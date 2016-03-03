@@ -1,5 +1,7 @@
 package common.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import common.service.RepositoryMin;
 
 /**
@@ -10,34 +12,37 @@ import common.service.RepositoryMin;
  */
 public class RepositoryMinBeans implements RepositoryMin {
 
+	private int id;
+	private String full_name;
+	private String name;
+	@SerializedName("private") private boolean isPrivate;
+	
+	
+	private int stargazers_count;
+	private int forks_count;
+	
 	public int getId() {
-		// TODO Auto-generated method stub
-		return 0;
+		return id;
 	}
 
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return name;
 	}
 
 	public String getFull_name() {
-		// TODO Auto-generated method stub
-		return null;
+		return full_name;
 	}
 
 	public boolean isPrivate() {
-		// TODO Auto-generated method stub
-		return false;
+		return isPrivate;
 	}
 
 	public int getStars() {
-		// TODO Auto-generated method stub
-		return 0;
+		return stargazers_count;
 	}
 
 	public int getForkNum() {
-		// TODO Auto-generated method stub
-		return 0;
+		return forks_count;
 	}
 
 }

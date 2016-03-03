@@ -21,6 +21,11 @@ public class RepositoryBeans implements Repository {
 	private String name;
 	private RepositoryOwner owner;
 	@SerializedName("private") private boolean isPrivate;
+	
+	
+	private int stargazers_count;
+	private int forks_count;
+	
 	/*
 	 * 未完待续
 	 */
