@@ -6,7 +6,8 @@ import java.util.List;
  * 
  * @author River
  *
- * 用于进行Pipeline&Filter模型传输的管道
+ * 用于进行Pipeline&Filter模型传输的管道，
+ * 服务模式为被动型，需要数据源、数据接收方主动调用方法获取数据
  * 
  * @param <T> 本通道用于传输的对象类型
  * 实现时注意同步性问题
@@ -21,7 +22,7 @@ public interface  ObjChannel<T> {
 	
 	/**
 	 * 获取通道内的一组对象
-	 * @param maxNum 获取的List的最大容量（当通道内数据不足时，其大小小于maxNum）
+	 * @param maxNum 获取的List的最大容量（当通道内数据不足时，其大小小于maxNum，可能为0）
 	 * @return 存放对象的列表
 	 */
 	public List<T> getObj(int maxNum);

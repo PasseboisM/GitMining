@@ -1,5 +1,10 @@
 package common.service;
 
+/**
+ * 
+ * @author River
+ * TODO 注释
+ */
 public interface RepositoryOwner {
 
 	public String getLogin();
