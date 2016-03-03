@@ -1,6 +1,10 @@
 package common.model;
 
 import com.google.gson.Gson;
+import com.google.gson.annotations.SerializedName;
+
+import common.service.Repository;
+import common.service.RepositoryOwner;
 
 /**
  * 
@@ -9,13 +13,14 @@ import com.google.gson.Gson;
  * Repository详情数据模型，采用JavaBeans规范
  * @TODO 里面的数据项还未全部填好
  */
-public class Repository {
+public class RepositoryBeans implements Repository {
 	
 //	private Obj_id _id;
 	private int id;
 	private String full_name;
 	private String name;
-	private Owner owner;
+	private RepositoryOwner owner;
+	@SerializedName("private") private boolean isPrivate;
 	/*
 	 * 未完待续
 	 */
@@ -24,18 +29,35 @@ public class Repository {
 //	public Obj_id get_id() {
 //		return _id;
 //	}
+	/* (non-Javadoc)
+	 * @see common.model.Repository#getId()
+	 */
 	public int getId() {
 		return id;
 	}
+	/* (non-Javadoc)
+	 * @see common.model.Repository#getName()
+	 */
 	public String getName() {
 		return name;
 	}
+	/* (non-Javadoc)
+	 * @see common.model.Repository#getFull_name()
+	 */
 	public String getFull_name() {
 		return full_name;
 	}
-	public Owner getOwner() {
+	/* (non-Javadoc)
+	 * @see common.model.Repository#getOwner()
+	 */
+	public RepositoryOwner getOwner() {
 		return owner;
 	}
+	
+	public boolean isPrivate() {
+		return isPrivate;
+	}
+	
 //	class Obj_id {
 //		private int timestamp;
 //		private int machineIdentifier;
@@ -55,7 +77,7 @@ public class Repository {
 //		}	
 //	}
 	
-	class Owner {
+	class OwnerBeans implements RepositoryOwner {
 		/*
 		 * "owner":
 		 * {"login":"rubinius",
@@ -93,51 +115,99 @@ public class Repository {
 		private String type;
 		private boolean site_admin;
 		
+		/* (non-Javadoc)
+		 * @see common.model.RepositoryOwner#getLogin()
+		 */
 		public String getLogin() {
 			return login;
 		}
+		/* (non-Javadoc)
+		 * @see common.model.RepositoryOwner#getId()
+		 */
 		public int getId() {
 			return id;
 		}
+		/* (non-Javadoc)
+		 * @see common.model.RepositoryOwner#getAvatar_url()
+		 */
 		public String getAvatar_url() {
 			return avatar_url;
 		}
+		/* (non-Javadoc)
+		 * @see common.model.RepositoryOwner#getGravatar_id()
+		 */
 		public String getGravatar_id() {
 			return gravatar_id;
 		}
+		/* (non-Javadoc)
+		 * @see common.model.RepositoryOwner#getUrl()
+		 */
 		public String getUrl() {
 			return url;
 		}
+		/* (non-Javadoc)
+		 * @see common.model.RepositoryOwner#getHtml_url()
+		 */
 		public String getHtml_url() {
 			return html_url;
 		}
+		/* (non-Javadoc)
+		 * @see common.model.RepositoryOwner#getFollowers_url()
+		 */
 		public String getFollowers_url() {
 			return followers_url;
 		}
+		/* (non-Javadoc)
+		 * @see common.model.RepositoryOwner#getFollowing_url()
+		 */
 		public String getFollowing_url() {
 			return following_url;
 		}
+		/* (non-Javadoc)
+		 * @see common.model.RepositoryOwner#getGists_url()
+		 */
 		public String getGists_url() {
 			return gists_url;
 		}
+		/* (non-Javadoc)
+		 * @see common.model.RepositoryOwner#getStarred_url()
+		 */
 		public String getStarred_url() {
 			return starred_url;
 		}
+		/* (non-Javadoc)
+		 * @see common.model.RepositoryOwner#getSubscriptions_url()
+		 */
 		public String getSubscriptions_url() {
 			return subscriptions_url;
 		}
+		/* (non-Javadoc)
+		 * @see common.model.RepositoryOwner#getOrganizations_url()
+		 */
 		public String getOrganizations_url() {
 			return organizations_url;
 		}
+		/* (non-Javadoc)
+		 * @see common.model.RepositoryOwner#getRepos_url()
+		 */
 		public String getRepos_url() {
 			return repos_url;
 		}
+		/* (non-Javadoc)
+		 * @see common.model.RepositoryOwner#getEvents_url()
+		 */
 		public String getEvents_url() {
 			return events_url;
 		}
+		/* (non-Javadoc)
+		 * @see common.model.RepositoryOwner#getType()
+		 */
 		public String getType() {
 			return type;
 		}
+		/* (non-Javadoc)
+		 * @see common.model.RepositoryOwner#isSite_admin()
+		 */
 		public boolean isSite_admin() {
 			return site_admin;
 		}
@@ -162,7 +232,7 @@ public class Repository {
 				+ "}";
 		
 		Gson gson = new Gson();
-		Repository re = gson.fromJson(s, Repository.class);
+		Repository re = gson.fromJson(s, RepositoryBeans.class);
 		
 		System.out.println("id:" + re.getId());
 		System.out.println("n:" + re.getName());

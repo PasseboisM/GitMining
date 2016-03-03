@@ -32,7 +32,7 @@ public interface  ObjChannel<T> {
 	public void close();
 	
 	/**
-	 * 通道内是否还有缓冲数据，由数据接收方调用
+	 * 通道内是否还有缓冲数据（由数据接收方查询用）
 	 * @return 是否还有缓冲数据
 	 */
 	public boolean hasMore();

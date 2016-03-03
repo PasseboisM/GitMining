@@ -1,16 +1,24 @@
 package logic.service;
 
+import logic.BasicLogicServiceFactory;
+
 /**
  * 
  * @author River
- * 采用工厂模式，为界面层提供逻辑层服务对象
- * @TODO doc
+ * 采用抽象工厂模式，为界面层提供逻辑层服务对象
+ * @TODO 注释没写
+ * 
  */
-public interface LogicServiceFactory {
+public abstract class LogicServiceFactory {
 	
-	public GeneralGetter getGeneralGetter();
+
+	public abstract GeneralGetter getGeneralGetter();
 	
-	public SearchService getSearchService();
+	public abstract SearchService getSearchService();
 	
-	public ChartMaker getChartMaker();
+	public abstract ChartMaker getChartMaker();
+	
+	public static LogicServiceFactory getInstance() {
+		return new BasicLogicServiceFactory();
+	}
 }
