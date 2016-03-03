@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
 import common.service.Repository;
+import common.service.RepositoryMin;
 import common.service.RepositoryOwner;
 
 /**
@@ -15,7 +16,6 @@ import common.service.RepositoryOwner;
  */
 public class RepositoryBeans implements Repository {
 	
-//	private Obj_id _id;
 	private int id;
 	private String full_name;
 	private String name;
@@ -25,31 +25,19 @@ public class RepositoryBeans implements Repository {
 	 * 未完待续
 	 */
 	
-	
-//	public Obj_id get_id() {
-//		return _id;
-//	}
-	/* (non-Javadoc)
-	 * @see common.model.Repository#getId()
-	 */
+
 	public int getId() {
 		return id;
 	}
-	/* (non-Javadoc)
-	 * @see common.model.Repository#getName()
-	 */
+
 	public String getName() {
 		return name;
 	}
-	/* (non-Javadoc)
-	 * @see common.model.Repository#getFull_name()
-	 */
+
 	public String getFull_name() {
 		return full_name;
 	}
-	/* (non-Javadoc)
-	 * @see common.model.Repository#getOwner()
-	 */
+
 	public RepositoryOwner getOwner() {
 		return owner;
 	}
@@ -58,24 +46,6 @@ public class RepositoryBeans implements Repository {
 		return isPrivate;
 	}
 	
-//	class Obj_id {
-//		private int timestamp;
-//		private int machineIdentifier;
-//		private int processIdentifier;
-//		private int counter;
-//		public int getTimestamp() {
-//			return timestamp;
-//		}
-//		public int getMachineIdentifier() {
-//			return machineIdentifier;
-//		}
-//		public int getProcessIdentifier() {
-//			return processIdentifier;
-//		}
-//		public int getCounter() {
-//			return counter;
-//		}	
-//	}
 	
 	class OwnerBeans implements RepositoryOwner {
 		/*
@@ -232,7 +202,7 @@ public class RepositoryBeans implements Repository {
 				+ "}";
 		
 		Gson gson = new Gson();
-		Repository re = gson.fromJson(s, RepositoryBeans.class);
+		RepositoryMin re = gson.fromJson(s, RepositoryBeans.class);
 		
 		System.out.println("id:" + re.getId());
 		System.out.println("n:" + re.getName());
@@ -240,6 +210,14 @@ public class RepositoryBeans implements Repository {
 		
 		
 		System.out.println(gson.toJson(re));
+	}
+	public int getStars() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	public int getForkNum() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 	

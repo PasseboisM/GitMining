@@ -2,43 +2,39 @@ package common.enumeration;
 
 import java.util.Comparator;
 
-import common.service.Repository;
+import common.service.RepositoryMin;
 
 /**
  * @author River
- * Repository排序方式
+ * RepositoryMin排序方式
  */
 public enum RepoSortStadard {
 
-	NO_SORT(new Comparator<Repository>() {
-		public int compare(Repository arg0, Repository arg1) {
+	NO_SORT(new Comparator<RepositoryMin>() {
+		public int compare(RepositoryMin arg0, RepositoryMin arg1) {
 			return 0;
 		}	
 	}),
-	STARS_DESCENDING(new Comparator<Repository>() {
-		public int compare(Repository arg0, Repository arg1) {
-			// return arg0.getStars()>arg0.getStars();
-			// TODO 接口还没有准备好
-			return 0;
+	STARS_DESCENDING(new Comparator<RepositoryMin>() {
+		public int compare(RepositoryMin arg0, RepositoryMin arg1) {
+			return arg0.getStars()-arg1.getStars();
 		}	
 	}),
-	FORKS_DESCENDING(new Comparator<Repository>() {
-		public int compare(Repository arg0, Repository arg1) {
-			// return arg0.getForkNumber()>arg0.getForkNumber();
-			// TODO 接口还没有准备好
-			return 0;
+	FORKS_DESCENDING(new Comparator<RepositoryMin>() {
+		public int compare(RepositoryMin arg0, RepositoryMin arg1) {
+			 return arg0.getForkNum()-arg1.getForkNum();
 		}	
 	}),
 	;//TODO More compare standards
 	
 	
-	private Comparator<Repository> cpr;
+	private Comparator<RepositoryMin> cpr;
 	
-	RepoSortStadard(Comparator<Repository> cpr) {
+	RepoSortStadard(Comparator<RepositoryMin> cpr) {
 		this.cpr = cpr;
 	}
 	
-	public Comparator<Repository> getComparator() {
+	public Comparator<RepositoryMin> getComparator() {
 		return cpr;
 	}
 }

@@ -1,5 +1,7 @@
 package data.service;
 
+import data.BasicDataServiceFactory;
+
 /**
  * 
  * @author River
@@ -11,11 +13,12 @@ package data.service;
  */
 public abstract class DataServiceFactory {
 
+	public abstract MassiveDataGetter getMassiveDataGetter();
 	
+	public abstract SpecificDataGetter getSpecificDataGetter();
 	
-	public DataServiceFactory getInstance() {
-		// TODO
-		return null;
+	public static DataServiceFactory getInstance() {
+		return new BasicDataServiceFactory();
 	}
 	
 }
