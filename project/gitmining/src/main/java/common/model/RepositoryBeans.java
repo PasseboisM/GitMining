@@ -136,7 +136,7 @@ public class RepositoryBeans implements Repository {
 	private int id;
 	private String name;
 	private String full_name;
-	private OwnerBeans owner;
+	private RepositoryOwner owner;
 	@SerializedName("private") private boolean isPrivate;
 	private String html_url;
 	private String description;
@@ -199,8 +199,8 @@ public class RepositoryBeans implements Repository {
 	private int open_issues;
 	private int watchers;
 	private String default_branch;
-	private Permission permissions;
-	private Organization organization;
+	private RepositoryPermission permissions;
+	private RepositoryOrganization organization;
 	private int network_count;
 	private int subscribers_count;
 	
