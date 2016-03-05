@@ -12,5 +12,11 @@ public interface SpecificDataSource {
 	 */
 	public Repository getSpecificRepo(RepositoryMin source);
 	
+	/**
+	 * 根据FullName查询Repository详细信息
+	 * @param fullName Repo的全名
+	 * @return 查询的Repository对象
+	 */
+	public Repository getSpecificRepo(String fullName);
 	
 }

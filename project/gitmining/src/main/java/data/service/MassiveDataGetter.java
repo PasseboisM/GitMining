@@ -1,6 +1,6 @@
 package data.service;
 
-import common.service.Repository;
+import common.service.RepositoryMin;
 import common.util.ObjChannel;
 
 /**
@@ -13,6 +13,6 @@ public interface MassiveDataGetter {
 	 * 获取提供Repository数据索引的通道
 	 * @return 包含所有Repository数据索引的List
 	 */
-	public ObjChannel<Repository> getRepoMinInfo();
+	public ObjChannel<RepositoryMin> getRepoMinInfo();
 	
 }
