@@ -8,6 +8,6 @@ package common.service;
  * TODO 还有好多Repository的信息条目！
  */
 public interface Repository extends RepositoryMin {
-
+	
 	public RepositoryOwner getOwner();
 }
