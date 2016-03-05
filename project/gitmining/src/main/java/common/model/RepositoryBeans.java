@@ -5,7 +5,9 @@ import com.google.gson.annotations.SerializedName;
 
 import common.service.Repository;
 import common.service.RepositoryMin;
+import common.service.RepositoryOrganization;
 import common.service.RepositoryOwner;
+import common.service.RepositoryPermission;
 
 /**
  * 
@@ -197,8 +199,8 @@ public class RepositoryBeans implements Repository {
 	private int open_issues;
 	private int watchers;
 	private String default_branch;
-//	private Permissions permissions;
-//	private Organization organization;
+	private RepositoryPermission permissions;
+	private RepositoryOrganization organization;
 	private int network_count;
 	private int subscribers_count;
 	
@@ -226,7 +228,6 @@ public class RepositoryBeans implements Repository {
 	public boolean isPrivate() {
 		return isPrivate;
 	}
-	
 	
 	class OwnerBeans implements RepositoryOwner {
 		/*
@@ -371,6 +372,101 @@ public class RepositoryBeans implements Repository {
 		}
 	}
 	
+	class Permission implements RepositoryPermission {
+		/*"permissions":{
+		 * 				"admin":false,
+		 * 				"push":false,
+		 * 				"pull":true
+		 * 				},
+		 */
+		
+		private boolean admin;
+		private boolean push;
+		private boolean pull;
+		
+		public boolean isAdmin() {
+			return admin;
+		}
+		public boolean isPush() {
+			return push;
+		}
+		public boolean isPull() {
+			return pull;
+		}
+	}
+	
+	class Organization implements RepositoryOrganization {
+		private String login;
+		private int id;
+		private String avatar_url;
+		private String gravatar_id;
+		private String url;
+		private String html_url;
+		private String followers_url;
+		private String following_url;
+		private String gist_url;
+		private String starred_url;
+		private String subscriprions_url;
+		private String organizations_url;
+		private String repos_url;
+		private String events_url;
+		private String received_events_url;
+		private String type;
+		private boolean site_admin;
+		
+		public String getLogin() {
+			return login;
+		}
+		public int getId() {
+			return id;
+		}
+		public String getAvatar_url() {
+			return avatar_url;
+		}
+		public String getGravatar_id() {
+			return gravatar_id;
+		}
+		public String getUrl() {
+			return url;
+		}
+		public String getHtml_url() {
+			return html_url;
+		}
+		public String getFollowers_url() {
+			return followers_url;
+		}
+		public String getFollowing_url() {
+			return following_url;
+		}
+		public String getGist_url() {
+			return gist_url;
+		}
+		public String getStarred_url() {
+			return starred_url;
+		}
+		public String getSubscriprions_url() {
+			return subscriprions_url;
+		}
+		public String getOrganizations_url() {
+			return organizations_url;
+		}
+		public String getRepos_url() {
+			return repos_url;
+		}
+		public String getEvents_url() {
+			return events_url;
+		}
+		public String getReceived_events_url() {
+			return received_events_url;
+		}
+		public String getType() {
+			return type;
+		}
+		public boolean isSite_admin() {
+			return site_admin;
+		}
+	}
+
 	public static void main(String[] args) {
 		String s = "{"
 				+ "\"id\":27,\"name\":\"rubinius\",\"full_name\":\"rubinius/rubinius\""
@@ -390,7 +486,7 @@ public class RepositoryBeans implements Repository {
 				+ "}";
 		
 		Gson gson = new Gson();
-		RepositoryMin re = gson.fromJson(s, RepositoryBeans.class);
+		RepositoryMin re = gson.fromJson(s, RepositoryMinBeans.class);
 		
 		System.out.println("id:" + re.getId());
 		System.out.println("n:" + re.getName());
