@@ -15,8 +15,8 @@ public interface RepositoryMin {
 
 	public boolean isPrivate();
 
-	public int getStars();
+	public int getStargazers_count();
 
-	public int getForkNum();
+	public int getForks_count();
 
 }

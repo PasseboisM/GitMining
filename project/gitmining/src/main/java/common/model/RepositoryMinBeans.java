@@ -16,8 +16,6 @@ public class RepositoryMinBeans implements RepositoryMin {
 	private String full_name;
 	private String name;
 	@SerializedName("private") private boolean isPrivate;
-	
-	
 	private int stargazers_count;
 	private int forks_count;
 	
@@ -37,11 +35,11 @@ public class RepositoryMinBeans implements RepositoryMin {
 		return isPrivate;
 	}
 
-	public int getStars() {
+	public int getStargazers_count() {
 		return stargazers_count;
 	}
 
-	public int getForkNum() {
+	public int getForks_count() {
 		return forks_count;
 	}
 
