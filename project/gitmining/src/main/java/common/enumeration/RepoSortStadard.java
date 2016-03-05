@@ -5,8 +5,9 @@ import java.util.Comparator;
 import common.service.RepositoryMin;
 
 /**
- * @author River
+ * @author xjh14
  * RepositoryMin排序方式
+ * TODO 似乎Comparator里面的比较顺序是反的？
  */
 public enum RepoSortStadard {
 
@@ -17,12 +18,12 @@ public enum RepoSortStadard {
 	}),
 	STARS_DESCENDING(new Comparator<RepositoryMin>() {
 		public int compare(RepositoryMin arg0, RepositoryMin arg1) {
-			return arg0.getStars()-arg1.getStars();
+			return arg0.getStargazers_count()-arg1.getStargazers_count();
 		}	
 	}),
 	FORKS_DESCENDING(new Comparator<RepositoryMin>() {
 		public int compare(RepositoryMin arg0, RepositoryMin arg1) {
-			 return arg0.getForkNum()-arg1.getForkNum();
+			 return arg0.getForks_count()-arg1.getForks_count();
 		}	
 	}),
 	;//TODO More compare standards

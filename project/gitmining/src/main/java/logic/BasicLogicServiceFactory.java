@@ -7,7 +7,7 @@ import logic.service.SearchService;
 
 /**
  * 
- * @author River
+ * @author xjh14
  * 
  * 基础版逻辑服务工厂
  * 

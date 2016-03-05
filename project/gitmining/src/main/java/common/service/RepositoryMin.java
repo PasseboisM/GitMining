@@ -2,7 +2,7 @@ package common.service;
 
 /**
  * 
- * @author River
+ * @author xjh14
  * 可常驻内存的Repository数据索引
  */
 public interface RepositoryMin {
@@ -15,8 +15,8 @@ public interface RepositoryMin {
 
 	public boolean isPrivate();
 
-	public int getStars();
+	public int getStargazers_count();
 
-	public int getForkNum();
+	public int getForks_count();
 
 }

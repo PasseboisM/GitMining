@@ -4,7 +4,7 @@ import network.BasicNetworkServiceFactory;
 
 /**
  * 
- * @author River
+ * @author xjh14
  * 采用抽象工厂模式，提供网络层服务对象
  */
 public abstract class NetworkServiceFactory {

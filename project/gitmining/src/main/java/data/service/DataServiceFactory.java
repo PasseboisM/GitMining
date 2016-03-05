@@ -4,7 +4,7 @@ import data.BasicDataServiceFactory;
 
 /**
  * 
- * @author River
+ * @author xjh14
  * 
  * 为Data层外层提供的获取Data服务的接口
  * 
