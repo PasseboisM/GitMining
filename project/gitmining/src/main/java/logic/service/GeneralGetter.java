@@ -2,8 +2,8 @@ package logic.service;
 
 import java.util.List;
 
-import common.enumeration.RepoSortStadard;
-import common.enumeration.UserSortSandard;
+import common.enumeration.sort_standard.RepoSortStadard;
+import common.enumeration.sort_standard.UserSortSandard;
 import common.service.GitUser;
 import common.service.Repository;
 

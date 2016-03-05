@@ -1,4 +1,4 @@
-package common.enumeration;
+package common.enumeration.attribute;
 
 /**
  * 

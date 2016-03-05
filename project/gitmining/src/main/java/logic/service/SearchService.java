@@ -2,8 +2,8 @@ package logic.service;
 
 import java.util.List;
 
-import common.enumeration.Category;
-import common.enumeration.Language;
+import common.enumeration.attribute.Category;
+import common.enumeration.attribute.Language;
 import common.param_obj.RepositorySearchParam;
 import common.param_obj.UserSearchParam;
 import common.service.GitUser;

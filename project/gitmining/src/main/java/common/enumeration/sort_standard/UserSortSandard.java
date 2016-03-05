@@ -1,4 +1,4 @@
-package common.enumeration;
+package common.enumeration.sort_standard;
 
 import java.util.Comparator;
 
