@@ -34,6 +34,8 @@ public interface RepositoryOwner {
 	public String getRepos_url();
 
 	public String getEvents_url();
+	
+	public String getReceived_events_url();
 
 	public String getType();
 
