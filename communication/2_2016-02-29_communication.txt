@@ -1,5 +1,5 @@
 who：徐江河，孙婧，王子安，徐家逸
-when：第一周
+when：第二周，2-29
 what：评审孙婧编写的需求文档；决定系统设计的分工方式
 how long：0.5hr
 arrived solution：修改了需求文档的部分内容；
