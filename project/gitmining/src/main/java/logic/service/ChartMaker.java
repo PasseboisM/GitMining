@@ -2,7 +2,7 @@ package logic.service;
 
 /**
  * 
- * @author River
+ * @author xjh14
  * 提供多种获取图表对象的服务接口
  * TODO Iter2任务，不着急
  */

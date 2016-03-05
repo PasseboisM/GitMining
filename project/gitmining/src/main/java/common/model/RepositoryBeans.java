@@ -11,7 +11,7 @@ import common.service.RepositoryPermission;
 
 /**
  * 
- * @author River
+ * @author xjh14, wza14
  *
  * Repository详情数据模型，采用JavaBeans规范
  * TODO 里面的数据项还未全部填好

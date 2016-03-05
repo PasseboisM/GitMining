@@ -5,8 +5,9 @@ import java.util.Comparator;
 import common.service.RepositoryMin;
 
 /**
- * @author River
+ * @author xjh14
  * RepositoryMin排序方式
+ * TODO 似乎Comparator里面的比较顺序是反的？
  */
 public enum RepoSortStadard {
 

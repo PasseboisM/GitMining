@@ -4,7 +4,7 @@ import common.service.Repository;
 import common.service.RepositoryMin;
 
 /**
- * @author River
+ * @author xjh14
  *
  */
 public interface SpecificDataGetter {

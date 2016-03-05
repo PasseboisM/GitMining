@@ -2,7 +2,7 @@ package common.service;
 
 /**
  * 
- * @author River
+ * @author xjh14
  * 可常驻内存的Repository数据索引
  */
 public interface RepositoryMin {

@@ -6,7 +6,7 @@ import common.exception.DataTransferException;
 
 /**
  * 
- * @author River
+ * @author xjh14
  *
  * 用于进行Pipeline&Filter模型传输的管道，
  * 服务模式为被动型，需要数据源、数据接收方主动调用方法获取数据
