@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.client.ClientProtocolException;
@@ -15,8 +14,10 @@ import com.google.gson.reflect.TypeToken;
 
 import common.model.GitUserBeans;
 import common.model.GitUserMinBeans;
+import common.model.RepositoryBeans;
 import common.service.GitUser;
 import common.service.GitUserMin;
+import common.service.Repository;
 import network.api.service.ApiMakerService;
 import network.api.service.RepoApiMaker;
 import network.api.service.UserApiMaker;
@@ -56,6 +57,15 @@ public class TestDriver {
 		Type listTypeType = new TypeToken<List<String>>(){}.getType();
 		List<String> repoLists = gson.fromJson(json2, listTypeType);
 		assertEquals("mojombo/grit", repoLists.get(0));
+		
+		String api3 = repoApi.makeRepoInfoApi(repoLists.get(0));
+		String json3 = con.do_get(api3);
+		
+		Repository repository = gson.fromJson(json3, RepositoryBeans.class);
+		assertEquals(1, repository.getId());
+		
+//		RepositoryMin repositoryMin = gson.fromJson(json3, RepositoryMinBeans.class);
+		
 		
 	}
 

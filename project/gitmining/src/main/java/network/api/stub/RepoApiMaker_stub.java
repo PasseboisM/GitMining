@@ -14,4 +14,8 @@ public class RepoApiMaker_stub implements RepoApiMaker {
 		return "http://www.gitmining.net/api/repository/names";
 	}
 
+	public String makeRepoInfoApi(String fullName) {
+		return "https://api.github.com/repos/"+fullName;
+	}
+
 }
