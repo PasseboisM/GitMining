@@ -1,5 +1,7 @@
 package network.data;
 
+import com.google.gson.Gson;
+
 import common.service.GitUser;
 import common.service.GitUserMin;
 import common.service.Repository;
@@ -9,6 +11,8 @@ import common.util.ObjChannel;
 import network.service.MassiveDataSource;
 
 public class MassiveDataSourceDefault implements MassiveDataSource {
+	
+	private Gson gson = new Gson(); 
 
 	public ObjChannel<String> getRepoNames() {
 		// TODO Auto-generated method stub
