@@ -17,15 +17,18 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
+import common.exception.NetworkException;
+
 public class HTTPConnection extends HTTPConnectionService {
 
 	
 	/* (non-Javadoc)
 	 * @see network.connection.HTTPConnectionService#do_post(java.lang.String, java.util.List)
 	 */
+	@SuppressWarnings("deprecation")
 	public String do_post(String url, List<NameValuePair> name_value_pair) throws IOException {
         String body = "{}";
-        DefaultHttpClient httpclient = new DefaultHttpClient();
+		DefaultHttpClient httpclient = new DefaultHttpClient();
         try {
             HttpPost httpost = new HttpPost(url);
             httpost.setEntity(new UrlEncodedFormEntity(name_value_pair, StandardCharsets.UTF_8));
@@ -40,7 +43,8 @@ public class HTTPConnection extends HTTPConnectionService {
     /* (non-Javadoc)
 	 * @see network.connection.HTTPConnectionService#do_get(java.lang.String)
 	 */
-    public String do_get(String url) throws ClientProtocolException, IOException {
+    @SuppressWarnings("deprecation")
+	public String do_get(String url) throws NetworkException {
         String body = "{}";
         DefaultHttpClient httpclient = new DefaultHttpClient();
         try {
@@ -48,7 +52,11 @@ public class HTTPConnection extends HTTPConnectionService {
             HttpResponse response = httpclient.execute(httpget);
             HttpEntity entity = response.getEntity();
             body = EntityUtils.toString(entity);
-        } finally {
+        } catch (ClientProtocolException e) {
+			throw new NetworkException();
+		} catch (IOException e) {
+			throw new NetworkException();
+		} finally {
             httpclient.getConnectionManager().shutdown();
         }
         return body;

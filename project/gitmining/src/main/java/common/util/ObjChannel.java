@@ -1,5 +1,6 @@
 package common.util;
 
+import java.io.Closeable;
 import java.util.List;
 
 import common.exception.DataTransferException;
@@ -14,7 +15,7 @@ import common.exception.DataTransferException;
  * @param <T> 本通道用于传输的对象类型
  * 实现时注意同步性问题
  */
-public interface  ObjChannel<T> {
+public interface  ObjChannel<T> extends Closeable {
 
 	/**
 	 * 向通道内传入对象数组，按顺序写入缓冲
