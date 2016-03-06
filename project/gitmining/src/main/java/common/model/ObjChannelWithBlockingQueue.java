@@ -78,4 +78,8 @@ public class ObjChannelWithBlockingQueue<T> implements ObjChannel<T> {
 		super();
 		status = NORMAL_RUNNING;
 	}
+
+	public void writeObj(List<T> list) {
+		queue.addAll(list);
+	}
 }

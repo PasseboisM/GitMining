@@ -24,6 +24,12 @@ public interface  ObjChannel<T> extends Closeable {
 	public void writeObj(T[] list);
 	
 	/**
+	 * 向通道内传入对象列表，按顺序写入缓冲
+	 * @param list 存放对象的列表
+	 */
+	public void writeObj(List<T> list);
+	
+	/**
 	 * 获取通道内的一组对象
 	 * @param maxNum 获取的List的最大容量（当通道内数据不足时，其大小小于maxNum，可能为0）
 	 * @return 存放对象的列表

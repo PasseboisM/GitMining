@@ -41,49 +41,32 @@ public class MassiveDataSourceDefault implements MassiveDataSource {
 		Type listTypeType = new TypeToken<List<String>>(){}.getType();
 		List<String> repoLists = gson.fromJson(json, listTypeType);
 		
-		DataSourceProducer<String> producer = new DataSourceProducer<String>(channel, repoLists);
-		Thread dataProduceThread = new Thread(producer);
-		dataProduceThread.start();
+		//TODO
+		
 		return channel;
 	}
 
 	public ObjChannel<RepositoryMin> getRepoMinInfo() throws NetworkException, DataTransferException {
 		ObjChannel<String> namesChannel = this.getRepoNames();
-		DataSourceConsumer<String> consumer = new DataSourceConsumer<String>(namesChannel);
+		
 		ObjChannel<RepositoryMin> repoChannel = new ObjChannelWithBlockingQueue<RepositoryMin>();
 		List<RepositoryMin> repositoryList = new LinkedList<RepositoryMin>();
 		
-		List<String> namesList = consumer.getData();
 		
-		for (String full_name : namesList) {
-			String url = repoApi.makeRepoInfoApi(full_name);
-			String json = conn.do_get(url);
-			RepositoryMin repositoryMin = gson.fromJson(json, RepositoryMinBeans.class);
-			repositoryList.add(repositoryMin);
-		}
-		DataSourceProducer<RepositoryMin> producer = new DataSourceProducer<RepositoryMin>(repoChannel, repositoryList);
-		Thread dataProduceThread = new Thread(producer);
-		dataProduceThread.start();
+		//TODO
+		
 		return repoChannel;
 	}
 
 	public ObjChannel<Repository> getRepoInfo() throws NetworkException, DataTransferException {
 		ObjChannel<String> namesChannel = this.getRepoNames();
-		DataSourceConsumer<String> consumer = new DataSourceConsumer<String>(namesChannel);
+		
 		ObjChannel<Repository> repoChannel = new ObjChannelWithBlockingQueue<Repository>();
 		List<Repository> repositoryList = new LinkedList<Repository>();
 		
-		List<String> namesList = consumer.getData();
+		//TODO
 		
-		for (String full_name : namesList) {
-			String url = repoApi.makeRepoInfoApi(full_name);
-			String json = conn.do_get(url);
-			Repository repository = gson.fromJson(json, RepositoryBeans.class);
-			repositoryList.add(repository);
-		}
-		DataSourceProducer<Repository> producer = new DataSourceProducer<Repository>(repoChannel, repositoryList);
-		Thread dataProduceThread = new Thread(producer);
-		dataProduceThread.start();
+		
 		return repoChannel;
 	}
 
