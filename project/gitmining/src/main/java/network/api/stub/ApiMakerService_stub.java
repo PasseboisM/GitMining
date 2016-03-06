@@ -15,5 +15,6 @@ public class ApiMakerService_stub extends ApiMakerService {
 	public UserApiMaker getUserApiMaker() {
 		return new UserApiMaker_stub();
 	}
+	
 
 }
