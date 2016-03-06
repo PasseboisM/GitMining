@@ -1,16 +1,15 @@
 package logic.data;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
-import network.service.MassiveDataSource;
-import network.service.stub.MassiveDataSource_stub;
+import common.service.RepositoryMin;
+import common.util.ObjChannel;
+import data.service.DataServiceFactory;
+import data.service.MassiveDataGetter;
 
 public class TestDriver {
 	@Test
 	public void testChannel() throws Exception {
-		MassiveDataSource massiveDataSourcestub = new MassiveDataSource_stub();
-		massiveDataSourcestub.getRepoInfo();
+		
 	}
 }
