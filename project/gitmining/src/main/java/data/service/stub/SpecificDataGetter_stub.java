@@ -1,5 +1,6 @@
 package data.service.stub;
 
+import common.exception.NetworkException;
 import common.service.GitUser;
 import common.service.GitUserMin;
 import common.service.Repository;
@@ -16,7 +17,12 @@ public class SpecificDataGetter_stub implements SpecificDataGetter {
 	
 	public Repository getSpecificRepo(RepositoryMin source) {
 		// TODO stub测试
-		return specificDataSource.getSpecificRepo(source.getFull_name()) ;
+		try {
+			return specificDataSource.getSpecificRepo(source.getFull_name()) ;
+		} catch (NetworkException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public GitUser getSpecificGitUser(GitUserMin source) {

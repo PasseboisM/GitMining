@@ -12,6 +12,7 @@ import org.junit.Test;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import common.exception.NetworkException;
 import common.model.GitUserBeans;
 import common.model.GitUserMinBeans;
 import common.model.RepositoryBeans;
@@ -27,7 +28,7 @@ import network.connection.service.HTTPConnectionService;
 public class TestDriver {
 
 	@Test
-	public void testUserService() throws ClientProtocolException, IOException {
+	public void testUserService() throws ClientProtocolException, IOException, NetworkException {
 
 		ApiMakerService apiMaker = new ApiMakerService_stub();
 		UserApiMaker userApi = apiMaker.getUserApiMaker();

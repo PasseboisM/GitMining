@@ -39,7 +39,7 @@ public class GeneralGetter_stub implements GeneralGetter {
 	}
 	
 	public List<Repository> getRepositories(int page, int numPerPage, RepoSortStadard sortStandard) {
-		return repository.subList(numPerPage*(page-1), numPerPage*page-1);
+		return repository.subList(numPerPage*(page-1), numPerPage*page);
 	}
 
 	public int getNumOfRepositories() {
