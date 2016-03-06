@@ -8,7 +8,7 @@ import common.service.GitUserMin;
  */
 public interface UserApiMaker {
 
-	public String getUserAPI(GitUserMin source);
+	public String makeUserAPI(GitUserMin source);
 	
-	public String getUserAPI(String login);
+	public String makeUserAPI(String login);
 }
