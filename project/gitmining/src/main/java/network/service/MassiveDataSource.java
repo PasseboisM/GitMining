@@ -1,5 +1,7 @@
 package network.service;
 
+import common.exception.DataTransferException;
+import common.exception.NetworkException;
 import common.service.GitUser;
 import common.service.GitUserMin;
 import common.service.Repository;
@@ -17,21 +19,26 @@ public interface MassiveDataSource {
 	/**
 	 * 获取Repository数据full name列表
 	 * @return 包含所有Repository数据索引的List
+	 * @throws NetworkException 发生网络异常，无法获取信息
 	 */
-	public ObjChannel<String> getRepoNames();
+	public ObjChannel<String> getRepoNames() throws NetworkException;
 	
 	/**
 	 * 获取提供Repository数据索引的通道
 	 * @return 传送包含所有Repository数据索引的数据通道
+	 * @throws NetworkException 发生网络异常，无法获取信息
+	 * @throws DataTransferException TODO
 	 */
-	public ObjChannel<RepositoryMin> getRepoMinInfo();
+	public ObjChannel<RepositoryMin> getRepoMinInfo() throws NetworkException, DataTransferException;
 	
 	/**
 	 * 获取提供Repository数据索引的通道。
 	 * Warning: 由于数据量大，应仅用于更新全部数据时使用。
 	 * @return 包含所有Repository详细数据的List
+	 * @throws NetworkException 发生网络异常，无法获取信息
+	 * @throws DataTransferException TODO
 	 */
-	public ObjChannel<Repository> getRepoInfo();
+	public ObjChannel<Repository> getRepoInfo() throws NetworkException, DataTransferException;
 	
 	/**
 	 * 获取全部GitUser数据索引的通道。
