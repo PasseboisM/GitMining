@@ -37,6 +37,7 @@ public class MassiveDataSourceDefault implements MassiveDataSource {
 	public ObjChannel<String> getRepoNames() throws NetworkException {
 		ObjChannel<String> channel = new ObjChannelWithBlockingQueue<String>();
 		String url = repoApi.makeRepoNamesApi();
+//		System.out.println(url);
 		String json = conn.do_get(url);
 		Type listTypeType = new TypeToken<List<String>>(){}.getType();
 		List<String> repoLists = gson.fromJson(json, listTypeType);
