@@ -1,7 +1,7 @@
 package network.data;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.google.gson.Gson;
@@ -16,6 +16,8 @@ import common.service.GitUser;
 import common.service.GitUserMin;
 import common.service.Repository;
 import common.service.RepositoryMin;
+import common.util.DataSourceConsumer;
+import common.util.DataSourceProducer;
 import common.util.ObjChannel;
 import network.api.service.ApiMakerService;
 import network.api.service.RepoApiMaker;
@@ -39,48 +41,49 @@ public class MassiveDataSourceDefault implements MassiveDataSource {
 		Type listTypeType = new TypeToken<List<String>>(){}.getType();
 		List<String> repoLists = gson.fromJson(json, listTypeType);
 		
-		String[] names = new String[repoLists.size()];
-		channel.writeObj(repoLists.toArray(names));
+		DataSourceProducer<String> producer = new DataSourceProducer<String>(channel, repoLists);
+		Thread dataProduceThread = new Thread(producer);
+		dataProduceThread.start();
 		return channel;
 	}
 
 	public ObjChannel<RepositoryMin> getRepoMinInfo() throws NetworkException, DataTransferException {
-		ObjChannel<RepositoryMin> repoChannel = new ObjChannelWithBlockingQueue<RepositoryMin>();
 		ObjChannel<String> namesChannel = this.getRepoNames();
-		int numPerTime = 50;
-		while(namesChannel.hasMore()){
-			List<String> names = namesChannel.getObj(numPerTime);
-			List<RepositoryMin> repositoryMins = new ArrayList<RepositoryMin>();
-			
-			for (String full_name : names) {
-				String url = repoApi.makeRepoInfoApi(full_name);
-				String json = conn.do_get(url);
-				RepositoryMin repositoryMin = gson.fromJson(json, RepositoryMinBeans.class);
-				repositoryMins.add(repositoryMin);
-			}
-			RepositoryMin[] repositoryMinsArray = new RepositoryMin[repositoryMins.size()];
-			repoChannel.writeObj(repositoryMins.toArray(repositoryMinsArray));
+		DataSourceConsumer<String> consumer = new DataSourceConsumer<String>(namesChannel);
+		ObjChannel<RepositoryMin> repoChannel = new ObjChannelWithBlockingQueue<RepositoryMin>();
+		List<RepositoryMin> repositoryList = new LinkedList<RepositoryMin>();
+		
+		List<String> namesList = consumer.getData();
+		
+		for (String full_name : namesList) {
+			String url = repoApi.makeRepoInfoApi(full_name);
+			String json = conn.do_get(url);
+			RepositoryMin repositoryMin = gson.fromJson(json, RepositoryMinBeans.class);
+			repositoryList.add(repositoryMin);
 		}
+		DataSourceProducer<RepositoryMin> producer = new DataSourceProducer<RepositoryMin>(repoChannel, repositoryList);
+		Thread dataProduceThread = new Thread(producer);
+		dataProduceThread.start();
 		return repoChannel;
 	}
 
 	public ObjChannel<Repository> getRepoInfo() throws NetworkException, DataTransferException {
-		ObjChannel<Repository> repoChannel = new ObjChannelWithBlockingQueue<Repository>();
 		ObjChannel<String> namesChannel = this.getRepoNames();
-		int numPerTime = 50;
-		while(namesChannel.hasMore()){
-			List<String> names = namesChannel.getObj(numPerTime);
-			List<Repository> repositories = new ArrayList<Repository>();
-			
-			for (String full_name : names) {
-				String url = repoApi.makeRepoInfoApi(full_name);
-				String json = conn.do_get(url);
-				Repository repository = gson.fromJson(json, RepositoryBeans.class);
-				repositories.add(repository);
-			}
-			Repository[] repositoriesArray = new Repository[repositories.size()];
-			repoChannel.writeObj(repositories.toArray(repositoriesArray));
+		DataSourceConsumer<String> consumer = new DataSourceConsumer<String>(namesChannel);
+		ObjChannel<Repository> repoChannel = new ObjChannelWithBlockingQueue<Repository>();
+		List<Repository> repositoryList = new LinkedList<Repository>();
+		
+		List<String> namesList = consumer.getData();
+		
+		for (String full_name : namesList) {
+			String url = repoApi.makeRepoInfoApi(full_name);
+			String json = conn.do_get(url);
+			Repository repository = gson.fromJson(json, RepositoryBeans.class);
+			repositoryList.add(repository);
 		}
+		DataSourceProducer<Repository> producer = new DataSourceProducer<Repository>(repoChannel, repositoryList);
+		Thread dataProduceThread = new Thread(producer);
+		dataProduceThread.start();
 		return repoChannel;
 	}
 
