@@ -27,7 +27,7 @@ public interface MassiveDataSource {
 	 * 获取提供Repository数据索引的通道
 	 * @return 传送包含所有Repository数据索引的数据通道
 	 * @throws NetworkException 发生网络异常，无法获取信息
-	 * @throws DataTransferException TODO
+	 * @throws DataTransferException 系统数据管道同步模型数据传输异常
 	 */
 	public ObjChannel<RepositoryMin> getRepoMinInfo() throws NetworkException, DataTransferException;
 	
