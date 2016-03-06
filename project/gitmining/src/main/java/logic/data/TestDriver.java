@@ -2,14 +2,13 @@ package logic.data;
 
 import org.junit.Test;
 
-import common.service.RepositoryMin;
-import common.util.ObjChannel;
-import data.service.DataServiceFactory;
-import data.service.MassiveDataGetter;
+import logic.data.stub.GeneralGetter_stub;
+import logic.service.GeneralGetter;
 
 public class TestDriver {
 	@Test
 	public void testChannel() throws Exception {
-		
+		GeneralGetter generalGetter = new GeneralGetter_stub();
+		System.out.println(generalGetter.getNumOfRepositories());
 	}
 }
