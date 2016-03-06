@@ -1,5 +1,7 @@
 package network.api.service;
 
+import network.api.ApiMakerGitMining;
+
 public abstract class ApiMakerService {
 
 	public abstract RepoApiMaker getRepoApiMaker();
@@ -7,6 +9,6 @@ public abstract class ApiMakerService {
 	public abstract UserApiMaker getUserApiMaker();
 	
 	public static ApiMakerService getInstance() {
-		return null;//TODO
+		return new ApiMakerGitMining();
 	}
 }

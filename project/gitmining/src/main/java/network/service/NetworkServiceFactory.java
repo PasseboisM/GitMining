@@ -1,6 +1,6 @@
 package network.service;
 
-import network.BasicNetworkServiceFactory;
+import network.data.BasicNetworkServiceFactory;
 
 /**
  * 

@@ -1,4 +1,4 @@
-package network;
+package network.data;
 
 import network.service.MassiveDataSource;
 import network.service.NetworkServiceFactory;
@@ -8,14 +8,12 @@ public class BasicNetworkServiceFactory extends NetworkServiceFactory {
 
 	@Override
 	public SpecificDataSource getSpecificDataSource() {
-		// TODO Auto-generated method stub
-		return null;
+		return new SpecificDataSourceDefault();
 	}
 
 	@Override
 	public MassiveDataSource getMassiveDataSource() {
-		// TODO Auto-generated method stub
-		return null;
+		return new MassiveDataSourceDefault();
 	}
 
 }
