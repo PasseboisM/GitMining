@@ -17,6 +17,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
+import common.exception.NetworkException;
+
 public class HTTPConnection extends HTTPConnectionService {
 
 	
@@ -42,7 +44,7 @@ public class HTTPConnection extends HTTPConnectionService {
 	 * @see network.connection.HTTPConnectionService#do_get(java.lang.String)
 	 */
     @SuppressWarnings("deprecation")
-	public String do_get(String url) throws ClientProtocolException, IOException {
+	public String do_get(String url) throws NetworkException {
         String body = "{}";
         DefaultHttpClient httpclient = new DefaultHttpClient();
         try {
@@ -50,7 +52,11 @@ public class HTTPConnection extends HTTPConnectionService {
             HttpResponse response = httpclient.execute(httpget);
             HttpEntity entity = response.getEntity();
             body = EntityUtils.toString(entity);
-        } finally {
+        } catch (ClientProtocolException e) {
+			throw new NetworkException();
+		} catch (IOException e) {
+			throw new NetworkException();
+		} finally {
             httpclient.getConnectionManager().shutdown();
         }
         return body;
