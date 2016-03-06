@@ -23,9 +23,10 @@ public class HTTPConnection extends HTTPConnectionService {
 	/* (non-Javadoc)
 	 * @see network.connection.HTTPConnectionService#do_post(java.lang.String, java.util.List)
 	 */
+	@SuppressWarnings("deprecation")
 	public String do_post(String url, List<NameValuePair> name_value_pair) throws IOException {
         String body = "{}";
-        DefaultHttpClient httpclient = new DefaultHttpClient();
+		DefaultHttpClient httpclient = new DefaultHttpClient();
         try {
             HttpPost httpost = new HttpPost(url);
             httpost.setEntity(new UrlEncodedFormEntity(name_value_pair, StandardCharsets.UTF_8));
@@ -40,7 +41,8 @@ public class HTTPConnection extends HTTPConnectionService {
     /* (non-Javadoc)
 	 * @see network.connection.HTTPConnectionService#do_get(java.lang.String)
 	 */
-    public String do_get(String url) throws ClientProtocolException, IOException {
+    @SuppressWarnings("deprecation")
+	public String do_get(String url) throws ClientProtocolException, IOException {
         String body = "{}";
         DefaultHttpClient httpclient = new DefaultHttpClient();
         try {
