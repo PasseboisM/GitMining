@@ -1,12 +1,10 @@
 package network.data;
 
 import java.lang.reflect.Type;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-
-import javax.swing.event.ListSelectionEvent;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -23,11 +21,13 @@ import common.service.Repository;
 import common.service.RepositoryMin;
 import common.util.MultiSourceSwitch;
 import common.util.ObjChannel;
-import common.util.Writable;
 import network.api.service.ApiMakerService;
 import network.api.service.RepoApiMaker;
 import network.api.service.UserApiMaker;
 import network.connection.service.HTTPConnectionService;
+import network.data.sources.GeneralProcessSource;
+import network.data.sources.JSONStringRPOSource;
+import network.data.sources.PureDataTransSource;
 import network.service.MassiveDataSource;
 
 /**
@@ -45,99 +45,44 @@ public class MassiveDataSourceDefault implements MassiveDataSource {
 	private RepoApiMaker repoApi = null;
 	private HTTPConnectionService conn = null;
 	
+	
 	private static final int SUGGESTED_THREAD_NUM = Integer.parseInt(System.getenv().get("NUMBER_OF_PROCESSORS"));
 //	private static final int SUGGESTED_THREAD_NUM = 1;
+	
+	
 	public ObjChannel<String> getRepoNames() throws NetworkException {
-		
+		//新建管道、集流器，获取URL
 		ObjChannel<String> channel = new ObjChannelWithBlockingQueue<String>();
 		MultiSourceSwitch<String> sourceSwitch = new BasicSourceSwitch<String>(channel);
 		String url = repoApi.makeRepoNamesApi();
-
+		
+		//获取并处理JSON
 		String json = conn.do_get(url);
 		Type listTypeType = new TypeToken<List<String>>(){}.getType();
 		List<String> repoLists = gson.fromJson(json, listTypeType);
 		
 		List<String>[] listSplit = splitList(repoLists, SUGGESTED_THREAD_NUM);
 		
-		Executor exec = Executors.newCachedThreadPool();
 		PureDataTransSource[] sources = new PureDataTransSource[SUGGESTED_THREAD_NUM];
 		for(int i=0;i<SUGGESTED_THREAD_NUM;i++) {
-			sources[i] = new PureDataTransSource(listSplit[i], sourceSwitch);
+			sources[i] = new PureDataTransSource<String>(listSplit[i], sourceSwitch);
 		}
-		for(int i=0;i<SUGGESTED_THREAD_NUM;i++) {
-			exec.execute(sources[i]);
-		}
+		execute(sources);
 		
 		return channel;
 	}
 	
-	/**
-	 * 自行注册、解注册的纯数据传送源
-	 * 可能需要提出为非内部类
-	 * @author xjh14
-	 * @param <T>
-	 */
-	class PureDataTransSource<T> implements Runnable {
 
-		List<T> data;
-		Writable<T> target;
+	
+	public ObjChannel<RepositoryMin> getRepoMinInfo() throws NetworkException, DataTransferException {
 		
-		ObjChannel<T> chan;
-		MultiSourceSwitch<T> sourceSwitch;
-		boolean isSwitch;
-		
-		PureDataTransSource(List<T> data,ObjChannel<T> chan) {
-			this.data = data;
-			target = chan;
-			
-			isSwitch = false;
-			this.chan = chan;
-		}
-		
-		PureDataTransSource(List<T> data,MultiSourceSwitch<T> sourceSwitch) {
-			this.data = data;
-			target = sourceSwitch;
-			
-			this.isSwitch = true;
-			sourceSwitch.register(this);
-			this.sourceSwitch = sourceSwitch;
-		}
-		
-		public void run() {
-			target.writeObj(data);
-			close();
-		}
-		
-		private void close() {
-			if(isSwitch) {
-				sourceSwitch.deregister(this);
-			} else {
-				chan.close();
-			}
-		}
+		return getRepo(RepositoryMin.class);
 	}
 	
 
-	public ObjChannel<RepositoryMin> getRepoMinInfo() throws NetworkException, DataTransferException {
-		ObjChannel<String> namesChannel = this.getRepoNames();
-		
-		ObjChannel<RepositoryMin> repoChannel = new ObjChannelWithBlockingQueue<RepositoryMin>();
-		List<RepositoryMin> repositoryList = new LinkedList<RepositoryMin>();
-		
-		
-		return repoChannel;
-	}
-
 	public ObjChannel<Repository> getRepoInfo() throws NetworkException, DataTransferException {
-		ObjChannel<String> namesChannel = this.getRepoNames();
-		
-		ObjChannel<Repository> repoChannel = new ObjChannelWithBlockingQueue<Repository>();
-		List<Repository> repositoryList = new LinkedList<Repository>();
-		
-		//TODO
-		
-		
-		return repoChannel;
+				
+		return getRepo(Repository.class);
 	}
 
 	public ObjChannel<GitUserMin> getUserMinInfo() {
@@ -150,7 +95,9 @@ public class MassiveDataSourceDefault implements MassiveDataSource {
 		return null;
 	}
 	
-	
+	/*
+	 * TODO 重构时可能要提到别的类中
+	 */
 	private <T> List[] splitList(List<T> origin, int pieces) {
 		assert pieces > 0;
 		
@@ -177,4 +124,59 @@ public class MassiveDataSourceDefault implements MassiveDataSource {
 		this.conn = HTTPConnectionService.getInstance();
 	}
 
+	private void execute(Runnable[] runnables) {
+		Executor exec = Executors.newCachedThreadPool();
+		for(Runnable r: runnables) {
+			exec.execute(r);
+		}
+	}
+	
+	private <T> ObjChannel<T> getRepo(Class<T> repoClass) throws NetworkException {
+		ObjChannel<String> namesChannel = this.getRepoNames();
+		ObjChannel<String> repoJSONChannel = new ObjChannelWithBlockingQueue<String>();
+
+		
+		GeneralProcessSource[] repoJSONGetter = new GeneralProcessSource[SUGGESTED_THREAD_NUM];
+		for(int i=0;i<SUGGESTED_THREAD_NUM;i++) {
+			repoJSONGetter[i] = new GeneralProcessSource<String, String>(namesChannel,repoJSONChannel,20) {
+				@Override
+				public List<String> process(List<String> get) {
+					List<String> repoJSONs = new ArrayList<String>();
+					for(String name:get) {
+						String c = null;
+						try {
+							c = conn.do_get(repoApi.makeRepoInfoApi(name));
+						} catch (NetworkException e) {
+							e.printStackTrace();
+							closeExceptionally();
+						}
+						repoJSONs.add(c);
+					}
+					return repoJSONs;
+				}
+			};
+		}
+		execute(repoJSONGetter);
+		
+		
+		ObjChannel<T> repoChannel = new ObjChannelWithBlockingQueue<T>();
+		JSONStringRPOSource[] RPOSources = new JSONStringRPOSource[SUGGESTED_THREAD_NUM];		
+		for(int i=0;i<SUGGESTED_THREAD_NUM;i++) {
+			RPOSources[i] = new JSONStringRPOSource(repoJSONChannel, getBeans(repoClass), repoChannel);
+		}
+		execute(RPOSources);
+		
+		return repoChannel;
+	}
+	
+	private Class getBeans(Class imp) {
+		if(imp==Repository.class) {
+			return RepositoryBeans.class;
+		} else if(imp==RepositoryMin.class) {
+			return RepositoryMinBeans.class;
+		} else {
+			return null;//TODO For GitUser?
+		}
+	}
+	
 }

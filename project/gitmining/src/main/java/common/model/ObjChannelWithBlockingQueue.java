@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import common.exception.DataTransferException;
 import common.util.ObjChannel;
@@ -16,6 +18,7 @@ import common.util.ObjChannel;
  * 
  * 本通道仅可拥有一个数据源，由这个数据源操控进行开启、关闭；
  * 本通道可以接受多个数据接收者。
+ * TODO 同步性有问题！亟待解决！
  */
 public class ObjChannelWithBlockingQueue<T> implements ObjChannel<T> {
 
@@ -23,19 +26,23 @@ public class ObjChannelWithBlockingQueue<T> implements ObjChannel<T> {
 	public static final int EXCEPTION_CLOSED = 1;
 	public static final int NORMAL_CLOSED = 2;
 	
-	
+	ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
 	
 	volatile int status;
 	
 	BlockingQueue<T> queue = new LinkedBlockingQueue<T>();
 	
 	public void writeObj(T[] list) {
+		lock.writeLock().lock();
 		for(T obj: list) {
 			queue.add(obj);
 		}
+		lock.writeLock().unlock();
 	}
 
 	public List<T> getObj(int maxNum) throws DataTransferException {
+		
+		lock.readLock().lock();
 		
 		List<T> result = new ArrayList<T>(maxNum);
 		int currentNum = 0;
@@ -53,6 +60,8 @@ public class ObjChannelWithBlockingQueue<T> implements ObjChannel<T> {
 				}
 			}
 		}
+
+		lock.readLock().lock();
 		
 		return result;
 	}
@@ -63,7 +72,6 @@ public class ObjChannelWithBlockingQueue<T> implements ObjChannel<T> {
 
 	public void closeWithException() {
 		status = EXCEPTION_CLOSED;
-		
 	}
 
 	public boolean hasMore() {
@@ -80,6 +88,8 @@ public class ObjChannelWithBlockingQueue<T> implements ObjChannel<T> {
 	}
 
 	public void writeObj(List<T> list) {
+		lock.writeLock().lock();
 		queue.addAll(list);
+		lock.writeLock().unlock();
 	}
 }

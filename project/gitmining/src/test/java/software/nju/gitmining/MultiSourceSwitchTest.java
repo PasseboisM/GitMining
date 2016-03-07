@@ -1,6 +1,9 @@
 package software.nju.gitmining;
 
 import static org.junit.Assert.*;
+
+import java.util.List;
+
 import network.data.MassiveDataSourceDefault;
 import network.service.MassiveDataSource;
 
@@ -26,17 +29,26 @@ public class MultiSourceSwitchTest {
 		int page = 500, realGet = 0, total = 0;
 		while(chan.hasMore()) {
 			try {
-				realGet = chan.getObj(page).size();
+				List<String> l = chan.getObj(page);
+				realGet = l.size();
+				if(realGet>0) {
+					System.out.println("Got:"+realGet+",e.g.:"+l.get(0));
+				} else {
+					System.out.println("Got nothing.");
+				}
 			} catch (DataTransferException e) {
 				e.printStackTrace();
 			}
-			System.out.println("Got:"+realGet);
 			total += realGet;
 		}
 		
 		long timeEnd = System.currentTimeMillis();
 		System.out.println("Time Elapse:"+(timeEnd-timeStart));
+		
+		//数目为当前GitMining提供仓库数（懒的现场写单线程提取了） 
+		//之后测试通不过时，记得改为实时单线程获取数目，或者重新数一下数目，更换Magic Number!
 		assertEquals(total,3216);
+		
 		/*
 		 * Result:
 		 * 4 threads : About 1000ms, between 850ms and 1250ms
