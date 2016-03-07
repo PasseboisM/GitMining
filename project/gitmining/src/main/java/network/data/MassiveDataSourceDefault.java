@@ -52,11 +52,7 @@ public class MassiveDataSourceDefault implements MassiveDataSource {
 		ObjChannel<String> channel = new ObjChannelWithBlockingQueue<String>();
 		MultiSourceSwitch<String> sourceSwitch = new BasicSourceSwitch<String>(channel);
 		String url = repoApi.makeRepoNamesApi();
-<<<<<<< HEAD
-//		System.out.println(url);
-=======
-		
->>>>>>> xjh14Development
+
 		String json = conn.do_get(url);
 		Type listTypeType = new TypeToken<List<String>>(){}.getType();
 		List<String> repoLists = gson.fromJson(json, listTypeType);
