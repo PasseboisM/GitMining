@@ -15,7 +15,7 @@ import common.exception.DataTransferException;
  * @param <T> 本通道用于传输的对象类型
  * 实现时注意同步性问题
  */
-public interface  ObjChannel<T> extends Closeable {
+public interface  ObjChannel<T> extends Closeable,Writable<T> {
 
 	/**
 	 * 向通道内传入对象数组，按顺序写入缓冲
