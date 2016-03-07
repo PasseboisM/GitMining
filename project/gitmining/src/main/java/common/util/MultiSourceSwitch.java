@@ -7,7 +7,7 @@ import java.util.List;
  * 能够帮助ObjChannel支持多数据源写入
  * @author xjh14
  */
-public interface MultiSourceSwitch<T> {
+public interface MultiSourceSwitch<T> extends Writable<T> {
 
 	/**
 	 * 向本集流器注册数据源，只有注册过的数据源才可以向本集流器写入数据
@@ -19,13 +19,13 @@ public interface MultiSourceSwitch<T> {
 	 * 向集流器目标管道写入对象数组
 	 * @param toBeWritten 待写入的对象数组
 	 */
-	public void write(T[] toBeWritten);
+	public void writeObj(T[] toBeWritten);
 	
 	/**
 	 * 向集流器目标管道写入对象列表
 	 * @param toBeWritten 待写入的对象列表
 	 */
-	public void write(List<T> toBeWritten);
+	public void writeObj(List<T> toBeWritten);
 	
 	/**
 	 * 向集流器注销本数据源，声明此数据源不会再写入数据

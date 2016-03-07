@@ -2,8 +2,7 @@ package common.model;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.event.ListSelectionEvent;
+import java.util.concurrent.locks.ReentrantLock;
 
 import common.util.MultiSourceSwitch;
 import common.util.ObjChannel;
@@ -16,6 +15,8 @@ import common.util.ObjChannel;
  */
 public class BasicSourceSwitch<T> implements MultiSourceSwitch<T> {
 
+	ReentrantLock lock = new ReentrantLock();
+	
 	private static final int WORKING = 0;
 	private static final int EXCEPTION_INVOKED = 1;
 	private static final int NORMAL_CLOSED = 2;
@@ -29,29 +30,35 @@ public class BasicSourceSwitch<T> implements MultiSourceSwitch<T> {
 		chan = channel;
 	}
 	
-	public synchronized void register(Object source) {
+	public void register(Object source) {
+		lock.lock();
 		if(!sources.contains(source)) {
 			sources.add(source);
 		}
+		lock.unlock();
 	}
 
-	public void write(T[] toBeWritten) {
+	public void writeObj(T[] toBeWritten) {
 		chan.writeObj(toBeWritten);
 	}
 
-	public void write(List<T> toBeWritten) {
+	public void writeObj(List<T> toBeWritten) {
 		chan.writeObj((T[]) toBeWritten.toArray());
 	}
 
-	public synchronized void deregister(Object source) {
+	public void deregister(Object source) {
+		lock.lock();
 		removeSource(source);
 		checkStatus();
+		lock.unlock();
 	}
 
-	public synchronized void declareException(Object source) {
+	public void declareException(Object source) {
+		lock.lock();
 		removeSource(source);
 		status = EXCEPTION_INVOKED;
 		checkStatus();
+		lock.unlock();
 	}
 
 	/**
