@@ -39,13 +39,22 @@ public class MassiveDataSourceTest {
 		/**
 		 * Test result records:
 		 * 
+		 * 
+		 * 环境：机房网（人不很多）
 		 * (4 threads in each channel)failed: 77s running time,expected 3216, but was 3160
 		 * 漏掉了一些数据，同步方面有问题
-		 * 
 		 * (1 thread in each channel)succeeded: 194s running time
 		 * 结论：如果是不用Channel的真单线程的话，恐怕时间甚至会不止250s，
 		 * 		所以多线程还是要有，一定要找出同步性有问题的地方
 		 * 
+		 * 环境：宿舍渣网
+		 * success, 77s (16 threads in each channel)
+		 * success, 94s (8 threads in each channel)
+		 * success, 183s(4 threads in each channel)
+		 * success, 361s(2 threads in each channel)
+		 * success, 812s(1 thread  in each channel)
+		 * 结论：
+		 * 为了实际运行时避免线程过度竞争，最终决定采用线程数目为processors * 2(本次测试中的8 threads) 
 		 */
 	}
 

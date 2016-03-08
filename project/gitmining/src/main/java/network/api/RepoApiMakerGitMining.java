@@ -15,7 +15,7 @@ public class RepoApiMakerGitMining implements RepoApiMaker {
 		String[] info = fullName.split("/");
 		
 		assert info.length==2:"仓库全名格式错误，无法生成访问API";
-		
+//		return "https://api.github.com/repos/"+fullName;
 		return "http://www.gitmining.net/api/repository/"+fullName;
 	}
 

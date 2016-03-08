@@ -26,23 +26,23 @@ public class ObjChannelWithBlockingQueue<T> implements ObjChannel<T> {
 	public static final int EXCEPTION_CLOSED = 1;
 	public static final int NORMAL_CLOSED = 2;
 	
-	ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
+	ReentrantLock lock = new ReentrantLock();
 	
 	volatile int status;
 	
 	BlockingQueue<T> queue = new LinkedBlockingQueue<T>();
 	
 	public void writeObj(T[] list) {
-		lock.writeLock().lock();
+//		lock.lock();
 		for(T obj: list) {
 			queue.add(obj);
 		}
-		lock.writeLock().unlock();
+//		lock.unlock();
 	}
 
 	public List<T> getObj(int maxNum) throws DataTransferException {
 		
-		lock.readLock().lock();
+//		lock.lock();
 		
 		List<T> result = new ArrayList<T>(maxNum);
 		int currentNum = 0;
@@ -61,7 +61,7 @@ public class ObjChannelWithBlockingQueue<T> implements ObjChannel<T> {
 			}
 		}
 
-		lock.readLock().lock();
+//		lock.unlock();
 		
 		return result;
 	}
@@ -88,8 +88,8 @@ public class ObjChannelWithBlockingQueue<T> implements ObjChannel<T> {
 	}
 
 	public void writeObj(List<T> list) {
-		lock.writeLock().lock();
+//		lock.lock();
 		queue.addAll(list);
-		lock.writeLock().unlock();
+//		lock.unlock();
 	}
 }
