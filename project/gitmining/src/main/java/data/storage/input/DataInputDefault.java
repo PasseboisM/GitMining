@@ -8,9 +8,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import network.service.MassiveDataSource;
+import network.service.NetworkServiceFactory;
+
 import com.google.gson.Gson;
 
 import common.exception.DataTransferException;
+import common.exception.NetworkException;
 import common.model.BasicSourceSwitch;
 import common.model.filter.GeneralProcessFilter;
 import common.service.GitUser;
@@ -31,13 +35,24 @@ public class DataInputDefault implements DataStorageInput {
 	@Override
 	public void saveRepository(Repository repo) {
 		File f = new File(dir.repositoryDirectory(repo));
+		FileWriter fw = null;
 		try {
+			f.mkdirs();
 			f.createNewFile();
+			f.setWritable(true);
 			String json = gson.toJson(repo);
-			FileWriter fw = new FileWriter(f);
+			fw = new FileWriter(f);
 			fw.write(json);
+			
 		} catch (IOException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				fw.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -94,24 +109,32 @@ public class DataInputDefault implements DataStorageInput {
 
 	}
 	
-	abstract class Writer<I> extends GeneralProcessFilter<I, Boolean> {
-
+//	abstract class Writer<I> extends GeneralProcessFilter<I, Boolean> {
+//
+//		
+//		public Writer(ObjChannel<I> input, MultiSourceSwitch<Boolean> output,
+//				int page) {
+//			super(input, output, page);
+//		}
+//
+//		@Override
+//		public List<Boolean> process(List<I> get) {
+//			for(Object obj:get) {
+//				writeObj(obj);
+//			}
+//			return new ArrayList<Boolean>();
+//		}
+//		
+//		public abstract void writeObj(Object obj);
+//		
+//	}
+	
+	public static void main(String[] args) throws NetworkException {
+		MassiveDataSource source =  NetworkServiceFactory.getInstance().getMassiveDataSource();
+		ObjChannel<Repository> chan = source.getRepoInfo();
 		
-		public Writer(ObjChannel<I> input, MultiSourceSwitch<Boolean> output,
-				int page) {
-			super(input, output, page);
-		}
-
-		@Override
-		public List<Boolean> process(List<I> get) {
-			for(Object obj:get) {
-				writeObj(obj);
-			}
-			return new ArrayList<Boolean>();
-		}
-		
-		public abstract void writeObj(Object obj);
-		
+		DataStorageInput input = new DataInputDefault();
+		input.saveRepository(chan);
 	}
 
 }
