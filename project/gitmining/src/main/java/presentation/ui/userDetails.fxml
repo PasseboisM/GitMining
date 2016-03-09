@@ -10,23 +10,10 @@
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="85.0" prefWidth="950.0">
-               <children>
-                  <TextField prefHeight="32.0" prefWidth="683.0" promptText="搜索其他用户">
-                     <HBox.margin>
-                        <Insets left="80.0" />
-                     </HBox.margin>
-                  </TextField>
-                  <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="55.0" text="搜索">
-                     <HBox.margin>
-                        <Insets left="20.0" />
-                     </HBox.margin>
-                  </Button>
-               </children>
-            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="85.0" prefWidth="950.0" />
             <HBox prefHeight="50.0" prefWidth="950.0">
                <children>
-                  <Label prefHeight="47.0" prefWidth="103.0" text="name">
+                  <Label prefHeight="47.0" prefWidth="103.0">
                      <font>
                         <Font size="36.0" />
                      </font>
@@ -34,7 +21,7 @@
                         <Insets left="50.0" />
                      </HBox.margin>
                   </Label>
-                  <Label prefHeight="33.0" prefWidth="127.0" text="id:79797" textFill="#6b6b6b">
+                  <Label prefHeight="33.0" prefWidth="127.0" textFill="#6b6b6b">
                      <font>
                         <Font size="25.0" />
                      </font>
@@ -49,7 +36,7 @@
                   <Insets />
                </VBox.margin>
             </Separator>
-            <Label text="sssssfsdfsdfs" textFill="#8d8d8d" wrapText="true">
+            <Label textFill="#8d8d8d" wrapText="true">
                <font>
                   <Font size="20.0" />
                </font>
@@ -64,7 +51,7 @@
                   </Label>
                </graphic>
             </Label>
-            <Label text="sssssfsdfsdfs" textFill="#8d8d8d" wrapText="true">
+            <Label textFill="#8d8d8d" wrapText="true">
                <font>
                   <Font size="20.0" />
                </font>
@@ -79,7 +66,7 @@
                   </Label>
                </graphic>
             </Label>
-            <Label text="123123123" textFill="#8d8d8d" wrapText="true">
+            <Label textFill="#8d8d8d" wrapText="true">
                <font>
                   <Font size="20.0" />
                </font>
@@ -94,7 +81,7 @@
                   <Insets left="20.0" />
                </VBox.margin>
             </Label>
-            <Label text="123123123" textFill="#8d8d8d" wrapText="true">
+            <Label textFill="#8d8d8d" wrapText="true">
                <font>
                   <Font size="20.0" />
                </font>
@@ -109,7 +96,7 @@
                   </Label>
                </graphic>
             </Label>
-            <Label text="123123123" textFill="#8d8d8d" wrapText="true">
+            <Label textFill="#8d8d8d" wrapText="true">
                <font>
                   <Font size="20.0" />
                </font>
@@ -124,7 +111,7 @@
                   </Label>
                </graphic>
             </Label>
-            <Label text="Repository Statistics">
+            <Label text="User Statistics">
                <font>
                   <Font size="28.0" />
                </font>
@@ -136,33 +123,12 @@
                <children>
                   <GridPane>
                      <children>
-                        <Label text="Label">
+                        <Label>
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label text="Label" textFill="#545454" GridPane.rowIndex="1">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                     </children>
-                     <columnConstraints>
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BOTTOM" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                  </GridPane>
-                  <GridPane>
-                     <children>
-                        <Label text="Label">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label text="Label" textFill="#545454" GridPane.rowIndex="1">
+                        <Label text="Follers" textFill="#545454" GridPane.rowIndex="1">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -178,33 +144,12 @@
                   </GridPane>
                   <GridPane>
                      <children>
-                        <Label text="Label">
+                        <Label>
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label text="Label" textFill="#545454" GridPane.rowIndex="1">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                     </children>
-                     <columnConstraints>
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BOTTOM" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                  </GridPane>
-                  <GridPane>
-                     <children>
-                        <Label text="Label">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label text="Label" textFill="#545454" GridPane.rowIndex="1">
+                        <Label text="Stars" textFill="#545454" GridPane.rowIndex="1">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -220,12 +165,54 @@
                   </GridPane>
                   <GridPane>
                      <children>
-                        <Label text="Label">
+                        <Label>
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label text="Label" textFill="#545454" GridPane.rowIndex="1">
+                        <Label text="Repo" textFill="#545454" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BOTTOM" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+                  <GridPane>
+                     <children>
+                        <Label>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label text="Commits" textFill="#545454" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BOTTOM" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+                  <GridPane>
+                     <children>
+                        <Label>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label text="Forks" textFill="#545454" GridPane.rowIndex="1">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -241,7 +228,7 @@
                   </GridPane>
                </children>
             </HBox>
-            <Label text="1231231231" textFill="#8d8d8d" wrapText="true">
+            <Label textFill="#8d8d8d" wrapText="true">
                <font>
                   <Font size="20.0" />
                </font>
@@ -256,7 +243,7 @@
                   </Label>
                </graphic>
             </Label>
-            <Label text="123123123" textFill="#8d8d8d" wrapText="true">
+            <Label textFill="#8d8d8d" wrapText="true">
                <font>
                   <Font size="20.0" />
                </font>
@@ -277,4 +264,7 @@
    <padding>
       <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
    </padding>
+   <bottom>
+      <Button mnemonicParsing="false" text="返回" BorderPane.alignment="CENTER" />
+   </bottom>
 </BorderPane>

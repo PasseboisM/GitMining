@@ -191,4 +191,7 @@
          </children>
       </VBox>
    </center>
+   <bottom>
+      <Button mnemonicParsing="false" text="返回" BorderPane.alignment="CENTER" />
+   </bottom>
 </BorderPane>
