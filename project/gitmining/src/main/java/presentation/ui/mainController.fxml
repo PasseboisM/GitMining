@@ -12,26 +12,22 @@
    <top>
       <MenuBar BorderPane.alignment="CENTER">
          <menus>
- -           <Menu mnemonicParsing="false" text="开始">
- -             <items>
- -               <MenuItem fx:id="download" mnemonicParsing="false" onAction="#getDownload" text="更新" />
- -                   <MenuItem fx:id="refresh" mnemonicParsing="false" onAction="#getRefresh" text="重启" />
- -                   <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#getExit" text="关闭" />
- -             </items>
- -           </Menu>
- -           <Menu mnemonicParsing="false" text="设置">
- -             <items>
- -               <MenuItem fx:id="online" mnemonicParsing="false" onAction="#setOnline" text="在线模式" />
- -                   <MenuItem fx:id="offline" mnemonicParsing="false" onAction="#setOffline" text="离线模式" />
- -             </items>
- -           </Menu>
- -           <Menu mnemonicParsing="false" text="帮助">
- -             <items>
- -               <MenuItem fx:id="guide" mnemonicParsing="false" onAction="#getGuide" text="说明" />
- -                   <MenuItem fx:id="member" mnemonicParsing="false" onAction="#getMember" text="鸣谢" />
- -             </items>
- -           </Menu>
- -         </menus>
+            <Menu mnemonicParsing="false" text="File">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Close" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Edit">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Delete" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="About" />
+               </items>
+            </Menu>
+         </menus>
       </MenuBar>
    </top>
    <center>
