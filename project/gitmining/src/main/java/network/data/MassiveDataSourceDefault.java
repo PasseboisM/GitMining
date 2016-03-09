@@ -17,6 +17,9 @@ import common.model.GitUserMinBeans;
 import common.model.ObjChannelWithBlockingQueue;
 import common.model.RepositoryBeans;
 import common.model.RepositoryMinBeans;
+import common.model.filter.GeneralProcessFilter;
+import common.model.filter.JSONStringRPOFilter;
+import common.model.filter.PureDataTransFilter;
 import common.service.GitUser;
 import common.service.GitUserMin;
 import common.service.Repository;
@@ -27,9 +30,6 @@ import network.api.service.ApiMakerService;
 import network.api.service.RepoApiMaker;
 import network.api.service.UserApiMaker;
 import network.connection.service.HTTPConnectionService;
-import network.data.filter.GeneralProcessFilter;
-import network.data.filter.JSONStringRPOFilter;
-import network.data.filter.PureDataTransFilter;
 import network.service.MassiveDataSource;
 
 /**

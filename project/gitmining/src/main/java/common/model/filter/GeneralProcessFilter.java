@@ -1,4 +1,4 @@
-package network.data.filter;
+package common.model.filter;
 
 import java.util.List;
 
