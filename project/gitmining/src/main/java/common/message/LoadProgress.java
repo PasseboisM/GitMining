@@ -2,8 +2,8 @@ package common.message;
 
 public class LoadProgress  {
 
-	private int totalRepoNum = 0;
-	private int loadedRepoNum = 0;
+	private int totalRepoNum = -1;
+	private int loadedRepoNum = -2;
 	
 	public LoadProgress(int totalRepoNum,int loadedRepoNum) {
 		this.totalRepoNum = totalRepoNum;
@@ -20,6 +20,10 @@ public class LoadProgress  {
 	
 	public boolean isFinished() {
 		return totalRepoNum==loadedRepoNum;
+	}
+	
+	public String toString() {
+		return "Total:"+totalRepoNum+", Loaded:"+loadedRepoNum;
 	}
 	
 }

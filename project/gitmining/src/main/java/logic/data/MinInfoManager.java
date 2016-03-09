@@ -13,6 +13,8 @@ import common.message.LoadProgress;
 import common.service.GitUserMin;
 import common.service.RepositoryMin;
 import common.util.ObjChannel;
+import common.util.Observable;
+import common.util.Observer;
 import data.service.DataServiceFactory;
 import data.service.MassiveDataGetter;
 
@@ -22,7 +24,7 @@ import data.service.MassiveDataGetter;
  * @author xjh14
  *
  */
-public class MinInfoManager {
+public class MinInfoManager implements Observable {
 
 	private static MinInfoManager instance = new MinInfoManager();
 	
@@ -81,7 +83,7 @@ public class MinInfoManager {
 	}
 	
 	class CollectionWriter<T> implements Runnable {
-		private static final int page = 10;
+		private static final int page = 50;
 		ObjChannel<T> source = null;
 		Collection<T> target = null;
 		public CollectionWriter(ObjChannel<T> source, Collection<T> target) {
@@ -92,14 +94,13 @@ public class MinInfoManager {
 		@Override
 		public void run() {
 			try {
-				
-				lock.lock();
-					while (source.hasMore()) {
-						System.out.println("Writing 10");
-						target.addAll(source.getObj(page));
-						System.out.println("Wrote 10");
-					}
-				lock.unlock();
+				while (source.hasMore()) {
+					lock.lock();
+					target.addAll(source.getObj(page));
+					lock.unlock();
+					System.out.println(getProgress());
+					notifyObservers();
+				}
 			} catch (DataTransferException e) {
 				setInitException(true);
 				e.printStackTrace();
@@ -115,6 +116,29 @@ public class MinInfoManager {
 
 	public void setInitException(boolean initException) {
 		this.initException = initException;
+	}
+
+	
+	
+	private List<Observer> observers = new ArrayList<>();
+	
+	public void notifyObservers() {
+		for(Observer ob:observers) {
+			ob.update();
+		}
+	}
+
+	public void addObserver(Observer observer) {
+		synchronized (this) {
+			observers.add(observer);
+		}
+	}
+
+	@Override
+	public void removeObserver(Observer observer) {
+		synchronized (this) {
+			observers.remove(observer);
+		}
 	}
 	
 }

@@ -1,12 +1,13 @@
 package logic.service;
 
-import java.util.Observable;
-import java.util.Observer;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import logic.data.MinInfoManager;
 import common.message.LoadProgress;
+import common.util.Observer;
 
-public class Loader extends Observable {
+public class Loader {
 
 	private static Loader instance = new Loader();
 	
@@ -16,23 +17,10 @@ public class Loader extends Observable {
 	
 	public void startLoading(){
 		
-		System.out.println("Entered loading");
 		manager = MinInfoManager.getInstance();
 		progress = manager.getProgress();
-		Thread inquiringProgress = new Thread(new Runnable(){
+		System.out.println(progress);
 
-			@Override
-			public void run() {
-				while (!progress.isFinished()) {
-						System.out.println("Invoked checker");
-						progress = manager.getProgress();
-						notifyObservers();
-				}
-				
-			}
-			
-		});
-		inquiringProgress.start();;
 	}
 	
 	private Loader(){}
@@ -42,12 +30,11 @@ public class Loader extends Observable {
 	}
 	
 	public static LoadProgress getProgress() {
-		return progress;
+		return MinInfoManager.getInstance().getProgress();
 	}
 	
-	@Override
-	public void addObserver(Observer o) {
-		super.addObserver(o);
-		System.out.println("Added "+o);
+	public void addObserver(Observer observer) {
+		MinInfoManager.getInstance().addObserver(observer);
 	}
+
 }

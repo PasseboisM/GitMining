@@ -1,9 +1,10 @@
 package presentation.ui;
 
 import java.io.IOException;
-import java.util.Observer;
 
 import common.message.LoadProgress;
+import common.util.Observable;
+import common.util.Observer;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -100,17 +101,25 @@ public class MainController extends Application implements Observer{
 		buttonAboutUs.setDisable(true);
 		rightComponentParent.getChildren().clear();
 	}
-	
+
 	@Override
-	public void update(java.util.Observable o, Object arg) {
+	public void update() {
 		LoadProgress loadProgress = Loader.getProgress();
 		if (loadProgress.getLoadedRepoNum()>50) {
 			this.ableToGetData = true;
 		}
 		
 		System.out.println(loadProgress.getLoadedRepoNum());
+		
+	}
+
+	@Override
+	public void update(Observable observable, Object obj) {
+		update();
+		
 	}
 	
+
 	
 
 }
