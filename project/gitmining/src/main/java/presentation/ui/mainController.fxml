@@ -37,7 +37,7 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox minHeight="-Infinity" prefHeight="675.0">
+            <HBox fx:id="hbox" minHeight="-Infinity" prefHeight="675.0">
                <children>
                   <FlowPane prefHeight="641.0" prefWidth="150.0">
                      <children>
@@ -108,7 +108,7 @@
                         </Accordion>
                      </children>
                   </FlowPane>
-                  <AnchorPane fx:id="rightComponentParent" prefHeight="200.0" prefWidth="1050.0" />
+                  <AnchorPane fx:id="pane" prefHeight="200.0" prefWidth="1050.0" />
                </children>
             </HBox>
             <ImageView fx:id="image" fitHeight="675.0" fitWidth="1200.0" onMousePressed="#imageMove" pickOnBounds="true">
