@@ -23,7 +23,7 @@ public class MainController extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		FXMLLoader loader = new FXMLLoader(MainController.class.getResource("main.fxml"));
+		FXMLLoader loader = new FXMLLoader(MainController.class.getResource("mainController.fxml"));
 		Parent root = loader.load();
 		Scene scene = new Scene(root,1190,680);
 		primaryStage.initStyle(StageStyle.DECORATED);
