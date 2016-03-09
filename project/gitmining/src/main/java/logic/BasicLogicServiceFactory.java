@@ -1,5 +1,6 @@
 package logic;
 
+import logic.data.GeneralGetterDefault;
 import logic.service.ChartMaker;
 import logic.service.GeneralGetter;
 import logic.service.LogicServiceFactory;
@@ -14,9 +15,10 @@ import logic.service.SearchService;
  */
 public class BasicLogicServiceFactory extends LogicServiceFactory {
 
+	GeneralGetter getter = new GeneralGetterDefault();
+	
 	public GeneralGetter getGeneralGetter() {
-		// TODO Auto-generated method stub
-		return null;
+		return getter;
 	}
 
 	public SearchService getSearchService() {

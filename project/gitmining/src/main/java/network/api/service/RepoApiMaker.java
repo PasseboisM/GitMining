@@ -9,4 +9,6 @@ public interface RepoApiMaker {
 	public String makeRepoInfoApi(String fullName);
 	
 	public String makeRepoNamesApi();
+	
+	public String makeRepoContributorLoginsApi(String repoFullName);
 }

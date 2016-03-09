@@ -1,7 +1,6 @@
 package network.api;
 
 import common.service.RepositoryMin;
-
 import network.api.service.RepoApiMaker;
 
 public class RepoApiMakerGitMining implements RepoApiMaker {
@@ -21,6 +20,11 @@ public class RepoApiMakerGitMining implements RepoApiMaker {
 
 	public String makeRepoNamesApi() {
 		return "http://www.gitmining.net/api/repository/names";
+	}
+
+	@Override
+	public String makeRepoContributorLoginsApi(String repoFullName) {
+		return "http://www.gitmining.net/api/repository/"+repoFullName+"/contributors/login";
 	}
 
 }

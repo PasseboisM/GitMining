@@ -1,6 +1,5 @@
 package data.service.stub;
 
-import common.exception.DataTransferException;
 import common.exception.NetworkException;
 import common.service.GitUserMin;
 import common.service.RepositoryMin;
@@ -19,14 +18,17 @@ public class MassiveDataGetter_stub implements MassiveDataGetter{
 			return dataSource.getRepoMinInfo();
 		} catch (NetworkException e) {
 			e.printStackTrace();
-		} catch (DataTransferException e) {
-			e.printStackTrace();
 		}
 		return null;
 	}
 
 	public ObjChannel<GitUserMin> getUserMinInfo() {
-		return dataSource.getUserMinInfo();
+		try {
+			return dataSource.getUserMinInfo();
+		} catch (NetworkException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

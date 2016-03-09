@@ -26,7 +26,13 @@ public class SpecificDataGetter_stub implements SpecificDataGetter {
 	}
 
 	public GitUser getSpecificGitUser(GitUserMin source) {
-		// TODO Auto-generated method stub
+		
+		try {
+			return specificDataSource.getSpecificUser(source.getLogin());
+		} catch (NetworkException e ) {
+			e.printStackTrace();
+		}
+		
 		return null;
 	}
 

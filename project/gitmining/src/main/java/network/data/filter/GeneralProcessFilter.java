@@ -9,7 +9,7 @@ import common.util.Writable;
 
 public abstract class GeneralProcessFilter<I,T> implements Runnable {
 
-	private int page = 20;
+	protected int page = 20;
 	
 	private ObjChannel<I> input = null;
 	private Writable<T> output = null;
@@ -18,7 +18,7 @@ public abstract class GeneralProcessFilter<I,T> implements Runnable {
 	private ObjChannel<T> chan = null;
 	MultiSourceSwitch<T> sourceSwitch = null;
 	
-	protected GeneralProcessFilter(){}
+	private GeneralProcessFilter(){}
 	
 	public GeneralProcessFilter(ObjChannel<I> input, ObjChannel<T> output, int page) {
 		this.input = input;

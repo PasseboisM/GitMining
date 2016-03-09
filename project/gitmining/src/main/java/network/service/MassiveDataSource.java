@@ -27,29 +27,29 @@ public interface MassiveDataSource {
 	 * 获取提供Repository数据索引的通道
 	 * @return 传送包含所有Repository数据索引的数据通道
 	 * @throws NetworkException 发生网络异常，无法获取信息
-	 * @throws DataTransferException 系统数据管道同步模型数据传输异常
 	 */
-	public ObjChannel<RepositoryMin> getRepoMinInfo() throws NetworkException, DataTransferException;
+	public ObjChannel<RepositoryMin> getRepoMinInfo() throws NetworkException;
 	
 	/**
 	 * 获取提供Repository数据索引的通道。
 	 * Warning: 由于数据量大，应仅用于更新全部数据时使用。
 	 * @return 包含所有Repository详细数据的List
 	 * @throws NetworkException 发生网络异常，无法获取信息
-	 * @throws DataTransferException TODO
 	 */
-	public ObjChannel<Repository> getRepoInfo() throws NetworkException, DataTransferException;
+	public ObjChannel<Repository> getRepoInfo() throws NetworkException;
 	
 	/**
 	 * 获取全部GitUser数据索引的通道。
 	 * @return 包含所有GitUser数据索引的List
+	 * @throws NetworkException 
 	 */
-	public ObjChannel<GitUserMin> getUserMinInfo();
+	public ObjChannel<GitUserMin> getUserMinInfo() throws NetworkException;
 	
 	/**
 	 * 获取提供GitUser数据的通道。
 	 * Warning: 由于数据量大，应仅用于更新全部数据时使用。
 	 * @return 传送包含所有GitUser数据索引的数据通道
+	 * @throws NetworkException 
 	 */
-	public ObjChannel<GitUser> getUserInfo();
+	public ObjChannel<GitUser> getUserInfo() throws NetworkException;
 }

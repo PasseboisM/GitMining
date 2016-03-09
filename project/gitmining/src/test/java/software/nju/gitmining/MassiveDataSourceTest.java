@@ -11,21 +11,23 @@ import org.junit.Test;
 
 import common.exception.DataTransferException;
 import common.exception.NetworkException;
+import common.service.GitUser;
 import common.service.Repository;
+import common.service.RepositoryMin;
 import common.util.ObjChannel;
 
 public class MassiveDataSourceTest {
 
 	@Test
-	public void test() throws NetworkException, DataTransferException {
+	public void repoTest() throws NetworkException, DataTransferException {
 		MassiveDataSource source = new MassiveDataSourceDefault();
 		
-		ObjChannel<Repository> repoChan = source.getRepoInfo();
+		ObjChannel<RepositoryMin> repoChan = source.getRepoMinInfo();
 		
 		int total = 0;
 		
 		while(repoChan.hasMore()) {
-			List<Repository> repos = repoChan.getObj(100);
+			List<RepositoryMin> repos = repoChan.getObj(100);
 			System.out.println("Got:"+repos.size()); 
 			total += repos.size();
 			if(repos.size()>0) {
@@ -57,12 +59,39 @@ public class MassiveDataSourceTest {
 		 * 为了实际运行时避免线程过度竞争，最终决定采用线程数目为processors * 2(本次测试中的8 threads) 
 		 */
 	}
+	
+//	@Test
+	public void userTest() throws NetworkException, DataTransferException {
+		MassiveDataSource source = new MassiveDataSourceDefault();
+		
+		ObjChannel<GitUser> repoChan = source.getUserInfo();
+		
+		int total = 0;
+		
+		while(repoChan.hasMore()) {
+			List<GitUser> repos = repoChan.getObj(50);
+			System.out.println("Got:"+repos.size()); 
+			total += repos.size();
+			if(repos.size()>0) {
+				printUser(repos.get(0));
+			}
+			System.out.println();
+		}
+		
+//		assertEquals(3216,total);
+	}
 
-	public void printRepo(Repository r) {
+	private void printUser(GitUser gitUser) {
+		System.out.println("Login"+gitUser.getLogin());
+		System.out.println("Location:"+gitUser.getLocation());
+		System.out.println("Mail:"+gitUser.getEmail());
+		
+	}
+
+	public void printRepo(RepositoryMin r) {
 		System.out.println("Name:"+r.getFull_name());
 		System.out.println("ID:"+r.getId());
-		System.out.println("URL:"+r.getArchive_url());
-		System.out.println("Created at:"+r.getCreated_at());
+
 
 	}
 }

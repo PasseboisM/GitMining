@@ -76,36 +76,25 @@ public class MassiveDataSourceDefault implements MassiveDataSource {
 	
 
 	
-	public ObjChannel<RepositoryMin> getRepoMinInfo() throws NetworkException, DataTransferException {
+	public ObjChannel<RepositoryMin> getRepoMinInfo() throws NetworkException {
 		
 		return getRepo(RepositoryMin.class);
 	}
 	
 
-	public ObjChannel<Repository> getRepoInfo() throws NetworkException, DataTransferException {
+	public ObjChannel<Repository> getRepoInfo() throws NetworkException {
 				
 		return getRepo(Repository.class);
 	}
 
-	/**
-	 * 似乎系统暂时不需要这个功能
-	 */
-	public ObjChannel<GitUserMin> getUserMinInfo() {
-		// TODO Auto-generated method stub
-		return null;
+	public ObjChannel<GitUserMin> getUserMinInfo() throws NetworkException {
+		return getUser(GitUserMin.class);
 	}
 
-	/**
-	 * 似乎系统暂时不需要这个功能
-	 */
-	public ObjChannel<GitUser> getUserInfo() {
-		// TODO Auto-generated method stub
-		return null;
+	public ObjChannel<GitUser> getUserInfo() throws NetworkException {
+		return getUser(GitUser.class);
 	}
 	
-	/*
-	 * TODO 重构时可能要提到别的类中
-	 */
 	private <T> List[] splitList(List<T> origin, int pieces) {
 		assert pieces > 0;
 		
@@ -163,6 +152,31 @@ public class MassiveDataSourceDefault implements MassiveDataSource {
 		return objChannel;
 	}
 	
+	private <T> ObjChannel<T> getUser(Class<T> userClass) throws NetworkException {
+		ObjChannel<String> namesChannel = this.getRepoNames();
+		ObjChannel<String> contributorChannel = new ObjChannelWithBlockingQueue<String>();
+		
+		
+		GeneralProcessFilter[] contributorGetter = new GeneralProcessFilter[SUGGESTED_THREAD_NUM];
+		MultiSourceSwitch switchRepoToContributor = new BasicSourceSwitch(contributorChannel);
+		for(int i=0;i<SUGGESTED_THREAD_NUM;i++) {
+			contributorGetter[i] = new RepoNameToContributorJSONFilter
+					(namesChannel, switchRepoToContributor, 1);
+		}
+		execute(contributorGetter);
+		
+		
+		ObjChannel<T> objChannel = new ObjChannelWithBlockingQueue<T>();
+		JSONStringRPOFilter[] RPOSources = new JSONStringRPOFilter[SUGGESTED_THREAD_NUM];
+		MultiSourceSwitch switchJSONToObj = new BasicSourceSwitch(objChannel);
+		for(int i=0;i<SUGGESTED_THREAD_NUM;i++) {
+			RPOSources[i] = new JSONStringRPOFilter(contributorChannel, getBeans(userClass), switchJSONToObj);
+		}
+		execute(RPOSources);
+		
+		return objChannel;
+	}
+	
 	/**
 	 * 用于由Repository的全名获得Repository详细数据的JSON表示的处理器
 	 * @author xjh14
@@ -190,6 +204,38 @@ public class MassiveDataSourceDefault implements MassiveDataSource {
 			return repoJSONs;
 		}
 	}
+	
+	class RepoNameToContributorJSONFilter extends GeneralProcessFilter<String, String> {
+
+		private final Type stringListType = new TypeToken<List<String>>() {}.getType();;
+		
+		public RepoNameToContributorJSONFilter(ObjChannel<String> input,
+				MultiSourceSwitch<String> output, int page) {
+			super(input, output, page);
+		}
+
+		@Override
+		public List<String> process(List<String> get) {
+			List<String> names = new ArrayList<>();
+			List<String> result = new ArrayList<>();
+			for(String repoName:get) {
+				try {
+					String rawNames = conn.do_get(repoApi.makeRepoContributorLoginsApi(repoName));
+					names = gson.fromJson(rawNames, stringListType);
+					for(String name:names) {
+						String rawUserJSON = conn.do_get(userApi.makeUserAPI(name));
+						result.add(rawUserJSON);
+					}
+				} catch (NetworkException e) {
+					e.printStackTrace();
+					break;
+				}
+			}
+			return result;
+		}
+		
+	}
+	
 	
 	/**
 	 * 获取接口对应的Beans模型
