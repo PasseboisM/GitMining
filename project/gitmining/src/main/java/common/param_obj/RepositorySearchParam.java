@@ -2,6 +2,7 @@ package common.param_obj;
 
 import common.enumeration.attribute.Category;
 import common.enumeration.attribute.Language;
+import common.service.RepositoryMin;
 
 /**
  * @author xjh14
@@ -33,6 +34,5 @@ public class RepositorySearchParam {
 	public String[] getKeywords() {
 		return keywords;
 	}
-
 	
 }

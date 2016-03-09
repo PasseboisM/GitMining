@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import common.exception.DataTransferException;
+import common.message.LoadProgress;
 import common.service.GitUserMin;
 import common.service.RepositoryMin;
 import common.util.ObjChannel;
@@ -20,7 +21,7 @@ import data.service.MassiveDataGetter;
  * @author xjh14
  *
  */
-class MinInfoManager {
+public class MinInfoManager {
 
 	private static MinInfoManager instance = new MinInfoManager();
 	
@@ -46,9 +47,14 @@ class MinInfoManager {
 		return userMinInfo.size();
 	}
 	
+	public int getTotalRepoNum() {
+		return getter.getRepoNumber();
+	}
+	
+	private MassiveDataGetter getter;
+	
 	private MinInfoManager(){
-		//TODO Init the info, 
-		MassiveDataGetter getter = DataServiceFactory.getInstance().getMassiveDataGetter();
+		getter = DataServiceFactory.getInstance().getMassiveDataGetter();
 		ObjChannel<RepositoryMin> repoChan = getter.getRepoMinInfo();
 		ObjChannel<GitUserMin> userChan = getter.getUserMinInfo();
 		Thread repoInitThread = new Thread(new CollectionWriter<RepositoryMin>(repoChan, repoMinInfo));
@@ -59,6 +65,10 @@ class MinInfoManager {
 	
 	public static MinInfoManager getInstance() {
 		return instance;
+	}
+	
+	public LoadProgress getProgress() {
+		return new LoadProgress(getTotalRepoNum(), getRepoNum());
 	}
 	
 	class CollectionWriter<T> implements Runnable {

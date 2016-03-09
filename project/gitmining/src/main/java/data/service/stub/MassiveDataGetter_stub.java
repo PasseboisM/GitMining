@@ -31,4 +31,10 @@ public class MassiveDataGetter_stub implements MassiveDataGetter{
 		return null;
 	}
 
+	@Override
+	public int getRepoNumber() {
+		
+		return 3216;
+	}
+
 }

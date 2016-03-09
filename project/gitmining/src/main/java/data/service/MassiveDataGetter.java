@@ -10,6 +10,8 @@ import common.util.ObjChannel;
  */
 public interface MassiveDataGetter {
 
+	public int getRepoNumber();
+	
 	/**
 	 * 获取提供Repository数据索引的通道
 	 * @return 包含所有Repository数据索引的Channel服务

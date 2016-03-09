@@ -18,5 +18,7 @@ public interface RepositoryMin {
 	public int getStargazers_count();
 
 	public int getForks_count();
+	
+	public String getLanguage();
 
 }

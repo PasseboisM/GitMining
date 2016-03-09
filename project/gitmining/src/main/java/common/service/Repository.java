@@ -111,8 +111,6 @@ public interface Repository extends RepositoryMin {
 
 	public int getWatchers_count();
 
-	public String getLanguage();
-
 	public boolean isHas_issues();
 
 	public boolean isHas_downloads();

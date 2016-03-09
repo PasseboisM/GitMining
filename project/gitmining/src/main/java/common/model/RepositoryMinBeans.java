@@ -18,6 +18,7 @@ public class RepositoryMinBeans implements RepositoryMin {
 	@SerializedName("private") private boolean isPrivate;
 	private int stargazers_count;
 	private int forks_count;
+	private String language;
 	
 	public int getId() {
 		return id;
@@ -41,6 +42,11 @@ public class RepositoryMinBeans implements RepositoryMin {
 
 	public int getForks_count() {
 		return forks_count;
+	}
+
+	@Override
+	public String getLanguage() {
+		return language;
 	}
 
 }
