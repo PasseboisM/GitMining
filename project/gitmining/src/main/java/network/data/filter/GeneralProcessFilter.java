@@ -1,4 +1,4 @@
-package network.data.sources;
+package network.data.filter;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import common.util.MultiSourceSwitch;
 import common.util.ObjChannel;
 import common.util.Writable;
 
-public abstract class GeneralProcessSource<I,T> implements Runnable {
+public abstract class GeneralProcessFilter<I,T> implements Runnable {
 
 	private int page = 20;
 	
@@ -18,9 +18,9 @@ public abstract class GeneralProcessSource<I,T> implements Runnable {
 	private ObjChannel<T> chan = null;
 	MultiSourceSwitch<T> sourceSwitch = null;
 	
-	protected GeneralProcessSource(){}
+	protected GeneralProcessFilter(){}
 	
-	public GeneralProcessSource(ObjChannel<I> input, ObjChannel<T> output, int page) {
+	public GeneralProcessFilter(ObjChannel<I> input, ObjChannel<T> output, int page) {
 		this.input = input;
 		this.output = output;
 		this.page = page;
@@ -29,7 +29,7 @@ public abstract class GeneralProcessSource<I,T> implements Runnable {
 		this.chan = output;
 	}
 	
-	public GeneralProcessSource(ObjChannel<I> input, MultiSourceSwitch<T> output, int page) {
+	public GeneralProcessFilter(ObjChannel<I> input, MultiSourceSwitch<T> output, int page) {
 		this.input = input;
 		this.output = output;
 		this.page = page;

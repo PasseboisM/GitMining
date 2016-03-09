@@ -27,9 +27,9 @@ import network.api.service.ApiMakerService;
 import network.api.service.RepoApiMaker;
 import network.api.service.UserApiMaker;
 import network.connection.service.HTTPConnectionService;
-import network.data.sources.GeneralProcessSource;
-import network.data.sources.JSONStringRPOSource;
-import network.data.sources.PureDataTransSource;
+import network.data.filter.GeneralProcessFilter;
+import network.data.filter.JSONStringRPOFilter;
+import network.data.filter.PureDataTransFilter;
 import network.service.MassiveDataSource;
 
 /**
@@ -65,9 +65,9 @@ public class MassiveDataSourceDefault implements MassiveDataSource {
 		
 		List<String>[] listSplit = splitList(repoLists, SUGGESTED_THREAD_NUM);
 		
-		PureDataTransSource[] sources = new PureDataTransSource[SUGGESTED_THREAD_NUM];
+		PureDataTransFilter[] sources = new PureDataTransFilter[SUGGESTED_THREAD_NUM];
 		for(int i=0;i<SUGGESTED_THREAD_NUM;i++) {
-			sources[i] = new PureDataTransSource<String>(listSplit[i], sourceSwitch);
+			sources[i] = new PureDataTransFilter<String>(listSplit[i], sourceSwitch);
 		}
 		execute(sources);
 		
@@ -144,7 +144,7 @@ public class MassiveDataSourceDefault implements MassiveDataSource {
 		ObjChannel<String> JSONChannel = new ObjChannelWithBlockingQueue<String>();
 
 		
-		GeneralProcessSource[] repoJSONGetter = new GeneralProcessSource[SUGGESTED_THREAD_NUM];
+		GeneralProcessFilter[] repoJSONGetter = new GeneralProcessFilter[SUGGESTED_THREAD_NUM];
 		MultiSourceSwitch switchNameToJSON = new BasicSourceSwitch(JSONChannel);
 		for(int i=0;i<SUGGESTED_THREAD_NUM;i++) {
 			repoJSONGetter[i] = new RepoJSONGetter(namesChannel,switchNameToJSON,50);
@@ -153,10 +153,10 @@ public class MassiveDataSourceDefault implements MassiveDataSource {
 		
 		
 		ObjChannel<T> objChannel = new ObjChannelWithBlockingQueue<T>();
-		JSONStringRPOSource[] RPOSources = new JSONStringRPOSource[SUGGESTED_THREAD_NUM];
+		JSONStringRPOFilter[] RPOSources = new JSONStringRPOFilter[SUGGESTED_THREAD_NUM];
 		MultiSourceSwitch switchJSONToObj = new BasicSourceSwitch(objChannel);
 		for(int i=0;i<SUGGESTED_THREAD_NUM;i++) {
-			RPOSources[i] = new JSONStringRPOSource(JSONChannel, getBeans(repoClass), switchJSONToObj);
+			RPOSources[i] = new JSONStringRPOFilter(JSONChannel, getBeans(repoClass), switchJSONToObj);
 		}
 		execute(RPOSources);
 		
@@ -167,7 +167,7 @@ public class MassiveDataSourceDefault implements MassiveDataSource {
 	 * 用于由Repository的全名获得Repository详细数据的JSON表示的处理器
 	 * @author xjh14
 	 */
-	class RepoJSONGetter extends GeneralProcessSource<String, String> {
+	class RepoJSONGetter extends GeneralProcessFilter<String, String> {
 
 		public RepoJSONGetter(ObjChannel<String> namesChannel,
 				MultiSourceSwitch switchNameToJSON, int i) {

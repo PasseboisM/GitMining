@@ -1,4 +1,4 @@
-package network.data.sources;
+package network.data.filter;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import common.util.Writable;
 	 * @author xjh14
 	 * @param <T>
 	 */
-public class PureDataTransSource<T> implements Runnable {
+public class PureDataTransFilter<T> implements Runnable {
 
 		List<T> data;
 		Writable<T> target;
@@ -21,7 +21,7 @@ public class PureDataTransSource<T> implements Runnable {
 		MultiSourceSwitch<T> sourceSwitch;
 		boolean isSwitch;
 		
-		public PureDataTransSource(List<T> data,ObjChannel<T> chan) {
+		public PureDataTransFilter(List<T> data,ObjChannel<T> chan) {
 			this.data = data;
 			target = chan;
 			
@@ -29,7 +29,7 @@ public class PureDataTransSource<T> implements Runnable {
 			this.chan = chan;
 		}
 		
-		public PureDataTransSource(List<T> data,MultiSourceSwitch<T> sourceSwitch) {
+		public PureDataTransFilter(List<T> data,MultiSourceSwitch<T> sourceSwitch) {
 			this.data = data;
 			target = sourceSwitch;
 			

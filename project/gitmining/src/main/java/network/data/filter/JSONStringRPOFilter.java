@@ -1,4 +1,4 @@
-package network.data.sources;
+package network.data.filter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ import common.util.Writable;
 	 *
 	 * @param <T>
 	 */
-public class JSONStringRPOSource<T> extends GeneralProcessSource<String, T> {
+public class JSONStringRPOFilter<T> extends GeneralProcessFilter<String, T> {
 
 		private static final int page = 20;
 		
@@ -30,7 +30,7 @@ public class JSONStringRPOSource<T> extends GeneralProcessSource<String, T> {
 		
 		private Gson gson = new Gson(); 
 		
-		public JSONStringRPOSource(ObjChannel<String> input, Class<T> objectiveClass,
+		public JSONStringRPOFilter(ObjChannel<String> input, Class<T> objectiveClass,
 				ObjChannel<T> output) {
 			super(input,output,page);
 			this.input = input;
@@ -41,7 +41,7 @@ public class JSONStringRPOSource<T> extends GeneralProcessSource<String, T> {
 			this.chan = output;
 		}
 		
-		public JSONStringRPOSource(ObjChannel<String> input, Class<T> objectiveClass,
+		public JSONStringRPOFilter(ObjChannel<String> input, Class<T> objectiveClass,
 				MultiSourceSwitch<T> output) {
 			super(input,output,page);
 			this.input = input;
