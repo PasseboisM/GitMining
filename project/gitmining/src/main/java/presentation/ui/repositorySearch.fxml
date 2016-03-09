@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.ui.RepositorySearchController">
+   <children>
+      <GridPane minHeight="-Infinity" prefHeight="200.0">
+         <children>
+            <TextField prefHeight="23.0" prefWidth="936.0" promptText="搜索项目" GridPane.columnIndex="1" GridPane.columnSpan="2" />
+            <Button fx:id="search" mnemonicParsing="false" text="Button" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
+            <Label alignment="TOP_RIGHT" contentDisplay="TOP" text="项目种类：" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <FlowPane fx:id="flowPaneCategory" hgap="5.0" prefHeight="200.0" prefWidth="200.0" vgap="10.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </FlowPane>
+            <FlowPane fx:id="flowPaneLanguage" hgap="5.0" prefHeight="200.0" prefWidth="200.0" vgap="10.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="2">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </FlowPane>
+            <Label alignment="TOP_RIGHT" contentDisplay="TOP" text="项目语言：" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <VBox.margin>
+            <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
+         </VBox.margin>
+      </GridPane>
+      <VBox fx:id="test" prefHeight="450.0" prefWidth="1050.0">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         <children>
+            <TabPane prefHeight="450.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab text="Untitled Tab 1">
+                     <content>
+                        <ScrollPane prefHeight="450.0" prefWidth="200.0">
+                           <content>
+                              <VBox prefWidth="1027.0">
+                                 <padding>
+                                    <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                                 </padding>
+                              </VBox>
+                           </content>
+                        </ScrollPane>
+                     </content>
+                  </Tab>
+                <Tab text="Untitled Tab 2">
+                     <content>
+                        <ScrollPane prefHeight="450.0" prefWidth="200.0">
+                           <content>
+                              <VBox prefWidth="1027.0">
+                                 <padding>
+                                    <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                                 </padding>
+                              </VBox>
+                           </content>
+                        </ScrollPane>
+                     </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
+            <Pagination pageCount="50" prefHeight="62.0" prefWidth="1030.0" />
+         </children></VBox>
+   </children>
+</VBox>
