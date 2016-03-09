@@ -68,6 +68,7 @@ public class MainController extends Application {
 			rightComponentParent.getChildren().add(RepositorySearchController.getInstance());
 		} catch (IOException e) {
 			e.printStackTrace();
+			System.out.println("!!!");
 		}
 	}
 	
@@ -81,6 +82,7 @@ public class MainController extends Application {
 			rightComponentParent.getChildren().add(UserSearchController.getInstance());
 		} catch (IOException e) {
 			e.printStackTrace();
+			System.out.println("???");
 		}
 	}
 	
