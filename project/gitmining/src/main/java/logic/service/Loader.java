@@ -1,6 +1,7 @@
 package logic.service;
 
 import java.util.Observable;
+import java.util.Observer;
 
 import logic.data.MinInfoManager;
 import common.message.LoadProgress;
@@ -14,6 +15,8 @@ public class Loader extends Observable {
 	private static MinInfoManager manager = null;
 	
 	public void startLoading(){
+		
+		System.out.println("Entered loading");
 		manager = MinInfoManager.getInstance();
 		progress = manager.getProgress();
 		Thread inquiringProgress = new Thread(new Runnable(){
@@ -21,13 +24,9 @@ public class Loader extends Observable {
 			@Override
 			public void run() {
 				while (!progress.isFinished()) {
-					try {
-						Thread.sleep(2000);
+						System.out.println("Invoked checker");
 						progress = manager.getProgress();
 						notifyObservers();
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
 				}
 				
 			}
@@ -44,5 +43,11 @@ public class Loader extends Observable {
 	
 	public static LoadProgress getProgress() {
 		return progress;
+	}
+	
+	@Override
+	public void addObserver(Observer o) {
+		super.addObserver(o);
+		System.out.println("Added "+o);
 	}
 }

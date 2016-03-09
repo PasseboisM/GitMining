@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.ReentrantLock;
 
 import common.exception.DataTransferException;
 import common.message.LoadProgress;
@@ -30,6 +31,8 @@ public class MinInfoManager {
 	
 	private volatile List<RepositoryMin> repoMinInfo = new ArrayList<RepositoryMin>(4000);
 	private volatile Set<GitUserMin> userMinInfo = new HashSet<GitUserMin>(10000);
+	
+	ReentrantLock lock = new ReentrantLock();
 	
 	public List<RepositoryMin> getRepoMin() {
 		return new ArrayList<>(repoMinInfo);
@@ -68,11 +71,17 @@ public class MinInfoManager {
 	}
 	
 	public LoadProgress getProgress() {
-		return new LoadProgress(getTotalRepoNum(), getRepoNum());
+		try {
+			lock.lock();
+			return new LoadProgress(getTotalRepoNum(), getRepoNum());
+		} finally {
+			lock.unlock();
+		}
+		
 	}
 	
 	class CollectionWriter<T> implements Runnable {
-		private static final int page = 50;
+		private static final int page = 10;
 		ObjChannel<T> source = null;
 		Collection<T> target = null;
 		public CollectionWriter(ObjChannel<T> source, Collection<T> target) {
@@ -83,9 +92,14 @@ public class MinInfoManager {
 		@Override
 		public void run() {
 			try {
-				while(source.hasMore()) {
-					target.addAll(source.getObj(page));
-				}
+				
+				lock.lock();
+					while (source.hasMore()) {
+						System.out.println("Writing 10");
+						target.addAll(source.getObj(page));
+						System.out.println("Wrote 10");
+					}
+				lock.unlock();
 			} catch (DataTransferException e) {
 				setInitException(true);
 				e.printStackTrace();

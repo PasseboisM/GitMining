@@ -48,7 +48,7 @@ public class MassiveDataSourceDefault implements MassiveDataSource {
 	private HTTPConnectionService conn = null;
 	
 	
-	private static final int SUGGESTED_THREAD_NUM = Runtime.getRuntime().availableProcessors() * 2;
+	private static final int SUGGESTED_THREAD_NUM = Runtime.getRuntime().availableProcessors() ;
 //	private static final int SUGGESTED_THREAD_NUM = 1;
 	
 	
