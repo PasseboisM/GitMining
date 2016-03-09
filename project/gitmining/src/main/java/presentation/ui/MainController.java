@@ -2,15 +2,19 @@ package presentation.ui;
 
 import java.io.IOException;
 
+import javax.swing.JOptionPane;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -41,8 +45,8 @@ public class MainController extends Application {
 	@FXML private Button buttonRepoSearch;
 	@FXML private Button buttonUserSearch;
 	@FXML private Button buttonAboutUs;
-	
-	
+	@FXML private MenuItem download,refresh,exit,online,offline,guide,member ;  
+
 	@FXML
 	private void imageMove() {
 		Timeline timeline = new Timeline();
@@ -58,6 +62,7 @@ public class MainController extends Application {
 						new KeyValue(image.translateYProperty(), 0)));
 		timeline.play();
 	}
+	
 	@FXML
 	private void onRepoSearchClicked(MouseEvent event) {
 		buttonRepoSearch.setDisable(true);
@@ -91,5 +96,47 @@ public class MainController extends Application {
 		buttonAboutUs.setDisable(true);
 		rightComponentParent.getChildren().clear();
 	}
+	          
+	@FXML  
+	private void getDownload(ActionEvent event) {   
+	      
+	}  
+	            
+	@FXML  
+	private void getRefresh(ActionEvent event) {  
+	            
+	}  
+	          
+	@FXML  
+	private void getExit(ActionEvent event) {  
+		System.exit(0);  
+		
+	}  
+	           
+	@FXML  
+	private void setOnline(ActionEvent event) {  
+	              
+	}  
+	           
+	@FXML  
+	private void setOffline(ActionEvent event) {  
+	           
+	}  
+	          
+	@FXML  
+	private void getGuide(ActionEvent event) {  
+		JOptionPane.showMessageDialog(
+				null, "GitMining是一款用于进行数据挖掘和数据分析的软件。" ,"说明",  JOptionPane.PLAIN_MESSAGE);  
+	}  
+	       
+	@FXML  
+	private void getMember(ActionEvent event) {  
+		JOptionPane.showMessageDialog(
+				null, "徐江河\n"+"王子安\n"+"孙婧\n"+"徐家逸","鸣谢",  JOptionPane.PLAIN_MESSAGE);  
+		
+	}  
+	       
 
-}
+}	
+
+
