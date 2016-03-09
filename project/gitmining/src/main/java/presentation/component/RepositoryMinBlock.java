@@ -17,7 +17,7 @@ public class RepositoryMinBlock  extends BorderPane{
 	@FXML private Label subscribersCount;
 	
 	public RepositoryMinBlock(){
-		FXMLLoader fxmlLoader = new FXMLLoader(RepositoryMinBlock.class.getResource("repoPane.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(RepositoryMinBlock.class.getResource("repositoryMinBlock.fxml"));
 		fxmlLoader.setController(this);
 		fxmlLoader.setRoot(this);
 		try {
