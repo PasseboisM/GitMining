@@ -1,7 +1,9 @@
 package presentation.ui;
 
 import java.io.IOException;
+import java.util.Observer;
 
+import common.message.LoadProgress;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -17,10 +19,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import logic.service.Loader;
 
 
-public class MainController extends Application {
+public class MainController extends Application implements Observer{
 
+	
+	private boolean ableToGetData = false;
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		FXMLLoader loader = new FXMLLoader(MainController.class.getResource("mainController.fxml"));
@@ -29,10 +34,12 @@ public class MainController extends Application {
 		primaryStage.initStyle(StageStyle.DECORATED);
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
+		Loader.getInstance().addObserver(this);
 		primaryStage.show();
 	}
 
 	public static void main(String[] args) {
+		Loader.getInstance().startLoading();
 		launch(args);
 	}
 	
@@ -65,10 +72,11 @@ public class MainController extends Application {
 		buttonAboutUs.setDisable(false);
 		rightComponentParent.getChildren().clear();
 		try {
-			rightComponentParent.getChildren().add(RepositorySearchController.getInstance());
+			if (ableToGetData) {
+				rightComponentParent.getChildren().add(RepositorySearchController.getInstance());
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.out.println("!!!");
 		}
 	}
 	
@@ -82,7 +90,6 @@ public class MainController extends Application {
 			rightComponentParent.getChildren().add(UserSearchController.getInstance());
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.out.println("???");
 		}
 	}
 	
@@ -93,5 +100,17 @@ public class MainController extends Application {
 		buttonAboutUs.setDisable(true);
 		rightComponentParent.getChildren().clear();
 	}
+	
+	@Override
+	public void update(java.util.Observable o, Object arg) {
+		LoadProgress loadProgress = Loader.getProgress();
+		if (loadProgress.getLoadedRepoNum()>50) {
+			this.ableToGetData = true;
+		}
+		
+		System.out.println(loadProgress.getLoadedRepoNum());
+	}
+	
+	
 
 }
