@@ -107,6 +107,7 @@ public class MainController extends Application implements Observer{
 		LoadProgress loadProgress = Loader.getProgress();
 		if (loadProgress.getLoadedRepoNum()>50) {
 			this.ableToGetData = true;
+			System.out.println("Now able to get data.");
 		}
 		
 		System.out.println(loadProgress.getLoadedRepoNum());
