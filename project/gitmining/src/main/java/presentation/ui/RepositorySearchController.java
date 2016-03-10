@@ -36,7 +36,7 @@ public class RepositorySearchController{
 
 	
 
-	@FXML	private Button search;
+	@FXML	private Button search,noSort,starSort,forkSort,contributorSort;
 	@FXML	private FlowPane flowPaneCategory;
 	@FXML	private FlowPane flowPaneLanguage;
 	@FXML	private VBox repoVBox;
@@ -56,6 +56,37 @@ public class RepositorySearchController{
 		
 		System.out.println("The Search For "+key+" in Repository");
 	}
+	
+	@FXML
+	private void noSortSearch(ActionEvent event) {
+
+		System.out.println("这个没什么卵用，我觉得可以和楼上的search算法一毛一样");
+	}
+	
+	@FXML
+	private void starSortSearch(ActionEvent event) {
+	//根据stars排序，需要从数据中得到一个stars的属性对其进行冒泡排序吧
+		
+		
+		System.out.println("这里会有一个冒泡算法吧");
+	}
+	
+	@FXML
+	private void forkSortSearch(ActionEvent event) {
+		//同上
+		
+		System.out.println("同上1");
+	}
+	
+	@FXML
+	private void contributorSortSearch(ActionEvent event) {
+		
+		//同上
+		
+		System.out.println("同上2");
+	}
+	
+	
 	
 	
 	private void initial(AnchorPane rightComponentParent,List<FakeData> datas) {
