@@ -156,10 +156,10 @@ public class DataInputDefault implements DataStorageInput {
 	
 	public static void main(String[] args) throws NetworkException {
 		MassiveDataSource source =  NetworkServiceFactory.getInstance().getMassiveDataSource();
-		ObjChannel<Repository> chan = source.getRepoInfo();
+		ObjChannel<GitUser> chan = source.getUserInfo();
 		
 		DataStorageInput input = new DataInputDefault();
-		input.saveRepository(chan);
+		input.saveUser(chan);
 	}
 
 }
