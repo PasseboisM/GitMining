@@ -12,18 +12,10 @@ import javafx.scene.layout.BorderPane;
 import presentation.ui.UserDetailsController;
 
 public class UserMinBlock extends BorderPane{
-	@FXML private Hyperlink userName;
-	@FXML private Label location;
-	@FXML private Label lastUpdated;
-	@FXML private Label followers;
-	@FXML private Label following;
-	@FXML private Label repos;
-	private GitUser user;
-	private FakeDataUser fakeData;
-	private AnchorPane rightComponentParent;
+	
 	
 	private UserMinBlock(){
-		FXMLLoader fxmlLoader = new FXMLLoader(RepositoryMinBlock.class.getResource("userMinBlock.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(UserMinBlock.class.getResource("userMinBlock.fxml"));
 		fxmlLoader.setController(this);
 		fxmlLoader.setRoot(this);
 		try {
@@ -42,13 +34,22 @@ public class UserMinBlock extends BorderPane{
 
 	private void setComponentText(FakeDataUser fakeData) {
 		userName.setText(fakeData.getLogin());
-		location.setText(fakeData.getLocation());
+		userLocation.setText(fakeData.getLocation());
 		lastUpdated.setText(fakeData.getUpdated_at());
 		followers.setText(fakeData.getFollowers()+"");
 		following.setText(fakeData.getFollowing()+"");
 		repos.setText(fakeData.getPublic_repos()+"");
 	}
+	@FXML private Hyperlink userName;
+	@FXML private Label userLocation;
+	@FXML private Label lastUpdated;
+	@FXML private Label followers;
+	@FXML private Label following;
+	@FXML private Label repos;
 	
+	private GitUser user;
+	private FakeDataUser fakeData;
+	private AnchorPane rightComponentParent;
 	@FXML
 	private void jumpToUserDetails() {
 		try {

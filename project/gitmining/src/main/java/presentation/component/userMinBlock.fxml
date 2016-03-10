@@ -15,7 +15,7 @@
                   <Font name="System Bold Italic" size="18.0" />
                </font>
             </Hyperlink>
-            <Label fx:id="location" prefWidth="600.0" textFill="#000000c2" wrapText="true">
+            <Label fx:id="userLocation" prefWidth="600.0" textFill="#000000c2" wrapText="true">
                <font>
                   <Font size="16.0" />
                </font>
