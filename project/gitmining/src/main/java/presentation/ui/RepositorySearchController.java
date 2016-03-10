@@ -6,12 +6,15 @@ import java.util.List;
 
 import common.enumeration.attribute.Category;
 import common.enumeration.attribute.Language;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
@@ -33,16 +36,58 @@ public class RepositorySearchController{
 
 	
 
-	@FXML	private Button search;
+	@FXML	private Button search,noSort,starSort,forkSort,contributorSort;
 	@FXML	private FlowPane flowPaneCategory;
 	@FXML	private FlowPane flowPaneLanguage;
 	@FXML	private VBox repoVBox;
 	@FXML 	private Pagination pag;
-
+	@FXML 	private TextField keyword;
+	
 	private List<CheckBox> categoryCheckBoxes;
 	private List<CheckBox> languageCheckBoxes;
 	private List<FakeData> fakeDatas;
 	private AnchorPane rightComponentParent;
+	
+	@FXML
+	private void onSearch(ActionEvent event) {
+		String key=keyword.getText();
+		//此处为根据key的搜索算法!
+		
+		
+		System.out.println("The Search For "+key+" in Repository");
+	}
+	
+	@FXML
+	private void noSortSearch(ActionEvent event) {
+
+		System.out.println("这个没什么卵用，我觉得可以和楼上的search算法一毛一样");
+	}
+	
+	@FXML
+	private void starSortSearch(ActionEvent event) {
+	//根据stars排序，需要从数据中得到一个stars的属性对其进行冒泡排序吧
+		
+		
+		System.out.println("这里会有一个冒泡算法吧");
+	}
+	
+	@FXML
+	private void forkSortSearch(ActionEvent event) {
+		//同上
+		
+		System.out.println("同上1");
+	}
+	
+	@FXML
+	private void contributorSortSearch(ActionEvent event) {
+		
+		//同上
+		
+		System.out.println("同上2");
+	}
+	
+	
+	
 	
 	private void initial(AnchorPane rightComponentParent,List<FakeData> datas) {
 		initialCategoryCheckBoxes();

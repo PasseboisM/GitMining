@@ -10,17 +10,17 @@
    <left>
       <VBox alignment="CENTER_LEFT" minWidth="-Infinity" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Hyperlink onAction="#jumpToRepositoryDetails">
+            <Hyperlink fx:id="userName" onAction="#jumpToUserDetails">
                <font>
                   <Font name="System Bold Italic" size="18.0" />
                </font>
             </Hyperlink>
-            <Label prefWidth="600.0" textFill="#000000c2" wrapText="true">
+            <Label fx:id="userLocation" prefWidth="600.0" textFill="#000000c2" wrapText="true">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label textFill="#00000095" wrapText="true">
+            <Label fx:id="lastUpdated" textFill="#00000095" wrapText="true">
                <font>
                   <Font size="14.0" />
                </font>
@@ -38,7 +38,7 @@
                <children>
                   <VBox alignment="CENTER" minHeight="-Infinity" prefHeight="100.0" prefWidth="60.0">
                      <children>
-                        <Label textFill="#000000a5" />
+                        <Label fx:id="followers" textFill="#000000a5" />
                         <Label text="followers" textFill="#000000a5" />
                      </children>
                      <HBox.margin>
@@ -47,13 +47,13 @@
                   </VBox>
                   <VBox alignment="CENTER" minHeight="-Infinity" prefHeight="100.0" prefWidth="60.0">
                      <children>
-                        <Label textFill="#000000a5" />
+                        <Label fx:id="following" textFill="#000000a5" />
                         <Label text="following" textFill="#000000a5" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" minHeight="-Infinity" prefHeight="100.0" prefWidth="50.0">
                      <children>
-                        <Label textFill="#000000a5" />
+                        <Label fx:id="repos" textFill="#000000a5" />
                         <Label text="repos" textFill="#000000a5" />
                      </children>
                   </VBox>
