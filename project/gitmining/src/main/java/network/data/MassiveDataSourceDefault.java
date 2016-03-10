@@ -247,9 +247,12 @@ public class MassiveDataSourceDefault implements MassiveDataSource {
 				try {
 					String rawNames = conn.do_get(repoApi.makeRepoContributorLoginsApi(repoName));
 					names = gson.fromJson(rawNames, stringListType);
-					for(String name:names) {
-						String rawUserJSON = conn.do_get(userApi.makeUserAPI(name));
-						result.add(rawUserJSON);
+					//TODO noise
+					if(names!=null) {
+						for(String name:names) {
+							String rawUserJSON = conn.do_get(userApi.makeUserAPI(name));
+							result.add(rawUserJSON);
+						}
 					}
 				} catch (NetworkException e) {
 					e.printStackTrace();
