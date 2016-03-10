@@ -21,8 +21,11 @@ public class UserSearchParam {
 		return loginName;
 	}
 	
-	public boolean matches(GitUserMin minInfo) {
-		//TODO Create a checker.
-		return false;
+	//TODO 搬移搜索策略
+	public int matches(GitUserMin minInfo) {
+		if(minInfo.getLogin().contains(loginName)||minInfo.getName().contains(loginName)) {
+			return 1;
+		}
+		return 0;
 	}
 }

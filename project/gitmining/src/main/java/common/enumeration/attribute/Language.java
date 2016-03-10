@@ -9,6 +9,7 @@ package common.enumeration.attribute;
  */
 public enum Language {
 	ALL("All"),
+	UNKNOWN("Unknown"),
 	RUBY("Ruby"),
 	JAVA("Java"),
 	C("C");
@@ -22,5 +23,14 @@ public enum Language {
 	
 	public String getName() {
 		return name;
+	}
+	
+	public static Language getLanguage(String name) {
+		for(Language lan:Language.values()) {
+			if(lan.getName().equals(name)) {
+				return lan;
+			}
+		}
+		return UNKNOWN;
 	}
 }

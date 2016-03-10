@@ -1,12 +1,8 @@
 package data.storage.input;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -17,11 +13,8 @@ import com.google.gson.Gson;
 
 import common.exception.DataTransferException;
 import common.exception.NetworkException;
-import common.model.BasicSourceSwitch;
-import common.model.filter.GeneralProcessFilter;
 import common.service.GitUser;
 import common.service.Repository;
-import common.util.MultiSourceSwitch;
 import common.util.ObjChannel;
 import data.storage.directory.DirectoryMakerDefault;
 import data.storage.directory.service.DirectoryMaker;
@@ -29,7 +22,7 @@ import data.storage.service.DataStorageInput;
 
 public class DataInputDefault implements DataStorageInput {
 
-	private static final int SUGGESTED_WRITING_THREAD = 4;
+//	private static final int SUGGESTED_WRITING_THREAD = 4;
 	
 	private DirectoryMaker dir = DirectoryMakerDefault.getInstance();
 	private Gson gson = new Gson();
@@ -102,20 +95,43 @@ public class DataInputDefault implements DataStorageInput {
 
 	@Override
 	public void saveUser(GitUser user) {
-		// TODO Auto-generated method stub
+		File directory = new File(dir.userDirectory(user));
+		File content = new File(directory, dir.userName(user));
+
+		FileWriter fw = null;
+		try {
+			directory.mkdirs();
+			if(!content.exists()) {
+				content.createNewFile();
+			}
+			String json = gson.toJson(user);
+			fw = new FileWriter(content);
+			fw.write(json);
+			fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 	}
 
 	@Override
 	public void saveUser(Collection<GitUser> users) {
-		// TODO Auto-generated method stub
-
+		for(GitUser user:users) {
+			saveUser(user);
+		}
 	}
 
 	@Override
 	public void saveUser(ObjChannel<GitUser> userChan) {
-		// TODO Auto-generated method stub
-
+		//TODO new thread!
+		while(userChan.hasMore()) {
+			try {
+				List<GitUser> partial = userChan.getObj(100);
+				saveUser(partial);
+			} catch (DataTransferException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 //	abstract class Writer<I> extends GeneralProcessFilter<I, Boolean> {

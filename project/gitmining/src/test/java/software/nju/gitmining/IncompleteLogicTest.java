@@ -13,7 +13,7 @@ import common.enumeration.sort_standard.RepoSortStadard;
 import common.service.Repository;
 import common.service.RepositoryMin;
 
-public class TempTest {
+public class IncompleteLogicTest {
 
 	@Test
 	public void test() {

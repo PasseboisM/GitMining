@@ -2,6 +2,8 @@ package common.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import common.enumeration.attribute.Category;
+import common.enumeration.attribute.Language;
 import common.service.RepositoryMin;
 
 /**
@@ -47,6 +49,16 @@ public class RepositoryMinBeans implements RepositoryMin {
 	@Override
 	public String getLanguage() {
 		return language;
+	}
+
+	@Override
+	public Language getMainLanguage() {
+		return Language.getLanguage(this.getLanguage());
+	}
+
+	@Override
+	public Category[] getCategories() {
+		return Category.getCategories(this);
 	}
 
 }

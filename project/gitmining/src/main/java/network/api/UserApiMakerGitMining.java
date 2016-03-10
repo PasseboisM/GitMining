@@ -17,6 +17,7 @@ public class UserApiMakerGitMining implements UserApiMaker {
 
 	
 	public String makeUserAPI(String login) {
+//		return "https://api.github.com/users/"+login;
 		return "http://www.gitmining.net/api/user/"+login;
 	}
 

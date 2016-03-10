@@ -27,7 +27,7 @@ public class SearchServiceDefault implements SearchService {
 		List<Repository> result = new ArrayList<>(500);
 		
 		for(RepositoryMin minInfo:minInfoList) {
-			if(params.matches(minInfo)) {
+			if(params.matches(minInfo)>0) {
 				matched.add(minInfo);
 			}
 		}
@@ -48,7 +48,7 @@ public class SearchServiceDefault implements SearchService {
 		List<GitUser> result = new ArrayList<>();
 		
 		for(GitUserMin min:minInfo) {
-			if(params.matches(min)) {
+			if(params.matches(min)>0) {
 				matched.add(min);
 			}
 		}
