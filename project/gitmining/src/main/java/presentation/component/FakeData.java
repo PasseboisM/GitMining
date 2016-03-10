@@ -1,4 +1,4 @@
-package presentation.ui;
+package presentation.component;
 
 public class FakeData {
 	private String full_name;
