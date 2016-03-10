@@ -66,13 +66,12 @@ public class UserSearchController {
 	@FXML
 	private void onSearch(ActionEvent event) {
 		String key=vagename.getText();
-		//此处为根据key的搜索算法!
 		System.out.println("The Search For "+key+" in Users");
 	}
 	
 	private List<FakeDataUser> getList(){
 		List<FakeDataUser> list = new ArrayList<FakeDataUser>();
-		for (int i = 0; i < 26; i++) {
+		for (int i = 0; i < 30000; i++) {
 			list.add(new FakeDataUser("a"+i+"/b"+i,i*10000, "https://github.com/rubinius", "Organization","aaa","http://rubini.us","Everywhere","community@rubini.us","Solve Hard Problems™",60,0,0,0,"2015-9-8", "2010-06-29T18:39:32Z"));
 		}
 		return list;

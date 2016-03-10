@@ -14,7 +14,6 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
@@ -34,8 +33,6 @@ public class RepositorySearchController{
 		return rootUINode;
 	}
 
-	
-
 	@FXML	private Button search,noSort,starSort,forkSort,contributorSort;
 	@FXML	private FlowPane flowPaneCategory;
 	@FXML	private FlowPane flowPaneLanguage;
@@ -51,43 +48,28 @@ public class RepositorySearchController{
 	@FXML
 	private void onSearch(ActionEvent event) {
 		String key=keyword.getText();
-		//此处为根据key的搜索算法!
-		
-		
 		System.out.println("The Search For "+key+" in Repository");
 	}
 	
 	@FXML
 	private void noSortSearch(ActionEvent event) {
-
 		System.out.println("这个没什么卵用，我觉得可以和楼上的search算法一毛一样");
 	}
 	
 	@FXML
 	private void starSortSearch(ActionEvent event) {
-	//根据stars排序，需要从数据中得到一个stars的属性对其进行冒泡排序吧
-		
-		
 		System.out.println("这里会有一个冒泡算法吧");
 	}
 	
 	@FXML
 	private void forkSortSearch(ActionEvent event) {
-		//同上
-		
 		System.out.println("同上1");
 	}
 	
 	@FXML
 	private void contributorSortSearch(ActionEvent event) {
-		
-		//同上
-		
 		System.out.println("同上2");
 	}
-	
-	
-	
 	
 	private void initial(AnchorPane rightComponentParent,List<FakeData> datas) {
 		initialCategoryCheckBoxes();
@@ -120,7 +102,7 @@ public class RepositorySearchController{
 	
 	private List<FakeData> getList(){
 		List<FakeData> list = new ArrayList<FakeData>();
-		for (int i = 0; i < 17; i++) {
+		for (int i = 0; i < 5000; i++) {
 			list.add(new FakeData("a"+i+"/b"+i, "description of fake data", "2015-9-8", 58, i+95, 62,"git://github.com/rubinius/rubinius.git"));
 		}
 		return list;
