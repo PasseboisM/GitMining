@@ -88,7 +88,7 @@ public class MainController extends Application implements Observer{
 		buttonAboutUs.setDisable(false);
 		rightComponentParent.getChildren().clear();
 		try {
-			rightComponentParent.getChildren().add(UserSearchController.getInstance());
+			rightComponentParent.getChildren().add(UserSearchController.getInstance(rightComponentParent));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

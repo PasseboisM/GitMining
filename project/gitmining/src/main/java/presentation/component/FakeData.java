@@ -1,4 +1,4 @@
-package presentation.ui;
+package presentation.component;
 
 public class FakeData {
 	private String full_name;
@@ -7,8 +7,9 @@ public class FakeData {
 	private int stargazers_count;
 	private int forks_count;
 	private int subscribers_count;
+	private String git_url;
 	public FakeData(String full_name, String description, String updated_at, int stargazers_count, int forks_count,
-			int subscribers_count) {
+			int subscribers_count,String git_url) {
 		super();
 		this.full_name = full_name;
 		this.description = description;
@@ -16,6 +17,12 @@ public class FakeData {
 		this.stargazers_count = stargazers_count;
 		this.forks_count = forks_count;
 		this.subscribers_count = subscribers_count;
+		this.git_url = git_url;
+	}
+	
+	
+	public String getGit_url() {
+		return git_url;
 	}
 	public String getFull_name() {
 		return full_name;
