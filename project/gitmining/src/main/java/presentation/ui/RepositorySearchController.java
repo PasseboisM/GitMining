@@ -6,12 +6,15 @@ import java.util.List;
 
 import common.enumeration.attribute.Category;
 import common.enumeration.attribute.Language;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
@@ -38,11 +41,22 @@ public class RepositorySearchController{
 	@FXML	private FlowPane flowPaneLanguage;
 	@FXML	private VBox repoVBox;
 	@FXML 	private Pagination pag;
-
+	@FXML 	private TextField keyword;
+	
 	private List<CheckBox> categoryCheckBoxes;
 	private List<CheckBox> languageCheckBoxes;
 	private List<FakeData> fakeDatas;
 	private AnchorPane rightComponentParent;
+	
+	@FXML
+	private void onSearch(ActionEvent event) {
+		String key=keyword.getText();
+		//此处为根据key的搜索算法!
+		
+		
+		System.out.println("The Search For "+key+" in Repository");
+	}
+	
 	
 	private void initial(AnchorPane rightComponentParent,List<FakeData> datas) {
 		initialCategoryCheckBoxes();

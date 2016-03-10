@@ -10,8 +10,8 @@
    <children>
       <GridPane minHeight="-Infinity" prefHeight="200.0">
          <children>
-            <TextField prefHeight="23.0" prefWidth="936.0" promptText="搜索项目" GridPane.columnIndex="1" GridPane.columnSpan="2" />
-            <Button fx:id="search" mnemonicParsing="false" text="查询" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
+            <TextField  fx:id="keyword" prefHeight="23.0" prefWidth="936.0" promptText="搜索项目" GridPane.columnIndex="1" GridPane.columnSpan="2" />
+            <Button fx:id="search" mnemonicParsing="false" text="查询" GridPane.columnIndex="3" GridPane.halignment="CENTER" onAction="#onSearch" />
             <Label alignment="TOP_RIGHT" contentDisplay="TOP" text="项目种类：" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
                <font>
                   <Font size="18.0" />
