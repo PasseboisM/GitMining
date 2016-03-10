@@ -67,8 +67,6 @@ public class UserSearchController {
 	private void onSearch(ActionEvent event) {
 		String key=vagename.getText();
 		//此处为根据key的搜索算法!
-		
-		
 		System.out.println("The Search For "+key+" in Users");
 	}
 	
