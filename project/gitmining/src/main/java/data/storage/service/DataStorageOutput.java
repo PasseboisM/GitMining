@@ -14,8 +14,12 @@ public interface DataStorageOutput {
 	
 	public Repository getRepository(RepositoryMin minInfo) throws TargetNotFoundException, DataCorruptedException;
 	
+	public Repository getRepository(String fullName) throws TargetNotFoundException, DataCorruptedException;
+	
 	public ObjChannel<GitUserMin> getUserMin();
 	
 	public GitUser getUser(GitUserMin minInfo) throws TargetNotFoundException, DataCorruptedException;
+	
+	public GitUser getUser(String login) throws TargetNotFoundException, DataCorruptedException;
 	
 }

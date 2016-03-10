@@ -15,28 +15,53 @@ public class DirectoryMakerDefault implements DirectoryMaker {
 	
 	private DirectoryMakerDefault() {}
 
-	public static void main(String[] args) {
-		System.out.println(root);
-	}
-	
 	@Override
 	public String repositoryDirectory(RepositoryMin minInfo) {
-		String owner = minInfo.getFull_name().split("/")[0];
-		return root+"\\LocalData\\repository\\"+owner+"\\";
+		return repositoryDirectory(minInfo.getFull_name());
 	}
 
 	@Override
 	public String userDirectory(GitUserMin minInfo) {
-		return root+"\\LocalData\\user\\";
+		return userDirectory(minInfo.getLogin());
 	}
 
 	@Override
 	public String repositoryName(RepositoryMin minInfo) {
-		return minInfo.getFull_name().split("/")[1]+".txt";
+		return repositoryName(minInfo.getFull_name());
 	}
 
 	@Override
 	public String userName(GitUserMin minInfo) {
-		return minInfo.getLogin()+".txt";
+		return userName(minInfo.getLogin());
+	}
+
+	@Override
+	public String repositoryDirectory(String fullName) {
+		return root+root+"\\LocalData\\repository\\"+fullName.split("/")[0]+"\\";
+	}
+
+	@Override
+	public String repositoryName(String fullName) {
+		return fullName.split("/")[1]+".txt";
+	}
+
+	@Override
+	public String userDirectory(String login) {
+		return root+"\\LocalData\\user\\";
+	}
+
+	@Override
+	public String userName(String login) {
+		return login+".txt";
+	}
+
+	@Override
+	public String repositoryRoot() {
+		return root+root+"\\LocalData\\repository\\";
+	}
+
+	@Override
+	public String userRoot() {
+		return userDirectory("");
 	}
 }

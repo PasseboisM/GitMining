@@ -73,7 +73,11 @@ public class JSONStringRPOFilter<T> extends GeneralProcessFilter<String, T> {
 			for(String json: get) {
 				//TODO noise!
 				if(json.equals("")) continue;
-				result.add(gson.fromJson(json, objectiveClass));
+				try {
+					result.add(gson.fromJson(json, objectiveClass));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 			return result;
 		}
