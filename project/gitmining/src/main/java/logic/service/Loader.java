@@ -5,9 +5,10 @@ import java.util.concurrent.Executors;
 
 import logic.data.MinInfoManager;
 import common.message.LoadProgress;
+import common.util.Observable;
 import common.util.Observer;
 
-public class Loader {
+public class Loader implements Observable {
 
 	private static Loader instance = new Loader();
 	
@@ -33,8 +34,19 @@ public class Loader {
 		return MinInfoManager.getInstance().getProgress();
 	}
 	
+	@Override
 	public void addObserver(Observer observer) {
 		MinInfoManager.getInstance().addObserver(observer);
+	}
+
+	@Override
+	public void notifyObservers() {
+		//本类为伪Observable，将Observer委托给MinInfoManager		
+	}
+
+	@Override
+	public void removeObserver(Observer observer) {
+		manager.removeObserver(observer);		
 	}
 
 }

@@ -2,8 +2,10 @@ package data.storage.input;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -34,25 +36,32 @@ public class DataInputDefault implements DataStorageInput {
 	
 	@Override
 	public void saveRepository(Repository repo) {
-		File f = new File(dir.repositoryDirectory(repo));
+		File directory = new File(dir.repositoryDirectory(repo));
+		File content = new File(directory, dir.repositoryName(repo));
+//		FileOutputStream fos = null;
+//		BufferedWriter bw = null;
 		FileWriter fw = null;
 		try {
-			f.mkdirs();
-			f.createNewFile();
-			f.setWritable(true);
+			directory.mkdirs();
+			if(!content.exists()) {
+				content.createNewFile();
+			}
 			String json = gson.toJson(repo);
-			fw = new FileWriter(f);
+//			fos = new FileOutputStream(content);
+//			bw = new BufferedWriter(new OutputStreamWriter(fos));
+//			bw.write(json);
+			fw = new FileWriter(content);
 			fw.write(json);
-			
+			fw.close();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} finally {
-			try {
-				fw.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//		} finally {
+//			try {
+//				bw.close();
+//				fos.close();
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
 		}
 	}
 

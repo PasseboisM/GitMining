@@ -15,24 +15,28 @@ public class DirectoryMakerDefault implements DirectoryMaker {
 	
 	private DirectoryMakerDefault() {}
 
+	public static void main(String[] args) {
+		System.out.println(root);
+	}
+	
 	@Override
 	public String repositoryDirectory(RepositoryMin minInfo) {
 		String owner = minInfo.getFull_name().split("/")[0];
-		return root+"/LocalData/repository/"+owner+"/";
+		return root+"\\LocalData\\repository\\"+owner+"\\";
 	}
 
 	@Override
 	public String userDirectory(GitUserMin minInfo) {
-		return root+"/LocalData/user/";
+		return root+"\\LocalData\\user\\";
 	}
 
 	@Override
 	public String repositoryName(RepositoryMin minInfo) {
-		return minInfo.getFull_name().split("/")[1]+".rp";
+		return minInfo.getFull_name().split("/")[1]+".txt";
 	}
 
 	@Override
 	public String userName(GitUserMin minInfo) {
-		return minInfo.getLogin()+".ur";
+		return minInfo.getLogin()+".txt";
 	}
 }

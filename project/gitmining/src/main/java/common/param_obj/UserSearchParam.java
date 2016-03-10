@@ -1,5 +1,7 @@
 package common.param_obj;
 
+import common.service.GitUserMin;
+
 /**
  * 
  * @author xjh14
@@ -17,5 +19,10 @@ public class UserSearchParam {
 
 	public String getLoginName() {
 		return loginName;
+	}
+	
+	public boolean matches(GitUserMin minInfo) {
+		//TODO Create a checker.
+		return false;
 	}
 }

@@ -52,6 +52,9 @@ public class GeneralGetterDefault implements GeneralGetter {
 		return minInfoManager.getUserNum();
 	}
 
+	/**
+	 * 迭代一不需要此功能
+	 */
 	@Override
 	public List<GitUser> getUsers(int page, int numPerPage,
 			UserSortSandard sortStandard) {

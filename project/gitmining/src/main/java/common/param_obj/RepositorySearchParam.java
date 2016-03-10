@@ -35,4 +35,8 @@ public class RepositorySearchParam {
 		return keywords;
 	}
 	
+	public boolean matches(RepositoryMin minInfo) {
+		//TODO Create a checker for RepoMin.
+		return false;
+	}
 }
