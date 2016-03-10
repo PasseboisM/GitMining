@@ -11,6 +11,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import presentation.component.FakeDataUser;
+import presentation.component.UserMinBlock;
 
 public class UserSearchController {
 	
@@ -42,8 +43,8 @@ public class UserSearchController {
 		vBox.setPrefWidth(1010);
 		for (int i = 0; i < 10; i++) {
 			if (pageIndex*10+i<fakeDatas.size()) {
-//				vBox.getChildren()
-//						.add(new RepositoryMinBlock(rightComponentParent, fakeDatas.get(pageIndex * 10 + i)));
+				vBox.getChildren()
+						.add(new UserMinBlock(rightComponentParent, fakeDatas.get(pageIndex * 10 + i)));
 			}
 		}
 		pane.setContent(vBox);
@@ -59,7 +60,7 @@ public class UserSearchController {
 	private List<FakeDataUser> getList(){
 		List<FakeDataUser> list = new ArrayList<FakeDataUser>();
 		for (int i = 0; i < 17; i++) {
-//			list.add(new FakeDataUser("a"+i+"/b"+i, "description of fake data", "2015-9-8", 58, i+95, 62,"git://github.com/rubinius/rubinius.git"));
+			list.add(new FakeDataUser("a"+i+"/b"+i,i*10000, "https://github.com/rubinius", "Organization","aaa","http://rubini.us","Everywhere","community@rubini.us","Solve Hard Problems™",60,0,0,0,"2015-9-8", "2010-06-29T18:39:32Z"));
 		}
 		return list;
 	}
