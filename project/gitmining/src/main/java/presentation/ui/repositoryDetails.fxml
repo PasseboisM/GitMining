@@ -16,7 +16,7 @@
             <HBox alignment="CENTER_LEFT" prefHeight="85.0" prefWidth="950.0" />
             <HBox prefHeight="50.0" prefWidth="950.0">
                <children>
-                  <Hyperlink>
+                  <Hyperlink fx:id="labelOwnerName">
                      <font>
                         <Font size="30.0" />
                      </font>
@@ -26,7 +26,7 @@
                         <Font size="36.0" />
                      </font>
                   </Label>
-                  <Hyperlink disable="true">
+                  <Hyperlink fx:id="labelRepoName" disable="true">
                      <font>
                         <Font size="26.0" />
                      </font>
@@ -38,7 +38,7 @@
                   <Insets />
                </VBox.margin>
             </Separator>
-            <Label textFill="#8d8d8d" wrapText="true">
+            <Label fx:id="LabelDescription" textFill="#8d8d8d" wrapText="true">
                <font>
                   <Font size="20.0" />
                </font>
@@ -60,7 +60,7 @@
                         </Label>
                      </children>
                   </AnchorPane>
-                  <TextField prefHeight="35.0" prefWidth="298.0" />
+                  <TextField fx:id="repo_url" prefHeight="35.0" prefWidth="298.0" />
                   <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="79.0" text="see more">
                      <HBox.margin>
                         <Insets left="25.0" />
@@ -90,7 +90,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label>
+                        <Label fx:id="labelStar">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -104,7 +104,7 @@
                   </GridPane>
                   <GridPane>
                      <children>
-                        <Label>
+                        <Label fx:id="labelFork">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -125,7 +125,7 @@
                   </GridPane>
                   <GridPane>
                      <children>
-                        <Label>
+                        <Label fx:id="labelWatch">
                            <font>
                               <Font size="18.0" />
                            </font>

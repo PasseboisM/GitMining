@@ -56,9 +56,10 @@ public class RepositoryMinBlock  extends BorderPane{
 	private void jumpToRepositoryDetails() {
 //		rightComponentParent.getChildren().clear();
 		try {
-			rightComponentParent.getChildren().add(RepoDetailsController.getInstance(rightComponentParent,repository));
+			rightComponentParent.getChildren().add(RepoDetailsController.getInstance(rightComponentParent,fakeData));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
+	
 }

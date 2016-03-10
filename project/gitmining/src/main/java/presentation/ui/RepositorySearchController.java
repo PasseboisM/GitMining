@@ -4,14 +4,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.experimental.theories.Theories;
-
 import common.enumeration.attribute.Category;
 import common.enumeration.attribute.Language;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Pagination;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
@@ -24,10 +25,11 @@ public class RepositorySearchController{
 		FXMLLoader loader = new FXMLLoader(RepositorySearchController.class.getResource("repositorySearch.fxml"));
 		VBox rootUINode = loader.load();
 		RepositorySearchController controller = loader.getController();
-		controller.initial(rightComponentParent);
 		
-		controller.initialDatas(controller.getList());
-		
+		List<FakeData> datas = controller.getList();
+//		controller.initialDatas(datas);
+		controller.initial(rightComponentParent,datas);
+		controller.initPage();
 //		GeneralGetter generalGetter = LogicServiceFactory.getInstance().getGeneralGetter();
 //		List<Repository> datas = generalGetter.getRepositories(1, 10, RepoSortStadard.NO_SORT);
 //		System.out.println(datas.size());
@@ -36,19 +38,43 @@ public class RepositorySearchController{
 		return rootUINode;
 	}
 
+	private void initPage() {
+		//除10上取整算法 加9之后再除10
+		pag.setPageCount((fakeDatas.size()+9)/10);
+		pag.setPageFactory((Integer pageIndex)->createPage(pageIndex));
+	}
+
+	private ScrollPane createPage(Integer pageIndex) {
+		ScrollPane pane = new ScrollPane();
+		VBox vBox = new VBox();
+		vBox.setPrefWidth(1010);
+		for (int i = 0; i < 10; i++) {
+			if (pageIndex*10+i<fakeDatas.size()) {
+				vBox.getChildren()
+						.add(new RepositoryMinBlock(rightComponentParent, fakeDatas.get(pageIndex * 10 + i)));
+				
+			}
+		}
+		pane.setContent(vBox);
+		return pane;
+	}
+
 	@FXML	private Button search;
 	@FXML	private FlowPane flowPaneCategory;
 	@FXML	private FlowPane flowPaneLanguage;
 	@FXML	private VBox repoVBox;
+	@FXML private Pagination pag;
+
 
 	private List<CheckBox> categoryCheckBoxes;
 	private List<CheckBox> languageCheckBoxes;
-	
+	private List<FakeData> fakeDatas;
 	private AnchorPane rightComponentParent;
-	private void initial(AnchorPane rightComponentParent) {
+	private void initial(AnchorPane rightComponentParent,List<FakeData> datas) {
 		initialCategoryCheckBoxes();
 		initialLanguageCheckBoxes();
 		this.rightComponentParent = rightComponentParent;
+		fakeDatas = datas;
 	}
 	
 	private void initialLanguageCheckBoxes() {
@@ -73,21 +99,16 @@ public class RepositorySearchController{
 		}
 		flowPaneCategory.getChildren().addAll(categoryCheckBoxes);
 	}
-	
-	private void initialDatas(List<FakeData> list){
-		for (FakeData repository : list) {
-			RepositoryMinBlock block = new RepositoryMinBlock(rightComponentParent,repository);
-			repoVBox.getChildren().add(block);
-		}
-	}
+
 	
 	private List<FakeData> getList(){
 		List<FakeData> list = new ArrayList<FakeData>();
-		for (int i = 0; i < 15; i++) {
-			list.add(new FakeData("a"+i+"/b"+i, "description of fake data", "2015-9-8", 58, i+95, 62));
+		for (int i = 0; i < 17; i++) {
+			list.add(new FakeData("a"+i+"/b"+i, "description of fake data", "2015-9-8", 58, i+95, 62,"git://github.com/rubinius/rubinius.git"));
 		}
 		return list;
 	}
+	
 
 	
 }
