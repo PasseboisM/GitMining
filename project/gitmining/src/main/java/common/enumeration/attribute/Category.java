@@ -1,5 +1,7 @@
 package common.enumeration.attribute;
 
+import common.service.RepositoryMin;
+
 /**
  * 
  * @author xjh14
@@ -19,5 +21,10 @@ public enum Category {
 	}
 	public String getName() {
 		return name;
+	}
+	
+	public static Category[] getCategories(RepositoryMin minInfo) {
+		//TODO Analyze categories
+		return new Category[0];
 	}
 }

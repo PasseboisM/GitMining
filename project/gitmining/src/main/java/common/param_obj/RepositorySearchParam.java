@@ -35,8 +35,33 @@ public class RepositorySearchParam {
 		return keywords;
 	}
 	
-	public boolean matches(RepositoryMin minInfo) {
-		//TODO Create a checker for RepoMin.
-		return false;
+	//TODO 应该把搜索策略搬出Parameter类，成为独立的Strategy
+	public int matches(RepositoryMin minInfo) {
+		
+		int matchCount = 0;
+		
+		for(Language lang:langs) {
+			if(lang==minInfo.getMainLanguage()) {
+				matchCount += 5;
+				break;
+			}
+		}
+		
+		for(Category cate:cates) {
+			for(Category minCate:minInfo.getCategories()) {
+				if(cate==minCate) {
+					matchCount++;
+					break;
+				}
+			}
+		}
+		
+		for(String keyword:keywords) {
+			if(minInfo.getFull_name().contains(keyword)) {
+				matchCount += 10;
+			}
+		}
+		
+		return matchCount;
 	}
 }

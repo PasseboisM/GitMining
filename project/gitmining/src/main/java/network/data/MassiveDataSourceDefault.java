@@ -1,5 +1,10 @@
 package network.data;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,10 +61,29 @@ public class MassiveDataSourceDefault implements MassiveDataSource {
 		//新建管道、集流器，获取URL
 		ObjChannel<String> channel = new ObjChannelWithBlockingQueue<String>();
 		MultiSourceSwitch<String> sourceSwitch = new BasicSourceSwitch<String>(channel);
-		String url = repoApi.makeRepoNamesApi();
+//		String url = repoApi.makeRepoNamesApi();
+		
+		File f = new File("names.json");
+		FileReader fr;
+		String json = null;
+		try {
+			fr = new FileReader(f);
+			BufferedReader br = new BufferedReader(fr);
+			json = br.readLine();
+			br.close();
+			fr.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 		
 		//获取并处理JSON
-		String json = conn.do_get(url);
+//		String json = conn.do_get(url);
 		Type listTypeType = new TypeToken<List<String>>(){}.getType();
 		List<String> repoLists = gson.fromJson(json, listTypeType);
 		
@@ -195,6 +219,7 @@ public class MassiveDataSourceDefault implements MassiveDataSource {
 				String c = null;
 				try {
 					c = conn.do_get(repoApi.makeRepoInfoApi(name));
+//					System.out.println(c);
 				} catch (NetworkException e) {
 					e.printStackTrace();
 					closeExceptionally();

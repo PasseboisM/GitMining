@@ -3,6 +3,8 @@ package common.model;
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
+import common.enumeration.attribute.Category;
+import common.enumeration.attribute.Language;
 import common.service.Repository;
 import common.service.RepositoryMin;
 import common.service.RepositoryOrganization;
@@ -756,6 +758,16 @@ public class RepositoryBeans implements Repository {
 
 	public int getSubscribers_count() {
 		return subscribers_count;
+	}
+
+	@Override
+	public Language getMainLanguage() {
+		return Language.getLanguage(this.getLanguage());
+	}
+
+	@Override
+	public Category[] getCategories() {
+		return Category.getCategories(this);
 	}
 	
 	

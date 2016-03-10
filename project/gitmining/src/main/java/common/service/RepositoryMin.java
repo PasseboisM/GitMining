@@ -1,5 +1,8 @@
 package common.service;
 
+import common.enumeration.attribute.Category;
+import common.enumeration.attribute.Language;
+
 /**
  * 
  * @author xjh14
@@ -21,4 +24,7 @@ public interface RepositoryMin {
 	
 	public String getLanguage();
 
+	public Language getMainLanguage();
+	
+	public Category[] getCategories();
 }
