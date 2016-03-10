@@ -3,37 +3,35 @@ package presentation.ui;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observer;
+
+import org.junit.experimental.theories.Theories;
 
 import common.enumeration.attribute.Category;
 import common.enumeration.attribute.Language;
-import common.enumeration.sort_standard.RepoSortStadard;
-import common.message.LoadProgress;
-import common.service.Repository;
-import javafx.beans.Observable;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
-import logic.service.GeneralGetter;
-import logic.service.Loader;
-import logic.service.LogicServiceFactory;
 import presentation.component.RepositoryMinBlock;
 
 public class RepositorySearchController{
 	
 	
-	public static VBox getInstance() throws IOException {
+	public static VBox getInstance(AnchorPane rightComponentParent) throws IOException {
 		FXMLLoader loader = new FXMLLoader(RepositorySearchController.class.getResource("repositorySearch.fxml"));
 		VBox rootUINode = loader.load();
 		RepositorySearchController controller = loader.getController();
-		controller.initial();
-		GeneralGetter generalGetter = LogicServiceFactory.getInstance().getGeneralGetter();
-		List<Repository> datas = generalGetter.getRepositories(1, 10, RepoSortStadard.NO_SORT);
-		System.out.println(datas.size());
-		controller.initialDatas(datas);
+		controller.initial(rightComponentParent);
+		
+		controller.initialDatas(controller.getList());
+		
+//		GeneralGetter generalGetter = LogicServiceFactory.getInstance().getGeneralGetter();
+//		List<Repository> datas = generalGetter.getRepositories(1, 10, RepoSortStadard.NO_SORT);
+//		System.out.println(datas.size());
+//		controller.initialDatas(datas);
 		System.out.println("finish");
 		return rootUINode;
 	}
@@ -46,9 +44,11 @@ public class RepositorySearchController{
 	private List<CheckBox> categoryCheckBoxes;
 	private List<CheckBox> languageCheckBoxes;
 	
-	private void initial() {
+	private AnchorPane rightComponentParent;
+	private void initial(AnchorPane rightComponentParent) {
 		initialCategoryCheckBoxes();
 		initialLanguageCheckBoxes();
+		this.rightComponentParent = rightComponentParent;
 	}
 	
 	private void initialLanguageCheckBoxes() {
@@ -74,11 +74,19 @@ public class RepositorySearchController{
 		flowPaneCategory.getChildren().addAll(categoryCheckBoxes);
 	}
 	
-	private void initialDatas(List<Repository> list){
-		for (Repository repository : list) {
-			RepositoryMinBlock block = new RepositoryMinBlock(repository);
+	private void initialDatas(List<FakeData> list){
+		for (FakeData repository : list) {
+			RepositoryMinBlock block = new RepositoryMinBlock(rightComponentParent,repository);
 			repoVBox.getChildren().add(block);
 		}
+	}
+	
+	private List<FakeData> getList(){
+		List<FakeData> list = new ArrayList<FakeData>();
+		for (int i = 0; i < 15; i++) {
+			list.add(new FakeData("a"+i+"/b"+i, "description of fake data", "2015-9-8", 58, i+95, 62));
+		}
+		return list;
 	}
 
 	

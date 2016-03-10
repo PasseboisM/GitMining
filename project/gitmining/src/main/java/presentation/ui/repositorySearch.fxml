@@ -53,7 +53,11 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
          <children>
-            <VBox fx:id="repoVBox" prefHeight="439.0" prefWidth="1030.0" />
+            <ScrollPane prefHeight="384.0" prefWidth="1030.0">
+               <content>
+                  <VBox fx:id="repoVBox" prefHeight="439.0" prefWidth="1010.0" />
+               </content>
+            </ScrollPane>
             <Pagination pageCount="50" prefHeight="62.0" prefWidth="1030.0" />
          </children></VBox>
    </children>

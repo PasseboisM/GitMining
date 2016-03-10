@@ -26,7 +26,7 @@ import logic.service.Loader;
 public class MainController extends Application implements Observer{
 
 	
-	private boolean ableToGetData = false;
+	private boolean ableToGetData = true;
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		FXMLLoader loader = new FXMLLoader(MainController.class.getResource("mainController.fxml"));
@@ -35,12 +35,12 @@ public class MainController extends Application implements Observer{
 		primaryStage.initStyle(StageStyle.DECORATED);
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
-		Loader.getInstance().addObserver(this);
 		primaryStage.show();
+//		Loader.getInstance().addObserver(this);
 	}
 
 	public static void main(String[] args) {
-		Loader.getInstance().startLoading();
+//		Loader.getInstance().startLoading();
 		launch(args);
 	}
 	
@@ -74,7 +74,7 @@ public class MainController extends Application implements Observer{
 		rightComponentParent.getChildren().clear();
 		try {
 			if (ableToGetData) {
-				rightComponentParent.getChildren().add(RepositorySearchController.getInstance());
+				rightComponentParent.getChildren().add(RepositorySearchController.getInstance(rightComponentParent));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -116,7 +116,6 @@ public class MainController extends Application implements Observer{
 	@Override
 	public void update(Observable observable, Object obj) {
 		update();
-		
 	}
 	
 

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1050.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.ui.RepoDetailsController">
    <padding>
       <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
    </padding>
@@ -16,7 +16,7 @@
             <HBox alignment="CENTER_LEFT" prefHeight="85.0" prefWidth="950.0" />
             <HBox prefHeight="50.0" prefWidth="950.0">
                <children>
-                  <Hyperlink text="Hyperlink">
+                  <Hyperlink>
                      <font>
                         <Font size="30.0" />
                      </font>
@@ -26,7 +26,7 @@
                         <Font size="36.0" />
                      </font>
                   </Label>
-                  <Hyperlink disable="true" text="Hyperlink">
+                  <Hyperlink disable="true">
                      <font>
                         <Font size="26.0" />
                      </font>
@@ -95,7 +95,7 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label text="Label" textFill="#545454" GridPane.rowIndex="1">
+                        <Label text="stars" textFill="#545454" GridPane.rowIndex="1">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -109,28 +109,7 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label text="Label" textFill="#545454" GridPane.rowIndex="1">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                     </children>
-                     <columnConstraints>
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BOTTOM" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                  </GridPane>
-                  <GridPane>
-                     <children>
-                        <Label>
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label text="Label" textFill="#545454" GridPane.rowIndex="1">
+                        <Label text="forks" textFill="#545454" GridPane.rowIndex="1">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -151,28 +130,7 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label text="Label" textFill="#545454" GridPane.rowIndex="1">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                     </children>
-                     <columnConstraints>
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BOTTOM" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                  </GridPane>
-                  <GridPane>
-                     <children>
-                        <Label>
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label text="Label" textFill="#545454" GridPane.rowIndex="1">
+                        <Label text="watchers" textFill="#545454" GridPane.rowIndex="1">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -192,6 +150,6 @@
       </VBox>
    </center>
    <bottom>
-      <Button mnemonicParsing="false" text="返回" BorderPane.alignment="CENTER" />
+      <Button mnemonicParsing="false" onAction="#returnToSearchController" text="返回" BorderPane.alignment="CENTER" />
    </bottom>
 </BorderPane>

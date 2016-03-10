@@ -6,16 +6,16 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root minWidth="-Infinity" prefWidth="1000.0" style="-fx-border-color: #46c7c7;" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minWidth="-Infinity" prefWidth="900.0" style="-fx-border-color: #46c7c7;" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <left>
-      <VBox alignment="CENTER_LEFT" minWidth="-Infinity" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER_LEFT" minWidth="-Infinity" prefWidth="500.0" BorderPane.alignment="CENTER">
          <children>
-            <Hyperlink fx:id="repoFullName">
+            <Hyperlink fx:id="repoFullName" onAction="#jumpToRepositoryDetails">
                <font>
                   <Font name="System Bold Italic" size="18.0" />
                </font>
             </Hyperlink>
-            <Label fx:id="description" prefWidth="600.0" textFill="#000000c2" wrapText="true">
+            <Label fx:id="description" prefWidth="500.0" textFill="#000000c2" wrapText="true">
                <font>
                   <Font size="16.0" />
                </font>
