@@ -16,8 +16,11 @@ import common.exception.DataCorruptedException;
 import common.exception.TargetNotFoundException;
 import common.model.BasicSourceSwitch;
 import common.model.GitUserBeans;
+import common.model.GitUserMinBeans;
 import common.model.ObjChannelWithBlockingQueue;
 import common.model.RepositoryBeans;
+import common.model.RepositoryMinBeans;
+import common.model.filter.GeneralProcessFilter;
 import common.model.filter.PureDataTransFilter;
 import common.service.GitUser;
 import common.service.GitUserMin;
@@ -38,7 +41,6 @@ public class DataOutputDefault implements DataStorageOutput {
 	
 	@Override
 	public ObjChannel<RepositoryMin> getRepoMin() {
-		// TODO Auto-generated method stub
 		File root = new File(dir.repositoryRoot());
 		File[] rootSubs = root.listFiles();
 		File[][] splitSubs = splitFileArray(rootSubs, OUTPUT_THREAD_NUM);
@@ -52,10 +54,16 @@ public class DataOutputDefault implements DataStorageOutput {
 		}
 		execute(directoryTransfer);
 		
+		ObjChannel<RepositoryMin> minInfoChan = new ObjChannelWithBlockingQueue<>();
+		JSONFileSearchReadDeserializeFilter[] deserializers = new JSONFileSearchReadDeserializeFilter[OUTPUT_THREAD_NUM];
+		MultiSourceSwitch<RepositoryMin> minInfoSwitch = new BasicSourceSwitch<>(minInfoChan);
+		for(int i=0;i<OUTPUT_THREAD_NUM;i++) {
+			deserializers[i] = new JSONFileSearchReadDeserializeFilter<RepositoryMin>
+				(directoryChan, minInfoSwitch, 20, RepositoryMin.class);
+		}
+		execute(deserializers);
 		
-		//TODO 待完成任务流
-		
-		return null;
+		return minInfoChan;
 	}
 
 	@Override
@@ -84,8 +92,30 @@ public class DataOutputDefault implements DataStorageOutput {
 
 	@Override
 	public ObjChannel<GitUserMin> getUserMin() {
-		// TODO Auto-generated method stub
-		return null;
+		File directory = new File(dir.userRoot());
+		File[] contents = directory.listFiles();
+		File[][] splitContents = splitFileArray(contents, OUTPUT_THREAD_NUM);
+		
+		ObjChannel<File> fileChan = new ObjChannelWithBlockingQueue<>();
+		PureDataTransFilter[] transfers = new PureDataTransFilter[OUTPUT_THREAD_NUM];
+		MultiSourceSwitch<File> fileSwitch = new BasicSourceSwitch<>(fileChan);
+		for(int i=0;i<OUTPUT_THREAD_NUM;i++) {
+			transfers[i] = new PureDataTransFilter<File>(Arrays.asList(splitContents[i]), fileSwitch);
+		}
+		execute(transfers);
+		
+
+		ObjChannel<GitUserMin> minInfoChan = new ObjChannelWithBlockingQueue<>();
+		JSONFileReadDeserializeFilter[] deserializers = new JSONFileReadDeserializeFilter[OUTPUT_THREAD_NUM];
+		MultiSourceSwitch<GitUserMin> minInfoSwitch = new BasicSourceSwitch<>(minInfoChan);
+		for(int i=0;i<OUTPUT_THREAD_NUM;i++) {
+			deserializers[i] = new JSONFileReadDeserializeFilter<GitUserMin>
+				(fileChan, minInfoSwitch, 20, GitUserMin.class);
+		}
+		execute(deserializers);
+		
+		return minInfoChan;
+		
 	}
 
 	@Override
@@ -184,6 +214,118 @@ public class DataOutputDefault implements DataStorageOutput {
 		} catch (IOException e) {
 			e.printStackTrace();
 			throw new TargetNotFoundException();
+		}
+	}
+	
+	/**
+	 * Goes one layer directory deeper to search for JSON files and transfer.
+	 * @author xjh14
+	 *
+	 * @param <T>
+	 */
+	class JSONFileSearchReadDeserializeFilter<T> extends GeneralProcessFilter<File, T> {
+
+		Class<T> objectiveType = null;
+		FileReader fr = null;
+		BufferedReader br = null;
+		
+		public JSONFileSearchReadDeserializeFilter(ObjChannel<File> directories,
+				MultiSourceSwitch<T> output, int page, Class<T> objective) {
+			super(directories, output, page);
+			this.objectiveType = objective;
+		}
+
+		@Override
+		public List<T> process(List<File> get) {
+			List<T> result = new ArrayList<>(page);
+			for(File dir:get) {
+				File[] files = dir.listFiles();
+				for(File content:files) {
+					try {
+						fr = new FileReader(content);
+						br = new BufferedReader(fr);
+						String s = br.readLine();
+						
+						T partial = (T) gson.fromJson(s, getBeans(objectiveType));
+						result.add(partial);
+						
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						try {
+							br.close();
+							fr.close();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+			return result;
+		}
+	}
+	
+	/**
+	 * Read the provided JSON files and convert to objective object.
+	 * @author xjh14
+	 *
+	 * @param <T>
+	 */
+	class JSONFileReadDeserializeFilter<T> extends GeneralProcessFilter<File, T> {
+
+		Class<T> objectiveType = null;
+		FileReader fr = null;
+		BufferedReader br = null;
+		
+		public JSONFileReadDeserializeFilter(ObjChannel<File> contents,
+				MultiSourceSwitch<T> output, int page, Class<T> objective) {
+			super(contents, output, page);
+			this.objectiveType = objective;
+		}
+
+		@Override
+		public List<T> process(List<File> get) {
+			List<T> result = new ArrayList<>(page);
+			for(File content:get) {
+				try {
+					fr = new FileReader(content);
+					br = new BufferedReader(fr);
+					String s = br.readLine();
+						
+					T partial = (T) gson.fromJson(s, getBeans(objectiveType));
+					result.add(partial);
+						
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					try {
+						br.close();
+						fr.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			return result;
+		}
+	}
+	
+	/**
+	 * 代码耦合！尽快移除
+	 * @param imp
+	 * @return
+	 */
+	private Class getBeans(Class imp) {
+		if(imp==Repository.class) {
+			return RepositoryBeans.class;
+		} else if(imp==RepositoryMin.class) {
+			return RepositoryMinBeans.class;
+		} else if(imp==GitUserMin.class) {
+			return GitUserMinBeans.class;
+		} else if (imp==GitUser.class) {
+			return GitUserBeans.class;
+		} else {
+			return null;
 		}
 	}
 }
