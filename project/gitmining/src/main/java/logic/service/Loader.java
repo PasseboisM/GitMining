@@ -41,7 +41,7 @@ public class Loader implements Observable {
 
 	@Override
 	public void notifyObservers() {
-		//本类为伪Observable，将Observer委托给MinInfoManager		
+		//本类为伪Observable，会将Observer委托给MinInfoManager，所以不用实现此方法	
 	}
 
 	@Override

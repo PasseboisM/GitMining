@@ -18,7 +18,6 @@ import common.util.ObjChannel;
  * 
  * 本通道仅可拥有一个数据源，由这个数据源操控进行开启、关闭；
  * 本通道可以接受多个数据接收者。
- * TODO 同步性有问题！亟待解决！
  */
 public class ObjChannelWithBlockingQueue<T> implements ObjChannel<T> {
 
@@ -26,7 +25,7 @@ public class ObjChannelWithBlockingQueue<T> implements ObjChannel<T> {
 	public static final int EXCEPTION_CLOSED = 1;
 	public static final int NORMAL_CLOSED = 2;
 	
-	ReentrantLock lock = new ReentrantLock();
+//	ReentrantLock lock = new ReentrantLock();
 	
 	volatile int status;
 	

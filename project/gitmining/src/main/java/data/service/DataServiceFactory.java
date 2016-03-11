@@ -1,5 +1,8 @@
 package data.service;
 
+import common.exception.NetworkException;
+
+import network.service.NetworkServiceFactory;
 import data.BasicDataServiceFactory;
 
 /**
@@ -12,13 +15,34 @@ import data.BasicDataServiceFactory;
  * 
  */
 public abstract class DataServiceFactory {
-
+	
+	private volatile static boolean networkAvaliable = false;
+	private volatile static boolean isUsingNetwork = false;
+	
 	public abstract MassiveDataGetter getMassiveDataGetter();
 	
 	public abstract SpecificDataGetter getSpecificDataGetter();
 	
+	private static boolean getNetworkAvailability() {
+		networkAvaliable = NetworkServiceFactory.getInstance().testNetwork();
+		return networkAvaliable;
+	}
+	
 	public static DataServiceFactory getInstance() {
 		return new BasicDataServiceFactory();
+	}
+	
+	public static boolean tryUseNetwork() throws NetworkException {
+		if (getNetworkAvailability()) {
+			isUsingNetwork = true;
+			return true;
+		} else {
+			throw new NetworkException();
+		}
+	}
+	
+	public static boolean isUsingNetwork() {
+		return isUsingNetwork;
 	}
 	
 }

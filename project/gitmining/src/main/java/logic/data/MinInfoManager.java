@@ -19,6 +19,7 @@ import data.service.DataServiceFactory;
 import data.service.MassiveDataGetter;
 
 /**
+ * 单例对象。
  * 在逻辑层保存原始信息索引，并对外提供副本的类。
  * 会在系统启动时开始初始化。
  * @author xjh14
@@ -29,7 +30,7 @@ public class MinInfoManager implements Observable {
 	private static MinInfoManager instance = new MinInfoManager();
 	
 	private AtomicInteger remainingInitMission = new AtomicInteger(1);
-	private boolean initException = false;
+	private volatile boolean initException = false;
 	
 	private volatile List<RepositoryMin> repoMinInfo = new ArrayList<RepositoryMin>(4000);
 	private volatile Set<GitUserMin> userMinInfo = new HashSet<GitUserMin>(10000);

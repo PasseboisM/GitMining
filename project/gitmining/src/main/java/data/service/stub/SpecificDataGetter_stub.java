@@ -9,7 +9,7 @@ import data.service.SpecificDataGetter;
 import network.service.NetworkServiceFactory;
 import network.service.SpecificDataSource;
 
-public class SpecificDataGetter_stub implements SpecificDataGetter {
+public class SpecificDataGetter_stub extends SpecificDataGetter {
 
 	
 	private NetworkServiceFactory networkDataService = NetworkServiceFactory.getInstance();

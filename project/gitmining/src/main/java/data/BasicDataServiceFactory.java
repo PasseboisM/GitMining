@@ -10,14 +10,13 @@ public class BasicDataServiceFactory extends DataServiceFactory {
 
 	@Override
 	public MassiveDataGetter getMassiveDataGetter() {
-		// TODO 使用stub进行测试
-		return new MassiveDataGetter_stub();
+//		return new MassiveDataGetter_stub();
+		return MassiveDataGetter.getInstance();
 	}
 
 	@Override
 	public SpecificDataGetter getSpecificDataGetter() {
-		// TODO Auto-generated method stub
-		return new SpecificDataGetter_stub();
+		return SpecificDataGetter.getInstance();
 	}
 
 }

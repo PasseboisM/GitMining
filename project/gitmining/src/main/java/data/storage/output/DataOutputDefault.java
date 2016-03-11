@@ -328,4 +328,10 @@ public class DataOutputDefault implements DataStorageOutput {
 			return null;
 		}
 	}
+
+	@Override
+	public int getRepoNumber() {
+		//TODO 真正实现
+		return 3086;
+	}
 }

@@ -10,6 +10,8 @@ import common.util.ObjChannel;
 
 public interface DataStorageOutput {
 
+	public int getRepoNumber();
+	
 	public ObjChannel<RepositoryMin> getRepoMin();
 	
 	public Repository getRepository(RepositoryMin minInfo) throws TargetNotFoundException, DataCorruptedException;

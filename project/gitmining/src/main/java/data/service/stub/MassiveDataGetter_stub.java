@@ -8,7 +8,7 @@ import data.service.MassiveDataGetter;
 import network.service.MassiveDataSource;
 import network.service.NetworkServiceFactory;
 
-public class MassiveDataGetter_stub implements MassiveDataGetter{
+public class MassiveDataGetter_stub extends MassiveDataGetter{
 
 	private NetworkServiceFactory networkDataService = NetworkServiceFactory.getInstance();
 	private MassiveDataSource dataSource = networkDataService.getMassiveDataSource();

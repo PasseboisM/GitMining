@@ -13,7 +13,6 @@ import common.service.Repository;
  * @author xjh14
  * 按照枚举项目+关键词的方式进行搜索，
  * 内容包括项目Repository、用户GitUser
- * TODO Iter1使用本模块，注意尽早编写（暂时只提供项目搜索接口，不提供用户搜索接口）
  */
 public interface SearchService {
 	
