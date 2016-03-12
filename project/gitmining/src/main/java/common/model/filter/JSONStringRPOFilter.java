@@ -71,7 +71,6 @@ public class JSONStringRPOFilter<T> extends GeneralProcessFilter<String, T> {
 		public List<T> process(List<String> get) {
 			List<T> result = new ArrayList<T>(page);
 			for(String json: get) {
-				//TODO noise!
 				if(json.equals("")) continue;
 				try {
 					result.add(gson.fromJson(json, objectiveClass));

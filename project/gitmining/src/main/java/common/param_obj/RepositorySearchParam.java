@@ -57,7 +57,7 @@ public class RepositorySearchParam {
 		}
 		
 		for(String keyword:keywords) {
-			if(minInfo.getFull_name().contains(keyword)) {
+			if(minInfo.getFull_name().contains(keyword)&&(!keyword.equals(""))) {
 				matchCount += 10;
 			}
 		}

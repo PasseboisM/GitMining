@@ -23,9 +23,13 @@ public class UserSearchParam {
 	
 	//TODO 搬移搜索策略
 	public int matches(GitUserMin minInfo) {
-		if(minInfo.getLogin().contains(loginName)||minInfo.getName().contains(loginName)) {
+		if(nameMatch(minInfo.getLogin(),loginName)||nameMatch(minInfo.getName(),loginName)) {
 			return 1;
 		}
 		return 0;
+	}
+	
+	private boolean nameMatch(String original,String searched) {
+		return original.toLowerCase().contains(searched.toLowerCase());
 	}
 }
