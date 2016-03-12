@@ -4,6 +4,8 @@ import java.util.List;
 
 import common.enumeration.sort_standard.RepoSortStadard;
 import common.enumeration.sort_standard.UserSortSandard;
+import common.exception.DataCorruptedException;
+import common.exception.NetworkException;
 import common.service.GitUser;
 import common.service.Repository;
 
@@ -20,9 +22,11 @@ public interface GeneralGetter {
 	 * @param numPerPage 请求返回的每页数量（数据不足时返回的对象数目<numPerPage）
 	 * @param sortStandard 请求的排序方式
 	 * @return 含有所请求的Repository的数据对象的List，其大小<=page
+	 * @throws DataCorruptedException 
+	 * @throws NetworkException 
 	 */
 	public List<Repository> getRepositories(int page, int numPerPage,
-			RepoSortStadard sortStandard);
+			RepoSortStadard sortStandard) throws NetworkException, DataCorruptedException;
 	
 	/**
 	 * 获取系统内Repository总共数目

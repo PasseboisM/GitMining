@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -11,7 +12,15 @@
       <GridPane minHeight="-Infinity" prefHeight="200.0">
          <children>
             <TextField fx:id="keyword" prefHeight="23.0" prefWidth="936.0" promptText="搜索项目" GridPane.columnIndex="1" GridPane.columnSpan="2" />
-            <Button fx:id="search" mnemonicParsing="false" onAction="#onSearch" text="查询" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
+            <Button fx:id="search" mnemonicParsing="false" onAction="#onSearch" stylesheets="@test.css" text="查询" GridPane.columnIndex="3" GridPane.halignment="CENTER">
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="BLACK" />
+                        <Stop color="WHITE" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill></Button>
             <Label alignment="TOP_RIGHT" contentDisplay="TOP" text="项目种类：" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
                <font>
                   <Font size="18.0" />
@@ -55,10 +64,10 @@
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="noSort" mnemonicParsing="false" text="普通的排"  onAction="#noSortSearch" />
-                  <Button fx:id="starSort" mnemonicParsing="false" text="关注降序"  onAction="#starSortSearch" />
-                  <Button fx:id="forkSort" mnemonicParsing="false" text="拷贝降序" onAction="#forkSortSearch" />
-                  <Button fx:id="contributorSort" mnemonicParsing="false" text="贡献降序" onAction="#contributorSortSearch" />
+                  <ToggleButton fx:id="noSort" mnemonicParsing="false" onAction="#noSortSearch" stylesheets="@test.css" text="普通的排" />
+                  <ToggleButton fx:id="starSort" mnemonicParsing="false" onAction="#starSortSearch" text="关注降序" />
+                  <ToggleButton fx:id="forkSort" mnemonicParsing="false" onAction="#forkSortSearch" text="拷贝降序" />
+                  <ToggleButton fx:id="contributorSort" mnemonicParsing="false" onAction="#contributorSortSearch" text="贡献降序" />
                </children>
             </HBox>
             <Pagination fx:id="pag" pageCount="50" prefHeight="498.0" prefWidth="1030.0" />

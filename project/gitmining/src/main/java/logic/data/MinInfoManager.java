@@ -9,6 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
 
 import common.exception.DataTransferException;
+import common.exception.NetworkException;
 import common.message.LoadProgress;
 import common.service.GitUserMin;
 import common.service.RepositoryMin;
@@ -61,8 +62,14 @@ public class MinInfoManager implements Observable {
 	
 	private MinInfoManager(){
 		getter = DataServiceFactory.getInstance().getMassiveDataGetter();
-		ObjChannel<RepositoryMin> repoChan = getter.getRepoMinInfo();
-		ObjChannel<GitUserMin> userChan = getter.getUserMinInfo();
+		ObjChannel<RepositoryMin> repoChan = null;
+		ObjChannel<GitUserMin> userChan = null;
+		try {
+			repoChan = getter.getRepoMinInfo();
+			userChan = getter.getUserMinInfo();
+		} catch (NetworkException e) {
+			e.printStackTrace();
+		}
 		Thread repoInitThread = new Thread(new CollectionWriter<RepositoryMin>(repoChan, repoMinInfo));
 		Thread userInitThread = new Thread(new CollectionWriter<>(userChan, userMinInfo));
 		repoInitThread.start();
@@ -76,7 +83,7 @@ public class MinInfoManager implements Observable {
 	public LoadProgress getProgress() {
 		try {
 			lock.lock();
-			return new LoadProgress(getTotalRepoNum(), getRepoNum());
+			return new LoadProgress(getTotalRepoNum(), getRepoNum(),userMinInfo.size());
 		} finally {
 			lock.unlock();
 		}

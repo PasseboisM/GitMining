@@ -10,13 +10,15 @@ import logic.service.LogicServiceFactory;
 import org.junit.Test;
 
 import common.enumeration.sort_standard.RepoSortStadard;
+import common.exception.DataCorruptedException;
+import common.exception.NetworkException;
 import common.service.Repository;
 import common.service.RepositoryMin;
 
 public class IncompleteLogicTest {
 
 	@Test
-	public void test() {
+	public void test() throws NetworkException, DataCorruptedException {
 		GeneralGetter getter = LogicServiceFactory.getInstance().getGeneralGetter();
 
 		try {
@@ -46,10 +48,11 @@ public class IncompleteLogicTest {
 	}
 
 	
-	public void printRepo(Repository r) {
+	public static void printRepo(Repository r) {
 		System.out.println("Name:"+r.getFull_name());
 		System.out.println("ID:"+r.getId());
 		System.out.println("Stars:"+r.getStargazers_count());
 		System.out.println();
 	}
+	
 }

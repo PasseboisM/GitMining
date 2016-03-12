@@ -1,5 +1,7 @@
 package data.storage;
 
+import data.storage.input.DataInputDefault;
+import data.storage.output.DataOutputDefault;
 import data.storage.service.DataStorageInput;
 import data.storage.service.DataStorageOutput;
 import data.storage.service.StorageServiceFactory;
@@ -20,13 +22,11 @@ public class StorageServiceFactoryDefault extends StorageServiceFactory {
 
 	@Override
 	public DataStorageInput getInput() {
-		// TODO Auto-generated method stub
-		return null;
+		return new DataInputDefault();
 	}
 
 	@Override
 	public DataStorageOutput getOutput() {
-		// TODO Auto-generated method stub
-		return null;
+		return new DataOutputDefault();
 	}
 }

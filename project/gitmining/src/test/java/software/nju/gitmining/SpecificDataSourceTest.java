@@ -6,6 +6,7 @@ import network.service.SpecificDataSource;
 
 import org.junit.Test;
 
+import common.exception.DataCorruptedException;
 import common.exception.NetworkException;
 import common.service.GitUser;
 import common.service.Repository;
@@ -13,7 +14,7 @@ import common.service.Repository;
 public class SpecificDataSourceTest {
 
 	@Test
-	public void test() throws NetworkException {
+	public void test() throws NetworkException, DataCorruptedException {
 		SpecificDataSource source = new SpecificDataSourceDefault();
 		GitUser user = source.getSpecificUser("rubinius");
 		Repository repo = source.getSpecificRepo("rubinius/rubinius");

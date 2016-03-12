@@ -14,7 +14,10 @@ public class DataBuffer {
 	
 	
 	public static void addRepository(Repository repo) {
-		repoBuffer.put(repo.getFull_name(), repo);
+		if(repo!=null) {
+			repoBuffer.put(repo.getFull_name(), repo);
+		}
+
 	}
 	
 	public static Repository searchRepository(String fullName) throws TargetNotFoundException {
@@ -27,7 +30,9 @@ public class DataBuffer {
 	}
 	
 	public static void addUser(GitUser user) {
-		userBuffer.put(user.getLogin(), user);
+		if(user!=null) {
+			userBuffer.put(user.getLogin(), user);
+		}
 	}
 	
 	public static GitUser searchUser(String login) throws TargetNotFoundException {

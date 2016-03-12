@@ -42,6 +42,7 @@ public class DataOutputDefault implements DataStorageOutput {
 	@Override
 	public ObjChannel<RepositoryMin> getRepoMin() {
 		File root = new File(dir.repositoryRoot());
+		System.out.println(root);
 		File[] rootSubs = root.listFiles();
 		File[][] splitSubs = splitFileArray(rootSubs, OUTPUT_THREAD_NUM);
 		
