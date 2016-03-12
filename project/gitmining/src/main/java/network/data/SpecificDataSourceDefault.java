@@ -32,7 +32,12 @@ public class SpecificDataSourceDefault implements SpecificDataSource {
 		String json = conn.do_get(url);
 		Repository result = gson.fromJson(json, RepositoryBeans.class);
 		
-		return result;
+		if(result.checkValidity()) {
+			return result;
+		} else {
+			throw new NetworkException();
+		}
+		
 	}
 
 	public GitUser getSpecificUser(GitUserMin source) throws NetworkException {
@@ -45,7 +50,11 @@ public class SpecificDataSourceDefault implements SpecificDataSource {
 		String json = conn.do_get(url);
 		GitUser result = gson.fromJson(json, GitUserBeans.class);
 		
-		return result;
+		if(result.checkValidity()) {
+			return result;
+		} else {
+			throw new NetworkException();
+		}
 	}
 
 	public SpecificDataSourceDefault() {
