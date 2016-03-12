@@ -83,7 +83,7 @@ public class MinInfoManager implements Observable {
 	public LoadProgress getProgress() {
 		try {
 			lock.lock();
-			return new LoadProgress(getTotalRepoNum(), getRepoNum(),userMinInfo.size());
+			return new LoadProgress(getTotalRepoNum(), getRepoNum(), getUserNum());
 		} finally {
 			lock.unlock();
 		}

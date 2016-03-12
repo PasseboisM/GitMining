@@ -27,7 +27,7 @@ public class GeneralGetterDefault implements GeneralGetter {
 		int leftEnd = (page-1) * numPerPage, rightEnd = page * numPerPage;
 		List<RepositoryMin> repoMinInfo = minInfoManager.getRepoMin();
 		
-		assert leftEnd < repoMinInfo.size();
+		assert leftEnd < repoMinInfo.size():"请求数目过多，超过数据总数";
 		
 		repoMinInfo.sort(sortStandard.getComparator());
 		List<RepositoryMin> required = repoMinInfo.subList(leftEnd,
@@ -56,12 +56,35 @@ public class GeneralGetterDefault implements GeneralGetter {
 
 	/**
 	 * 迭代一不需要此功能
+	 * @throws DataCorruptedException 
+	 * @throws NetworkException 
 	 */
 	@Override
 	public List<GitUser> getUsers(int page, int numPerPage,
-			UserSortSandard sortStandard) {
-		// TODO Auto-generated method stub
-		return null;
+			UserSortSandard sortStandard) throws NetworkException, DataCorruptedException {
+		int leftEnd = (page-1) * numPerPage, rightEnd = page * numPerPage;
+		List<GitUserMin> totalList = minInfoManager.getUserMin();
+		
+		assert leftEnd < totalList.size():"请求数目过多，超过数据总数";
+		
+		totalList.sort(sortStandard.getComparator());
+		/*
+		 * List<RepositoryMin> required = repoMinInfo.subList(leftEnd,
+				rightEnd>repoMinInfo.size()? repoMinInfo.size():rightEnd);
+		
+		//TODO get Repository with multi-thread?
+		List<Repository> result = new ArrayList<>(numPerPage);
+		for(RepositoryMin minInfo:required) {
+			result.add(dataGetter.getSpecificRepo(minInfo));
+		}
+		 */
+		List<GitUserMin> required = totalList.subList(leftEnd,
+				(rightEnd>totalList.size())?totalList.size():rightEnd);
+		List<GitUser> result = new ArrayList<>(numPerPage);
+		for(GitUserMin min:required) {
+			result.add(dataGetter.getSpecificGitUser(min));
+		}
+		return result;
 	}
 	
 	public GeneralGetterDefault() {

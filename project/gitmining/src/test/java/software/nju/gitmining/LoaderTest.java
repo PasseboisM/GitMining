@@ -1,6 +1,5 @@
 package software.nju.gitmining;
 
-import static org.junit.Assert.*;
 import logic.data.MinInfoManager;
 import logic.service.Loader;
 
