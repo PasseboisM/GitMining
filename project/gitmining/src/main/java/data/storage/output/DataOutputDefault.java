@@ -249,7 +249,14 @@ public class DataOutputDefault implements DataStorageOutput {
 						String s = br.readLine();
 						
 						T partial = (T) gson.fromJson(s, getBeans(objectiveType));
-						result.add(partial);
+						
+						//TODO 尽快将系统中大范围修改为Checkable，避免强制转型
+						Checkable check = (Checkable)partial;
+						if(!check.checkValidity()) {
+							continue;
+						} else {
+							result.add(partial);
+						}
 						
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -295,8 +302,14 @@ public class DataOutputDefault implements DataStorageOutput {
 					String s = br.readLine();
 						
 					T partial = (T) gson.fromJson(s, getBeans(objectiveType));
-					result.add(partial);
-						
+					
+					//TODO 尽快将系统中大范围修改为Checkable，避免强制转型
+					Checkable check = (Checkable)partial;
+					if(!check.checkValidity()) {
+						continue;
+					} else {
+						result.add(partial);
+					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				} finally {
@@ -316,7 +329,6 @@ public class DataOutputDefault implements DataStorageOutput {
 //	 * Wipe out the data with noise. Only used while developing.
 //	 */
 //	private void cleanUserData() {
-//		//TODO
 //		File directory = new File(dir.userRoot());
 //		File[] contents = directory.listFiles();
 //		File[][] splitContents = splitFileArray(contents, OUTPUT_THREAD_NUM);
