@@ -3,10 +3,8 @@ package presentation.component;
 import java.io.IOException;
 
 import common.service.Repository;
-import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -21,7 +19,7 @@ public class RepositoryMinBlock  extends BorderPane{
 	@FXML private Label forksCount;
 	@FXML private Label subscribersCount;
 	private Repository repository;
-	private FakeData fakeData;
+//	private FakeData fakeData;
 	private AnchorPane rightComponentParent;
 	
 	private RepositoryMinBlock(){
@@ -35,27 +33,27 @@ public class RepositoryMinBlock  extends BorderPane{
 		}
 	}
 	
-	public RepositoryMinBlock(AnchorPane rightComponentParent,FakeData fakeData){
+	public RepositoryMinBlock(AnchorPane rightComponentParent,Repository repositoryData){
 		this();
-		this.setComponentText(fakeData);
-		this.fakeData = fakeData;
+		this.setComponentText(repositoryData);
+		this.repository = repositoryData;
 		this.rightComponentParent = rightComponentParent;
 	}
 
-	private void setComponentText(FakeData fakeData) {
-		repoFullName.setText(fakeData.getFull_name());
-		description.setText(fakeData.getDescription());
-		lastUpdated.setText("Last updated : "+fakeData.getUpdated_at());
-		stargazersCount.setText(fakeData.getStargazers_count()+"");
-		forksCount.setText(fakeData.getForks_count()+"");
-		subscribersCount.setText(fakeData.getSubscribers_count()+"");
+	private void setComponentText(Repository repositoryData) {
+		repoFullName.setText(repositoryData.getFull_name());
+		description.setText(repositoryData.getDescription());
+		lastUpdated.setText("Last updated : "+repositoryData.getUpdated_at());
+		stargazersCount.setText(repositoryData.getStargazers_count()+"");
+		forksCount.setText(repositoryData.getForks_count()+"");
+		subscribersCount.setText(repositoryData.getSubscribers_count()+"");
 	}
 	
 	@FXML
 	private void jumpToRepositoryDetails() {
 //		rightComponentParent.getChildren().clear();
 		try {
-			rightComponentParent.getChildren().add(RepoDetailsController.getInstance(rightComponentParent,fakeData));
+			rightComponentParent.getChildren().add(RepoDetailsController.getInstance(rightComponentParent,repository));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
