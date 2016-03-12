@@ -171,6 +171,17 @@ public class RepositorySearchController{
 		pag.setPageCount((repositoriesdatas.size()+9)/10);
 		pag.setPageFactory((Integer pageIndex)->createPage(pageIndex));
 	}
+	
+	private void initialPage(){
+		//除10上取整算法 加9之后再除10
+		pag.setPageCount((repositoriesdatas.size()+9)/10);
+		pag.setPageFactory((Integer pageIndex)->initCreatePage(pageIndex));
+	}
+
+	private ScrollPane initCreatePage(Integer pageIndex) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	private ScrollPane createPage(Integer pageIndex) {
 		ScrollPane pane = new ScrollPane();
