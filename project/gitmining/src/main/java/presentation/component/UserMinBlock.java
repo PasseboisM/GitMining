@@ -25,20 +25,20 @@ public class UserMinBlock extends BorderPane{
 		}
 	}
 	
-	public UserMinBlock(AnchorPane rightComponentParent,FakeDataUser fakeData){
+	public UserMinBlock(AnchorPane rightComponentParent,GitUser fakeData){
 		this();
 		this.setComponentText(fakeData);
-		this.fakeData = fakeData;
+		this.user = fakeData;
 		this.rightComponentParent = rightComponentParent;
 	}
 
-	private void setComponentText(FakeDataUser fakeData) {
-		userName.setText(fakeData.getLogin());
-		userLocation.setText(fakeData.getLocation());
-		lastUpdated.setText(fakeData.getUpdated_at());
-		followers.setText(fakeData.getFollowers()+"");
-		following.setText(fakeData.getFollowing()+"");
-		repos.setText(fakeData.getPublic_repos()+"");
+	private void setComponentText(GitUser userData) {
+		userName.setText(userData.getName());
+		userLocation.setText(userData.getLocation());
+		lastUpdated.setText(userData.getUpdated_at());
+		followers.setText(userData.getFollowers()+"");
+		following.setText(userData.getFollowing()+"");
+		repos.setText(userData.getPublic_repos()+"");
 	}
 	@FXML private Hyperlink userName;
 	@FXML private Label userLocation;
@@ -48,12 +48,12 @@ public class UserMinBlock extends BorderPane{
 	@FXML private Label repos;
 	
 	private GitUser user;
-	private FakeDataUser fakeData;
+	
 	private AnchorPane rightComponentParent;
 	@FXML
 	private void jumpToUserDetails() {
 		try {
-			rightComponentParent.getChildren().add(UserDetailsController.getInstance(rightComponentParent,fakeData));
+			rightComponentParent.getChildren().add(UserDetailsController.getInstance(rightComponentParent,user));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
