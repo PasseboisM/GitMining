@@ -54,7 +54,6 @@ public class SearchServiceDefault implements SearchService {
 				matched.add(min);
 			}
 		}
-		
 		// TODO try with multi-threads
 		for(GitUserMin matches:matched) {
 			result.add(dataGetter.getSpecificGitUser(matches));

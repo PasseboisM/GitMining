@@ -54,6 +54,7 @@ public class UserMinBlock extends BorderPane{
 	private void jumpToUserDetails() {
 		try {
 			rightComponentParent.getChildren().add(UserDetailsController.getInstance(rightComponentParent,user));
+			System.out.println(user.getLogin());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

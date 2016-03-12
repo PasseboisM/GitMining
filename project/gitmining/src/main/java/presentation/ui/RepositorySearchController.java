@@ -52,47 +52,33 @@ public class RepositorySearchController{
 	private List<CheckBox> languageCheckBoxes;
 	private AnchorPane rightComponentParent;
 	final ToggleGroup Group = new ToggleGroup();
-	private RepoSortStadard sortStadard;
-	private SearchService searchService;
+	
 	private List<Repository> repositoriesdatas;
 	
 	private LogicServiceFactory logicServiceFactory;
 	private GeneralGetter generalGetter;
+	private SearchService searchService;
 	
 	private Language[] langs;
 	private Category[] cates;
 	private String[]  keywords = {""}; 
+	private RepoSortStadard sortStadard;
 	
 	@FXML
 	private void changeSortStrategy(ActionEvent event) {
 		ToggleButton button = (ToggleButton) event.getSource();
 		sortStadard=RepoSortStadard.values()[Group.getToggles().indexOf(button)];
-		initPage();
+		refreshPage();
 	}
 	
 	@FXML
 	private void onSearch(ActionEvent event) {
 		String key=keyword.getText();
 		keywords = key.trim().split(" ");
-//		System.out.println(key.equals("")); is true
 		refreshLanguages(Language.values());
 		refreshCategories(Category.values());
-		
-		initPage();
+		refreshPage();
 	}
-	
-	/*public static void main(String[] args) {
-		for (String string : "oiu             uuu       ii".split(" ")) {
-			System.out.println(string.equals(""));
-		}
-//		for (String string : " ".split(" ")) {
-//			System.out.println(string.equals(""));
-//		}
-//		System.out.println("".split(" ").length);
-//		System.out.println(" ".split(" ").length);
-		
-//		System.out.println("oiu             uuu       ii");
-	}*/
 	
 	
 	private void initial(AnchorPane rightComponentParent) {
@@ -101,15 +87,13 @@ public class RepositorySearchController{
 		initialToggleButtonGroup();
 		initialSearchService();
 		this.rightComponentParent = rightComponentParent;
-		
-		initPage();
+		refreshPage();
 	}
 
 	private void initialSearchService() {
 		this.logicServiceFactory = LogicServiceFactory.getInstance();
 		this.generalGetter = logicServiceFactory.getGeneralGetter();
 		this.searchService = logicServiceFactory.getSearchService();
-		
 	}
 
 	private void initialToggleButtonGroup() {
@@ -168,8 +152,14 @@ public class RepositorySearchController{
 		cates = categoriesList.toArray(cates);
 	}
 	
-	private void initPage() {
+	private void refreshPage() {
 		RepositorySearchParam repoSearchParam = new RepositorySearchParam(langs, cates, keywords);
+//		for (Category category : cates) {
+//			System.out.println(category.getName());
+//		}
+//		for (Language language : langs) {
+//			System.out.println(language.getName());
+//		}
 		try {
 			this.repositoriesdatas = searchService.searchRepository(repoSearchParam);
 		} catch (NetworkException e) {
@@ -178,7 +168,6 @@ public class RepositorySearchController{
 			e.printStackTrace();
 		}
 		//除10上取整算法 加9之后再除10
-		System.out.println(repositoriesdatas.size());
 		pag.setPageCount((repositoriesdatas.size()+9)/10);
 		pag.setPageFactory((Integer pageIndex)->createPage(pageIndex));
 	}
@@ -205,7 +194,5 @@ public class RepositorySearchController{
 		pane.setContent(vBox);
 		return pane;
 	}
-	
-
 	
 }

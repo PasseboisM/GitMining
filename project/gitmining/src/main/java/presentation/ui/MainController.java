@@ -44,7 +44,7 @@ public class MainController extends Application implements Observer{
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
 		primaryStage.show();
-//		Loader.getInstance().addObserver(this);
+		Loader.getInstance().addObserver(this);
 	}
 
 	private void initial() {
@@ -134,12 +134,16 @@ public class MainController extends Application implements Observer{
 		LoadProgress loadProgress = Loader.getProgress();
 		if (loadProgress.getLoadedRepoNum()>50) {
 			this.ableToGetData = true;
-			System.out.println("Now able to get data.");
 		}
-		System.out.println(loadProgress.getLoadedRepoNum());
-		System.out.println(progressBar);
+//		progressBar.setProgress(1.0*loadProgress.getLoadedRepoNum()/loadProgress.getTotalRepoNum());
+//		if (this.progressBar == null) {
+//			progressBar = new ProgressBar();
+//			progressBar.setPrefWidth(152.0);
+//			progressBar.setPrefHeight(11.0);
+//		}
+//		progressBar.setProgress(1.0*loadProgress.getLoadedRepoNum()/loadProgress.getTotalRepoNum());
+//		System.out.println(progressBar.getLayoutX()+"           "+progressBar.getLayoutY());
 	}
-
 	@Override
 	public void update(Observable observable, Object obj) {
 		update();
