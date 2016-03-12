@@ -34,13 +34,12 @@ public class RepositorySearchController{
 		FXMLLoader loader = new FXMLLoader(RepositorySearchController.class.getResource("repositorySearch.fxml"));
 		VBox rootUINode = loader.load();
 		RepositorySearchController controller = loader.getController();
-//		List<Repository> datas = controller.getList();
 		controller.initial(rightComponentParent);
 		return rootUINode;
 	}
 
 	@FXML	private Button search;
-	@FXML   private ToggleButton  noSort,starSort,forkSort,contributorSort;
+	@FXML   private ToggleButton  noSort,starSort,forkSort;
 	@FXML	private FlowPane flowPaneCategory;
 	@FXML	private FlowPane flowPaneLanguage;
 	@FXML	private VBox repoVBox;
@@ -49,19 +48,29 @@ public class RepositorySearchController{
 	
 	private List<CheckBox> categoryCheckBoxes;
 	private List<CheckBox> languageCheckBoxes;
-//	private List<Repository> repoDatas;
 	private AnchorPane rightComponentParent;
 	final ToggleGroup Group = new ToggleGroup();
+	private RepoSortStadard sortStadard;
 	
 	private LogicServiceFactory logicServiceFactory;
 	private GeneralGetter generalGetter;
 	
-
+	@FXML
+	private void changeSortStrategy(ActionEvent event) {
+		ToggleButton button = (ToggleButton) event.getSource();
+		sortStadard=RepoSortStadard.values()[Group.getToggles().indexOf(button)];
+		initPage();
+	}
 	
 	@FXML
 	private void onSearch(ActionEvent event) {
 		String key=keyword.getText();
 		System.out.println("The Search For "+key+" in Repository");
+		
+		
+//		for (RepoSortStadard repoSortStadard : RepoSortStadard.values()) {
+//			System.out.println(repoSortStadard);
+//		}
 	}
 	
 	@FXML
@@ -91,16 +100,15 @@ public class RepositorySearchController{
 		this.logicServiceFactory = LogicServiceFactory.getInstance();
 		this.generalGetter = logicServiceFactory.getGeneralGetter();
 		this.rightComponentParent = rightComponentParent;
-//		this.repoDatas = datas;
 		initPage();
 	}
 
 	private void initialToggleButtonGroup() {
 		noSort.setToggleGroup(Group);
 		noSort.setSelected(true);
+		sortStadard = RepoSortStadard.NO_SORT;
 		starSort.setToggleGroup(Group);
 		forkSort.setToggleGroup(Group);
-		contributorSort.setToggleGroup(Group);
 	}
 	
 	private void initialLanguageCheckBoxes() {
@@ -124,20 +132,12 @@ public class RepositorySearchController{
 		}
 		flowPaneCategory.getChildren().addAll(categoryCheckBoxes);
 	}
-	/*
-	private List<Repository> getList(){
-		List<Repository> list = new ArrayList<Repository>();
-//		for (int i = 0; i < 5000; i++) {
-//			list.add(new Repository("a"+i+"/b"+i, "description of fake data", "2015-9-8", 58, i+95, 62,"git://github.com/rubinius/rubinius.git"));
-//		}
-//		return list;
-		return list;
-	}*/
 	
 	private void initPage() {
 		//除10上取整算法 加9之后再除10
 		pag.setPageCount((generalGetter.getNumOfRepositories()+9)/10);
 		pag.setPageFactory((Integer pageIndex)->createPage(pageIndex));
+		
 	}
 
 	private ScrollPane createPage(Integer pageIndex) {
@@ -145,18 +145,14 @@ public class RepositorySearchController{
 		VBox vBox = new VBox();
 		vBox.setPrefWidth(1010);
 		int numPerPage = 10;
-		
-		
 		List<Repository> listPerPage = null;
 		try {
-			listPerPage = generalGetter.getRepositories(pageIndex+1, numPerPage, RepoSortStadard.NO_SORT);
+			listPerPage = generalGetter.getRepositories(pageIndex+1, numPerPage, sortStadard);
 		} catch (NetworkException e) {
 			e.printStackTrace();
 		} catch (DataCorruptedException e) {
 			e.printStackTrace();
 		}
-		
-		
 		
 		for (int i = 0; i < numPerPage; i++) {
 			vBox.getChildren().add(new RepositoryMinBlock(rightComponentParent, listPerPage.get(i)));
