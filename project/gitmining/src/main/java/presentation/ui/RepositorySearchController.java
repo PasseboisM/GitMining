@@ -14,6 +14,8 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
@@ -33,7 +35,8 @@ public class RepositorySearchController{
 		return rootUINode;
 	}
 
-	@FXML	private Button search,noSort,starSort,forkSort,contributorSort;
+	@FXML	private Button search;
+	@FXML   private ToggleButton  noSort,starSort,forkSort,contributorSort;
 	@FXML	private FlowPane flowPaneCategory;
 	@FXML	private FlowPane flowPaneLanguage;
 	@FXML	private VBox repoVBox;
@@ -44,6 +47,10 @@ public class RepositorySearchController{
 	private List<CheckBox> languageCheckBoxes;
 	private List<FakeData> fakeDatas;
 	private AnchorPane rightComponentParent;
+	
+	final ToggleGroup Group = new ToggleGroup();
+	
+
 	
 	@FXML
 	private void onSearch(ActionEvent event) {
@@ -74,8 +81,17 @@ public class RepositorySearchController{
 	private void initial(AnchorPane rightComponentParent,List<FakeData> datas) {
 		initialCategoryCheckBoxes();
 		initialLanguageCheckBoxes();
+		initialToggleButtonGroup();
 		this.rightComponentParent = rightComponentParent;
 		this.fakeDatas = datas;
+	}
+
+	private void initialToggleButtonGroup() {
+		noSort.setToggleGroup(Group);
+		noSort.setSelected(true);
+		starSort.setToggleGroup(Group);
+		forkSort.setToggleGroup(Group);
+		contributorSort.setToggleGroup(Group);
 	}
 	
 	private void initialLanguageCheckBoxes() {
