@@ -1,9 +1,12 @@
 package presentation.ui;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import common.enumeration.sort_standard.UserSortSandard;
+import common.exception.DataCorruptedException;
+import common.exception.NetworkException;
 import common.service.GitUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,7 +27,7 @@ public class UserSearchController {
 		FXMLLoader loader = new FXMLLoader(UserSearchController.class.getResource("userSearch.fxml"));
 		AnchorPane pane = loader.load();
 		UserSearchController controller = loader.getController();
-//		List<GitUser> datas = controller.
+//		List<GitUser> datas = controller.getList();
 		controller.initial(rightComponentParent);
 		controller.initialPage();
 		return pane;
@@ -35,12 +38,15 @@ public class UserSearchController {
 		this.rightComponentParent = rightComponentParent;
 		this.logicServiceFactory = LogicServiceFactory.getInstance();
 		this.generalGetter = logicServiceFactory.getGeneralGetter();
+		
 	}
 	
 	private void initialPage(){
 		//除10上取整算法 加9之后再除10
+		
 		pag.setPageCount((generalGetter.getNumOfUsers() + 9) / 10);
 		pag.setPageFactory((Integer pageIndex)->createPage(pageIndex));
+		
 	}
 	
 	private ScrollPane createPage(Integer pageIndex) {
@@ -49,8 +55,13 @@ public class UserSearchController {
 		vBox.setPrefWidth(1010);
 		int numPerPage = 10;
 		List<GitUser> userPerPage = null;
-		userPerPage = generalGetter.getUsers(pageIndex+1, numPerPage, UserSortSandard.NO_SORT);
-		System.out.println(userPerPage);
+		try {
+			userPerPage = generalGetter.getUsers(pageIndex+1, numPerPage, UserSortSandard.NO_SORT);
+		} catch (NetworkException | DataCorruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//System.out.println(userPerPage);
 		for (int i = 0; i < 10; i++) {
 //			if (pageIndex*10+i<datas.size()) {
 //				vBox.getChildren()
@@ -69,7 +80,7 @@ public class UserSearchController {
 	@FXML	private Button search;
 	
 	
-//	private List<GitUser> datas;
+	private List<GitUser> datas;
 	private AnchorPane rightComponentParent;
 	
 	private LogicServiceFactory logicServiceFactory;
