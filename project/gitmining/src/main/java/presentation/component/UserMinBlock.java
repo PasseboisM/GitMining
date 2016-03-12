@@ -25,14 +25,14 @@ public class UserMinBlock extends BorderPane{
 		}
 	}
 	
-	public UserMinBlock(AnchorPane rightComponentParent,FakeDataUser fakeData){
+	public UserMinBlock(AnchorPane rightComponentParent,GitUser fakeData){
 		this();
 		this.setComponentText(fakeData);
-		this.fakeData = fakeData;
+		this.user = fakeData;
 		this.rightComponentParent = rightComponentParent;
 	}
 
-	private void setComponentText(FakeDataUser fakeData) {
+	private void setComponentText(GitUser fakeData) {
 		userName.setText(fakeData.getLogin());
 		userLocation.setText(fakeData.getLocation());
 		lastUpdated.setText(fakeData.getUpdated_at());
@@ -48,12 +48,12 @@ public class UserMinBlock extends BorderPane{
 	@FXML private Label repos;
 	
 	private GitUser user;
-	private FakeDataUser fakeData;
+	
 	private AnchorPane rightComponentParent;
 	@FXML
 	private void jumpToUserDetails() {
 		try {
-			rightComponentParent.getChildren().add(UserDetailsController.getInstance(rightComponentParent,fakeData));
+			rightComponentParent.getChildren().add(UserDetailsController.getInstance(rightComponentParent,user));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
