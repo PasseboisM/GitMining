@@ -44,7 +44,6 @@ public class MainController extends Application implements Observer{
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
 		primaryStage.show();
-		Loader.getInstance().addObserver(this);
 	}
 
 	private void initial() {

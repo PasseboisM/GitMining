@@ -84,7 +84,6 @@
                               </TitledPane>
                           </panes>
                         </Accordion>
-                        <ProgressBar fx:id="progressBar" prefHeight="11.0" prefWidth="152.0" progress="0.55" />
                      </children>
                   </FlowPane>
                   <AnchorPane fx:id="rightComponentParent" prefHeight="200.0" prefWidth="1050.0" />

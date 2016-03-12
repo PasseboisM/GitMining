@@ -61,7 +61,7 @@ public class RepositorySearchController{
 	
 	private Language[] langs;
 	private Category[] cates;
-	private String[]  keywords = {""}; 
+	private String[]  keywords = {}; 
 	private RepoSortStadard sortStadard;
 	
 	@FXML
