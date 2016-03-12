@@ -6,6 +6,8 @@ import java.util.List;
 import common.enumeration.sort_standard.UserSortSandard;
 import common.exception.DataCorruptedException;
 import common.exception.NetworkException;
+import common.param_obj.RepositorySearchParam;
+import common.param_obj.UserSearchParam;
 import common.service.GitUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,6 +20,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import logic.service.GeneralGetter;
 import logic.service.LogicServiceFactory;
+import logic.service.SearchService;
 import presentation.component.UserMinBlock;
 
 public class UserSearchController {
@@ -36,14 +39,27 @@ public class UserSearchController {
 	private void initial(AnchorPane rightComponentParent) {
 		this.rightComponentParent = rightComponentParent;
 		this.logicServiceFactory = LogicServiceFactory.getInstance();
-		this.generalGetter = logicServiceFactory.getGeneralGetter();
 		
+		initialSearchService();
+		initialPage();
 	}
 	
 	private void initialPage(){
 		//除10上取整算法 加9之后再除10
-		
-		pag.setPageCount((generalGetter.getNumOfUsers() + 9) / 10);
+		UserSearchParam userSearchParam = new UserSearchParam(keyword);
+	//	System.out.println(keywords);
+		try {
+			this.datas = searchService.searchUser(userSearchParam);
+		//	System.out.println(keywords.length());
+		} catch (NetworkException e) {
+			System.out.println("network!");
+			e.printStackTrace();
+		} catch (DataCorruptedException e) {
+			System.out.println("dataCorrupted");
+			e.printStackTrace();
+		}
+	//	System.out.println(datas.size());
+		pag.setPageCount((datas.size() + 9) / 10);
 		pag.setPageFactory((Integer pageIndex)->createPage(pageIndex));
 		
 	}
@@ -53,21 +69,14 @@ public class UserSearchController {
 		VBox vBox = new VBox();
 		vBox.setPrefWidth(1010);
 		int numPerPage = 10;
-		List<GitUser> userPerPage = null;
-		try {
-			userPerPage = generalGetter.getUsers(pageIndex+1, numPerPage, UserSortSandard.NO_SORT);
-		} catch (NetworkException | DataCorruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		//System.out.println(userPerPage);
+
 		for (int i = 0; i < 10; i++) {
 //			if (pageIndex*10+i<datas.size()) {
 //				vBox.getChildren()
 //						.add(new UserMinBlock(rightComponentParent, datas.get(pageIndex * 10 + i)));
 //			}
-			vBox
-			.getChildren().add(new UserMinBlock(rightComponentParent,userPerPage.get(i)));
+			vBox.getChildren()
+			.add(new UserMinBlock(rightComponentParent,datas.get(numPerPage * pageIndex + i)));
 		}
 		pane.setContent(vBox);
 		return pane;
@@ -81,14 +90,23 @@ public class UserSearchController {
 	
 	private List<GitUser> datas;
 	private AnchorPane rightComponentParent;
-	
+	private String  keyword = ""; 
 	private LogicServiceFactory logicServiceFactory;
-	private GeneralGetter generalGetter;
+
+	private SearchService searchService;
 	
 	@FXML
 	private void onSearch(ActionEvent event) {
 		String key=vagename.getText();
-		System.out.println("The Search For "+key+" in Users");
+		keyword = key;
+//		System.out.println(keyword);
+		initialPage();
+	}
+	private void initialSearchService() {
+		this.logicServiceFactory = LogicServiceFactory.getInstance();
+	
+		this.searchService = logicServiceFactory.getSearchService();
+		
 	}
 	
 //	private List<GitUser> getList(){

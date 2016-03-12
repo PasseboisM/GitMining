@@ -2,13 +2,14 @@ package common.service;
 
 import common.enumeration.attribute.Category;
 import common.enumeration.attribute.Language;
+import common.util.Checkable;
 
 /**
  * 
  * @author xjh14
  * 可常驻内存的Repository数据索引
  */
-public interface RepositoryMin {
+public interface RepositoryMin extends Checkable{
 
 	public int getId();
 

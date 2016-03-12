@@ -14,7 +14,7 @@
             <HBox alignment="CENTER_LEFT" prefHeight="85.0" prefWidth="950.0" />
             <HBox prefHeight="50.0" prefWidth="950.0">
                <children>
-                  <Label fx:id="labelName" prefHeight="47.0" prefWidth="103.0">
+                  <Label fx:id="labelName" prefHeight="47.0" prefWidth="450.0" >
                      <font>
                         <Font size="36.0" />
                      </font>
@@ -22,7 +22,7 @@
                         <Insets left="50.0" />
                      </HBox.margin>
                   </Label>
-                  <Label fx:id="labelId" prefHeight="33.0" prefWidth="127.0" textFill="#6b6b6b">
+                  <Label fx:id="labelId" prefHeight="33.0" prefWidth="254.0" textFill="#6b6b6b" >
                      <font>
                         <Font size="25.0" />
                      </font>

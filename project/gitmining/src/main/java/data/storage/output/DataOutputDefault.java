@@ -26,6 +26,7 @@ import common.service.GitUser;
 import common.service.GitUserMin;
 import common.service.Repository;
 import common.service.RepositoryMin;
+import common.util.Checkable;
 import common.util.MultiSourceSwitch;
 import common.util.ObjChannel;
 import data.storage.directory.DirectoryMakerDefault;
@@ -311,6 +312,97 @@ public class DataOutputDefault implements DataStorageOutput {
 		}
 	}
 	
+//	/**
+//	 * Wipe out the data with noise. Only used while developing.
+//	 */
+//	private void cleanUserData() {
+//		//TODO
+//		File directory = new File(dir.userRoot());
+//		File[] contents = directory.listFiles();
+//		File[][] splitContents = splitFileArray(contents, OUTPUT_THREAD_NUM);
+//		
+//		ObjChannel<File> fileChan = new ObjChannelWithBlockingQueue<>();
+//		PureDataTransFilter[] transfers = new PureDataTransFilter[OUTPUT_THREAD_NUM];
+//		MultiSourceSwitch<File> fileSwitch = new BasicSourceSwitch<>(fileChan);
+//		for(int i=0;i<OUTPUT_THREAD_NUM;i++) {
+//			transfers[i] = new PureDataTransFilter<File>(Arrays.asList(splitContents[i]), fileSwitch);
+//		}
+//		execute(transfers);
+//		
+//
+//		ObjChannel<GitUser> minInfoChan = new ObjChannelWithBlockingQueue<>();
+//		JSONFileCleanerFilter[] deserializers = new JSONFileCleanerFilter[OUTPUT_THREAD_NUM];
+//		MultiSourceSwitch<GitUser> minInfoSwitch = new BasicSourceSwitch<>(minInfoChan);
+//		for(int i=0;i<OUTPUT_THREAD_NUM;i++) {
+//			deserializers[i] = new JSONFileCleanerFilter<GitUser>
+//				(fileChan, minInfoSwitch, 20, GitUser.class);
+//		}
+//		execute(deserializers);
+//		
+//	}
+//	
+//	private static volatile int totalCleaned = 0;
+//	
+//	/**
+//	 * Read the provided JSON files and convert to objective object.
+//	 * @author xjh14
+//	 *
+//	 * @param <T>
+//	 */
+//	class JSONFileCleanerFilter<T> extends GeneralProcessFilter<File, T> {
+//
+//		
+//		
+//		Class<T> objectiveType = null;
+//		FileReader fr = null;
+//		BufferedReader br = null;
+//		
+//		public JSONFileCleanerFilter(ObjChannel<File> contents,
+//				MultiSourceSwitch<T> output, int page, Class<T> objective) {
+//			super(contents, output, page);
+//			this.objectiveType = objective;
+//		}
+//
+//		@Override
+//		public List<T> process(List<File> get) {
+//			List<T> result = new ArrayList<>(page);
+//			for(File content:get) {
+//				try {
+//					fr = new FileReader(content);
+//					br = new BufferedReader(fr);
+//					String s = br.readLine();
+//						
+//					T partial = (T) gson.fromJson(s, getBeans(objectiveType));
+//					Checkable check = (Checkable) partial;
+//					if(check==null) System.out.println(content.getAbsolutePath());
+//					if(!check.checkValidity()) {
+//						try {
+//							br.close();
+//							fr.close();
+//						} catch (IOException e) {
+//							e.printStackTrace();
+//						}
+//						totalCleaned ++ ;
+//						System.out.println("Deleting "+totalCleaned);
+//						System.out.println(partial);
+//						content.delete();
+//					} else {
+//						result.add(partial);
+//					}
+//					
+//						
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				} finally {
+//					
+//				}
+//			}
+//			return result;
+//		}
+//	}
+//	
+	
+	
 	/**
 	 * 代码耦合！尽快移除
 	 * @param imp
@@ -335,4 +427,90 @@ public class DataOutputDefault implements DataStorageOutput {
 		//TODO 真正实现
 		return 3086;
 	}
+//	
+//	public void cleanRepo() {
+//		File root = new File(dir.repositoryRoot());
+//		System.out.println(root);
+//		File[] rootSubs = root.listFiles();
+//		File[][] splitSubs = splitFileArray(rootSubs, OUTPUT_THREAD_NUM);
+//		
+//		//Create a channel transferring file directories.
+//		ObjChannel<File> directoryChan = new ObjChannelWithBlockingQueue<>();
+//		PureDataTransFilter[] directoryTransfer = new PureDataTransFilter[OUTPUT_THREAD_NUM];
+//		MultiSourceSwitch<File> directorySwitch = new BasicSourceSwitch<>(directoryChan);
+//		for(int i=0;i<OUTPUT_THREAD_NUM;i++) {
+//			directoryTransfer[i] = new PureDataTransFilter<File>(Arrays.asList(splitSubs[i]), directorySwitch);
+//		}
+//		execute(directoryTransfer);
+//		
+//		ObjChannel<Repository> minInfoChan = new ObjChannelWithBlockingQueue<>();
+//		JSONFileCleanFilter[] deserializers = new JSONFileCleanFilter[OUTPUT_THREAD_NUM];
+//		MultiSourceSwitch<Repository> minInfoSwitch = new BasicSourceSwitch<>(minInfoChan);
+//		for(int i=0;i<OUTPUT_THREAD_NUM;i++) {
+//			deserializers[i] = new JSONFileCleanFilter<Repository>
+//				(directoryChan, minInfoSwitch, 20, Repository.class);
+//		}
+//		execute(deserializers);
+//		
+//	}
+//	
+//	private static volatile int totalCleaned = 0;
+//	
+//	class JSONFileCleanFilter<T> extends GeneralProcessFilter<File, T> {
+//
+//		Class<T> objectiveType = null;
+//		FileReader fr = null;
+//		BufferedReader br = null;
+//		
+//		public JSONFileCleanFilter(ObjChannel<File> directories,
+//				MultiSourceSwitch<T> output, int page, Class<T> objective) {
+//			super(directories, output, page);
+//			this.objectiveType = objective;
+//		}
+//
+//		@Override
+//		public List<T> process(List<File> get) {
+//			List<T> result = new ArrayList<>(page);
+//			for(File dir:get) {
+//				File[] files = dir.listFiles();
+//				for(File content:files) {
+//					try {
+//						fr = new FileReader(content);
+//						br = new BufferedReader(fr);
+//						String s = br.readLine();
+//						
+//						T partial = (T) gson.fromJson(s, getBeans(objectiveType));
+//						Checkable check = (Checkable) partial;
+//						
+//						if((check==null)||(!check.checkValidity())) {
+//							try {
+//								br.close();
+//								fr.close();
+//							} catch (IOException e) {
+//								e.printStackTrace();
+//							}
+//							totalCleaned ++;
+//							System.out.println("Deleting "+totalCleaned);
+//							System.out.println(partial);
+//							content.delete();
+//						} else {
+//							result.add(partial);
+//						}
+//
+//					} catch (Exception e) {
+//						e.printStackTrace();
+//					}
+//				}
+//			}
+//			return result;
+//		}
+//	}
+//	
+//	
+//	
+//	
+//	public static void main(String[] args) {
+//		DataOutputDefault data = new DataOutputDefault();
+//		data.cleanRepo();
+//	}
 }
