@@ -17,6 +17,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import logic.service.GeneralGetter;
 import logic.service.LogicServiceFactory;
 import logic.service.SearchService;
 import presentation.component.UserMinBlock;
@@ -27,54 +28,70 @@ public class UserSearchController {
 		FXMLLoader loader = new FXMLLoader(UserSearchController.class.getResource("userSearch.fxml"));
 		AnchorPane pane = loader.load();
 		UserSearchController controller = loader.getController();
-//		List<GitUser> datas = controller.getList();
 		controller.initial(rightComponentParent);
-		controller.initialPage();
 		return pane;
 	}
 	
 	
 	private void initial(AnchorPane rightComponentParent) {
 		this.rightComponentParent = rightComponentParent;
-		this.logicServiceFactory = LogicServiceFactory.getInstance();
-		
 		initialSearchService();
 		initialPage();
 	}
 	
-	private void initialPage(){
+	private void refreshPage(){
 		//除10上取整算法 加9之后再除10
 		UserSearchParam userSearchParam = new UserSearchParam(keyword,UserSortSandard.NO_SORT);
-	//	System.out.println(keywords);
 		try {
 			this.datas = searchService.searchUser(userSearchParam);
-		//	System.out.println(keywords.length());
 		} catch (NetworkException e) {
-			System.out.println("network!");
 			e.printStackTrace();
 		} catch (DataCorruptedException e) {
-			System.out.println("dataCorrupted");
 			e.printStackTrace();
 		}
-	//	System.out.println(datas.size());
 		pag.setPageCount((datas.size() + 9) / 10);
 		pag.setPageFactory((Integer pageIndex)->createPage(pageIndex));
-		
 	}
 	
+	private void initialPage(){
+		pag.setPageCount((generalGetter.getNumOfUsers() + 9) / 10);
+		pag.setPageFactory((Integer pageIndex)->initialCreatePage(pageIndex));
+	}
+	
+	private ScrollPane initialCreatePage(Integer pageIndex) {
+		ScrollPane pane = new ScrollPane();
+		VBox vBox = new VBox();
+		vBox.setPrefWidth(1010);
+		int numPerPage = 10;
+		
+		List<GitUser> gitUserPerPage = null;
+		try {
+			gitUserPerPage = generalGetter.getUsers(pageIndex+1, numPerPage, UserSortSandard.NO_SORT);
+		} catch (NetworkException e) {
+			e.printStackTrace();
+		} catch (DataCorruptedException e) {
+			e.printStackTrace();
+		}
+		for (GitUser gitUser : gitUserPerPage) {
+			vBox.getChildren().add(new UserMinBlock(rightComponentParent, gitUser));
+		}
+		
+		pane.setContent(vBox);
+		return pane;
+	}
+
+
 	private ScrollPane createPage(Integer pageIndex) {
 		ScrollPane pane = new ScrollPane();
 		VBox vBox = new VBox();
 		vBox.setPrefWidth(1010);
 		int numPerPage = 10;
 
-		for (int i = 0; i < 10; i++) {
-//			if (pageIndex*10+i<datas.size()) {
-//				vBox.getChildren()
-//						.add(new UserMinBlock(rightComponentParent, datas.get(pageIndex * 10 + i)));
-//			}
-			vBox.getChildren()
-			.add(new UserMinBlock(rightComponentParent,datas.get(numPerPage * pageIndex + i)));
+		for (int i = 0; i < numPerPage; i++) {
+			if (numPerPage * pageIndex + i<datas.size()) {
+				vBox.getChildren()
+						.add(new UserMinBlock(rightComponentParent, datas.get(numPerPage * pageIndex + i)));
+			}
 		}
 		pane.setContent(vBox);
 		return pane;
@@ -90,28 +107,18 @@ public class UserSearchController {
 	private AnchorPane rightComponentParent;
 	private String  keyword = ""; 
 	private LogicServiceFactory logicServiceFactory;
-
 	private SearchService searchService;
+	private GeneralGetter generalGetter;
 	
 	@FXML
 	private void onSearch(ActionEvent event) {
-		String key=vagename.getText();
-		keyword = key;
-//		System.out.println(keyword);
-		initialPage();
+		keyword = vagename.getText();
+		refreshPage();
 	}
 	private void initialSearchService() {
 		this.logicServiceFactory = LogicServiceFactory.getInstance();
-	
 		this.searchService = logicServiceFactory.getSearchService();
-		
+		this.generalGetter = logicServiceFactory.getGeneralGetter();
 	}
 	
-//	private List<GitUser> getList(){
-//		List<GitUser> list = new ArrayList<GitUser>();
-//		for (int i = 0; i <datas.size(); i++) {
-//			list.add(datas.get(i));
-//		}
-//		return list;
-//	}
 }

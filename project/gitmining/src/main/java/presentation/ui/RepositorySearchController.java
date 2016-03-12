@@ -197,14 +197,6 @@ public class RepositorySearchController{
 		VBox vBox = new VBox();
 		vBox.setPrefWidth(1010);
 		int numPerPage = 10;
-//		List<Repository> listPerPage = null;
-//		try {
-//			listPerPage = generalGetter.getRepositories(pageIndex+1, numPerPage, sortStadard);
-//		} catch (NetworkException e) {
-//			e.printStackTrace();
-//		} catch (DataCorruptedException e) {
-//			e.printStackTrace();
-//		}
 		for (int i = 0; i < numPerPage; i++) {
 			if (numPerPage * pageIndex + i<repositoriesdatas.size()) {
 				vBox.getChildren().add(new RepositoryMinBlock(rightComponentParent,
