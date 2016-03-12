@@ -40,28 +40,40 @@ public class RepositorySearchParam {
 		
 		int matchCount = 0;
 		
+		boolean languageMatched = false;
+		
 		for(Language lang:langs) {
 			if(lang==minInfo.getMainLanguage()) {
 				matchCount += 5;
+				languageMatched = true;
+				break;
+			} else if(lang==Language.ALL) {
+				languageMatched = true;
 				break;
 			}
 		}
 		
-		for(Category cate:cates) {
-			for(Category minCate:minInfo.getCategories()) {
-				if(cate==minCate) {
-					matchCount++;
-					break;
-				}
-			}
-		}
-		
+//		for(Category cate:cates) {
+//			for(Category minCate:minInfo.getCategories()) {
+//				if(cate==minCate) {
+//					matchCount++;
+//					break;
+//				}
+//			}
+//		}
+		boolean keywordMatched = false;
 		for(String keyword:keywords) {
 			if(minInfo.getFull_name().contains(keyword)&&(!keyword.equals(""))) {
 				matchCount += 10;
+				keywordMatched = true;
+			} else if(keyword.equals("")) {
+				keywordMatched = true;
 			}
 		}
+
+		//If matched, minimum index of matching is 1.
+		boolean matched = languageMatched || keywordMatched;
 		
-		return matchCount;
+		return matched? Math.max(1,matchCount):matchCount;
 	}
 }
