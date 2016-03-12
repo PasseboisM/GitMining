@@ -87,7 +87,7 @@ public class RepositorySearchController{
 		initialToggleButtonGroup();
 		initialSearchService();
 		this.rightComponentParent = rightComponentParent;
-		refreshPage();
+		initialPage();
 	}
 
 	private void initialSearchService() {
@@ -154,12 +154,6 @@ public class RepositorySearchController{
 	
 	private void refreshPage() {
 		RepositorySearchParam repoSearchParam = new RepositorySearchParam(langs, cates, keywords,sortStadard);
-//		for (Category category : cates) {
-//			System.out.println(category.getName());
-//		}
-//		for (Language language : langs) {
-//			System.out.println(language.getName());
-//		}
 		try {
 			this.repositoriesdatas = searchService.searchRepository(repoSearchParam);
 		} catch (NetworkException e) {
@@ -174,13 +168,28 @@ public class RepositorySearchController{
 	
 	private void initialPage(){
 		//除10上取整算法 加9之后再除10
-		pag.setPageCount((repositoriesdatas.size()+9)/10);
+		pag.setPageCount((generalGetter.getNumOfRepositories()+9)/10);
 		pag.setPageFactory((Integer pageIndex)->initCreatePage(pageIndex));
 	}
 
 	private ScrollPane initCreatePage(Integer pageIndex) {
-		// TODO Auto-generated method stub
-		return null;
+		ScrollPane pane = new ScrollPane();
+		VBox vBox = new VBox();
+		vBox.setPrefWidth(1010);
+		int numPerPage = 10;
+		List<Repository> listPerPage = null;
+		try {
+			listPerPage = generalGetter.getRepositories(pageIndex+1, numPerPage, sortStadard);
+		} catch (NetworkException e) {
+			e.printStackTrace();
+		} catch (DataCorruptedException e) {
+			e.printStackTrace();
+		}
+		for (Repository repository : listPerPage) {
+			vBox.getChildren().add(new RepositoryMinBlock(rightComponentParent,repository));
+		}
+		pane.setContent(vBox);
+		return pane;
 	}
 
 	private ScrollPane createPage(Integer pageIndex) {
