@@ -6,7 +6,6 @@ import java.util.List;
 import common.enumeration.sort_standard.UserSortSandard;
 import common.exception.DataCorruptedException;
 import common.exception.NetworkException;
-import common.param_obj.RepositorySearchParam;
 import common.param_obj.UserSearchParam;
 import common.service.GitUser;
 import javafx.event.ActionEvent;
@@ -18,7 +17,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import logic.service.GeneralGetter;
 import logic.service.LogicServiceFactory;
 import logic.service.SearchService;
 import presentation.component.UserMinBlock;
@@ -46,7 +44,7 @@ public class UserSearchController {
 	
 	private void initialPage(){
 		//除10上取整算法 加9之后再除10
-		UserSearchParam userSearchParam = new UserSearchParam(keyword);
+		UserSearchParam userSearchParam = new UserSearchParam(keyword,UserSortSandard.NO_SORT);
 	//	System.out.println(keywords);
 		try {
 			this.datas = searchService.searchUser(userSearchParam);

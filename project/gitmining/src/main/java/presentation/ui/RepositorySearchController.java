@@ -153,7 +153,7 @@ public class RepositorySearchController{
 	}
 	
 	private void refreshPage() {
-		RepositorySearchParam repoSearchParam = new RepositorySearchParam(langs, cates, keywords);
+		RepositorySearchParam repoSearchParam = new RepositorySearchParam(langs, cates, keywords,sortStadard);
 //		for (Category category : cates) {
 //			System.out.println(category.getName());
 //		}
