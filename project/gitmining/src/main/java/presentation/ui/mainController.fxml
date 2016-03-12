@@ -80,10 +80,12 @@
                                           <Insets bottom="0" left="0" right="0" top="0" />
                                        </padding>
                                        <children>
+                                          <ProgressBar fx:id="progressBar" prefHeight="27.0" prefWidth="152.0" progress="0.0" />
+                                          <Label text="网络设置" />
                                           <HBox prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <ToggleButton mnemonicParsing="false" prefHeight="27.0" prefWidth="76.0" text="ToggleButton" />
-                                                <ToggleButton mnemonicParsing="false" prefHeight="27.0" prefWidth="74.0" text="ToggleButton" />
+                                                <ToggleButton fx:id="buttonLocalMode" mnemonicParsing="false" onAction="#setOnlineOrLocalMode" prefHeight="27.0" prefWidth="76.0" text="离线模式" />
+                                                <ToggleButton fx:id="buttonOnlineMode" mnemonicParsing="false" onAction="#setOnlineOrLocalMode" prefHeight="27.0" prefWidth="74.0" text="联网模式" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -109,7 +111,7 @@
                   <AnchorPane fx:id="rightComponentParent" prefHeight="200.0" prefWidth="1050.0" />
                </children>
             </HBox>
-            <ImageView fx:id="image" fitHeight="675.0" fitWidth="1200.0" onMousePressed="#imageMove" pickOnBounds="true">
+            <ImageView fx:id="image" fitHeight="675.0" fitWidth="1200.0" onMousePressed="#imageMove" opacity="0.0" pickOnBounds="true">
                <image>
                   <Image url="@inStage.jpg" />
                </image>
