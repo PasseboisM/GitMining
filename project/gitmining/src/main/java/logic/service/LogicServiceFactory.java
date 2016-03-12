@@ -30,6 +30,12 @@ public abstract class LogicServiceFactory {
 	public abstract ChartMaker getChartMaker();
 	
 	/**
+	 * 获取对逻辑层服务进行设置的对象。
+	 * @return
+	 */
+	public abstract ServiceConfigure getServiceConfigure();
+	
+	/**
 	 * 获取本接口默认实现。
 	 * @return 可用于获取各种逻辑层服务的LogicServiceFactory对象
 	 */

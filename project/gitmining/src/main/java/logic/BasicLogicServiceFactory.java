@@ -1,10 +1,12 @@
 package logic;
 
 import logic.data.GeneralGetterDefault;
+import logic.data.SearchServiceDefault;
 import logic.service.ChartMaker;
 import logic.service.GeneralGetter;
 import logic.service.LogicServiceFactory;
 import logic.service.SearchService;
+import logic.service.ServiceConfigure;
 
 /**
  * 
@@ -22,13 +24,17 @@ public class BasicLogicServiceFactory extends LogicServiceFactory {
 	}
 
 	public SearchService getSearchService() {
-		// TODO Auto-generated method stub
-		return null;
+		return new SearchServiceDefault();
 	}
 
 	public ChartMaker getChartMaker() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public ServiceConfigure getServiceConfigure() {
+		return new ServiceConfigureDefault();
 	}
 
 }

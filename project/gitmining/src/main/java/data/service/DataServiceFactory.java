@@ -16,7 +16,7 @@ import data.BasicDataServiceFactory;
  */
 public abstract class DataServiceFactory {
 	
-	private volatile static boolean networkAvaliable = false;
+	private volatile static boolean networkAvailable = false;
 	private volatile static boolean isUsingNetwork = false;
 	
 	public abstract MassiveDataGetter getMassiveDataGetter();
@@ -24,15 +24,20 @@ public abstract class DataServiceFactory {
 	public abstract SpecificDataGetter getSpecificDataGetter();
 	
 	private static boolean getNetworkAvailability() {
-		networkAvaliable = NetworkServiceFactory.getInstance().testNetwork();
-		return networkAvaliable;
+		networkAvailable = NetworkServiceFactory.getInstance().testNetwork();
+		return networkAvailable;
 	}
 	
 	public static DataServiceFactory getInstance() {
 		return new BasicDataServiceFactory();
 	}
 	
-	public static boolean tryUseNetwork() throws NetworkException {
+	public static boolean tryUseNetwork(boolean useNetwork) throws NetworkException {
+		if(!useNetwork) {
+			isUsingNetwork = false;
+			return true;
+		}
+		
 		if (getNetworkAvailability()) {
 			isUsingNetwork = true;
 			return true;
