@@ -47,6 +47,8 @@ public interface GeneralGetter {
 	 * @param numPerPage 请求返回的每页数量（数据不足时返回的对象数目<numPerPage）
 	 * @param sortStandard 排序方式
 	 * @return 包含所请求GitUser信息的List对象
+	 * @throws DataCorruptedException 
+	 * @throws NetworkException 
 	 */
-	public List<GitUser> getUsers(int page, int numPerPage,UserSortSandard sortStandard);
+	public List<GitUser> getUsers(int page, int numPerPage,UserSortSandard sortStandard) throws NetworkException, DataCorruptedException;
 }
