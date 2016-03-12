@@ -1,5 +1,6 @@
 package common.param_obj;
 
+import common.enumeration.sort_standard.UserSortSandard;
 import common.service.GitUserMin;
 
 /**
@@ -12,11 +13,18 @@ public class UserSearchParam {
 
 	private String loginName;
 
-	public UserSearchParam(String loginName) {
+	private UserSortSandard sortStandard;
+	
+	public UserSearchParam(String loginName, UserSortSandard sortStandard) {
 		super();
 		this.loginName = loginName;
+		this.sortStandard = sortStandard;
 	}
 
+	public UserSortSandard getSortStandard() {
+		return sortStandard;
+	}
+	
 	public String getLoginName() {
 		return loginName;
 	}

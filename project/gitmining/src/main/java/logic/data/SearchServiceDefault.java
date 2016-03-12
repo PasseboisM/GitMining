@@ -39,6 +39,8 @@ public class SearchServiceDefault implements SearchService {
 			result.add(dataGetter.getSpecificRepo(matches));
 		}
 		
+		result.sort(params.getSortStandard().getComparator());
+		
 		return result;
 	}
 
@@ -58,6 +60,8 @@ public class SearchServiceDefault implements SearchService {
 		for(GitUserMin matches:matched) {
 			result.add(dataGetter.getSpecificGitUser(matches));
 		}
+		
+		result.sort(params.getSortStandard().getComparator());
 		
 		return result;
 	}
