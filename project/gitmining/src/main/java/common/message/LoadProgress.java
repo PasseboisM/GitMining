@@ -24,10 +24,13 @@ public class LoadProgress  {
 		return totalRepoNum==loadedRepoNum;
 	}
 	
-	public String toString() {
-		return "Total:"+totalRepoNum+", Loaded:"+loadedRepoNum;
-	}
 	
+	@Override
+	public String toString() {
+		return "LoadProgress [totalRepoNum=" + totalRepoNum + ", loadedRepoNum=" + loadedRepoNum + ", loadedUser="
+				+ loadedUser + "]";
+	}
+
 	public int getLoadedUser() {
 		return loadedUser;
 	}

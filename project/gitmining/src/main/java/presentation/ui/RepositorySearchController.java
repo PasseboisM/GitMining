@@ -6,6 +6,10 @@ import java.util.List;
 
 import common.enumeration.attribute.Category;
 import common.enumeration.attribute.Language;
+import common.enumeration.sort_standard.RepoSortStadard;
+import common.exception.DataCorruptedException;
+import common.exception.NetworkException;
+import common.service.Repository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +23,8 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
-import presentation.component.FakeData;
+import logic.service.GeneralGetter;
+import logic.service.LogicServiceFactory;
 import presentation.component.RepositoryMinBlock;
 
 public class RepositorySearchController{
@@ -29,9 +34,8 @@ public class RepositorySearchController{
 		FXMLLoader loader = new FXMLLoader(RepositorySearchController.class.getResource("repositorySearch.fxml"));
 		VBox rootUINode = loader.load();
 		RepositorySearchController controller = loader.getController();
-		List<FakeData> datas = controller.getList();
-		controller.initial(rightComponentParent,datas);
-		controller.initPage();
+//		List<Repository> datas = controller.getList();
+		controller.initial(rightComponentParent);
 		return rootUINode;
 	}
 
@@ -45,10 +49,12 @@ public class RepositorySearchController{
 	
 	private List<CheckBox> categoryCheckBoxes;
 	private List<CheckBox> languageCheckBoxes;
-	private List<FakeData> fakeDatas;
+//	private List<Repository> repoDatas;
 	private AnchorPane rightComponentParent;
-	
 	final ToggleGroup Group = new ToggleGroup();
+	
+	private LogicServiceFactory logicServiceFactory;
+	private GeneralGetter generalGetter;
 	
 
 	
@@ -78,12 +84,15 @@ public class RepositorySearchController{
 		System.out.println("同上2");
 	}
 	
-	private void initial(AnchorPane rightComponentParent,List<FakeData> datas) {
+	private void initial(AnchorPane rightComponentParent) {
 		initialCategoryCheckBoxes();
 		initialLanguageCheckBoxes();
 		initialToggleButtonGroup();
+		this.logicServiceFactory = LogicServiceFactory.getInstance();
+		this.generalGetter = logicServiceFactory.getGeneralGetter();
 		this.rightComponentParent = rightComponentParent;
-		this.fakeDatas = datas;
+//		this.repoDatas = datas;
+		initPage();
 	}
 
 	private void initialToggleButtonGroup() {
@@ -115,18 +124,19 @@ public class RepositorySearchController{
 		}
 		flowPaneCategory.getChildren().addAll(categoryCheckBoxes);
 	}
-	
-	private List<FakeData> getList(){
-		List<FakeData> list = new ArrayList<FakeData>();
-		for (int i = 0; i < 5000; i++) {
-			list.add(new FakeData("a"+i+"/b"+i, "description of fake data", "2015-9-8", 58, i+95, 62,"git://github.com/rubinius/rubinius.git"));
-		}
+	/*
+	private List<Repository> getList(){
+		List<Repository> list = new ArrayList<Repository>();
+//		for (int i = 0; i < 5000; i++) {
+//			list.add(new Repository("a"+i+"/b"+i, "description of fake data", "2015-9-8", 58, i+95, 62,"git://github.com/rubinius/rubinius.git"));
+//		}
+//		return list;
 		return list;
-	}
+	}*/
 	
 	private void initPage() {
 		//除10上取整算法 加9之后再除10
-		pag.setPageCount((fakeDatas.size()+9)/10);
+		pag.setPageCount((generalGetter.getNumOfRepositories()+9)/10);
 		pag.setPageFactory((Integer pageIndex)->createPage(pageIndex));
 	}
 
@@ -134,11 +144,22 @@ public class RepositorySearchController{
 		ScrollPane pane = new ScrollPane();
 		VBox vBox = new VBox();
 		vBox.setPrefWidth(1010);
-		for (int i = 0; i < 10; i++) {
-			if (pageIndex*10+i<fakeDatas.size()) {
-				vBox.getChildren()
-						.add(new RepositoryMinBlock(rightComponentParent, fakeDatas.get(pageIndex * 10 + i)));
-			}
+		int numPerPage = 10;
+		
+		
+		List<Repository> listPerPage = null;
+		try {
+			listPerPage = generalGetter.getRepositories(pageIndex+1, numPerPage, RepoSortStadard.NO_SORT);
+		} catch (NetworkException e) {
+			e.printStackTrace();
+		} catch (DataCorruptedException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		for (int i = 0; i < numPerPage; i++) {
+			vBox.getChildren().add(new RepositoryMinBlock(rightComponentParent, listPerPage.get(i)));
 		}
 		pane.setContent(vBox);
 		return pane;

@@ -2,6 +2,7 @@ package presentation.ui;
 
 import java.io.IOException;
 
+import common.exception.NetworkException;
 import common.message.LoadProgress;
 import common.util.Observable;
 import common.util.Observer;
@@ -14,6 +15,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -21,6 +25,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import logic.service.Loader;
+import logic.service.LogicServiceFactory;
+import logic.service.ServiceConfigure;
 
 
 public class MainController extends Application implements Observer{
@@ -31,12 +37,28 @@ public class MainController extends Application implements Observer{
 	public void start(Stage primaryStage) throws Exception {
 		FXMLLoader loader = new FXMLLoader(MainController.class.getResource("mainController.fxml"));
 		Parent root = loader.load();
+		MainController controller = loader.getController();
+		controller.initial();
 		Scene scene = new Scene(root,1190,680);
 		primaryStage.initStyle(StageStyle.DECORATED);
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
 		primaryStage.show();
 //		Loader.getInstance().addObserver(this);
+	}
+
+	private void initial() {
+		logicServiceFactory = LogicServiceFactory.getInstance();
+		serviceConfigure = logicServiceFactory.getServiceConfigure();
+		setToggleButtonGroup();
+	}
+
+	private void setToggleButtonGroup() {
+		toggleGroup = new ToggleGroup();
+		buttonLocalMode.setToggleGroup(toggleGroup);
+		buttonLocalMode.setSelected(true);
+		buttonOnlineMode.setToggleGroup(toggleGroup);
+		this.setOnlineOrLocalMode();
 	}
 
 	public static void main(String[] args) {
@@ -48,9 +70,23 @@ public class MainController extends Application implements Observer{
 	@FXML private AnchorPane rightComponentParent;
 	@FXML private Button buttonRepoSearch;
 	@FXML private Button buttonUserSearch;
-//	@FXML private Button buttonAboutUs;
+	@FXML private ProgressBar progressBar;
+	@FXML private ToggleButton buttonLocalMode;
+	@FXML private ToggleButton buttonOnlineMode;
+				 private ToggleGroup toggleGroup;
+				 
+				 private LogicServiceFactory logicServiceFactory;
+				 private ServiceConfigure serviceConfigure;
 	
-	
+	@FXML
+	private void setOnlineOrLocalMode(){
+		boolean isOnlineMode = (toggleGroup.getSelectedToggle()==buttonOnlineMode);
+		try {
+			serviceConfigure.setOnlineActive(isOnlineMode);
+		} catch (NetworkException e) {
+			e.printStackTrace();
+		}
+	}
 	@FXML
 	private void imageMove() {
 		Timeline timeline = new Timeline();
@@ -70,7 +106,6 @@ public class MainController extends Application implements Observer{
 	private void onRepoSearchClicked(MouseEvent event) {
 		buttonRepoSearch.setDisable(true);
 		buttonUserSearch.setDisable(false);
-//		buttonAboutUs.setDisable(false);
 		rightComponentParent.getChildren().clear();
 		try {
 			if (ableToGetData) {
@@ -85,7 +120,6 @@ public class MainController extends Application implements Observer{
 	private void onUserSearchClicked(MouseEvent event){
 		buttonRepoSearch.setDisable(false);
 		buttonUserSearch.setDisable(true);
-//		buttonAboutUs.setDisable(false);
 		rightComponentParent.getChildren().clear();
 		try {
 			rightComponentParent.getChildren().add(UserSearchController.getInstance(rightComponentParent));
@@ -94,13 +128,6 @@ public class MainController extends Application implements Observer{
 		}
 	}
 	
-	/*@FXML
-	private void onAboutUsClicked(MouseEvent event){
-		buttonRepoSearch.setDisable(false);
-		buttonUserSearch.setDisable(false);
-		buttonAboutUs.setDisable(true);
-		rightComponentParent.getChildren().clear();
-	}*/
 
 	@Override
 	public void update() {
@@ -109,17 +136,13 @@ public class MainController extends Application implements Observer{
 			this.ableToGetData = true;
 			System.out.println("Now able to get data.");
 		}
-		
 		System.out.println(loadProgress.getLoadedRepoNum());
-		
+		System.out.println(progressBar);
 	}
 
 	@Override
 	public void update(Observable observable, Object obj) {
 		update();
 	}
-	
-
-	
 
 }

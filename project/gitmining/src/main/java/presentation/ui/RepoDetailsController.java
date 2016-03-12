@@ -10,11 +10,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import presentation.component.FakeData;
 
 public class RepoDetailsController {
 	
-	public static BorderPane getInstance(AnchorPane rightComponentParent,FakeData repository) throws IOException {
+	public static BorderPane getInstance(AnchorPane rightComponentParent,Repository repository) throws IOException {
 		FXMLLoader loader = new FXMLLoader(RepoDetailsController.class.getResource("repositoryDetails.fxml"));
 		BorderPane pane = loader.load();
 		RepoDetailsController controller = loader.getController();
@@ -33,14 +32,14 @@ public class RepoDetailsController {
 	@FXML private Hyperlink labelOwnerName;
 	
 	private void initial(AnchorPane rightComponentParent,Repository repository) {
-//		initialComponentText(repository);
-		this.rightComponentParent = rightComponentParent;
-	}
-	
-	private void initial(AnchorPane rightComponentParent,FakeData repository) {
 		initialComponentText(repository);
 		this.rightComponentParent = rightComponentParent;
 	}
+	
+	/*private void initial(AnchorPane rightComponentParent,FakeData repository) {
+		initialComponentText(repository);
+		this.rightComponentParent = rightComponentParent;
+	}*/
 	
 	private void initialComponentText(Repository repository) {
 		repo_url.setText(repository.getGit_url());
@@ -54,7 +53,7 @@ public class RepoDetailsController {
 		labelRepoName.setText(full_name.split("/")[1]);
 	}
 	
-	private void initialComponentText(FakeData repository) {
+	/*private void initialComponentText(FakeData repository) {
 		repo_url.setText(repository.getGit_url());
 		labelStar.setText(repository.getStargazers_count()+"");
 		labelFork.setText(repository.getForks_count()+"");
@@ -64,11 +63,10 @@ public class RepoDetailsController {
 		assert full_name.split("/").length==2;
 		labelOwnerName.setText(full_name.split("/")[0]);
 		labelRepoName.setText(full_name.split("/")[1]);
-	}
+	}*/
 	@FXML
 	private void returnToSearchController() {
 		rightComponentParent.getChildren().remove(borderPane);
 	}
-	
 	
 }
