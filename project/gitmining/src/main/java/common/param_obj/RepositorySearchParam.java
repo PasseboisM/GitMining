@@ -2,6 +2,7 @@ package common.param_obj;
 
 import common.enumeration.attribute.Category;
 import common.enumeration.attribute.Language;
+import common.enumeration.sort_standard.RepoSortStadard;
 import common.service.RepositoryMin;
 
 /**
@@ -14,13 +15,14 @@ public class RepositorySearchParam {
 	private Language[] langs;
 	private Category[] cates;
 	private String[] keywords;
-	
+	private RepoSortStadard sortStandard;
 	public RepositorySearchParam(Language[] langs, Category[] cates,
-			String[] keywords) {
+			String[] keywords, RepoSortStadard sortStandard) {
 		super();
 		this.langs = langs;
 		this.cates = cates;
 		this.keywords = keywords;
+		this.sortStandard = sortStandard;
 	}
 
 	public Language[] getLangs() {
@@ -33,6 +35,10 @@ public class RepositorySearchParam {
 
 	public String[] getKeywords() {
 		return keywords;
+	}
+	
+	public RepoSortStadard getSortStandard() {
+		return sortStandard;
 	}
 	
 	//TODO 应该把搜索策略搬出Parameter类，成为独立的Strategy
