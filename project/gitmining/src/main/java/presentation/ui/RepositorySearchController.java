@@ -9,6 +9,7 @@ import common.enumeration.attribute.Language;
 import common.enumeration.sort_standard.RepoSortStadard;
 import common.exception.DataCorruptedException;
 import common.exception.NetworkException;
+import common.param_obj.RepositorySearchParam;
 import common.service.Repository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,6 +26,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import logic.service.GeneralGetter;
 import logic.service.LogicServiceFactory;
+import logic.service.SearchService;
 import presentation.component.RepositoryMinBlock;
 
 public class RepositorySearchController{
@@ -51,9 +53,15 @@ public class RepositorySearchController{
 	private AnchorPane rightComponentParent;
 	final ToggleGroup Group = new ToggleGroup();
 	private RepoSortStadard sortStadard;
+	private SearchService searchService;
+	private List<Repository> repositoriesdatas;
 	
 	private LogicServiceFactory logicServiceFactory;
 	private GeneralGetter generalGetter;
+	
+	private Language[] langs;
+	private Category[] cates;
+	private String[]  keywords = {""}; 
 	
 	@FXML
 	private void changeSortStrategy(ActionEvent event) {
@@ -65,42 +73,43 @@ public class RepositorySearchController{
 	@FXML
 	private void onSearch(ActionEvent event) {
 		String key=keyword.getText();
-		System.out.println("The Search For "+key+" in Repository");
+		keywords = key.trim().split(" ");
+//		System.out.println(key.equals("")); is true
+		refreshLanguages(Language.values());
+		refreshCategories(Category.values());
 		
-		
-//		for (RepoSortStadard repoSortStadard : RepoSortStadard.values()) {
-//			System.out.println(repoSortStadard);
+		initPage();
+	}
+	
+	/*public static void main(String[] args) {
+		for (String string : "oiu             uuu       ii".split(" ")) {
+			System.out.println(string.equals(""));
+		}
+//		for (String string : " ".split(" ")) {
+//			System.out.println(string.equals(""));
 //		}
-	}
+//		System.out.println("".split(" ").length);
+//		System.out.println(" ".split(" ").length);
+		
+//		System.out.println("oiu             uuu       ii");
+	}*/
 	
-	@FXML
-	private void noSortSearch(ActionEvent event) {
-		System.out.println("这个没什么卵用，我觉得可以和楼上的search算法一毛一样");
-	}
-	
-	@FXML
-	private void starSortSearch(ActionEvent event) {
-		System.out.println("这里会有一个冒泡算法吧");
-	}
-	
-	@FXML
-	private void forkSortSearch(ActionEvent event) {
-		System.out.println("同上1");
-	}
-	
-	@FXML
-	private void contributorSortSearch(ActionEvent event) {
-		System.out.println("同上2");
-	}
 	
 	private void initial(AnchorPane rightComponentParent) {
 		initialCategoryCheckBoxes();
 		initialLanguageCheckBoxes();
 		initialToggleButtonGroup();
+		initialSearchService();
+		this.rightComponentParent = rightComponentParent;
+		
+		initPage();
+	}
+
+	private void initialSearchService() {
 		this.logicServiceFactory = LogicServiceFactory.getInstance();
 		this.generalGetter = logicServiceFactory.getGeneralGetter();
-		this.rightComponentParent = rightComponentParent;
-		initPage();
+		this.searchService = logicServiceFactory.getSearchService();
+		
 	}
 
 	private void initialToggleButtonGroup() {
@@ -119,7 +128,20 @@ public class RepositorySearchController{
 			CheckBox checkBox = new CheckBox(language.getName());
 			languageCheckBoxes.add(checkBox);
 		}
+		languageCheckBoxes.get(0).setSelected(true);
+		refreshLanguages(languages);
 		flowPaneLanguage.getChildren().addAll(languageCheckBoxes);
+	}
+
+	private void refreshLanguages(Language[] languages) {
+		List<Language> languagesList = new ArrayList<Language>();
+		for (CheckBox checkBox : languageCheckBoxes) {
+			if (checkBox.isSelected()) {
+				languagesList.add(languages[languageCheckBoxes.indexOf(checkBox)]);
+			}
+		}
+		langs = new Language[languagesList.size()];
+		langs = languagesList.toArray(langs);
 	}
 	
 	private void initialCategoryCheckBoxes() {
@@ -130,14 +152,35 @@ public class RepositorySearchController{
 			CheckBox checkBox = new CheckBox(category.getName());
 			categoryCheckBoxes.add(checkBox);
 		}
+		categoryCheckBoxes.get(0).setSelected(true);
+		refreshCategories(categories);
 		flowPaneCategory.getChildren().addAll(categoryCheckBoxes);
+	}
+
+	private void refreshCategories(Category[] categories) {
+		List<Category> categoriesList = new ArrayList<Category>();
+		for (CheckBox checkBox : categoryCheckBoxes) {
+			if (checkBox.isSelected()) {
+				categoriesList.add(categories[categoryCheckBoxes.indexOf(checkBox)]);
+			}
+		}
+		cates = new Category[categoriesList.size()];
+		cates = categoriesList.toArray(cates);
 	}
 	
 	private void initPage() {
+		RepositorySearchParam repoSearchParam = new RepositorySearchParam(langs, cates, keywords);
+		try {
+			this.repositoriesdatas = searchService.searchRepository(repoSearchParam);
+		} catch (NetworkException e) {
+			e.printStackTrace();
+		} catch (DataCorruptedException e) {
+			e.printStackTrace();
+		}
 		//除10上取整算法 加9之后再除10
-		pag.setPageCount((generalGetter.getNumOfRepositories()+9)/10);
+		System.out.println(repositoriesdatas.size());
+		pag.setPageCount((repositoriesdatas.size()+9)/10);
 		pag.setPageFactory((Integer pageIndex)->createPage(pageIndex));
-		
 	}
 
 	private ScrollPane createPage(Integer pageIndex) {
@@ -145,17 +188,19 @@ public class RepositorySearchController{
 		VBox vBox = new VBox();
 		vBox.setPrefWidth(1010);
 		int numPerPage = 10;
-		List<Repository> listPerPage = null;
-		try {
-			listPerPage = generalGetter.getRepositories(pageIndex+1, numPerPage, sortStadard);
-		} catch (NetworkException e) {
-			e.printStackTrace();
-		} catch (DataCorruptedException e) {
-			e.printStackTrace();
-		}
-		
+//		List<Repository> listPerPage = null;
+//		try {
+//			listPerPage = generalGetter.getRepositories(pageIndex+1, numPerPage, sortStadard);
+//		} catch (NetworkException e) {
+//			e.printStackTrace();
+//		} catch (DataCorruptedException e) {
+//			e.printStackTrace();
+//		}
 		for (int i = 0; i < numPerPage; i++) {
-			vBox.getChildren().add(new RepositoryMinBlock(rightComponentParent, listPerPage.get(i)));
+			if (numPerPage * pageIndex + i<repositoriesdatas.size()) {
+				vBox.getChildren().add(new RepositoryMinBlock(rightComponentParent,
+						repositoriesdatas.get(numPerPage * pageIndex + i)));
+			}
 		}
 		pane.setContent(vBox);
 		return pane;

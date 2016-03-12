@@ -32,13 +32,13 @@ public class UserMinBlock extends BorderPane{
 		this.rightComponentParent = rightComponentParent;
 	}
 
-	private void setComponentText(GitUser fakeData) {
-		userName.setText(fakeData.getLogin());
-		userLocation.setText(fakeData.getLocation());
-		lastUpdated.setText(fakeData.getUpdated_at());
-		followers.setText(fakeData.getFollowers()+"");
-		following.setText(fakeData.getFollowing()+"");
-		repos.setText(fakeData.getPublic_repos()+"");
+	private void setComponentText(GitUser userData) {
+		userName.setText(userData.getName());
+		userLocation.setText(userData.getLocation());
+		lastUpdated.setText(userData.getUpdated_at());
+		followers.setText(userData.getFollowers()+"");
+		following.setText(userData.getFollowing()+"");
+		repos.setText(userData.getPublic_repos()+"");
 	}
 	@FXML private Hyperlink userName;
 	@FXML private Label userLocation;
