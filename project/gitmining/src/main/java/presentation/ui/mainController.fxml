@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
@@ -46,12 +47,12 @@
                                           <Insets bottom="0" left="0" right="0" top="0" />
                                        </padding>
                                        <children>
-                                          <Button fx:id="buttonRepoSearch" mnemonicParsing="false" onMousePressed="#onRepoSearchClicked" prefHeight="50.0" prefWidth="150.0" text="项目查询">
+                                          <Button fx:id="buttonRepoSearch" mnemonicParsing="false" onMousePressed="#onRepoSearchClicked" prefHeight="50.0" prefWidth="150.0" stylesheets="@test.css" text="项目查询">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
                                           </Button>
-                                          <Button fx:id="buttonUserSearch" mnemonicParsing="false" onMousePressed="#onUserSearchClicked" prefHeight="50.0" prefWidth="150.0" text="用户查询">
+                                          <Button fx:id="buttonUserSearch" mnemonicParsing="false" onMousePressed="#onUserSearchClicked" prefHeight="50.0" prefWidth="150.0" stylesheets="@test.css" text="用户查询">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
@@ -72,18 +73,19 @@
                                     </LinearGradient>
                                  </textFill>
                               </TitledPane>
-                            <TitledPane animated="false" text="帮助">
+                            <TitledPane animated="false" text="设置">
                                  <content>
-                                    <VBox prefHeight="50.0" prefWidth="100.0">
+                                    <VBox prefHeight="80.0" prefWidth="100.0">
                                     <padding>
                                           <Insets bottom="0" left="0" right="0" top="0" />
                                        </padding>
                                        <children>
-                                          <Button fx:id="buttonAboutUs" mnemonicParsing="false" onMousePressed="#onAboutUsClicked" prefHeight="50.0" prefWidth="150.0" text="关于我们">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Button>
+                                          <HBox prefHeight="100.0" prefWidth="200.0">
+                                             <children>
+                                                <ToggleButton mnemonicParsing="false" prefHeight="27.0" prefWidth="76.0" text="ToggleButton" />
+                                                <ToggleButton mnemonicParsing="false" prefHeight="27.0" prefWidth="74.0" text="ToggleButton" />
+                                             </children>
+                                          </HBox>
                                        </children>
                                     </VBox>
                                  </content>

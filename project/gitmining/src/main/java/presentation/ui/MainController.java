@@ -48,7 +48,7 @@ public class MainController extends Application implements Observer{
 	@FXML private AnchorPane rightComponentParent;
 	@FXML private Button buttonRepoSearch;
 	@FXML private Button buttonUserSearch;
-	@FXML private Button buttonAboutUs;
+//	@FXML private Button buttonAboutUs;
 	
 	
 	@FXML
@@ -70,7 +70,7 @@ public class MainController extends Application implements Observer{
 	private void onRepoSearchClicked(MouseEvent event) {
 		buttonRepoSearch.setDisable(true);
 		buttonUserSearch.setDisable(false);
-		buttonAboutUs.setDisable(false);
+//		buttonAboutUs.setDisable(false);
 		rightComponentParent.getChildren().clear();
 		try {
 			if (ableToGetData) {
@@ -85,7 +85,7 @@ public class MainController extends Application implements Observer{
 	private void onUserSearchClicked(MouseEvent event){
 		buttonRepoSearch.setDisable(false);
 		buttonUserSearch.setDisable(true);
-		buttonAboutUs.setDisable(false);
+//		buttonAboutUs.setDisable(false);
 		rightComponentParent.getChildren().clear();
 		try {
 			rightComponentParent.getChildren().add(UserSearchController.getInstance(rightComponentParent));
@@ -94,13 +94,13 @@ public class MainController extends Application implements Observer{
 		}
 	}
 	
-	@FXML
+	/*@FXML
 	private void onAboutUsClicked(MouseEvent event){
 		buttonRepoSearch.setDisable(false);
 		buttonUserSearch.setDisable(false);
 		buttonAboutUs.setDisable(true);
 		rightComponentParent.getChildren().clear();
-	}
+	}*/
 
 	@Override
 	public void update() {
