@@ -61,4 +61,22 @@ public class RepositoryMinBeans implements RepositoryMin {
 		return Category.getCategories(this);
 	}
 
+	@Override
+	public boolean checkValidity() {
+		boolean fullNameValid = (full_name!=null) && (full_name.split("/").length==2);
+		boolean nameValid = (name!=null) && (!name.equals(""));
+		boolean idValid = id > -1;
+		boolean starsValid = stargazers_count > -1;
+		boolean forksValid = forks_count > -1;
+		
+		return fullNameValid && nameValid && idValid && starsValid && forksValid;
+	}
+
+	@Override
+	public String toString() {
+		return "RepositoryMinBeans [id=" + id + ", full_name=" + full_name
+				+ ", name=" + name + ", stargazers_count=" + stargazers_count
+				+ ", forks_count=" + forks_count + "]";
+	}
+
 }

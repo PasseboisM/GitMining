@@ -154,6 +154,23 @@ public class GitUserBeans implements GitUser {
 	public String getUpdated_at() {
 		return updated_at;
 	}
+	@Override
+	public boolean checkValidity() {
+		
+		boolean loginValid = (login!=null) && (!login.equals(""));
+		boolean nameValid = (name!=null) && (!name.equals(""));
+		boolean followersValid = followers > -1;
+		boolean idValid = id > -1;
+		boolean createdAtValid = (created_at!=null) && (!created_at.equals(""));
+		
+		return loginValid && nameValid && followersValid && idValid && createdAtValid;
+	}
+	@Override
+	public String toString() {
+		return "GitUserBeans [login=" + login + ", id=" + id + ", name=" + name
+				+ ", followers=" + followers + ", created_at=" + created_at
+				+ "]";
+	}
 	
 	
 }

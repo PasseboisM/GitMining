@@ -769,6 +769,24 @@ public class RepositoryBeans implements Repository {
 	public Category[] getCategories() {
 		return Category.getCategories(this);
 	}
+
+	@Override
+	public boolean checkValidity() {
+		boolean fullNameValid = (full_name!=null) && (full_name.split("/").length==2);
+		boolean nameValid = (name!=null) && (!name.equals(""));
+		boolean idValid = id > -1;
+		boolean starsValid = stargazers_count > -1;
+		boolean forksValid = forks_count > -1;
+		
+		return fullNameValid && nameValid && idValid && starsValid && forksValid;
+	}
+
+	@Override
+	public String toString() {
+		return "RepositoryBeans [id=" + id + ", name=" + name + ", full_name="
+				+ full_name + ", isPrivate=" + isPrivate + ", fork=" + fork
+				+ ", forks=" + forks + "]";
+	}
 	
 	
 }
