@@ -6,6 +6,8 @@ import common.service.GitUser;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
@@ -23,9 +25,10 @@ public class UserDetailsController {
 	private void initial(AnchorPane rightComponentParent,GitUser user) {
 		initialComponentText(user);
 		this.rightComponentParent = rightComponentParent;
-		
+		Image image = new Image(user.getAvatar_url());
+		imageView.setImage(image);
 	}
-
+	
 	private void initialComponentText(GitUser user) {
 		labelName.setText(user.getName());
 		labelId.setText("ID : "+user.getId());
@@ -53,6 +56,7 @@ public class UserDetailsController {
 	@FXML	private Label labelCreatedAt;
 	@FXML	private Label labelUpdatedAt;
 	@FXML    private BorderPane borderPane;
+	@FXML    private ImageView imageView;
 	
 	@FXML
 	private void returnToSearchController() {
