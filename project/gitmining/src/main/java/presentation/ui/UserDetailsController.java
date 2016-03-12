@@ -8,10 +8,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import presentation.component.FakeDataUser;
+
 
 public class UserDetailsController {
-	public static BorderPane getInstance(AnchorPane rightComponentParent,FakeDataUser user) throws IOException {
+	public static BorderPane getInstance(AnchorPane rightComponentParent,GitUser user) throws IOException {
 		FXMLLoader loader = new FXMLLoader(UserDetailsController.class.getResource("userDetails.fxml"));
 		BorderPane pane = loader.load();
 		UserDetailsController controller = loader.getController();
@@ -21,13 +21,12 @@ public class UserDetailsController {
 	}
 	private AnchorPane rightComponentParent;
 	private void initial(AnchorPane rightComponentParent,GitUser user) {
-		this.rightComponentParent = rightComponentParent;
-	}
-	private void initial(AnchorPane rightComponentParent,FakeDataUser user) {
 		initialComponentText(user);
 		this.rightComponentParent = rightComponentParent;
+		
 	}
-	private void initialComponentText(FakeDataUser user) {
+
+	private void initialComponentText(GitUser user) {
 		labelName.setText(user.getName());
 		labelId.setText("ID : "+user.getId());
 		labelType.setText(user.getType());
