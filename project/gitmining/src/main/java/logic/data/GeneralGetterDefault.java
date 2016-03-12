@@ -5,6 +5,8 @@ import java.util.List;
 
 import common.enumeration.sort_standard.RepoSortStadard;
 import common.enumeration.sort_standard.UserSortSandard;
+import common.exception.DataCorruptedException;
+import common.exception.NetworkException;
 import common.service.GitUser;
 import common.service.GitUserMin;
 import common.service.Repository;
@@ -21,7 +23,7 @@ public class GeneralGetterDefault implements GeneralGetter {
 	
 	@Override
 	public List<Repository> getRepositories(int page, int numPerPage,
-			RepoSortStadard sortStandard) {
+			RepoSortStadard sortStandard) throws NetworkException, DataCorruptedException {
 		int leftEnd = (page-1) * numPerPage, rightEnd = page * numPerPage;
 		List<RepositoryMin> repoMinInfo = minInfoManager.getRepoMin();
 		

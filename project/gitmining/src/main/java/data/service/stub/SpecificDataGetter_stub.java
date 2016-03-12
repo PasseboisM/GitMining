@@ -1,5 +1,6 @@
 package data.service.stub;
 
+import common.exception.DataCorruptedException;
 import common.exception.NetworkException;
 import common.service.GitUser;
 import common.service.GitUserMin;
@@ -15,7 +16,7 @@ public class SpecificDataGetter_stub extends SpecificDataGetter {
 	private NetworkServiceFactory networkDataService = NetworkServiceFactory.getInstance();
 	private SpecificDataSource specificDataSource = networkDataService.getSpecificDataSource();
 	
-	public Repository getSpecificRepo(RepositoryMin source) {
+	public Repository getSpecificRepo(RepositoryMin source) throws DataCorruptedException {
 		// TODO stub测试
 		try {
 			return specificDataSource.getSpecificRepo(source.getFull_name()) ;

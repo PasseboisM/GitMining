@@ -4,10 +4,12 @@ public class LoadProgress  {
 
 	private int totalRepoNum = -1;
 	private int loadedRepoNum = -2;
+	private int loadedUser = -3;
 	
-	public LoadProgress(int totalRepoNum,int loadedRepoNum) {
+	public LoadProgress(int totalRepoNum,int loadedRepoNum,int loadedUserNum) {
 		this.totalRepoNum = totalRepoNum;
 		this.loadedRepoNum = loadedRepoNum;
+		this.loadedUser = loadedUserNum;
 	}
 
 	public int getTotalRepoNum() {
@@ -26,4 +28,7 @@ public class LoadProgress  {
 		return "Total:"+totalRepoNum+", Loaded:"+loadedRepoNum;
 	}
 	
+	public int getLoadedUser() {
+		return loadedUser;
+	}
 }

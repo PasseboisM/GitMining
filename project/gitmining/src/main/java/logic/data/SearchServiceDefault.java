@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import common.exception.DataCorruptedException;
+import common.exception.NetworkException;
 import common.param_obj.RepositorySearchParam;
 import common.param_obj.UserSearchParam;
 import common.service.GitUser;
@@ -21,7 +23,7 @@ public class SearchServiceDefault implements SearchService {
 	private SpecificDataGetter dataGetter = null;
 	
 	@Override
-	public List<Repository> searchRepository(RepositorySearchParam params) {
+	public List<Repository> searchRepository(RepositorySearchParam params) throws NetworkException, DataCorruptedException {
 		List<RepositoryMin> minInfoList = minInfoManager.getRepoMin();
 		List<RepositoryMin> matched = new LinkedList<>();
 		List<Repository> result = new ArrayList<>(500);
@@ -41,7 +43,7 @@ public class SearchServiceDefault implements SearchService {
 	}
 
 	@Override
-	public List<GitUser> searchUser(UserSearchParam params) {
+	public List<GitUser> searchUser(UserSearchParam params) throws NetworkException, DataCorruptedException {
 
 		List<GitUserMin> minInfo = minInfoManager.getUserMin();
 		List<GitUserMin> matched = new LinkedList<>();

@@ -34,7 +34,9 @@ public class ObjChannelWithBlockingQueue<T> implements ObjChannel<T> {
 	public void writeObj(T[] list) {
 //		lock.lock();
 		for(T obj: list) {
-			queue.add(obj);
+			if(obj!=null) {
+				queue.add(obj);	
+			}
 		}
 //		lock.unlock();
 	}
