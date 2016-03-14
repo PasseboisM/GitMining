@@ -25,10 +25,10 @@ public class UserMinBlock extends BorderPane{
 		}
 	}
 	
-	public UserMinBlock(AnchorPane rightComponentParent,GitUser fakeData){
+	public UserMinBlock(AnchorPane rightComponentParent,GitUser gitUser){
 		this();
-		this.setComponentText(fakeData);
-		this.user = fakeData;
+		this.setComponentText(gitUser);
+		this.user = gitUser;
 		this.rightComponentParent = rightComponentParent;
 	}
 
