@@ -1,7 +1,6 @@
 package common.param_obj;
 
 import common.enumeration.sort_standard.UserSortSandard;
-import common.service.GitUserMin;
 
 /**
  * 
@@ -29,15 +28,4 @@ public class UserSearchParam {
 		return loginName;
 	}
 	
-	//TODO 搬移搜索策略
-	public int matches(GitUserMin minInfo) {
-		if(nameMatch(minInfo.getLogin(),loginName)||nameMatch(minInfo.getName(),loginName)) {
-			return 1;
-		}
-		return 0;
-	}
-	
-	private boolean nameMatch(String original,String searched) {
-		return original.toLowerCase().contains(searched.toLowerCase());
-	}
 }

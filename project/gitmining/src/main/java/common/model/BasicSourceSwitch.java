@@ -19,8 +19,8 @@ public class BasicSourceSwitch<T> implements MultiSourceSwitch<T> {
 	
 	private static final int WORKING = 0;
 	private static final int EXCEPTION_INVOKED = 1;
-	private static final int NORMAL_CLOSED = 2;
-	private static final int EXCEPTIONAL_CLOSED = 3;
+//	private static final int NORMAL_CLOSED = 2;
+//	private static final int EXCEPTIONAL_CLOSED = 3;
 	
 	private ObjChannel<T> chan;
 	private volatile List<Object> sources = new ArrayList<Object>();
@@ -43,7 +43,7 @@ public class BasicSourceSwitch<T> implements MultiSourceSwitch<T> {
 	}
 
 	public void writeObj(List<T> toBeWritten) {
-		chan.writeObj((T[]) toBeWritten.toArray());
+		chan.writeObj(toBeWritten);
 	}
 
 	public void deregister(Object source) {

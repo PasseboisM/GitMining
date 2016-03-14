@@ -6,7 +6,7 @@ import logic.service.ServiceConfigure;
 
 public class ServiceConfigureDefault implements ServiceConfigure {
 
-	private DataServiceFactory dataService = null;
+//	private DataServiceFactory dataService = null;
 	
 	@Override
 	public void setOnlineActive(boolean useOnlineMode) throws NetworkException {
@@ -23,8 +23,8 @@ public class ServiceConfigureDefault implements ServiceConfigure {
 
 	}
 
-	public ServiceConfigureDefault() {
-		dataService = DataServiceFactory.getInstance();
-	}
-	
+//	public ServiceConfigureDefault() {
+//		dataService = DataServiceFactory.getInstance();
+//	}
+//	
 }

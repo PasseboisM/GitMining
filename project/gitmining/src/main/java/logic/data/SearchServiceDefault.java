@@ -14,10 +14,17 @@ import common.service.Repository;
 import common.service.RepositoryMin;
 import data.service.DataServiceFactory;
 import data.service.SpecificDataGetter;
+import logic.data.search.RepoSearchStrategyDefault;
+import logic.data.search.UserSearchStrategyDefault;
+import logic.data.search.service.RepositorySearchStrategy;
+import logic.data.search.service.UserSearchStrategy;
 import logic.service.SearchService;
 
 public class SearchServiceDefault implements SearchService {
-
+	
+	private UserSearchStrategy userMatcher = new UserSearchStrategyDefault();
+	private RepositorySearchStrategy repoMatcher = new RepoSearchStrategyDefault();
+	
 	private MinInfoManager minInfoManager = null;
 	
 	private SpecificDataGetter dataGetter = null;
@@ -28,8 +35,9 @@ public class SearchServiceDefault implements SearchService {
 		List<RepositoryMin> matched = new LinkedList<>();
 		List<Repository> result = new ArrayList<>(500);
 		
+		//TODO Not using the relation index really
 		for(RepositoryMin minInfo:minInfoList) {
-			if(params.matches(minInfo)>0) {
+			if(repoMatcher.match(minInfo, params)>0.0) {
 				matched.add(minInfo);
 			}
 		}
@@ -51,11 +59,13 @@ public class SearchServiceDefault implements SearchService {
 		List<GitUserMin> matched = new LinkedList<>();
 		List<GitUser> result = new ArrayList<>();
 		
+		//TODO Not using the relation index really
 		for(GitUserMin min:minInfo) {
-			if(params.matches(min)>0) {
+			if(userMatcher.match(min, params)>0) {
 				matched.add(min);
 			}
 		}
+		
 		// TODO try with multi-threads
 		for(GitUserMin matches:matched) {
 			result.add(dataGetter.getSpecificGitUser(matches));

@@ -2,7 +2,6 @@ package data.manage;
 
 import network.service.MassiveDataSource;
 import network.service.NetworkServiceFactory;
-import network.service.SpecificDataSource;
 import common.exception.NetworkException;
 import common.service.GitUserMin;
 import common.service.RepositoryMin;
@@ -20,8 +19,6 @@ import data.storage.service.StorageServiceFactory;
 public class MassiveDataGetterDefault extends MassiveDataGetter {
 	
 	private static MassiveDataGetter instance = new MassiveDataGetterDefault();
-	
-	private DataStorageOutput storage = StorageServiceFactory.getInstance().getOutput();
 	
 	private DataStorageOutput fromStorage = null;
 	private MassiveDataSource fromNetwork = null;

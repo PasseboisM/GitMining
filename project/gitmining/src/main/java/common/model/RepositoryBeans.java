@@ -6,7 +6,6 @@ import com.google.gson.annotations.SerializedName;
 import common.enumeration.attribute.Category;
 import common.enumeration.attribute.Language;
 import common.service.Repository;
-import common.service.RepositoryMin;
 import common.service.RepositoryOrganization;
 import common.service.RepositoryOwner;
 import common.service.RepositoryPermission;

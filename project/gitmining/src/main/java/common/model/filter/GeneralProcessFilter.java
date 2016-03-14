@@ -18,6 +18,8 @@ public abstract class GeneralProcessFilter<I,T> implements Runnable {
 	private ObjChannel<T> chan = null;
 	MultiSourceSwitch<T> sourceSwitch = null;
 	
+	//用于提醒子类在构造器中必须调用本类的含多个参数的构造器
+	@SuppressWarnings("unused")
 	private GeneralProcessFilter(){}
 	
 	public GeneralProcessFilter(ObjChannel<I> input, ObjChannel<T> output, int page) {
