@@ -10,6 +10,17 @@ what：完成界面的搭建，完成界面大部分代码编写
 problem：javafx学习的时间过长，界面美化较少
 todo：制作雷达图控件，美化界面
 
+who：徐家逸xjyi14
+when：第三周
+what：辅助完成界面的搭建，完成界面代码编写
+problem：javafx学习的时间过长，界面美化较少
+todo：制作控件，美化界面
+
+who：孙婧sj14
+when：第三周
+what：编写项目计划文档和迭代二的需求分析
+problem：javafx学习进度较慢，未在界面开发上做出贡献
+todo：继续学习javafx，辅助界面完成
 
 
 组长总结：
