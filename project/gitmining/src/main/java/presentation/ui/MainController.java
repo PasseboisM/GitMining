@@ -39,7 +39,7 @@ public class MainController extends Application implements Observer{
 		Parent root = loader.load();
 		MainController controller = loader.getController();
 		controller.initial();
-		Scene scene = new Scene(root,1190,680);
+		Scene scene = new Scene(root,1190,660);
 		primaryStage.initStyle(StageStyle.DECORATED);
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
