@@ -4,9 +4,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-import network.api.stub.UserApiMaker_stub;
-import network.connection.service.HTTPConnectionService;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -20,6 +17,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 import common.exception.NetworkException;
+import network.connection.service.HTTPConnectionService;
 
 public class HTTPConnection extends HTTPConnectionService {
 
