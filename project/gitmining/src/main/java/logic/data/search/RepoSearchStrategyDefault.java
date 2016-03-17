@@ -1,5 +1,7 @@
 package logic.data.search;
 
+import org.w3c.dom.css.ElementCSSInlineStyle;
+
 import common.enumeration.attribute.Language;
 import common.param_obj.RepositorySearchParam;
 import common.service.RepositoryMin;
@@ -13,18 +15,22 @@ public class RepoSearchStrategyDefault implements RepositorySearchStrategy {
 		double matchCount = 0;
 		
 		boolean languageMatched = false;
-		
+		Language mainLang = obj.getMainLanguage();
 		for(Language lang:params.getLangs()) {
-			if(lang==obj.getMainLanguage()) {
-				matchCount += 5;
+			// Other属性弱于其他语言，对相关系数增加3.0
+			if (Language.OTHERS == mainLang) {
+				matchCount += 3.0;
 				languageMatched = true;
 				break;
-			} else if(lang==Language.ALL) {
+			} else if (lang == mainLang) {
+				matchCount += 5.0;
+				languageMatched = true;
+				break;
+			} else if (lang == Language.ALL) {
 				languageMatched = true;
 				break;
 			}
 		}
-		
 		
 		boolean categoryMatched = true;
 //		for(Category cate:cates) {
