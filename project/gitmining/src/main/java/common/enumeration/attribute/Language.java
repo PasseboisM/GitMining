@@ -8,11 +8,31 @@ package common.enumeration.attribute;
  * TODO 更多语言类型
  */
 public enum Language {
-	ALL("All"),
-	UNKNOWN("Unknown"),
-	RUBY("Ruby"),
+	ALL("all"),
 	JAVA("Java"),
-	C("C");
+	RUBY("Ruby"),
+	PYTHON("Python"),
+	C("C"),
+	JAVA_SCRIPT("JavaScript"),
+	PERL("Perl"),
+	PHP("PHP"),
+	C_PLUS_PLUS("C++"),
+	HTML("HTML"),
+	SHELL("Shell"),
+	OBJECTIVE_C("Objective-C"),
+	VIML("VimL"),
+	C_SHARP("C#"),
+	EMACS_LISP("Emacs Lisp"),
+	ERLANG("Erlang"),
+	LUA("Lua"),
+	CLOJURE("Clojure"),
+	CSS("CSS"),
+	HASKELL("Haskell"),
+	SCALA("Scala"),
+	COMMON_LISP("Common Lisp"),
+	R("R"),
+	OTHERS("Others");
+	
 	
 	
 	
@@ -31,6 +51,6 @@ public enum Language {
 				return lan;
 			}
 		}
-		return UNKNOWN;
+		return OTHERS;
 	}
 }

@@ -3,12 +3,10 @@ package network.connection.service;
 import java.io.IOException;
 import java.util.List;
 
-import network.connection.HTTPConnection;
-
 import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
 
 import common.exception.NetworkException;
+import network.connection.HTTPConnection;
 
 public abstract class HTTPConnectionService {
 

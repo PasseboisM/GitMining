@@ -1,12 +1,9 @@
 package logic.service;
 
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-
-import logic.data.MinInfoManager;
 import common.message.LoadProgress;
 import common.util.Observable;
 import common.util.Observer;
+import logic.data.MinInfoManager;
 
 public class Loader implements Observable {
 
