@@ -126,6 +126,16 @@ public class RepositorySearchController{
 				}
 			}
 		});
+		
+		for(int i = 1;i<languageCheckBoxes.size();i++){
+			languageCheckBoxes.get(i).setOnAction((ActionEvent event)->{
+				CheckBox checkBoxi = (CheckBox) event.getSource();
+				if(checkBoxi.isSelected()){
+					//all设为不选
+					languageCheckBoxes.get(0).setSelected(false);
+				}
+			});
+		}
 	}
 
 	private void refreshLanguages(Language[] languages) {
@@ -147,7 +157,7 @@ public class RepositorySearchController{
 			CheckBox checkBox = new CheckBox(category.getName());
 			categoryCheckBoxes.add(checkBox);
 		}
-		//categoryCheckBoxes.get(0).setSelected(true);
+		categoryCheckBoxes.get(0).setSelected(true);
 		refreshCategories(categories);
 		flowPaneCategory.getChildren().addAll(categoryCheckBoxes);
 		
@@ -158,9 +168,19 @@ public class RepositorySearchController{
 				for(int i = 1;i<categoryCheckBoxes.size();i++){
 					categoryCheckBoxes.get(i).setSelected(false);
 				}
-				System.out.println("others set not");
+				//System.out.println("others set not");
 			}
 		});
+		
+		for(int i = 1;i<categoryCheckBoxes.size();i++){
+			categoryCheckBoxes.get(i).setOnAction((ActionEvent event)->{
+				CheckBox checkBoxi = (CheckBox) event.getSource();
+				if(checkBoxi.isSelected()){
+					//all设为不选
+					categoryCheckBoxes.get(0).setSelected(false);
+				}
+			});
+		}
 		
 		/*categoryCheckBoxes.get(0).setOnAction(new EventHandler<ActionEvent>() {
 			
