@@ -1,6 +1,7 @@
 package presentation.ui;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 import common.exception.NetworkException;
 import common.message.LoadProgress;
@@ -18,6 +19,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -27,6 +29,7 @@ import javafx.util.Duration;
 import logic.service.Loader;
 import logic.service.LogicServiceFactory;
 import logic.service.ServiceConfigure;
+import presentation.image.ImageFactory;
 
 
 public class MainController extends Application implements Observer{
@@ -50,6 +53,16 @@ public class MainController extends Application implements Observer{
 		logicServiceFactory = LogicServiceFactory.getInstance();
 		serviceConfigure = logicServiceFactory.getServiceConfigure();
 		setToggleButtonGroup();
+		
+		
+		String imageFilename ="userSearchBackground.jpg";
+		Image bgImage = null;
+		try {
+			bgImage = ImageFactory.getImageByFileName(imageFilename);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		image.setImage(bgImage);
 	}
 
 	private void setToggleButtonGroup() {
