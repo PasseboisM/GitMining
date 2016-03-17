@@ -12,6 +12,7 @@ import common.exception.NetworkException;
 import common.param_obj.RepositorySearchParam;
 import common.service.Repository;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -115,6 +116,16 @@ public class RepositorySearchController{
 		languageCheckBoxes.get(0).setSelected(true);
 		refreshLanguages(languages);
 		flowPaneLanguage.getChildren().addAll(languageCheckBoxes);
+		
+		languageCheckBoxes.get(0).setOnAction((ActionEvent event)->{
+			CheckBox checkBoxAll = (CheckBox) event.getSource();
+			if(checkBoxAll.isSelected()){
+				//其他设为不选
+				for(int i = 1;i<languageCheckBoxes.size();i++){
+					languageCheckBoxes.get(i).setSelected(false);
+				}
+			}
+		});
 	}
 
 	private void refreshLanguages(Language[] languages) {
@@ -136,9 +147,29 @@ public class RepositorySearchController{
 			CheckBox checkBox = new CheckBox(category.getName());
 			categoryCheckBoxes.add(checkBox);
 		}
-		categoryCheckBoxes.get(0).setSelected(true);
+		//categoryCheckBoxes.get(0).setSelected(true);
 		refreshCategories(categories);
 		flowPaneCategory.getChildren().addAll(categoryCheckBoxes);
+		
+		categoryCheckBoxes.get(0).setOnAction((ActionEvent event)->{
+			CheckBox checkBoxAll = (CheckBox) event.getSource();
+			if(checkBoxAll.isSelected()){
+				//其他都设为不选
+				for(int i = 1;i<categoryCheckBoxes.size();i++){
+					categoryCheckBoxes.get(i).setSelected(false);
+				}
+				System.out.println("others set not");
+			}
+		});
+		
+		/*categoryCheckBoxes.get(0).setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				// TODO Auto-generated method stub
+				
+			}
+		});*/
 	}
 
 	private void refreshCategories(Category[] categories) {
