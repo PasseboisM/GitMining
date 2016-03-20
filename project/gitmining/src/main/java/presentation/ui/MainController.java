@@ -82,6 +82,8 @@ public class MainController extends Application implements Observer{
 	@FXML private AnchorPane rightComponentParent;
 	@FXML private Button buttonRepoSearch;
 	@FXML private Button buttonUserSearch;
+	@FXML private Button buttonRepoStatistic;
+	@FXML private Button buttonUserStatistic;
 	@FXML private ProgressBar progressBar;
 	@FXML private ToggleButton buttonLocalMode;
 	@FXML private ToggleButton buttonOnlineMode;
@@ -138,6 +140,26 @@ public class MainController extends Application implements Observer{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@FXML
+	private void onRepoStatisticClicked(MouseEvent event) {
+		buttonRepoSearch.setDisable(true);
+		buttonUserSearch.setDisable(false);
+		rightComponentParent.getChildren().clear();
+		try {
+			rightComponentParent.getChildren().add(RepoStatisticController.getInstance(rightComponentParent));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@FXML 
+	private void onUserStatisticClicked(MouseEvent event){
+		buttonRepoSearch.setDisable(false);
+		buttonUserSearch.setDisable(true);
+		rightComponentParent.getChildren().clear();
+		
 	}
 	
 
