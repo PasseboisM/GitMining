@@ -37,7 +37,7 @@ public class DirectoryMakerDefault implements DirectoryMaker {
 
 	@Override
 	public String repositoryDirectory(String fullName) {
-		return root+"\\LocalData\\repository\\"+fullName.split("/")[0]+"\\";
+		return root+"/LocalData/repository/"+fullName.split("/")[0]+"/";
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class DirectoryMakerDefault implements DirectoryMaker {
 
 	@Override
 	public String userDirectory(String login) {
-		return root+"\\LocalData\\user\\";
+		return root+"/LocalData/user/";
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class DirectoryMakerDefault implements DirectoryMaker {
 
 	@Override
 	public String repositoryRoot() {
-		return root+"\\LocalData\\repository\\";
+		return root+"/LocalData/repository/";
 	}
 
 	@Override
