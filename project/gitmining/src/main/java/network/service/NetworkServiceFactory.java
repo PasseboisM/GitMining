@@ -1,6 +1,5 @@
 package network.service;
 
-import static org.junit.Assert.assertEquals;
 import network.api.service.ApiMakerService;
 import network.api.service.NetworkTester;
 import network.data.BasicNetworkServiceFactory;

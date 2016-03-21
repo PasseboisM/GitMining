@@ -19,13 +19,10 @@ import org.apache.http.util.EntityUtils;
 import common.exception.NetworkException;
 import network.connection.service.HTTPConnectionService;
 
+@SuppressWarnings("deprecation")
 public class HTTPConnection extends HTTPConnectionService {
-
 	
-	/* (non-Javadoc)
-	 * @see network.connection.HTTPConnectionService#do_post(java.lang.String, java.util.List)
-	 */
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings("resource")
 	public String do_post(String url, List<NameValuePair> name_value_pair) throws IOException {
         String body = "{}";
 		DefaultHttpClient httpclient = new DefaultHttpClient();
@@ -40,10 +37,8 @@ public class HTTPConnection extends HTTPConnectionService {
         }
         return body;
     }
-    /* (non-Javadoc)
-	 * @see network.connection.HTTPConnectionService#do_get(java.lang.String)
-	 */
-    @SuppressWarnings("deprecation")
+	
+	
 	public String do_get(String url) throws NetworkException {
         String body = "{}";
         HttpClient httpclient = HttpClients.createMinimal();

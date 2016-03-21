@@ -1,6 +1,5 @@
 package network.service;
 
-import common.exception.DataTransferException;
 import common.exception.NetworkException;
 import common.service.GitUser;
 import common.service.GitUserMin;
