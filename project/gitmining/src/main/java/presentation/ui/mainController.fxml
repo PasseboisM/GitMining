@@ -52,6 +52,39 @@
                                     </LinearGradient>
                                  </textFill>
                               </TitledPane>
+                              <TitledPane animated="false" text="统计">
+                                 <content>
+                                    <VBox prefHeight="100.0" prefWidth="100.0">
+                                    <padding>
+                                          <Insets bottom="0" left="0" right="0" top="0" />
+                                       </padding>
+                                       <children>
+                                          <Button fx:id="buttonRepoStatistic" mnemonicParsing="false" onMousePressed="#onRepoStatisticClicked" prefHeight="50.0" prefWidth="150.0" stylesheets="@test.css" text="项目统计">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Button>
+                                          <Button fx:id="buttonUserStatistic" mnemonicParsing="false" onMousePressed="#onUserStatisticClicked" prefHeight="50.0" prefWidth="150.0" stylesheets="@test.css" text="用户统计">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                 </content>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <textFill>
+                                    <LinearGradient endX="0.5" endY="1.0" startX="0.4904761904761905">
+                                       <stops>
+                                          <Stop color="#101ce0" />
+                                          <Stop color="#101ce0" offset="0.00749063670411985" />
+                                          <Stop color="#652727" offset="1.0" />
+                                       </stops>
+                                    </LinearGradient>
+                                 </textFill>
+                              </TitledPane>
                             <TitledPane animated="false" text="设置">
                                  <content>
                                     <VBox prefHeight="80.0" prefWidth="100.0">
