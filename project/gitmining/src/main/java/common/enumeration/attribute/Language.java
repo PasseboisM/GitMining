@@ -5,7 +5,6 @@ package common.enumeration.attribute;
  * @author xjh14
  * 搜索、排序时使用的枚举类型，表示项目所使用的语言
  * 可用于对Repository进行分类
- * TODO 更多语言类型
  */
 public enum Language {
 	ALL("all"),

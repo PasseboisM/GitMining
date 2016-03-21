@@ -204,11 +204,6 @@ public class RepositoryBeans implements Repository {
 	private Organization organization;
 	private int network_count;
 	private int subscribers_count;
-	
-	/*
-	 * 未完待续
-	 */
-	
 
 	public int getId() {
 		return id;
