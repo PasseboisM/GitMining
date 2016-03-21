@@ -41,28 +41,34 @@ public class DataOutputDefault implements DataStorageOutput {
 	
 	@Override
 	public ObjChannel<RepositoryMin> getRepoMin() {
+		//获取数据中的项目根目录
 		File root = new File(dir.repositoryRoot());
 		System.out.println(root);
+		//获取项目文件夹下的子文件夹数组（子文件夹的名字即为项目持有者的名字）
 		File[] rootSubs = root.listFiles();
+		//将子文件夹数组分解为多个部分，便于输出
 		File[][] splitSubs = splitFileArray(rootSubs, OUTPUT_THREAD_NUM);
 		
-		//Create a channel transferring file directories.
+		//初始化文件传输管道、文件转换过滤器、集流器
 		ObjChannel<File> directoryChan = new ObjChannelWithBlockingQueue<>();
 		PureDataTransFilter[] directoryTransfer = new PureDataTransFilter[OUTPUT_THREAD_NUM];
 		MultiSourceSwitch<File> directorySwitch = new BasicSourceSwitch<>(directoryChan);
 		for(int i=0;i<OUTPUT_THREAD_NUM;i++) {
 			directoryTransfer[i] = new PureDataTransFilter<File>(Arrays.asList(splitSubs[i]), directorySwitch);
 		}
+		//执行转换过程（将文件列表转换至管道中以便传输）
 		execute(directoryTransfer);
 		
-		ObjChannel<RepositoryMin> minInfoChan = new ObjChannelWithBlockingQueue<>();
 		
+		//初始化项目信息最小子集传输管道、格式转换过滤器、集流器
+		ObjChannel<RepositoryMin> minInfoChan = new ObjChannelWithBlockingQueue<>();
 		JSONFileSearchReadDeserializeFilter[] deserializers = new JSONFileSearchReadDeserializeFilter[OUTPUT_THREAD_NUM];
 		MultiSourceSwitch<RepositoryMin> minInfoSwitch = new BasicSourceSwitch<>(minInfoChan);
 		for(int i=0;i<OUTPUT_THREAD_NUM;i++) {
 			deserializers[i] = new JSONFileSearchReadDeserializeFilter<RepositoryMin>
 				(directoryChan, minInfoSwitch, 20, RepositoryMin.class);
 		}
+		//执行将文件到项目信息最小子集的转换
 		execute(deserializers);
 		
 		return minInfoChan;
@@ -222,6 +228,7 @@ public class DataOutputDefault implements DataStorageOutput {
 	
 	/**
 	 * Goes one layer directory deeper to search for JSON files and transfer.
+	 * 译：用于读取并将保存json的文件反序列化的过滤器
 	 * @author xjh14
 	 *
 	 * @param <T>
@@ -241,24 +248,26 @@ public class DataOutputDefault implements DataStorageOutput {
 		@Override
 		public List<T> process(List<File> get) {
 			List<T> result = new ArrayList<>(page);
-			for(File dir:get) {
+			//便利项目持有者文件夹集合的片段中的每个文件夹
+			for (File dir : get) {
+				//得到项目持有者文件夹中的每个项目文件
 				File[] files = dir.listFiles();
-				for(File content:files) {
+				for (File content : files) {
 					try {
 						fr = new FileReader(content);
 						br = new BufferedReader(fr);
 						String s = br.readLine();
-						
+
 						T partial = (T) gson.fromJson(s, BeansTranslator.getBeans(objectiveType));
-						
-						//TODO 尽快将系统中大范围修改为Checkable，避免强制转型
-						Checkable check = (Checkable)partial;
-						if(!check.checkValidity()) {
+
+						// TODO 尽快将系统中大范围修改为Checkable，避免强制转型
+						Checkable check = (Checkable) partial;
+						if (!check.checkValidity()) {
 							continue;
 						} else {
 							result.add(partial);
 						}
-						
+
 					} catch (Exception e) {
 						e.printStackTrace();
 					} finally {
