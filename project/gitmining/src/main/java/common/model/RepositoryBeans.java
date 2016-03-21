@@ -264,105 +264,70 @@ public class RepositoryBeans implements Repository {
 		private String type;
 		private boolean site_admin;
 		
-		/* (non-Javadoc)
-		 * @see common.model.RepositoryOwner#getLogin()
-		 */
 		public String getLogin() {
 			return login;
 		}
-		/* (non-Javadoc)
-		 * @see common.model.RepositoryOwner#getId()
-		 */
+
 		public int getId() {
 			return id;
 		}
-		/* (non-Javadoc)
-		 * @see common.model.RepositoryOwner#getAvatar_url()
-		 */
+
 		public String getAvatar_url() {
 			return avatar_url;
 		}
-		/* (non-Javadoc)
-		 * @see common.model.RepositoryOwner#getGravatar_id()
-		 */
+
 		public String getGravatar_id() {
 			return gravatar_id;
 		}
-		/* (non-Javadoc)
-		 * @see common.model.RepositoryOwner#getUrl()
-		 */
+
 		public String getUrl() {
 			return url;
 		}
-		/* (non-Javadoc)
-		 * @see common.model.RepositoryOwner#getHtml_url()
-		 */
+
 		public String getHtml_url() {
 			return html_url;
 		}
-		/* (non-Javadoc)
-		 * @see common.model.RepositoryOwner#getFollowers_url()
-		 */
+
 		public String getFollowers_url() {
 			return followers_url;
 		}
-		/* (non-Javadoc)
-		 * @see common.model.RepositoryOwner#getFollowing_url()
-		 */
+
 		public String getFollowing_url() {
 			return following_url;
 		}
-		/* (non-Javadoc)
-		 * @see common.model.RepositoryOwner#getGists_url()
-		 */
+
 		public String getGists_url() {
 			return gists_url;
 		}
-		/* (non-Javadoc)
-		 * @see common.model.RepositoryOwner#getStarred_url()
-		 */
+
 		public String getStarred_url() {
 			return starred_url;
 		}
-		/* (non-Javadoc)
-		 * @see common.model.RepositoryOwner#getSubscriptions_url()
-		 */
+
 		public String getSubscriptions_url() {
 			return subscriptions_url;
 		}
-		/* (non-Javadoc)
-		 * @see common.model.RepositoryOwner#getOrganizations_url()
-		 */
+
 		public String getOrganizations_url() {
 			return organizations_url;
 		}
-		/* (non-Javadoc)
-		 * @see common.model.RepositoryOwner#getRepos_url()
-		 */
+
 		public String getRepos_url() {
 			return repos_url;
 		}
-		/* (non-Javadoc)
-		 * @see common.model.RepositoryOwner#getEvents_url()
-		 */
+
 		public String getEvents_url() {
 			return events_url;
 		}
-		/* (non-Javadoc)
-		 * @see common.model.RepositoryOwner#getReceived_events_url()
-		 */
+
 		public String getReceived_events_url() {
 			return received_events_url;
 		}
-		/* (non-Javadoc)
-		 * @see common.model.RepositoryOwner#getType()
-		 */
+
 		public String getType() {
 			return type;
 		}
-		/* (non-Javadoc)
-		 * @see common.model.RepositoryOwner#isSite_admin()
-		 */
+
 		public boolean isSite_admin() {
 			return site_admin;
 		}
