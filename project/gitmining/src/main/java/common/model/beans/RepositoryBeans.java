@@ -1,4 +1,4 @@
-package common.model;
+package common.model.beans;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;

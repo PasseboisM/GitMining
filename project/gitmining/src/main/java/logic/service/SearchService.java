@@ -2,8 +2,6 @@ package logic.service;
 
 import java.util.List;
 
-import common.enumeration.attribute.Category;
-import common.enumeration.attribute.Language;
 import common.exception.DataCorruptedException;
 import common.exception.NetworkException;
 import common.param_obj.RepositorySearchParam;

@@ -13,9 +13,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import common.exception.NetworkException;
-import common.model.GitUserBeans;
-import common.model.GitUserMinBeans;
-import common.model.RepositoryBeans;
+import common.model.beans.GitUserBeans;
+import common.model.beans.GitUserMinBeans;
+import common.model.beans.RepositoryBeans;
 import common.service.GitUser;
 import common.service.GitUserMin;
 import common.service.Repository;

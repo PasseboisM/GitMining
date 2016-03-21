@@ -15,11 +15,10 @@ import com.google.gson.Gson;
 import common.exception.DataCorruptedException;
 import common.exception.TargetNotFoundException;
 import common.model.BasicSourceSwitch;
-import common.model.GitUserBeans;
-import common.model.GitUserMinBeans;
 import common.model.ObjChannelWithBlockingQueue;
-import common.model.RepositoryBeans;
-import common.model.RepositoryMinBeans;
+import common.model.beans.BeansTranslator;
+import common.model.beans.GitUserBeans;
+import common.model.beans.RepositoryBeans;
 import common.model.filter.GeneralProcessFilter;
 import common.model.filter.PureDataTransFilter;
 import common.service.GitUser;
@@ -32,7 +31,7 @@ import common.util.ObjChannel;
 import data.storage.directory.DirectoryMakerDefault;
 import data.storage.directory.service.DirectoryMaker;
 import data.storage.service.DataStorageOutput;
-
+@SuppressWarnings({"rawtypes","unchecked"})
 public class DataOutputDefault implements DataStorageOutput {
 
 	private DirectoryMaker dir = DirectoryMakerDefault.getInstance();
@@ -57,6 +56,7 @@ public class DataOutputDefault implements DataStorageOutput {
 		execute(directoryTransfer);
 		
 		ObjChannel<RepositoryMin> minInfoChan = new ObjChannelWithBlockingQueue<>();
+		
 		JSONFileSearchReadDeserializeFilter[] deserializers = new JSONFileSearchReadDeserializeFilter[OUTPUT_THREAD_NUM];
 		MultiSourceSwitch<RepositoryMin> minInfoSwitch = new BasicSourceSwitch<>(minInfoChan);
 		for(int i=0;i<OUTPUT_THREAD_NUM;i++) {
@@ -170,7 +170,8 @@ public class DataOutputDefault implements DataStorageOutput {
 	private File[][] splitFileArray(File[] directory,int pieces) {
 		assert pieces > 0;
 		int totalNum = directory.length;
-		int eachNum = totalNum/pieces,lastPieceNum = totalNum-eachNum*(pieces-1);
+		int eachNum = totalNum/pieces;
+//		int lastPieceNum = totalNum-eachNum*(pieces-1);
 		File[][] result = new File[pieces][];
 		for(int i=0;i<pieces;i++) {
 			
@@ -248,7 +249,7 @@ public class DataOutputDefault implements DataStorageOutput {
 						br = new BufferedReader(fr);
 						String s = br.readLine();
 						
-						T partial = (T) gson.fromJson(s, getBeans(objectiveType));
+						T partial = (T) gson.fromJson(s, BeansTranslator.getBeans(objectiveType));
 						
 						//TODO 尽快将系统中大范围修改为Checkable，避免强制转型
 						Checkable check = (Checkable)partial;
@@ -301,7 +302,7 @@ public class DataOutputDefault implements DataStorageOutput {
 					br = new BufferedReader(fr);
 					String s = br.readLine();
 						
-					T partial = (T) gson.fromJson(s, getBeans(objectiveType));
+					T partial = (T) gson.fromJson(s, BeansTranslator.getBeans(objectiveType));
 					
 					//TODO 尽快将系统中大范围修改为Checkable，避免强制转型
 					Checkable check = (Checkable)partial;
@@ -414,25 +415,6 @@ public class DataOutputDefault implements DataStorageOutput {
 //	}
 //	
 	
-	
-	/**
-	 * 代码耦合！尽快移除
-	 * @param imp
-	 * @return
-	 */
-	private Class getBeans(Class imp) {
-		if(imp==Repository.class) {
-			return RepositoryBeans.class;
-		} else if(imp==RepositoryMin.class) {
-			return RepositoryMinBeans.class;
-		} else if(imp==GitUserMin.class) {
-			return GitUserMinBeans.class;
-		} else if (imp==GitUser.class) {
-			return GitUserBeans.class;
-		} else {
-			return null;
-		}
-	}
 
 	@Override
 	public int getRepoNumber() {

@@ -1,4 +1,4 @@
-package common.model;
+package common.model.beans;
 
 import common.service.GitUserMin;
 
