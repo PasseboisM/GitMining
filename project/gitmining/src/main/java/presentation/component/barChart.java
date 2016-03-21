@@ -14,14 +14,22 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class barChart extends AnchorPane {
-	private BarChart<String,Integer> barChart;
+	//
+	private final static String language1 = "java";
+	
+	//建立一个柱状图，x轴为string类型，y轴为Integer类型
+	private BarChart<String,Integer> barChar;
+	
+	//创建x轴的分类
 	private CategoryAxis xAxis;
-	private ObservableList<String> xNames = FXCollections.observableArrayList();
+	
+	//统计项目所使用语言的数据，横轴为语言类型
+	private ObservableList<String> language = FXCollections.observableArrayList();
 	
 	private void initialize() {
         String[] x = {"x1","x2"};
-        xNames.addAll(Arrays.asList(x));
-        xAxis.setCategories(xNames);
+        language.addAll(Arrays.asList(x));
+        xAxis.setCategories(language);
     }
 
 }
