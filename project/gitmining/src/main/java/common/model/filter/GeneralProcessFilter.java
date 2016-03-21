@@ -45,8 +45,8 @@ public abstract class GeneralProcessFilter<I,T> implements Runnable {
 	public void run() {
 		while(input.hasMore()) {
 			try {
-				List<I> jsons = input.getObj(page);
-				List<T> partialResult = process(jsons);
+				List<I> inputObjects = input.getObj(page);
+				List<T> partialResult = process(inputObjects);
 				output.writeObj(partialResult);
 			} catch (DataTransferException e) {
 				closeExceptionally();

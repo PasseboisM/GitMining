@@ -12,10 +12,10 @@ import common.util.ObjChannel;
 	 * 自行注册，能够接受JSON输入，转换后输出到管道或集线器
 	 * @author xjh14
 	 *
-	 * @param <T>
+	 * @param <T> 转换后的数据类型
 	 */
 public class JSONStringRPOFilter<T> extends GeneralProcessFilter<String, T> {
-
+		//每次转换的数量
 		private static final int page = 20;
 		
 		private Class<T> objectiveClass = null;
@@ -36,25 +36,13 @@ public class JSONStringRPOFilter<T> extends GeneralProcessFilter<String, T> {
 			this.sourceSwitch = output;
 			output.register(this);
 		}
-//		
-//		public void run() {
-//			while(input.hasMore()) {
-//				try {
-//					List<String> jsons = input.getObj(page);
-//					List<T> partialResult = process(jsons);
-//					output.writeObj(partialResult);
-//				} catch (DataTransferException e) {
-//					closeExceptionally();
-//					return;
-//				}
-//			}
-//			close();
-//		}
+
 
 		@Override
 		public List<T> process(List<String> get) {
 			List<T> result = new ArrayList<T>(page);
 			for(String json: get) {
+				//去除空数据
 				if(json.equals("")) continue;
 				try {
 					result.add(gson.fromJson(json, objectiveClass));
