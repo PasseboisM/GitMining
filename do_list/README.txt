@@ -16,7 +16,7 @@
             Document,
             LogicDevelopment,  
             PresentationDevelopment,
-            Refractoring,
+            Refractor,
             Debug,
             Test
             PerformanceImprove,
