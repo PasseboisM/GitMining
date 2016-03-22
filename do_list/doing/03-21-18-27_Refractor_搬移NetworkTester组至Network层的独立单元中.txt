@@ -1,0 +1,4 @@
+﻿任务简述：当前NetworkTester组作为固定不变的元素以硬编码方式放在了抽象类ApiMakerService中，应该将其放至某NetworkTester管理类中，可以由ApiMakerService委托管理类进行提供
+任务发现时间：3/21 18:30
+任务开始时间：3/22 10:57
+任务完成时间：
