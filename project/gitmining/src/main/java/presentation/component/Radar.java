@@ -90,8 +90,8 @@ public class Radar extends AnchorPane{
 		List<Double> pointsPositions = new ArrayList<>();
 		Double arc = Math.PI*2/numberOfEdge;
 		for (int i = 0; i < numberOfEdge; i++) {
-			pointsPositions.add(Math.cos(arc*i)*EDGE_LENGTH);
-			pointsPositions.add(Math.sin(arc*i)*EDGE_LENGTH);
+			pointsPositions.add(Math.cos(arc*i-Math.PI/2)*EDGE_LENGTH);
+			pointsPositions.add(Math.sin(arc*i-Math.PI/2)*EDGE_LENGTH);
 		}
 		return pointsPositions;
 	}
