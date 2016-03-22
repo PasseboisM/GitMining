@@ -10,7 +10,7 @@ public class NetworkTesterTest {
 
 	@Test
 	public void test() {
-		NetworkTester[] testers = ApiMakerService.getNetworkTesters();
+		NetworkTester[] testers = ApiMakerService.getInstance().getTestConnectionApiMaker().getTestConnectionApis();
 		for(NetworkTester tester:testers) {
 			assertEquals(tester.test(),true);
 		}
