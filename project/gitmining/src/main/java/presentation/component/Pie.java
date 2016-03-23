@@ -5,10 +5,14 @@ import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
 public class Pie extends AnchorPane {
+	@FXML
+	private PieChart pie;
+	
 	//饼图外的label
 	private List<Label> labels;
 	
