@@ -6,19 +6,19 @@ import java.util.List;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import presentation.component.Radar;
+import presentation.component.Bar;
 
 public class Test extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		List<Double> marks = new ArrayList<>();
-		marks.add(0.1);
-		marks.add(0.3);
-		marks.add(0.5);
-		marks.add(0.7);
-		marks.add(0.9);
-		Radar radar = new Radar(marks);
+		List<Integer> marks = new ArrayList<>();
+		marks.add(1);
+		marks.add(3);
+		marks.add(5);
+		marks.add(7);
+		marks.add(9);
+		Bar radar = new Bar(marks);
 		Scene scene = new Scene(radar, 800, 600);
 		primaryStage.setScene(scene);
 		primaryStage.show();

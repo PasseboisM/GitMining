@@ -36,7 +36,7 @@ public class Bar extends AnchorPane {
 	//设置label
 	private List<Label> labels;
 	
-	/*
+	/**
 	 * 柱状图构造函数
 	 * @param numOfRepo是每种语言的仓库数量
 	 */
@@ -50,7 +50,7 @@ public class Bar extends AnchorPane {
 			e.printStackTrace();
 		}
 		this.numOfRepo = numOfRepo;
-		this.numOfBar = languages.size();
+		this.numOfBar = numOfRepo.size();
 		this.initial();
 	}
 	
@@ -58,7 +58,7 @@ public class Bar extends AnchorPane {
 		this(numOfRepo);
 		this.setLabelsText(languages);
 	}
-	/*
+	/**
 	 * 初始化横轴上标签
 	 */
 	private void setLabelsText(List<String> languages2) {
@@ -67,7 +67,7 @@ public class Bar extends AnchorPane {
 		}
 	}
 
-	/*
+	/**
 	 * 初始化柱状图
 	 */
 	private void initial() {
