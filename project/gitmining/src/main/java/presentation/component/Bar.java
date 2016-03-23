@@ -23,6 +23,8 @@ public class Bar extends AnchorPane {
 	private BarChart barChar;
 	@FXML
 	private CategoryAxis xAxis;
+	@FXML
+	private NumberAxis yAxis;
 	
 	//横轴表示语言类型
 	private List<Label> languages;
@@ -32,9 +34,6 @@ public class Bar extends AnchorPane {
 	
 	//设置Bar的数量
 	private Integer numOfBar;
-	
-	//设置label
-	private List<Label> labels;
 	
 	/**
 	 * 柱状图构造函数
@@ -63,7 +62,7 @@ public class Bar extends AnchorPane {
 	 */
 	private void setLabelsText(List<String> languages2) {
 		for(int i=0;i<numOfBar;i++){
-			labels.get(i).setText(languages2.get(i));
+			languages.get(i).setText(languages2.get(i));
 		}
 	}
 

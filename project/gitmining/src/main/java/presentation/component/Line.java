@@ -18,6 +18,7 @@ public class Line extends AnchorPane {
 	private CategoryAxis xAxis;
 	@FXML
 	private NumberAxis yAxis;
+	
 	//定义x轴上的label
 	private List<Label> labels;
 	
@@ -34,6 +35,7 @@ public class Line extends AnchorPane {
 			e.printStackTrace();
 		}
 		this.initial();
+		this.datas = datas;
 	}
 
 	private void initial() {

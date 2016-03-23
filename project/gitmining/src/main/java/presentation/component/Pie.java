@@ -28,6 +28,7 @@ public class Pie extends AnchorPane {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		this.datas = datas;
 		this.initial();
 	}
 
