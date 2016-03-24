@@ -144,11 +144,13 @@ public class MainController extends Application implements Observer{
 	
 	@FXML
 	private void onRepoStatisticClicked(MouseEvent event) {
-		buttonRepoSearch.setDisable(true);
-		buttonUserSearch.setDisable(false);
+		buttonRepoStatistic.setDisable(true);
+		buttonUserStatistic.setDisable(false);
 		rightComponentParent.getChildren().clear();
 		try {
+//			System.out.println("do!");
 			rightComponentParent.getChildren().add(RepoStatisticController.getInstance(rightComponentParent));
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -156,10 +158,16 @@ public class MainController extends Application implements Observer{
 	
 	@FXML 
 	private void onUserStatisticClicked(MouseEvent event){
-		buttonRepoSearch.setDisable(false);
-		buttonUserSearch.setDisable(true);
+		buttonRepoStatistic.setDisable(false);
+		buttonUserStatistic.setDisable(true);
 		rightComponentParent.getChildren().clear();
-		
+		try {
+
+			rightComponentParent.getChildren().add(UserStatisticController.getInstance(rightComponentParent));
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 

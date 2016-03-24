@@ -1,6 +1,7 @@
 package presentation.ui;
 
 import java.io.IOException;
+import java.util.List;
 
 import common.service.Repository;
 import javafx.fxml.FXML;
@@ -10,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import presentation.component.Radar;
 
 public class RepoDetailsController {
 	
@@ -22,6 +24,8 @@ public class RepoDetailsController {
 	}
 	
 	private AnchorPane rightComponentParent;
+	private List<Double> marks;
+	private List<String> labels;
 	@FXML private BorderPane borderPane;
 	@FXML private TextField repo_url;
 	@FXML private Label labelStar;
@@ -30,9 +34,12 @@ public class RepoDetailsController {
 	@FXML private Label LabelDescription;
 	@FXML private Hyperlink labelRepoName;
 	@FXML private Hyperlink labelOwnerName;
+	@FXML private AnchorPane forRadar;
 	
 	private void initial(AnchorPane rightComponentParent,Repository repository) {
 		initialComponentText(repository);
+//		fake();
+		initialRadar();
 		this.rightComponentParent = rightComponentParent;
 	}
 	
@@ -40,7 +47,21 @@ public class RepoDetailsController {
 		initialComponentText(repository);
 		this.rightComponentParent = rightComponentParent;
 	}*/
-	
+//	private void fake(){
+//		marks.set(6,(double) 0);
+//		marks.set(1,(double) 0.5);
+//		marks.set(2,(double) 0);
+//		marks.set(3,(double) 0.5);
+//		marks.set(4,(double) 0);
+//		marks.set(5,(double) 0.5);
+//		labels.set(6, "a");
+//		labels.set(1, "b");
+//		labels.set(2, "c");
+//		labels.set(3, "d");
+//		labels.set(4, "e");
+//		labels.set(5, "f");
+//	}
+//	
 	private void initialComponentText(Repository repository) {
 		repo_url.setText(repository.getGit_url());
 		labelStar.setText(repository.getStargazers_count()+"");
@@ -51,6 +72,10 @@ public class RepoDetailsController {
 		assert full_name.split("/").length==2;
 		labelOwnerName.setText(full_name.split("/")[0]);
 		labelRepoName.setText(full_name.split("/")[1]);
+	}
+	
+	private void initialRadar(){
+		forRadar.getChildren().add(new Radar(marks,labels));
 	}
 	
 	/*private void initialComponentText(FakeData repository) {

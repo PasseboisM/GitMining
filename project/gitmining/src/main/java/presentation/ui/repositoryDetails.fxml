@@ -152,4 +152,7 @@
    <bottom>
       <Button mnemonicParsing="false" onAction="#returnToSearchController" text="返回" BorderPane.alignment="CENTER" />
    </bottom>
+   <right>
+      <AnchorPane fx:id="forRadar" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </right>
 </BorderPane>
