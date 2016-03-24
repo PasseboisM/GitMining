@@ -12,8 +12,10 @@ public class RepoPerUser {
 	public List<Repository> users;
 
 }
-
+/**
+ * 项目数量以10为间隔递增
+ * */
 class Repository {
 	int repositories;
-	int gap;//项目数量的间隔
+	int gap = 10;//项目数量的间隔
 }
