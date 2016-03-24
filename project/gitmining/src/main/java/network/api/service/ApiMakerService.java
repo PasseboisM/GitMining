@@ -2,6 +2,11 @@ package network.api.service;
 
 import network.api.ApiMakerGitMining;
 
+/**
+ * 统一获取API模块的各种API Maker的抽象类。<br />
+ * 当需要获取仓库/用户/网络测试相关URL时，应该先从本类获取对应的API生成器。
+ * @author xjh14
+ */
 public abstract class ApiMakerService {
 
 	/**

@@ -1,6 +1,7 @@
 package data.storage.output;
 
 import java.io.BufferedReader;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -31,7 +32,15 @@ import common.util.ObjChannel;
 import data.storage.directory.DirectoryMakerDefault;
 import data.storage.directory.service.DirectoryMaker;
 import data.storage.service.DataStorageOutput;
+
+
 @SuppressWarnings({"rawtypes","unchecked"})
+/**
+ * 默认的本地数据输出实现类，可以满足迭代一的需求。
+ * @author xjh14
+ * Ver: 1.0
+ * Created at: 迭代一
+ */
 public class DataOutputDefault implements DataStorageOutput {
 
 	private DirectoryMaker dir = DirectoryMakerDefault.getInstance();
