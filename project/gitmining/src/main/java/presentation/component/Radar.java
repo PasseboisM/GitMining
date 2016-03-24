@@ -60,9 +60,15 @@ public class Radar extends AnchorPane{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		this.marks = marks;
+		this.initialMarks(marks);
 		this.numberOfEdge = marks.size();
 		this.initial();
+	}
+	private void initialMarks(List<Double> marks) {
+		this.marks = new ArrayList<>();
+		for (Double mark : marks) {
+			this.marks.add(mark==0.0?0.02:mark);
+		}
 	}
 	/**
 	 * 雷达图构造函数

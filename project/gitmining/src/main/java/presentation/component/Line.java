@@ -26,7 +26,7 @@ public class Line extends AnchorPane {
 	private List<Double> datas;
 	
 	public Line(List<Double> datas) {
-		FXMLLoader fxmlLoader = new FXMLLoader(Bar.class.getResource("line.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(Line.class.getResource("line.fxml"));
 		fxmlLoader.setController(this);
 		fxmlLoader.setRoot(this);
 		try {
@@ -34,8 +34,28 @@ public class Line extends AnchorPane {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		this.initial();
+		
 		this.datas = datas;
+		this.initial();
+	}
+	/**
+	 * 这个是主要调用的初始化接口，对外开放！
+	 */
+	
+	public Line(List<Double> datas,List<String> labels) {
+		this(datas);
+		this.setLabelsText(labels);
+	}
+	
+	
+	
+	/**
+	 * 初始化横轴上标签
+	 */
+	private void setLabelsText(List<String> languages2) {
+		for(int i=0;i<labels.size();i++){
+			labels.get(i).setText(languages2.get(i));
+		}
 	}
 
 	private void initial() {

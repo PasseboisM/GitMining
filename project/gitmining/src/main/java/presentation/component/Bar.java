@@ -26,21 +26,20 @@ public class Bar extends AnchorPane {
 	@FXML
 	private NumberAxis yAxis;
 	
-	//横轴表示语言类型
-	private List<Label> languages;
+	//横轴表示类型
+	private List<Label> labels;
 	
 	//每种语言项目的数量
 	private List<Integer> numOfRepo;
 	
-	//设置Bar的数量
-	private Integer numOfBar;
+	
 	
 	/**
 	 * 柱状图构造函数
-	 * @param numOfRepo是每种语言的仓库数量
+	 * @param numOfRepo是每种语言的数量
 	 */
 	public Bar(List<Integer> numOfRepo) {
-		FXMLLoader fxmlLoader = new FXMLLoader(Bar.class.getResource("BarChart.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(Bar.class.getResource("bar.fxml"));
 		fxmlLoader.setController(this);
 		fxmlLoader.setRoot(this);
 		try {
@@ -49,20 +48,28 @@ public class Bar extends AnchorPane {
 			e.printStackTrace();
 		}
 		this.numOfRepo = numOfRepo;
-		this.numOfBar = numOfRepo.size();
+		
 		this.initial();
 	}
 	
-	public Bar(List<Integer> numOfRepo,List<String> languages) {
+
+	/**
+	 * 这个是主要调用的初始化接口，对外开放！
+	 */
+	
+	public Bar(List<Integer> numOfRepo,List<String> labels) {
 		this(numOfRepo);
-		this.setLabelsText(languages);
+		this.setLabelsText(labels);
 	}
+	
+	
+	
 	/**
 	 * 初始化横轴上标签
 	 */
 	private void setLabelsText(List<String> languages2) {
-		for(int i=0;i<numOfBar;i++){
-			languages.get(i).setText(languages2.get(i));
+		for(int i=0;i<numOfRepo.size();i++){
+			labels.get(i).setText(languages2.get(i));
 		}
 	}
 

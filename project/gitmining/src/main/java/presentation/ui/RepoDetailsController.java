@@ -51,12 +51,12 @@ public class RepoDetailsController {
 		this.rightComponentParent = rightComponentParent;
 	}*/
 	private void fake(){
-		marks.add(0,(double) 0);
-		marks.add(1,(double) 0.5);
-		marks.add(2,(double) 0);
-		marks.add(3,(double) 0.5);
-		marks.add(4,(double) 0);
-		marks.add(5,(double) 0.5);
+		marks.add(0, 0.0);
+		marks.add(1, 0.5);
+		marks.add(2, 0.0);
+		marks.add(3, 0.5);
+		marks.add(4, 0.0);
+		marks.add(5, 0.5);
 		labels.add(0, "a");
 		labels.add(1, "b");
 		labels.add(2, "c");

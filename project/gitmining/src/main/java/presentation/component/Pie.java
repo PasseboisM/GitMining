@@ -20,7 +20,7 @@ public class Pie extends AnchorPane {
 	private List<Double> datas;
 	
 	public Pie(List<Double> datas) {
-		FXMLLoader fxmlLoader = new FXMLLoader(Bar.class.getResource("pie.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(Pie.class.getResource("pie.fxml"));
 		fxmlLoader.setController(this);
 		fxmlLoader.setRoot(this);
 		try {
@@ -30,6 +30,23 @@ public class Pie extends AnchorPane {
 		}
 		this.datas = datas;
 		this.initial();
+	}
+
+	
+	public Pie(List<Double> datas,List<String> labels) {
+		this(datas);
+		this.setLabelsText(labels);
+	}
+	
+	
+	
+	/**
+	 * 初始化横轴上标签
+	 */
+	private void setLabelsText(List<String> languages2) {
+		for(int i=0;i<labels.size();i++){
+			labels.get(i).setText(languages2.get(i));
+		}
 	}
 
 	private void initial() {

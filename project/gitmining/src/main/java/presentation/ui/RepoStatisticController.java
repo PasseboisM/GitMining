@@ -4,8 +4,11 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import presentation.component.Bar;
+import presentation.component.Pie;
 
 public class RepoStatisticController {
 	
@@ -29,7 +32,18 @@ public class RepoStatisticController {
 	@FXML	private VBox repoVBox;
 	private AnchorPane rightComponentParent;
 	
-	public void initialChart(){
+	public ScrollPane initialChart(){
+		ScrollPane pane=new ScrollPane();
+		VBox vBox=new VBox();
+		vBox.getChildren().add(new Pie(null));
+		vBox.getChildren().add(new Bar(null,null));
+		vBox.getChildren().add(new Bar(null,null));
+		vBox.getChildren().add(new Bar(null,null));
+		vBox.getChildren().add(new Bar(null,null));
+		vBox.getChildren().add(new Bar(null,null));
+		vBox.getChildren().add(new Bar(null,null));
+		pane.setContent(vBox);
+		return pane;
 		
 	}
 }

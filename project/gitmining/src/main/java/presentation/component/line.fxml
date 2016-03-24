@@ -5,10 +5,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<fx:root type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane layoutX="-136.0" layoutY="-116.0" prefHeight="600.0" prefWidth="800.0">
+      <AnchorPane layoutX="-138.0" layoutY="-116.0" prefHeight="600.0" prefWidth="800.0">
          <children>
             <LineChart fx:id="line" layoutX="216.0" layoutY="163.0">
               <xAxis>
@@ -21,4 +20,4 @@
          </children>
       </AnchorPane>
    </children>
-</AnchorPane>
+</fx:root>
