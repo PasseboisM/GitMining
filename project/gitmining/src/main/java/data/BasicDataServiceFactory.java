@@ -8,7 +8,6 @@ public class BasicDataServiceFactory extends DataServiceFactory {
 
 	@Override
 	public MassiveDataGetter getMassiveDataGetter() {
-//		return new MassiveDataGetter_stub();
 		return MassiveDataGetter.getInstance();
 	}
 

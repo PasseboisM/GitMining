@@ -83,11 +83,13 @@ public class DataOutputDefault implements DataStorageOutput {
 	@Override
 	public Repository getRepository(String fullName)
 			throws TargetNotFoundException, DataCorruptedException {
+		//获取项目对应的持有者文件夹
 		File directory = new File(dir.repositoryDirectory(fullName));
+		//获取项目对应的具体文件
 		File content = new File(directory, dir.repositoryName(fullName));
-		
+		//检查文件是否存在
 		checkExistence(content);
-		
+		//获取文件中的JSON字符串
 		String json = readLine(content);
 		
 		try {
@@ -100,19 +102,26 @@ public class DataOutputDefault implements DataStorageOutput {
 
 	@Override
 	public ObjChannel<GitUserMin> getUserMin() {
+		//获取数据中的用户根目录
 		File directory = new File(dir.userRoot());
+		//获取用户文件夹下的文件数组
 		File[] contents = directory.listFiles();
+		//将文件数组分割为多个子部分
 		File[][] splitContents = splitFileArray(contents, OUTPUT_THREAD_NUM);
 		
+		
+		//初始化将文件列表转化进入的通道和转化所需的过滤器、集流器
 		ObjChannel<File> fileChan = new ObjChannelWithBlockingQueue<>();
 		PureDataTransFilter[] transfers = new PureDataTransFilter[OUTPUT_THREAD_NUM];
 		MultiSourceSwitch<File> fileSwitch = new BasicSourceSwitch<>(fileChan);
 		for(int i=0;i<OUTPUT_THREAD_NUM;i++) {
 			transfers[i] = new PureDataTransFilter<File>(Arrays.asList(splitContents[i]), fileSwitch);
 		}
+		//执行转化过程，将文件数组转化进通道中
 		execute(transfers);
 		
-
+		
+		//初始化将通道中文件（保存JSON字符串）向GitUser进行转化的通过，转化用到的过滤器、集流器
 		ObjChannel<GitUserMin> minInfoChan = new ObjChannelWithBlockingQueue<>();
 		JSONFileReadDeserializeFilter[] deserializers = new JSONFileReadDeserializeFilter[OUTPUT_THREAD_NUM];
 		MultiSourceSwitch<GitUserMin> minInfoSwitch = new BasicSourceSwitch<>(minInfoChan);
@@ -120,6 +129,7 @@ public class DataOutputDefault implements DataStorageOutput {
 			deserializers[i] = new JSONFileReadDeserializeFilter<GitUserMin>
 				(fileChan, minInfoSwitch, 20, GitUserMin.class);
 		}
+		//执行转化过程
 		execute(deserializers);
 		
 		return minInfoChan;
@@ -135,12 +145,12 @@ public class DataOutputDefault implements DataStorageOutput {
 	@Override
 	public GitUser getUser(String login) throws TargetNotFoundException,
 			DataCorruptedException {
-		
+		//获得GitUser的登录名（login）对应的文件
 		File directory = new File(dir.userDirectory(login));
 		File content = new File(directory,dir.userName(login));
-		
+		//检查文件是否存在
 		checkExistence(content);
-		
+		//获取文件中的JSON字符串
 		String json = readLine(content);
 		
 		try {
@@ -286,6 +296,7 @@ public class DataOutputDefault implements DataStorageOutput {
 	
 	/**
 	 * Read the provided JSON files and convert to objective object.
+	 * 译：用于将文件反序列化转化成对象的过滤器 
 	 * @author xjh14
 	 *
 	 * @param <T>
@@ -305,6 +316,7 @@ public class DataOutputDefault implements DataStorageOutput {
 		@Override
 		public List<T> process(List<File> get) {
 			List<T> result = new ArrayList<>(page);
+			//遍历文件列表片段的每一个文件
 			for(File content:get) {
 				try {
 					fr = new FileReader(content);

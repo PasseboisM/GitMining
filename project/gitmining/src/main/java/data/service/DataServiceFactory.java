@@ -24,7 +24,7 @@ public abstract class DataServiceFactory {
 	public abstract SpecificDataGetter getSpecificDataGetter();
 	
 	private static boolean getNetworkAvailability() {
-		networkAvailable = NetworkServiceFactory.getInstance().testNetwork();
+		networkAvailable = NetworkServiceFactory.getInstance().getNetworkConnectionTester().testNetwork();
 		return networkAvailable;
 	}
 	
