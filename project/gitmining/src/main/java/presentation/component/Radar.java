@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import chart_data.ScoreOfRepo;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,9 +24,9 @@ public class Radar extends AnchorPane{
 	 */
 	private final static double RADIO = 1.2;
 	/**
-	 * 默认边数，目前没用
+	 * 多边形边数
 	 */
-	private Integer numberOfEdge = 6;
+	private Integer numberOfEdge;
 	/**
 	 * 外圈多边形
 	 */
@@ -47,23 +48,23 @@ public class Radar extends AnchorPane{
 	 */
 	private List<Label> labels;
 	
-	/**
-	 * 雷达图构造函数
-	 * @param marks 分数列表，列表类型为Double型列表（取值范围是[0,1]）
-	 */
-	public Radar(List<Double> marks) {
-		FXMLLoader fxmlLoader = new FXMLLoader(Radar.class.getResource("radar.fxml"));
-		fxmlLoader.setController(this);
-		fxmlLoader.setRoot(this);
-		try {
-			fxmlLoader.load();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		this.initialMarks(marks);
-		this.numberOfEdge = marks.size();
-		this.initial();
-	}
+//	/**
+//	 * 雷达图构造函数
+//	 * @param marks 分数列表，列表类型为Double型列表（取值范围是[0,1]）
+//	 */
+//	public Radar(List<Double> marks) {
+//		FXMLLoader fxmlLoader = new FXMLLoader(Radar.class.getResource("radar.fxml"));
+//		fxmlLoader.setController(this);
+//		fxmlLoader.setRoot(this);
+//		try {
+//			fxmlLoader.load();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		this.initialMarks(marks);
+//		this.numberOfEdge = marks.size();
+//		this.initial();
+//	}
 	private void initialMarks(List<Double> marks) {
 		this.marks = new ArrayList<>();
 		for (Double mark : marks) {
@@ -76,9 +77,19 @@ public class Radar extends AnchorPane{
 	 * @param marks 分数列表，列表类型为Double型列表（取值范围是[0,1]）
 	 * @param headers 周围文字列表，列表类型为String型
 	 */
-	public Radar(List<Double> marks,List<String> headers) {
-		this(marks);
-		this.setLabelsText(headers);
+	public Radar(ScoreOfRepo scoreOfRepo) {
+		FXMLLoader fxmlLoader = new FXMLLoader(Radar.class.getResource("radar.fxml"));
+		fxmlLoader.setController(this);
+		fxmlLoader.setRoot(this);
+		try {
+			fxmlLoader.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		this.initialMarks(scoreOfRepo.marks);
+		this.numberOfEdge = scoreOfRepo.marks.size();
+		this.initial();
+		this.setLabelsText(scoreOfRepo.headers);
 	}
 	/**
 	 * 初始化一些雷达图里面的控件

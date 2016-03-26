@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import chart_data.ScoreOfRepo;
 import common.service.Repository;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +14,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import presentation.component.Radar;
 
 public class RepoDetailsController {
@@ -45,11 +45,6 @@ public class RepoDetailsController {
 		initialRadar();
 		this.rightComponentParent = rightComponentParent;
 	}
-	
-	/*private void initial(AnchorPane rightComponentParent,FakeData repository) {
-		initialComponentText(repository);
-		this.rightComponentParent = rightComponentParent;
-	}*/
 	private void fake(){
 		marks.add(0, 0.0);
 		marks.add(1, 0.5);
@@ -79,22 +74,11 @@ public class RepoDetailsController {
 	
 	private ScrollPane initialRadar(){
 		ScrollPane pane=new ScrollPane();
-		forRadar.getChildren().add(new Radar(marks,labels));
+		forRadar.getChildren().add(new Radar(new ScoreOfRepo(marks,labels)));
 		pane.setContent(forRadar);
 		return pane;
 	}
 	
-	/*private void initialComponentText(FakeData repository) {
-		repo_url.setText(repository.getGit_url());
-		labelStar.setText(repository.getStargazers_count()+"");
-		labelFork.setText(repository.getForks_count()+"");
-		labelWatch.setText(repository.getSubscribers_count()+"");
-		LabelDescription.setText(repository.getDescription());
-		String full_name = repository.getFull_name();
-		assert full_name.split("/").length==2;
-		labelOwnerName.setText(full_name.split("/")[0]);
-		labelRepoName.setText(full_name.split("/")[1]);
-	}*/
 	@FXML
 	private void returnToSearchController() {
 		rightComponentParent.getChildren().remove(borderPane);

@@ -1,5 +1,7 @@
 package chart_data;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -8,11 +10,23 @@ import java.util.List;
  * */
 
 public class ScoreOfRepo {
-	
+	//TODO 之后添加其他方面的评分
 	//对项目forks、open_issues、size、subscribers_count、watchers的评分
-	public List<Double> points;
+	public List<Double> marks;
 	
 	//文字描述列表
-	public List<String> labels;
+	public List<String> headers;
+
+	public ScoreOfRepo(List<Double> marks, List<String> headers) {
+		this.marks = marks;
+		this.headers = headers;
+	}
+
+	public ScoreOfRepo(List<Double> marks) {
+		this.headers = new ArrayList<>(Arrays.asList("forks", "open_issues", "size","subscribers_count","watchers"));
+		this.marks = marks;
+	}
+	
+	
 
 }
