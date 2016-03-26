@@ -10,10 +10,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import logic.calc.repo.RepoStatisticUtil;
 import presentation.component.Radar;
 
 public class RepoDetailsController {
@@ -28,7 +28,7 @@ public class RepoDetailsController {
 	
 	private AnchorPane rightComponentParent;
 	private List<Double> marks=new ArrayList<>();
-	private List<String> labels=new ArrayList<>();
+//	private List<String> labels=new ArrayList<>();
 	@FXML private BorderPane borderPane;
 	@FXML private TextField repo_url;
 	@FXML private Label labelStar;
@@ -41,23 +41,8 @@ public class RepoDetailsController {
 	
 	private void initial(AnchorPane rightComponentParent,Repository repository) {
 		initialComponentText(repository);
-		fake();
-		initialRadar();
+		initialRadar(repository.getFull_name());
 		this.rightComponentParent = rightComponentParent;
-	}
-	private void fake(){
-		marks.add(0, 0.0);
-		marks.add(1, 0.5);
-		marks.add(2, 0.0);
-		marks.add(3, 0.5);
-		marks.add(4, 0.0);
-		marks.add(5, 0.5);
-		labels.add(0, "a");
-		labels.add(1, "b");
-		labels.add(2, "c");
-		labels.add(3, "d");
-		labels.add(4, "e");
-		labels.add(5, "f");
 	}
 	
 	private void initialComponentText(Repository repository) {
@@ -72,11 +57,13 @@ public class RepoDetailsController {
 		labelRepoName.setText(full_name.split("/")[1]);
 	}
 	
-	private ScrollPane initialRadar(){
-		ScrollPane pane=new ScrollPane();
-		forRadar.getChildren().add(new Radar(new ScoreOfRepo(marks,labels)));
-		pane.setContent(forRadar);
-		return pane;
+	private void initialRadar(String repoName){
+		try {
+			marks = RepoStatisticUtil.getSingleUserPoints(repoName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		forRadar.getChildren().add(new Radar(new ScoreOfRepo(marks)));
 	}
 	
 	@FXML

@@ -22,7 +22,7 @@ public class Radar extends AnchorPane{
 	/**
 	 * 文字显示距中心点距离和外圈多边形边长的比例
 	 */
-	private final static double RADIO = 1.2;
+	private final static double RADIO = 1.35;
 	/**
 	 * 多边形边数
 	 */
@@ -151,8 +151,8 @@ public class Radar extends AnchorPane{
 		labels = new ArrayList<>();
 		for (int i = 0; i < numberOfEdge; i++) {
 			Label label = new Label();
-			label.setLayoutX(143+points.get(i*2)*RADIO-8);
-			label.setLayoutY(127+points.get(i*2+1)*RADIO-8);
+			label.setLayoutX(143+points.get(i*2)*RADIO-12);
+			label.setLayoutY(127+points.get(i*2+1)*RADIO-12);
 			labels.add(label);
 			this.getChildren().add(label);
 		}
