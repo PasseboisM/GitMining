@@ -3,9 +3,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PythonRunner {
-	public static void runpython(String fileName,String...paras) throws IOException, InterruptedException {
+	public static List<String> runpython(String fileName,String...paras) throws IOException, InterruptedException {
 		String pythonPath = System.getenv("PYTHON_PATH") + "/python.exe";
 		String folderName = "src/main/java/logic/calc/python/";
 		String[] args = new String[2+paras.length];
@@ -20,13 +22,16 @@ public class PythonRunner {
 		BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
 		String line;
+		List<String> resultList = new ArrayList<>();
+		
 		try {
 			while ((line = bufferedReader.readLine()) != null) {
-				System.out.println(line);
+				resultList.add(line);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return resultList;
 	}
 	
 	public static void main(String[] args) {

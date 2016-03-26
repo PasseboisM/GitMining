@@ -9,16 +9,10 @@ import java.util.List;
 
 public class ScoreOfRepo {
 	
-	//对项目contributers的评分
-	public List<Double> contributers;
+	//对项目forks、open_issues、size、subscribers_count、watchers的评分
+	public List<Double> points;
 	
-	//对项目commit值的评分
-	public List<Double> commits;
-	
-	//对项目issue的评分
-	public List<Double> issue;
-	
-	//对项目pull request的评分
-	public List<Double> pull_request;
+	//文字描述列表
+	public List<String> labels;
 
 }
