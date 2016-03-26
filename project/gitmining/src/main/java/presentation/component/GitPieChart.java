@@ -9,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.chart.PieChart;
-import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 
@@ -47,6 +46,7 @@ public class GitPieChart extends AnchorPane {
 			Tooltip tooltip = new Tooltip(String.valueOf(data.getPieValue()) + "%");
 			Tooltip.install(node, tooltip);
 		}
+		pieChart.setTitle(title);
 	}
 
 }
