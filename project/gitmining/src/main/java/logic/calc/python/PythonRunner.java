@@ -1,4 +1,4 @@
-package logic.calc;
+package logic.calc.python;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 public class PythonRunner {
 	public static void runpython(String fileName,String...paras) throws IOException, InterruptedException {
 		String pythonPath = System.getenv("PYTHON_PATH") + "/python.exe";
-		String folderName = "src/main/java/logic/calc/";
+		String folderName = "src/main/java/logic/calc/python/";
 		String[] args = new String[2+paras.length];
 		args[0] = pythonPath;
 		args[1] = folderName+fileName;
