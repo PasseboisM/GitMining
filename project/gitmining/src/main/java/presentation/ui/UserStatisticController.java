@@ -9,7 +9,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import presentation.component.Bar;
 import presentation.component.Line;
-import presentation.component.Pie;
 
 public class UserStatisticController {
 
@@ -34,7 +33,9 @@ public class UserStatisticController {
 	public ScrollPane initialChart(){
 		ScrollPane pane=new ScrollPane();
 		VBox vBox=new VBox();
-		vBox.getChildren().add(new Pie(null,null));
+		//zhe shui hua de
+		//wo shang wo ye xing
+//		vBox.getChildren().add(new GitPieChart(null,null));
 		vBox.getChildren().add(new Bar(null,null));
 		vBox.getChildren().add(new Bar(null,null));
 		vBox.getChildren().add(new Bar(null,null));

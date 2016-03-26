@@ -8,7 +8,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import presentation.component.Bar;
-import presentation.component.Pie;
+import presentation.component.GitPieChart;
 
 public class RepoStatisticController {
 	
@@ -36,7 +36,7 @@ public class RepoStatisticController {
 	public ScrollPane initialChart(){
 		ScrollPane pane=new ScrollPane();
 		VBox vBox=new VBox();
-		vBox.getChildren().add(new Pie(null));
+//		vBox.getChildren().add(new GitPieChart(null));
 		vBox.getChildren().add(new Bar(null,null));
 		vBox.getChildren().add(new Bar(null,null));
 		vBox.getChildren().add(new Bar(null,null));

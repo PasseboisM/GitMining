@@ -48,29 +48,6 @@ public class Radar extends AnchorPane{
 	 */
 	private List<Label> labels;
 	
-//	/**
-//	 * 雷达图构造函数
-//	 * @param marks 分数列表，列表类型为Double型列表（取值范围是[0,1]）
-//	 */
-//	public Radar(List<Double> marks) {
-//		FXMLLoader fxmlLoader = new FXMLLoader(Radar.class.getResource("radar.fxml"));
-//		fxmlLoader.setController(this);
-//		fxmlLoader.setRoot(this);
-//		try {
-//			fxmlLoader.load();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		this.initialMarks(marks);
-//		this.numberOfEdge = marks.size();
-//		this.initial();
-//	}
-	private void initialMarks(List<Double> marks) {
-		this.marks = new ArrayList<>();
-		for (Double mark : marks) {
-			this.marks.add(mark==0.0?0.02:mark);
-		}
-	}
 	/**
 	 * 雷达图构造函数
 	 * @see Radar#Radar(List)
@@ -86,7 +63,7 @@ public class Radar extends AnchorPane{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		this.initialMarks(radarDatas.marks);
+		this.marks = radarDatas.marks;
 		this.numberOfEdge = radarDatas.marks.size();
 		this.initial();
 		this.setLabelsText(radarDatas.headers);
