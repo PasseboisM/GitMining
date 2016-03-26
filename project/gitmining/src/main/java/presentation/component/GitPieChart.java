@@ -16,8 +16,6 @@ import javafx.scene.layout.AnchorPane;
 public class GitPieChart extends AnchorPane {
 	@FXML
 	private PieChart pieChart;
-	@FXML
-	private Label caption;
 	
 	public GitPieChart(List<String> headers,List<Double> datas,String title) {
 		FXMLLoader fxmlLoader = new FXMLLoader(GitPieChart.class.getResource("pieChart.fxml"));
