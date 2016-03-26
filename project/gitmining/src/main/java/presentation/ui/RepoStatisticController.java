@@ -31,7 +31,8 @@ public class RepoStatisticController {
 	
 	@FXML	private VBox repoVBox;
 	private AnchorPane rightComponentParent;
-	
+	//zhe ta ma bu shi zai hua shui?
+	//bao cuo de dai ma tong tong shan diao
 	public ScrollPane initialChart(){
 		ScrollPane pane=new ScrollPane();
 		VBox vBox=new VBox();

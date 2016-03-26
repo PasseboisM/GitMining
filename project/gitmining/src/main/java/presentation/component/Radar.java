@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import chart_data.ScoreOfRepo;
+import chart_data.RadarDatas;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -77,7 +77,7 @@ public class Radar extends AnchorPane{
 	 * @param marks 分数列表，列表类型为Double型列表（取值范围是[0,1]）
 	 * @param headers 周围文字列表，列表类型为String型
 	 */
-	public Radar(ScoreOfRepo scoreOfRepo) {
+	public Radar(RadarDatas radarDatas) {
 		FXMLLoader fxmlLoader = new FXMLLoader(Radar.class.getResource("radar.fxml"));
 		fxmlLoader.setController(this);
 		fxmlLoader.setRoot(this);
@@ -86,10 +86,10 @@ public class Radar extends AnchorPane{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		this.initialMarks(scoreOfRepo.marks);
-		this.numberOfEdge = scoreOfRepo.marks.size();
+		this.initialMarks(radarDatas.marks);
+		this.numberOfEdge = radarDatas.marks.size();
 		this.initial();
-		this.setLabelsText(scoreOfRepo.headers);
+		this.setLabelsText(radarDatas.headers);
 	}
 	/**
 	 * 初始化一些雷达图里面的控件

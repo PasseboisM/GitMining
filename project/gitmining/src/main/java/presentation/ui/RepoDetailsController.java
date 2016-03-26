@@ -1,10 +1,7 @@
 package presentation.ui;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
-import chart_data.ScoreOfRepo;
 import common.service.Repository;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,7 +24,7 @@ public class RepoDetailsController {
 	}
 	
 	private AnchorPane rightComponentParent;
-	private List<Double> marks=new ArrayList<>();
+//	private List<Double> marks=new ArrayList<>();
 //	private List<String> labels=new ArrayList<>();
 	@FXML private BorderPane borderPane;
 	@FXML private TextField repo_url;
@@ -58,12 +55,13 @@ public class RepoDetailsController {
 	}
 	
 	private void initialRadar(String repoName){
+		Radar radar = null;
 		try {
-			marks = RepoStatisticUtil.getSingleUserPoints(repoName);
+			radar = new Radar(RepoStatisticUtil.getSingleUserPoints(repoName));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		forRadar.getChildren().add(new Radar(new ScoreOfRepo(marks)));
+		forRadar.getChildren().add(radar);
 	}
 	
 	@FXML
