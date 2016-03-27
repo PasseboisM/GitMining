@@ -26,7 +26,7 @@ public class PythonRunner {
 		
 		try {
 			while ((line = bufferedReader.readLine()) != null) {
-				System.out.println(line);
+//				System.out.println(line);
 				resultList.add(line);
 			}
 		} catch (IOException e) {

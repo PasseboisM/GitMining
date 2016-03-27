@@ -138,8 +138,9 @@ public class Radar extends AnchorPane{
 	public void setRadarDatas(Iterator<RadarVertex> iterator){
 		ObservableList<Double> polygonPoints = polygon.getPoints();
 		for (int i = 0; i < numberOfEdge; i++) {
-			labels.get(i).setText(iterator.next().header);
-			double mark = iterator.next().mark;
+			RadarVertex radarVertex = iterator.next();
+			labels.get(i).setText(radarVertex.header);
+			double mark = radarVertex.mark;
 			polygonPoints.add(points.get(i * 2) * mark);
 			polygonPoints.add(points.get(i * 2 + 1) * mark);
 		}
