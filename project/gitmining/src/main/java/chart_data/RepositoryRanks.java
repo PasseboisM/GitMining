@@ -2,6 +2,8 @@ package chart_data;
 
 import java.util.Iterator;
 
+import chart_data.radar.RadarDatas;
+
 /**
  * Type: RepositoryStatistics<br />
  * 一个Repository的多项目评分统计数据（基于其数据在系统整体数据中水平进行评价）。

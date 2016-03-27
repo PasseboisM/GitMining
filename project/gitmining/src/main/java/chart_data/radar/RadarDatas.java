@@ -1,4 +1,4 @@
-package chart_data;
+package chart_data.radar;
 
 import java.util.Iterator;
 import java.util.LinkedList;

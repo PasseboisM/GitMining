@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import chart_data.RadarDatas;
+import chart_data.radar.RadarDatas;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -64,7 +64,7 @@ public class Radar extends AnchorPane{
 			e.printStackTrace();
 		}
 		this.marks = radarDatas.marks;
-		this.numberOfEdge = radarDatas.marks.size();
+		this.numberOfEdge = radarDatas.getNumOfVertexes();
 		this.initial();
 		this.setLabelsText(radarDatas.headers);
 	}
