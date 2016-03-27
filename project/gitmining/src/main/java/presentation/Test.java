@@ -25,6 +25,7 @@ public class Test extends Application {
 		List<String> headers = new ArrayList<>(Arrays.asList("a","b","c","d","e"));
 //		Line rader = new Line(marks);
 		GitPieChart pieChart = new GitPieChart(headers, datas, "testPieChart");
+//		Line line = new Line(headers,datas,"Line");
 		Scene scene = new Scene(pieChart, 800, 600);
 		primaryStage.setScene(scene);
 		primaryStage.show();
