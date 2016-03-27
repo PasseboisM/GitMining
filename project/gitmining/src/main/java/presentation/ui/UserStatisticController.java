@@ -40,10 +40,10 @@ public class UserStatisticController {
 //		vBox.getChildren().add(new GitBarChart(null,null));
 //		vBox.getChildren().add(new GitBarChart(null,null));
 //		vBox.getChildren().add(new GitBarChart(null,null));
-		vBox.getChildren().add(new Line(null,null));
-		vBox.getChildren().add(new Line(null,null));
-		vBox.getChildren().add(new Line(null,null));
-		vBox.getChildren().add(new Line(null,null));
+//		vBox.getChildren().add(new Line(null,null));
+//		vBox.getChildren().add(new Line(null,null));
+//		vBox.getChildren().add(new Line(null,null));
+//		vBox.getChildren().add(new Line(null,null));
 		pane.setContent(vBox);
 		return pane;
 		
