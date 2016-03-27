@@ -6,7 +6,7 @@ import java.util.List;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import presentation.component.GitBarChart;
+import presentation.component.GitLineChart;
 
 public class Test extends Application {
 
@@ -23,7 +23,7 @@ public class Test extends Application {
 		
 		List<String> headers = new ArrayList<>(Arrays.asList("a","b","c","d","e","f","g"));
 		List<Number> numbers = new ArrayList<>(Arrays.asList(58,69.3,100,321.2,26,233,21.5));
-		GitBarChart barChart = new GitBarChart(headers, numbers, "SName","TestBarChart", "xLabel", "yLabel");
+		GitLineChart barChart = new GitLineChart(headers, numbers, "SName","TestBarChart", "xLabel", "yLabel");
 		Scene scene = new Scene(barChart, 800, 600);
 		primaryStage.setScene(scene);
 		primaryStage.show();

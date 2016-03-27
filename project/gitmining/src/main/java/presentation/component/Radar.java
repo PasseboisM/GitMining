@@ -93,7 +93,7 @@ public class Radar extends AnchorPane{
 	
 	/**
 	 * 初始化外圈多边形和子多边形
-	 * @param points 外圈多变性坐标列表（一个X,一个Y）
+	 * @param points 外圈多边形坐标列表（一个X,一个Y）
 	 */
 	private void initialPolygons() {
 		ObservableList<Double> fatherPolygonPoints = fatherPolygon.getPoints();
@@ -105,7 +105,7 @@ public class Radar extends AnchorPane{
 	
 	/**
 	 * 初始化内圈边
-	 * @param points 外圈多变性坐标列表（一个X,一个Y）
+	 * @param points 外圈多边形坐标列表（一个X,一个Y）
 	 */
 	private void initialLines() {
 		for (int i = 0; i < numberOfEdge; i++) {
@@ -119,7 +119,7 @@ public class Radar extends AnchorPane{
 	}
 	/**
 	 * 初始化标签位置
-	 * @param points 外圈多变性坐标列表（一个X,一个Y）
+	 * @param points 外圈多边形坐标列表（一个X,一个Y）
 	 */
 	private void initialLabels() {
 		labels = new ArrayList<>();
@@ -133,7 +133,7 @@ public class Radar extends AnchorPane{
 	}
 	/**
 	 * 设置标签文字
-	 * @param iterator 标签文字列表
+	 * @param iterator
 	 */
 	public void setRadarDatas(Iterator<RadarVertex> iterator){
 		ObservableList<Double> polygonPoints = polygon.getPoints();

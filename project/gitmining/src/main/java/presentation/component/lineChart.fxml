@@ -7,17 +7,13 @@
 
 <fx:root type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane layoutX="-138.0" layoutY="-116.0" prefHeight="600.0" prefWidth="800.0">
-         <children>
-            <LineChart fx:id="lineChart" layoutX="216.0" layoutY="163.0">
-              <xAxis>
-                <CategoryAxis side="BOTTOM" fx:id="xAxis" />
-              </xAxis>
-              <yAxis>
-                <NumberAxis fx:id="yAxis" side="LEFT" />
-              </yAxis>
-            </LineChart>
-         </children>
-      </AnchorPane>
+      <LineChart fx:id="lineChart">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" fx:id="xAxis" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis fx:id="yAxis" side="LEFT" />
+        </yAxis>
+      </LineChart>
    </children>
 </fx:root>
