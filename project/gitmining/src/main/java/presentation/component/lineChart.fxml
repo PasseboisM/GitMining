@@ -9,7 +9,7 @@
    <children>
       <AnchorPane layoutX="-138.0" layoutY="-116.0" prefHeight="600.0" prefWidth="800.0">
          <children>
-            <LineChart fx:id="line" layoutX="216.0" layoutY="163.0">
+            <LineChart fx:id="lineChart" layoutX="216.0" layoutY="163.0">
               <xAxis>
                 <CategoryAxis side="BOTTOM" fx:id="xAxis" />
               </xAxis>

@@ -3,21 +3,17 @@ package presentation.component;
 import java.io.IOException;
 import java.util.List;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.chart.Axis;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
 public class GitLineChart extends AnchorPane {
 	@FXML
-	private LineChart<String, Number> line;
+	private LineChart<String, Number> lineChart;
 	@FXML
 	private CategoryAxis xAxis ;
 	@FXML
@@ -27,7 +23,7 @@ public class GitLineChart extends AnchorPane {
  * 折线图构造函数
  */	
 	public GitLineChart(List<Double> labels,List<Double> datas,String title,String xLabel,String yLabel) {
-		FXMLLoader fxmlLoader = new FXMLLoader(GitLineChart.class.getResource("line.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(GitLineChart.class.getResource("lineChart.fxml"));
 		fxmlLoader.setController(this);
 		fxmlLoader.setRoot(this);
 		try {
@@ -36,7 +32,7 @@ public class GitLineChart extends AnchorPane {
 			e.printStackTrace();
 		}
 		
-		line.setTitle(title);
+		lineChart.setTitle(title);
 		xAxis.setLabel(xLabel);
 		yAxis.setLabel(yLabel);
 		this.initial();
@@ -55,7 +51,7 @@ public class GitLineChart extends AnchorPane {
         series.getData().add(new XYChart.Data(4.0+"", 24.0));
         series.getData().add(new XYChart.Data(5.0+"", 34.0));
         
-        line.getData().add(series);
+        lineChart.getData().add(series);
 	}
 
 }
