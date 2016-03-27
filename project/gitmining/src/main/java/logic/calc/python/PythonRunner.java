@@ -38,7 +38,7 @@ public class PythonRunner {
 		try {
 			PythonRunner.runpython("repo_json_to_csv.py");
 //			PythonRunner.runpython("user_json_to_csv.py");
-			PythonRunner.runpython("statistics_user.py","0-wiz-0");
+//			PythonRunner.runpython("statistics_user.py","0-wiz-0");
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (InterruptedException e) {

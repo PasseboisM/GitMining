@@ -4,7 +4,7 @@ import numpy
 import json
 import sys
 
-folder_name = 'D:/program/git/GitMiningByTeamMole/project/gitmining/LocalData/user/'
+folder_name = 'LocalData/user/'
 # user = '0-wiz-0' + '.txt'
 user = sys.argv[1] + '.txt'
 colomns = ['followers','following','public_gists','public_repos']
