@@ -7,7 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import presentation.component.Bar;
+import presentation.component.GitBarChart;
 import presentation.component.Line;
 
 public class UserStatisticController {
@@ -36,10 +36,10 @@ public class UserStatisticController {
 		//zhe shui hua de
 		//wo shang wo ye xing
 //		vBox.getChildren().add(new GitPieChart(null,null));
-		vBox.getChildren().add(new Bar(null,null));
-		vBox.getChildren().add(new Bar(null,null));
-		vBox.getChildren().add(new Bar(null,null));
-		vBox.getChildren().add(new Bar(null,null));
+//		vBox.getChildren().add(new GitBarChart(null,null));
+//		vBox.getChildren().add(new GitBarChart(null,null));
+//		vBox.getChildren().add(new GitBarChart(null,null));
+//		vBox.getChildren().add(new GitBarChart(null,null));
 		vBox.getChildren().add(new Line(null,null));
 		vBox.getChildren().add(new Line(null,null));
 		vBox.getChildren().add(new Line(null,null));

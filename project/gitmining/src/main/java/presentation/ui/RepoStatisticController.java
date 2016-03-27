@@ -7,7 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import presentation.component.Bar;
+import presentation.component.GitBarChart;
 import presentation.component.GitPieChart;
 
 public class RepoStatisticController {
@@ -37,12 +37,12 @@ public class RepoStatisticController {
 		ScrollPane pane=new ScrollPane();
 		VBox vBox=new VBox();
 //		vBox.getChildren().add(new GitPieChart(null));
-		vBox.getChildren().add(new Bar(null,null));
-		vBox.getChildren().add(new Bar(null,null));
-		vBox.getChildren().add(new Bar(null,null));
-		vBox.getChildren().add(new Bar(null,null));
-		vBox.getChildren().add(new Bar(null,null));
-		vBox.getChildren().add(new Bar(null,null));
+//		vBox.getChildren().add(new GitBarChart(null,null));
+//		vBox.getChildren().add(new GitBarChart(null,null));
+//		vBox.getChildren().add(new GitBarChart(null,null));
+//		vBox.getChildren().add(new GitBarChart(null,null));
+//		vBox.getChildren().add(new GitBarChart(null,null));
+//		vBox.getChildren().add(new GitBarChart(null,null));
 		pane.setContent(vBox);
 		return pane;
 		

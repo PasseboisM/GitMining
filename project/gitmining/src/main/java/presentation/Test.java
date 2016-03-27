@@ -8,7 +8,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import presentation.component.Bar;
+import presentation.component.GitBarChart;
 import presentation.component.GitPieChart;
 import presentation.component.Line;
 
@@ -23,9 +23,14 @@ public class Test extends Application {
 		datas.add(7.0);
 		datas.add(9.0);
 		List<String> headers = new ArrayList<>(Arrays.asList("a","b","c","d","e"));
-//		Line rader = new Line(marks);
 		GitPieChart pieChart = new GitPieChart(headers, datas, "testPieChart");
+<<<<<<< HEAD
 //		Line line = new Line(headers,datas,"Line");
+=======
+		
+		
+//		GitBarChart barChart = new GitBarChart(null, null, "TestBarChart", "xLabel", "yLabel");
+>>>>>>> 146db7c2b931e214761809842bd8566a6b30afb5
 		Scene scene = new Scene(pieChart, 800, 600);
 		primaryStage.setScene(scene);
 		primaryStage.show();
