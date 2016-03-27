@@ -13,23 +13,18 @@ import javafx.scene.layout.AnchorPane;
 
 public class GitBarChart extends AnchorPane {
 	@FXML
-	private BarChart<String,Number> barChar;
+	private BarChart<String,Number> barChart;
 	@FXML
 	private CategoryAxis xAxis;
 	@FXML
 	private NumberAxis yAxis;
 	
-	 final static String austria = "Austria";
-	    final static String brazil = "Brazil";
-	    final static String france = "France";
-	    final static String italy = "Italy";
-	    final static String usa = "USA";
 
 	/**
 	 * 柱状图构造函数
 	 */
-	public GitBarChart(List<String> columns, List<Number> values,String title,String xLabel,String yLabel) {
-		FXMLLoader fxmlLoader = new FXMLLoader(GitBarChart.class.getResource("bar.fxml"));
+	public GitBarChart(List<String> columns, List<Number> values,String seriesName,String title,String xLabel,String yLabel) {
+		FXMLLoader fxmlLoader = new FXMLLoader(GitBarChart.class.getResource("barChart.fxml"));
 		fxmlLoader.setController(this);
 		fxmlLoader.setRoot(this);
 		try {
@@ -37,10 +32,10 @@ public class GitBarChart extends AnchorPane {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		barChar.setTitle(title);
+		barChart.setTitle(title);
 		xAxis.setLabel(xLabel);
 		yAxis.setLabel(yLabel);
-		this.initial();
+		this.initial(columns,values,seriesName);
 	}
 	
 
@@ -48,16 +43,20 @@ public class GitBarChart extends AnchorPane {
 	 * 初始化柱状图
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private void initial() {
-		XYChart.Series series1 = new XYChart.Series();
-        series1.setName("test");       
-        series1.getData().add(new XYChart.Data(austria,25601.34));
-        series1.getData().add(new XYChart.Data(brazil,20148.82));
-        series1.getData().add(new XYChart.Data(france,10000));
-        series1.getData().add(new XYChart.Data(italy,35407.15));
-        series1.getData().add(new XYChart.Data(usa,12000));  
-        
-        barChar.getData().add(series1);
+	private void initial(List<String> columns, List<Number> values, String seriesName) {
+		XYChart.Series series = new XYChart.Series();
+        series.setName(seriesName);
+        for (int i = 0; i < columns.size(); i++) {
+        	XYChart.Data data =new XYChart.Data(columns.get(i),values.get(i));
+            series.getData().add(data);
+        }
+//        Node node = data.getNode();
+//        Tooltip tooltip = new Tooltip(String.valueOf(999));
+//        yAxis.get
+//		Tooltip.install(xAxis, tooltip);
+        barChart.getData().add(series);
+        barChart.setCategoryGap(500/columns.size());
+
     }
 
 }
