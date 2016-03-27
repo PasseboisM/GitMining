@@ -5,11 +5,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * Modified at: 
  * Type:GeneralStatistics
  * 内部包含了按照fork number进行统计、划分区间的Repository分布情况。
  * */
+
 public class ForkNumberRanges {
-	
 	
 	private List<ForkNumberRange> repositoryRanges = new LinkedList<>();
 	private int gap = 100;
@@ -35,9 +36,6 @@ public class ForkNumberRanges {
 		this.gap = gap;
 	}
 
-
-
-
 	public class ForkNumberRange {
 		public final int lowerBound;
 		public final int higherBound;
@@ -49,5 +47,4 @@ public class ForkNumberRanges {
 			this.numOfRepos = numOfRepos;
 		}
 	}
-
 }
