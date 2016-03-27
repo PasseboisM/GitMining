@@ -27,7 +27,7 @@ public abstract class LogicServiceFactory {
 	 * TODO 确定接口内容后填写注释
 	 * @return
 	 */
-	public abstract ChartMaker getChartMaker();
+	public abstract StatisticsMaker getChartMaker();
 	
 	/**
 	 * 获取对逻辑层服务进行设置的对象。

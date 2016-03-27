@@ -2,7 +2,7 @@ package logic;
 
 import logic.data.GeneralGetterDefault;
 import logic.data.SearchServiceDefault;
-import logic.service.ChartMaker;
+import logic.service.StatisticsMaker;
 import logic.service.GeneralGetter;
 import logic.service.LogicServiceFactory;
 import logic.service.SearchService;
@@ -27,7 +27,7 @@ public class BasicLogicServiceFactory extends LogicServiceFactory {
 		return new SearchServiceDefault();
 	}
 
-	public ChartMaker getChartMaker() {
+	public StatisticsMaker getChartMaker() {
 		// TODO Auto-generated method stub
 		return null;
 	}
