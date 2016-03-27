@@ -14,8 +14,7 @@ def byteify(input):
     else:
         return input
 
-
-folder_name = 'D:/program/git/GitMiningByTeamMole/project/gitmining/LocalData/repository/'
+folder_name = os.path.abspath('.')+'/LocalData/repository/'
 json_datas = []
 for subfolder in os.listdir(folder_name):
     for file in os.listdir(folder_name+subfolder):
@@ -24,5 +23,5 @@ for subfolder in os.listdir(folder_name):
 json_datas = byteify(json_datas)
 user_datas = DataFrame(json_datas)
 user_datas.to_csv("LocalData/repo.csv")
-# print 'done'
+print 'done'
 

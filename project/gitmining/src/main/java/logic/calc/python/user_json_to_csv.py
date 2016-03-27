@@ -14,8 +14,7 @@ def byteify(input):
     else:
         return input
 
-
-folder_name = 'D:/program/git/GitMiningByTeamMole/project/gitmining/LocalData/user/'
+folder_name = os.path.abspath('.')+'/LocalData/user/'
 json_datas = []
 for file in os.listdir(folder_name):
     user_data = json.loads(open(folder_name+file,'r').read())
