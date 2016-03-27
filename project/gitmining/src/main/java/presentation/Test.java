@@ -6,11 +6,10 @@ import java.util.List;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import presentation.component.GitBarChart;
+import presentation.component.GitLineChart;
 import presentation.component.GitPieChart;
-import presentation.component.Line;
 
 public class Test extends Application {
 
@@ -23,15 +22,13 @@ public class Test extends Application {
 		datas.add(7.0);
 		datas.add(9.0);
 		List<String> headers = new ArrayList<>(Arrays.asList("a","b","c","d","e"));
-		GitPieChart pieChart = new GitPieChart(headers, datas, "testPieChart");
-<<<<<<< HEAD
-//		Line line = new Line(headers,datas,"Line");
-=======
+//		GitPieChart pieChart = new GitPieChart(headers, datas, "testPieChart");
+
+		GitLineChart lineChart = new GitLineChart(null,null,"title","x","y");
 		
-		
-//		GitBarChart barChart = new GitBarChart(null, null, "TestBarChart", "xLabel", "yLabel");
->>>>>>> 146db7c2b931e214761809842bd8566a6b30afb5
-		Scene scene = new Scene(pieChart, 800, 600);
+//	    GitBarChart barChart = new GitBarChart(null, null, "TestBarChart", "xLabel", "yLabel");
+
+		Scene scene = new Scene(lineChart, 800, 600);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}

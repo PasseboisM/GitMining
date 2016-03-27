@@ -8,7 +8,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import presentation.component.GitBarChart;
-import presentation.component.Line;
+import presentation.component.GitLineChart;
 
 public class UserStatisticController {
 
@@ -40,10 +40,10 @@ public class UserStatisticController {
 //		vBox.getChildren().add(new GitBarChart(null,null));
 //		vBox.getChildren().add(new GitBarChart(null,null));
 //		vBox.getChildren().add(new GitBarChart(null,null));
-		vBox.getChildren().add(new Line(null,null));
-		vBox.getChildren().add(new Line(null,null));
-		vBox.getChildren().add(new Line(null,null));
-		vBox.getChildren().add(new Line(null,null));
+//		vBox.getChildren().add(new GitLineChart(null,null));
+//		vBox.getChildren().add(new GitLineChart(null,null));
+//		vBox.getChildren().add(new GitLineChart(null,null));
+//		vBox.getChildren().add(new GitLineChart(null,null));
 		pane.setContent(vBox);
 		return pane;
 		
