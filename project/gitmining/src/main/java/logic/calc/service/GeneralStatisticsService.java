@@ -2,6 +2,7 @@ package logic.calc.service;
 
 import chart_data.FollowerNumberRanges;
 import chart_data.ForkNumberRanges;
+import chart_data.LanguageCounts;
 
 
 /**
@@ -22,4 +23,9 @@ public interface GeneralStatisticsService {
 	 * 获取当前系统中所有仓库的Fork数分布。
 	 */
 	public ForkNumberRanges getForkNumberRanges();
+	
+	/**
+	 * 获取
+	 */
+	public LanguageCounts getLanguageCounts();
 }
