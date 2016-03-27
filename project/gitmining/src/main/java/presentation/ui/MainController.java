@@ -82,8 +82,8 @@ public class MainController extends Application implements Observer{
 	@FXML private AnchorPane rightComponentParent;
 	@FXML private Button buttonRepoSearch;
 	@FXML private Button buttonUserSearch;
-	@FXML private Button buttonRepoStatistic;
-	@FXML private Button buttonUserStatistic;
+	@FXML private Button buttonRepoStatistic1,buttonRepoStatistic2,buttonRepoStatistic3,buttonRepoStatistic4;
+	@FXML private Button buttonUserStatistic1,buttonUserStatistic2,buttonUserStatistic3,buttonUserStatistic4,buttonUserStatistic5;
 	@FXML private ProgressBar progressBar;
 	@FXML private ToggleButton buttonLocalMode;
 	@FXML private ToggleButton buttonOnlineMode;
@@ -143,13 +143,51 @@ public class MainController extends Application implements Observer{
 	}
 	
 	@FXML
-	private void onRepoStatisticClicked(MouseEvent event) {
-		buttonRepoStatistic.setDisable(true);
-		buttonUserStatistic.setDisable(false);
+	private void onRepoStatisticClicked1(MouseEvent event) {
+		
+		rightComponentParent.getChildren().clear();
+		try {
+			System.out.println("do!");
+			rightComponentParent.getChildren().add(RepoStatistic_1Controller.getInstance(rightComponentParent));
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@FXML
+	private void onRepoStatisticClicked2(MouseEvent event) {
+		
+		rightComponentParent.getChildren().clear();
+		try {
+			System.out.println("do2!");
+			rightComponentParent.getChildren().add(RepoStatistic_2Controller.getInstance(rightComponentParent));
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@FXML
+	private void onRepoStatisticClicked3(MouseEvent event) {
+		
 		rightComponentParent.getChildren().clear();
 		try {
 //			System.out.println("do!");
-			rightComponentParent.getChildren().add(RepoStatisticController.getInstance(rightComponentParent));
+			rightComponentParent.getChildren().add(RepoStatistic_3Controller.getInstance(rightComponentParent));
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@FXML
+	private void onRepoStatisticClicked4(MouseEvent event) {
+		
+		rightComponentParent.getChildren().clear();
+		try {
+//			System.out.println("do!");
+			rightComponentParent.getChildren().add(RepoStatistic_4Controller.getInstance(rightComponentParent));
 			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -157,18 +195,77 @@ public class MainController extends Application implements Observer{
 	}
 	
 	@FXML 
-	private void onUserStatisticClicked(MouseEvent event){
-		buttonRepoStatistic.setDisable(false);
-		buttonUserStatistic.setDisable(true);
+	private void onUserStatisticClicked1(MouseEvent event){
+	
 		rightComponentParent.getChildren().clear();
 		try {
-
-			rightComponentParent.getChildren().add(UserStatisticController.getInstance(rightComponentParent));
+			System.out.println("did!");
+			rightComponentParent.getChildren().add(UserStatistic_1Controller.getInstance(rightComponentParent));
 			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	@FXML 
+	private void onUserStatisticClicked2(MouseEvent event){
+	
+		rightComponentParent.getChildren().clear();
+		try {
+			System.out.println("did2!");
+			rightComponentParent.getChildren().add(UserStatistic_2Controller.getInstance(rightComponentParent));
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	@FXML 
+	private void onUserStatisticClicked3(MouseEvent event){
+	
+		rightComponentParent.getChildren().clear();
+		try {
+
+			rightComponentParent.getChildren().add(UserStatistic_3Controller.getInstance(rightComponentParent));
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	@FXML 
+	private void onUserStatisticClicked4(MouseEvent event){
+	
+		rightComponentParent.getChildren().clear();
+		try {
+
+			rightComponentParent.getChildren().add(UserStatistic_4Controller.getInstance(rightComponentParent));
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	@FXML 
+	private void onUserStatisticClicked5(MouseEvent event){
+	
+		rightComponentParent.getChildren().clear();
+		try {
+
+			rightComponentParent.getChildren().add(UserStatistic_5Controller.getInstance(rightComponentParent));
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
 	
 
 	@Override
