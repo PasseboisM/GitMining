@@ -2,9 +2,11 @@ package presentation.component;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import chart_data.radar.RadarDatas;
+import chart_data.radar.RadarDatas.RadarVertex;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,9 +42,9 @@ public class Radar extends AnchorPane{
 	 */
 	@FXML private AnchorPane linesFather;
 	/**
-	 * 分数列表
+	 * 坐标列表
 	 */
-	private List<Double>	marks;
+	private List<Double>	points;
 	/**
 	 * 文字列表
 	 */
@@ -63,19 +65,18 @@ public class Radar extends AnchorPane{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		this.marks = radarDatas.marks;
 		this.numberOfEdge = radarDatas.getNumOfVertexes();
+		this.points = this.getPointPositions();
 		this.initial();
-		this.setLabelsText(radarDatas.headers);
+		this.setRadarDatas(radarDatas.getVertexes());
 	}
 	/**
 	 * 初始化一些雷达图里面的控件
 	 */
 	private void initial() {
-		List<Double> points = this.getPointPositions();
-		this.initialPolygons(points);
-		this.initialLines(points);
-		this.initialLabels(points);
+		this.initialPolygons();
+		this.initialLines();
+		this.initialLabels();
 	}
 	/**
 	 * 获得外圈点的坐标
@@ -94,23 +95,19 @@ public class Radar extends AnchorPane{
 	 * 初始化外圈多边形和子多边形
 	 * @param points 外圈多变性坐标列表（一个X,一个Y）
 	 */
-	private void initialPolygons(List<Double> points) {
+	private void initialPolygons() {
 		ObservableList<Double> fatherPolygonPoints = fatherPolygon.getPoints();
 		ObservableList<Double> polygonPoints = polygon.getPoints();
 		fatherPolygonPoints.clear();
 		polygonPoints.clear();
 		fatherPolygonPoints.addAll(points);
-		for (int i = 0; i < numberOfEdge; i++) {
-			polygonPoints.add(points.get(i * 2) * marks.get(i));
-			polygonPoints.add(points.get(i * 2 + 1) * marks.get(i));
-		}
 	}
 	
 	/**
 	 * 初始化内圈边
 	 * @param points 外圈多变性坐标列表（一个X,一个Y）
 	 */
-	private void initialLines(List<Double> points) {
+	private void initialLines() {
 		for (int i = 0; i < numberOfEdge; i++) {
 			Line line = new Line(0, 0, points.get(i*2), points.get(i*2+1));
 			line.setLayoutX(83);
@@ -124,7 +121,7 @@ public class Radar extends AnchorPane{
 	 * 初始化标签位置
 	 * @param points 外圈多变性坐标列表（一个X,一个Y）
 	 */
-	private void initialLabels(List<Double> points) {
+	private void initialLabels() {
 		labels = new ArrayList<>();
 		for (int i = 0; i < numberOfEdge; i++) {
 			Label label = new Label();
@@ -136,11 +133,15 @@ public class Radar extends AnchorPane{
 	}
 	/**
 	 * 设置标签文字
-	 * @param headers 标签文字列表
+	 * @param iterator 标签文字列表
 	 */
-	public void setLabelsText(List<String> headers){
+	public void setRadarDatas(Iterator<RadarVertex> iterator){
+		ObservableList<Double> polygonPoints = polygon.getPoints();
 		for (int i = 0; i < numberOfEdge; i++) {
-			labels.get(i).setText(headers.get(i));
+			labels.get(i).setText(iterator.next().header);
+			double mark = iterator.next().mark;
+			polygonPoints.add(points.get(i * 2) * mark);
+			polygonPoints.add(points.get(i * 2 + 1) * mark);
 		}
 	}
 }
