@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import logic.calc.repo.RepoStatisticUtil;
+import logic.calc.service.RepositoryStatisticsService;
 import presentation.component.Radar;
 
 public class RepoDetailsController {
@@ -36,7 +37,7 @@ public class RepoDetailsController {
 	
 	private void initial(AnchorPane rightComponentParent,Repository repository) {
 		initialComponentText(repository);
-		initialRadar(repository.getFull_name());
+		initialRadar(repository);
 		this.rightComponentParent = rightComponentParent;
 	}
 	
@@ -52,10 +53,11 @@ public class RepoDetailsController {
 		labelRepoName.setText(full_name.split("/")[1]);
 	}
 	
-	private void initialRadar(String repoName){
+	private void initialRadar(Repository r){
+		RepositoryStatisticsService service = new RepoStatisticUtil();
 		Radar radar = null;
 		try {
-			radar = new Radar(RepoStatisticUtil.getSingleUserPoints(repoName));
+			radar = new Radar(service.getRanks(r));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

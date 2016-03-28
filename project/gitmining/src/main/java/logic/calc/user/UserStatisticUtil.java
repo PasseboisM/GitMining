@@ -1,4 +1,4 @@
-package logic.calc.repo;
+package logic.calc.user;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import chart_data.radar.UserRanks;
 import logic.calc.python.PythonRunner;
 //TODO 之后会移位置
 public class UserStatisticUtil {
-	private static final String SINGLE_USER_FILE =  "statistics_user.py";
+	private static final String SINGLE_USER_FILE =  "statistic_single_user_rank.py";
 	public static RadarDatas getSingleUserPoints(String name) throws IOException, InterruptedException{
 		List<String> strResult = PythonRunner.runpython(SINGLE_USER_FILE, name);
 		RadarDatas radarDatas = new UserRanks();

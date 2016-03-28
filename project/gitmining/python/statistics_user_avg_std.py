@@ -4,17 +4,8 @@ import numpy
 import json
 import sys
 
-folder_name = 'LocalData/user/'
-# user = '0-wiz-0' + '.txt'
-user = sys.argv[1] + '.txt'
 colomns = ['followers','following','public_gists','public_repos']
 
-user_data_json = json.loads(open(folder_name+user,'r').read())
-user_data = []
-for colomn in colomns:
-    user_data.append(user_data_json[colomn])
-
-# print user_data
 user_dataframe = DataFrame.from_csv("LocalData/user.csv")
 
 statis_user_data = user_dataframe[colomns]

@@ -4,17 +4,8 @@ import numpy
 import json
 import sys
 
-# folder_name = 'LocalData/repository/'
-# repo = '1stvamp/memorised' + '.txt'
-# repo = sys.argv[1] + '.txt'
 colomns = ['forks','open_issues','size','subscribers_count','watchers']
 
-# repo_data_json = json.loads(open(folder_name+repo,'r').read())
-# repo_data = []
-# for colomn in colomns:
-#     repo_data.append(repo_data_json[colomn])
-
-# print repo_data
 repo_dataframe = DataFrame.from_csv("LocalData/repo.csv")
 
 statis_repo_data = repo_dataframe[colomns]

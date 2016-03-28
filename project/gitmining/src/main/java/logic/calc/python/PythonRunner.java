@@ -9,7 +9,7 @@ import java.util.List;
 public class PythonRunner {
 	public static List<String> runpython(String fileName,String...paras) throws IOException, InterruptedException {
 		String pythonPath = System.getenv("PYTHON_PATH") + "/python.exe";
-		String folderName = "src/main/java/logic/calc/python/";
+		String folderName = "python/";
 		String[] args = new String[2+paras.length];
 		args[0] = pythonPath;
 		args[1] = folderName+fileName;
@@ -17,6 +17,7 @@ public class PythonRunner {
 			args[2+i] = paras[i];
 		}
 		Process process = Runtime.getRuntime().exec(args);
+		
 		InputStream inputStream = process.getInputStream();
 		InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
 		BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
@@ -26,7 +27,7 @@ public class PythonRunner {
 		
 		try {
 			while ((line = bufferedReader.readLine()) != null) {
-				System.out.println(line);
+//				System.out.println(line);
 				resultList.add(line);
 			}
 		} catch (IOException e) {
@@ -39,7 +40,9 @@ public class PythonRunner {
 		try {
 //			PythonRunner.runpython("repo_json_to_csv.py");
 //			PythonRunner.runpython("user_json_to_csv.py");
-			PythonRunner.runpython("statistics_user.py","0-wiz-0");
+//			PythonRunner.runpython("statistics_repo_avg_std.py");
+//			PythonRunner.runpython("statistics_user_avg_std.py");
+			PythonRunner.runpython("statistic_single_user_rank.py","15","58.5","99","101");
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (InterruptedException e) {
