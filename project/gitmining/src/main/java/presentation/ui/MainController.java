@@ -32,6 +32,15 @@ import logic.service.ServiceConfigure;
 import presentation.image.ImageFactory;
 import presentation.ui.search.RepositorySearchController;
 import presentation.ui.search.UserSearchController;
+import presentation.ui.statistics.RepoStatistic_1Controller;
+import presentation.ui.statistics.RepoStatistic_2Controller;
+import presentation.ui.statistics.RepoStatistic_3Controller;
+import presentation.ui.statistics.RepoStatistic_4Controller;
+import presentation.ui.statistics.UserStatistic_1Controller;
+import presentation.ui.statistics.UserStatistic_2Controller;
+import presentation.ui.statistics.UserStatistic_3Controller;
+import presentation.ui.statistics.UserStatistic_4Controller;
+import presentation.ui.statistics.UserStatistic_5Controller;
 
 
 public class MainController extends Application implements Observer{

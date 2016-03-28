@@ -1,4 +1,4 @@
-package presentation.ui;
+package presentation.ui.statistics;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,13 +11,15 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import presentation.component.GitBarChart;
+import presentation.component.GitLineChart;
 
-public class RepoStatistic_4Controller {
+public class UserStatistic_4Controller {
+
 	public static VBox getInstance(AnchorPane rightComponentParent) throws IOException {
-		FXMLLoader loader = new FXMLLoader(RepoStatistic_4Controller.class.getResource("repositoryStatistic4.fxml"));
+		FXMLLoader loader = new FXMLLoader(UserStatistic_4Controller.class.getResource("userStatistic4.fxml"));
 //		System.out.println("doing!");
 		VBox rootUINode = loader.load();
-		RepoStatistic_4Controller controller = loader.getController();
+		UserStatistic_4Controller controller = loader.getController();
 		controller.initial(rightComponentParent);
 //		System.out.println("done!");
 		return rootUINode;
@@ -37,7 +39,6 @@ public class RepoStatistic_4Controller {
 	private AnchorPane rightComponentParent;
 	
 	public ScrollPane initialChart(){
-		
 		List <Number> a=new ArrayList<>();
 		a.add(1.0);
 		a.add(2.0);
@@ -45,9 +46,7 @@ public class RepoStatistic_4Controller {
 		a.add(4.0);
 		a.add(5.0);
 		List<String> headers = new ArrayList<>(Arrays.asList("a","b","c","d","e"));
-		GitBarChart barChart=new GitBarChart(headers,a,"a1","a2","a3","a4");
-		
-		
+		GitLineChart lineChart=new GitLineChart(headers,a,"a1","a2","a3","a4");
 		
 		
 		ScrollPane pane=new ScrollPane();
@@ -55,7 +54,7 @@ public class RepoStatistic_4Controller {
 		vBox.setPrefWidth(1010);
 		
 	
-	vBox.getChildren().add(barChart);
+	vBox.getChildren().add(lineChart);
 
 		pane.setContent(vBox);
 	//	System.out.println("do something");

@@ -1,4 +1,4 @@
-package presentation.ui;
+package presentation.ui.statistics;
 
 import java.io.IOException;
 
