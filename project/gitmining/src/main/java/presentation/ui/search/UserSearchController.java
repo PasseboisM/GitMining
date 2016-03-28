@@ -1,4 +1,4 @@
-package presentation.ui;
+package presentation.ui.search;
 
 import java.io.IOException;
 import java.util.List;

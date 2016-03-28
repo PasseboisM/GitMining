@@ -26,12 +26,12 @@
                                           <Insets bottom="0" left="0" right="0" top="0" />
                                        </padding>
                                        <children>
-                                          <Button fx:id="buttonRepoSearch" mnemonicParsing="false" onMousePressed="#onRepoSearchClicked" prefHeight="50.0" prefWidth="150.0" stylesheets="@test.css" text="项目查询">
+                                          <Button fx:id="buttonRepoSearch" mnemonicParsing="false" onMousePressed="#onRepoSearchClicked" prefHeight="50.0" prefWidth="150.0" text="项目查询">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
                                           </Button>
-                                          <Button fx:id="buttonUserSearch" mnemonicParsing="false" onMousePressed="#onUserSearchClicked" prefHeight="50.0" prefWidth="150.0" stylesheets="@test.css" text="用户查询">
+                                          <Button fx:id="buttonUserSearch" mnemonicParsing="false" onMousePressed="#onUserSearchClicked" prefHeight="50.0" prefWidth="150.0" text="用户查询">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
@@ -66,22 +66,22 @@
                                           <Insets bottom="0" left="0" right="0" top="0" />
                                        </padding>
                                        <children>
-                                          <Button fx:id="buttonRepoStatistic1" mnemonicParsing="false" onMousePressed="#onRepoStatisticClicked1" prefHeight="50.0" prefWidth="150.0" stylesheets="@test.css" text="创建时间">
+                                          <Button fx:id="buttonRepoStatistic1" mnemonicParsing="false" onMousePressed="#onRepoStatisticClicked1" prefHeight="50.0" prefWidth="150.0" text="创建时间">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
                                           </Button>
-                                          <Button fx:id="buttonRepoStatistic2" mnemonicParsing="false" onMousePressed="#onRepoStatisticClicked2" prefHeight="50.0" prefWidth="150.0" stylesheets="@test.css" text="项目语言">
+                                          <Button fx:id="buttonRepoStatistic2" mnemonicParsing="false" onMousePressed="#onRepoStatisticClicked2" prefHeight="50.0" prefWidth="150.0" text="项目语言">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
                                           </Button>
-                                          <Button fx:id="buttonRepoStatistic3" mnemonicParsing="false" onMousePressed="#onRepoStatisticClicked3" prefHeight="50.0" prefWidth="150.0" stylesheets="@test.css" text="项目规模">
+                                          <Button fx:id="buttonRepoStatistic3" mnemonicParsing="false" onMousePressed="#onRepoStatisticClicked3" prefHeight="50.0" prefWidth="150.0" text="项目规模">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
                                           </Button>
-                                          <Button fx:id="buttonRepoStatistic4" mnemonicParsing="false" onMousePressed="#onRepoStatisticClicked4" prefHeight="50.0" prefWidth="150.0" stylesheets="@test.css" text="项目合作">
+                                          <Button fx:id="buttonRepoStatistic4" mnemonicParsing="false" onMousePressed="#onRepoStatisticClicked4" prefHeight="50.0" prefWidth="150.0" text="项目合作">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
@@ -109,27 +109,27 @@
                                           <Insets bottom="0" left="0" right="0" top="0" />
                                        </padding>
                                        <children>
-                                          <Button fx:id="buttonUserStatistic1" mnemonicParsing="false" onMousePressed="#onUserStatisticClicked1" prefHeight="50.0" prefWidth="150.0" stylesheets="@test.css" text="用户类型">
+                                          <Button fx:id="buttonUserStatistic1" mnemonicParsing="false" onMousePressed="#onUserStatisticClicked1" prefHeight="50.0" prefWidth="150.0" text="用户类型">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
                                           </Button>
-                                          <Button fx:id="buttonUserStatistic2" mnemonicParsing="false" onMousePressed="#onUserStatisticClicked2" prefHeight="50.0" prefWidth="150.0" stylesheets="@test.css" text="创建时间">
+                                          <Button fx:id="buttonUserStatistic2" mnemonicParsing="false" onMousePressed="#onUserStatisticClicked2" prefHeight="50.0" prefWidth="150.0" text="创建时间">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
                                           </Button>
-                                          <Button fx:id="buttonUserStatistic3" mnemonicParsing="false" onMousePressed="#onUserStatisticClicked3" prefHeight="50.0" prefWidth="150.0" stylesheets="@test.css" text="公司分布">
+                                          <Button fx:id="buttonUserStatistic3" mnemonicParsing="false" onMousePressed="#onUserStatisticClicked3" prefHeight="50.0" prefWidth="150.0" text="公司分布">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
                                           </Button>
-                                          <Button fx:id="buttonUserStatistic4" mnemonicParsing="false" onMousePressed="#onUserStatisticClicked4" prefHeight="50.0" prefWidth="150.0" stylesheets="@test.css" text="项目数量">
+                                          <Button fx:id="buttonUserStatistic4" mnemonicParsing="false" onMousePressed="#onUserStatisticClicked4" prefHeight="50.0" prefWidth="150.0" text="项目数量">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
                                           </Button>
-                                          <Button fx:id="buttonUserStatistic5" mnemonicParsing="false" onMousePressed="#onUserStatisticClicked5" prefHeight="50.0" prefWidth="150.0" stylesheets="@test.css" text="用户热度">
+                                          <Button fx:id="buttonUserStatistic5" mnemonicParsing="false" onMousePressed="#onUserStatisticClicked5" prefHeight="50.0" prefWidth="150.0" text="用户热度">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>

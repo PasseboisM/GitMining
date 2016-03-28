@@ -9,7 +9,7 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import presentation.ui.RepoDetailsController;
+import presentation.ui.search.RepoDetailsController;
 
 public class RepositoryMinBlock  extends BorderPane{
 	@FXML private Hyperlink repoFullName;

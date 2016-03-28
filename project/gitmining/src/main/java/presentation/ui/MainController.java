@@ -30,6 +30,8 @@ import logic.service.Loader;
 import logic.service.LogicServiceFactory;
 import logic.service.ServiceConfigure;
 import presentation.image.ImageFactory;
+import presentation.ui.search.RepositorySearchController;
+import presentation.ui.search.UserSearchController;
 
 
 public class MainController extends Application implements Observer{
