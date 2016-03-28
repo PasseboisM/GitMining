@@ -22,12 +22,12 @@ public class UserTypeStatisticsPane {
 
 	private void initial(AnchorPane rightComponentParent) {
 		this.initialChart();
-		this.rightComponentParent = rightComponentParent;
+//		this.rightComponentParent = rightComponentParent;
 	}
 
 	@FXML
 	private AnchorPane anchorPane;
-	private AnchorPane rightComponentParent;
+//	private AnchorPane rightComponentParent;
 
 	public void initialChart() {
 		List<Double> a = new ArrayList<>(Arrays.asList(1.0, 2.0));

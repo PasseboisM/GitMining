@@ -22,13 +22,13 @@ public class RepoStatisticController {
 		return rootUINode;
 	}
 	private void initial(AnchorPane rightComponentParent) {
-		this.rightComponentParent = rightComponentParent;
+//		this.rightComponentParent = rightComponentParent;
 		initialChart();
 	}
 	
 	
 	@FXML	private VBox repoVBox;
-	private AnchorPane rightComponentParent;
+//	private AnchorPane rightComponentParent;
 	//zhe ta ma bu shi zai hua shui?
 	//bao cuo de dai ma tong tong shan diao
 	public ScrollPane initialChart(){

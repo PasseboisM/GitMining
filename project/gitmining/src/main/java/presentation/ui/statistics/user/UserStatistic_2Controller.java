@@ -26,7 +26,7 @@ public class UserStatistic_2Controller {
 	private void initial(AnchorPane rightComponentParent) {
 		vMain.getChildren().add(initialChart());
 		
-		this.rightComponentParent=rightComponentParent;
+//		this.rightComponentParent=rightComponentParent;
 		
 		
 	}
@@ -35,7 +35,7 @@ public class UserStatistic_2Controller {
 	@FXML
 	private VBox vMain;
 	
-	private AnchorPane rightComponentParent;
+//	private AnchorPane rightComponentParent;
 	
 	public ScrollPane initialChart(){
 		List <Number> a=new ArrayList<>();
