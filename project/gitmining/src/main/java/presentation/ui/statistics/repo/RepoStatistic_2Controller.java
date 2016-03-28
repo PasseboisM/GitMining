@@ -13,6 +13,10 @@ import javafx.scene.layout.VBox;
 import presentation.component.GitBarChart;
 
 
+
+/*项目语言分类的统计的柱状图
+ * */
+
 public class RepoStatistic_2Controller {
 	public static VBox getInstance(AnchorPane rightComponentParent) throws IOException {
 		FXMLLoader loader = new FXMLLoader(RepoStatistic_2Controller.class.getResource("repositoryStatistic2.fxml"));
@@ -26,7 +30,7 @@ public class RepoStatistic_2Controller {
 	private void initial(AnchorPane rightComponentParent) {
 		vMain.getChildren().add(initialChart());
 		
-//		this.rightComponentParent=rightComponentParent;
+
 		
 		
 	}
@@ -35,7 +39,7 @@ public class RepoStatistic_2Controller {
 	@FXML
 	private VBox vMain;
 	
-//	private AnchorPane rightComponentParent;
+
 	
 	public ScrollPane initialChart(){
 		

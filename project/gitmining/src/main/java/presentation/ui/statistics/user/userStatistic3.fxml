@@ -4,4 +4,4 @@
 <?import javafx.scene.layout.*?>
 
 
-<VBox fx:id="vMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.ui.UserStatistic_3Controller"/>
+<VBox fx:id="vMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.ui.statistics.user.UserStatistic_3Controller"/>

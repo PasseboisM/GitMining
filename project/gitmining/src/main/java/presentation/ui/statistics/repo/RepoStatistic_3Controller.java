@@ -12,6 +12,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import presentation.component.GitBarChart;
 
+/*统计项目规模的柱状图
+ * */
+
+
+
 public class RepoStatistic_3Controller {
 	public static VBox getInstance(AnchorPane rightComponentParent) throws IOException {
 		FXMLLoader loader = new FXMLLoader(RepoStatistic_3Controller.class.getResource("repositoryStatistic3.fxml"));
@@ -37,6 +42,8 @@ public class RepoStatistic_3Controller {
 //	private AnchorPane rightComponentParent;
 	
 	public ScrollPane initialChart(){
+	
+		
 		
 		List <Number> a=new ArrayList<>();
 		a.add(1.0);

@@ -12,6 +12,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import presentation.component.GitBarChart;
 
+/*项目合作者数量分类的柱状图
+ * */
+
+
 public class RepoStatistic_4Controller {
 	public static VBox getInstance(AnchorPane rightComponentParent) throws IOException {
 		FXMLLoader loader = new FXMLLoader(RepoStatistic_4Controller.class.getResource("repositoryStatistic4.fxml"));

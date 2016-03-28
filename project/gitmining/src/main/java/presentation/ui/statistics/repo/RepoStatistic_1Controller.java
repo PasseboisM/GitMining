@@ -15,7 +15,8 @@ import presentation.component.GitPieChart;
 
 public class RepoStatistic_1Controller {
 	
-	
+/*仓库创建时间相关的饼图
+ * */	
 	
 	public static VBox getInstance(AnchorPane rightComponentParent) throws IOException {
 		FXMLLoader loader = new FXMLLoader(RepoStatistic_1Controller.class.getResource("repositoryStatistic.fxml"));
