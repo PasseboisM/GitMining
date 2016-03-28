@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -137,12 +138,16 @@ public class Radar extends AnchorPane{
 	 */
 	public void setRadarDatas(Iterator<RadarVertex> iterator){
 		ObservableList<Double> polygonPoints = polygon.getPoints();
+		Tooltip tooltip = new Tooltip("Score of Repository");
 		for (int i = 0; i < numberOfEdge; i++) {
 			RadarVertex radarVertex = iterator.next();
-			labels.get(i).setText(radarVertex.header);
+			String header = radarVertex.header;
 			double mark = radarVertex.mark;
+			labels.get(i).setText(header);
 			polygonPoints.add(points.get(i * 2) * mark);
 			polygonPoints.add(points.get(i * 2 + 1) * mark);
+			tooltip.setText(tooltip.getText()+"\n"+header+" : "+String.format("%.2f", mark*100)+"%");
 		}
+		Tooltip.install(this, tooltip);
 	}
 }

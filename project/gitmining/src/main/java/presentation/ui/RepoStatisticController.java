@@ -7,8 +7,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import presentation.component.GitBarChart;
-import presentation.component.GitPieChart;
 
 public class RepoStatisticController {
 	

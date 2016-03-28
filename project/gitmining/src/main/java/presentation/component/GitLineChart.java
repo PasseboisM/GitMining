@@ -34,7 +34,6 @@ public class GitLineChart extends AnchorPane {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 		lineChart.setTitle(title);
 		xAxis.setLabel(xLabel);
 		yAxis.setLabel(yLabel);
