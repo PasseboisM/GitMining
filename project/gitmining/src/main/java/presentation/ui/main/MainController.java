@@ -1,4 +1,4 @@
-package presentation.ui;
+package presentation.ui.main;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
