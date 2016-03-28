@@ -3,6 +3,7 @@ package logic.calc.service;
 import chart_data.FollowerNumberRanges;
 import chart_data.ForkNumberRanges;
 import chart_data.LanguageCounts;
+import chart_data.RepoCreateOnTimeCounts;
 
 
 /**
@@ -25,7 +26,15 @@ public interface GeneralStatisticsService {
 	public ForkNumberRanges getForkNumberRanges();
 	
 	/**
-	 * 获取
+	 * 获取所有项目的（主）语言分布情况
 	 */
 	public LanguageCounts getLanguageCounts();
+	
+	/**
+	 * 获取所有仓库关于创建时间的分布（按年分组）
+	 */
+	public RepoCreateOnTimeCounts getRepoCreateOnTimeCounts();
+	
+	
+	
 }

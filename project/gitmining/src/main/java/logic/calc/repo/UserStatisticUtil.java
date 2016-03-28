@@ -6,14 +6,14 @@ import java.util.Arrays;
 import java.util.List;
 
 import chart_data.radar.RadarDatas;
-import chart_data.radar.UserRadarDatas;
+import chart_data.radar.UserRanks;
 import logic.calc.python.PythonRunner;
 //TODO 之后会移位置
 public class UserStatisticUtil {
 	private static final String SINGLE_USER_FILE =  "statistics_user.py";
 	public static RadarDatas getSingleUserPoints(String name) throws IOException, InterruptedException{
 		List<String> strResult = PythonRunner.runpython(SINGLE_USER_FILE, name);
-		RadarDatas radarDatas = new UserRadarDatas();
+		RadarDatas radarDatas = new UserRanks();
 		List<String> headers = new ArrayList<>(Arrays.asList("followers", "following", "public_gists", "public_repos"));
 		for (int i = 0; i < headers.size(); i++) {
 			radarDatas.addVertex(headers.get(i), Double.parseDouble(strResult.get(i)));

@@ -1,8 +1,7 @@
-package chart_data;
+package chart_data.radar;
 
 import java.util.Iterator;
 
-import chart_data.radar.RadarDatas;
 
 /**
  * Type: RepositoryStatistics<br />
@@ -26,4 +25,5 @@ public class RepositoryRanks extends RadarDatas {
 	public Iterator<RadarVertex> getVertexes() {
 		return super.getVertexes();
 	}
+	
 }

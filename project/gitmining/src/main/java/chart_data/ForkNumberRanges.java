@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Modified at: 
  * Type:GeneralStatistics
  * 内部包含了按照fork number进行统计、划分区间的Repository分布情况。
  * */
