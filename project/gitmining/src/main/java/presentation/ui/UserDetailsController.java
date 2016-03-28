@@ -9,13 +9,12 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 
 
 public class UserDetailsController {
-	public static BorderPane getInstance(AnchorPane rightComponentParent,GitUser user) throws IOException {
+	public static AnchorPane getInstance(AnchorPane rightComponentParent,GitUser user) throws IOException {
 		FXMLLoader loader = new FXMLLoader(UserDetailsController.class.getResource("userDetails.fxml"));
-		BorderPane pane = loader.load();
+		AnchorPane pane = loader.load();
 		UserDetailsController controller = loader.getController();
 		controller.initial(rightComponentParent,user);
 		return pane;
@@ -55,11 +54,11 @@ public class UserDetailsController {
 	@FXML	private Label labelRepos;
 	@FXML	private Label labelCreatedAt;
 	@FXML	private Label labelUpdatedAt;
-	@FXML    private BorderPane borderPane;
+	@FXML    private AnchorPane anchorPane;
 	@FXML    private ImageView imageView;
 	
 	@FXML
 	private void returnToSearchController() {
-		rightComponentParent.getChildren().remove(borderPane);
+		rightComponentParent.getChildren().remove(anchorPane);
 	}
 }
