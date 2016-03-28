@@ -1,5 +1,6 @@
 package logic;
 
+import logic.calc.StatisticsMakerDefault;
 import logic.data.GeneralGetterDefault;
 import logic.data.SearchServiceDefault;
 import logic.service.StatisticsMaker;
@@ -18,23 +19,25 @@ import logic.service.ServiceConfigure;
 public class BasicLogicServiceFactory extends LogicServiceFactory {
 
 	GeneralGetter getter = new GeneralGetterDefault();
+	ServiceConfigure configure = new ServiceConfigureDefault();
+	StatisticsMaker statistics = new StatisticsMakerDefault();
+	SearchService search = new SearchServiceDefault();
 	
 	public GeneralGetter getGeneralGetter() {
 		return getter;
 	}
 
 	public SearchService getSearchService() {
-		return new SearchServiceDefault();
+		return search;
 	}
 
-	public StatisticsMaker getChartMaker() {
-		// TODO Auto-generated method stub
-		return null;
+	public StatisticsMaker getStatisticsMaker() {
+		return statistics;
 	}
 
 	@Override
 	public ServiceConfigure getServiceConfigure() {
-		return new ServiceConfigureDefault();
+		return configure;
 	}
 
 }

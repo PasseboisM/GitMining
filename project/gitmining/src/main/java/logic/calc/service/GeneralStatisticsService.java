@@ -4,6 +4,9 @@ import chart_data.FollowerNumberRanges;
 import chart_data.ForkNumberRanges;
 import chart_data.LanguageCounts;
 import chart_data.RepoCreateOnTimeCounts;
+import chart_data.StarCountRanges;
+import chart_data.UserCreateOnTimeCounts;
+import chart_data.UserTypeCounts;
 
 
 /**
@@ -35,6 +38,19 @@ public interface GeneralStatisticsService {
 	 */
 	public RepoCreateOnTimeCounts getRepoCreateOnTimeCounts();
 	
+	/**
+	 * 获取所有用户关于创建时间的分布（按年分组）
+	 */
+	public UserCreateOnTimeCounts getUserCreateOnTimeCounts();
 	
+	/**
+	 * 获取所有仓库关于其StarGazer数目的分布
+	 */
+	public StarCountRanges getStarCountRanges();
+	
+	/**
+	 * 获取抽象GitUser关于其类型的分布（User/Organization）
+	 */
+	public UserTypeCounts getUserTypeCounts();
 	
 }

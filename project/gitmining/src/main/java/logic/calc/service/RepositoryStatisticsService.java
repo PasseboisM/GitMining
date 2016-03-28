@@ -15,6 +15,8 @@ public interface RepositoryStatisticsService {
 
 	/**
 	 * 获取某个Repository的综合评分
+	 * @param r 待分析的Repository对象
+	 * @return RepositoryRanks 内含此Repository综合评分的对象
 	 */
 	public RepositoryRanks getRanks(Repository r);
 	
