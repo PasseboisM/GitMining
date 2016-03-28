@@ -23,5 +23,5 @@ for subfolder in os.listdir(folder_name):
 json_datas = byteify(json_datas)
 user_datas = DataFrame(json_datas)
 user_datas.to_csv("LocalData/repo.csv")
-print 'done'
+# print 'done'
 

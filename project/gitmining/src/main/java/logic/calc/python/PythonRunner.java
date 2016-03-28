@@ -26,7 +26,7 @@ public class PythonRunner {
 		
 		try {
 			while ((line = bufferedReader.readLine()) != null) {
-//				System.out.println(line);
+				System.out.println(line);
 				resultList.add(line);
 			}
 		} catch (IOException e) {
@@ -37,9 +37,9 @@ public class PythonRunner {
 	
 	public static void main(String[] args) {
 		try {
-			PythonRunner.runpython("repo_json_to_csv.py");
+//			PythonRunner.runpython("repo_json_to_csv.py");
 //			PythonRunner.runpython("user_json_to_csv.py");
-//			PythonRunner.runpython("statistics_user.py","0-wiz-0");
+			PythonRunner.runpython("statistics_user.py","0-wiz-0");
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (InterruptedException e) {

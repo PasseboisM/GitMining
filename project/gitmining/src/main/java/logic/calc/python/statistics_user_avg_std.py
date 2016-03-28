@@ -20,9 +20,8 @@ user_dataframe = DataFrame.from_csv("LocalData/user.csv")
 statis_user_data = user_dataframe[colomns]
 avg = numpy.average(statis_user_data,axis=0)
 std = numpy.std(statis_user_data,axis=0)
+# print zip(avg,std)
+avg_std_tuple = DataFrame(zip(avg,std),columns=['avg','std'])
+avg_std_tuple.to_csv("LocalData/user_avg_std.csv")
 
-norm_list = []
-for i in range(len(colomns)):
-    # print avg[i],std[i]
-    norm_function = norm(loc=avg[i], scale=std[i])
-    print norm_function.cdf(user_data[i])
+
