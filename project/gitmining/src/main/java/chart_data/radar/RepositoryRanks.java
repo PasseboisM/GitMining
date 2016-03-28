@@ -1,6 +1,8 @@
 package chart_data.radar;
 
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 
 
 /**
@@ -12,7 +14,10 @@ import java.util.Iterator;
  */
 public class RepositoryRanks extends RadarDatas {
 
-	//TODO 本类内可以存放一些提示信息，比如应该生成的评分项目、预期项目数目
+	//TODO 本类内可以存放一些提示信息，比如应该生成的评分项目、预期项目数目，比如下面的List
+	public static final List<String> defaultHeaders = Arrays.asList("forks",
+			"open_issues", "size", "subscribers_count", "watchers");
+	
 	
 	public void addVertex(String rankTitle, double rank) {
 		super.addVertex(rankTitle, rank);

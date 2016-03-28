@@ -24,10 +24,10 @@ public abstract class LogicServiceFactory {
 	public abstract SearchService getSearchService();
 	
 	/**
-	 * TODO 确定接口内容后填写注释
-	 * @return
+	 * 获取可用于进行整体（全体Repo/User）/单个对象（单个Repo/User）数据特征分析的接口
+	 * @return 用于进一步得到更详细接口的StatisticsMaker
 	 */
-	public abstract StatisticsMaker getChartMaker();
+	public abstract StatisticsMaker getStatisticsMaker();
 	
 	/**
 	 * 获取对逻辑层服务进行设置的对象。
