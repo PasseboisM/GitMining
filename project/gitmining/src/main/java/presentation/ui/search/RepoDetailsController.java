@@ -10,7 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import logic.calc.repo.RepoStatisticUtil;
+import logic.calc.repo.RepoStatisticsUtil;
 import logic.calc.service.RepositoryStatisticsService;
 import presentation.component.Radar;
 
@@ -54,7 +54,7 @@ public class RepoDetailsController {
 	}
 	
 	private void initialRadar(Repository r){
-		RepositoryStatisticsService service = new RepoStatisticUtil();
+		RepositoryStatisticsService service = new RepoStatisticsUtil();
 		Radar radar = null;
 		try {
 			radar = new Radar(service.getRanks(r));

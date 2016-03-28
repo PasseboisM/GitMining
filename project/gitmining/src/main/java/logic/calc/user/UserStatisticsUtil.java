@@ -9,8 +9,9 @@ import chart_data.radar.RadarDatas;
 import chart_data.radar.UserRanks;
 import logic.calc.python.PythonRunner;
 //TODO 之后会移位置
-public class UserStatisticUtil {
+public class UserStatisticsUtil {
 	private static final String SINGLE_USER_FILE =  "statistic_single_user_rank.py";
+	@Deprecated
 	public static RadarDatas getSingleUserPoints(String name) throws IOException, InterruptedException{
 		List<String> strResult = PythonRunner.runpython(SINGLE_USER_FILE, name);
 		RadarDatas radarDatas = new UserRanks();

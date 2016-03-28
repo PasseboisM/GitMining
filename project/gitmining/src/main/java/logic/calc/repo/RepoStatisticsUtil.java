@@ -1,8 +1,6 @@
 package logic.calc.repo;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import chart_data.radar.RepositoryRanks;
@@ -10,10 +8,9 @@ import common.service.Repository;
 import logic.calc.python.PythonRunner;
 import logic.calc.service.RepositoryStatisticsService;
 
-public class RepoStatisticUtil implements RepositoryStatisticsService{
+public class RepoStatisticsUtil implements RepositoryStatisticsService{
 	
 		private static final String SINGLE_REPO_FILE =  "statistic_single_repo_rank.py";
-
 
 		@Override
 		public RepositoryRanks getRanks(Repository r) {
@@ -26,7 +23,7 @@ public class RepoStatisticUtil implements RepositoryStatisticsService{
 				e.printStackTrace();
 			}
 			RepositoryRanks radarDatas = new RepositoryRanks();
-			List<String> headers = new ArrayList<>(Arrays.asList("forks", "open_issues", "size", "subscribers_count", "watchers"));
+			List<String> headers = RepositoryRanks.defaultHeaders;
 			for (int i = 0; i < headers.size(); i++) {
 				radarDatas.addVertex(headers.get(i), Double.parseDouble(strResult.get(i)));
 			}

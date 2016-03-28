@@ -7,9 +7,9 @@ todo：先完成统计模块的实现，并进行单元测试、系统测试。�
 
 who：王子安wza14
 when：第5周
-what：
-problem：
-todo：
+what：协助界面的开发，包括柱状图、饼图、给图表添加提示信息（Tooltip）、学习并开发统计python文件
+problem：界面开发过慢、python语法不熟、界面没美化
+todo：完成统计python编写工作、协助完成界面工作
 
 who：孙婧sj14
 when：第5周
