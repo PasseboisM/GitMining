@@ -1,5 +1,6 @@
 package logic.calc;
 
+import logic.calc.repo.RepoStatisticUtil;
 import logic.calc.service.GeneralStatisticsService;
 import logic.calc.service.RepositoryStatisticsService;
 import logic.calc.service.UserStatisticsService;
@@ -21,14 +22,12 @@ public class StatisticsMakerDefault implements StatisticsMaker {
 
 	@Override
 	public UserStatisticsService getUserStatistics() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public RepositoryStatisticsService getRepositoryStatistics() {
-		// TODO Auto-generated method stub
-		return null;
+		return new RepoStatisticUtil();
 	}
 
 }

@@ -45,9 +45,6 @@ public class MassiveDataSourceDefault implements MassiveDataSource {
 	
 	
 	private static final int SUGGESTED_THREAD_NUM = Runtime.getRuntime().availableProcessors() *2;
-//	private static final int SUGGESTED_THREAD_NUM = 1;
-	
-	
 	
 	public ObjChannel<String> getRepoNames() throws NetworkException {
 		//新建管道、集流器，获取URL
@@ -183,28 +180,6 @@ public class MassiveDataSourceDefault implements MassiveDataSource {
 			exec.execute(r);
 		}
 	}
-
-
-
-//	/**
-//	 * 获取接口对应的Beans模型
-//	 * TODO 将职责分散给各个接口
-//	 * @param imp 接口类型
-//	 * @return Beans类型
-//	 */
-//	private Class getBeans(Class imp) {
-//		if(imp==Repository.class) {
-//			return RepositoryBeans.class;
-//		} else if(imp==RepositoryMin.class) {
-//			return RepositoryMinBeans.class;
-//		} else if(imp==GitUserMin.class) {
-//			return GitUserMinBeans.class;
-//		} else if (imp==GitUser.class) {
-//			return GitUserBeans.class;
-//		} else {
-//			return null;
-//		}
-//	}
 
 	public MassiveDataSourceDefault() {
 		ApiMakerService apiMaker = ApiMakerService.getInstance();

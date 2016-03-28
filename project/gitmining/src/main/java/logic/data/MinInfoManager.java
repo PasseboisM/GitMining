@@ -34,7 +34,7 @@ public class MinInfoManager implements Observable {
 	private volatile boolean initException = false;
 	
 	private volatile List<RepositoryMin> repoMinInfo = new ArrayList<RepositoryMin>(4000);
-	private volatile Set<GitUserMin> userMinInfo = new HashSet<GitUserMin>(10000);
+	private volatile Set<GitUserMin> userMinInfo = new HashSet<GitUserMin>(30000);
 	
 	ReentrantLock lock = new ReentrantLock();
 	
@@ -91,7 +91,7 @@ public class MinInfoManager implements Observable {
 	}
 	
 	class CollectionWriter<T> implements Runnable {
-		private static final int page = 50;
+		private static final int page = 100;
 		ObjChannel<T> source = null;
 		Collection<T> target = null;
 		public CollectionWriter(ObjChannel<T> source, Collection<T> target) {
