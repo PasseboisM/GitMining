@@ -155,12 +155,9 @@ public class MainController extends Application implements Observer{
 	
 	@FXML
 	private void onRepoStatisticClicked1(MouseEvent event) {
-		
 		rightComponentParent.getChildren().clear();
 		try {
-			System.out.println("do!");
 			rightComponentParent.getChildren().add(RepoStatistic_1Controller.getInstance(rightComponentParent));
-			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -168,12 +165,9 @@ public class MainController extends Application implements Observer{
 	
 	@FXML
 	private void onRepoStatisticClicked2(MouseEvent event) {
-		
 		rightComponentParent.getChildren().clear();
 		try {
-			System.out.println("do2!");
 			rightComponentParent.getChildren().add(RepoStatistic_2Controller.getInstance(rightComponentParent));
-			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -181,12 +175,9 @@ public class MainController extends Application implements Observer{
 	
 	@FXML
 	private void onRepoStatisticClicked3(MouseEvent event) {
-		
 		rightComponentParent.getChildren().clear();
 		try {
-//			System.out.println("do!");
 			rightComponentParent.getChildren().add(RepoStatistic_3Controller.getInstance(rightComponentParent));
-			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -194,12 +185,9 @@ public class MainController extends Application implements Observer{
 	
 	@FXML
 	private void onRepoStatisticClicked4(MouseEvent event) {
-		
 		rightComponentParent.getChildren().clear();
 		try {
-//			System.out.println("do!");
 			rightComponentParent.getChildren().add(RepoStatistic_4Controller.getInstance(rightComponentParent));
-			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -207,12 +195,9 @@ public class MainController extends Application implements Observer{
 	
 	@FXML 
 	private void onUserStatisticClicked1(MouseEvent event){
-	
 		rightComponentParent.getChildren().clear();
 		try {
-			System.out.println("did!");
 			rightComponentParent.getChildren().add(UserStatistic_1Controller.getInstance(rightComponentParent));
-			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -221,12 +206,9 @@ public class MainController extends Application implements Observer{
 	
 	@FXML 
 	private void onUserStatisticClicked2(MouseEvent event){
-	
 		rightComponentParent.getChildren().clear();
 		try {
-			System.out.println("did2!");
 			rightComponentParent.getChildren().add(UserStatistic_2Controller.getInstance(rightComponentParent));
-			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -235,49 +217,33 @@ public class MainController extends Application implements Observer{
 	
 	@FXML 
 	private void onUserStatisticClicked3(MouseEvent event){
-	
 		rightComponentParent.getChildren().clear();
 		try {
-
 			rightComponentParent.getChildren().add(UserStatistic_3Controller.getInstance(rightComponentParent));
-			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	
 	
 	@FXML 
 	private void onUserStatisticClicked4(MouseEvent event){
-	
 		rightComponentParent.getChildren().clear();
 		try {
-
 			rightComponentParent.getChildren().add(UserStatistic_4Controller.getInstance(rightComponentParent));
-			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
 	
 	@FXML 
 	private void onUserStatisticClicked5(MouseEvent event){
-	
 		rightComponentParent.getChildren().clear();
 		try {
-
 			rightComponentParent.getChildren().add(UserStatistic_5Controller.getInstance(rightComponentParent));
-			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
-	
 
 	@Override
 	public void update() {
