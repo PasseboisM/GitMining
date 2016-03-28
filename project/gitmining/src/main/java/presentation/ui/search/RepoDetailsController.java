@@ -24,8 +24,6 @@ public class RepoDetailsController {
 	}
 	
 	private AnchorPane rightComponentParent;
-//	private List<Double> marks=new ArrayList<>();
-//	private List<String> labels=new ArrayList<>();
 	@FXML private BorderPane borderPane;
 	@FXML private TextField repo_url;
 	@FXML private Label labelStar;

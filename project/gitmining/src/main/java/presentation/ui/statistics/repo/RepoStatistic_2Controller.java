@@ -1,4 +1,4 @@
-package presentation.ui.statistics;
+package presentation.ui.statistics.repo;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,13 +12,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import presentation.component.GitBarChart;
 
-public class UserStatistic_3Controller {
 
+public class RepoStatistic_2Controller {
 	public static VBox getInstance(AnchorPane rightComponentParent) throws IOException {
-		FXMLLoader loader = new FXMLLoader(UserStatistic_3Controller.class.getResource("userStatistic3.fxml"));
+		FXMLLoader loader = new FXMLLoader(RepoStatistic_2Controller.class.getResource("repositoryStatistic2.fxml"));
 //		System.out.println("doing!");
 		VBox rootUINode = loader.load();
-		UserStatistic_3Controller controller = loader.getController();
+		RepoStatistic_2Controller controller = loader.getController();
 		controller.initial(rightComponentParent);
 //		System.out.println("done!");
 		return rootUINode;
@@ -48,12 +48,17 @@ public class UserStatistic_3Controller {
 		List<String> headers = new ArrayList<>(Arrays.asList("a","b","c","d","e"));
 		GitBarChart barChart=new GitBarChart(headers,a,"a1","a2","a3","a4");
 		
+		
+		
 		ScrollPane pane=new ScrollPane();
 		VBox vBox=new VBox();
+
 		vBox.setPrefWidth(1010);
 		
 	
 		vBox.getChildren().add(barChart);
+
+
 
 		pane.setContent(vBox);
 	//	System.out.println("do something");

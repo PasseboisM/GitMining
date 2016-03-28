@@ -7,12 +7,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Side;
 import javafx.scene.Node;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Tooltip;
-import javafx.scene.layout.AnchorPane;
 
-public class GitPieChart extends AnchorPane {
+public class GitPieChart extends PieChart {
 	@FXML
 	private PieChart pieChart;
 	
@@ -40,10 +40,10 @@ public class GitPieChart extends AnchorPane {
 			pieChartData.add(new PieChart.Data(headers.get(i), datas.get(i)*100.0/sum));
 		}
 		pieChart.setData(pieChartData);
-		
+		pieChart.setLegendSide(Side.RIGHT);
 		for (PieChart.Data data : pieChart.getData()) {
 			Node node = data.getNode();
-			Tooltip tooltip = new Tooltip(String.valueOf(data.getPieValue()) + "%");
+			Tooltip tooltip = new Tooltip(String.format("%.2f", data.getPieValue()) + "%");
 			Tooltip.install(node, tooltip);
 		}
 		pieChart.setTitle(title);

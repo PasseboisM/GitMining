@@ -6,8 +6,5 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<fx:root type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <PieChart fx:id="pieChart" />
-   </children>
-</fx:root>
+
+<fx:root fx:id="pieChart" prefHeight="650.0" prefWidth="1050.0" type="PieChart" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" />

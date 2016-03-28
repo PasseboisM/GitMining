@@ -1,4 +1,4 @@
-package presentation.ui.statistics;
+package presentation.ui.statistics.repo;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,14 +10,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import presentation.component.GitBarChart;
 
-public class RepoStatistic_4Controller {
+import presentation.component.GitPieChart;
+
+public class RepoStatistic_1Controller {
+	
+	
+	
 	public static VBox getInstance(AnchorPane rightComponentParent) throws IOException {
-		FXMLLoader loader = new FXMLLoader(RepoStatistic_4Controller.class.getResource("repositoryStatistic4.fxml"));
+		FXMLLoader loader = new FXMLLoader(RepoStatistic_1Controller.class.getResource("repositoryStatistic.fxml"));
 //		System.out.println("doing!");
 		VBox rootUINode = loader.load();
-		RepoStatistic_4Controller controller = loader.getController();
+		RepoStatistic_1Controller controller = loader.getController();
 		controller.initial(rightComponentParent);
 //		System.out.println("done!");
 		return rootUINode;
@@ -37,26 +41,30 @@ public class RepoStatistic_4Controller {
 	private AnchorPane rightComponentParent;
 	
 	public ScrollPane initialChart(){
+	
 		
-		List <Number> a=new ArrayList<>();
+		
+		List <Double> a=new ArrayList<>();
 		a.add(1.0);
 		a.add(2.0);
 		a.add(3.0);
 		a.add(4.0);
 		a.add(5.0);
 		List<String> headers = new ArrayList<>(Arrays.asList("a","b","c","d","e"));
-		GitBarChart barChart=new GitBarChart(headers,a,"a1","a2","a3","a4");
-		
-		
+		GitPieChart pieChart=new GitPieChart(headers,a,"Pie");
 		
 		
 		ScrollPane pane=new ScrollPane();
 		VBox vBox=new VBox();
 		vBox.setPrefWidth(1010);
-		
+		vBox.getChildren().add(pieChart);
 	
-	vBox.getChildren().add(barChart);
-
+//		vBox.getChildren().add(new Bar(null,null));
+//		vBox.getChildren().add(new Bar(null,null));
+//		vBox.getChildren().add(new Bar(null,null));
+//		vBox.getChildren().add(new Bar(null,null));
+//		vBox.getChildren().add(new Bar(null,null));
+//		vBox.getChildren().add(new Bar(null,null));
 		pane.setContent(vBox);
 	//	System.out.println("do something");
 		

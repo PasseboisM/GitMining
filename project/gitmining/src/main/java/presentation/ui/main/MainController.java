@@ -32,15 +32,15 @@ import logic.service.ServiceConfigure;
 import presentation.image.ImageFactory;
 import presentation.ui.search.RepositorySearchController;
 import presentation.ui.search.UserSearchController;
-import presentation.ui.statistics.RepoStatistic_1Controller;
-import presentation.ui.statistics.RepoStatistic_2Controller;
-import presentation.ui.statistics.RepoStatistic_3Controller;
-import presentation.ui.statistics.RepoStatistic_4Controller;
-import presentation.ui.statistics.UserStatistic_1Controller;
-import presentation.ui.statistics.UserStatistic_2Controller;
-import presentation.ui.statistics.UserStatistic_3Controller;
-import presentation.ui.statistics.UserStatistic_4Controller;
-import presentation.ui.statistics.UserStatistic_5Controller;
+import presentation.ui.statistics.repo.RepoStatistic_1Controller;
+import presentation.ui.statistics.repo.RepoStatistic_2Controller;
+import presentation.ui.statistics.repo.RepoStatistic_3Controller;
+import presentation.ui.statistics.repo.RepoStatistic_4Controller;
+import presentation.ui.statistics.user.UserTypeStatisticsPane;
+import presentation.ui.statistics.user.UserStatistic_2Controller;
+import presentation.ui.statistics.user.UserStatistic_3Controller;
+import presentation.ui.statistics.user.UserStatistic_4Controller;
+import presentation.ui.statistics.user.UserStatistic_5Controller;
 
 
 public class MainController extends Application implements Observer{
@@ -127,6 +127,7 @@ public class MainController extends Application implements Observer{
 						new KeyValue(image.translateYProperty(), 0)));
 		timeline.play();
 	}
+	//TODO need to refact!!!!!!!!!!
 	@FXML
 	private void onRepoSearchClicked(MouseEvent event) {
 		buttonRepoSearch.setDisable(true);
@@ -197,12 +198,11 @@ public class MainController extends Application implements Observer{
 	private void onUserStatisticClicked1(MouseEvent event){
 		rightComponentParent.getChildren().clear();
 		try {
-			rightComponentParent.getChildren().add(UserStatistic_1Controller.getInstance(rightComponentParent));
+			rightComponentParent.getChildren().add(UserTypeStatisticsPane.getInstance(rightComponentParent));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
 	
 	@FXML 
 	private void onUserStatisticClicked2(MouseEvent event){
