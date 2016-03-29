@@ -1,71 +1,43 @@
 package presentation.ui.statistics.repo;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import presentation.component.GitBarChart;
 import presentation.ui.statistics.StatisticsPane;
 
-/*项目合作者数量分类的柱状图
- * */
-
+/**
+ * 项目贡献者数量分类的柱状图
+ */
 
 public class RepoContributorStatistic implements StatisticsPane {
 	public AnchorPane getInstance(AnchorPane rightComponentParent) throws IOException {
-		FXMLLoader loader = new FXMLLoader(RepoContributorStatistic.class.getResource("repositoryContributorStatistic.fxml"));
-//		System.out.println("doing!");
+		FXMLLoader loader = new FXMLLoader(
+				RepoContributorStatistic.class.getResource("repositoryContributorStatistic.fxml"));
 		AnchorPane rootUINode = loader.load();
 		RepoContributorStatistic controller = loader.getController();
 		controller.initial(rightComponentParent);
-//		System.out.println("done!");
 		return rootUINode;
 	}
-	private void initial(AnchorPane rightComponentParent) {
-		vMain.getChildren().add(initialChart());
-		
-//		this.rightComponentParent=rightComponentParent;
-		
-		
-	}
-	
-	
-	@FXML
-	private VBox vMain;
-	
-//	private AnchorPane rightComponentParent;
-	
-	public ScrollPane initialChart(){
-		
-		List <Number> a=new ArrayList<>();
-		a.add(1.0);
-		a.add(2.0);
-		a.add(3.0);
-		a.add(4.0);
-		a.add(5.0);
-		List<String> headers = new ArrayList<>(Arrays.asList("a","b","c","d","e"));
-		GitBarChart barChart=new GitBarChart(headers,a,"a1","a2","a3","a4");
-		
-		
-		
-		
-		ScrollPane pane=new ScrollPane();
-		VBox vBox=new VBox();
-		vBox.setPrefWidth(1010);
-		
-	
-	vBox.getChildren().add(barChart);
 
-		pane.setContent(vBox);
-	//	System.out.println("do something");
-		
-		return pane;
-		
+	private void initial(AnchorPane rightComponentParent) {
+		this.initialChart();
+		// this.rightComponentParent=rightComponentParent;
+	}
+
+	@FXML
+	private AnchorPane anchorPane;
+
+	// private AnchorPane rightComponentParent;
+
+	public void initialChart() {
+		List<Number> a = Arrays.asList(1.0, 2.0, 3.0, 4.0, 5.0);
+		List<String> headers = Arrays.asList("a", "b", "c", "d", "e");
+		GitBarChart barChart = new GitBarChart(headers, a, "项目", "项目贡献者统计图", "范围", "项目个数");
+		anchorPane.getChildren().add(barChart);
 	}
 }

@@ -71,17 +71,17 @@
                                                 <Font size="18.0" />
                                              </font>
                                           </Button>
-                                          <Button fx:id="buttonRepoStatistic1" mnemonicParsing="false" onAction="#onStatisticClicked" prefHeight="50.0" prefWidth="150.0" text="创建时间">
+                                          <Button fx:id="buttonRepoCreateTime" mnemonicParsing="false" onAction="#onStatisticClicked" prefHeight="50.0" prefWidth="150.0" text="创建时间">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
                                           </Button>
-                                          <Button fx:id="buttonRepoStatistic4" mnemonicParsing="false" onAction="#onStatisticClicked" prefHeight="50.0" prefWidth="150.0" text="项目贡献者">
+                                          <Button fx:id="buttonContributor" mnemonicParsing="false" onAction="#onStatisticClicked" prefHeight="50.0" prefWidth="150.0" text="项目贡献者">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
                                           </Button>
-                                          <Button fx:id="buttonRepoStatistic3" mnemonicParsing="false" onAction="#onStatisticClicked" prefHeight="50.0" prefWidth="150.0" text="项目合作者">
+                                          <Button fx:id="buttonCollaborator" mnemonicParsing="false" onAction="#onStatisticClicked" prefHeight="50.0" prefWidth="150.0" text="项目合作者">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
@@ -114,7 +114,7 @@
                                                 <Font size="18.0" />
                                              </font>
                                           </Button>
-                                          <Button fx:id="buttonCreateTime" mnemonicParsing="false" onAction="#onStatisticClicked" prefHeight="50.0" prefWidth="150.0" text="创建时间">
+                                          <Button fx:id="buttonUserCreateTime" mnemonicParsing="false" onAction="#onStatisticClicked" prefHeight="50.0" prefWidth="150.0" text="创建时间">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>

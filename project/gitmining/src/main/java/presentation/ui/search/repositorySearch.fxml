@@ -64,7 +64,7 @@
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <ToggleButton fx:id="noSort" mnemonicParsing="false" onAction="#changeSortStrategy" stylesheets="@test.css" text="普通的排" />
+                  <ToggleButton fx:id="noSort" mnemonicParsing="false" onAction="#changeSortStrategy" text="普通的排" />
                   <ToggleButton fx:id="starSort" mnemonicParsing="false" onAction="#changeSortStrategy" text="关注降序" />
                   <ToggleButton fx:id="forkSort" mnemonicParsing="false" onAction="#changeSortStrategy" text="拷贝降序" />
                </children>

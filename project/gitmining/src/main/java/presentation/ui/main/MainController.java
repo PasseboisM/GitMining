@@ -35,6 +35,9 @@ import presentation.image.ImageFactory;
 import presentation.ui.search.RepositorySearchController;
 import presentation.ui.search.UserSearchController;
 import presentation.ui.statistics.StatisticsPane;
+import presentation.ui.statistics.repo.RepoCollaboratorStatistic;
+import presentation.ui.statistics.repo.RepoContributorStatistic;
+import presentation.ui.statistics.repo.RepoCreateTimeStatistic;
 import presentation.ui.statistics.repo.RepoLanguageStatistic;
 import presentation.ui.statistics.user.UserBlogCountStatisticsPane;
 import presentation.ui.statistics.user.UserCreateTimeStatisticsPane;
@@ -96,8 +99,8 @@ public class MainController extends Application implements Observer{
 	@FXML private AnchorPane rightComponentParent;
 	@FXML private Button buttonRepoSearch;
 	@FXML private Button buttonUserSearch;
-	@FXML private Button buttonLanguage,buttonRepoStatistic2,buttonRepoStatistic3,buttonRepoStatistic4;
-	@FXML private Button buttonUserType,buttonCreateTime,buttonInEachCompany,buttonBlogCount,buttonLocationCount,buttonEmailCount,buttonFollower,buttonFollowing;
+	@FXML private Button buttonLanguage,buttonRepoCreateTime,buttonContributor,buttonCollaborator;
+	@FXML private Button buttonUserType,buttonUserCreateTime,buttonInEachCompany,buttonBlogCount,buttonLocationCount,buttonEmailCount,buttonFollower,buttonFollowing;
 	@FXML private ProgressBar progressBar;
 	@FXML private ToggleButton buttonLocalMode;
 	@FXML private ToggleButton buttonOnlineMode;
@@ -234,9 +237,12 @@ public class MainController extends Application implements Observer{
 	private  static final  HashMap<String, StatisticsPane> MAP = new HashMap<String,StatisticsPane>() {
 		{
 			put("buttonLanguage", new RepoLanguageStatistic());
+			put("buttonRepoCreateTime", new RepoCreateTimeStatistic());
+			put("buttonContributor", new RepoContributorStatistic());
+			put("buttonCollaborator", new RepoCollaboratorStatistic());
 			
 			put("buttonUserType", new UserTypeStatisticsPane());
-			put("buttonCreateTime", new UserCreateTimeStatisticsPane());
+			put("buttonUserCreateTime", new UserCreateTimeStatisticsPane());
 			put("buttonInEachCompany", new UserInEachCompanyStatisticsPane());
 			put("buttonBlogCount", new UserBlogCountStatisticsPane());
 			put("buttonLocationCount", new UserLocationCountStatisticsPane());
