@@ -13,9 +13,9 @@ todo：完成统计python编写工作、协助完成界面工作
 
 who：孙婧sj14
 when：第5周
-what：
-problem：
-todo：
+what：做柱状图控件，整理图表的数据类型。
+problem：控件做的太慢，整理出的图表数据类型不好用
+todo：完成界面工作
 
 who：徐家逸xjyi14
 when：第5周
