@@ -39,12 +39,14 @@ import presentation.ui.statistics.repo.RepoStatistic_1Controller;
 import presentation.ui.statistics.repo.RepoStatistic_2Controller;
 import presentation.ui.statistics.repo.RepoStatistic_3Controller;
 import presentation.ui.statistics.repo.RepoStatistic_4Controller;
-import presentation.ui.statistics.user.UserTypeStatisticsPane;
+import presentation.ui.statistics.user.UserBlogCountStatisticsPane;
 import presentation.ui.statistics.user.UserCreateTimeStatisticsPane;
+import presentation.ui.statistics.user.UserEmailCountStatisticsPane;
+import presentation.ui.statistics.user.UserFollowerStatisticsPane;
+import presentation.ui.statistics.user.UserFollowingStatisticsPane;
 import presentation.ui.statistics.user.UserInEachCompanyStatisticsPane;
 import presentation.ui.statistics.user.UserLocationCountStatisticsPane;
-import presentation.ui.statistics.user.UserBlogCountStatisticsPane;
-import presentation.ui.statistics.user.UserEmailCountStatisticsPane;
+import presentation.ui.statistics.user.UserTypeStatisticsPane;
 
 
 public class MainController extends Application implements Observer{
@@ -241,6 +243,8 @@ public class MainController extends Application implements Observer{
 			put("buttonBlogCount", new UserBlogCountStatisticsPane());
 			put("buttonLocationCount", new UserLocationCountStatisticsPane());
 			put("buttonEmailCount", new UserEmailCountStatisticsPane());
+			put("buttonFollower", new UserFollowerStatisticsPane());
+			put("buttonFollowing", new UserFollowingStatisticsPane());
 		}
 	};
 

@@ -11,7 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import presentation.component.GitPieChart;
 import presentation.ui.statistics.StatisticsPane;
 
-public class UserTypeStatisticsPane extends StatisticsPane {
+public class UserTypeStatisticsPane implements StatisticsPane {
 
 	public AnchorPane getInstance(AnchorPane rightComponentParent) throws IOException {
 		FXMLLoader loader = new FXMLLoader(UserTypeStatisticsPane.class.getResource("userTypeStatistics.fxml"));

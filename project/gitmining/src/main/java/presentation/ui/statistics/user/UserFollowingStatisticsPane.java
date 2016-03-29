@@ -7,31 +7,32 @@ import java.util.List;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
-import presentation.component.GitBarChart;
+import presentation.component.GitLineChart;
 import presentation.ui.statistics.StatisticsPane;
 
-public class UserInEachCompanyStatisticsPane  implements StatisticsPane{
+public class UserFollowingStatisticsPane implements StatisticsPane {
 
 	public AnchorPane getInstance(AnchorPane rightComponentParent) throws IOException {
-		FXMLLoader loader = new FXMLLoader(UserInEachCompanyStatisticsPane.class.getResource("userInEachCompanyStatistics.fxml"));
+		FXMLLoader loader = new FXMLLoader(UserFollowingStatisticsPane.class.getResource("userFollowingStatistics.fxml"));
 		AnchorPane rootUINode = loader.load();
-		UserInEachCompanyStatisticsPane controller = loader.getController();
+		UserFollowingStatisticsPane controller = loader.getController();
 		controller.initial(rightComponentParent);
 		return rootUINode;
 	}
+
 	private void initial(AnchorPane rightComponentParent) {
 		this.initialChart();
-//		this.rightComponentParent=rightComponentParent;
+//		this.rightComponentParent = rightComponentParent;
 	}
-	
-	
+
 	@FXML
 	private AnchorPane anchorPane;
 //	private AnchorPane rightComponentParent;
-	public void initialChart(){
+
+	public void initialChart() {
 		List <Number> a = Arrays.asList(1.0,2.0,3.0,4.0,5.0);
 		List<String> headers = Arrays.asList("a","b","c","d","e");
-		GitBarChart barChart=new GitBarChart(headers,a,"用户","用户所在公司统计图","公司","用户个数");
+		GitLineChart barChart=new GitLineChart(headers,a,"用户","用户关注人数统计图","用户","关注人数");
 		anchorPane.getChildren().add(barChart);
 	}
 }

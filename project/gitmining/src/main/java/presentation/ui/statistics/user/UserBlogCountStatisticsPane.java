@@ -10,7 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import presentation.component.GitBarChart;
 import presentation.ui.statistics.StatisticsPane;
 
-public class UserBlogCountStatisticsPane extends StatisticsPane {
+public class UserBlogCountStatisticsPane implements StatisticsPane {
 
 	public AnchorPane getInstance(AnchorPane rightComponentParent) throws IOException {
 		FXMLLoader loader = new FXMLLoader(UserBlogCountStatisticsPane.class.getResource("userBlogStatistics.fxml"));

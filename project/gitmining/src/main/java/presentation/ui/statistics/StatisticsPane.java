@@ -4,10 +4,7 @@ import java.io.IOException;
 
 import javafx.scene.layout.AnchorPane;
 
-public class StatisticsPane {
+public interface StatisticsPane {
 
-	public AnchorPane getInstance(AnchorPane rightComponentParent) throws IOException {
-		return null;
-	}
-
+	public AnchorPane getInstance(AnchorPane rightComponentParent) throws IOException;
 }

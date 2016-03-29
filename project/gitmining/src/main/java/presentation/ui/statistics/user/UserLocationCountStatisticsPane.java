@@ -10,7 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import presentation.component.GitBarChart;
 import presentation.ui.statistics.StatisticsPane;
 
-public class UserLocationCountStatisticsPane extends StatisticsPane {
+public class UserLocationCountStatisticsPane implements StatisticsPane {
 
 	public AnchorPane getInstance(AnchorPane rightComponentParent) throws IOException {
 		FXMLLoader loader = new FXMLLoader(UserLocationCountStatisticsPane.class.getResource("userLocationStatistics.fxml"));
