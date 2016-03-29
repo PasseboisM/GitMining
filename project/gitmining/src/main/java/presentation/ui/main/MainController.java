@@ -35,10 +35,7 @@ import presentation.image.ImageFactory;
 import presentation.ui.search.RepositorySearchController;
 import presentation.ui.search.UserSearchController;
 import presentation.ui.statistics.StatisticsPane;
-import presentation.ui.statistics.repo.RepoCreateTimeStatistic;
 import presentation.ui.statistics.repo.RepoLanguageStatistic;
-import presentation.ui.statistics.repo.RepoCollaboratorStatistic;
-import presentation.ui.statistics.repo.RepoContributorStatistic;
 import presentation.ui.statistics.user.UserBlogCountStatisticsPane;
 import presentation.ui.statistics.user.UserCreateTimeStatisticsPane;
 import presentation.ui.statistics.user.UserEmailCountStatisticsPane;
@@ -99,7 +96,7 @@ public class MainController extends Application implements Observer{
 	@FXML private AnchorPane rightComponentParent;
 	@FXML private Button buttonRepoSearch;
 	@FXML private Button buttonUserSearch;
-	@FXML private Button buttonRepoStatistic1,buttonRepoStatistic2,buttonRepoStatistic3,buttonRepoStatistic4;
+	@FXML private Button buttonLanguage,buttonRepoStatistic2,buttonRepoStatistic3,buttonRepoStatistic4;
 	@FXML private Button buttonUserType,buttonCreateTime,buttonInEachCompany,buttonBlogCount,buttonLocationCount,buttonEmailCount,buttonFollower,buttonFollowing;
 	@FXML private ProgressBar progressBar;
 	@FXML private ToggleButton buttonLocalMode;
@@ -133,7 +130,6 @@ public class MainController extends Application implements Observer{
 						new KeyValue(image.translateYProperty(), 0)));
 		timeline.play();
 	}
-	//TODO need to refact!!!!!!!!!!
 	@FXML
 	private void onRepoSearchClicked(MouseEvent event) {
 		buttonRepoSearch.setDisable(true);
@@ -237,6 +233,8 @@ public class MainController extends Application implements Observer{
 	@SuppressWarnings("serial")
 	private  static final  HashMap<String, StatisticsPane> MAP = new HashMap<String,StatisticsPane>() {
 		{
+			put("buttonLanguage", new RepoLanguageStatistic());
+			
 			put("buttonUserType", new UserTypeStatisticsPane());
 			put("buttonCreateTime", new UserCreateTimeStatisticsPane());
 			put("buttonInEachCompany", new UserInEachCompanyStatisticsPane());

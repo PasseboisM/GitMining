@@ -33,7 +33,7 @@ public class RepoLanguageStatistic implements StatisticsPane {
 	public void initialChart() {
 		List<Number> a = Arrays.asList(1.0, 2.0, 3.0, 4.0, 5.0);
 		List<String> headers = Arrays.asList("a", "b", "c", "d", "e");
-		GitBarChart barChart = new GitBarChart(headers, a, "用户", "用户博客统计图", "博客名", "用户个数");
+		GitBarChart barChart = new GitBarChart(headers, a, "项目", "项目语言统计图", "语言", "项目个数");
 		anchorPane.getChildren().add(barChart);
 	}
 }
