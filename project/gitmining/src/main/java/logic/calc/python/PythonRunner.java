@@ -7,11 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PythonRunner {
-	public static List<String> runpython(String fileName,String...paras) throws IOException, InterruptedException {
-		String pythonPath = System.getenv("PYTHON_PATH") + "/python.exe";
+	
+	private static final String root = System.getProperty("user.dir");
+	
+	public static List<String> runPython(String fileName,String...paras) throws IOException, InterruptedException {
 		String folderName = "python/";
 		String[] args = new String[2+paras.length];
-		args[0] = pythonPath;
+		args[0] = "python";
 		args[1] = folderName+fileName;
 		for (int i = 0; i < paras.length; i++) {
 			args[2+i] = paras[i];
@@ -27,7 +29,7 @@ public class PythonRunner {
 		
 		try {
 			while ((line = bufferedReader.readLine()) != null) {
-//				System.out.println(line);
+				System.out.println(line);
 				resultList.add(line);
 			}
 		} catch (IOException e) {
@@ -36,13 +38,12 @@ public class PythonRunner {
 		return resultList;
 	}
 	
+
 	public static void main(String[] args) {
 		try {
-//			PythonRunner.runpython("repo_json_to_csv.py");
-//			PythonRunner.runpython("user_json_to_csv.py");
-//			PythonRunner.runpython("statistics_repo_avg_std.py");
-//			PythonRunner.runpython("statistics_user_avg_std.py");
-			PythonRunner.runpython("statistic_single_user_rank.py","15","58.5","99","101");
+			long t1 = System.currentTimeMillis();
+			List<String> result = PythonRunner.runPython("statistic_single_user_rank.py","15","58.5","99","101");
+			System.out.println(System.currentTimeMillis()-t1);
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (InterruptedException e) {

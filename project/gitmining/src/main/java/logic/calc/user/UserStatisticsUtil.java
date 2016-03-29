@@ -13,7 +13,7 @@ public class UserStatisticsUtil {
 	private static final String SINGLE_USER_FILE =  "statistic_single_user_rank.py";
 	@Deprecated
 	public static RadarDatas getSingleUserPoints(String name) throws IOException, InterruptedException{
-		List<String> strResult = PythonRunner.runpython(SINGLE_USER_FILE, name);
+		List<String> strResult = PythonRunner.runPython(SINGLE_USER_FILE, name);
 		RadarDatas radarDatas = new UserRanks();
 		List<String> headers = new ArrayList<>(Arrays.asList("followers", "following", "public_gists", "public_repos"));
 		for (int i = 0; i < headers.size(); i++) {

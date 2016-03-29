@@ -16,7 +16,7 @@ public class RepoStatisticsUtil implements RepositoryStatisticsService{
 		public RepositoryRanks getRanks(Repository r) {
 			List<String> strResult = null;
 			try {
-				strResult = PythonRunner.runpython(SINGLE_REPO_FILE, r.getForks_count()+"",r.getOpen_issues()+"",r.getSize()+"",r.getSubscribers_count()+"",r.getWatchers()+"");
+				strResult = PythonRunner.runPython(SINGLE_REPO_FILE, r.getForks_count()+"",r.getOpen_issues()+"",r.getSize()+"",r.getSubscribers_count()+"",r.getWatchers()+"");
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (InterruptedException e) {
