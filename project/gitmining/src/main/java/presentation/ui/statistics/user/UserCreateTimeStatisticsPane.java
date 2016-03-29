@@ -30,7 +30,7 @@ public class UserCreateTimeStatisticsPane {
 	public void initialChart(){
 		List <Number> a = Arrays.asList(1.0,2.0,3.0,4.0,5.0);
 		List<String> headers = Arrays.asList("a","b","c","d","e");
-		GitBarChart barChart=new GitBarChart(headers,a,"用户创建时间统计图","用户个数","创建时间","用户");
+		GitBarChart barChart=new GitBarChart(headers,a,"用户","用户创建时间统计图","创建时间","用户个数");
 		anchorPane.getChildren().add(barChart);
 	}
 }

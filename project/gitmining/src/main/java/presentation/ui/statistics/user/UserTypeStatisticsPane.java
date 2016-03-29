@@ -32,7 +32,7 @@ public class UserTypeStatisticsPane {
 	public void initialChart() {
 		List<Double> a = new ArrayList<>(Arrays.asList(1.0, 2.0));
 		List<String> headers = new ArrayList<>(Arrays.asList("a", "b"));
-		GitPieChart pieChart = new GitPieChart(headers, a, "PieUser");
+		GitPieChart pieChart = new GitPieChart(headers, a, "用户类型统计图");
 		anchorPane.getChildren().add(pieChart);
 	}
 }

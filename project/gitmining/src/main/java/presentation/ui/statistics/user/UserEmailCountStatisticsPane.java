@@ -7,7 +7,7 @@ import java.util.List;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
-import presentation.component.GitLineChart;
+import presentation.component.GitBarChart;
 
 public class UserEmailCountStatisticsPane {
 
@@ -30,7 +30,7 @@ public class UserEmailCountStatisticsPane {
 	public void initialChart(){
 		List <Number> a = Arrays.asList(1.0,2.0,3.0,4.0,5.0);
 		List<String> headers = Arrays.asList("a","b","c","d","e");
-		GitLineChart lineChart=new GitLineChart(headers,a,"用户所在公司统计图","用户个数","公司","用户");
+		GitBarChart lineChart=new GitBarChart(headers,a,"用户","用户邮箱统计图","邮箱","用户个数");
 		anchorPane.getChildren().add(lineChart);
 	}
 }
