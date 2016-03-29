@@ -38,9 +38,9 @@ import presentation.ui.statistics.repo.RepoStatistic_3Controller;
 import presentation.ui.statistics.repo.RepoStatistic_4Controller;
 import presentation.ui.statistics.user.UserTypeStatisticsPane;
 import presentation.ui.statistics.user.UserCreateTimeStatisticsPane;
-import presentation.ui.statistics.user.UserStatistic_3Controller;
-import presentation.ui.statistics.user.UserStatistic_4Controller;
-import presentation.ui.statistics.user.UserStatistic_5Controller;
+import presentation.ui.statistics.user.UserInEachCompanyStatisticsPane;
+import presentation.ui.statistics.user.UserBlogCountStatisticsPane;
+import presentation.ui.statistics.user.UserEmailStatisticsPane;
 
 
 public class MainController extends Application implements Observer{
@@ -219,7 +219,7 @@ public class MainController extends Application implements Observer{
 	private void onUserStatisticClicked3(MouseEvent event){
 		rightComponentParent.getChildren().clear();
 		try {
-			rightComponentParent.getChildren().add(UserStatistic_3Controller.getInstance(rightComponentParent));
+			rightComponentParent.getChildren().add(UserInEachCompanyStatisticsPane.getInstance(rightComponentParent));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -229,7 +229,7 @@ public class MainController extends Application implements Observer{
 	private void onUserStatisticClicked4(MouseEvent event){
 		rightComponentParent.getChildren().clear();
 		try {
-			rightComponentParent.getChildren().add(UserStatistic_4Controller.getInstance(rightComponentParent));
+			rightComponentParent.getChildren().add(UserBlogCountStatisticsPane.getInstance(rightComponentParent));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -239,7 +239,7 @@ public class MainController extends Application implements Observer{
 	private void onUserStatisticClicked5(MouseEvent event){
 		rightComponentParent.getChildren().clear();
 		try {
-			rightComponentParent.getChildren().add(UserStatistic_5Controller.getInstance(rightComponentParent));
+			rightComponentParent.getChildren().add(UserEmailStatisticsPane.getInstance(rightComponentParent));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
