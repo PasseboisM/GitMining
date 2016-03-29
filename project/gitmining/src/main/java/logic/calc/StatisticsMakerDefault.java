@@ -1,6 +1,6 @@
 package logic.calc;
 
-import logic.calc.repo.RepoStatisticUtil;
+import logic.calc.repo.RepoStatisticsUtil;
 import logic.calc.service.GeneralStatisticsService;
 import logic.calc.service.RepositoryStatisticsService;
 import logic.calc.service.UserStatisticsService;
@@ -27,7 +27,7 @@ public class StatisticsMakerDefault implements StatisticsMaker {
 
 	@Override
 	public RepositoryStatisticsService getRepositoryStatistics() {
-		return new RepoStatisticUtil();
+		return new RepoStatisticsUtil();
 	}
 
 }
