@@ -2,6 +2,7 @@ package presentation.ui.main;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.HashMap;
 
 import common.exception.NetworkException;
 import common.message.LoadProgress;
@@ -11,6 +12,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -32,6 +34,7 @@ import logic.service.ServiceConfigure;
 import presentation.image.ImageFactory;
 import presentation.ui.search.RepositorySearchController;
 import presentation.ui.search.UserSearchController;
+import presentation.ui.statistics.StatisticsPane;
 import presentation.ui.statistics.repo.RepoStatistic_1Controller;
 import presentation.ui.statistics.repo.RepoStatistic_2Controller;
 import presentation.ui.statistics.repo.RepoStatistic_3Controller;
@@ -39,6 +42,7 @@ import presentation.ui.statistics.repo.RepoStatistic_4Controller;
 import presentation.ui.statistics.user.UserTypeStatisticsPane;
 import presentation.ui.statistics.user.UserCreateTimeStatisticsPane;
 import presentation.ui.statistics.user.UserInEachCompanyStatisticsPane;
+import presentation.ui.statistics.user.UserLocationCountStatisticsPane;
 import presentation.ui.statistics.user.UserBlogCountStatisticsPane;
 import presentation.ui.statistics.user.UserEmailCountStatisticsPane;
 
@@ -94,7 +98,7 @@ public class MainController extends Application implements Observer{
 	@FXML private Button buttonRepoSearch;
 	@FXML private Button buttonUserSearch;
 	@FXML private Button buttonRepoStatistic1,buttonRepoStatistic2,buttonRepoStatistic3,buttonRepoStatistic4;
-	@FXML private Button buttonUserStatistic1,buttonUserStatistic2,buttonUserStatistic3,buttonUserStatistic4,buttonUserStatistic5;
+	@FXML private Button buttonUserType,buttonCreateTime,buttonInEachCompany,buttonBlogCount,buttonLocationCount,buttonEmailCount,buttonFollower,buttonFollowing;
 	@FXML private ProgressBar progressBar;
 	@FXML private ToggleButton buttonLocalMode;
 	@FXML private ToggleButton buttonOnlineMode;
@@ -195,55 +199,17 @@ public class MainController extends Application implements Observer{
 	}
 	
 	@FXML 
-	private void onUserStatisticClicked1(MouseEvent event){
+	private void onUserStatisticClicked(ActionEvent event){
+		Button button = (Button) event.getSource();
+		System.out.println(button.getId());
 		rightComponentParent.getChildren().clear();
 		try {
-			rightComponentParent.getChildren().add(UserTypeStatisticsPane.getInstance(rightComponentParent));
+			rightComponentParent.getChildren().add(MAP.get(button.getId()).getInstance(rightComponentParent));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	@FXML 
-	private void onUserStatisticClicked2(MouseEvent event){
-		rightComponentParent.getChildren().clear();
-		try {
-			rightComponentParent.getChildren().add(UserCreateTimeStatisticsPane.getInstance(rightComponentParent));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	
-	@FXML 
-	private void onUserStatisticClicked3(MouseEvent event){
-		rightComponentParent.getChildren().clear();
-		try {
-			rightComponentParent.getChildren().add(UserInEachCompanyStatisticsPane.getInstance(rightComponentParent));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	@FXML 
-	private void onUserStatisticClicked4(MouseEvent event){
-		rightComponentParent.getChildren().clear();
-		try {
-			rightComponentParent.getChildren().add(UserBlogCountStatisticsPane.getInstance(rightComponentParent));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	@FXML 
-	private void onUserStatisticClicked5(MouseEvent event){
-		rightComponentParent.getChildren().clear();
-		try {
-			rightComponentParent.getChildren().add(UserEmailCountStatisticsPane.getInstance(rightComponentParent));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 
 	@Override
 	public void update() {
@@ -264,5 +230,18 @@ public class MainController extends Application implements Observer{
 	public void update(Observable observable, Object obj) {
 		update();
 	}
+	
+	
+	@SuppressWarnings("serial")
+	private  static final  HashMap<String, StatisticsPane> MAP = new HashMap<String,StatisticsPane>() {
+		{
+			put("buttonUserType", new UserTypeStatisticsPane());
+			put("buttonCreateTime", new UserCreateTimeStatisticsPane());
+			put("buttonInEachCompany", new UserInEachCompanyStatisticsPane());
+			put("buttonBlogCount", new UserBlogCountStatisticsPane());
+			put("buttonLocationCount", new UserLocationCountStatisticsPane());
+			put("buttonEmailCount", new UserEmailCountStatisticsPane());
+		}
+	};
 
 }

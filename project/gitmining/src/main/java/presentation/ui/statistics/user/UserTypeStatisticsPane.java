@@ -9,10 +9,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import presentation.component.GitPieChart;
+import presentation.ui.statistics.StatisticsPane;
 
-public class UserTypeStatisticsPane {
+public class UserTypeStatisticsPane extends StatisticsPane {
 
-	public static AnchorPane getInstance(AnchorPane rightComponentParent) throws IOException {
+	public AnchorPane getInstance(AnchorPane rightComponentParent) throws IOException {
 		FXMLLoader loader = new FXMLLoader(UserTypeStatisticsPane.class.getResource("userTypeStatistics.fxml"));
 		AnchorPane rootUINode = loader.load();
 		UserTypeStatisticsPane controller = loader.getController();

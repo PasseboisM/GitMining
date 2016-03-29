@@ -8,10 +8,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import presentation.component.GitBarChart;
+import presentation.ui.statistics.StatisticsPane;
 
-public class UserBlogCountStatisticsPane {
+public class UserBlogCountStatisticsPane extends StatisticsPane {
 
-	public static AnchorPane getInstance(AnchorPane rightComponentParent) throws IOException {
+	public AnchorPane getInstance(AnchorPane rightComponentParent) throws IOException {
 		FXMLLoader loader = new FXMLLoader(UserBlogCountStatisticsPane.class.getResource("userBlogStatistics.fxml"));
 		AnchorPane rootUINode = loader.load();
 		UserBlogCountStatisticsPane controller = loader.getController();
