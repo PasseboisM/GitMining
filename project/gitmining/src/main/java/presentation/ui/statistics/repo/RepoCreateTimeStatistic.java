@@ -12,17 +12,18 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import presentation.component.GitPieChart;
+import presentation.ui.statistics.StatisticsPane;
 
-public class RepoStatistic_1Controller {
+public class RepoCreateTimeStatistic implements StatisticsPane{
 	
 /*仓库创建时间相关的饼图
  * */	
 	
-	public static VBox getInstance(AnchorPane rightComponentParent) throws IOException {
-		FXMLLoader loader = new FXMLLoader(RepoStatistic_1Controller.class.getResource("repositoryStatistic.fxml"));
+	public AnchorPane getInstance(AnchorPane rightComponentParent) throws IOException {
+		FXMLLoader loader = new FXMLLoader(RepoCreateTimeStatistic.class.getResource("repositoryCreateTimeStatistic.fxml"));
 //		System.out.println("doing!");
-		VBox rootUINode = loader.load();
-		RepoStatistic_1Controller controller = loader.getController();
+		AnchorPane rootUINode = loader.load();
+		RepoCreateTimeStatistic controller = loader.getController();
 		controller.initial(rightComponentParent);
 //		System.out.println("done!");
 		return rootUINode;

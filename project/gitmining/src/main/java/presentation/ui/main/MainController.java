@@ -35,10 +35,10 @@ import presentation.image.ImageFactory;
 import presentation.ui.search.RepositorySearchController;
 import presentation.ui.search.UserSearchController;
 import presentation.ui.statistics.StatisticsPane;
-import presentation.ui.statistics.repo.RepoStatistic_1Controller;
-import presentation.ui.statistics.repo.RepoStatistic_2Controller;
-import presentation.ui.statistics.repo.RepoStatistic_3Controller;
-import presentation.ui.statistics.repo.RepoStatistic_4Controller;
+import presentation.ui.statistics.repo.RepoCreateTimeStatistic;
+import presentation.ui.statistics.repo.RepoLanguageStatistic;
+import presentation.ui.statistics.repo.RepoCollaboratorStatistic;
+import presentation.ui.statistics.repo.RepoContributorStatistic;
 import presentation.ui.statistics.user.UserBlogCountStatisticsPane;
 import presentation.ui.statistics.user.UserCreateTimeStatisticsPane;
 import presentation.ui.statistics.user.UserEmailCountStatisticsPane;
@@ -160,48 +160,48 @@ public class MainController extends Application implements Observer{
 		}
 	}
 	
-	@FXML
-	private void onRepoStatisticClicked1(MouseEvent event) {
-		rightComponentParent.getChildren().clear();
-		try {
-			rightComponentParent.getChildren().add(RepoStatistic_1Controller.getInstance(rightComponentParent));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	@FXML
-	private void onRepoStatisticClicked2(MouseEvent event) {
-		rightComponentParent.getChildren().clear();
-		try {
-			rightComponentParent.getChildren().add(RepoStatistic_2Controller.getInstance(rightComponentParent));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	@FXML
-	private void onRepoStatisticClicked3(MouseEvent event) {
-		rightComponentParent.getChildren().clear();
-		try {
-			rightComponentParent.getChildren().add(RepoStatistic_3Controller.getInstance(rightComponentParent));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	@FXML
-	private void onRepoStatisticClicked4(MouseEvent event) {
-		rightComponentParent.getChildren().clear();
-		try {
-			rightComponentParent.getChildren().add(RepoStatistic_4Controller.getInstance(rightComponentParent));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+//	@FXML
+//	private void onRepoStatisticClicked1(MouseEvent event) {
+//		rightComponentParent.getChildren().clear();
+//		try {
+//			rightComponentParent.getChildren().add(RepoStatistic_1Controller.getInstance(rightComponentParent));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//	}
+//	
+//	@FXML
+//	private void onRepoStatisticClicked2(MouseEvent event) {
+//		rightComponentParent.getChildren().clear();
+//		try {
+//			rightComponentParent.getChildren().add(RepoStatistic_2Controller.getInstance(rightComponentParent));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//	}
+//	
+//	@FXML
+//	private void onRepoStatisticClicked3(MouseEvent event) {
+//		rightComponentParent.getChildren().clear();
+//		try {
+//			rightComponentParent.getChildren().add(RepoStatistic_3Controller.getInstance(rightComponentParent));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//	}
+//	
+//	@FXML
+//	private void onRepoStatisticClicked4(MouseEvent event) {
+//		rightComponentParent.getChildren().clear();
+//		try {
+//			rightComponentParent.getChildren().add(RepoStatistic_4Controller.getInstance(rightComponentParent));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//	}
 	
 	@FXML 
-	private void onUserStatisticClicked(ActionEvent event){
+	private void onStatisticClicked(ActionEvent event){
 		Button button = (Button) event.getSource();
 		System.out.println(button.getId());
 		rightComponentParent.getChildren().clear();

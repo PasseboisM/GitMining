@@ -11,18 +11,19 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import presentation.component.GitBarChart;
+import presentation.ui.statistics.StatisticsPane;
 
 /*统计项目规模的柱状图
  * */
 
 
 
-public class RepoStatistic_3Controller {
-	public static VBox getInstance(AnchorPane rightComponentParent) throws IOException {
-		FXMLLoader loader = new FXMLLoader(RepoStatistic_3Controller.class.getResource("repositoryStatistic3.fxml"));
+public class RepoCollaboratorStatistic implements StatisticsPane {
+	public AnchorPane getInstance(AnchorPane rightComponentParent) throws IOException {
+		FXMLLoader loader = new FXMLLoader(RepoCollaboratorStatistic.class.getResource("repositoryCollaboratorStatistic.fxml"));
 //		System.out.println("doing!");
-		VBox rootUINode = loader.load();
-		RepoStatistic_3Controller controller = loader.getController();
+		AnchorPane rootUINode = loader.load();
+		RepoCollaboratorStatistic controller = loader.getController();
 		controller.initial(rightComponentParent);
 //		System.out.println("done!");
 		return rootUINode;

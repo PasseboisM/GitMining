@@ -11,18 +11,18 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import presentation.component.GitBarChart;
+import presentation.ui.statistics.StatisticsPane;
 
-
-
-/*项目语言分类的统计的柱状图
+/*项目合作者数量分类的柱状图
  * */
 
-public class RepoStatistic_2Controller {
-	public static VBox getInstance(AnchorPane rightComponentParent) throws IOException {
-		FXMLLoader loader = new FXMLLoader(RepoStatistic_2Controller.class.getResource("repositoryStatistic2.fxml"));
+
+public class RepoContributorStatistic implements StatisticsPane {
+	public AnchorPane getInstance(AnchorPane rightComponentParent) throws IOException {
+		FXMLLoader loader = new FXMLLoader(RepoContributorStatistic.class.getResource("repositoryContributorStatistic.fxml"));
 //		System.out.println("doing!");
-		VBox rootUINode = loader.load();
-		RepoStatistic_2Controller controller = loader.getController();
+		AnchorPane rootUINode = loader.load();
+		RepoContributorStatistic controller = loader.getController();
 		controller.initial(rightComponentParent);
 //		System.out.println("done!");
 		return rootUINode;
@@ -30,7 +30,7 @@ public class RepoStatistic_2Controller {
 	private void initial(AnchorPane rightComponentParent) {
 		vMain.getChildren().add(initialChart());
 		
-
+//		this.rightComponentParent=rightComponentParent;
 		
 		
 	}
@@ -39,7 +39,7 @@ public class RepoStatistic_2Controller {
 	@FXML
 	private VBox vMain;
 	
-
+//	private AnchorPane rightComponentParent;
 	
 	public ScrollPane initialChart(){
 		
@@ -54,15 +54,13 @@ public class RepoStatistic_2Controller {
 		
 		
 		
+		
 		ScrollPane pane=new ScrollPane();
 		VBox vBox=new VBox();
-
 		vBox.setPrefWidth(1010);
 		
 	
-		vBox.getChildren().add(barChart);
-
-
+	vBox.getChildren().add(barChart);
 
 		pane.setContent(vBox);
 	//	System.out.println("do something");

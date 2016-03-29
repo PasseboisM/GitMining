@@ -66,22 +66,22 @@
                                           <Insets bottom="0" left="0" right="0" top="0" />
                                        </padding>
                                        <children>
-                                          <Button fx:id="buttonRepoStatistic1" mnemonicParsing="false" onMousePressed="#onRepoStatisticClicked1" prefHeight="50.0" prefWidth="150.0" text="创建时间">
+                                          <Button fx:id="buttonRepoStatistic2" mnemonicParsing="false" onAction="#onStatisticClicked" prefHeight="50.0" prefWidth="150.0" text="项目语言">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
                                           </Button>
-                                          <Button fx:id="buttonRepoStatistic2" mnemonicParsing="false" onMousePressed="#onRepoStatisticClicked2" prefHeight="50.0" prefWidth="150.0" text="项目语言">
+                                          <Button fx:id="buttonRepoStatistic1" mnemonicParsing="false" onAction="#onStatisticClicked" prefHeight="50.0" prefWidth="150.0" text="创建时间">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
                                           </Button>
-                                          <Button fx:id="buttonRepoStatistic3" mnemonicParsing="false" onMousePressed="#onRepoStatisticClicked3" prefHeight="50.0" prefWidth="150.0" text="项目规模">
+                                          <Button fx:id="buttonRepoStatistic4" mnemonicParsing="false" onAction="#onStatisticClicked" prefHeight="50.0" prefWidth="150.0" text="项目贡献者">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
                                           </Button>
-                                          <Button fx:id="buttonRepoStatistic4" mnemonicParsing="false" onMousePressed="#onRepoStatisticClicked4" prefHeight="50.0" prefWidth="150.0" text="项目合作">
+                                          <Button fx:id="buttonRepoStatistic3" mnemonicParsing="false" onAction="#onStatisticClicked" prefHeight="50.0" prefWidth="150.0" text="项目合作者">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
@@ -109,42 +109,42 @@
                                           <Insets bottom="0" left="0" right="0" top="0" />
                                        </padding>
                                        <children>
-                                          <Button fx:id="buttonUserType" mnemonicParsing="false" onAction="#onUserStatisticClicked" prefHeight="50.0" prefWidth="150.0" text="用户类型">
+                                          <Button fx:id="buttonUserType" mnemonicParsing="false" onAction="#onStatisticClicked" prefHeight="50.0" prefWidth="150.0" text="用户类型">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
                                           </Button>
-                                          <Button fx:id="buttonCreateTime" mnemonicParsing="false" onAction="#onUserStatisticClicked" prefHeight="50.0" prefWidth="150.0" text="创建时间">
+                                          <Button fx:id="buttonCreateTime" mnemonicParsing="false" onAction="#onStatisticClicked" prefHeight="50.0" prefWidth="150.0" text="创建时间">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
                                           </Button>
-                                          <Button fx:id="buttonInEachCompany" mnemonicParsing="false" onAction="#onUserStatisticClicked" prefHeight="50.0" prefWidth="150.0" text="公司分布">
+                                          <Button fx:id="buttonInEachCompany" mnemonicParsing="false" onAction="#onStatisticClicked" prefHeight="50.0" prefWidth="150.0" text="公司分布">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
                                           </Button>
-                                          <Button fx:id="buttonBlogCount" mnemonicParsing="false" onAction="#onUserStatisticClicked" prefHeight="50.0" prefWidth="150.0" text="博客数量">
+                                          <Button fx:id="buttonBlogCount" mnemonicParsing="false" onAction="#onStatisticClicked" prefHeight="50.0" prefWidth="150.0" text="博客数量">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
                                           </Button>
-                                          <Button fx:id="buttonLocationCount" mnemonicParsing="false" onAction="#onUserStatisticClicked" prefHeight="50.0" prefWidth="150.0" text="地区分布">
+                                          <Button fx:id="buttonLocationCount" mnemonicParsing="false" onAction="#onStatisticClicked" prefHeight="50.0" prefWidth="150.0" text="地区分布">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
                                           </Button>
-                                                      <Button fx:id="buttonEmailCount" mnemonicParsing="false" onAction="#onUserStatisticClicked" prefHeight="50.0" prefWidth="150.0" text="邮箱统计">
+                                                      <Button fx:id="buttonEmailCount" mnemonicParsing="false" onAction="#onStatisticClicked" prefHeight="50.0" prefWidth="150.0" text="邮箱统计">
                                                          <font>
                                                             <Font size="18.0" />
                                                          </font>
                                                       </Button>
-                                                      <Button fx:id="buttonFollower" mnemonicParsing="false" onAction="#onUserStatisticClicked" prefHeight="50.0" prefWidth="150.0" text="被关注统计">
+                                                      <Button fx:id="buttonFollower" mnemonicParsing="false" onAction="#onStatisticClicked" prefHeight="50.0" prefWidth="150.0" text="被关注统计">
                                                          <font>
                                                             <Font size="18.0" />
                                                          </font>
                                                       </Button>
-                                                      <Button fx:id="buttonFollowing" mnemonicParsing="false" onAction="#onUserStatisticClicked" prefHeight="50.0" prefWidth="150.0" text="关注统计">
+                                                      <Button fx:id="buttonFollowing" mnemonicParsing="false" onAction="#onStatisticClicked" prefHeight="50.0" prefWidth="150.0" text="关注统计">
                                                          <font>
                                                             <Font size="18.0" />
                                                          </font>
