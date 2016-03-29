@@ -40,7 +40,7 @@ import presentation.ui.statistics.user.UserTypeStatisticsPane;
 import presentation.ui.statistics.user.UserCreateTimeStatisticsPane;
 import presentation.ui.statistics.user.UserInEachCompanyStatisticsPane;
 import presentation.ui.statistics.user.UserBlogCountStatisticsPane;
-import presentation.ui.statistics.user.UserEmailStatisticsPane;
+import presentation.ui.statistics.user.UserEmailCountStatisticsPane;
 
 
 public class MainController extends Application implements Observer{
@@ -239,7 +239,7 @@ public class MainController extends Application implements Observer{
 	private void onUserStatisticClicked5(MouseEvent event){
 		rightComponentParent.getChildren().clear();
 		try {
-			rightComponentParent.getChildren().add(UserEmailStatisticsPane.getInstance(rightComponentParent));
+			rightComponentParent.getChildren().add(UserEmailCountStatisticsPane.getInstance(rightComponentParent));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

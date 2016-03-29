@@ -9,12 +9,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import presentation.component.GitLineChart;
 
-public class UserEmailStatisticsPane {
+public class UserEmailCountStatisticsPane {
 
 	public static AnchorPane getInstance(AnchorPane rightComponentParent) throws IOException {
-		FXMLLoader loader = new FXMLLoader(UserEmailStatisticsPane.class.getResource("userInEachCompanyStatistics.fxml"));
+		FXMLLoader loader = new FXMLLoader(UserEmailCountStatisticsPane.class.getResource("userEmailStatistics.fxml"));
 		AnchorPane rootUINode = loader.load();
-		UserEmailStatisticsPane controller = loader.getController();
+		UserEmailCountStatisticsPane controller = loader.getController();
 		controller.initial(rightComponentParent);
 		return rootUINode;
 	}
