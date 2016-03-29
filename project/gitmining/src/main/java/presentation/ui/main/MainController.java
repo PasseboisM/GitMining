@@ -37,7 +37,7 @@ import presentation.ui.statistics.repo.RepoStatistic_2Controller;
 import presentation.ui.statistics.repo.RepoStatistic_3Controller;
 import presentation.ui.statistics.repo.RepoStatistic_4Controller;
 import presentation.ui.statistics.user.UserTypeStatisticsPane;
-import presentation.ui.statistics.user.UserStatistic_2Controller;
+import presentation.ui.statistics.user.UserCreateTimeStatisticsPane;
 import presentation.ui.statistics.user.UserStatistic_3Controller;
 import presentation.ui.statistics.user.UserStatistic_4Controller;
 import presentation.ui.statistics.user.UserStatistic_5Controller;
@@ -208,7 +208,7 @@ public class MainController extends Application implements Observer{
 	private void onUserStatisticClicked2(MouseEvent event){
 		rightComponentParent.getChildren().clear();
 		try {
-			rightComponentParent.getChildren().add(UserStatistic_2Controller.getInstance(rightComponentParent));
+			rightComponentParent.getChildren().add(UserCreateTimeStatisticsPane.getInstance(rightComponentParent));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
