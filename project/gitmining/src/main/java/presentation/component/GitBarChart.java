@@ -111,7 +111,7 @@ public class GitBarChart extends AnchorPane {
 			int count = languageCount.repositoryCount;
 			XYChart.Data<String,Number> data = (Data<String,Number>) series.getData().get(i);
 			Node node = data.getNode();
-			Tooltip tooltip = new Tooltip(String.valueOf("项目个数："+count+"个"));
+			Tooltip tooltip = new Tooltip("项目个数："+count+"个");
 			Tooltip.install(node, tooltip);
 		}
 	}
@@ -136,7 +136,7 @@ public class GitBarChart extends AnchorPane {
 			int count = languageCount.count;
 			XYChart.Data<String,Number> data = (Data<String,Number>) series.getData().get(i);
 			Node node = data.getNode();
-			Tooltip tooltip = new Tooltip(String.valueOf("用户个数："+count+"个"));
+			Tooltip tooltip = new Tooltip("用户个数："+count+"个");
 			Tooltip.install(node, tooltip);
 		}
 	}

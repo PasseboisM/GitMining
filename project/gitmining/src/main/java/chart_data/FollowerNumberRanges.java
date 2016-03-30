@@ -21,6 +21,10 @@ public class FollowerNumberRanges {
 		ranges.add(new FollowerNumberRange(lowerRange, higherRange, numOfUsers));
 	}
 	
+	public int getNumOfRange(){
+		return ranges.size();
+	}
+	
 	/**
 	 * 获取所有UserRange。<br />
 	 * 数据迭代器保证区间<strong>按顺序从小到大提供</strong>。

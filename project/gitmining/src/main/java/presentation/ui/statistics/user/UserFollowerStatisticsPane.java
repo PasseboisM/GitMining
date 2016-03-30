@@ -1,12 +1,13 @@
 package presentation.ui.statistics.user;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
+import chart_data.FollowerNumberRanges;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
+import logic.calc.general.GeneralStatisticsUtil;
+import logic.calc.service.GeneralStatisticsService;
 import presentation.component.GitLineChart;
 import presentation.ui.statistics.StatisticsPane;
 
@@ -30,9 +31,9 @@ public class UserFollowerStatisticsPane implements StatisticsPane {
 //	private AnchorPane rightComponentParent;
 
 	public void initialChart() {
-		List <Number> a = Arrays.asList(1.0,2.0,3.0,4.0,5.0);
-		List<String> headers = Arrays.asList("a","b","c","d","e");
-		GitLineChart barChart=new GitLineChart(headers,a,"用户","用户被关注人数统计图","用户","被关注人数");
-		anchorPane.getChildren().add(barChart);
+		GeneralStatisticsService generalStatisticsService = new GeneralStatisticsUtil();
+		FollowerNumberRanges followerNumberRanges = generalStatisticsService.getFollowerNumberRanges();
+		GitLineChart lineChart = new GitLineChart(followerNumberRanges);
+		anchorPane.getChildren().add(lineChart);
 	}
 }

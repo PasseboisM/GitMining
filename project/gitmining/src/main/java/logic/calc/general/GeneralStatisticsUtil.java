@@ -14,8 +14,13 @@ public class GeneralStatisticsUtil implements GeneralStatisticsService{
 
 	@Override
 	public FollowerNumberRanges getFollowerNumberRanges() {
-		// TODO Auto-generated method stub
-		return null;
+		FollowerNumberRanges followerNumberRanges = new FollowerNumberRanges();
+		followerNumberRanges.addNewRange(0, 10, 9798);
+		followerNumberRanges.addNewRange(10, 20, 1398);
+		followerNumberRanges.addNewRange(20, 30, 758);
+		followerNumberRanges.addNewRange(30, 40, 598);
+		followerNumberRanges.addNewRange(40, 27069, 1998);
+		return followerNumberRanges;
 	}
 
 	@Override
@@ -59,8 +64,14 @@ public class GeneralStatisticsUtil implements GeneralStatisticsService{
 
 	@Override
 	public UserCreateOnTimeCounts getUserCreateOnTimeCounts() {
+		UserCreateOnTimeCounts userCreateOnTimeCounts = new UserCreateOnTimeCounts();
+		userCreateOnTimeCounts.addCreateCount("2007", 28);
+		userCreateOnTimeCounts.addCreateCount("2008", 228);
+		userCreateOnTimeCounts.addCreateCount("2009", 578);
+		userCreateOnTimeCounts.addCreateCount("2010", 698);
+		userCreateOnTimeCounts.addCreateCount("2011", 576);
 		// TODO Auto-generated method stub
-		return null;
+		return userCreateOnTimeCounts;
 	}
 
 	@Override

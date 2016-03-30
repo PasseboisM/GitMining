@@ -1,8 +1,11 @@
 package presentation.component;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 
+import chart_data.FollowerNumberRanges;
+import chart_data.FollowerNumberRanges.FollowerNumberRange;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -18,14 +21,33 @@ public class GitLineChart extends AnchorPane {
 	@FXML
 	private LineChart<String, Number> lineChart;
 	@FXML
-	private CategoryAxis xAxis ;
+	private CategoryAxis xAxis;
 	@FXML
-	private NumberAxis yAxis ;
+	private NumberAxis yAxis;
+
+	/**
+	 * 折线图构造函数
+	 */
+	public GitLineChart(List<String> labels, List<Number> datas, String seriesName, String title, String xLabel,
+			String yLabel) {
+		this.initialFXML();
+		this.initialText(title, xLabel, yLabel);
+		this.initial(labels, datas, seriesName);
+	}
 	
-/**
- * 折线图构造函数
- */	
-	public GitLineChart(List<String> labels,List<Number> datas,String seriesName,String title,String xLabel,String yLabel) {
+	public GitLineChart(FollowerNumberRanges followerNumberRanges) {
+		this.initialFXML();
+		this.initialText("被关注数统计图", "用户","被关注数");
+		this.initial(followerNumberRanges,"用户");
+	}
+
+	private void initialText(String title, String xLabel, String yLabel) {
+		lineChart.setTitle(title);
+		xAxis.setLabel(xLabel);
+		yAxis.setLabel(yLabel);
+	}
+
+	private void initialFXML() {
 		FXMLLoader fxmlLoader = new FXMLLoader(GitLineChart.class.getResource("lineChart.fxml"));
 		fxmlLoader.setController(this);
 		fxmlLoader.setRoot(this);
@@ -34,27 +56,47 @@ public class GitLineChart extends AnchorPane {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		lineChart.setTitle(title);
-		xAxis.setLabel(xLabel);
-		yAxis.setLabel(yLabel);
-		this.initial(labels, datas, seriesName);
 	}
 
 	/**
 	 * 初始化折线图
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private void initial(List<String> labels,List<Number> datas,String seriesName) {
-        XYChart.Series series = new XYChart.Series();
-        series.setName(seriesName);
-        for (int i = 0; i < labels.size(); i++) {
-        	series.getData().add(new XYChart.Data(labels.get(i), datas.get(i)));
+	private void initial(List<String> labels, List<Number> datas, String seriesName) {
+		XYChart.Series<String,Number> series = new XYChart.Series<>();
+		series.setName(seriesName);
+		for (int i = 0; i < labels.size(); i++) {
+			series.getData().add(new XYChart.Data<String,Number>(labels.get(i), datas.get(i)));
 		}
-        lineChart.getData().add(series);
-        for (int i = 0; i < labels.size(); i++) {
-			XYChart.Data data = (Data) series.getData().get(i);
+		lineChart.getData().add(series);
+		for (int i = 0; i < labels.size(); i++) {
+			XYChart.Data<String,Number> data = (Data<String,Number>) series.getData().get(i);
 			Node node = data.getNode();
 			Tooltip tooltip = new Tooltip(String.valueOf(datas.get(i)));
+			Tooltip.install(node, tooltip);
+		}
+	}
+	//TODO 可能要改一下chart_data数据包类
+	private void initial(FollowerNumberRanges followerNumberRanges, String seriesName) {
+		XYChart.Series<String,Number> series = new XYChart.Series<>();
+		series.setName(seriesName);
+		int numOfFollower = 0;
+		Iterator<FollowerNumberRange> iterator = followerNumberRanges.getUserRanges();
+		while (iterator.hasNext()) {
+			FollowerNumberRange followerNumberRange = iterator.next();
+			int lowerRange = followerNumberRange.lowerRange;
+			int higherRange = followerNumberRange.higherRange;
+			numOfFollower += followerNumberRange.numOfUsers;
+			series.getData().add(new XYChart.Data<String,Number>(lowerRange+"-"+higherRange, numOfFollower));
+		}
+		lineChart.getData().add(series);
+		numOfFollower = 0;
+		iterator = followerNumberRanges.getUserRanges();
+		for (int i = 0; i <followerNumberRanges.getNumOfRange(); i++) {
+			FollowerNumberRange followerNumberRange = iterator.next();
+			numOfFollower += followerNumberRange.numOfUsers;
+			XYChart.Data<String,Number> data = (Data<String,Number>) series.getData().get(i);
+			Node node = data.getNode();
+			Tooltip tooltip = new Tooltip("用户数量："+numOfFollower+"个");
 			Tooltip.install(node, tooltip);
 		}
 	}

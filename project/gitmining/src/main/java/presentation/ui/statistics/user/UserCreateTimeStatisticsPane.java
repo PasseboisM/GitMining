@@ -4,9 +4,12 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+import chart_data.UserCreateOnTimeCounts;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
+import logic.calc.general.GeneralStatisticsUtil;
+import logic.calc.service.GeneralStatisticsService;
 import presentation.component.GitBarChart;
 import presentation.ui.statistics.StatisticsPane;
 
@@ -29,9 +32,9 @@ public class UserCreateTimeStatisticsPane implements StatisticsPane {
 //	private AnchorPane rightComponentParent;
 	
 	public void initialChart(){
-		List <Number> a = Arrays.asList(1.0,2.0,3.0,4.0,5.0);
-		List<String> headers = Arrays.asList("a","b","c","d","e");
-		GitBarChart barChart=new GitBarChart(headers,a,"用户","用户创建时间统计图","创建时间","用户个数");
+		GeneralStatisticsService statisticsService = new GeneralStatisticsUtil();
+		UserCreateOnTimeCounts userCreateOnTimeCounts = statisticsService.getUserCreateOnTimeCounts();
+		GitBarChart barChart = new GitBarChart(userCreateOnTimeCounts);
 		anchorPane.getChildren().add(barChart);
 	}
 }
