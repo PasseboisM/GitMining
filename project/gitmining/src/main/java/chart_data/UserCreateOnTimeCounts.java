@@ -18,6 +18,10 @@ public class UserCreateOnTimeCounts {
 		counts.add(new UserCreateOnTimeCount(time, count));
 	}
 	
+	public int getNumOfCount(){
+		return counts.size();
+	}
+	
 	/**
 	 * 获取关于时间的用户创建数目分布，<br />
 	 * 迭代器<strong>按照时间顺序先后</strong>给出各个时间段的条目。

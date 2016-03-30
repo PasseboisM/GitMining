@@ -35,9 +35,6 @@ public class RepoLanguageStatistic implements StatisticsPane {
 		GeneralStatisticsService statisticsService = new GeneralStatisticsUtil();
 		LanguageCounts languageCounts = statisticsService.getLanguageCounts();
 		GitBarChart barChart = new GitBarChart(languageCounts);
-//		List<Number> a = Arrays.asList(1.0, 2.0, 3.0, 4.0, 5.0);
-//		List<String> headers = Arrays.asList("a", "b", "c", "d", "e");
-//		GitBarChart barChart = new GitBarChart(headers, a, "项目", "项目语言统计图", "语言", "项目个数");
 		anchorPane.getChildren().add(barChart);
 	}
 }
