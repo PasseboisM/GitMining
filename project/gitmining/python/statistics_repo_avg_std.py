@@ -12,6 +12,6 @@ statis_repo_data = repo_dataframe[colomns]
 avg = numpy.average(statis_repo_data,axis=0)
 std = numpy.std(statis_repo_data,axis=0)
 
-avg_std_tuple = DataFrame(zip(avg,std),columns=['avg','std'])
+avg_std_tuple = DataFrame(zip(colomns,avg,std),columns=['head','avg','std'])
 avg_std_tuple.to_csv("LocalData/repo_avg_std.csv")
 

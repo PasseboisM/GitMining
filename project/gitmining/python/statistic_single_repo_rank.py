@@ -3,17 +3,22 @@ from scipy.stats import norm
 import json
 import sys
 
-df = DataFrame.from_csv("LocalData/repo_avg_std.csv")
-# print len(df)
+# Params:
+# 1 A list of names of analyzed data
+# 2 The object to be analyzed in JSON format
 
-user_data = []
-for i in xrange(1,1+len(df)):
-    user_data.append(float(sys.argv[i]))
-# print user_data
-avg = df['avg']
-std = df['std']
-norm_list = []
-for i in range(len(df)):
-    # print avg[i],std[i]
-    norm_function = norm(loc=avg[i], scale=std[i])
-    print norm_function.cdf(user_data[i])
+# Output:
+# A list of ranks(0-1) for the data in corresponding order as argv[1]
+
+
+df = DataFrame.from_csv("LocalData/repo_avg_std.csv")
+
+headers = json.loads(sys.argv[1])
+obj = json.loads(sys.argv[2])
+
+for head in headers:
+    avg = df['avg'][head]
+    std = df['std'][head]
+    norm_function = norm(loc=avg, scale=std)
+    print norm_function.cdf(obj[head])
+

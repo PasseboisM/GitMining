@@ -4,6 +4,7 @@ import logic.calc.repo.RepoStatisticsUtil;
 import logic.calc.service.GeneralStatisticsService;
 import logic.calc.service.RepositoryStatisticsService;
 import logic.calc.service.UserStatisticsService;
+import logic.calc.user.UserStatisticsUtil;
 import logic.service.StatisticsMaker;
 
 /**
@@ -22,7 +23,7 @@ public class StatisticsMakerDefault implements StatisticsMaker {
 
 	@Override
 	public UserStatisticsService getUserStatistics() {
-		return null;
+		return new UserStatisticsUtil();
 	}
 
 	@Override
