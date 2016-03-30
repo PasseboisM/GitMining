@@ -15,6 +15,7 @@ import java.util.List;
 public class RepoCreateOnTimeCounts {
 	
 	private List<RepoCreateOnTimeCount> counts = new LinkedList<>();
+	public String title = "项目创建时间统计图";
 	
 	public void addCreateCount(String time, int count) {
 		counts.add(new RepoCreateOnTimeCount(time, count));

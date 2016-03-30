@@ -2,8 +2,9 @@ package presentation.component;
 
 import java.io.IOException;
 import java.util.Iterator;
-import java.util.List;
 
+import chart_data.RepoCreateOnTimeCounts;
+import chart_data.RepoCreateOnTimeCounts.RepoCreateOnTimeCount;
 import chart_data.UserTypeCounts;
 import chart_data.UserTypeCounts.UserTypeCount;
 import javafx.collections.FXCollections;
@@ -18,15 +19,14 @@ import javafx.scene.control.Tooltip;
 public class GitPieChart extends PieChart {
 	@FXML
 	private PieChart pieChart;
-	@Deprecated
-	public GitPieChart(List<String> headers,List<Double> datas,String title) {
-		this.initialFXML();
-		this.initial(headers,datas,title);
-	}
-	
 	public GitPieChart(UserTypeCounts userTypeCounts) {
 		this.initialFXML();
 		this.initial(userTypeCounts);
+	}
+	
+	public GitPieChart(RepoCreateOnTimeCounts repoCreateOnTimeCounts) {
+		this.initialFXML();
+		this.initial(repoCreateOnTimeCounts);
 	}
 
 	private void initialFXML() {
@@ -38,6 +38,23 @@ public class GitPieChart extends PieChart {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private void initial(RepoCreateOnTimeCounts repoCreateOnTimeCounts) {
+		ObservableList<PieChart.Data> pieChartData =FXCollections.observableArrayList();
+		Iterator<RepoCreateOnTimeCount> iterator = repoCreateOnTimeCounts.getCounts();
+		Double sum = 0.0;
+		while(iterator.hasNext()){
+			sum+=iterator.next().count;
+		}
+		iterator = repoCreateOnTimeCounts.getCounts();
+		while(iterator.hasNext()){
+			RepoCreateOnTimeCount repoCreateOnTimeCount = iterator.next();
+			String type = repoCreateOnTimeCount.time;
+			int count = repoCreateOnTimeCount.count;
+			pieChartData.add(new PieChart.Data(type, count*100.0/sum));
+		}
+		this.initialTooltip(repoCreateOnTimeCounts.title, pieChartData);
 	}
 
 	private void initial(UserTypeCounts userTypeCounts) {
@@ -57,18 +74,6 @@ public class GitPieChart extends PieChart {
 		this.initialTooltip(userTypeCounts.title, pieChartData);
 	}
 
-	@Deprecated
-	private void initial(List<String> headers,List<Double> datas,String title) {
-		ObservableList<PieChart.Data> pieChartData =FXCollections.observableArrayList();
-		Double sum = 0.0;
-		for (Double Double : datas) {
-			sum+=Double;
-		}
-		for (int i = 0; i < headers.size(); i++) {
-			pieChartData.add(new PieChart.Data(headers.get(i), datas.get(i)*100.0/sum));
-		}
-		this.initialTooltip(title, pieChartData);
-	}
 
 	private void initialTooltip(String title, ObservableList<PieChart.Data> pieChartData) {
 		pieChart.setData(pieChartData);

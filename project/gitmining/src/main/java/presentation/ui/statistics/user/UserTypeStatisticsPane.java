@@ -31,9 +31,6 @@ public class UserTypeStatisticsPane implements StatisticsPane {
 //	private AnchorPane rightComponentParent;
 
 	public void initialChart() {
-//		List<Double> a = new ArrayList<>(Arrays.asList(1.0, 2.0));
-//		List<String> headers = new ArrayList<>(Arrays.asList("a", "b"));
-//		GitPieChart pieChart = new GitPieChart(headers, a, "用户类型统计图");
 		GeneralStatisticsService statisticsService = new GeneralStatisticsUtil();
 		UserTypeCounts userTypeCounts = statisticsService.getUserTypeCounts();
 		GitPieChart pieChart = new GitPieChart(userTypeCounts);

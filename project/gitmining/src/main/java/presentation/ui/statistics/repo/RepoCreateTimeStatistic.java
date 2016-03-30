@@ -1,13 +1,13 @@
 package presentation.ui.statistics.repo;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
+import chart_data.RepoCreateOnTimeCounts;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
+import logic.calc.general.GeneralStatisticsUtil;
+import logic.calc.service.GeneralStatisticsService;
 import presentation.component.GitPieChart;
 import presentation.ui.statistics.StatisticsPane;
 
@@ -33,13 +33,12 @@ public class RepoCreateTimeStatistic implements StatisticsPane {
 
 	@FXML
 	private AnchorPane anchorPane;
-
 	// private AnchorPane rightComponentParent;
 
 	public void initialChart() {
-		List<Double> a = new ArrayList<>(Arrays.asList(1.0, 2.0));
-		List<String> headers = new ArrayList<>(Arrays.asList("a", "b"));
-		GitPieChart pieChart = new GitPieChart(headers, a, "项目创建时间统计图");
+		GeneralStatisticsService statisticsService = new GeneralStatisticsUtil();
+		RepoCreateOnTimeCounts repoCreateOnTimeCounts = statisticsService.getRepoCreateOnTimeCounts();
+		GitPieChart pieChart = new GitPieChart(repoCreateOnTimeCounts);
 		anchorPane.getChildren().add(pieChart);
 	}
 }
