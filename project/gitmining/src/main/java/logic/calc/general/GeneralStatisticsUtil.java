@@ -7,6 +7,7 @@ import chart_data.RepoCreateOnTimeCounts;
 import chart_data.StarCountRanges;
 import chart_data.UserCreateOnTimeCounts;
 import chart_data.UserTypeCounts;
+import common.enumeration.attribute.Language;
 import logic.calc.service.GeneralStatisticsService;
 
 public class GeneralStatisticsUtil implements GeneralStatisticsService{
@@ -25,8 +26,22 @@ public class GeneralStatisticsUtil implements GeneralStatisticsService{
 
 	@Override
 	public LanguageCounts getLanguageCounts() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		//TODO 测试用的，写好了就删掉
+		LanguageCounts languageCounts = new LanguageCounts();
+		languageCounts.addLanguageCount(Language.C, 98);
+		languageCounts.addLanguageCount(Language.C_PLUS_PLUS, 243);
+		languageCounts.addLanguageCount(Language.C_SHARP, 34);
+		languageCounts.addLanguageCount(Language.JAVA, 66);
+		languageCounts.addLanguageCount(Language.COMMON_LISP, 109);
+		languageCounts.addLanguageCount(Language.HTML, 21);
+		languageCounts.addLanguageCount(Language.OBJECTIVE_C, 676);
+		languageCounts.addLanguageCount(Language.PERL, 87);
+		languageCounts.addLanguageCount(Language.RUBY, 555);
+		languageCounts.addLanguageCount(Language.PYTHON, 27);
+		languageCounts.addLanguageCount(Language.R, 78);
+		return languageCounts;
+//		return null;
 	}
 
 	@Override

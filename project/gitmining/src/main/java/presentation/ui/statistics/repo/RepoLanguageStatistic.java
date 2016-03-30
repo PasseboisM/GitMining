@@ -1,12 +1,13 @@
 package presentation.ui.statistics.repo;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
+import chart_data.LanguageCounts;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
+import logic.calc.general.GeneralStatisticsUtil;
+import logic.calc.service.GeneralStatisticsService;
 import presentation.component.GitBarChart;
 import presentation.ui.statistics.StatisticsPane;
 
@@ -31,9 +32,12 @@ public class RepoLanguageStatistic implements StatisticsPane {
 	private AnchorPane anchorPane;
 
 	public void initialChart() {
-		List<Number> a = Arrays.asList(1.0, 2.0, 3.0, 4.0, 5.0);
-		List<String> headers = Arrays.asList("a", "b", "c", "d", "e");
-		GitBarChart barChart = new GitBarChart(headers, a, "项目", "项目语言统计图", "语言", "项目个数");
+		GeneralStatisticsService statisticsService = new GeneralStatisticsUtil();
+		LanguageCounts languageCounts = statisticsService.getLanguageCounts();
+		GitBarChart barChart = new GitBarChart(languageCounts);
+//		List<Number> a = Arrays.asList(1.0, 2.0, 3.0, 4.0, 5.0);
+//		List<String> headers = Arrays.asList("a", "b", "c", "d", "e");
+//		GitBarChart barChart = new GitBarChart(headers, a, "项目", "项目语言统计图", "语言", "项目个数");
 		anchorPane.getChildren().add(barChart);
 	}
 }

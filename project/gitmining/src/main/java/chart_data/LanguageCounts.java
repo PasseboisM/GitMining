@@ -22,6 +22,9 @@ public class LanguageCounts {
 		return languageCounts.listIterator();
 	}
 	
+	public int getNumOfLanguages() {
+		return languageCounts.size();
+	}
 	
 	public class LanguageCount {
 		public final Language language;

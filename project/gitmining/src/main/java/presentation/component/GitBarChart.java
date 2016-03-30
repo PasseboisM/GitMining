@@ -1,8 +1,12 @@
 package presentation.component;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 
+import chart_data.LanguageCounts;
+import chart_data.LanguageCounts.LanguageCount;
+import common.enumeration.attribute.Language;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -27,6 +31,24 @@ public class GitBarChart extends AnchorPane {
 	 */
 	public GitBarChart(List<String> columns, List<Number> values, String seriesName, String title, String xLabel,
 			String yLabel) {
+		this.initialFXML();
+		this.initialText(title, xLabel, yLabel);
+		this.initial(columns, values, seriesName);
+	}
+	
+	public GitBarChart(LanguageCounts languageCounts) {
+		this.initialFXML();
+		this.initialText("项目使用语言统计图", "语言", "项目个数");
+		this.initial(languageCounts, "项目");
+	}
+
+	private void initialText(String title, String xLabel, String yLabel) {
+		barChart.setTitle(title);
+		xAxis.setLabel(xLabel);
+		yAxis.setLabel(yLabel);
+	}
+
+	private void initialFXML() {
 		FXMLLoader fxmlLoader = new FXMLLoader(GitBarChart.class.getResource("barChart.fxml"));
 		fxmlLoader.setController(this);
 		fxmlLoader.setRoot(this);
@@ -35,33 +57,54 @@ public class GitBarChart extends AnchorPane {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		barChart.setTitle(title);
-		xAxis.setLabel(xLabel);
-		yAxis.setLabel(yLabel);
-		this.initial(columns, values, seriesName);
 	}
 
 	/**
 	 * 初始化柱状图
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void initial(List<String> columns, List<Number> values, String seriesName) {
-		XYChart.Series series = new XYChart.Series();
+		XYChart.Series<String,Number> series = new XYChart.Series<>();
 		series.setName(seriesName);
 		for (int i = 0; i < columns.size(); i++) {
-			XYChart.Data data = new XYChart.Data(columns.get(i), values.get(i));
+			XYChart.Data<String,Number> data = new XYChart.Data<>(columns.get(i), values.get(i));
 			series.getData().add(data);
 		}
 		barChart.getData().add(series);
-		barChart.setCategoryGap(500 / columns.size());
+		barChart.setCategoryGap(500.0 / columns.size());
 
 		for (int i = 0; i < columns.size(); i++) {
-			XYChart.Data data = (Data) series.getData().get(i);
+			XYChart.Data<String,Number> data = (Data<String,Number>) series.getData().get(i);
 			Node node = data.getNode();
 			Tooltip tooltip = new Tooltip(String.valueOf(values.get(i)));
 			Tooltip.install(node, tooltip);
 		}
 
 	}
+	
+	
+	
+	private void initial(LanguageCounts languageCounts, String seriesName) {
+		XYChart.Series<String,Number> series = new XYChart.Series<>();
+		series.setName(seriesName);
+		Iterator<LanguageCount> countIterator = languageCounts.getLanguageCount();
+		while (countIterator.hasNext()) {
+			LanguageCount languageCount = countIterator.next();
+			Language language = languageCount.language;
+			int count = languageCount.repositoryCount;
+			XYChart.Data<String,Number> data = new XYChart.Data<>(language.getName(), count);
+			series.getData().add(data);
+		}
+		barChart.getData().add(series);
+		barChart.setCategoryGap(500.0 / languageCounts.getNumOfLanguages());
 
+		countIterator = languageCounts.getLanguageCount();
+		for (int i = 0; i < languageCounts.getNumOfLanguages(); i++) {
+			LanguageCount languageCount = countIterator.next();
+			int count = languageCount.repositoryCount;
+			XYChart.Data<String,Number> data = (Data<String,Number>) series.getData().get(i);
+			Node node = data.getNode();
+			Tooltip tooltip = new Tooltip(String.valueOf("项目个数："+count+"个"));
+			Tooltip.install(node, tooltip);
+		}
+	}
 }
