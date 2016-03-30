@@ -15,6 +15,16 @@ public class UserStatisticsUtil implements UserStatisticsService {
 	private static final Gson gson = new Gson();
 	private static final String SINGLE_USER_FILE =  "statistic_single_user_rank.py";
 
+	
+	/**
+	 * Dependency: statistic_single_repo_rank.py
+	 * 	Python input: 
+	 * 		1. Headers as JSON list
+	 * 		2. GitUser data in JSON format
+	 * 	Python output:
+	 * 		Rank results in the corresponding order as the header list.
+	 */
+	@Override
 	public UserRanks getRanks(GitUser u){
 		
 		List<String> headers = UserRanks.defaultHeaders;

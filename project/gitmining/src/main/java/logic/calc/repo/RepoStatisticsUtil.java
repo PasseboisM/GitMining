@@ -15,6 +15,14 @@ public class RepoStatisticsUtil implements RepositoryStatisticsService{
 		private static final Gson gson = new Gson();
 		private static final String SINGLE_REPO_FILE =  "statistic_single_repo_rank.py";
 
+		/**
+		 * Dependency: statistic_single_repo_rank.py
+		 * 	Python input: 
+		 * 		1. Headers as JSON list
+		 * 		2. Repository data in JSON format
+		 * 	Python output:
+		 * 		Rank results in the corresponding order as the header list.
+		 */
 		@Override
 		public RepositoryRanks getRanks(Repository r) {
 			List<String> headers = RepositoryRanks.defaultHeaders;

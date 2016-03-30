@@ -14,6 +14,9 @@ public class GeneralStatisticsUtil implements GeneralStatisticsService{
 
 	@Override
 	public FollowerNumberRanges getFollowerNumberRanges() {
+		// Python: user_dist_over_follower.py
+		
+		
 		FollowerNumberRanges followerNumberRanges = new FollowerNumberRanges();
 		followerNumberRanges.addNewRange(0, 10, 9798);
 		followerNumberRanges.addNewRange(10, 20, 1398);
@@ -25,12 +28,16 @@ public class GeneralStatisticsUtil implements GeneralStatisticsService{
 
 	@Override
 	public ForkNumberRanges getForkNumberRanges() {
+		// Python: repo_dist_over_fork.py
+		
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public LanguageCounts getLanguageCounts() {
+		// Python: repo_dist_over_lang.py
+		
 		
 		//TODO 测试用的，写好了就删掉
 		LanguageCounts languageCounts = new LanguageCounts();
@@ -51,6 +58,8 @@ public class GeneralStatisticsUtil implements GeneralStatisticsService{
 
 	@Override
 	public RepoCreateOnTimeCounts getRepoCreateOnTimeCounts() {
+		// Python: repo_dist_over_create_time.py
+		
 		
 		//TODO 测试用的，写好了就删掉
 		RepoCreateOnTimeCounts repoCreateOnTimeCounts = new RepoCreateOnTimeCounts();
@@ -64,6 +73,9 @@ public class GeneralStatisticsUtil implements GeneralStatisticsService{
 
 	@Override
 	public UserCreateOnTimeCounts getUserCreateOnTimeCounts() {
+		// Python: user_dist_over_create_time.py
+		
+		
 		UserCreateOnTimeCounts userCreateOnTimeCounts = new UserCreateOnTimeCounts();
 		userCreateOnTimeCounts.addCreateCount("2007", 28);
 		userCreateOnTimeCounts.addCreateCount("2008", 228);
@@ -76,12 +88,15 @@ public class GeneralStatisticsUtil implements GeneralStatisticsService{
 
 	@Override
 	public StarCountRanges getStarCountRanges() {
+		// Python: repo_dist_over_star.py 
+		
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public UserTypeCounts getUserTypeCounts() {
+		// Python: user_dist_over_type.py
 		
 		//TODO 测试用的，写好了就删掉
 		UserTypeCounts userTypeCounts = new UserTypeCounts();
