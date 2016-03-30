@@ -50,7 +50,13 @@ public class GeneralStatisticsUtil implements GeneralStatisticsService{
 	@Override
 	public UserTypeCounts getUserTypeCounts() {
 		// TODO Auto-generated method stub
-		return null;
+		
+		UserTypeCounts userTypeCounts = new UserTypeCounts();
+		userTypeCounts.addCount("User", 27067);
+		userTypeCounts.addCount("Organization", 950);
+		return userTypeCounts;
+		
+//		return null
 	}
 
 }

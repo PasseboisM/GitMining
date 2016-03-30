@@ -1,13 +1,13 @@
 package presentation.ui.statistics.user;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
+import chart_data.UserTypeCounts;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
+import logic.calc.general.GeneralStatisticsUtil;
+import logic.calc.service.GeneralStatisticsService;
 import presentation.component.GitPieChart;
 import presentation.ui.statistics.StatisticsPane;
 
@@ -31,9 +31,12 @@ public class UserTypeStatisticsPane implements StatisticsPane {
 //	private AnchorPane rightComponentParent;
 
 	public void initialChart() {
-		List<Double> a = new ArrayList<>(Arrays.asList(1.0, 2.0));
-		List<String> headers = new ArrayList<>(Arrays.asList("a", "b"));
-		GitPieChart pieChart = new GitPieChart(headers, a, "用户类型统计图");
+//		List<Double> a = new ArrayList<>(Arrays.asList(1.0, 2.0));
+//		List<String> headers = new ArrayList<>(Arrays.asList("a", "b"));
+//		GitPieChart pieChart = new GitPieChart(headers, a, "用户类型统计图");
+		GeneralStatisticsService statisticsService = new GeneralStatisticsUtil();
+		UserTypeCounts userTypeCounts = statisticsService.getUserTypeCounts();
+		GitPieChart pieChart = new GitPieChart(userTypeCounts);
 		anchorPane.getChildren().add(pieChart);
 	}
 }

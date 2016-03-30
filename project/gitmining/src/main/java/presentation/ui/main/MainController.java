@@ -71,7 +71,6 @@ public class MainController extends Application implements Observer{
 		serviceConfigure = logicServiceFactory.getServiceConfigure();
 		setToggleButtonGroup();
 		
-		
 		String imageFilename ="userSearchBackground.jpg";
 		Image bgImage = null;
 		try {
@@ -159,50 +158,10 @@ public class MainController extends Application implements Observer{
 		}
 	}
 	
-//	@FXML
-//	private void onRepoStatisticClicked1(MouseEvent event) {
-//		rightComponentParent.getChildren().clear();
-//		try {
-//			rightComponentParent.getChildren().add(RepoStatistic_1Controller.getInstance(rightComponentParent));
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//	}
-//	
-//	@FXML
-//	private void onRepoStatisticClicked2(MouseEvent event) {
-//		rightComponentParent.getChildren().clear();
-//		try {
-//			rightComponentParent.getChildren().add(RepoStatistic_2Controller.getInstance(rightComponentParent));
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//	}
-//	
-//	@FXML
-//	private void onRepoStatisticClicked3(MouseEvent event) {
-//		rightComponentParent.getChildren().clear();
-//		try {
-//			rightComponentParent.getChildren().add(RepoStatistic_3Controller.getInstance(rightComponentParent));
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//	}
-//	
-//	@FXML
-//	private void onRepoStatisticClicked4(MouseEvent event) {
-//		rightComponentParent.getChildren().clear();
-//		try {
-//			rightComponentParent.getChildren().add(RepoStatistic_4Controller.getInstance(rightComponentParent));
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//	}
-	
 	@FXML 
 	private void onStatisticClicked(ActionEvent event){
 		Button button = (Button) event.getSource();
-		System.out.println(button.getId());
+//		System.out.println(button.getId());
 		rightComponentParent.getChildren().clear();
 		try {
 			rightComponentParent.getChildren().add(MAP.get(button.getId()).getInstance(rightComponentParent));
@@ -210,7 +169,6 @@ public class MainController extends Application implements Observer{
 			e.printStackTrace();
 		}
 	}
-	
 
 	@Override
 	public void update() {
@@ -231,7 +189,6 @@ public class MainController extends Application implements Observer{
 	public void update(Observable observable, Object obj) {
 		update();
 	}
-	
 	
 	@SuppressWarnings("serial")
 	private  static final  HashMap<String, StatisticsPane> MAP = new HashMap<String,StatisticsPane>() {

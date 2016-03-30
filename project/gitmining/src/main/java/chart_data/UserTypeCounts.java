@@ -13,6 +13,7 @@ import java.util.List;
 public class UserTypeCounts {
 	
 	public List<UserTypeCount> counts = new LinkedList<>();
+	public String title = "用户类型统计图";
 	
 	public void addCount(String type, int count) {
 		counts.add(new UserTypeCount(type, count));
