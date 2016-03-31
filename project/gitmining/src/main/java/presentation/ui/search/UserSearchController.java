@@ -76,7 +76,6 @@ public class UserSearchController {
 		for (GitUser gitUser : gitUserPerPage) {
 			vBox.getChildren().add(new UserMinBlock(rightComponentParent, gitUser));
 		}
-		pane.getContent();
 		pane.setContent(vBox);
 		return pane;
 	}
