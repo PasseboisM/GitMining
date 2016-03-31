@@ -2,7 +2,7 @@ package presentation.ui.statistics.user;
 
 import java.io.IOException;
 
-import chart_data.UserTypeCounts;
+import chart_data.UserDistOverType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
@@ -32,7 +32,7 @@ public class UserTypeStatisticsPane implements StatisticsPane {
 
 	public void initialChart() {
 		GeneralStatisticsService statisticsService = new GeneralStatisticsUtil();
-		UserTypeCounts userTypeCounts = statisticsService.getUserTypeCounts();
+		UserDistOverType userTypeCounts = statisticsService.getUserDistOverType();
 		GitPieChart pieChart = new GitPieChart(userTypeCounts);
 		anchorPane.getChildren().add(pieChart);
 	}

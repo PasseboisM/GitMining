@@ -3,10 +3,10 @@ package presentation.component;
 import java.io.IOException;
 import java.util.Iterator;
 
-import chart_data.RepoCreateOnTimeCounts;
-import chart_data.RepoCreateOnTimeCounts.RepoCreateOnTimeCount;
-import chart_data.UserTypeCounts;
-import chart_data.UserTypeCounts.UserTypeCount;
+import chart_data.RepoDistOverCreateTime;
+import chart_data.RepoDistOverCreateTime.RepoCreateOnTimeCount;
+import chart_data.UserDistOverType;
+import chart_data.UserDistOverType.UserTypeCount;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -20,12 +20,12 @@ import javafx.scene.text.Font;
 public class GitPieChart extends PieChart {
 	@FXML
 	private PieChart pieChart;
-	public GitPieChart(UserTypeCounts userTypeCounts) {
+	public GitPieChart(UserDistOverType userTypeCounts) {
 		this.initialFXML();
 		this.initial(userTypeCounts);
 	}
 	
-	public GitPieChart(RepoCreateOnTimeCounts repoCreateOnTimeCounts) {
+	public GitPieChart(RepoDistOverCreateTime repoCreateOnTimeCounts) {
 		this.initialFXML();
 		this.initial(repoCreateOnTimeCounts);
 	}
@@ -41,7 +41,7 @@ public class GitPieChart extends PieChart {
 		}
 	}
 
-	private void initial(RepoCreateOnTimeCounts repoCreateOnTimeCounts) {
+	private void initial(RepoDistOverCreateTime repoCreateOnTimeCounts) {
 		ObservableList<PieChart.Data> pieChartData =FXCollections.observableArrayList();
 		Iterator<RepoCreateOnTimeCount> iterator = repoCreateOnTimeCounts.getCounts();
 		Double sum = 0.0;
@@ -58,7 +58,7 @@ public class GitPieChart extends PieChart {
 		this.initialTooltip(repoCreateOnTimeCounts.title, pieChartData);
 	}
 
-	private void initial(UserTypeCounts userTypeCounts) {
+	private void initial(UserDistOverType userTypeCounts) {
 		ObservableList<PieChart.Data> pieChartData =FXCollections.observableArrayList();
 		Iterator<UserTypeCount> iterator = userTypeCounts.getCounts();
 		Double sum = 0.0;

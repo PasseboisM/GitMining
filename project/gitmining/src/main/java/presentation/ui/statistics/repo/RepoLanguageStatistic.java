@@ -2,7 +2,7 @@ package presentation.ui.statistics.repo;
 
 import java.io.IOException;
 
-import chart_data.LanguageCounts;
+import chart_data.RepoDistOverLanguage;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
@@ -33,7 +33,7 @@ public class RepoLanguageStatistic implements StatisticsPane {
 
 	public void initialChart() {
 		GeneralStatisticsService statisticsService = new GeneralStatisticsUtil();
-		LanguageCounts languageCounts = statisticsService.getLanguageCounts();
+		RepoDistOverLanguage languageCounts = statisticsService.getRepoDistOverLanguage();
 		GitBarChart barChart = new GitBarChart(languageCounts);
 		anchorPane.getChildren().add(barChart);
 	}

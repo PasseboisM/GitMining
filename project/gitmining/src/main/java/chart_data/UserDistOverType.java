@@ -10,7 +10,7 @@ import java.util.List;
  * 预计只有User/Organization两种类型
  * */
 
-public class UserTypeCounts {
+public class UserDistOverType {
 	
 	public List<UserTypeCount> counts = new LinkedList<>();
 	public String title = "用户类型统计图";

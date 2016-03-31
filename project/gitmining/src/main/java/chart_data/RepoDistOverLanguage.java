@@ -10,7 +10,7 @@ import common.enumeration.attribute.Language;
  * Type: GeneralStatistics
  * 系统中所有项目的语言分布情况。
  * */
-public class LanguageCounts {
+public class RepoDistOverLanguage {
 	
 	public List<LanguageCount> languageCounts = new LinkedList<>();
 	

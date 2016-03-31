@@ -1,12 +1,12 @@
 package logic.calc.service;
 
-import chart_data.FollowerNumberRanges;
-import chart_data.ForkNumberRanges;
-import chart_data.LanguageCounts;
-import chart_data.RepoCreateOnTimeCounts;
-import chart_data.StarCountRanges;
-import chart_data.UserCreateOnTimeCounts;
-import chart_data.UserTypeCounts;
+import chart_data.UserDistOverFollower;
+import chart_data.RepoDistOverFork;
+import chart_data.RepoDistOverLanguage;
+import chart_data.RepoDistOverCreateTime;
+import chart_data.RepoDistOverStar;
+import chart_data.UserDistOverCreateTime;
+import chart_data.UserDistOverType;
 
 
 /**
@@ -21,36 +21,36 @@ public interface GeneralStatisticsService {
 	/**
 	 * 获取当前系统中所有用户的Follower数目分布。
 	 */
-	public FollowerNumberRanges getFollowerNumberRanges();
+	public UserDistOverFollower getUserDistOverFollower();
 	
 	/**
 	 * 获取当前系统中所有仓库的Fork数分布。
 	 */
-	public ForkNumberRanges getForkNumberRanges();
+	public RepoDistOverFork getRepoDistOverFork();
 	
 	/**
 	 * 获取所有项目的（主）语言分布情况
 	 */
-	public LanguageCounts getLanguageCounts();
+	public RepoDistOverLanguage getRepoDistOverLanguage();
 	
 	/**
 	 * 获取所有仓库关于创建时间的分布（按年分组）
 	 */
-	public RepoCreateOnTimeCounts getRepoCreateOnTimeCounts();
+	public RepoDistOverCreateTime getRepoDistOverCreateTime();
 	
 	/**
 	 * 获取所有用户关于创建时间的分布（按年分组）
 	 */
-	public UserCreateOnTimeCounts getUserCreateOnTimeCounts();
+	public UserDistOverCreateTime getUserDistOverCreateTime();
 	
 	/**
 	 * 获取所有仓库关于其StarGazer数目的分布
 	 */
-	public StarCountRanges getStarCountRanges();
+	public RepoDistOverStar getRepoDistOverStar();
 	
 	/**
 	 * 获取抽象GitUser关于其类型的分布（User/Organization）
 	 */
-	public UserTypeCounts getUserTypeCounts();
+	public UserDistOverType getUserDistOverType();
 	
 }

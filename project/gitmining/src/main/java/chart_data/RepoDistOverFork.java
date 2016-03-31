@@ -9,7 +9,7 @@ import java.util.List;
  * 内部包含了按照fork number进行统计、划分区间的Repository分布情况。
  * */
 
-public class ForkNumberRanges {
+public class RepoDistOverFork {
 	
 	private List<ForkNumberRange> repositoryRanges = new LinkedList<>();
 	private int gap = 100;

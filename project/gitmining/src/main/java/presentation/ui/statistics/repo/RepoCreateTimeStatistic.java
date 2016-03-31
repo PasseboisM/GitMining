@@ -2,7 +2,7 @@ package presentation.ui.statistics.repo;
 
 import java.io.IOException;
 
-import chart_data.RepoCreateOnTimeCounts;
+import chart_data.RepoDistOverCreateTime;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
@@ -37,7 +37,7 @@ public class RepoCreateTimeStatistic implements StatisticsPane {
 
 	public void initialChart() {
 		GeneralStatisticsService statisticsService = new GeneralStatisticsUtil();
-		RepoCreateOnTimeCounts repoCreateOnTimeCounts = statisticsService.getRepoCreateOnTimeCounts();
+		RepoDistOverCreateTime repoCreateOnTimeCounts = statisticsService.getRepoDistOverCreateTime();
 		GitPieChart pieChart = new GitPieChart(repoCreateOnTimeCounts);
 		anchorPane.getChildren().add(pieChart);
 	}

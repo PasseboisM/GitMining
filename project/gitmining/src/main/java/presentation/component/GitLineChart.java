@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
-import chart_data.FollowerNumberRanges;
-import chart_data.FollowerNumberRanges.FollowerNumberRange;
+import chart_data.UserDistOverFollower;
+import chart_data.UserDistOverFollower.FollowerNumberRange;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -35,7 +35,7 @@ public class GitLineChart extends AnchorPane {
 		this.initial(labels, datas, seriesName);
 	}
 	
-	public GitLineChart(FollowerNumberRanges followerNumberRanges) {
+	public GitLineChart(UserDistOverFollower followerNumberRanges) {
 		this.initialFXML();
 		this.initialText("被关注数统计图", "用户","被关注数");
 		this.initial(followerNumberRanges,"用户");
@@ -76,7 +76,7 @@ public class GitLineChart extends AnchorPane {
 		}
 	}
 	//TODO 可能要改一下chart_data数据包类
-	private void initial(FollowerNumberRanges followerNumberRanges, String seriesName) {
+	private void initial(UserDistOverFollower followerNumberRanges, String seriesName) {
 		XYChart.Series<String,Number> series = new XYChart.Series<>();
 		series.setName(seriesName);
 		int numOfFollower = 0;

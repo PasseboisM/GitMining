@@ -10,7 +10,7 @@ import java.util.List;
  * 
  * */
 
-public class FollowerNumberRanges {
+public class UserDistOverFollower {
 	//随追随者数量的增加的用户的数量
 	private List<FollowerNumberRange> ranges = new LinkedList<>();
 	private int gap = 10;//追随者数量的间隔

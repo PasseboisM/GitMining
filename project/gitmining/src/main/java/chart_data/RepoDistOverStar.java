@@ -11,7 +11,7 @@ import java.util.List;
  * 建议区间长度：500
  * */
 
-public class StarCountRanges {
+public class RepoDistOverStar {
 	
 	private List<StarCountRange> counts = new LinkedList<>();
 

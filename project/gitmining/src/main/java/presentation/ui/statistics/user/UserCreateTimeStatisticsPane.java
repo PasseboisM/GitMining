@@ -2,7 +2,7 @@ package presentation.ui.statistics.user;
 
 import java.io.IOException;
 
-import chart_data.UserCreateOnTimeCounts;
+import chart_data.UserDistOverCreateTime;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
@@ -31,7 +31,7 @@ public class UserCreateTimeStatisticsPane implements StatisticsPane {
 	
 	public void initialChart(){
 		GeneralStatisticsService statisticsService = new GeneralStatisticsUtil();
-		UserCreateOnTimeCounts userCreateOnTimeCounts = statisticsService.getUserCreateOnTimeCounts();
+		UserDistOverCreateTime userCreateOnTimeCounts = statisticsService.getUserDistOverCreateTime();
 		GitBarChart barChart = new GitBarChart(userCreateOnTimeCounts);
 		anchorPane.getChildren().add(barChart);
 	}

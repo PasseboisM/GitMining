@@ -10,7 +10,7 @@ import java.util.List;
  * 系统内用户注册时间分布，预期以年为单位。
  * */
 
-public class UserCreateOnTimeCounts {
+public class UserDistOverCreateTime {
 
 	private List<UserCreateOnTimeCount> counts = new LinkedList<>();
 	

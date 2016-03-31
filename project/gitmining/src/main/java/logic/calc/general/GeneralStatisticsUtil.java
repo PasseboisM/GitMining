@@ -1,22 +1,22 @@
 package logic.calc.general;
 
-import chart_data.FollowerNumberRanges;
-import chart_data.ForkNumberRanges;
-import chart_data.LanguageCounts;
-import chart_data.RepoCreateOnTimeCounts;
-import chart_data.StarCountRanges;
-import chart_data.UserCreateOnTimeCounts;
-import chart_data.UserTypeCounts;
+import chart_data.UserDistOverFollower;
+import chart_data.RepoDistOverFork;
+import chart_data.RepoDistOverLanguage;
+import chart_data.RepoDistOverCreateTime;
+import chart_data.RepoDistOverStar;
+import chart_data.UserDistOverCreateTime;
+import chart_data.UserDistOverType;
 import common.enumeration.attribute.Language;
 import logic.calc.service.GeneralStatisticsService;
 
 public class GeneralStatisticsUtil implements GeneralStatisticsService{
 
 	@Override
-	public FollowerNumberRanges getFollowerNumberRanges() {
+	public UserDistOverFollower getUserDistOverFollower() {
 		String pyFile = "user_dist_over_follower.py";
 		
-		FollowerNumberRanges followerNumberRanges = new FollowerNumberRanges();
+		UserDistOverFollower followerNumberRanges = new UserDistOverFollower();
 		followerNumberRanges.addNewRange(0, 10, 9798);
 		followerNumberRanges.addNewRange(10, 20, 1398);
 		followerNumberRanges.addNewRange(20, 30, 758);
@@ -26,7 +26,7 @@ public class GeneralStatisticsUtil implements GeneralStatisticsService{
 	}
 
 	@Override
-	public ForkNumberRanges getForkNumberRanges() {
+	public RepoDistOverFork getRepoDistOverFork() {
 		String pyFile = "repo_dist_over_fork.py";
 		
 		// TODO Auto-generated method stub
@@ -34,11 +34,11 @@ public class GeneralStatisticsUtil implements GeneralStatisticsService{
 	}
 
 	@Override
-	public LanguageCounts getLanguageCounts() {
+	public RepoDistOverLanguage getRepoDistOverLanguage() {
 		String pyFile = "repo_dist_over_lang.py";
 		
 		//TODO 测试用的，写好了就删掉
-		LanguageCounts languageCounts = new LanguageCounts();
+		RepoDistOverLanguage languageCounts = new RepoDistOverLanguage();
 		languageCounts.addLanguageCount(Language.C, 98);
 		languageCounts.addLanguageCount(Language.C_PLUS_PLUS, 243);
 		languageCounts.addLanguageCount(Language.C_SHARP, 34);
@@ -55,11 +55,11 @@ public class GeneralStatisticsUtil implements GeneralStatisticsService{
 	}
 
 	@Override
-	public RepoCreateOnTimeCounts getRepoCreateOnTimeCounts() {
+	public RepoDistOverCreateTime getRepoDistOverCreateTime() {
 		String pyFile = "repo_dist_over_create_time.py";
 		
 		//TODO 测试用的，写好了就删掉
-		RepoCreateOnTimeCounts repoCreateOnTimeCounts = new RepoCreateOnTimeCounts();
+		RepoDistOverCreateTime repoCreateOnTimeCounts = new RepoDistOverCreateTime();
 		repoCreateOnTimeCounts.addCreateCount("2007", 9);
 		repoCreateOnTimeCounts.addCreateCount("2008", 179);
 		repoCreateOnTimeCounts.addCreateCount("2009", 997);
@@ -69,10 +69,10 @@ public class GeneralStatisticsUtil implements GeneralStatisticsService{
 	}
 
 	@Override
-	public UserCreateOnTimeCounts getUserCreateOnTimeCounts() {
+	public UserDistOverCreateTime getUserDistOverCreateTime() {
 		String pyFile = "user_dist_over_create_time.py";
 		
-		UserCreateOnTimeCounts userCreateOnTimeCounts = new UserCreateOnTimeCounts();
+		UserDistOverCreateTime userCreateOnTimeCounts = new UserDistOverCreateTime();
 		userCreateOnTimeCounts.addCreateCount("2007", 28);
 		userCreateOnTimeCounts.addCreateCount("2008", 228);
 		userCreateOnTimeCounts.addCreateCount("2009", 578);
@@ -83,17 +83,17 @@ public class GeneralStatisticsUtil implements GeneralStatisticsService{
 	}
 
 	@Override
-	public StarCountRanges getStarCountRanges() {
+	public RepoDistOverStar getRepoDistOverStar() {
 		String pyFile = "repo_dist_over_star.py";
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public UserTypeCounts getUserTypeCounts() {
+	public UserDistOverType getUserDistOverType() {
 		String pyFile = "user_dist_over_type.py";
 		//TODO 测试用的，写好了就删掉
-		UserTypeCounts userTypeCounts = new UserTypeCounts();
+		UserDistOverType userTypeCounts = new UserDistOverType();
 		userTypeCounts.addCount("User", 27067);
 		userTypeCounts.addCount("Organization", 950);
 		return userTypeCounts;

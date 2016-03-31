@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
-import chart_data.LanguageCounts;
-import chart_data.LanguageCounts.LanguageCount;
-import chart_data.UserCreateOnTimeCounts;
-import chart_data.UserCreateOnTimeCounts.UserCreateOnTimeCount;
+import chart_data.RepoDistOverLanguage;
+import chart_data.RepoDistOverLanguage.LanguageCount;
+import chart_data.UserDistOverCreateTime;
+import chart_data.UserDistOverCreateTime.UserCreateOnTimeCount;
 import common.enumeration.attribute.Language;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -38,13 +38,13 @@ public class GitBarChart extends AnchorPane {
 		this.initial(columns, values, seriesName);
 	}
 	
-	public GitBarChart(LanguageCounts languageCounts) {
+	public GitBarChart(RepoDistOverLanguage languageCounts) {
 		this.initialFXML();
 		this.initialText("项目使用语言统计图", "语言", "项目个数");
 		this.initial(languageCounts, "项目");
 	}
 	
-	public GitBarChart(UserCreateOnTimeCounts userCreateOnTimeCounts) {
+	public GitBarChart(UserDistOverCreateTime userCreateOnTimeCounts) {
 		this.initialFXML();
 		this.initialText("用户创建时间统计图", "创建时间", "用户个数");
 		this.initial(userCreateOnTimeCounts, "用户");
@@ -91,7 +91,7 @@ public class GitBarChart extends AnchorPane {
 	
 	
 	
-	private void initial(LanguageCounts languageCounts, String seriesName) {
+	private void initial(RepoDistOverLanguage languageCounts, String seriesName) {
 		XYChart.Series<String,Number> series = new XYChart.Series<>();
 		series.setName(seriesName);
 		Iterator<LanguageCount> countIterator = languageCounts.getLanguageCount();
@@ -116,7 +116,7 @@ public class GitBarChart extends AnchorPane {
 		}
 	}
 
-	private void initial(UserCreateOnTimeCounts userCreateOnTimeCounts, String seriesName) {
+	private void initial(UserDistOverCreateTime userCreateOnTimeCounts, String seriesName) {
 		XYChart.Series<String,Number> series = new XYChart.Series<>();
 		series.setName(seriesName);
 		Iterator<UserCreateOnTimeCount> countIterator = userCreateOnTimeCounts.getCounts();

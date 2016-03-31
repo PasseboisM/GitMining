@@ -12,7 +12,7 @@ import java.util.List;
  * TODO 应该与UserCreateOnTimeCounts共享一个父类
  * */
 
-public class RepoCreateOnTimeCounts {
+public class RepoDistOverCreateTime {
 	
 	private List<RepoCreateOnTimeCount> counts = new LinkedList<>();
 	public String title = "项目创建时间统计图";

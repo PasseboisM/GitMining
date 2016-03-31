@@ -2,7 +2,7 @@ package presentation.ui.statistics.user;
 
 import java.io.IOException;
 
-import chart_data.FollowerNumberRanges;
+import chart_data.UserDistOverFollower;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
@@ -32,7 +32,7 @@ public class UserFollowerStatisticsPane implements StatisticsPane {
 
 	public void initialChart() {
 		GeneralStatisticsService generalStatisticsService = new GeneralStatisticsUtil();
-		FollowerNumberRanges followerNumberRanges = generalStatisticsService.getFollowerNumberRanges();
+		UserDistOverFollower followerNumberRanges = generalStatisticsService.getUserDistOverFollower();
 		GitLineChart lineChart = new GitLineChart(followerNumberRanges);
 		anchorPane.getChildren().add(lineChart);
 	}
