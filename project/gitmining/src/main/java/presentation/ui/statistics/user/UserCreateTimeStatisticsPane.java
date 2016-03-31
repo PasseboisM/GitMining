@@ -1,8 +1,6 @@
 package presentation.ui.statistics.user;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
 import chart_data.UserCreateOnTimeCounts;
 import javafx.fxml.FXML;
