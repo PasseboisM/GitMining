@@ -27,6 +27,7 @@ public class UserSearchController {
 	public static AnchorPane getInstance(AnchorPane rightComponentParent) throws IOException{
 		FXMLLoader loader = new FXMLLoader(UserSearchController.class.getResource("userSearch.fxml"));
 		AnchorPane pane = loader.load();
+		pane.getStylesheets().add(UserSearchController.class.getResource("button.css").toExternalForm());
 		UserSearchController controller = loader.getController();
 		controller.initial(rightComponentParent);
 		return pane;
@@ -60,7 +61,6 @@ public class UserSearchController {
 	
 	private ScrollPane initialCreatePage(Integer pageIndex) {
 		ScrollPane pane = new ScrollPane();
-		pane.setId("scrollpane");
 		VBox vBox = new VBox();
 		vBox.setPrefWidth(1010);
 		int numPerPage = 10;
@@ -78,7 +78,6 @@ public class UserSearchController {
 		}
 		pane.getContent();
 		pane.setContent(vBox);
-		pane.getStyleClass().add("/resouces/css/scollpane.css");
 		return pane;
 	}
 
