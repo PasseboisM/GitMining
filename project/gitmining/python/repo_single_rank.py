@@ -10,14 +10,17 @@ import sys
 # Output:
 # A list of ranks(0-1) for the data in corresponding order as argv[1]
 
+df = DataFrame.from_csv("LocalData/repo_avg_std.csv")
 
-df = DataFrame.from_csv("LocalData/user_avg_std.csv")
+input = open(sys.argv[1],'r')
 
-headers = json.loads(sys.argv[1])
-obj = json.loads(sys.argv[2])
+headers = json.loads(input.readline())
+obj = json.loads(input.readline())
+
 
 for head in headers:
     avg = df['avg'][head]
     std = df['std'][head]
-    norm_func = norm(loc=avg, scale=std)
-    print norm_func.cdf(obj[head])
+    norm_function = norm(loc=avg, scale=std)
+    print norm_function.cdf(obj[head])
+

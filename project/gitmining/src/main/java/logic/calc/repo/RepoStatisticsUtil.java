@@ -13,7 +13,7 @@ import logic.calc.service.RepositoryStatisticsService;
 public class RepoStatisticsUtil implements RepositoryStatisticsService{
 	
 		private static final Gson gson = new Gson();
-		private static final String SINGLE_REPO_FILE =  "statistic_single_repo_rank.py";
+		private static final String SINGLE_REPO_FILE =  "repo_single_rank.py";
 
 		/**
 		 * Dependency: statistic_single_repo_rank.py
