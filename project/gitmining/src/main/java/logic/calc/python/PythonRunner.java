@@ -9,10 +9,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import chart_data.radar.RepositoryRanks;
-
-import com.google.gson.Gson;
-
 public class PythonRunner {
 	
 	public static List<String> runPython(String fileName,String...paras) throws IOException, InterruptedException {
