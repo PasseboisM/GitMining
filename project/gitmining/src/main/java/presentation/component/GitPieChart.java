@@ -15,6 +15,7 @@ import javafx.geometry.Side;
 import javafx.scene.Node;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Tooltip;
+import javafx.scene.text.Font;
 
 public class GitPieChart extends PieChart {
 	@FXML
@@ -81,9 +82,11 @@ public class GitPieChart extends PieChart {
 		for (PieChart.Data data : pieChart.getData()) {
 			Node node = data.getNode();
 			Tooltip tooltip = new Tooltip(String.format("%.2f", data.getPieValue()) + "%");
+			tooltip.setFont(new Font(25));
 			Tooltip.install(node, tooltip);
 		}
 		pieChart.setTitle(title);
+		
 	}
 
 }
