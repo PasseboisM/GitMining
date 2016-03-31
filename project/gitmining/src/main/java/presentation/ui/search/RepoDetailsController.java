@@ -2,6 +2,8 @@ package presentation.ui.search;
 
 import java.io.IOException;
 
+import com.google.gson.Gson;
+
 import common.service.Repository;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -56,6 +58,9 @@ public class RepoDetailsController {
 	private void initialRadar(Repository r){
 		RepositoryStatisticsService service = new RepoStatisticsUtil();
 		Radar radar = null;
+		Gson gson = new Gson();
+		String json = gson.toJson(r);
+		System.out.println(json);
 		try {
 			radar = new Radar(service.getRanks(r));
 		} catch (Exception e) {
