@@ -60,6 +60,7 @@ public class UserSearchController {
 	
 	private ScrollPane initialCreatePage(Integer pageIndex) {
 		ScrollPane pane = new ScrollPane();
+		pane.setId("scrollpane");
 		VBox vBox = new VBox();
 		vBox.setPrefWidth(1010);
 		int numPerPage = 10;
@@ -75,8 +76,9 @@ public class UserSearchController {
 		for (GitUser gitUser : gitUserPerPage) {
 			vBox.getChildren().add(new UserMinBlock(rightComponentParent, gitUser));
 		}
-		
+		pane.getContent();
 		pane.setContent(vBox);
+		pane.getStyleClass().add("/resouces/css/scollpane.css");
 		return pane;
 	}
 
