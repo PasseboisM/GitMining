@@ -1,12 +1,13 @@
 package presentation.ui.statistics.repo;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
+import chart_data.RepoDistOverStar;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
+import logic.calc.general.GeneralStatisticsUtil;
+import logic.calc.service.GeneralStatisticsService;
 import presentation.component.GitBarChart;
 import presentation.ui.statistics.StatisticsPane;
 
@@ -17,7 +18,7 @@ import presentation.ui.statistics.StatisticsPane;
 public class RepoStarStatistic implements StatisticsPane {
 	public AnchorPane getInstance(AnchorPane rightComponentParent) throws IOException {
 		FXMLLoader loader = new FXMLLoader(
-				RepoStarStatistic.class.getResource("repositoryCollaboratorStatistic.fxml"));
+				RepoStarStatistic.class.getResource("repositoryStarStatistic.fxml"));
 		AnchorPane rootUINode = loader.load();
 		RepoStarStatistic controller = loader.getController();
 		controller.initial(rightComponentParent);
@@ -34,9 +35,9 @@ public class RepoStarStatistic implements StatisticsPane {
 	// private AnchorPane rightComponentParent;
 
 	public void initialChart() {
-		List<Number> a = Arrays.asList(1.0, 2.0, 3.0, 4.0, 5.0);
-		List<String> headers = Arrays.asList("a", "b", "c", "d", "e");
-		GitBarChart barChart = new GitBarChart(headers, a, "项目", "项目关注度统计图", "范围", "关注人数");
+		GeneralStatisticsService generalStatisticsService = new GeneralStatisticsUtil();
+		RepoDistOverStar repoDistOverStar = generalStatisticsService.getRepoDistOverStar();
+		GitBarChart barChart = new GitBarChart(repoDistOverStar);
 		anchorPane.getChildren().add(barChart);
 	}
 }

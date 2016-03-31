@@ -1,12 +1,13 @@
 package presentation.ui.statistics.repo;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
+import chart_data.RepoDistOverFork;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
+import logic.calc.general.GeneralStatisticsUtil;
+import logic.calc.service.GeneralStatisticsService;
 import presentation.component.GitBarChart;
 import presentation.ui.statistics.StatisticsPane;
 
@@ -35,9 +36,9 @@ public class RepoForkStatistic implements StatisticsPane {
 	// private AnchorPane rightComponentParent;
 
 	public void initialChart() {
-		List<Number> a = Arrays.asList(1.0, 2.0, 3.0, 4.0, 5.0);
-		List<String> headers = Arrays.asList("a", "b", "c", "d", "e");
-		GitBarChart barChart = new GitBarChart(headers, a, "项目", "项目复刻数统计图", "范围", "复刻次数");
+		GeneralStatisticsService generalStatisticsService = new GeneralStatisticsUtil();
+		RepoDistOverFork repoDistOverFork = generalStatisticsService.getRepoDistOverFork();
+		GitBarChart barChart = new GitBarChart(repoDistOverFork);
 		anchorPane.getChildren().add(barChart);
 	}
 }

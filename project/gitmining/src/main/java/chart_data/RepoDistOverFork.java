@@ -19,6 +19,10 @@ public class RepoDistOverFork {
 		repositoryRanges.add(new ForkNumberRange(lowerBound, higherBound, numOfRepos));
 	}
 	
+	public int getNumOfRanges(){
+		return repositoryRanges.size();
+	}
+	
 	/**
 	 * 获取所有的ForkNumberRange<br />
 	 * 迭代器保证提供的区间<strong>从小到大排序</strong>。

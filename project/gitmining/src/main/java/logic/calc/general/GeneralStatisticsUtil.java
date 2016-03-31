@@ -29,8 +29,14 @@ public class GeneralStatisticsUtil implements GeneralStatisticsService{
 	public RepoDistOverFork getRepoDistOverFork() {
 		String pyFile = "repo_dist_over_fork.py";
 		
+		RepoDistOverFork repoDistOverFork = new RepoDistOverFork();
+		repoDistOverFork.addRange(0, 25, 1983);
+		repoDistOverFork.addRange(25, 50, 983);
+		repoDistOverFork.addRange(50, 75, 83);
+		repoDistOverFork.addRange(75, 100, 183);
+		
 		// TODO Auto-generated method stub
-		return null;
+		return repoDistOverFork;
 	}
 
 	@Override
@@ -86,7 +92,14 @@ public class GeneralStatisticsUtil implements GeneralStatisticsService{
 	public RepoDistOverStar getRepoDistOverStar() {
 		String pyFile = "repo_dist_over_star.py";
 		// TODO Auto-generated method stub
-		return null;
+		RepoDistOverStar repoDistOverStar = new RepoDistOverStar();
+		repoDistOverStar.addRange(0, 25, 2083);
+		repoDistOverStar.addRange(25, 50, 883);
+		repoDistOverStar.addRange(50, 75, 283);
+		repoDistOverStar.addRange(75, 100, 83);
+		
+		// TODO Auto-generated method stub
+		return repoDistOverStar;
 	}
 
 	@Override
