@@ -14,8 +14,7 @@ public class GeneralStatisticsUtil implements GeneralStatisticsService{
 
 	@Override
 	public FollowerNumberRanges getFollowerNumberRanges() {
-		// Python: user_dist_over_follower.py
-		
+		String pyFile = "user_dist_over_follower.py";
 		
 		FollowerNumberRanges followerNumberRanges = new FollowerNumberRanges();
 		followerNumberRanges.addNewRange(0, 10, 9798);
@@ -28,8 +27,7 @@ public class GeneralStatisticsUtil implements GeneralStatisticsService{
 
 	@Override
 	public ForkNumberRanges getForkNumberRanges() {
-		// Python: repo_dist_over_fork.py
-		
+		String pyFile = "repo_dist_over_fork.py";
 		// TODO Auto-generated method stub
 		return null;
 	}

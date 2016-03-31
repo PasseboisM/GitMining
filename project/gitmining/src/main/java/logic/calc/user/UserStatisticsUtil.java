@@ -13,7 +13,7 @@ import logic.calc.service.UserStatisticsService;
 public class UserStatisticsUtil implements UserStatisticsService {
 	
 	private static final Gson gson = new Gson();
-	private static final String SINGLE_USER_FILE =  "statistic_single_user_rank.py";
+	private static final String SINGLE_USER_FILE =  "user_single_rank.py";
 
 	
 	/**
