@@ -35,8 +35,8 @@ import presentation.image.ImageFactory;
 import presentation.ui.search.RepositorySearchController;
 import presentation.ui.search.UserSearchController;
 import presentation.ui.statistics.StatisticsPane;
-import presentation.ui.statistics.repo.RepoCollaboratorStatistic;
-import presentation.ui.statistics.repo.RepoContributorStatistic;
+import presentation.ui.statistics.repo.RepoStarStatistic;
+import presentation.ui.statistics.repo.RepoForkStatistic;
 import presentation.ui.statistics.repo.RepoCreateTimeStatistic;
 import presentation.ui.statistics.repo.RepoLanguageStatistic;
 import presentation.ui.statistics.user.UserBlogCountStatisticsPane;
@@ -98,7 +98,7 @@ public class MainController extends Application implements Observer{
 	@FXML private AnchorPane rightComponentParent;
 	@FXML private Button buttonRepoSearch;
 	@FXML private Button buttonUserSearch;
-	@FXML private Button buttonLanguage,buttonRepoCreateTime,buttonContributor,buttonCollaborator;
+	@FXML private Button buttonLanguage,buttonRepoCreateTime,buttonFork,buttonStar;
 	@FXML private Button buttonUserType,buttonUserCreateTime,buttonInEachCompany,buttonBlogCount,buttonLocationCount,buttonEmailCount,buttonFollower,buttonFollowing;
 	@FXML private ProgressBar progressBar;
 	@FXML private ToggleButton buttonLocalMode;
@@ -195,8 +195,8 @@ public class MainController extends Application implements Observer{
 		{
 			put("buttonLanguage", new RepoLanguageStatistic());
 			put("buttonRepoCreateTime", new RepoCreateTimeStatistic());
-			put("buttonContributor", new RepoContributorStatistic());
-			put("buttonCollaborator", new RepoCollaboratorStatistic());
+			put("buttonFork", new RepoForkStatistic());
+			put("buttonStar", new RepoStarStatistic());
 			
 			put("buttonUserType", new UserTypeStatisticsPane());
 			put("buttonUserCreateTime", new UserCreateTimeStatisticsPane());

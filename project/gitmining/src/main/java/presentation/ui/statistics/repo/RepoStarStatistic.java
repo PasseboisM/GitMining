@@ -11,15 +11,15 @@ import presentation.component.GitBarChart;
 import presentation.ui.statistics.StatisticsPane;
 
 /**
- * 项目贡献者数量分类的柱状图
+ * 统计项目合作者的柱状图
  */
 
-public class RepoContributorStatistic implements StatisticsPane {
+public class RepoStarStatistic implements StatisticsPane {
 	public AnchorPane getInstance(AnchorPane rightComponentParent) throws IOException {
 		FXMLLoader loader = new FXMLLoader(
-				RepoContributorStatistic.class.getResource("repositoryContributorStatistic.fxml"));
+				RepoStarStatistic.class.getResource("repositoryCollaboratorStatistic.fxml"));
 		AnchorPane rootUINode = loader.load();
-		RepoContributorStatistic controller = loader.getController();
+		RepoStarStatistic controller = loader.getController();
 		controller.initial(rightComponentParent);
 		return rootUINode;
 	}
@@ -31,13 +31,12 @@ public class RepoContributorStatistic implements StatisticsPane {
 
 	@FXML
 	private AnchorPane anchorPane;
-
 	// private AnchorPane rightComponentParent;
 
 	public void initialChart() {
 		List<Number> a = Arrays.asList(1.0, 2.0, 3.0, 4.0, 5.0);
 		List<String> headers = Arrays.asList("a", "b", "c", "d", "e");
-		GitBarChart barChart = new GitBarChart(headers, a, "项目", "项目贡献者统计图", "范围", "项目个数");
+		GitBarChart barChart = new GitBarChart(headers, a, "项目", "项目关注度统计图", "范围", "关注人数");
 		anchorPane.getChildren().add(barChart);
 	}
 }

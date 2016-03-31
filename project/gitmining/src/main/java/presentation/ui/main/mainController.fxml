@@ -76,12 +76,12 @@
                                                 <Font size="18.0" />
                                              </font>
                                           </Button>
-                                          <Button fx:id="buttonContributor" mnemonicParsing="false" onAction="#onStatisticClicked" prefHeight="50.0" prefWidth="150.0" text="项目贡献者">
+                                          <Button fx:id="buttonFork" mnemonicParsing="false" onAction="#onStatisticClicked" prefHeight="50.0" prefWidth="150.0" text="项目复刻">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
                                           </Button>
-                                          <Button fx:id="buttonCollaborator" mnemonicParsing="false" onAction="#onStatisticClicked" prefHeight="50.0" prefWidth="150.0" text="项目合作者">
+                                          <Button fx:id="buttonStar" mnemonicParsing="false" onAction="#onStatisticClicked" prefHeight="50.0" prefWidth="150.0" text="项目关注">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
