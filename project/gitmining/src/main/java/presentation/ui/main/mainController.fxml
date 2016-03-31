@@ -119,22 +119,22 @@
                                                 <Font size="18.0" />
                                              </font>
                                           </Button>
-                                          <Button fx:id="buttonInEachCompany" mnemonicParsing="false" onAction="#onStatisticClicked" prefHeight="50.0" prefWidth="150.0" text="公司分布">
+                                          <Button fx:id="buttonInEachCompany" minHeight="-Infinity" mnemonicParsing="false" onAction="#onStatisticClicked" prefHeight="0.0" prefWidth="150.0" text="公司分布">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
                                           </Button>
-                                          <Button fx:id="buttonBlogCount" mnemonicParsing="false" onAction="#onStatisticClicked" prefHeight="50.0" prefWidth="150.0" text="博客数量">
+                                          <Button fx:id="buttonBlogCount" minHeight="-Infinity" mnemonicParsing="false" onAction="#onStatisticClicked" prefHeight="0.0" prefWidth="150.0" text="博客数量">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
                                           </Button>
-                                          <Button fx:id="buttonLocationCount" mnemonicParsing="false" onAction="#onStatisticClicked" prefHeight="50.0" prefWidth="150.0" text="地区分布">
+                                          <Button fx:id="buttonLocationCount" minHeight="-Infinity" mnemonicParsing="false" onAction="#onStatisticClicked" prefHeight="0.0" prefWidth="150.0" text="地区分布">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
                                           </Button>
-                                                      <Button fx:id="buttonEmailCount" mnemonicParsing="false" onAction="#onStatisticClicked" prefHeight="50.0" prefWidth="150.0" text="邮箱统计">
+                                                      <Button fx:id="buttonEmailCount" minHeight="-Infinity" mnemonicParsing="false" onAction="#onStatisticClicked" prefHeight="0.0" prefWidth="150.0" text="邮箱统计">
                                                          <font>
                                                             <Font size="18.0" />
                                                          </font>
@@ -144,7 +144,7 @@
                                                             <Font size="18.0" />
                                                          </font>
                                                       </Button>
-                                                      <Button fx:id="buttonFollowing" mnemonicParsing="false" onAction="#onStatisticClicked" prefHeight="50.0" prefWidth="150.0" text="关注统计">
+                                                      <Button fx:id="buttonFollowing" minHeight="-Infinity" mnemonicParsing="false" onAction="#onStatisticClicked" prefHeight="0.0" prefWidth="150.0" text="关注统计">
                                                          <font>
                                                             <Font size="18.0" />
                                                          </font>
