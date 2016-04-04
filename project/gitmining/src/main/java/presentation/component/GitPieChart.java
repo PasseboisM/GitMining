@@ -51,6 +51,7 @@ public class GitPieChart extends PieChart {
 		iterator = repoCreateOnTimeCounts.getCounts();
 		while(iterator.hasNext()){
 			RepoCreateOnTimeCount repoCreateOnTimeCount = iterator.next();
+			//TODO 稍微修改了RepoCreateOnTimeCount的属性，界面也需要修改一下
 			String type = repoCreateOnTimeCount.time;
 			int count = repoCreateOnTimeCount.count;
 			pieChartData.add(new PieChart.Data(type, count*100.0/sum));

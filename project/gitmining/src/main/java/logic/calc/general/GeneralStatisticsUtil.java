@@ -132,12 +132,31 @@ public class GeneralStatisticsUtil implements GeneralStatisticsService{
 	public RepoDistOverCreateTime getRepoDistOverCreateTime() {
 		String pyFile = "repo_dist_over_create_time.py";
 		
-		//TODO 测试用的，写好了就删掉
+		/*
+		 * 初步统计：最早为2007-10;最晚至2010-08
+		 * 决定4个月算一次间隔
+		 */
+		List<String> divList = Arrays.asList(
+				"2007-10","2008-02","2008-06","2008-10","2009-02","2009-06",
+				"2009-10","2010-02","2010-06","2010-10");
+		String divJSON = gson.toJson(divList);
+		
+		List<String> result = null;
+		try {
+			result = PythonRunner.runPython(pyFile, divJSON);
+		} catch (IOException | InterruptedException e) {
+			e.printStackTrace();
+			return new RepoDistOverCreateTime();
+		}
+		
 		RepoDistOverCreateTime repoCreateOnTimeCounts = new RepoDistOverCreateTime();
-//		repoCreateOnTimeCounts.addCreateCount("2007", 9);
-//		repoCreateOnTimeCounts.addCreateCount("2008", 179);
-//		repoCreateOnTimeCounts.addCreateCount("2009", 997);
-//		repoCreateOnTimeCounts.addCreateCount("2010", 5932);		
+
+		for(int i=0;i<divList.size()-1;i++) {
+			repoCreateOnTimeCounts.addCreateCount(
+					divList.get(i),divList.get(i+1),
+					Integer.parseInt(result.get(i)));
+		}
+		
 		return repoCreateOnTimeCounts;
 	}
 
@@ -145,27 +164,67 @@ public class GeneralStatisticsUtil implements GeneralStatisticsService{
 	public UserDistOverCreateTime getUserDistOverCreateTime() {
 		String pyFile = "user_dist_over_create_time.py";
 		
+		/*
+		 * 包括2007-2015的数据，故按年分
+		 */
+		ArrayList<String> divList = new ArrayList<>();
+		for(int i=2007;i<=2015;i++) {
+			divList.add(""+i);
+		}
+		
+		String divJSON = gson.toJson(divList);
+		
+		List<String> result = null;
+		try {
+			result = PythonRunner.runPython(pyFile, divJSON);
+		} catch (IOException | InterruptedException e) {
+			e.printStackTrace();
+			return new UserDistOverCreateTime();
+		}
+		
 		UserDistOverCreateTime userCreateOnTimeCounts = new UserDistOverCreateTime();
-//		userCreateOnTimeCounts.addCreateCount("2007", 28);
-//		userCreateOnTimeCounts.addCreateCount("2008", 228);
-//		userCreateOnTimeCounts.addCreateCount("2009", 578);
-//		userCreateOnTimeCounts.addCreateCount("2010", 698);
-//		userCreateOnTimeCounts.addCreateCount("2011", 576);
-		// TODO Auto-generated method stub
+
+		for(int i=0;i<divList.size()-1;i++) {
+			userCreateOnTimeCounts.addCreateCount(
+					divList.get(i), divList.get(i+1), 
+					Integer.parseInt(result.get(i)));
+		}
+		
 		return userCreateOnTimeCounts;
 	}
 
 	@Override
 	public RepoDistOverStar getRepoDistOverStar() {
 		String pyFile = "repo_dist_over_star.py";
+		
+		/*
+		 * 初步统计1200个不到100的；1300个100至1000的；500个1000+的（其中13个上万的）
+		 * 最高为37000
+		 */
+		List<Integer> gaps = new ArrayList<>();
+		for(int i=0;i<5;i++) gaps.add(20);//0--100 5份
+		for(int i=0;i<5;i++) gaps.add(200);//100--1100 5份
+		for(int i=0;i<3;i++) gaps.add(3000);//1100--10100 3份
+		gaps.add(30000);
+		
+		String gapsJSON = gson.toJson(gaps);
+		List<String> result = null;
+		try {
+			result = PythonRunner.runPython(pyFile, gapsJSON);
+		} catch (IOException | InterruptedException e) {
+			e.printStackTrace();
+			return new RepoDistOverStar();
+		}
+		
 		RepoDistOverStar repoDistOverStar = new RepoDistOverStar();
 		
+		int lower = 0;
+		for(int i=0;i<gaps.size();i++) {
+			repoDistOverStar.addRange(lower, lower+gaps.get(i), 
+					Integer.parseInt(result.get(i)));
+			lower += gaps.get(i);
+		}
 		
-//		repoDistOverStar.addRange(0, 25, 2083);
-//		repoDistOverStar.addRange(25, 50, 883);
-//		repoDistOverStar.addRange(50, 75, 283);
-//		repoDistOverStar.addRange(75, 100, 83);
-//		
 		return repoDistOverStar;
 	}
 
@@ -198,9 +257,9 @@ public class GeneralStatisticsUtil implements GeneralStatisticsService{
 	public static void main(String[] args) {
 		GeneralStatisticsUtil util = new GeneralStatisticsUtil();
 		System.out.println("1");
-		RepoDistOverLanguage lang = util.getRepoDistOverLanguage();
+		UserDistOverCreateTime lang = util.getUserDistOverCreateTime();
 		System.out.println("2");
-		Iterator ite = lang.getLanguageCount();
+		Iterator ite = lang.getCounts();
 		while(ite.hasNext()) {
 			System.out.println(ite.next());
 		}

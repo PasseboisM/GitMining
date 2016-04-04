@@ -66,6 +66,11 @@ public class RepoDistOverStar {
 			this.higherStar = higherStar;
 			this.numOfRepos = numOfRepos;
 		}
+		@Override
+		public String toString() {
+			return "StarCountRange [lowerStar=" + lowerStar + ", higherStar="
+					+ higherStar + ", numOfRepos=" + numOfRepos + "]";
+		}
 	}
 	
 

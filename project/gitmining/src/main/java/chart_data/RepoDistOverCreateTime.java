@@ -17,8 +17,8 @@ public class RepoDistOverCreateTime {
 	private List<RepoCreateOnTimeCount> counts = new LinkedList<>();
 	public String title = "项目创建时间统计图";
 	
-	public void addCreateCount(String time, int count) {
-		counts.add(new RepoCreateOnTimeCount(time, count));
+	public void addCreateCount(String timeLo, String timeHi, int count) {
+		counts.add(new RepoCreateOnTimeCount(timeLo, timeHi, count));
 	}
 	
 	/**
@@ -31,7 +31,7 @@ public class RepoDistOverCreateTime {
 			@Override
 			public int compare(RepoCreateOnTimeCount o1,
 					RepoCreateOnTimeCount o2) {
-				return o1.time.compareTo(o2.time);
+				return o1.timeLo.compareTo(o2.timeLo);
 			}
 		});
 		
@@ -39,11 +39,18 @@ public class RepoDistOverCreateTime {
 	}
 	
 	public class RepoCreateOnTimeCount {
-		public final String time;
+		public final String timeLo;
+		public final String timeHi;
 		public final int count;
-		public RepoCreateOnTimeCount(String time, int count) {
-			this.time = time;
+		public RepoCreateOnTimeCount(String timeLo, String timeHi, int count) {
+			this.timeLo = timeLo;
+			this.timeHi = timeHi;
 			this.count = count;
+		}
+		@Override
+		public String toString() {
+			return "RepoCreateOnTimeCount [timeLo=" + timeLo + ", timeHi="
+					+ timeHi + ", count=" + count + "]";
 		}
 	}
 

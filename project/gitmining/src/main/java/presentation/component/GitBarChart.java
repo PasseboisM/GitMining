@@ -196,7 +196,7 @@ public class GitBarChart extends AnchorPane {
 		Iterator<UserCreateOnTimeCount> countIterator = userCreateOnTimeCounts.getCounts();
 		while (countIterator.hasNext()) {
 			UserCreateOnTimeCount languageCount = countIterator.next();
-			String createTime = languageCount.time;
+			String createTime = languageCount.timeLo;
 			int count = languageCount.count;
 			XYChart.Data<String,Number> data = new XYChart.Data<>(createTime, count);
 			series.getData().add(data);
