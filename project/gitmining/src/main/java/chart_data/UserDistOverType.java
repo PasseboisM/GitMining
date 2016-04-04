@@ -1,7 +1,8 @@
 package chart_data;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -12,8 +13,10 @@ import java.util.List;
 
 public class UserDistOverType {
 	
-	public List<UserTypeCount> counts = new LinkedList<>();
-	public String title = "用户类型统计图";
+	public static final List<String> headers =  Arrays.asList("User","Organization");
+	public static final String title = "用户类型统计图";
+	
+	private List<UserTypeCount> counts = new ArrayList<>(2);
 	
 	public void addCount(String type, int count) {
 		counts.add(new UserTypeCount(type, count));
@@ -31,6 +34,11 @@ public class UserDistOverType {
 			this.type = type;
 			this.count = count;
 		}
+		@Override
+		public String toString() {
+			return "UserTypeCount [type=" + type + ", count=" + count + "]";
+		}
+		
 	}
 	
 }

@@ -736,8 +736,13 @@ public class RepositoryBeans implements Repository {
 		boolean idValid = id > -1;
 		boolean starsValid = stargazers_count > -1;
 		boolean forksValid = forks_count > -1;
+		boolean createdAtValid = (created_at!=null) && 
+				(created_at.matches("\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z"));
+		boolean updatedAtValid = (updated_at!=null) && 
+				(updated_at.matches("\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z"));
 		
-		return fullNameValid && nameValid && idValid && starsValid && forksValid;
+		return fullNameValid && nameValid && idValid && starsValid && forksValid
+				&& createdAtValid && updatedAtValid;
 	}
 
 	@Override

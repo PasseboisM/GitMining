@@ -14,8 +14,8 @@ public class UserDistOverCreateTime {
 
 	private List<UserCreateOnTimeCount> counts = new LinkedList<>();
 	
-	public void addCreateCount(String time, int count) {
-		counts.add(new UserCreateOnTimeCount(time, count));
+	public void addCreateCount(String timeLo, String timeHi, int count) {
+		counts.add(new UserCreateOnTimeCount(timeLo, timeHi, count));
 	}
 	
 	public int getNumOfCount(){
@@ -32,7 +32,7 @@ public class UserDistOverCreateTime {
 			@Override
 			public int compare(UserCreateOnTimeCount o1,
 					UserCreateOnTimeCount o2) {
-				return o1.time.compareTo(o2.time);
+				return o1.timeLo.compareTo(o2.timeLo);
 			}
 		});
 		
@@ -40,12 +40,23 @@ public class UserDistOverCreateTime {
 	}
 	
 	public class UserCreateOnTimeCount {
-		public final String time;
+		public final String timeLo;
+		public final String timeHi;
 		public final int count;
-		public UserCreateOnTimeCount(String time, int count) {
-			this.time = time;
+		
+		
+		public UserCreateOnTimeCount(String timeLo, String timeHi, int count) {
+			this.timeLo = timeLo;
+			this.timeHi = timeHi;
 			this.count = count;
 		}
+		
+		@Override
+		public String toString() {
+			return "UserCreateOnTimeCount [timeLo=" + timeLo + ", timeHi="
+					+ timeHi + ", count=" + count + "]";
+		}
+		
 	}
 
 }

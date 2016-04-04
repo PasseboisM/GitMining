@@ -49,5 +49,11 @@ public class RepoDistOverFork {
 			this.higherBound = higherBound;
 			this.numOfRepos = numOfRepos;
 		}
+		@Override
+		public String toString() {
+			return "ForkNumberRange [lowerBound=" + lowerBound
+					+ ", higherBound=" + higherBound + ", numOfRepos="
+					+ numOfRepos + "]";
+		}
 	}
 }

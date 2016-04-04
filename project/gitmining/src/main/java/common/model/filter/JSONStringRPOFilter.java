@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.google.gson.Gson;
 
+import common.util.Checkable;
 import common.util.MultiSourceSwitch;
 import common.util.ObjChannel;
 
@@ -42,10 +43,12 @@ public class JSONStringRPOFilter<T> extends GeneralProcessFilter<String, T> {
 		public List<T> process(List<String> get) {
 			List<T> result = new ArrayList<T>(page);
 			for(String json: get) {
-				//去除空数据
-				if(json.equals("")) continue;
 				try {
-					result.add(gson.fromJson(json, objectiveClass));
+					T obj = gson.fromJson(json, objectiveClass);
+					Checkable check = (Checkable) obj;
+					if(check.checkValidity()) {
+						result.add(obj);
+					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
