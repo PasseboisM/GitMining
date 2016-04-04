@@ -7,12 +7,15 @@ import java.util.List;
 import chart_data.RepoDistOverFork;
 import chart_data.RepoDistOverFork.ForkNumberRange;
 import chart_data.RepoDistOverLanguage;
+import chart_data.RepoDistOverLanguage.LanguageCount;
 import chart_data.RepoDistOverStar;
 import chart_data.RepoDistOverStar.StarCountRange;
-import chart_data.RepoDistOverLanguage.LanguageCount;
 import chart_data.UserDistOverCreateTime;
 import chart_data.UserDistOverCreateTime.UserCreateOnTimeCount;
 import common.enumeration.attribute.Language;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -23,6 +26,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
 
 public class GitBarChart extends AnchorPane {
 	@FXML
@@ -31,7 +35,8 @@ public class GitBarChart extends AnchorPane {
 	private CategoryAxis xAxis;
 	@FXML
 	private NumberAxis yAxis;
-
+	private static final int DEFAULT_YAXIS_UPPER_BOUND = 100;
+	private static final int DEFAULT_FRAME_DURATION = 500;
 	/**
 	 * 柱状图构造函数
 	 */
@@ -46,6 +51,9 @@ public class GitBarChart extends AnchorPane {
 		this.initialFXML();
 		this.initialText("项目使用语言统计图", "语言", "项目个数");
 		this.initial(languageCounts, "项目");
+//		for (Timeline timeline : timelines) {
+//			timeline.play();
+//		}
 	}
 	
 	public GitBarChart(UserDistOverCreateTime userCreateOnTimeCounts) {
@@ -130,7 +138,7 @@ public class GitBarChart extends AnchorPane {
 			int number = forkNumberRange.numOfRepos;
 			XYChart.Data<String,Number> data = (Data<String,Number>) series.getData().get(i);
 			Node node = data.getNode();
-			Tooltip tooltip = new Tooltip("复刻数了"+lowerBound+"至"+higherBound+"的项目个数："+number+"个");
+			Tooltip tooltip = new Tooltip("复刻数从"+lowerBound+"至"+higherBound+"的项目个数："+number+"个");
 			Tooltip.install(node, tooltip);
 		}
 	}
@@ -158,27 +166,28 @@ public class GitBarChart extends AnchorPane {
 			int number = starCountRange.numOfRepos;
 			XYChart.Data<String,Number> data = (Data<String,Number>) series.getData().get(i);
 			Node node = data.getNode();
-			Tooltip tooltip = new Tooltip("复刻数了"+lowerBound+"至"+higherBound+"的项目个数："+number+"个");
+			Tooltip tooltip = new Tooltip("复刻数从"+lowerBound+"至"+higherBound+"的项目个数："+number+"个");
 			Tooltip.install(node, tooltip);
 		}
 	}
-	
-	
 	
 	private void initial(RepoDistOverLanguage languageCounts, String seriesName) {
 		XYChart.Series<String,Number> series = new XYChart.Series<>();
 		series.setName(seriesName);
 		Iterator<LanguageCount> countIterator = languageCounts.getLanguageCount();
+		int maxCount = DEFAULT_YAXIS_UPPER_BOUND;
 		while (countIterator.hasNext()) {
 			LanguageCount languageCount = countIterator.next();
 			Language language = languageCount.language;
 			int count = languageCount.repositoryCount;
-			XYChart.Data<String,Number> data = new XYChart.Data<>(language.getName(), count);
+			maxCount = count>maxCount?count:maxCount;
+			XYChart.Data<String,Number> data = new XYChart.Data<>(language.getName(), 0);
 			series.getData().add(data);
 		}
+		yAxis.setAnimated(false);
+		yAxis.setUpperBound(maxCount);
 		barChart.getData().add(series);
 		barChart.setCategoryGap(500.0 / languageCounts.getNumOfLanguages());
-
 		countIterator = languageCounts.getLanguageCount();
 		for (int i = 0; i < languageCounts.getNumOfLanguages(); i++) {
 			LanguageCount languageCount = countIterator.next();
@@ -188,6 +197,19 @@ public class GitBarChart extends AnchorPane {
 			Tooltip tooltip = new Tooltip("项目个数："+count+"个");
 			Tooltip.install(node, tooltip);
 		}
+		
+		Timeline tl = new Timeline();
+		tl.getKeyFrames().add(new KeyFrame(Duration.millis(DEFAULT_FRAME_DURATION),
+		    (ActionEvent actionEvent) -> {
+		    	final Iterator<LanguageCount> iterator = languageCounts.getLanguageCount();
+				series.getData().stream().forEach((theData) -> {
+					LanguageCount languageCount = iterator.next();
+	    			int count = languageCount.repositoryCount;
+	    			theData.setYValue(count);
+		            });
+		    }
+		));
+		tl.play();
 	}
 
 	private void initial(UserDistOverCreateTime userCreateOnTimeCounts, String seriesName) {
