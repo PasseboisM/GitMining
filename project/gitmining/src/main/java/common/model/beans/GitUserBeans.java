@@ -161,9 +161,12 @@ public class GitUserBeans implements GitUser {
 		boolean nameValid = (name!=null) && (!name.equals(""));
 		boolean followersValid = followers > -1;
 		boolean idValid = id > -1;
-		boolean createdAtValid = (created_at!=null) && (!created_at.equals(""));
+		boolean createdAtValid = (created_at!=null) && 
+				(created_at.matches("\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z"));
+		boolean typeValid = (type!=null) && (type.equals("User")||type.equals("Organization"));
 		
-		return loginValid && nameValid && followersValid && idValid && createdAtValid;
+		return loginValid && nameValid && followersValid 
+				&& idValid && createdAtValid && typeValid;
 	}
 	@Override
 	public String toString() {
@@ -171,6 +174,5 @@ public class GitUserBeans implements GitUser {
 				+ ", followers=" + followers + ", created_at=" + created_at
 				+ "]";
 	}
-	
 	
 }

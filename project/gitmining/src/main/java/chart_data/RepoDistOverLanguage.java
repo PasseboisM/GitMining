@@ -34,5 +34,10 @@ public class RepoDistOverLanguage {
 			this.language = language;
 			this.repositoryCount = repositoryCount;
 		}
+		@Override
+		public String toString() {
+			return "LanguageCount [language=" + language + ", repositoryCount="
+					+ repositoryCount + "]";
+		}
 	}
 }

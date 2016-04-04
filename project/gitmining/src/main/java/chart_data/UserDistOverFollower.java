@@ -1,5 +1,6 @@
 package chart_data;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -11,9 +12,9 @@ import java.util.List;
  * */
 
 public class UserDistOverFollower {
+	
 	//随追随者数量的增加的用户的数量
 	private List<FollowerNumberRange> ranges = new LinkedList<>();
-	private int gap = 10;//追随者数量的间隔
 	/**
 	 * 向本数据中加入新的区间（注意区间要从小到大加入）
 	 */
@@ -34,18 +35,6 @@ public class UserDistOverFollower {
 	}
 	
 	/**
-	 * 添加数据或使用数据时，可以参考默认建议数据区间长度。<br />
-	 * （也可以不采用默认区间长度）
-	 */
-	public int getGap() {
-		return gap;
-	}
-	
-	public void setGap(int newValue) {
-		gap = newValue;
-	}
-	
-	/**
 	 * 追随者数量建议以10为间隔递增
 	 * */
 	public class FollowerNumberRange {
@@ -57,6 +46,12 @@ public class UserDistOverFollower {
 			this.lowerRange = lowerRange;
 			this.higherRange = higherRange;
 			this.numOfUsers = numOfUsers;
+		}
+		@Override
+		public String toString() {
+			return "FollowerNumberRange [lowerRange=" + lowerRange
+					+ ", higherRange=" + higherRange + ", numOfUsers="
+					+ numOfUsers + "]";
 		}
 
 	}

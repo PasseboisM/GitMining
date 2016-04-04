@@ -1,5 +1,13 @@
 package logic.calc.general;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+
+import com.google.gson.Gson;
+
 import chart_data.UserDistOverFollower;
 import chart_data.RepoDistOverFork;
 import chart_data.RepoDistOverLanguage;
@@ -8,20 +16,48 @@ import chart_data.RepoDistOverStar;
 import chart_data.UserDistOverCreateTime;
 import chart_data.UserDistOverType;
 import common.enumeration.attribute.Language;
+import logic.calc.python.PythonRunner;
 import logic.calc.service.GeneralStatisticsService;
 
 public class GeneralStatisticsUtil implements GeneralStatisticsService{
 
+	private Gson gson = new Gson();
+	
 	@Override
 	public UserDistOverFollower getUserDistOverFollower() {
 		String pyFile = "user_dist_over_follower.py";
 		
-		UserDistOverFollower followerNumberRanges = new UserDistOverFollower();
-		followerNumberRanges.addNewRange(0, 10, 9798);
-		followerNumberRanges.addNewRange(10, 20, 1398);
-		followerNumberRanges.addNewRange(20, 30, 758);
-		followerNumberRanges.addNewRange(30, 40, 598);
-		followerNumberRanges.addNewRange(40, 27069, 1998);
+		/*
+		 * 手动统计了一下，在27000多条数据中，8人超过10000,175人超过1000，有24000+人不到100
+		 * 最大值18727
+		 * 于是不能采用均一的区间长度
+		 */
+		
+		List<Integer> gaps = new ArrayList<>(20);
+		//TODO 继续修改比例
+		for(int i=0;i<10;i++) gaps.add(10);//0~100  10份
+		for(int i=0;i<3;i++) gaps.add(300);//100~1000  3份
+		for(int i=0;i<2;i++) gaps.add(4500);//1000~10000 2份
+		gaps.add(10000);//10000~20000  1份     总计16份
+		
+		String gapsJSON = gson.toJson(gaps);
+		List<String> result = null;
+		try {
+			result = PythonRunner.runPython(pyFile, gapsJSON);
+		} catch (IOException | InterruptedException e) {
+			e.printStackTrace();
+			return new UserDistOverFollower();
+		}
+		
+		UserDistOverFollower followerNumberRanges = new UserDistOverFollower();			
+
+		int lower = 0;
+		for(int i=0;i<gaps.size();i++) {
+			followerNumberRanges.addNewRange(lower, lower+gaps.get(i),
+					Integer.parseInt(result.get(i)));
+			lower += gaps.get(i);
+		}
+		
 		return followerNumberRanges;
 	}
 
@@ -29,13 +65,32 @@ public class GeneralStatisticsUtil implements GeneralStatisticsService{
 	public RepoDistOverFork getRepoDistOverFork() {
 		String pyFile = "repo_dist_over_fork.py";
 		
-		RepoDistOverFork repoDistOverFork = new RepoDistOverFork();
-		repoDistOverFork.addRange(0, 25, 1983);
-		repoDistOverFork.addRange(25, 50, 983);
-		repoDistOverFork.addRange(50, 75, 83);
-		repoDistOverFork.addRange(75, 100, 183);
+		/*
+		 * 最高9000；72个大于1000的，800个大于100的；2000多个不到100的
+		 */
+		List<Integer> gaps = new ArrayList<>(20);
+		for(int i=0;i<10;i++) gaps.add(10);
+		for(int i=0;i<9;i++) gaps.add(100);
+		for(int i=0;i<3;i++) gaps.add(3000);
 		
-		// TODO Auto-generated method stub
+		String gapsJSON = gson.toJson(gaps);
+		List<String> result = null;
+		try {
+			result = PythonRunner.runPython(pyFile, gapsJSON);
+		} catch (IOException | InterruptedException e) {
+			e.printStackTrace();
+			return new RepoDistOverFork();
+		}
+		
+		RepoDistOverFork repoDistOverFork = new RepoDistOverFork();
+		
+		int lower = 0;
+		for(int i=0;i<gaps.size();i++) {
+			repoDistOverFork.addRange(lower, lower+gaps.get(i),
+					Integer.parseInt(result.get(i)));
+			lower += gaps.get(i);
+		}
+
 		return repoDistOverFork;
 	}
 
@@ -43,21 +98,34 @@ public class GeneralStatisticsUtil implements GeneralStatisticsService{
 	public RepoDistOverLanguage getRepoDistOverLanguage() {
 		String pyFile = "repo_dist_over_lang.py";
 		
-		//TODO 测试用的，写好了就删掉
+		ArrayList<String> langList = new ArrayList<String>();
+		for(Language l:Language.values()) {
+			langList.add(l.getName());
+		}
+		langList.remove(Language.ALL.getName());
+		langList.remove(Language.OTHERS.getName());
+		
+		String langJSON = gson.toJson(langList);
+
+		List<String> result = null;
+		
+		try {
+			result = PythonRunner.runPython(pyFile, langJSON);
+		} catch (IOException | InterruptedException e) {
+			e.printStackTrace();
+			return new RepoDistOverLanguage();
+		}
+		
 		RepoDistOverLanguage languageCounts = new RepoDistOverLanguage();
-		languageCounts.addLanguageCount(Language.C, 98);
-		languageCounts.addLanguageCount(Language.C_PLUS_PLUS, 243);
-		languageCounts.addLanguageCount(Language.C_SHARP, 34);
-		languageCounts.addLanguageCount(Language.JAVA, 66);
-		languageCounts.addLanguageCount(Language.COMMON_LISP, 109);
-		languageCounts.addLanguageCount(Language.HTML, 21);
-		languageCounts.addLanguageCount(Language.OBJECTIVE_C, 676);
-		languageCounts.addLanguageCount(Language.PERL, 87);
-		languageCounts.addLanguageCount(Language.RUBY, 555);
-		languageCounts.addLanguageCount(Language.PYTHON, 27);
-		languageCounts.addLanguageCount(Language.R, 78);
+		int count = 0;
+		for(String lang:langList) {
+			languageCounts.addLanguageCount(Language.getLanguage(lang),
+					Integer.parseInt(result.get(count)));
+			count ++;
+		}
+		
+		
 		return languageCounts;
-//		return null;
 	}
 
 	@Override
@@ -66,12 +134,11 @@ public class GeneralStatisticsUtil implements GeneralStatisticsService{
 		
 		//TODO 测试用的，写好了就删掉
 		RepoDistOverCreateTime repoCreateOnTimeCounts = new RepoDistOverCreateTime();
-		repoCreateOnTimeCounts.addCreateCount("2007", 9);
-		repoCreateOnTimeCounts.addCreateCount("2008", 179);
-		repoCreateOnTimeCounts.addCreateCount("2009", 997);
-		repoCreateOnTimeCounts.addCreateCount("2010", 5932);		
+//		repoCreateOnTimeCounts.addCreateCount("2007", 9);
+//		repoCreateOnTimeCounts.addCreateCount("2008", 179);
+//		repoCreateOnTimeCounts.addCreateCount("2009", 997);
+//		repoCreateOnTimeCounts.addCreateCount("2010", 5932);		
 		return repoCreateOnTimeCounts;
-//		return null;
 	}
 
 	@Override
@@ -79,11 +146,11 @@ public class GeneralStatisticsUtil implements GeneralStatisticsService{
 		String pyFile = "user_dist_over_create_time.py";
 		
 		UserDistOverCreateTime userCreateOnTimeCounts = new UserDistOverCreateTime();
-		userCreateOnTimeCounts.addCreateCount("2007", 28);
-		userCreateOnTimeCounts.addCreateCount("2008", 228);
-		userCreateOnTimeCounts.addCreateCount("2009", 578);
-		userCreateOnTimeCounts.addCreateCount("2010", 698);
-		userCreateOnTimeCounts.addCreateCount("2011", 576);
+//		userCreateOnTimeCounts.addCreateCount("2007", 28);
+//		userCreateOnTimeCounts.addCreateCount("2008", 228);
+//		userCreateOnTimeCounts.addCreateCount("2009", 578);
+//		userCreateOnTimeCounts.addCreateCount("2010", 698);
+//		userCreateOnTimeCounts.addCreateCount("2011", 576);
 		// TODO Auto-generated method stub
 		return userCreateOnTimeCounts;
 	}
@@ -91,27 +158,52 @@ public class GeneralStatisticsUtil implements GeneralStatisticsService{
 	@Override
 	public RepoDistOverStar getRepoDistOverStar() {
 		String pyFile = "repo_dist_over_star.py";
-		// TODO Auto-generated method stub
 		RepoDistOverStar repoDistOverStar = new RepoDistOverStar();
-		repoDistOverStar.addRange(0, 25, 2083);
-		repoDistOverStar.addRange(25, 50, 883);
-		repoDistOverStar.addRange(50, 75, 283);
-		repoDistOverStar.addRange(75, 100, 83);
 		
-		// TODO Auto-generated method stub
+		
+//		repoDistOverStar.addRange(0, 25, 2083);
+//		repoDistOverStar.addRange(25, 50, 883);
+//		repoDistOverStar.addRange(50, 75, 283);
+//		repoDistOverStar.addRange(75, 100, 83);
+//		
 		return repoDistOverStar;
 	}
 
 	@Override
 	public UserDistOverType getUserDistOverType() {
 		String pyFile = "user_dist_over_type.py";
-		//TODO 测试用的，写好了就删掉
+
+		List<String> headers = UserDistOverType.headers;
+		String param1 = gson.toJson(headers);
+		
+		List<String> result = null;
+		try {
+			result = PythonRunner.runPython(pyFile, param1);
+		} catch (IOException | InterruptedException e) {
+			e.printStackTrace();
+			return new UserDistOverType();
+		}
+		
 		UserDistOverType userTypeCounts = new UserDistOverType();
-		userTypeCounts.addCount("User", 27067);
-		userTypeCounts.addCount("Organization", 950);
+		
+		int index = 0;
+		for(String head:headers) {
+			userTypeCounts.addCount(head, Integer.parseInt(result.get(index++)));
+		}
+
 		return userTypeCounts;
 		
-//		return null
 	}
 
+	public static void main(String[] args) {
+		GeneralStatisticsUtil util = new GeneralStatisticsUtil();
+		System.out.println("1");
+		RepoDistOverLanguage lang = util.getRepoDistOverLanguage();
+		System.out.println("2");
+		Iterator ite = lang.getLanguageCount();
+		while(ite.hasNext()) {
+			System.out.println(ite.next());
+		}
+	}
+	
 }

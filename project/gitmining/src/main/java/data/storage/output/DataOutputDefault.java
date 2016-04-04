@@ -452,89 +452,88 @@ public class DataOutputDefault implements DataStorageOutput {
 		return 3086;
 	}
 //	
-//	public void cleanRepo() {
-//		File root = new File(dir.repositoryRoot());
-//		System.out.println(root);
-//		File[] rootSubs = root.listFiles();
-//		File[][] splitSubs = splitFileArray(rootSubs, OUTPUT_THREAD_NUM);
-//		
-//		//Create a channel transferring file directories.
-//		ObjChannel<File> directoryChan = new ObjChannelWithBlockingQueue<>();
-//		PureDataTransFilter[] directoryTransfer = new PureDataTransFilter[OUTPUT_THREAD_NUM];
-//		MultiSourceSwitch<File> directorySwitch = new BasicSourceSwitch<>(directoryChan);
-//		for(int i=0;i<OUTPUT_THREAD_NUM;i++) {
-//			directoryTransfer[i] = new PureDataTransFilter<File>(Arrays.asList(splitSubs[i]), directorySwitch);
-//		}
-//		execute(directoryTransfer);
-//		
-//		ObjChannel<Repository> minInfoChan = new ObjChannelWithBlockingQueue<>();
-//		JSONFileCleanFilter[] deserializers = new JSONFileCleanFilter[OUTPUT_THREAD_NUM];
-//		MultiSourceSwitch<Repository> minInfoSwitch = new BasicSourceSwitch<>(minInfoChan);
-//		for(int i=0;i<OUTPUT_THREAD_NUM;i++) {
-//			deserializers[i] = new JSONFileCleanFilter<Repository>
-//				(directoryChan, minInfoSwitch, 20, Repository.class);
-//		}
-//		execute(deserializers);
-//		
-//	}
-//	
-//	private static volatile int totalCleaned = 0;
-//	
-//	class JSONFileCleanFilter<T> extends GeneralProcessFilter<File, T> {
-//
-//		Class<T> objectiveType = null;
-//		FileReader fr = null;
-//		BufferedReader br = null;
-//		
-//		public JSONFileCleanFilter(ObjChannel<File> directories,
-//				MultiSourceSwitch<T> output, int page, Class<T> objective) {
-//			super(directories, output, page);
-//			this.objectiveType = objective;
-//		}
-//
-//		@Override
-//		public List<T> process(List<File> get) {
-//			List<T> result = new ArrayList<>(page);
-//			for(File dir:get) {
-//				File[] files = dir.listFiles();
-//				for(File content:files) {
-//					try {
-//						fr = new FileReader(content);
-//						br = new BufferedReader(fr);
-//						String s = br.readLine();
-//						
-//						T partial = (T) gson.fromJson(s, getBeans(objectiveType));
-//						Checkable check = (Checkable) partial;
-//						
-//						if((check==null)||(!check.checkValidity())) {
-//							try {
-//								br.close();
-//								fr.close();
-//							} catch (IOException e) {
-//								e.printStackTrace();
-//							}
-//							totalCleaned ++;
-//							System.out.println("Deleting "+totalCleaned);
-//							System.out.println(partial);
-//							content.delete();
-//						} else {
-//							result.add(partial);
-//						}
-//
-//					} catch (Exception e) {
-//						e.printStackTrace();
-//					}
-//				}
-//			}
-//			return result;
-//		}
-//	}
-//	
-//	
+	public void cleanRepo() {
+		File root = new File(dir.userRoot());
+		System.out.println(root);
+		File[] rootSubs = root.listFiles();
+		File[][] splitSubs = splitFileArray(rootSubs, OUTPUT_THREAD_NUM);
+		
+		//Create a channel transferring file directories.
+		ObjChannel<File> directoryChan = new ObjChannelWithBlockingQueue<>();
+		PureDataTransFilter[] directoryTransfer = new PureDataTransFilter[OUTPUT_THREAD_NUM];
+		MultiSourceSwitch<File> directorySwitch = new BasicSourceSwitch<>(directoryChan);
+		for(int i=0;i<OUTPUT_THREAD_NUM;i++) {
+			directoryTransfer[i] = new PureDataTransFilter<File>(Arrays.asList(splitSubs[i]), directorySwitch);
+		}
+		execute(directoryTransfer);
+		
+		ObjChannel<GitUser> minInfoChan = new ObjChannelWithBlockingQueue<>();
+		JSONFileCleanFilter[] deserializers = new JSONFileCleanFilter[OUTPUT_THREAD_NUM];
+		MultiSourceSwitch<GitUser> minInfoSwitch = new BasicSourceSwitch<>(minInfoChan);
+		for(int i=0;i<OUTPUT_THREAD_NUM;i++) {
+			deserializers[i] = new JSONFileCleanFilter<GitUser>
+				(directoryChan, minInfoSwitch, 20, GitUser.class);
+		}
+		execute(deserializers);
+		
+	}
+	
+	private static volatile int totalCleaned = 0;
+	private static volatile int totalPassed = 0;
+	class JSONFileCleanFilter<T> extends GeneralProcessFilter<File, T> {
+
+		Class<T> objectiveType = null;
+		FileReader fr = null;
+		BufferedReader br = null;
+		
+		public JSONFileCleanFilter(ObjChannel<File> directories,
+				MultiSourceSwitch<T> output, int page, Class<T> objective) {
+			super(directories, output, page);
+			this.objectiveType = objective;
+		}
+
+		@Override
+		public List<T> process(List<File> get) {
+			List<T> result = new ArrayList<>(page);
+				for(File content:get) {
+					try {
+						fr = new FileReader(content);
+						br = new BufferedReader(fr);
+						String s = br.readLine();
+						
+						T partial = (T) gson.fromJson(s, BeansTranslator.getBeans(objectiveType));
+						Checkable check = (Checkable) partial;
+						
+						if((check==null)||(!check.checkValidity())) {
+							try {
+								br.close();
+								fr.close();
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+							totalCleaned ++;
+							System.out.println("Deleting "+totalCleaned);
+							System.out.println(partial);
+							content.delete();
+						} else {
+							totalPassed ++;
+							System.out.println("Passed:" + totalPassed);
+							result.add(partial);
+						}
+
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			return result;
+		}
+	}
+	
 //	
 //	
-//	public static void main(String[] args) {
-//		DataOutputDefault data = new DataOutputDefault();
-//		data.cleanRepo();
-//	}
+//	
+	public static void main(String[] args) {
+		DataOutputDefault data = new DataOutputDefault();
+		data.cleanRepo();
+	}
 }
