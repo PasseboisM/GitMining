@@ -17,7 +17,6 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
@@ -55,7 +54,7 @@ public class MainController extends Application implements Observer{
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		
+		loadImgFile();
 		FXMLLoader loader = new FXMLLoader(MainController.class.getResource("mainController.fxml"));
 		mainAnchorPane = loader.load();
 		MainController controller = loader.getController();
@@ -69,14 +68,14 @@ public class MainController extends Application implements Observer{
 		primaryStage.show();
 		
 	}
-	
-	public static Scene getScene() throws Exception{
-		FXMLLoader loader = new FXMLLoader(MainController.class.getResource("mainController.fxml"));
-		Parent root = loader.load();
-		MainController controller = loader.getController();
-		controller.initial();
-		Scene scene = new Scene(root,1190,660);
-		return scene;
+
+	private void loadImgFile() {
+		String imageFilename ="userSearchBackground.jpg";
+		try {
+			bgImage = ImageFactory.getImageByFileName(imageFilename);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void initial() {
@@ -87,14 +86,11 @@ public class MainController extends Application implements Observer{
 		setToggleButtonGroup();
 	}
 	private void initialImage() {
-		String imageFilename ="userSearchBackground.jpg";
-		Image bgImage = null;
-		try {
-			bgImage = ImageFactory.getImageByFileName(imageFilename);
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
+		image = new ImageView();
 		image.setImage(bgImage);
+		image.setFitWidth(1200);
+		image.setFitHeight(675);
+		mainAnchorPane.getChildren().add(image);
 	}
 
 	private void initialProgressBar(){
@@ -133,6 +129,12 @@ public class MainController extends Application implements Observer{
 			ft.setFromValue(1.0);
 			ft.setToValue(0);
 			ft.play();
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					onRepoSearchClicked();
+				}
+			});
 			try {
 				Thread.sleep(FADE_DURATION);
 				progressBar.setVisible(false);
@@ -148,7 +150,7 @@ public class MainController extends Application implements Observer{
 		launch(args);
 	}
 	
-	@FXML private ImageView image;
+				 private ImageView image;
 	@FXML private AnchorPane rightComponentParent;
 	@FXML private Button buttonRepoSearch;
 	@FXML private Button buttonUserSearch;
@@ -163,6 +165,7 @@ public class MainController extends Application implements Observer{
 				 private LogicServiceFactory logicServiceFactory;
 				 private ServiceConfigure serviceConfigure;
 				 
+				 private static Image bgImage = null;
 				 private static final int FADE_DURATION = 3000;
 
 	@FXML
