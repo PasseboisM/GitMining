@@ -121,14 +121,18 @@ public class GitBarChart extends AnchorPane {
 		XYChart.Series<String,Number> series = new XYChart.Series<>();
 		series.setName(seriesName);
 		Iterator<ForkNumberRange> iterator = repoDistOverFork.getRepositoryRanges();
+		int maxCount = DEFAULT_YAXIS_UPPER_BOUND;
 		while (iterator.hasNext()) {
 			ForkNumberRange forkNumberRange = iterator.next();
 			int lowerBound = forkNumberRange.lowerBound;
 			int higherBound = forkNumberRange.higherBound;
 			int number = forkNumberRange.numOfRepos;
-			XYChart.Data<String,Number> data = new XYChart.Data<>(lowerBound + "-" + higherBound, number);
+			maxCount = number>maxCount?number:maxCount;
+			XYChart.Data<String,Number> data = new XYChart.Data<>(lowerBound + "-" + higherBound, 0);
 			series.getData().add(data);
 		}
+		yAxis.setAnimated(false);
+		yAxis.setUpperBound(maxCount);
 		barChart.getData().add(series);
 		barChart.setCategoryGap(500.0 / repoDistOverFork.getNumOfRanges());
 		
@@ -143,20 +147,37 @@ public class GitBarChart extends AnchorPane {
 			Tooltip tooltip = new Tooltip("复刻数从"+lowerBound+"至"+higherBound+"的项目个数："+number+"个");
 			Tooltip.install(node, tooltip);
 		}
+		
+		Timeline tl = new Timeline();
+		tl.getKeyFrames().add(new KeyFrame(Duration.millis(DEFAULT_FRAME_DURATION),
+		    (ActionEvent actionEvent) -> {
+		    	final Iterator<ForkNumberRange> countIterator = repoDistOverFork.getRepositoryRanges();
+				series.getData().stream().forEach((theData) -> {
+					ForkNumberRange forkNumberRange = countIterator.next();
+					int number = forkNumberRange.numOfRepos;
+	    			theData.setYValue(number);
+		            });
+		    }
+		));
+		tl.play();
 	}
 	
 	private void initial(RepoDistOverStar repoDistOverStar, String seriesName) {
 		XYChart.Series<String,Number> series = new XYChart.Series<>();
 		series.setName(seriesName);
 		Iterator<StarCountRange> iterator = repoDistOverStar.getRanges();
+		int maxCount = DEFAULT_YAXIS_UPPER_BOUND;
 		while (iterator.hasNext()) {
 			StarCountRange starCountRange = iterator.next();
 			int lowerBound = starCountRange.lowerStar;
 			int higherBound = starCountRange.higherStar;
 			int number = starCountRange.numOfRepos;
-			XYChart.Data<String,Number> data = new XYChart.Data<>(lowerBound + "-" + higherBound, number);
+			maxCount = number>maxCount?number:maxCount;
+			XYChart.Data<String,Number> data = new XYChart.Data<>(lowerBound + "-" + higherBound, 0);
 			series.getData().add(data);
 		}
+		yAxis.setAnimated(false);
+		yAxis.setUpperBound(maxCount);
 		barChart.getData().add(series);
 		barChart.setCategoryGap(500.0 / repoDistOverStar.getNumOfRanges());
 		
@@ -171,6 +192,19 @@ public class GitBarChart extends AnchorPane {
 			Tooltip tooltip = new Tooltip("复刻数从"+lowerBound+"至"+higherBound+"的项目个数："+number+"个");
 			Tooltip.install(node, tooltip);
 		}
+		
+		Timeline tl = new Timeline();
+		tl.getKeyFrames().add(new KeyFrame(Duration.millis(DEFAULT_FRAME_DURATION),
+		    (ActionEvent actionEvent) -> {
+		    	final Iterator<StarCountRange> countIterator = repoDistOverStar.getRanges();
+				series.getData().stream().forEach((theData) -> {
+					StarCountRange starCountRange = countIterator.next();
+					int number = starCountRange.numOfRepos;
+	    			theData.setYValue(number);
+		            });
+		    }
+		));
+		tl.play();
 	}
 	
 	private void initial(RepoDistOverLanguage languageCounts, String seriesName) {
@@ -229,13 +263,17 @@ public class GitBarChart extends AnchorPane {
 		XYChart.Series<String,Number> series = new XYChart.Series<>();
 		series.setName(seriesName);
 		Iterator<UserCreateOnTimeCount> countIterator = userCreateOnTimeCounts.getCounts();
+		int maxCount = DEFAULT_YAXIS_UPPER_BOUND;
 		while (countIterator.hasNext()) {
 			UserCreateOnTimeCount languageCount = countIterator.next();
 			String createTime = languageCount.timeLo;
 			int count = languageCount.count;
-			XYChart.Data<String,Number> data = new XYChart.Data<>(createTime, count);
+			maxCount = count>maxCount?count:maxCount;
+			XYChart.Data<String,Number> data = new XYChart.Data<>(createTime, 0);
 			series.getData().add(data);
 		}
+		yAxis.setAnimated(false);
+		yAxis.setUpperBound(maxCount);
 		barChart.getData().add(series);
 		barChart.setCategoryGap(500.0 / userCreateOnTimeCounts.getNumOfCount());
 
@@ -248,5 +286,18 @@ public class GitBarChart extends AnchorPane {
 			Tooltip tooltip = new Tooltip("用户个数："+count+"个");
 			Tooltip.install(node, tooltip);
 		}
+		
+		Timeline tl = new Timeline();
+		tl.getKeyFrames().add(new KeyFrame(Duration.millis(DEFAULT_FRAME_DURATION),
+		    (ActionEvent actionEvent) -> {
+		    	final Iterator<UserCreateOnTimeCount> iterator = userCreateOnTimeCounts.getCounts();
+				series.getData().stream().forEach((theData) -> {
+					UserCreateOnTimeCount languageCount = iterator.next();
+					int count = languageCount.count;
+	    			theData.setYValue(count);
+		            });
+		    }
+		));
+		tl.play();
 	}
 }
