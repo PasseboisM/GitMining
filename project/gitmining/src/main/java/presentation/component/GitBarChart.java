@@ -1,6 +1,7 @@
 package presentation.component;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import chart_data.RepoDistOverStar.StarCountRange;
 import chart_data.UserDistOverCreateTime;
 import chart_data.UserDistOverCreateTime.UserCreateOnTimeCount;
 import common.enumeration.attribute.Language;
+import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -172,6 +174,7 @@ public class GitBarChart extends AnchorPane {
 	}
 	
 	private void initial(RepoDistOverLanguage languageCounts, String seriesName) {
+		List<FadeTransition> fadeTransitions = new ArrayList<>();
 		XYChart.Series<String,Number> series = new XYChart.Series<>();
 		series.setName(seriesName);
 		Iterator<LanguageCount> countIterator = languageCounts.getLanguageCount();
@@ -196,6 +199,11 @@ public class GitBarChart extends AnchorPane {
 			Node node = data.getNode();
 			Tooltip tooltip = new Tooltip("项目个数："+count+"个");
 			Tooltip.install(node, tooltip);
+			
+			FadeTransition ft = new FadeTransition(Duration.millis(DEFAULT_FRAME_DURATION), node);
+			ft.setFromValue(0.1);
+			ft.setToValue(1.0);
+			fadeTransitions.add(ft);
 		}
 		
 		Timeline tl = new Timeline();
@@ -210,6 +218,11 @@ public class GitBarChart extends AnchorPane {
 		    }
 		));
 		tl.play();
+		
+		fadeTransitions.stream().forEach((ft)->{
+			ft.play();
+		});
+		
 	}
 
 	private void initial(UserDistOverCreateTime userCreateOnTimeCounts, String seriesName) {
