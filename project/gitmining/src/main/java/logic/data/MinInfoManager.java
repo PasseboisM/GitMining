@@ -106,7 +106,7 @@ public class MinInfoManager implements Observable {
 					lock.lock();
 					target.addAll(source.getObj(page));
 					lock.unlock();
-					System.out.println(getProgress());
+//					System.out.println(getProgress());
 					notifyObservers();
 				}
 			} catch (DataTransferException e) {

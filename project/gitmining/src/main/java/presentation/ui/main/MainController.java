@@ -5,9 +5,6 @@ import java.net.MalformedURLException;
 import java.util.HashMap;
 
 import common.exception.NetworkException;
-import common.message.LoadProgress;
-import common.util.Observable;
-import common.util.Observer;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -28,17 +25,16 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import logic.service.Loader;
 import logic.service.LogicServiceFactory;
 import logic.service.ServiceConfigure;
 import presentation.image.ImageFactory;
 import presentation.ui.search.RepositorySearchController;
 import presentation.ui.search.UserSearchController;
 import presentation.ui.statistics.StatisticsPane;
-import presentation.ui.statistics.repo.RepoStarStatistic;
-import presentation.ui.statistics.repo.RepoForkStatistic;
 import presentation.ui.statistics.repo.RepoCreateTimeStatistic;
+import presentation.ui.statistics.repo.RepoForkStatistic;
 import presentation.ui.statistics.repo.RepoLanguageStatistic;
+import presentation.ui.statistics.repo.RepoStarStatistic;
 import presentation.ui.statistics.user.UserBlogCountStatisticsPane;
 import presentation.ui.statistics.user.UserCreateTimeStatisticsPane;
 import presentation.ui.statistics.user.UserEmailCountStatisticsPane;
@@ -49,10 +45,9 @@ import presentation.ui.statistics.user.UserLocationCountStatisticsPane;
 import presentation.ui.statistics.user.UserTypeStatisticsPane;
 
 
-public class MainController extends Application implements Observer{
+public class MainController extends Application{
 
 	
-	private boolean ableToGetData = true;
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		FXMLLoader loader = new FXMLLoader(MainController.class.getResource("mainController.fxml"));
@@ -90,7 +85,6 @@ public class MainController extends Application implements Observer{
 	}
 
 	public static void main(String[] args) {
-//		Loader.getInstance().startLoading();
 		launch(args);
 	}
 	
@@ -138,9 +132,9 @@ public class MainController extends Application implements Observer{
 		buttonUserSearch.setDisable(false);
 		rightComponentParent.getChildren().clear();
 		try {
-			if (ableToGetData) {
+//			if (ableToGetData) {
 				rightComponentParent.getChildren().add(RepositorySearchController.getInstance(rightComponentParent));
-			}
+//			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -170,25 +164,6 @@ public class MainController extends Application implements Observer{
 		}
 	}
 
-	@Override
-	public void update() {
-		LoadProgress loadProgress = Loader.getProgress();
-		if (loadProgress.getLoadedRepoNum()>50) {
-			this.ableToGetData = true;
-		}
-//		progressBar.setProgress(1.0*loadProgress.getLoadedRepoNum()/loadProgress.getTotalRepoNum());
-//		if (this.progressBar == null) {
-//			progressBar = new ProgressBar();
-//			progressBar.setPrefWidth(152.0);
-//			progressBar.setPrefHeight(11.0);
-//		}
-//		progressBar.setProgress(1.0*loadProgress.getLoadedRepoNum()/loadProgress.getTotalRepoNum());
-//		System.out.println(progressBar.getLayoutX()+"           "+progressBar.getLayoutY());
-	}
-	@Override
-	public void update(Observable observable, Object obj) {
-		update();
-	}
 	
 	@SuppressWarnings("serial")
 	private  static final  HashMap<String, StatisticsPane> MAP = new HashMap<String,StatisticsPane>() {

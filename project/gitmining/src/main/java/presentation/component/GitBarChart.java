@@ -75,8 +75,6 @@ public class GitBarChart extends AnchorPane {
 		this.initialText("项目关注度分区间统计图", "关注度区间", "项目个数");
 		this.initial(repoDistOverStar, "项目");
 	}
-	
-	
 
 	private void initialText(String title, String xLabel, String yLabel) {
 		barChart.setTitle(title);
