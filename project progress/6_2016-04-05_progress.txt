@@ -12,9 +12,9 @@ todo：
 
 who：孙婧sj14
 when：第6周
-what：
-problem：
-todo：
+what：修改界面上一些小组件
+problem：不会改变图表边上文字的大小
+todo：学习图表的动画效果
 
 who：徐家逸xjyi14
 when：第6周
