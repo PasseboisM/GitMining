@@ -8,6 +8,7 @@ import common.exception.NetworkException;
 import common.message.LoadProgress;
 import common.util.Observable;
 import common.util.Observer;
+import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -24,7 +25,6 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -58,9 +58,7 @@ public class MainController extends Application implements Observer{
 		
 		FXMLLoader loader = new FXMLLoader(MainController.class.getResource("mainController.fxml"));
 		mainAnchorPane = loader.load();
-//		System.out.println(mainAnchorPane.getChildren().get(1));
 		MainController controller = loader.getController();
-		controller.setMainAnchorPane(mainAnchorPane);
 		
 		Scene scene = new Scene(mainAnchorPane,1190,660);
 		
@@ -69,8 +67,7 @@ public class MainController extends Application implements Observer{
 		primaryStage.setResizable(false);
 		controller.initial();
 		primaryStage.show();
-		Loader.getInstance().addObserver(controller);
-		Loader.getInstance().startLoading();
+		
 	}
 	
 	public static Scene getScene() throws Exception{
@@ -82,8 +79,13 @@ public class MainController extends Application implements Observer{
 		return scene;
 	}
 
-	
-
+	private void initial() {
+		initialImage();
+		initialProgressBar();
+		Loader.getInstance().addObserver(this);
+		Loader.getInstance().startLoading();
+		setToggleButtonGroup();
+	}
 	private void initialImage() {
 		String imageFilename ="userSearchBackground.jpg";
 		Image bgImage = null;
@@ -95,6 +97,15 @@ public class MainController extends Application implements Observer{
 		image.setImage(bgImage);
 	}
 
+	private void initialProgressBar(){
+		progressBar = new ProgressBar(0);
+		progressBar.setLayoutX(100);
+		progressBar.setLayoutY(625);
+		progressBar.setPrefHeight(30);
+		progressBar.setPrefWidth(972);
+		mainAnchorPane.getChildren().add(progressBar);
+	}
+
 	private void setToggleButtonGroup() {
 		toggleGroup = new ToggleGroup();
 		buttonLocalMode.setToggleGroup(toggleGroup);
@@ -103,8 +114,37 @@ public class MainController extends Application implements Observer{
 		this.setOnlineOrLocalMode();
 	}
 
+	@Override
+	public void update(Observable observable, Object obj) {
+		update();
+	}
+	@Override
+	public void update() {
+		LoadProgress lp = Loader.getProgress();
+		double loadRate = (lp.getLoadedRepoNum()+lp.getLoadedUser())*1.0/(lp.getTotalRepoNum()+lp.getTotalUserNum());
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				progressBar.setProgress(loadRate);
+			}
+		});
+		if (loadRate == 1.0) {
+			FadeTransition ft = new FadeTransition(Duration.millis(FADE_DURATION), progressBar);
+			ft.setFromValue(1.0);
+			ft.setToValue(0);
+			ft.play();
+			try {
+				Thread.sleep(FADE_DURATION);
+				progressBar.setVisible(false);
+				imageMove();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+
 	public static void main(String[] args) {
-//		Platform.setImplicitExit(false);
 		launch(args);
 	}
 	
@@ -122,14 +162,8 @@ public class MainController extends Application implements Observer{
 				 
 				 private LogicServiceFactory logicServiceFactory;
 				 private ServiceConfigure serviceConfigure;
-	
-	public AnchorPane getMainAnchorPane() {
-		return mainAnchorPane;
-	}
-
-	public void setMainAnchorPane(AnchorPane mainAnchorPane) {
-		this.mainAnchorPane = mainAnchorPane;
-	}
+				 
+				 private static final int FADE_DURATION = 3000;
 
 	@FXML
 	private void setOnlineOrLocalMode(){
@@ -158,21 +192,19 @@ public class MainController extends Application implements Observer{
 		timeline.play();
 	}
 	@FXML
-	private void onRepoSearchClicked(MouseEvent event) {
+	private void onRepoSearchClicked() {
 		buttonRepoSearch.setDisable(true);
 		buttonUserSearch.setDisable(false);
 		rightComponentParent.getChildren().clear();
 		try {
-//			if (ableToGetData) {
-				rightComponentParent.getChildren().add(RepositorySearchController.getInstance(rightComponentParent));
-//			}
+			rightComponentParent.getChildren().add(RepositorySearchController.getInstance(rightComponentParent));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
 	@FXML 
-	private void onUserSearchClicked(MouseEvent event){
+	private void onUserSearchClicked(){
 		buttonRepoSearch.setDisable(false);
 		buttonUserSearch.setDisable(true);
 		rightComponentParent.getChildren().clear();
@@ -186,7 +218,6 @@ public class MainController extends Application implements Observer{
 	@FXML 
 	private void onStatisticClicked(ActionEvent event){
 		Button button = (Button) event.getSource();
-//		System.out.println(button.getId());
 		rightComponentParent.getChildren().clear();
 		try {
 			rightComponentParent.getChildren().add(MAP.get(button.getId()).getInstance(rightComponentParent));
@@ -215,36 +246,6 @@ public class MainController extends Application implements Observer{
 		}
 	};
 
-	private void initial() {
-		initialImage();
-		initialProgressBar();
-		setToggleButtonGroup();
-	}
-	@Override
-	public void update() {
-		LoadProgress lp = Loader.getProgress();
-		double loadRate = (lp.getLoadedRepoNum()+lp.getLoadedUser())*1.0/(lp.getTotalRepoNum()+lp.getTotalUserNum());
-		System.out.println(loadRate);
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-				progressBar.setProgress(loadRate);
-			}
-		});
-	}
-	
-	private void initialProgressBar(){
-		progressBar = new ProgressBar(0);
-		progressBar.setLayoutX(100);
-		progressBar.setLayoutY(625);
-		progressBar.setPrefHeight(30);
-		progressBar.setPrefWidth(972);
-		mainAnchorPane.getChildren().add(progressBar);
-	}
 
-	@Override
-	public void update(Observable observable, Object obj) {
-		update();
-	}
 
 }
