@@ -37,4 +37,10 @@ public class MassiveDataGetter_stub extends MassiveDataGetter{
 		return 3216;
 	}
 
+	@Override
+	public int getUserNumber() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

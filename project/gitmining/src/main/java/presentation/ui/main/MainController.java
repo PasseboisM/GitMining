@@ -5,10 +5,14 @@ import java.net.MalformedURLException;
 import java.util.HashMap;
 
 import common.exception.NetworkException;
+import common.message.LoadProgress;
+import common.util.Observable;
+import common.util.Observer;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,6 +29,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import logic.service.Loader;
 import logic.service.LogicServiceFactory;
 import logic.service.ServiceConfigure;
 import presentation.image.ImageFactory;
@@ -45,27 +50,41 @@ import presentation.ui.statistics.user.UserLocationCountStatisticsPane;
 import presentation.ui.statistics.user.UserTypeStatisticsPane;
 
 
-public class MainController extends Application{
+public class MainController extends Application implements Observer{
 
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		
+		FXMLLoader loader = new FXMLLoader(MainController.class.getResource("mainController.fxml"));
+		mainAnchorPane = loader.load();
+//		System.out.println(mainAnchorPane.getChildren().get(1));
+		MainController controller = loader.getController();
+		controller.setMainAnchorPane(mainAnchorPane);
+		
+		Scene scene = new Scene(mainAnchorPane,1190,660);
+		
+		primaryStage.initStyle(StageStyle.DECORATED);
+		primaryStage.setScene(scene);
+		primaryStage.setResizable(false);
+		controller.initial();
+		primaryStage.show();
+		Loader.getInstance().addObserver(controller);
+		Loader.getInstance().startLoading();
+	}
+	
+	public static Scene getScene() throws Exception{
 		FXMLLoader loader = new FXMLLoader(MainController.class.getResource("mainController.fxml"));
 		Parent root = loader.load();
 		MainController controller = loader.getController();
 		controller.initial();
 		Scene scene = new Scene(root,1190,660);
-		primaryStage.initStyle(StageStyle.DECORATED);
-		primaryStage.setScene(scene);
-		primaryStage.setResizable(false);
-		primaryStage.show();
+		return scene;
 	}
 
-	private void initial() {
-		logicServiceFactory = LogicServiceFactory.getInstance();
-		serviceConfigure = logicServiceFactory.getServiceConfigure();
-		setToggleButtonGroup();
-		
+	
+
+	private void initialImage() {
 		String imageFilename ="userSearchBackground.jpg";
 		Image bgImage = null;
 		try {
@@ -85,6 +104,7 @@ public class MainController extends Application{
 	}
 
 	public static void main(String[] args) {
+//		Platform.setImplicitExit(false);
 		launch(args);
 	}
 	
@@ -94,16 +114,27 @@ public class MainController extends Application{
 	@FXML private Button buttonUserSearch;
 	@FXML private Button buttonLanguage,buttonRepoCreateTime,buttonFork,buttonStar;
 	@FXML private Button buttonUserType,buttonUserCreateTime,buttonInEachCompany,buttonBlogCount,buttonLocationCount,buttonEmailCount,buttonFollower,buttonFollowing;
-	@FXML private ProgressBar progressBar;
+				 private ProgressBar progressBar; 	
 	@FXML private ToggleButton buttonLocalMode;
 	@FXML private ToggleButton buttonOnlineMode;
+	@FXML private AnchorPane mainAnchorPane;
 				 private ToggleGroup toggleGroup;
 				 
 				 private LogicServiceFactory logicServiceFactory;
 				 private ServiceConfigure serviceConfigure;
 	
+	public AnchorPane getMainAnchorPane() {
+		return mainAnchorPane;
+	}
+
+	public void setMainAnchorPane(AnchorPane mainAnchorPane) {
+		this.mainAnchorPane = mainAnchorPane;
+	}
+
 	@FXML
 	private void setOnlineOrLocalMode(){
+		logicServiceFactory = LogicServiceFactory.getInstance();
+		serviceConfigure = logicServiceFactory.getServiceConfigure();
 		boolean isOnlineMode = (toggleGroup.getSelectedToggle()==buttonOnlineMode);
 		try {
 			serviceConfigure.setOnlineActive(isOnlineMode);
@@ -183,5 +214,37 @@ public class MainController extends Application{
 			put("buttonFollowing", new UserFollowingStatisticsPane());
 		}
 	};
+
+	private void initial() {
+		initialImage();
+		initialProgressBar();
+		setToggleButtonGroup();
+	}
+	@Override
+	public void update() {
+		LoadProgress lp = Loader.getProgress();
+		double loadRate = (lp.getLoadedRepoNum()+lp.getLoadedUser())*1.0/(lp.getTotalRepoNum()+lp.getTotalUserNum());
+		System.out.println(loadRate);
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				progressBar.setProgress(loadRate);
+			}
+		});
+	}
+	
+	private void initialProgressBar(){
+		progressBar = new ProgressBar(0);
+		progressBar.setLayoutX(100);
+		progressBar.setLayoutY(625);
+		progressBar.setPrefHeight(30);
+		progressBar.setPrefWidth(972);
+		mainAnchorPane.getChildren().add(progressBar);
+	}
+
+	@Override
+	public void update(Observable observable, Object obj) {
+		update();
+	}
 
 }

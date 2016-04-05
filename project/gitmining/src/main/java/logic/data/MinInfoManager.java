@@ -58,6 +58,10 @@ public class MinInfoManager implements Observable {
 		return getter.getRepoNumber();
 	}
 	
+	public int getTotalUserNum() {
+		return getter.getUserNumber();
+	}
+	
 	private MassiveDataGetter getter;
 	
 	private MinInfoManager(){
@@ -83,7 +87,7 @@ public class MinInfoManager implements Observable {
 	public LoadProgress getProgress() {
 		try {
 			lock.lock();
-			return new LoadProgress(getTotalRepoNum(), getRepoNum(), getUserNum());
+			return new LoadProgress(getTotalRepoNum(), getRepoNum(),getTotalUserNum(), getUserNum());
 		} finally {
 			lock.unlock();
 		}

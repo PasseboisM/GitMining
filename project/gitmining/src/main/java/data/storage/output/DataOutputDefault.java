@@ -451,6 +451,12 @@ public class DataOutputDefault implements DataStorageOutput {
 		//TODO 真正实现
 		return 3086;
 	}
+	
+	@Override
+	public int getUserNumber() {
+		//TODO 真正实现
+		return 27069;
+	}
 //	
 	public void cleanRepo() {
 		File root = new File(dir.userRoot());

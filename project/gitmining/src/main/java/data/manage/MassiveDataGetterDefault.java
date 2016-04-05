@@ -33,6 +33,11 @@ public class MassiveDataGetterDefault extends MassiveDataGetter {
 	public int getRepoNumber() {
 		return fromStorage.getRepoNumber();
 	}
+	
+	@Override
+	public int getUserNumber() {
+		return fromStorage.getUserNumber();
+	}
 
 	@Override
 	public ObjChannel<RepositoryMin> getRepoMinInfo() throws NetworkException {

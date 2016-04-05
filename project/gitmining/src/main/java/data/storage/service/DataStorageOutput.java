@@ -10,7 +10,7 @@ import common.util.ObjChannel;
 
 public interface DataStorageOutput {
 
-	public int getRepoNumber();
+	
 	
 	public ObjChannel<RepositoryMin> getRepoMin();
 	
@@ -23,5 +23,8 @@ public interface DataStorageOutput {
 	public GitUser getUser(GitUserMin minInfo) throws TargetNotFoundException, DataCorruptedException;
 	
 	public GitUser getUser(String login) throws TargetNotFoundException, DataCorruptedException;
+
+	int getUserNumber();
 	
+	public int getRepoNumber();
 }

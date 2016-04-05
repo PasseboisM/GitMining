@@ -14,11 +14,9 @@ public class Loader implements Observable {
 	private static MinInfoManager manager = null;
 	
 	public void startLoading(){
-		
 		manager = MinInfoManager.getInstance();
 		progress = manager.getProgress();
 		System.out.println(progress);
-
 	}
 	
 	private Loader(){}

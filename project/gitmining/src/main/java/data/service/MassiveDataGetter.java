@@ -34,4 +34,6 @@ public abstract class MassiveDataGetter {
 	public static MassiveDataGetter getInstance() {
 		return MassiveDataGetterDefault.getInstance();
 	}
+
+	public abstract int getUserNumber();
 }
