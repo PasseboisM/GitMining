@@ -1,0 +1,26 @@
+﻿who：徐江河xjh14
+when：第6周
+what：完成了统计模块的实现
+problem：统计模块响应速度较慢
+todo：增加更多统计项目；使用新API；改进系统性能
+
+who：王子安wza14
+when：第6周
+what：
+problem：
+todo：
+
+who：孙婧sj14
+when：第6周
+what：
+problem：
+todo：
+
+who：徐家逸xjyi14
+when：第6周
+what：
+problem：
+todo：
+
+组长总结：
+    第6周内我们组主要的任务是完成统计功能的实现、进行界面的美化与图表控件的测试。准备在下一周进行系统集成测试与一些额外功能的设计、实现。
