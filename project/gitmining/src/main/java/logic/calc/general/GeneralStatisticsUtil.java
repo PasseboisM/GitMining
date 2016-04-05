@@ -69,9 +69,11 @@ public class GeneralStatisticsUtil implements GeneralStatisticsService{
 		 * 最高9000；72个大于1000的，800个大于100的；2000多个不到100的
 		 */
 		List<Integer> gaps = new ArrayList<>(20);
-		for(int i=0;i<10;i++) gaps.add(10);
-		for(int i=0;i<9;i++) gaps.add(100);
-		for(int i=0;i<3;i++) gaps.add(3000);
+//		for(int i=0;i<10;i++) gaps.add(10);
+//		for(int i=0;i<9;i++) gaps.add(100);
+//		for(int i=0;i<3;i++) gaps.add(3000);
+		for(int i=0;i<12;i++) gaps.add(20);
+		for(int i=0;i<1;i++) gaps.add(8760);
 		
 		String gapsJSON = gson.toJson(gaps);
 		List<String> result = null;
