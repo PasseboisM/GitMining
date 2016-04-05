@@ -58,15 +58,13 @@ public class MainController extends Application implements Observer{
 		FXMLLoader loader = new FXMLLoader(MainController.class.getResource("mainController.fxml"));
 		mainAnchorPane = loader.load();
 		MainController controller = loader.getController();
-		
+		controller.initial();
 		Scene scene = new Scene(mainAnchorPane,1190,660);
-		
 		primaryStage.initStyle(StageStyle.DECORATED);
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
-		controller.initial();
-		primaryStage.show();
 		
+		primaryStage.show();
 	}
 
 	private void loadImgFile() {
