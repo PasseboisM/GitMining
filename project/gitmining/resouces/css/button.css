@@ -1,3 +1,7 @@
 .button {
-    -fx-background-color: red;
+    -fx-background-color: grey;
+}
+.scroll-pane {
+	-fx-background-color:  #0000ff;
+	-fx-control-inner-background: #0000ff;
 }

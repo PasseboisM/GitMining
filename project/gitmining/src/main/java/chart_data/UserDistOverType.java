@@ -38,7 +38,6 @@ public class UserDistOverType {
 		public String toString() {
 			return "UserTypeCount [type=" + type + ", count=" + count + "]";
 		}
-		
 	}
 	
 }

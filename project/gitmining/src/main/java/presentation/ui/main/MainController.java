@@ -50,7 +50,6 @@ import presentation.ui.statistics.user.UserTypeStatisticsPane;
 
 
 public class MainController extends Application implements Observer{
-
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -63,7 +62,6 @@ public class MainController extends Application implements Observer{
 		primaryStage.initStyle(StageStyle.DECORATED);
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
-		
 		primaryStage.show();
 	}
 
@@ -79,10 +77,10 @@ public class MainController extends Application implements Observer{
 	private void initial() {
 		initialImage();
 		initialProgressBar();
-		Loader.getInstance().addObserver(this);
-		Loader.getInstance().startLoading();
-		setToggleButtonGroup();
+		registerToLoader();
+		initialToggleButtonGroup();
 	}
+
 	private void initialImage() {
 		image = new ImageView();
 		image.setImage(bgImage);
@@ -90,7 +88,7 @@ public class MainController extends Application implements Observer{
 		image.setFitHeight(675);
 		mainAnchorPane.getChildren().add(image);
 	}
-
+	
 	private void initialProgressBar(){
 		progressBar = new ProgressBar(0);
 		progressBar.setLayoutX(100);
@@ -99,8 +97,13 @@ public class MainController extends Application implements Observer{
 		progressBar.setPrefWidth(972);
 		mainAnchorPane.getChildren().add(progressBar);
 	}
-
-	private void setToggleButtonGroup() {
+	
+	private void registerToLoader() {
+		Loader.getInstance().addObserver(this);
+		Loader.getInstance().startLoading();
+	}
+	
+	private void initialToggleButtonGroup() {
 		toggleGroup = new ToggleGroup();
 		buttonLocalMode.setToggleGroup(toggleGroup);
 		buttonLocalMode.setSelected(true);
@@ -112,6 +115,7 @@ public class MainController extends Application implements Observer{
 	public void update(Observable observable, Object obj) {
 		update();
 	}
+	
 	@Override
 	public void update() {
 		LoadProgress lp = Loader.getProgress();
@@ -119,9 +123,7 @@ public class MainController extends Application implements Observer{
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-				progressBar.setProgress(loadRate);
-			}
-		});
+				progressBar.setProgress(loadRate);}});
 		if (loadRate == 1.0) {
 			FadeTransition ft = new FadeTransition(Duration.millis(FADE_DURATION), progressBar);
 			ft.setFromValue(1.0);
@@ -130,41 +132,31 @@ public class MainController extends Application implements Observer{
 			Platform.runLater(new Runnable() {
 				@Override
 				public void run() {
-					onRepoSearchClicked();
-				}
-			});
+					onRepoSearchClicked();}});
 			try {
 				Thread.sleep(FADE_DURATION);
 				progressBar.setVisible(false);
-				imageMove();
+				imageMoveFrame();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
-		
-	}
-
-	public static void main(String[] args) {
-		launch(args);
 	}
 	
-				 private ImageView image;
-	@FXML private AnchorPane rightComponentParent;
-	@FXML private Button buttonRepoSearch;
-	@FXML private Button buttonUserSearch;
-	@FXML private Button buttonLanguage,buttonRepoCreateTime,buttonFork,buttonStar;
-	@FXML private Button buttonUserType,buttonUserCreateTime,buttonInEachCompany,buttonBlogCount,buttonLocationCount,buttonEmailCount,buttonFollower,buttonFollowing;
-				 private ProgressBar progressBar; 	
-	@FXML private ToggleButton buttonLocalMode;
-	@FXML private ToggleButton buttonOnlineMode;
-	@FXML private AnchorPane mainAnchorPane;
-				 private ToggleGroup toggleGroup;
-				 
-				 private LogicServiceFactory logicServiceFactory;
-				 private ServiceConfigure serviceConfigure;
-				 
-				 private static Image bgImage = null;
-				 private static final int FADE_DURATION = 3000;
+	private void imageMoveFrame() {
+		Timeline timeline = new Timeline();
+		timeline.getKeyFrames()
+		.addAll(new KeyFrame(Duration.ZERO, // set start position at 0
+				new KeyValue(image.translateXProperty(), 0),
+				new KeyValue(image.translateYProperty(), 0)),
+				new KeyFrame(new Duration(1000), // set middle position at 1s
+						new KeyValue(image.translateXProperty(), 750),
+						new KeyValue(image.translateYProperty(), 0)),
+				new KeyFrame(new Duration(2000), // set end position at 2s
+						new KeyValue(image.translateXProperty(), 1200),
+						new KeyValue(image.translateYProperty(), 0)));
+		timeline.play();
+	}
 
 	@FXML
 	private void setOnlineOrLocalMode(){
@@ -177,21 +169,8 @@ public class MainController extends Application implements Observer{
 			e.printStackTrace();
 		}
 	}
-	@FXML
-	private void imageMove() {
-		Timeline timeline = new Timeline();
-		timeline.getKeyFrames()
-				.addAll(new KeyFrame(Duration.ZERO, // set start position at 0
-						new KeyValue(image.translateXProperty(), 0),
-						new KeyValue(image.translateYProperty(), 0)),
-						new KeyFrame(new Duration(1000), // set middle position at 1s
-						new KeyValue(image.translateXProperty(), 750),
-						new KeyValue(image.translateYProperty(), 0)),
-						new KeyFrame(new Duration(2000), // set end position at 2s
-						new KeyValue(image.translateXProperty(), 1200),
-						new KeyValue(image.translateYProperty(), 0)));
-		timeline.play();
-	}
+	
+	
 	@FXML
 	private void onRepoSearchClicked() {
 		buttonRepoSearch.setDisable(true);
@@ -221,15 +200,31 @@ public class MainController extends Application implements Observer{
 		Button button = (Button) event.getSource();
 		rightComponentParent.getChildren().clear();
 		try {
-			rightComponentParent.getChildren().add(MAP.get(button.getId()).getInstance(rightComponentParent));
+			rightComponentParent.getChildren().add(MAP_BUTTON_TO_PANE.get(button.getId()).getInstance(rightComponentParent));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
+	@FXML private AnchorPane rightComponentParent;
+	@FXML private Button buttonRepoSearch;
+	@FXML private Button buttonUserSearch;
+	@FXML private Button buttonLanguage,buttonRepoCreateTime,buttonFork,buttonStar;
+	@FXML private Button buttonUserType,buttonUserCreateTime,buttonInEachCompany,buttonBlogCount,buttonLocationCount,buttonEmailCount,buttonFollower,buttonFollowing;
+	@FXML private ToggleButton buttonLocalMode;
+	@FXML private ToggleButton buttonOnlineMode;
+	@FXML private AnchorPane mainAnchorPane;
+	private ToggleGroup toggleGroup;
+	private ImageView image;
+	private ProgressBar progressBar; 	
 	
-	@SuppressWarnings("serial")
-	private  static final  HashMap<String, StatisticsPane> MAP = new HashMap<String,StatisticsPane>() {
+	private LogicServiceFactory logicServiceFactory;
+	private ServiceConfigure serviceConfigure;
+	
+	private static Image bgImage = null;
+	private static final int FADE_DURATION = 3000;
+	private static final HashMap<String, StatisticsPane> MAP_BUTTON_TO_PANE = new HashMap<String,StatisticsPane>() {
+		private static final long serialVersionUID = 1L;
 		{
 			put("buttonLanguage", new RepoLanguageStatistic());
 			put("buttonRepoCreateTime", new RepoCreateTimeStatistic());
@@ -246,7 +241,8 @@ public class MainController extends Application implements Observer{
 			put("buttonFollowing", new UserFollowingStatisticsPane());
 		}
 	};
-
-
+	public static void main(String[] args) {
+		launch(args);
+	}
 
 }

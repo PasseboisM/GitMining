@@ -73,9 +73,8 @@ public class GitPieChart extends PieChart {
 			int count = userTypeCount.count;
 			pieChartData.add(new PieChart.Data(type, count*100.0/sum));
 		}
-		this.initialTooltip(userTypeCounts.title, pieChartData);
+		this.initialTooltip(UserDistOverType.title, pieChartData);
 	}
-
 
 	private void initialTooltip(String title, ObservableList<PieChart.Data> pieChartData) {
 		pieChart.setData(pieChartData);

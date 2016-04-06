@@ -8,11 +8,11 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1050.0" style="-fx-background-color: #2f4f4f;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.ui.search.UserSearchController">
    <children>
       <TextField fx:id="vagename" layoutX="180.0" layoutY="55.0" prefHeight="30.0" prefWidth="659.0" promptText="搜索用户" />
-      <Button fx:id="search" layoutX="839.0" layoutY="55.0" mnemonicParsing="false" onAction="#onSearch" prefHeight="30.0" prefWidth="55.0"  text="搜索" />
-      <AnchorPane layoutX="7.0" layoutY="103.0">
+      <Button fx:id="search" layoutX="839.0" layoutY="55.0" mnemonicParsing="false" onAction="#onSearch" prefHeight="30.0" prefWidth="55.0" text="搜索" />
+      <AnchorPane layoutX="7.0" layoutY="103.0" prefHeight="561.0" prefWidth="1025.0">
          <children>
             <AnchorPane opacity="0.42" prefHeight="561.0" prefWidth="1039.0" style="-fx-background-color: white;" />
-            <Pagination fx:id="pag" prefHeight="561.0" prefWidth="1039.0" />
+            <Pagination fx:id="pag" prefHeight="561.0" prefWidth="1039.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
          </children>
       </AnchorPane>
    </children>
