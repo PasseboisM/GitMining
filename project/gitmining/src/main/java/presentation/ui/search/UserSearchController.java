@@ -27,7 +27,7 @@ public class UserSearchController {
 	public static AnchorPane getInstance(AnchorPane rightComponentParent) throws IOException{
 		FXMLLoader loader = new FXMLLoader(UserSearchController.class.getResource("userSearch.fxml"));
 		AnchorPane pane = loader.load();
-		pane.getStylesheets().add(UserSearchController.class.getResource("button.css").toExternalForm());
+//		pane.getStylesheets().add(UserSearchController.class.getResource("button.css").toExternalForm());
 		UserSearchController controller = loader.getController();
 		controller.initial(rightComponentParent);
 		return pane;
@@ -117,5 +117,6 @@ public class UserSearchController {
 		this.searchService = logicServiceFactory.getSearchService();
 		this.generalGetter = logicServiceFactory.getGeneralGetter();
 	}
+	
 	
 }
