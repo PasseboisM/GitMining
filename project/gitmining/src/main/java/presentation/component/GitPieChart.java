@@ -46,14 +46,33 @@ public class GitPieChart extends PieChart {
 		}
 	}
 
+	private void initial(UserDistOverType userTypeCounts) {
+		ObservableList<PieChart.Data> pieChartData = initialDatas(userTypeCounts);
+		this.initialTooltip(UserDistOverType.title, pieChartData);
+		this.initialAnimation(pieChartData);
+	}
+
 	private void initial(RepoDistOverCreateTime repoCreateOnTimeCounts) {
-		ObservableList<PieChart.Data> pieChartData = initialDatas(repoCreateOnTimeCounts);
+		ObservableList<PieChart.Data> pieChartData = this.initialDatas(repoCreateOnTimeCounts);
 		this.initialTooltip(repoCreateOnTimeCounts.title, pieChartData);
-		pieChart.setClockwise(false);
-		for (PieChart.Data d : pieChartData) {
-			d.getNode().setOnMouseEntered(new MouseHoverAnimation(d, pieChart));
-			d.getNode().setOnMouseExited(new MouseExitAnimation());
-			}
+		this.initialAnimation(pieChartData);
+	}
+
+	private ObservableList<PieChart.Data> initialDatas(UserDistOverType userTypeCounts) {
+		ObservableList<PieChart.Data> pieChartData =FXCollections.observableArrayList();
+		Iterator<UserTypeCount> iterator = userTypeCounts.getCounts();
+		Double sum = 0.0;
+		while(iterator.hasNext()){
+			sum+=iterator.next().count;
+		}
+		iterator = userTypeCounts.getCounts();
+		while(iterator.hasNext()){
+			UserTypeCount userTypeCount = iterator.next();
+			String type = userTypeCount.type;
+			int count = userTypeCount.count;
+			pieChartData.add(new PieChart.Data(type, count*100.0/sum));
+		}
+		return pieChartData;
 	}
 
 	private ObservableList<PieChart.Data> initialDatas(RepoDistOverCreateTime repoCreateOnTimeCounts) {
@@ -73,23 +92,6 @@ public class GitPieChart extends PieChart {
 		return pieChartData;
 	}
 
-	private void initial(UserDistOverType userTypeCounts) {
-		ObservableList<PieChart.Data> pieChartData =FXCollections.observableArrayList();
-		Iterator<UserTypeCount> iterator = userTypeCounts.getCounts();
-		Double sum = 0.0;
-		while(iterator.hasNext()){
-			sum+=iterator.next().count;
-		}
-		iterator = userTypeCounts.getCounts();
-		while(iterator.hasNext()){
-			UserTypeCount userTypeCount = iterator.next();
-			String type = userTypeCount.type;
-			int count = userTypeCount.count;
-			pieChartData.add(new PieChart.Data(type, count*100.0/sum));
-		}
-		this.initialTooltip(UserDistOverType.title, pieChartData);
-	}
-
 	private void initialTooltip(String title, ObservableList<PieChart.Data> pieChartData) {
 		pieChart.setData(pieChartData);
 		pieChart.setLegendSide(Side.RIGHT);
@@ -101,8 +103,14 @@ public class GitPieChart extends PieChart {
 		}
 		pieChart.setTitle(title);
 	}
-	
-	
+
+	private void initialAnimation(ObservableList<PieChart.Data> pieChartData) {
+		pieChart.setClockwise(false);
+		for (PieChart.Data d : pieChartData) {
+			d.getNode().setOnMouseEntered(new MouseHoverAnimation(d, pieChart));
+			d.getNode().setOnMouseExited(new MouseExitAnimation());
+		}
+	}
 
 	static class MouseHoverAnimation implements EventHandler<MouseEvent> {
 		static final Duration ANIMATION_DURATION = new Duration(500);
