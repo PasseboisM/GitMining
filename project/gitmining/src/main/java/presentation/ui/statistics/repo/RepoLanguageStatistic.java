@@ -8,7 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import logic.calc.general.GeneralStatisticsUtil;
 import logic.calc.service.GeneralStatisticsService;
-import presentation.component.GitBarChart;
+import presentation.component.GitPieChart;
 import presentation.ui.statistics.StatisticsPane;
 
 /**
@@ -34,7 +34,7 @@ public class RepoLanguageStatistic implements StatisticsPane {
 	public void initialChart() {
 		GeneralStatisticsService statisticsService = new GeneralStatisticsUtil();
 		RepoDistOverLanguage languageCounts = statisticsService.getRepoDistOverLanguage();
-		GitBarChart barChart = new GitBarChart(languageCounts);
-		anchorPane.getChildren().add(barChart);
+		GitPieChart pieChart = new GitPieChart(languageCounts);
+		anchorPane.getChildren().add(pieChart);
 	}
 }
