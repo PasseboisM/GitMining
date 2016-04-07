@@ -1,7 +1,3 @@
-.progress-bar .bar {
-    -fx-background:
-        -fx-box-border,
-        linear-gradient(to bottom, derive(-fx-accent,95%), derive(-fx-accent,10%)),
-        red; /* this line is the background color of the bar */
-    -fx-background: 0, 1, 2;
+.accordion .title { 
+	-fx-background-color: linear-gradient(#2A2728,#201D1E,#201D1E,#3E3B3C); 
 }
