@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import chart_data.RepoDistOverCreateTime;
+import chart_data.RepoDistOverCreateTime.RepoCreateOnTimeCount;
 import chart_data.RepoDistOverFork;
 import chart_data.RepoDistOverFork.ForkNumberRange;
 import chart_data.RepoDistOverLanguage;
@@ -39,23 +41,20 @@ public class GitBarChart extends AnchorPane {
 	private NumberAxis yAxis;
 	private static final int DEFAULT_YAXIS_UPPER_BOUND = 100;
 	private static final int DEFAULT_FRAME_DURATION = 500;
-	/**
-	 * 柱状图构造函数
-	 */
-	public GitBarChart(List<String> columns, List<Number> values, String seriesName, String title, String xLabel,
-			String yLabel) {
-		this.initialFXML();
-		this.initialText(title, xLabel, yLabel);
-		this.initial(columns, values, seriesName);
-	}
+//	/**
+//	 * 柱状图构造函数
+//	 */
+//	public GitBarChart(List<String> columns, List<Number> values, String seriesName, String title, String xLabel,
+//			String yLabel) {
+//		this.initialFXML();
+//		this.initialText(title, xLabel, yLabel);
+//		this.initial(columns, values, seriesName);
+//	}
 	
 	public GitBarChart(RepoDistOverLanguage languageCounts) {
 		this.initialFXML();
 		this.initialText("项目使用语言统计图", "语言", "项目个数");
 		this.initial(languageCounts, "项目");
-//		for (Timeline timeline : timelines) {
-//			timeline.play();
-//		}
 	}
 	
 	public GitBarChart(UserDistOverCreateTime userCreateOnTimeCounts) {
@@ -64,6 +63,13 @@ public class GitBarChart extends AnchorPane {
 		this.initial(userCreateOnTimeCounts, "用户");
 	}
 	
+	public GitBarChart(RepoDistOverCreateTime repoDistOverCreateTime){
+		this.initialFXML();
+		this.initialText("项目创建时间统计图", "创建时间", "项目个数");
+		this.initial(repoDistOverCreateTime, "项目");
+	}
+	
+
 	public GitBarChart(RepoDistOverFork repoDistOverFork) {
 		this.initialFXML();
 		this.initialText("项目复刻数分区间统计图", "复刻数区间", "项目个数");
@@ -93,28 +99,73 @@ public class GitBarChart extends AnchorPane {
 		}
 	}
 
-	/**
-	 * 初始化柱状图
-	 */
-	private void initial(List<String> columns, List<Number> values, String seriesName) {
+//	/**
+//	 * 初始化柱状图
+//	 */
+//	private void initial(List<String> columns, List<Number> values, String seriesName) {
+//		XYChart.Series<String,Number> series = new XYChart.Series<>();
+//		series.setName(seriesName);
+//		for (int i = 0; i < columns.size(); i++) {
+//			XYChart.Data<String,Number> data = new XYChart.Data<>(columns.get(i), values.get(i));
+//			series.getData().add(data);
+//		}
+//		barChart.getData().add(series);
+//		barChart.setCategoryGap(500.0 / columns.size());
+//
+//		for (int i = 0; i < columns.size(); i++) {
+//			XYChart.Data<String,Number> data = (Data<String,Number>) series.getData().get(i);
+//			Node node = data.getNode();
+//			Tooltip tooltip = new Tooltip(String.valueOf(values.get(i)));
+//			Tooltip.install(node, tooltip);
+//		}
+//
+//	}
+	
+	private void initial(RepoDistOverCreateTime repoDistOverCreateTime, String seriesName) {
 		XYChart.Series<String,Number> series = new XYChart.Series<>();
 		series.setName(seriesName);
-		for (int i = 0; i < columns.size(); i++) {
-			XYChart.Data<String,Number> data = new XYChart.Data<>(columns.get(i), values.get(i));
+		Iterator<RepoCreateOnTimeCount> iterator = repoDistOverCreateTime.getCounts();
+		int maxCount = DEFAULT_YAXIS_UPPER_BOUND;
+		while (iterator.hasNext()) {
+			RepoCreateOnTimeCount repoCreateOnTimeCount = iterator.next();
+			String lowerBound = repoCreateOnTimeCount.timeLo;
+			String higherBound = repoCreateOnTimeCount.timeHi;
+			int number = repoCreateOnTimeCount.count;
+			maxCount = number>maxCount?number:maxCount;
+			XYChart.Data<String,Number> data = new XYChart.Data<>(lowerBound + "~" + higherBound, 0);
 			series.getData().add(data);
 		}
+		yAxis.setAnimated(false);
+		yAxis.setUpperBound(maxCount);
 		barChart.getData().add(series);
-		barChart.setCategoryGap(500.0 / columns.size());
-
-		for (int i = 0; i < columns.size(); i++) {
+		barChart.setCategoryGap(500.0 / repoDistOverCreateTime.getNumOfCounts());
+		
+		 iterator = repoDistOverCreateTime.getCounts();
+		for (int i = 0; i < repoDistOverCreateTime.getNumOfCounts(); i++) {
+			RepoCreateOnTimeCount repoCreateOnTimeCount = iterator.next();
+			String lowerBound = repoCreateOnTimeCount.timeLo;
+			String higherBound = repoCreateOnTimeCount.timeHi;
+			int number = repoCreateOnTimeCount.count;
 			XYChart.Data<String,Number> data = (Data<String,Number>) series.getData().get(i);
 			Node node = data.getNode();
-			Tooltip tooltip = new Tooltip(String.valueOf(values.get(i)));
+			Tooltip tooltip = new Tooltip("创建时间从"+lowerBound+"至"+higherBound+"的项目个数："+number+"个");
 			Tooltip.install(node, tooltip);
 		}
-
+		
+		Timeline tl = new Timeline();
+		tl.getKeyFrames().add(new KeyFrame(Duration.millis(DEFAULT_FRAME_DURATION),
+		    (ActionEvent actionEvent) -> {
+		    	final Iterator<RepoCreateOnTimeCount> countIterator = repoDistOverCreateTime.getCounts();
+				series.getData().stream().forEach((theData) -> {
+					RepoCreateOnTimeCount repoCreateOnTimeCount = countIterator.next();
+					int number = repoCreateOnTimeCount.count;
+	    			theData.setYValue(number);
+		            });
+		    }
+		));
+		tl.play();
+		
 	}
-	
 	private void initial(RepoDistOverFork repoDistOverFork, String seriesName) {
 		XYChart.Series<String,Number> series = new XYChart.Series<>();
 		series.setName(seriesName);
