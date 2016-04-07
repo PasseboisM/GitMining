@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
 
 public class ImageFactory {
 	public static Image getImageByFileName(String filename) throws MalformedURLException{
-		File file = new File("resouces/images/"+filename);
+		File file = new File("resources/images/"+filename);
 		Image image = new Image(file.toURI().toURL().toString(),true);
 		return image;
 	}

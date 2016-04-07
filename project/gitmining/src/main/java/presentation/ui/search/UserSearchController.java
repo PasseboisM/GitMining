@@ -27,12 +27,11 @@ public class UserSearchController {
 	public static AnchorPane getInstance(AnchorPane rightComponentParent) throws IOException{
 		FXMLLoader loader = new FXMLLoader(UserSearchController.class.getResource("userSearch.fxml"));
 		AnchorPane pane = loader.load();
-		pane.getStylesheets().add(UserSearchController.class.getResource("button.css").toExternalForm());
+//		pane.getStylesheets().add(UserSearchController.class.getResource("button.css").toExternalForm());
 		UserSearchController controller = loader.getController();
 		controller.initial(rightComponentParent);
 		return pane;
 	}
-	
 	
 	private void initial(AnchorPane rightComponentParent) {
 		this.rightComponentParent = rightComponentParent;
@@ -62,7 +61,6 @@ public class UserSearchController {
 	private ScrollPane initialCreatePage(Integer pageIndex) {
 		ScrollPane pane = new ScrollPane();
 		VBox vBox = new VBox();
-		vBox.setPrefWidth(1010);
 		int numPerPage = 10;
 		
 		List<GitUser> gitUserPerPage = null;
@@ -84,7 +82,6 @@ public class UserSearchController {
 	private ScrollPane createPage(Integer pageIndex) {
 		ScrollPane pane = new ScrollPane();
 		VBox vBox = new VBox();
-		vBox.setPrefWidth(1010);
 		int numPerPage = 10;
 
 		for (int i = 0; i < numPerPage; i++) {
@@ -120,5 +117,6 @@ public class UserSearchController {
 		this.searchService = logicServiceFactory.getSearchService();
 		this.generalGetter = logicServiceFactory.getGeneralGetter();
 	}
+	
 	
 }
