@@ -2,6 +2,7 @@ package network.data;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -27,6 +28,8 @@ import network.api.service.RepoApiMaker;
 import network.api.service.UserApiMaker;
 import network.connection.service.HTTPConnectionService;
 import network.service.MassiveDataSource;
+import network.service.NetworkServiceFactory;
+import network.service.SpecificDataSource;
 
 /**
  * 包含了JSON字符串解析功能的数据源，为上层提供能够获取批量信息的ObjChannel
@@ -42,7 +45,7 @@ public class MassiveDataSourceDefault implements MassiveDataSource {
 	private UserApiMaker userApi = null;
 	private RepoApiMaker repoApi = null;
 	private HTTPConnectionService conn = null;
-	
+	private SpecificDataSource spec = NetworkServiceFactory.getInstance().getSpecificDataSource();
 	
 	private static final int SUGGESTED_THREAD_NUM = Runtime.getRuntime().availableProcessors() *2;
 	
@@ -119,32 +122,35 @@ public class MassiveDataSourceDefault implements MassiveDataSource {
 	}
 	
 	private <T> ObjChannel<T> getUser(Class<T> userClass) throws NetworkException {
-		//初始化传输Github项目名称的管道(用于获得contributor)
-		ObjChannel<String> namesChannel = this.getRepoNames();
-		//初始化传输贡献者的管道
-		ObjChannel<String> contributorChannel = new ObjChannelWithBlockingQueue<String>();
 		
-		//初始化用于将github名转换成项目贡献者的过滤器、转换用到的集流器
-		GeneralProcessFilter[] contributorGetter = new GeneralProcessFilter[SUGGESTED_THREAD_NUM];
-		MultiSourceSwitch switchRepoToContributor = new BasicSourceSwitch(contributorChannel);
+
+		String[] loginURL = userApi.allUserAPIs();
+		
+		//loginURLChannel里面传输的是可用于获取Login的URL(String)
+		ObjChannel<String> loginURLChannel = new ObjChannelWithBlockingQueue<>();
+		PureDataTransFilter<String> loginURLTrans = new PureDataTransFilter<>(
+				Arrays.asList(loginURL), loginURLChannel);
+		Executors.newCachedThreadPool().execute(loginURLTrans);
+
+		//JSONListChan中是JSON格式的List，而List中是User的Login
+		ObjChannel<String> JSONListChan = new ObjChannelWithBlockingQueue<String>();
+		OnlineJSONGetter[] loginListGetter = new OnlineJSONGetter[SUGGESTED_THREAD_NUM];
+		MultiSourceSwitch switchURLToList= new BasicSourceSwitch(JSONListChan);
 		for(int i=0;i<SUGGESTED_THREAD_NUM;i++) {
-			contributorGetter[i] = new RepoNameToContributorJSONFilter
-					(namesChannel, switchRepoToContributor, 1);
+			loginListGetter[i] = new OnlineJSONGetter(loginURLChannel,switchURLToList,50);
 		}
-		//执行转换任务
-		execute(contributorGetter);
+		execute(loginListGetter);
 		
-		//初始化传输GitUser的管道、将项目贡献者信息的JSON字符串转换成java Object的过滤器、转换用到的集流器
-		ObjChannel<T> objChannel = new ObjChannelWithBlockingQueue<T>();
-		JSONStringRPOFilter[] RPOSources = new JSONStringRPOFilter[SUGGESTED_THREAD_NUM];
-		MultiSourceSwitch switchJSONToObj = new BasicSourceSwitch(objChannel);
+		ObjChannel<T> result = new ObjChannelWithBlockingQueue<>();
+		UserGetter[] userGetters = new UserGetter[SUGGESTED_THREAD_NUM];
+		MultiSourceSwitch<T> resultSwitch = new BasicSourceSwitch(result);
 		for(int i=0;i<SUGGESTED_THREAD_NUM;i++) {
-			RPOSources[i] = new JSONStringRPOFilter(contributorChannel, BeansTranslator.getBeans(userClass), switchJSONToObj);
+			userGetters[i] = new UserGetter<>(
+					JSONListChan, resultSwitch, 5, BeansTranslator.getBeans(userClass));
 		}
-		//执行转换任务
-		execute(RPOSources);
+		execute(userGetters);
 		
-		return objChannel;
+		return result;
 	}
 	
 	/**
@@ -171,7 +177,6 @@ public class MassiveDataSourceDefault implements MassiveDataSource {
 		
 		return result;
 	}
-
 
 
 	private void execute(Runnable[] runnables) {
@@ -253,4 +258,72 @@ public class MassiveDataSourceDefault implements MassiveDataSource {
 		
 	}
 	
+	/**
+	 * 专用Filter，可以把JSONLoginList直接转化为T（T为GitUserBeans/GitUserMinBeans）
+	 * @author xjh14
+	 * Ver: 1.0
+	 * Created at: 2016年4月7日
+	 * @param <T>
+	 */
+	class UserGetter<T> extends GeneralProcessFilter<String, T> {
+
+		private final Type stringListType = new TypeToken<List<String>>() {}.getType();
+		private Class<T> target = null;
+		
+		public UserGetter(ObjChannel<String> input,
+				MultiSourceSwitch<T> output, int page,Class<T> target) {
+			super(input, output, page);
+			this.target = target;
+		}
+
+		@Override
+		public List<T> process(List<String> get) {
+			List<T> result = new ArrayList<>(page);
+			for(String jsonList: get) {
+				if(jsonList==null) continue;
+				List<String> loginList = gson.fromJson(jsonList, stringListType);
+				for(String login:loginList) {
+					try {
+						result.add(target.cast(spec.getSpecificUser(login)));
+					} catch (NetworkException e) {
+//						System.out.println("试图由Login获取GitUser失败："+login);
+					}
+				}
+				
+			}
+			return result;
+		}
+		
+	}
+	
+	/**
+	 * 用于从网络API获取字符串内容（一般为JSON格式）的Filter
+	 * @author xjh14
+	 * Ver: 1.0
+	 * Created at: 2016年4月7日
+	 */
+	class OnlineJSONGetter extends GeneralProcessFilter<String, String> {
+
+		public OnlineJSONGetter(ObjChannel<String> input,
+				MultiSourceSwitch<String> output, int page) {
+			super(input, output, page);
+		}
+
+		@Override
+		public List<String> process(List<String> get) {
+			List<String> result = new ArrayList<>(page);
+			for(String url: get) {
+				String temp = null;
+				try {
+					temp = conn.do_get(url);
+					result.add(temp);
+				} catch (NetworkException e) {
+					System.out.println("获取网络数据失败:"+url);
+					continue;
+				}
+			}
+			return result;
+		}
+		
+	}
 }

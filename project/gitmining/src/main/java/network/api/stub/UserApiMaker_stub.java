@@ -1,7 +1,6 @@
 package network.api.stub;
 
 import common.service.GitUserMin;
-
 import network.api.service.UserApiMaker;
 
 public class UserApiMaker_stub implements UserApiMaker {
@@ -12,6 +11,12 @@ public class UserApiMaker_stub implements UserApiMaker {
 
 	public String makeUserAPI(String login) {
 		return "https://api.github.com/users/"+login;
+	}
+
+	@Override
+	public String[] allUserAPIs() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

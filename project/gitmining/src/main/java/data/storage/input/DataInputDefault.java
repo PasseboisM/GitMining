@@ -23,6 +23,8 @@ import data.storage.service.DataStorageInput;
 public class DataInputDefault implements DataStorageInput {
 
 //	private static final int SUGGESTED_WRITING_THREAD = 4;
+	private static volatile int totalSaved = 0;
+	
 	
 	private DirectoryMaker dir = DirectoryMakerDefault.getInstance();
 	private Gson gson = new Gson();
@@ -108,6 +110,8 @@ public class DataInputDefault implements DataStorageInput {
 			fw = new FileWriter(content);
 			fw.write(json);
 			fw.close();
+			totalSaved ++;
+			System.out.println("Saved "+totalSaved+": "+user.getLogin());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
