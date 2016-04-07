@@ -3,8 +3,8 @@ package presentation.component;
 import java.io.IOException;
 import java.util.Iterator;
 
-import chart_data.RepoDistOverCreateTime;
-import chart_data.RepoDistOverCreateTime.RepoCreateOnTimeCount;
+import chart_data.RepoDistOverLanguage;
+import chart_data.RepoDistOverLanguage.LanguageCount;
 import chart_data.UserDistOverType;
 import chart_data.UserDistOverType.UserTypeCount;
 import javafx.animation.TranslateTransitionBuilder;
@@ -30,9 +30,32 @@ public class GitPieChart extends PieChart {
 		this.initial(userTypeCounts);
 	}
 	
-	public GitPieChart(RepoDistOverCreateTime repoCreateOnTimeCounts) {
+	public GitPieChart(RepoDistOverLanguage repoDistOverLanguage){
 		this.initialFXML();
-		this.initial(repoCreateOnTimeCounts);
+		this.initial(repoDistOverLanguage);
+	}
+
+	private void initial(RepoDistOverLanguage repoDistOverLanguage) {
+		ObservableList<PieChart.Data> pieChartData = initialDatas(repoDistOverLanguage);
+		this.initialTooltip("项目语言统计图", pieChartData);
+		this.initialAnimation(pieChartData);
+	}
+
+	private ObservableList<Data> initialDatas(RepoDistOverLanguage repoDistOverLanguage) {
+		ObservableList<PieChart.Data> pieChartData =FXCollections.observableArrayList();
+		Iterator<LanguageCount> iterator = repoDistOverLanguage.getLanguageCount();
+		Double sum = 0.0;
+		while(iterator.hasNext()){
+			sum+=iterator.next().repositoryCount;
+		}
+		iterator = repoDistOverLanguage.getLanguageCount();
+		while(iterator.hasNext()){
+			LanguageCount userTypeCount = iterator.next();
+			String type = userTypeCount.language.getName();
+			int count = userTypeCount.repositoryCount;
+			pieChartData.add(new PieChart.Data(type, count*100.0/sum));
+		}
+		return pieChartData;
 	}
 
 	private void initialFXML() {
@@ -51,12 +74,7 @@ public class GitPieChart extends PieChart {
 		this.initialTooltip(UserDistOverType.title, pieChartData);
 		this.initialAnimation(pieChartData);
 	}
-
-	private void initial(RepoDistOverCreateTime repoCreateOnTimeCounts) {
-		ObservableList<PieChart.Data> pieChartData = this.initialDatas(repoCreateOnTimeCounts);
-		this.initialTooltip(repoCreateOnTimeCounts.title, pieChartData);
-		this.initialAnimation(pieChartData);
-	}
+	
 
 	private ObservableList<PieChart.Data> initialDatas(UserDistOverType userTypeCounts) {
 		ObservableList<PieChart.Data> pieChartData =FXCollections.observableArrayList();
@@ -75,22 +93,6 @@ public class GitPieChart extends PieChart {
 		return pieChartData;
 	}
 
-	private ObservableList<PieChart.Data> initialDatas(RepoDistOverCreateTime repoCreateOnTimeCounts) {
-		ObservableList<PieChart.Data> pieChartData =FXCollections.observableArrayList();
-		Iterator<RepoCreateOnTimeCount> iterator = repoCreateOnTimeCounts.getCounts();
-		Double sum = 0.0;
-		while(iterator.hasNext()){
-			sum+=iterator.next().count;
-		}
-		iterator = repoCreateOnTimeCounts.getCounts();
-		while(iterator.hasNext()){
-			RepoCreateOnTimeCount repoCreateOnTimeCount = iterator.next();
-			String type = repoCreateOnTimeCount.timeLo+"~"+repoCreateOnTimeCount.timeHi;
-			int count = repoCreateOnTimeCount.count;
-			pieChartData.add(new PieChart.Data(type, count*100.0/sum));
-		}
-		return pieChartData;
-	}
 
 	private void initialTooltip(String title, ObservableList<PieChart.Data> pieChartData) {
 		pieChart.setData(pieChartData);
@@ -146,8 +148,8 @@ public class GitPieChart extends PieChart {
 			}
 
 			double radius = maxX - minX;
-			System.out.println("cos:" + cos);
-			System.out.println("sin" + sin);
+//			System.out.println("cos:" + cos);
+//			System.out.println("sin" + sin);
 			TranslateTransitionBuilder.create().toX((radius * ANIMATION_DISTANCE) * cos)
 					.toY((radius * ANIMATION_DISTANCE) * (-sin)).duration(ANIMATION_DURATION).node(n).build().play();
 		}
