@@ -1,6 +1,7 @@
 package presentation.ui.search;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +22,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
@@ -28,6 +31,7 @@ import logic.service.GeneralGetter;
 import logic.service.LogicServiceFactory;
 import logic.service.SearchService;
 import presentation.component.RepositoryMinBlock;
+import presentation.image.ImageFactory;
 
 public class RepositorySearchController{
 	
@@ -63,6 +67,9 @@ public class RepositorySearchController{
 	private Category[] cates;
 	private String[]  keywords = {}; 
 	private RepoSortStadard sortStadard;
+	private static Image bgImage = null;
+	private ImageView image;
+	
 	
 	@FXML
 	private void changeSortStrategy(ActionEvent event) {
