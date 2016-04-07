@@ -47,7 +47,6 @@ public class GitBarChart extends AnchorPane {
 		this.initialText("项目创建时间统计图", "创建时间", "项目个数");
 		this.initial(repoDistOverCreateTime, "项目");
 	}
-	
 
 	public GitBarChart(RepoDistOverFork repoDistOverFork) {
 		this.initialFXML();
@@ -77,7 +76,6 @@ public class GitBarChart extends AnchorPane {
 			e.printStackTrace();
 		}
 	}
-
 	
 	private void initial(RepoDistOverCreateTime repoDistOverCreateTime, String seriesName) {
 		XYChart.Series<String,Number> series = new XYChart.Series<>();
@@ -122,8 +120,8 @@ public class GitBarChart extends AnchorPane {
 		    }
 		));
 		tl.play();
-		
 	}
+	
 	private void initial(RepoDistOverFork repoDistOverFork, String seriesName) {
 		XYChart.Series<String,Number> series = new XYChart.Series<>();
 		series.setName(seriesName);
@@ -213,7 +211,6 @@ public class GitBarChart extends AnchorPane {
 		));
 		tl.play();
 	}
-	
 
 	private void initial(UserDistOverCreateTime userCreateOnTimeCounts, String seriesName) {
 		XYChart.Series<String,Number> series = new XYChart.Series<>();

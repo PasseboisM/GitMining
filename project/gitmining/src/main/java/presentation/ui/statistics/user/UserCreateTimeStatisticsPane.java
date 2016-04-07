@@ -8,7 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import logic.calc.general.GeneralStatisticsUtil;
 import logic.calc.service.GeneralStatisticsService;
-import presentation.component.GitBarChart;
+import presentation.component.GitLineChart;
 import presentation.ui.statistics.StatisticsPane;
 
 public class UserCreateTimeStatisticsPane implements StatisticsPane {
@@ -32,7 +32,7 @@ public class UserCreateTimeStatisticsPane implements StatisticsPane {
 	public void initialChart(){
 		GeneralStatisticsService statisticsService = new GeneralStatisticsUtil();
 		UserDistOverCreateTime userCreateOnTimeCounts = statisticsService.getUserDistOverCreateTime();
-		GitBarChart barChart = new GitBarChart(userCreateOnTimeCounts);
-		anchorPane.getChildren().add(barChart);
+		GitLineChart lineChart = new GitLineChart(userCreateOnTimeCounts);
+		anchorPane.getChildren().add(lineChart);
 	}
 }
