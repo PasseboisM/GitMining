@@ -1,7 +1,6 @@
 package presentation.ui.search;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +30,6 @@ import logic.service.GeneralGetter;
 import logic.service.LogicServiceFactory;
 import logic.service.SearchService;
 import presentation.component.RepositoryMinBlock;
-import presentation.image.ImageFactory;
 
 public class RepositorySearchController{
 	

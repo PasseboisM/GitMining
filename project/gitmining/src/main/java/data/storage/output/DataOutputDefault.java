@@ -455,7 +455,7 @@ public class DataOutputDefault implements DataStorageOutput {
 	@Override
 	public int getUserNumber() {
 		//TODO 真正实现
-		return 27069;
+		return 57068;
 	}
 //	
 	public void cleanRepo() {

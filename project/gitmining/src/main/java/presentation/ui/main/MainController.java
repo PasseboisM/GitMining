@@ -26,7 +26,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import logic.service.Loader;
 import logic.service.LogicServiceFactory;
@@ -125,7 +124,7 @@ public class MainController extends Application implements Observer{
 			@Override
 			public void run() {
 				progressBar.setProgress(loadRate);}});
-		if (loadRate == 1.0) {
+		if (loadRate >= 1.0) {
 			FadeTransition ft = new FadeTransition(Duration.millis(FADE_DURATION), progressBar);
 			ft.setFromValue(1.0);
 			ft.setToValue(0);
@@ -136,7 +135,10 @@ public class MainController extends Application implements Observer{
 					onRepoSearchClicked();}});
 			try {
 				Thread.sleep(FADE_DURATION);
-				progressBar.setVisible(false);
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						progressBar.setVisible(false);}});
 				imageMoveFrame();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
