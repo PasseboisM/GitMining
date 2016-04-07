@@ -1,5 +1,7 @@
 package common.model.beans;
 
+import com.google.gson.Gson;
+
 import common.service.GitUser;
 
 /**
@@ -165,8 +167,12 @@ public class GitUserBeans implements GitUser {
 				(created_at.matches("\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z"));
 		boolean typeValid = (type!=null) && (type.equals("User")||type.equals("Organization"));
 		
-		return loginValid && nameValid && followersValid 
-				&& idValid && createdAtValid && typeValid;
+		return loginValid 
+				&& nameValid
+				&& followersValid 
+				&& idValid 
+				&& createdAtValid
+				&& typeValid;
 	}
 	@Override
 	public String toString() {
@@ -175,4 +181,28 @@ public class GitUserBeans implements GitUser {
 				+ "]";
 	}
 	
+//	public static void main(String[] args) {
+//		String s = "{\"login\":\"kaze\",\"id\":53155,\"avatar_url\":\"htt"
+//				+ "ps://avatars.githubusercontent.com/u/53155?v\u003d3\",\"gr"
+//				+ "avatar_id\":\"\",\"url\":\"https://api.git"
+//				+ "hub.com/users/kaze\",\"html_url\":\"https://git"
+//				+ "hub.com/kaze\",\"followers_url\":\"https://api.github"
+//				+ ".com/users/kaze/followers\",\"following_url\":\"https://api.gith"
+//				+ "ub.com/users/kaze/following{/other_user}\",\"gists_url\":\"https://ap"
+//				+ "i.github.com/users/kaze/gists{/gist_id}\",\"starred_url\":\"ht"
+//				+ "tps://api.github.com/users/kaze/starred{/owner}{/repo}\",\"subscrip"
+//				+ "tions_url\":\"https://api.github.com/users/kaz"
+//				+ "e/subscriptions\",\"organizations_url\":\"https://api.githu"
+//				+ "b.com/users/kaze/orgs\",\"repos_url\":\"https://api.github"
+//				+ ".com/users/kaze/repos\",\"events_url\":\"https://api.git"
+//				+ "hub.com/users/kaze/events{/privacy}\",\"received_ev"
+//				+ "ents_url\":\"https://api.github.com/users/kaze/recei"
+//				+ "ved_events\",\"type\":\"User\",\"site_admin\":false,\"public_r"
+//				+ "epos\":33,\"public_gists\":5,\"followers\":2,\"follow"
+//				+ "ing\":3,\"created_at\":\"2009-02-09T22:18:56Z\",\"updated_at\":\"2"
+//				+ "015-11-21T19:10:01Z\"}";
+//		Gson gson = new Gson();
+//		GitUserBeans test = gson.fromJson(s,GitUserBeans.class);
+//		System.out.println(test.checkValidity());
+//	}
 }
