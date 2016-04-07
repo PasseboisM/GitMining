@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
+import chart_data.UserDistOverCreateTime;
+import chart_data.UserDistOverCreateTime.UserCreateOnTimeCount;
 import chart_data.UserDistOverFollower;
 import chart_data.UserDistOverFollower.FollowerNumberRange;
 import javafx.fxml.FXML;
@@ -40,6 +42,13 @@ public class GitLineChart extends AnchorPane {
 		this.initialText("被关注数统计图", "用户","被关注数");
 		this.initial(followerNumberRanges,"用户");
 	}
+	
+	public GitLineChart(UserDistOverCreateTime userDistOverCreateTime){
+		this.initialFXML();
+		this.initialText("用户创建时间统计图", "创建时间", "用户个数");
+		this.initial(userDistOverCreateTime, "用户");
+	}
+
 
 	private void initialText(String title, String xLabel, String yLabel) {
 		lineChart.setTitle(title);
@@ -94,6 +103,28 @@ public class GitLineChart extends AnchorPane {
 		for (int i = 0; i <followerNumberRanges.getNumOfRange(); i++) {
 			FollowerNumberRange followerNumberRange = iterator.next();
 			numOfFollower += followerNumberRange.numOfUsers;
+			XYChart.Data<String,Number> data = (Data<String,Number>) series.getData().get(i);
+			Node node = data.getNode();
+			Tooltip tooltip = new Tooltip("用户数量："+numOfFollower+"个");
+			Tooltip.install(node, tooltip);
+		}
+	}
+	private void initial(UserDistOverCreateTime userDistOverCreateTime, String seriesName) {
+		XYChart.Series<String,Number> series = new XYChart.Series<>();
+		series.setName(seriesName);
+		Iterator<UserCreateOnTimeCount> iterator = userDistOverCreateTime.getCounts();
+		while (iterator.hasNext()) {
+			UserCreateOnTimeCount followerNumberRange = iterator.next();
+			String lowerRange = followerNumberRange.timeLo;
+			String higherRange = followerNumberRange.timeHi;
+			int numOfFollower = followerNumberRange.count;
+			series.getData().add(new XYChart.Data<String,Number>(lowerRange+"~"+higherRange, numOfFollower));
+		}
+		lineChart.getData().add(series);
+		iterator = userDistOverCreateTime.getCounts();
+		for (int i = 0; i <userDistOverCreateTime.getNumOfCount(); i++) {
+			UserCreateOnTimeCount followerNumberRange = iterator.next();
+			int numOfFollower = followerNumberRange.count;
 			XYChart.Data<String,Number> data = (Data<String,Number>) series.getData().get(i);
 			Node node = data.getNode();
 			Tooltip tooltip = new Tooltip("用户数量："+numOfFollower+"个");

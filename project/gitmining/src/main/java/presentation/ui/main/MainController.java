@@ -98,6 +98,7 @@ public class MainController extends Application implements Observer{
 		mainAnchorPane.getChildren().add(progressBar);
 	}
 	
+	
 	private void registerToLoader() {
 		Loader.getInstance().addObserver(this);
 		Loader.getInstance().startLoading();
