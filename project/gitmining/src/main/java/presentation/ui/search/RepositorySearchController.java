@@ -36,10 +36,10 @@ import presentation.image.ImageFactory;
 public class RepositorySearchController{
 	
 	
-	public static VBox getInstance(AnchorPane rightComponentParent) throws IOException {
+	public static AnchorPane getInstance(AnchorPane rightComponentParent) throws IOException {
 		
 		FXMLLoader loader = new FXMLLoader(RepositorySearchController.class.getResource("repositorySearch.fxml"));
-		VBox rootUINode = loader.load();
+		AnchorPane rootUINode = loader.load();
 		RepositorySearchController controller = loader.getController();
 		controller.initial(rightComponentParent);
 		return rootUINode;
@@ -60,8 +60,8 @@ public class RepositorySearchController{
 		image.setImage(bgImage);
 		image.setFitWidth(1200);
 		image.setFitHeight(675);
-	
-//		repoVBox.getChildren().add(image);
+//	System.out.println(bgImage.toString()+"1");
+		repoVBox.getChildren().add(image);
 	}
 	
 
@@ -72,7 +72,7 @@ public class RepositorySearchController{
 	@FXML	private VBox repoVBox;
 	@FXML 	private Pagination pag;
 	@FXML 	private TextField keyword;
-
+	@FXML 	private AnchorPane mainPane;
 	
 	private List<CheckBox> categoryCheckBoxes;
 	private List<CheckBox> languageCheckBoxes;
