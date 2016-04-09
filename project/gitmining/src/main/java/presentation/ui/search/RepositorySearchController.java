@@ -1,6 +1,7 @@
 package presentation.ui.search;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,17 +31,39 @@ import logic.service.GeneralGetter;
 import logic.service.LogicServiceFactory;
 import logic.service.SearchService;
 import presentation.component.RepositoryMinBlock;
+import presentation.image.ImageFactory;
 
 public class RepositorySearchController{
 	
 	
 	public static VBox getInstance(AnchorPane rightComponentParent) throws IOException {
+		
 		FXMLLoader loader = new FXMLLoader(RepositorySearchController.class.getResource("repositorySearch.fxml"));
 		VBox rootUINode = loader.load();
 		RepositorySearchController controller = loader.getController();
 		controller.initial(rightComponentParent);
 		return rootUINode;
 	}
+	
+	private Image loadImgFile() {
+		Image tempImage = null;
+		String imageFilename ="userSearchBackground.jpg";
+		try {
+			tempImage = ImageFactory.getImageByFileName(imageFilename);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		return tempImage;
+	}
+	private void initialImage() {
+		image = new ImageView();
+		image.setImage(bgImage);
+		image.setFitWidth(1200);
+		image.setFitHeight(675);
+	
+//		repoVBox.getChildren().add(image);
+	}
+	
 
 	@FXML	private Button search;
 	@FXML   private ToggleButton  noSort,starSort,forkSort;
@@ -49,6 +72,7 @@ public class RepositorySearchController{
 	@FXML	private VBox repoVBox;
 	@FXML 	private Pagination pag;
 	@FXML 	private TextField keyword;
+
 	
 	private List<CheckBox> categoryCheckBoxes;
 	private List<CheckBox> languageCheckBoxes;
@@ -65,9 +89,9 @@ public class RepositorySearchController{
 	private Category[] cates;
 	private String[]  keywords = {}; 
 	private RepoSortStadard sortStadard;
-	private static Image bgImage = null;
 	private ImageView image;
 	
+	private static Image bgImage = null;
 	
 	@FXML
 	private void changeSortStrategy(ActionEvent event) {
@@ -87,6 +111,8 @@ public class RepositorySearchController{
 	
 	
 	private void initial(AnchorPane rightComponentParent) {
+		bgImage=loadImgFile();
+		initialImage();
 		initialCategoryCheckBoxes();
 		initialLanguageCheckBoxes();
 		initialToggleButtonGroup();
