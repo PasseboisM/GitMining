@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.HashMap;
 
+import org.junit.FixMethodOrder;
+
 import common.exception.NetworkException;
 import common.message.LoadProgress;
 import common.util.Observable;
@@ -25,6 +27,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import logic.service.Loader;
@@ -55,7 +58,7 @@ public class MainController extends Application implements Observer{
 		loadImgFile();
 		FXMLLoader loader = new FXMLLoader(MainController.class.getResource("mainController.fxml"));
 		mainAnchorPane = loader.load();
-		mainAnchorPane.getStylesheets().add(MainController.class.getResource("main.css").toExternalForm());
+//		mainAnchorPane.getStylesheets().add(MainController.class.getResource("main.css").toExternalForm());
 		MainController controller = loader.getController();
 		controller.initial();
 		Scene scene = new Scene(mainAnchorPane,1190,660);
@@ -76,6 +79,7 @@ public class MainController extends Application implements Observer{
 	private void initial() {
 		initialImage();
 		initialProgressBar();
+		flowpane.getStylesheets().add(MainController.class.getResource("main.css").toExternalForm());
 		registerToLoader();
 		initialToggleButtonGroup();
 	}
@@ -176,8 +180,6 @@ public class MainController extends Application implements Observer{
 	
 	@FXML
 	private void onRepoSearchClicked() {
-		buttonRepoSearch.setDisable(true);
-		buttonUserSearch.setDisable(false);
 		rightComponentParent.getChildren().clear();
 		try {
 			rightComponentParent.getChildren().add(RepositorySearchController.getInstance(rightComponentParent));
@@ -188,8 +190,6 @@ public class MainController extends Application implements Observer{
 	
 	@FXML 
 	private void onUserSearchClicked(){
-		buttonRepoSearch.setDisable(false);
-		buttonUserSearch.setDisable(true);
 		rightComponentParent.getChildren().clear();
 		try {
 			rightComponentParent.getChildren().add(UserSearchController.getInstance(rightComponentParent));
@@ -217,6 +217,7 @@ public class MainController extends Application implements Observer{
 	@FXML private ToggleButton buttonLocalMode;
 	@FXML private ToggleButton buttonOnlineMode;
 	@FXML private AnchorPane mainAnchorPane;
+	@FXML private FlowPane flowpane;
 	private ToggleGroup toggleGroup;
 	private ImageView image;
 	private ProgressBar progressBar;
