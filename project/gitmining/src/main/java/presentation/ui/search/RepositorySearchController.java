@@ -58,10 +58,12 @@ public class RepositorySearchController{
 	private void initialImage() {
 		image = new ImageView();
 		image.setImage(bgImage);
-		image.setFitWidth(1200);
+		image.setFitWidth(100);
 		image.setFitHeight(675);
 //	System.out.println(bgImage.toString()+"1");
+//		下两行中请注释掉一行或两行观察区别,建议调整图片大小之后，对于VBox上方控件进行半透明化的css处理
 		repoVBox.getChildren().add(image);
+//		mainPane.getChildren().add(image);
 	}
 	
 
