@@ -219,7 +219,7 @@ public class MainController extends Application implements Observer{
 	@FXML private AnchorPane mainAnchorPane;
 	private ToggleGroup toggleGroup;
 	private ImageView image;
-	private ProgressBar progressBar; 	
+	private ProgressBar progressBar;
 	
 	private LogicServiceFactory logicServiceFactory;
 	private ServiceConfigure serviceConfigure;

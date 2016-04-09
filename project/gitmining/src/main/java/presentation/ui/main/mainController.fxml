@@ -17,7 +17,7 @@
                <children>
                   <HBox fx:id="hbox" minHeight="-Infinity" prefHeight="700.0" prefWidth="1200.0">
                      <children>
-                        <FlowPane prefHeight="641.0" prefWidth="150.0">
+                        <FlowPane fx:id="flowpane" prefHeight="641.0" prefWidth="150.0">
                            <children>
                               <Accordion prefWidth="150.0">
                                 <panes>

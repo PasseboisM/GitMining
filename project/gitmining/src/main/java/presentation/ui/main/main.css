@@ -1,3 +1,6 @@
 .accordion .title { 
 	-fx-background-color: linear-gradient(#2A2728,#201D1E,#201D1E,#3E3B3C); 
 }
+#flowpane {
+	-fx-background-color: linear-gradient(#2A2728,#201D1E,#201D1E,#3E3B3C); 
+}
