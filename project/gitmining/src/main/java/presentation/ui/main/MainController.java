@@ -2,6 +2,7 @@ package presentation.ui.main;
 
 import java.net.MalformedURLException;
 import java.util.HashMap;
+import java.util.List;
 
 import common.exception.NetworkException;
 import common.message.LoadProgress;
@@ -16,6 +17,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
@@ -217,8 +219,11 @@ public class MainController extends Application implements Observer{
 				Platform.runLater(new Runnable() {
 					@Override
 					public void run() {
-						rightComponentParent.getChildren().add(anchorPane);
-						rightComponentParent.getChildren().remove(waitLoader);
+						List<Node> childred = rightComponentParent.getChildren();
+						if (childred.get(childred.size()-1).equals(waitLoader)) {
+							childred.add(anchorPane);
+						}
+						childred.remove(waitLoader);
 					}
 				});
 			}
@@ -227,24 +232,6 @@ public class MainController extends Application implements Observer{
 		t.start();
 	}
 	
-	/*class RunRunRun implements Runnable {
-		private WaitLoader waitLoader;
-		private Button button;
-		public RunRunRun(WaitLoader waitLoader, Button button) {
-			this.waitLoader = waitLoader;
-			this.button = button;
-		}
-		@Override
-		public void run() {
-			try {
-				rightComponentParent.getChildren().add(MAP_BUTTON_TO_PANE.get(button.getId()).getInstance(rightComponentParent));
-				rightComponentParent.getChildren().remove(waitLoader);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		
-	}*/
 
 	@FXML private AnchorPane rightComponentParent;
 	@FXML private Button buttonRepoSearch;
