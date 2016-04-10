@@ -9,6 +9,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import logic.calc.service.UserStatisticsService;
+import logic.calc.user.UserStatisticsUtil;
+import presentation.component.Radar;
 
 
 public class UserDetailsController {
@@ -30,6 +33,15 @@ public class UserDetailsController {
 		this.rightComponentParent = rightComponentParent;
 		Image image = new Image(user.getAvatar_url());
 		imageView.setImage(image);
+		
+		UserStatisticsService service = new UserStatisticsUtil();
+		Radar radar = null;
+		try {
+			radar = new Radar(service.getRanks(user));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		radarAnchorPane.getChildren().add(radar);
 	}
 	
 	private void initialComponentText(GitUser user) {
@@ -60,6 +72,7 @@ public class UserDetailsController {
 	@FXML	private Label labelUpdatedAt;
 	@FXML    private AnchorPane anchorPane;
 	@FXML    private ImageView imageView;
+	@FXML    private AnchorPane radarAnchorPane;
 	
 	@FXML
 	private void returnToSearchController() {
