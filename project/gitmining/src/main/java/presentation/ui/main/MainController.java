@@ -31,6 +31,7 @@ import javafx.util.Duration;
 import logic.service.Loader;
 import logic.service.LogicServiceFactory;
 import logic.service.ServiceConfigure;
+import presentation.component.WaitLoader;
 import presentation.image.ImageFactory;
 import presentation.ui.search.RepositorySearchController;
 import presentation.ui.search.UserSearchController;
@@ -79,6 +80,20 @@ public class MainController extends Application implements Observer{
 		flowpane.getStylesheets().add(MainController.class.getResource("menu.css").toExternalForm());
 		registerToLoader();
 //		initialToggleButtonGroup();
+		buttonUserType.setOnAction((ae)->{
+			Button button = (Button) ae.getSource();
+			rightComponentParent.getChildren().clear();
+			WaitLoader waitLoader = new WaitLoader();
+			rightComponentParent.getChildren().add(waitLoader);
+			long time1 = System.currentTimeMillis();
+			try {
+				rightComponentParent.getChildren().add(MAP_BUTTON_TO_PANE.get(button.getId()).getInstance(rightComponentParent));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			System.out.println("Time used:"+(System.currentTimeMillis()-time1)+"ms");
+			rightComponentParent.getChildren().remove(waitLoader);
+		});
 	}
 
 	private void initialImage() {
@@ -192,6 +207,8 @@ public class MainController extends Application implements Observer{
 	@FXML 
 	private void onUserSearchClicked(){
 		rightComponentParent.getChildren().clear();
+		WaitLoader waitLoader = new WaitLoader();
+		rightComponentParent.getChildren().add(waitLoader);
 		long time1 = System.currentTimeMillis();
 		try {
 			rightComponentParent.getChildren().add(UserSearchController.getInstance(rightComponentParent));
@@ -199,20 +216,57 @@ public class MainController extends Application implements Observer{
 			e.printStackTrace();
 		}
 		System.out.println("Time used:"+(System.currentTimeMillis()-time1)+"ms");
+		rightComponentParent.getChildren().remove(waitLoader);
 	}
 	
 	@FXML 
 	private void onStatisticClicked(ActionEvent event){
 		Button button = (Button) event.getSource();
 		rightComponentParent.getChildren().clear();
+		WaitLoader waitLoader = new WaitLoader();
+		rightComponentParent.getChildren().add(waitLoader);
 		long time1 = System.currentTimeMillis();
-		try {
-			rightComponentParent.getChildren().add(MAP_BUTTON_TO_PANE.get(button.getId()).getInstance(rightComponentParent));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		Runnable thread = new Runnable() {
+			@Override
+			public void run() {
+				
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						try {
+							rightComponentParent.getChildren().add(MAP_BUTTON_TO_PANE.get(button.getId()).getInstance(rightComponentParent));
+							rightComponentParent.getChildren().remove(waitLoader);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+		};
+		Thread t = new Thread(thread);
+		t.start();
+		Platform.runLater(thread);
 		System.out.println("Time used:"+(System.currentTimeMillis()-time1)+"ms");
 	}
+	
+	/*class RunRunRun implements Runnable {
+		private WaitLoader waitLoader;
+		private Button button;
+		public RunRunRun(WaitLoader waitLoader, Button button) {
+			this.waitLoader = waitLoader;
+			this.button = button;
+		}
+		@Override
+		public void run() {
+			try {
+				rightComponentParent.getChildren().add(MAP_BUTTON_TO_PANE.get(button.getId()).getInstance(rightComponentParent));
+				rightComponentParent.getChildren().remove(waitLoader);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}*/
 
 	@FXML private AnchorPane rightComponentParent;
 	@FXML private Button buttonRepoSearch;

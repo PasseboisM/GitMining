@@ -19,7 +19,6 @@ public class RepositoryMinBlock  extends BorderPane{
 	@FXML private Label forksCount;
 	@FXML private Label subscribersCount;
 	private Repository repository;
-//	private FakeData fakeData;
 	private AnchorPane rightComponentParent;
 	
 	private RepositoryMinBlock(){
@@ -51,7 +50,6 @@ public class RepositoryMinBlock  extends BorderPane{
 	
 	@FXML
 	private void jumpToRepositoryDetails() {
-//		rightComponentParent.getChildren().clear();
 		try {
 			rightComponentParent.getChildren().add(RepoDetailsController.getInstance(rightComponentParent,repository));
 		} catch (IOException e) {

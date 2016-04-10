@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1050.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane opacity="0.66" prefHeight="650.0" prefWidth="1050.0" style="-fx-background-color: white;" />
+      <VBox alignment="CENTER" layoutX="414.0" layoutY="244.0" prefHeight="185.0" prefWidth="182.0">
+         <children>
+            <ProgressIndicator blendMode="DIFFERENCE" layoutX="476.0" layoutY="276.0" prefHeight="158.0" prefWidth="182.0" />
+            <Label fx:id="text" alignment="TOP_LEFT" text="  数据加载中..." textFill="#ff3e17" wrapText="true">
+               <font>
+                  <Font size="22.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" top="10.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+      </VBox>
+   </children>
+</fx:root>

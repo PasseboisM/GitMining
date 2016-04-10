@@ -17,10 +17,15 @@ public class RepoCreateTimeStatistic implements StatisticsPane {
 	 * 仓库创建时间相关的饼图
 	 */
 
-	public AnchorPane getInstance(AnchorPane rightComponentParent) throws IOException {
+	public AnchorPane getInstance(AnchorPane rightComponentParent) {
 		FXMLLoader loader = new FXMLLoader(
 				RepoCreateTimeStatistic.class.getResource("repositoryCreateTimeStatistic.fxml"));
-		AnchorPane rootUINode = loader.load();
+		AnchorPane rootUINode = null;
+		try {
+			rootUINode = loader.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		RepoCreateTimeStatistic controller = loader.getController();
 		controller.initial(rightComponentParent);
 		return rootUINode;

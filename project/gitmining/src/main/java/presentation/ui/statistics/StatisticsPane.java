@@ -6,5 +6,5 @@ import javafx.scene.layout.AnchorPane;
 
 public interface StatisticsPane {
 
-	public AnchorPane getInstance(AnchorPane rightComponentParent) throws IOException;
+	public AnchorPane getInstance(AnchorPane rightComponentParent);
 }
