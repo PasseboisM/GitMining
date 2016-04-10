@@ -40,6 +40,7 @@ public class RepositorySearchController{
 		
 		FXMLLoader loader = new FXMLLoader(RepositorySearchController.class.getResource("repositorySearch.fxml"));
 		AnchorPane rootUINode = loader.load();
+		rootUINode.getStylesheets().add(RepositorySearchController.class.getResource("repoSearch.css").toExternalForm());
 		RepositorySearchController controller = loader.getController();
 		controller.initial(rightComponentParent);
 		return rootUINode;
@@ -121,6 +122,7 @@ public class RepositorySearchController{
 		initialSearchService();
 		this.rightComponentParent = rightComponentParent;
 		initialPage();
+		this.rightComponentParent.getStylesheets().add(RepositorySearchController.class.getResource("repoSearch.css").toExternalForm());
 	}
 
 	private void initialSearchService() {
@@ -214,14 +216,6 @@ public class RepositorySearchController{
 			});
 		}
 		
-		/*categoryCheckBoxes.get(0).setOnAction(new EventHandler<ActionEvent>() {
-			
-			@Override
-			public void handle(ActionEvent event) {
-				// TODO Auto-generated method stub
-				
-			}
-		});*/
 	}
 
 	private void refreshCategories(Category[] categories) {

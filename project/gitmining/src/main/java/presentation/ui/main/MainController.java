@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.HashMap;
 
-import org.junit.FixMethodOrder;
-
 import common.exception.NetworkException;
 import common.message.LoadProgress;
 import common.util.Observable;
@@ -58,7 +56,6 @@ public class MainController extends Application implements Observer{
 		loadImgFile();
 		FXMLLoader loader = new FXMLLoader(MainController.class.getResource("mainController.fxml"));
 		mainAnchorPane = loader.load();
-//		mainAnchorPane.getStylesheets().add(MainController.class.getResource("main.css").toExternalForm());
 		MainController controller = loader.getController();
 		controller.initial();
 		Scene scene = new Scene(mainAnchorPane,1190,660);
@@ -79,9 +76,9 @@ public class MainController extends Application implements Observer{
 	private void initial() {
 		initialImage();
 		initialProgressBar();
-		flowpane.getStylesheets().add(MainController.class.getResource("main.css").toExternalForm());
+		flowpane.getStylesheets().add(MainController.class.getResource("menu.css").toExternalForm());
 		registerToLoader();
-		initialToggleButtonGroup();
+//		initialToggleButtonGroup();
 	}
 
 	private void initialImage() {
@@ -107,13 +104,13 @@ public class MainController extends Application implements Observer{
 		Loader.getInstance().startLoading();
 	}
 	
-	private void initialToggleButtonGroup() {
+	/*private void initialToggleButtonGroup() {
 		toggleGroup = new ToggleGroup();
 		buttonLocalMode.setToggleGroup(toggleGroup);
 		buttonLocalMode.setSelected(true);
 		buttonOnlineMode.setToggleGroup(toggleGroup);
 		this.setOnlineOrLocalMode();
-	}
+	}*/
 
 	@Override
 	public void update(Observable observable, Object obj) {
@@ -122,13 +119,15 @@ public class MainController extends Application implements Observer{
 	
 	@Override
 	public void update() {
+		if(startViewing) return;
 		LoadProgress lp = Loader.getProgress();
-		double loadRate = (lp.getLoadedRepoNum()+lp.getLoadedUser())*1.0/(lp.getTotalRepoNum()+lp.getTotalUserNum());
+		double loadRate = (lp.getLoadedRepoNum()+lp.getLoadedUser())*1.0/(lp.getTotalRepoNum()+lp.getTotalUserNum())/LOADING_RATE;
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
 				progressBar.setProgress(loadRate);}});
 		if (loadRate >= 1.0) {
+			startViewing = true;
 			FadeTransition ft = new FadeTransition(Duration.millis(FADE_DURATION), progressBar);
 			ft.setFromValue(1.0);
 			ft.setToValue(0);
@@ -181,32 +180,38 @@ public class MainController extends Application implements Observer{
 	@FXML
 	private void onRepoSearchClicked() {
 		rightComponentParent.getChildren().clear();
+		long time1 = System.currentTimeMillis();
 		try {
 			rightComponentParent.getChildren().add(RepositorySearchController.getInstance(rightComponentParent));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		System.out.println("Time used:"+(System.currentTimeMillis()-time1)+"ms");
 	}
 	
 	@FXML 
 	private void onUserSearchClicked(){
 		rightComponentParent.getChildren().clear();
+		long time1 = System.currentTimeMillis();
 		try {
 			rightComponentParent.getChildren().add(UserSearchController.getInstance(rightComponentParent));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		System.out.println("Time used:"+(System.currentTimeMillis()-time1)+"ms");
 	}
 	
 	@FXML 
 	private void onStatisticClicked(ActionEvent event){
 		Button button = (Button) event.getSource();
 		rightComponentParent.getChildren().clear();
+		long time1 = System.currentTimeMillis();
 		try {
 			rightComponentParent.getChildren().add(MAP_BUTTON_TO_PANE.get(button.getId()).getInstance(rightComponentParent));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		System.out.println("Time used:"+(System.currentTimeMillis()-time1)+"ms");
 	}
 
 	@FXML private AnchorPane rightComponentParent;
@@ -218,6 +223,7 @@ public class MainController extends Application implements Observer{
 	@FXML private ToggleButton buttonOnlineMode;
 	@FXML private AnchorPane mainAnchorPane;
 	@FXML private FlowPane flowpane;
+	private boolean startViewing = false;
 	private ToggleGroup toggleGroup;
 	private ImageView image;
 	private ProgressBar progressBar;
@@ -227,6 +233,7 @@ public class MainController extends Application implements Observer{
 	
 	private static Image bgImage = null;
 	private static final int FADE_DURATION = 3000;
+	private static final double LOADING_RATE = 1.0;
 	private static final HashMap<String, StatisticsPane> MAP_BUTTON_TO_PANE = new HashMap<String,StatisticsPane>() {
 		private static final long serialVersionUID = 1L;
 		{
