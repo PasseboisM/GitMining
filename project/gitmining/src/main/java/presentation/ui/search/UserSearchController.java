@@ -24,10 +24,14 @@ import presentation.component.UserMinBlock;
 
 public class UserSearchController {
 	
-	public static AnchorPane getInstance(AnchorPane rightComponentParent) throws IOException{
+	public static AnchorPane getInstance(AnchorPane rightComponentParent){
 		FXMLLoader loader = new FXMLLoader(UserSearchController.class.getResource("userSearch.fxml"));
-		AnchorPane pane = loader.load();
-//		pane.getStylesheets().add(UserSearchController.class.getResource("button.css").toExternalForm());
+		AnchorPane pane = null;
+		try {
+			pane = loader.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		UserSearchController controller = loader.getController();
 		controller.initial(rightComponentParent);
 		return pane;

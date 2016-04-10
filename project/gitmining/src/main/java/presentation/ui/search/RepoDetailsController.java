@@ -21,9 +21,14 @@ import presentation.image.ImageFactory;
 
 public class RepoDetailsController {
 	
-	public static BorderPane getInstance(AnchorPane rightComponentParent,Repository repository) throws IOException {
+	public static BorderPane getInstance(AnchorPane rightComponentParent,Repository repository){
 		FXMLLoader loader = new FXMLLoader(RepoDetailsController.class.getResource("repositoryDetails.fxml"));
-		BorderPane pane = loader.load();
+		BorderPane pane = null;
+		try {
+			pane = loader.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		RepoDetailsController controller = loader.getController();
 		controller.initial(rightComponentParent,repository);
 		return pane;

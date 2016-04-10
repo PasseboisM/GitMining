@@ -33,6 +33,7 @@ import logic.service.LogicServiceFactory;
 import logic.service.ServiceConfigure;
 import presentation.component.WaitLoader;
 import presentation.image.ImageFactory;
+import presentation.ui.WaitLoaderRunner;
 import presentation.ui.search.RepositorySearchController;
 import presentation.ui.search.UserSearchController;
 import presentation.ui.statistics.StatisticsPane;
@@ -192,11 +193,7 @@ public class MainController extends Application implements Observer{
 	private void onRepoSearchClicked() {
 		rightComponentParent.getChildren().clear();
 		long time1 = System.currentTimeMillis();
-		try {
-			rightComponentParent.getChildren().add(RepositorySearchController.getInstance(rightComponentParent));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		rightComponentParent.getChildren().add(RepositorySearchController.getInstance(rightComponentParent));
 		System.out.println("Time used:"+(System.currentTimeMillis()-time1)+"ms");
 	}
 	
@@ -205,13 +202,7 @@ public class MainController extends Application implements Observer{
 		rightComponentParent.getChildren().clear();
 		WaitLoader waitLoader = new WaitLoader();
 		rightComponentParent.getChildren().add(waitLoader);
-		long time1 = System.currentTimeMillis();
-		try {
-			rightComponentParent.getChildren().add(UserSearchController.getInstance(rightComponentParent));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		System.out.println("Time used:"+(System.currentTimeMillis()-time1)+"ms");
+		rightComponentParent.getChildren().add(UserSearchController.getInstance(rightComponentParent));
 		rightComponentParent.getChildren().remove(waitLoader);
 	}
 	
@@ -221,24 +212,9 @@ public class MainController extends Application implements Observer{
 		rightComponentParent.getChildren().clear();
 		WaitLoader waitLoader = new WaitLoader();
 		rightComponentParent.getChildren().add(waitLoader);
-		long time1 = System.currentTimeMillis();
-		Runnable thread = new Runnable() {
-			@Override
-			public void run() {
-				AnchorPane statisticPane = MAP_BUTTON_TO_PANE.get(button.getId()).getInstance(rightComponentParent);
-				
-				Platform.runLater(new Runnable() {
-					@Override
-					public void run() {
-						rightComponentParent.getChildren().add(statisticPane);
-						rightComponentParent.getChildren().remove(waitLoader);
-					}
-				});
-			}
-		};
-		Thread t = new Thread(thread);
+		WaitLoaderRunner waitLoaderRunner = new WaitLoaderRunner(rightComponentParent, waitLoader, MAP_BUTTON_TO_PANE.get(button.getId()));
+		Thread t = new Thread(waitLoaderRunner);
 		t.start();
-		System.out.println("Time used:"+(System.currentTimeMillis()-time1)+"ms");
 	}
 	
 	/*class RunRunRun implements Runnable {

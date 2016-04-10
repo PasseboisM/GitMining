@@ -12,9 +12,14 @@ import javafx.scene.layout.AnchorPane;
 
 
 public class UserDetailsController {
-	public static AnchorPane getInstance(AnchorPane rightComponentParent,GitUser user) throws IOException {
+	public static AnchorPane getInstance(AnchorPane rightComponentParent,GitUser user)  {
 		FXMLLoader loader = new FXMLLoader(UserDetailsController.class.getResource("userDetails.fxml"));
-		AnchorPane pane = loader.load();
+		AnchorPane pane = null;
+		try {
+			pane = loader.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		UserDetailsController controller = loader.getController();
 		controller.initial(rightComponentParent,user);
 		return pane;

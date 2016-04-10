@@ -52,11 +52,6 @@ public class UserMinBlock extends BorderPane{
 	private AnchorPane rightComponentParent;
 	@FXML
 	private void jumpToUserDetails() {
-		try {
-			rightComponentParent.getChildren().add(UserDetailsController.getInstance(rightComponentParent,user));
-			System.out.println(user.getLogin());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		rightComponentParent.getChildren().add(UserDetailsController.getInstance(rightComponentParent,user));
 	}
 }

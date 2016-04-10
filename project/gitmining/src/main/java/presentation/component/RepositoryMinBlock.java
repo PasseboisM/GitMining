@@ -50,11 +50,7 @@ public class RepositoryMinBlock  extends BorderPane{
 	
 	@FXML
 	private void jumpToRepositoryDetails() {
-		try {
-			rightComponentParent.getChildren().add(RepoDetailsController.getInstance(rightComponentParent,repository));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		rightComponentParent.getChildren().add(RepoDetailsController.getInstance(rightComponentParent,repository));
 	}
 	
 }
