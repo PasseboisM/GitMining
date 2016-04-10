@@ -11,6 +11,11 @@ import common.exception.NetworkException;
 import common.service.GitUser;
 import common.service.Repository;
 
+/**
+ * 测试网络层获取特定数据对象的功能
+ * @author xjh14
+ * Ver: 1.0
+ */
 public class SpecificDataSourceTest {
 
 	@Test

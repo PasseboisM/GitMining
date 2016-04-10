@@ -13,6 +13,11 @@ import common.exception.DataTransferException;
 import common.exception.NetworkException;
 import common.util.ObjChannel;
 
+/**
+ * 测试MultiSourceSwitch类的功能（能否保证多Filter的同步输出）
+ * @author xjh14
+ * Ver: 1.0
+ */
 public class MultiSourceSwitchTest {
 
 	@Test

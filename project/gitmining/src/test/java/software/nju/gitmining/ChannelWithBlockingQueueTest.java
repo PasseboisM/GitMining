@@ -13,11 +13,18 @@ import common.exception.DataTransferException;
 import common.model.ObjChannelWithBlockingQueue;
 import common.util.ObjChannel;
 
+/**
+ * 本测试用例套件用于对系统中的ChannelWithBlockingQueue类进行功能测试
+ * @author xjh14
+ * Ver: 1.0
+ */
 public class ChannelWithBlockingQueueTest {
 
 	Random rand = new Random();
 	
-	
+	/**
+	 * 测试在只有一个Consumer的情况下Channel的功能性。
+	 */
 	@Test
 	public void testSingleConsumer() throws InterruptedException {
 		
@@ -44,6 +51,9 @@ public class ChannelWithBlockingQueueTest {
 		
 	}
 	
+	/**
+	 * 测试在有多个Consumer的情况下ChannelWithBlockingQueue的同步性是否良好
+	 */
 	@Test
 	public void testMultipleConsumer() throws Exception {
 		

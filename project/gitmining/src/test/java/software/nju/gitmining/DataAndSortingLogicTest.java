@@ -15,6 +15,11 @@ import common.exception.NetworkException;
 import common.service.Repository;
 import common.service.RepositoryMin;
 
+/**
+ * 作为集成测试，同时测试逻辑层数据获取与排序功能
+ * @author xjh14
+ * Ver: 1.0
+ */
 public class DataAndSortingLogicTest {
 
 	@Test
