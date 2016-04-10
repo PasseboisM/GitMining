@@ -47,7 +47,7 @@ public class RepositorySearchController{
 	
 	private Image loadImgFile() {
 		Image tempImage = null;
-		String imageFilename ="userSearchBackground.jpg";
+		String imageFilename ="searchBackground.jpg";
 		try {
 			tempImage = ImageFactory.getImageByFileName(imageFilename);
 		} catch (MalformedURLException e) {
@@ -58,12 +58,12 @@ public class RepositorySearchController{
 	private void initialImage() {
 		image = new ImageView();
 		image.setImage(bgImage);
-		image.setFitWidth(100);
+		image.setFitWidth(1050);
 		image.setFitHeight(675);
 //	System.out.println(bgImage.toString()+"1");
 //		下两行中请注释掉一行或两行观察区别,建议调整图片大小之后，对于VBox上方控件进行半透明化的css处理
-		repoVBox.getChildren().add(image);
-//		mainPane.getChildren().add(image);
+//		repoVBox.getChildren().add(image);
+		sonPane.getChildren().add(image);
 	}
 	
 
@@ -75,7 +75,7 @@ public class RepositorySearchController{
 	@FXML 	private Pagination pag;
 	@FXML 	private TextField keyword;
 	@FXML 	private AnchorPane mainPane;
-	
+	@FXML 	private AnchorPane sonPane;
 	private List<CheckBox> categoryCheckBoxes;
 	private List<CheckBox> languageCheckBoxes;
 	private AnchorPane rightComponentParent;

@@ -7,12 +7,12 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="658.0" prefWidth="1051.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.ui.search.RepositorySearchController">
    <children>
+      <AnchorPane fx:id="sonPane" prefHeight="658.0" prefWidth="1051.0" />
       <VBox fx:id="repoVBox" maxHeight="-Infinity" maxWidth="-Infinity">
          <children>
-            <GridPane minHeight="-Infinity" prefHeight="200.0">
+            <GridPane minHeight="-Infinity" opacity="0.8" prefHeight="200.0">
                <children>
                   <TextField fx:id="keyword" prefHeight="23.0" prefWidth="936.0" promptText="搜索项目" GridPane.columnIndex="1" GridPane.columnSpan="2" />
                   <Button fx:id="search" mnemonicParsing="false" onAction="#onSearch" text="查询" GridPane.columnIndex="3" GridPane.halignment="CENTER">
