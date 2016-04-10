@@ -17,9 +17,20 @@
 	-fx-background-color: #201D1E;
 	-fx-border-color: #161314;
 }
-
 .button:disabled{
 	-fx-background-color: #2A2728;
-	
 	-fx-text-fill: white;
+}
+.toggle-button{
+	-fx-background-color: #2A2728;
+	-fx-border-color: #161314;
+	-fx-text-fill: white;
+}
+.toggle-button:hover{
+	-fx-background-color: #201D1E;
+	-fx-border-color: #161314;
+}
+.toggle-button:selected{
+	-fx-background-color: red;
+	-fx-border-color: #161314;
 }
