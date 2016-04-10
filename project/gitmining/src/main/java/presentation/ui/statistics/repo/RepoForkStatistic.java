@@ -16,10 +16,15 @@ import presentation.ui.statistics.StatisticsPane;
  */
 
 public class RepoForkStatistic implements StatisticsPane {
-	public AnchorPane getInstance(AnchorPane rightComponentParent) throws IOException {
+	public AnchorPane getInstance(AnchorPane rightComponentParent) {
 		FXMLLoader loader = new FXMLLoader(
 				RepoForkStatistic.class.getResource("repositoryForkStatistic.fxml"));
-		AnchorPane rootUINode = loader.load();
+		AnchorPane rootUINode = null;
+		try {
+			rootUINode = loader.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		RepoForkStatistic controller = loader.getController();
 		controller.initial(rightComponentParent);
 		return rootUINode;

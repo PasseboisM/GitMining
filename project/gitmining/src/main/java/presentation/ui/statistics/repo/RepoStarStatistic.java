@@ -16,10 +16,15 @@ import presentation.ui.statistics.StatisticsPane;
  */
 
 public class RepoStarStatistic implements StatisticsPane {
-	public AnchorPane getInstance(AnchorPane rightComponentParent) throws IOException {
+	public AnchorPane getInstance(AnchorPane rightComponentParent) {
 		FXMLLoader loader = new FXMLLoader(
 				RepoStarStatistic.class.getResource("repositoryStarStatistic.fxml"));
-		AnchorPane rootUINode = loader.load();
+		AnchorPane rootUINode = null;
+		try {
+			rootUINode = loader.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		RepoStarStatistic controller = loader.getController();
 		controller.initial(rightComponentParent);
 		return rootUINode;

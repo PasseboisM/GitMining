@@ -86,11 +86,7 @@ public class MainController extends Application implements Observer{
 			WaitLoader waitLoader = new WaitLoader();
 			rightComponentParent.getChildren().add(waitLoader);
 			long time1 = System.currentTimeMillis();
-			try {
-				rightComponentParent.getChildren().add(MAP_BUTTON_TO_PANE.get(button.getId()).getInstance(rightComponentParent));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			rightComponentParent.getChildren().add(MAP_BUTTON_TO_PANE.get(button.getId()).getInstance(rightComponentParent));
 			System.out.println("Time used:"+(System.currentTimeMillis()-time1)+"ms");
 			rightComponentParent.getChildren().remove(waitLoader);
 		});
@@ -229,23 +225,19 @@ public class MainController extends Application implements Observer{
 		Runnable thread = new Runnable() {
 			@Override
 			public void run() {
+				AnchorPane statisticPane = MAP_BUTTON_TO_PANE.get(button.getId()).getInstance(rightComponentParent);
 				
 				Platform.runLater(new Runnable() {
 					@Override
 					public void run() {
-						try {
-							rightComponentParent.getChildren().add(MAP_BUTTON_TO_PANE.get(button.getId()).getInstance(rightComponentParent));
-							rightComponentParent.getChildren().remove(waitLoader);
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
+						rightComponentParent.getChildren().add(statisticPane);
+						rightComponentParent.getChildren().remove(waitLoader);
 					}
 				});
 			}
 		};
 		Thread t = new Thread(thread);
 		t.start();
-		Platform.runLater(thread);
 		System.out.println("Time used:"+(System.currentTimeMillis()-time1)+"ms");
 	}
 	

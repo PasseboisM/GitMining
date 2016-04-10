@@ -9,9 +9,14 @@ import presentation.ui.statistics.StatisticsPane;
 
 public class UserInEachCompanyStatisticsPane  implements StatisticsPane{
 
-	public AnchorPane getInstance(AnchorPane rightComponentParent) throws IOException {
+	public AnchorPane getInstance(AnchorPane rightComponentParent) {
 		FXMLLoader loader = new FXMLLoader(UserInEachCompanyStatisticsPane.class.getResource("userInEachCompanyStatistics.fxml"));
-		AnchorPane rootUINode = loader.load();
+		AnchorPane rootUINode = null;
+		try {
+			rootUINode = loader.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		UserInEachCompanyStatisticsPane controller = loader.getController();
 		controller.initial(rightComponentParent);
 		return rootUINode;
