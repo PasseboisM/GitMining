@@ -1,6 +1,5 @@
 package presentation.ui.main;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.HashMap;
 
@@ -33,7 +32,6 @@ import logic.service.LogicServiceFactory;
 import logic.service.ServiceConfigure;
 import presentation.component.WaitLoader;
 import presentation.image.ImageFactory;
-import presentation.ui.WaitLoaderRunner;
 import presentation.ui.search.RepositorySearchController;
 import presentation.ui.search.UserSearchController;
 import presentation.ui.statistics.StatisticsPane;
@@ -212,8 +210,20 @@ public class MainController extends Application implements Observer{
 		rightComponentParent.getChildren().clear();
 		WaitLoader waitLoader = new WaitLoader();
 		rightComponentParent.getChildren().add(waitLoader);
-		WaitLoaderRunner waitLoaderRunner = new WaitLoaderRunner(rightComponentParent, waitLoader, MAP_BUTTON_TO_PANE.get(button.getId()));
-		Thread t = new Thread(waitLoaderRunner);
+		Runnable runnable = new Runnable() {
+			@Override
+			public void run() {
+				AnchorPane anchorPane = MAP_BUTTON_TO_PANE.get(button.getId()).getInstance(rightComponentParent);
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						rightComponentParent.getChildren().add(anchorPane);
+						rightComponentParent.getChildren().remove(waitLoader);
+					}
+				});
+			}
+		};
+		Thread t = new Thread(runnable);
 		t.start();
 	}
 	

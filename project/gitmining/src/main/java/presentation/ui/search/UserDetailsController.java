@@ -23,7 +23,6 @@ public class UserDetailsController {
 		UserDetailsController controller = loader.getController();
 		controller.initial(rightComponentParent,user);
 		return pane;
-		
 	}
 	private AnchorPane rightComponentParent;
 	private void initial(AnchorPane rightComponentParent,GitUser user) {

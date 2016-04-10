@@ -3,6 +3,7 @@ package presentation.component;
 import java.io.IOException;
 
 import common.service.GitUser;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Hyperlink;
@@ -52,6 +53,22 @@ public class UserMinBlock extends BorderPane{
 	private AnchorPane rightComponentParent;
 	@FXML
 	private void jumpToUserDetails() {
-		rightComponentParent.getChildren().add(UserDetailsController.getInstance(rightComponentParent,user));
+		WaitLoader waitLoader = new WaitLoader();
+		rightComponentParent.getChildren().add(waitLoader);
+		Runnable runnable = new Runnable() {
+			@Override
+			public void run() {
+				AnchorPane anchorPane = UserDetailsController.getInstance(rightComponentParent,user);
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						rightComponentParent.getChildren().add(anchorPane);
+						rightComponentParent.getChildren().remove(waitLoader);
+					}
+				});
+			}
+		};
+		Thread t = new Thread(runnable);
+		t.start();
 	}
 }

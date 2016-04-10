@@ -6,9 +6,9 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1050.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1050.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane opacity="0.66" prefHeight="650.0" prefWidth="1050.0" style="-fx-background-color: white;" />
+      <AnchorPane opacity="0.66" prefHeight="675.0" prefWidth="1050.0" style="-fx-background-color: white;" />
       <VBox alignment="CENTER" layoutX="414.0" layoutY="244.0" prefHeight="185.0" prefWidth="182.0">
          <children>
             <ProgressIndicator blendMode="DIFFERENCE" layoutX="476.0" layoutY="276.0" prefHeight="158.0" prefWidth="182.0" />
