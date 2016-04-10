@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.HashMap;
 
-import org.junit.FixMethodOrder;
-
 import common.exception.NetworkException;
 import common.message.LoadProgress;
 import common.util.Observable;
@@ -79,9 +77,9 @@ public class MainController extends Application implements Observer{
 	private void initial() {
 		initialImage();
 		initialProgressBar();
-		flowpane.getStylesheets().add(MainController.class.getResource("main.css").toExternalForm());
+		flowpane.getStylesheets().add(MainController.class.getResource("menu.css").toExternalForm());
 		registerToLoader();
-		initialToggleButtonGroup();
+//		initialToggleButtonGroup();
 	}
 
 	private void initialImage() {
@@ -107,13 +105,13 @@ public class MainController extends Application implements Observer{
 		Loader.getInstance().startLoading();
 	}
 	
-	private void initialToggleButtonGroup() {
+	/*private void initialToggleButtonGroup() {
 		toggleGroup = new ToggleGroup();
 		buttonLocalMode.setToggleGroup(toggleGroup);
 		buttonLocalMode.setSelected(true);
 		buttonOnlineMode.setToggleGroup(toggleGroup);
 		this.setOnlineOrLocalMode();
-	}
+	}*/
 
 	@Override
 	public void update(Observable observable, Object obj) {

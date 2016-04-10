@@ -12,7 +12,7 @@ public class CSSTester extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		FXMLLoader loader = new FXMLLoader(MainController.class.getResource("mainController.fxml"));
 		AnchorPane mainAnchorPane = loader.load();
-		mainAnchorPane.getStylesheets().add(CSSTester.class.getResource("main.css").toExternalForm());
+		mainAnchorPane.getStylesheets().add(CSSTester.class.getResource("menu.css").toExternalForm());
 		Scene scene = new Scene(mainAnchorPane,1190,660);
 //		scene.getStylesheets().add(CSSTester.class.getResource("main.css").toExternalForm());
 		primaryStage.setScene(scene);
