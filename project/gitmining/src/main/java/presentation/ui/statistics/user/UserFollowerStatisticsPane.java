@@ -23,12 +23,10 @@ public class UserFollowerStatisticsPane implements StatisticsPane {
 
 	private void initial(AnchorPane rightComponentParent) {
 		this.initialChart();
-//		this.rightComponentParent = rightComponentParent;
 	}
 
 	@FXML
 	private AnchorPane anchorPane;
-//	private AnchorPane rightComponentParent;
 
 	public void initialChart() {
 		GeneralStatisticsService generalStatisticsService = new GeneralStatisticsUtil();

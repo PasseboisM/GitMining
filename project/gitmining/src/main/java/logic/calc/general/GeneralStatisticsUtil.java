@@ -34,14 +34,12 @@ public class GeneralStatisticsUtil implements GeneralStatisticsService{
 		 */
 		
 		List<Integer> gaps = new ArrayList<>(20);
-		//TODO 继续修改比例
 		for(int i=0;i<10;i++) gaps.add(10);//0~100  10份
-//		for(int i=0;i<3;i++) gaps.add(300);//100~1000  3份
-		for(int i=0;i<5;i++) gaps.add(20);//100~1000  3份
-		for(int i=0;i<2;i++) gaps.add(100);//100~1000  3份
-		for(int i=0;i<2;i++) gaps.add(300);//100~1000  3份
+		for(int i=0;i<5;i++) gaps.add(20);//100~200  5份
+		for(int i=0;i<2;i++) gaps.add(100);//200~400  2份
+		for(int i=0;i<2;i++) gaps.add(300);//400~1000  2份
 		for(int i=0;i<2;i++) gaps.add(4500);//1000~10000 2份
-		gaps.add(10000);//10000~20000  1份     总计16份
+		gaps.add(10000);//10000~20000  1份     总计22份
 		
 		String gapsJSON = gson.toJson(gaps);
 		List<String> result = null;

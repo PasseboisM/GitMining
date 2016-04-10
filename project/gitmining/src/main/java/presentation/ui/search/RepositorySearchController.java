@@ -216,14 +216,6 @@ public class RepositorySearchController{
 			});
 		}
 		
-		/*categoryCheckBoxes.get(0).setOnAction(new EventHandler<ActionEvent>() {
-			
-			@Override
-			public void handle(ActionEvent event) {
-				// TODO Auto-generated method stub
-				
-			}
-		});*/
 	}
 
 	private void refreshCategories(Category[] categories) {

@@ -56,7 +56,6 @@ public class MainController extends Application implements Observer{
 		loadImgFile();
 		FXMLLoader loader = new FXMLLoader(MainController.class.getResource("mainController.fxml"));
 		mainAnchorPane = loader.load();
-//		mainAnchorPane.getStylesheets().add(MainController.class.getResource("main.css").toExternalForm());
 		MainController controller = loader.getController();
 		controller.initial();
 		Scene scene = new Scene(mainAnchorPane,1190,660);
@@ -234,7 +233,7 @@ public class MainController extends Application implements Observer{
 	
 	private static Image bgImage = null;
 	private static final int FADE_DURATION = 3000;
-	private static final double LOADING_RATE = 0.1;
+	private static final double LOADING_RATE = 1.0;
 	private static final HashMap<String, StatisticsPane> MAP_BUTTON_TO_PANE = new HashMap<String,StatisticsPane>() {
 		private static final long serialVersionUID = 1L;
 		{
