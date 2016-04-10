@@ -146,7 +146,7 @@
       </VBox>
    </center>
    <bottom>
-      <Button mnemonicParsing="false" onAction="#returnToSearchController" text="返回" BorderPane.alignment="CENTER" />
+      <Button fx:id="returnButton" mnemonicParsing="false" onAction="#returnToSearchController" style="-fx-border-radius: 5px;" BorderPane.alignment="CENTER" />
    </bottom>
    <right>
       <AnchorPane fx:id="forRadar" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="414.0" prefWidth="200.0" BorderPane.alignment="BOTTOM_CENTER" />
