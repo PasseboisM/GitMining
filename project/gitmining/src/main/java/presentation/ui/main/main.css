@@ -4,7 +4,7 @@
 #flowpane {
 	-fx-background-color: linear-gradient(#2A2728,#201D1E,#201D1E,#3E3B3C); 
 }
-.accordion .content { 
+.accordion .content {
 	-fx-background-color: #201D1E;
 	-fx-border-color: #3E3B3C;
 }
@@ -31,6 +31,5 @@
 	-fx-border-color: #161314;
 }
 .toggle-button:selected{
-	-fx-background-color: red;
-	-fx-border-color: #161314;
+	-fx-background-color: #0C090A; 
 }
