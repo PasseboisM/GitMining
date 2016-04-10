@@ -47,7 +47,7 @@ public class MultiSourceSwitchTest {
 		
 		//数目为当前GitMining提供仓库数（懒的现场写单线程提取了） 
 		//之后测试通不过时，记得改为实时单线程获取数目，或者重新数一下数目，更换Magic Number!
-		assertEquals(total,3216);
+		assertEquals(total,3086);
 		
 		/*
 		 * Result:

@@ -47,14 +47,4 @@ public class DataOutputTest {
 		}
 	}
 
-	@Test
-	public void testRepoMin() {
-		fail("Test case hasn't been written!");
-	}
-	
-	@Test
-	public void testUserMin() {
-		fail("Test case hasn't been written!");
-	}
-	
 }

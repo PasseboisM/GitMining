@@ -46,7 +46,7 @@ public class JSONStringRPOFilter<T> extends GeneralProcessFilter<String, T> {
 				try {
 					T obj = gson.fromJson(json, objectiveClass);
 					Checkable check = (Checkable) obj;
-					if(check.checkValidity()) {
+					if(check != null && check.checkValidity()) {
 						result.add(obj);
 					}
 				} catch (Exception e) {
