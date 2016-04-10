@@ -8,7 +8,7 @@ input = open(sys.argv[1],'r')
 gaps = json.loads(input.readline())
 
 user_dataframe = DataFrame.from_csv("LocalData/repo.csv")
-star_list = user_dataframe['stargazers_count']
+star_list = user_dataframe['watchers']
 
 start = 0
 for i in range(len(gaps)):
