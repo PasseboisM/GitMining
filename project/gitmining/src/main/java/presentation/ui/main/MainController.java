@@ -120,13 +120,15 @@ public class MainController extends Application implements Observer{
 	
 	@Override
 	public void update() {
+		if(startViewing) return;
 		LoadProgress lp = Loader.getProgress();
-		double loadRate = (lp.getLoadedRepoNum()+lp.getLoadedUser())*1.0/(lp.getTotalRepoNum()+lp.getTotalUserNum());
+		double loadRate = (lp.getLoadedRepoNum()+lp.getLoadedUser())*1.0/(lp.getTotalRepoNum()+lp.getTotalUserNum())/LOADING_RATE;
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
 				progressBar.setProgress(loadRate);}});
 		if (loadRate >= 1.0) {
+			startViewing = true;
 			FadeTransition ft = new FadeTransition(Duration.millis(FADE_DURATION), progressBar);
 			ft.setFromValue(1.0);
 			ft.setToValue(0);
@@ -179,32 +181,38 @@ public class MainController extends Application implements Observer{
 	@FXML
 	private void onRepoSearchClicked() {
 		rightComponentParent.getChildren().clear();
+		long time1 = System.currentTimeMillis();
 		try {
 			rightComponentParent.getChildren().add(RepositorySearchController.getInstance(rightComponentParent));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		System.out.println("Time used:"+(System.currentTimeMillis()-time1)+"ms");
 	}
 	
 	@FXML 
 	private void onUserSearchClicked(){
 		rightComponentParent.getChildren().clear();
+		long time1 = System.currentTimeMillis();
 		try {
 			rightComponentParent.getChildren().add(UserSearchController.getInstance(rightComponentParent));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		System.out.println("Time used:"+(System.currentTimeMillis()-time1)+"ms");
 	}
 	
 	@FXML 
 	private void onStatisticClicked(ActionEvent event){
 		Button button = (Button) event.getSource();
 		rightComponentParent.getChildren().clear();
+		long time1 = System.currentTimeMillis();
 		try {
 			rightComponentParent.getChildren().add(MAP_BUTTON_TO_PANE.get(button.getId()).getInstance(rightComponentParent));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		System.out.println("Time used:"+(System.currentTimeMillis()-time1)+"ms");
 	}
 
 	@FXML private AnchorPane rightComponentParent;
@@ -216,6 +224,7 @@ public class MainController extends Application implements Observer{
 	@FXML private ToggleButton buttonOnlineMode;
 	@FXML private AnchorPane mainAnchorPane;
 	@FXML private FlowPane flowpane;
+	private boolean startViewing = false;
 	private ToggleGroup toggleGroup;
 	private ImageView image;
 	private ProgressBar progressBar;
@@ -225,6 +234,7 @@ public class MainController extends Application implements Observer{
 	
 	private static Image bgImage = null;
 	private static final int FADE_DURATION = 3000;
+	private static final double LOADING_RATE = 0.1;
 	private static final HashMap<String, StatisticsPane> MAP_BUTTON_TO_PANE = new HashMap<String,StatisticsPane>() {
 		private static final long serialVersionUID = 1L;
 		{

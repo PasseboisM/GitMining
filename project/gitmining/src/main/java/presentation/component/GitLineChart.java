@@ -88,21 +88,20 @@ public class GitLineChart extends AnchorPane {
 	private void initial(UserDistOverFollower followerNumberRanges, String seriesName) {
 		XYChart.Series<String,Number> series = new XYChart.Series<>();
 		series.setName(seriesName);
-		int numOfFollower = 0;
+//		int numOfFollower = 0;
 		Iterator<FollowerNumberRange> iterator = followerNumberRanges.getUserRanges();
 		while (iterator.hasNext()) {
 			FollowerNumberRange followerNumberRange = iterator.next();
 			int lowerRange = followerNumberRange.lowerRange;
 			int higherRange = followerNumberRange.higherRange;
-			numOfFollower += followerNumberRange.numOfUsers;
+			int numOfFollower = followerNumberRange.numOfUsers;
 			series.getData().add(new XYChart.Data<String,Number>(lowerRange+"-"+higherRange, numOfFollower));
 		}
 		lineChart.getData().add(series);
-		numOfFollower = 0;
 		iterator = followerNumberRanges.getUserRanges();
 		for (int i = 0; i <followerNumberRanges.getNumOfRange(); i++) {
 			FollowerNumberRange followerNumberRange = iterator.next();
-			numOfFollower += followerNumberRange.numOfUsers;
+			int numOfFollower = followerNumberRange.numOfUsers;
 			XYChart.Data<String,Number> data = (Data<String,Number>) series.getData().get(i);
 			Node node = data.getNode();
 			Tooltip tooltip = new Tooltip("用户数量："+numOfFollower+"个");
