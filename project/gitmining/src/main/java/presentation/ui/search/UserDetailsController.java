@@ -18,7 +18,6 @@ import logic.calc.user.UserStatisticsUtil;
 import presentation.component.Radar;
 import presentation.image.ImageFactory;
 
-// mnemonicParsing="false" onAction="#returnToSearchController" prefHeight="28.0" prefWidth="64.0" text="返回"
 public class UserDetailsController {
 	public static AnchorPane getInstance(AnchorPane rightComponentParent,GitUser user)  {
 		FXMLLoader loader = new FXMLLoader(UserDetailsController.class.getResource("userDetails.fxml"));
@@ -34,7 +33,7 @@ public class UserDetailsController {
 	}
 	private AnchorPane rightComponentParent;
 	private void initial(AnchorPane rightComponentParent,GitUser user) {
-		btImage=loadImgFile();
+		loadImgFile();
 		initialButton();
 		initialComponentText(user);
 		this.rightComponentParent = rightComponentParent;
@@ -51,22 +50,19 @@ public class UserDetailsController {
 			}
 		});
 	}
-	private Image loadImgFile() {
-		Image tempImage = null;
-		String imageFilename ="10.png";
+	private void loadImgFile() {
 		try {
-			tempImage = ImageFactory.getImageByFileName(imageFilename);
+			btImage = ImageFactory.getImageByFileName(ImageFactory.BACK);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
-		return tempImage;
 	}
 	
 	private void initialImage() {
 		imageV = new ImageView();
 		imageV.setImage(btImage);
-		imageV.setX(5);
-		imageV.setY(5);
+		imageV.setFitWidth(25);
+		imageV.setFitHeight(25);
 	}
 	private void initialButton(){
 		initialImage();
