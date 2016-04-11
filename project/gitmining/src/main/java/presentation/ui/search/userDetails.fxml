@@ -9,11 +9,14 @@
 
 <AnchorPane fx:id="anchorPane" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.ui.search.UserDetailsController">
    <children>
-      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1050.0">
+      <BorderPane layoutX="57.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="643.0" prefWidth="1050.0">
          <center>
             <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fx:id="imageView" fitHeight="246.0" fitWidth="262.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageView" fitHeight="246.0" fitWidth="262.0" pickOnBounds="true" preserveRatio="true">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="20.0" top="20.0" />
+                     </VBox.margin></ImageView>
                   <Label fx:id="labelType" textFill="#8d8d8d" wrapText="true">
                      <font>
                         <Font size="20.0" />
@@ -166,7 +169,10 @@
          <right>
             <VBox alignment="TOP_CENTER" prefHeight="494.0" prefWidth="322.0">
                <children>
-                  <AnchorPane fx:id="radarAnchorPane" prefHeight="314.0" prefWidth="322.0" />
+                  <AnchorPane fx:id="radarAnchorPane" prefHeight="314.0" prefWidth="322.0">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin></AnchorPane>
                   <Label text="User Statistics" BorderPane.alignment="CENTER">
                      <font>
                         <Font size="28.0" />
@@ -240,6 +246,9 @@
                      </children>
                   </HBox>
                </children>
+               <BorderPane.margin>
+                  <Insets right="50.0" />
+               </BorderPane.margin>
             </VBox>
          </right>
       </BorderPane>

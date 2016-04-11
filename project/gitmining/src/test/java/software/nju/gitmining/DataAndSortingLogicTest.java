@@ -1,11 +1,8 @@
 package software.nju.gitmining;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.List;
-
-import logic.service.GeneralGetter;
-import logic.service.LogicServiceFactory;
 
 import org.junit.Test;
 
@@ -13,7 +10,8 @@ import common.enumeration.sort_standard.RepoSortStadard;
 import common.exception.DataCorruptedException;
 import common.exception.NetworkException;
 import common.service.Repository;
-import common.service.RepositoryMin;
+import logic.service.GeneralGetter;
+import logic.service.LogicServiceFactory;
 
 /**
  * 作为集成测试，同时测试逻辑层数据获取与排序功能

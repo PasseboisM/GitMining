@@ -11,33 +11,8 @@
       <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
    </padding>
    <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="369.0" prefWidth="673.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="85.0" prefWidth="950.0" />
-            <HBox prefHeight="50.0" prefWidth="950.0">
-               <children>
-                  <Hyperlink fx:id="labelOwnerName">
-                     <font>
-                        <Font size="30.0" />
-                     </font>
-                  </Hyperlink>
-                  <Label text="/">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </Label>
-                  <Hyperlink fx:id="labelRepoName" disable="true">
-                     <font>
-                        <Font size="26.0" />
-                     </font>
-                  </Hyperlink>
-               </children>
-            </HBox>
-            <Separator prefWidth="200.0">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </Separator>
             <Label fx:id="LabelDescription" textFill="#8d8d8d" wrapText="true">
                <font>
                   <Font size="20.0" />
@@ -67,12 +42,53 @@
                   <Insets left="25.0" />
                </padding>
             </HBox>
-            <Label text="Repository Statistics">
+            <Label fx:id="labelUpdatedAt" textFill="#8d8d8d" wrapText="true">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <graphic>
+                  <Label text="updated at : " wrapText="true">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </Label>
+               </graphic>
+            </Label>
+            <Label fx:id="labelCreatedAt" textFill="#8d8d8d" wrapText="true">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <graphic>
+                  <Label text="created at : " wrapText="true">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </Label>
+               </graphic>
+            </Label>
+         </children>
+      </VBox>
+   </center>
+   <right>
+      <VBox alignment="CENTER">
+         <children>
+            <AnchorPane fx:id="forRadar" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="279.0" prefWidth="277.0" BorderPane.alignment="TOP_CENTER">
+               <BorderPane.margin>
+                  <Insets right="50.0" />
+               </BorderPane.margin>
+            </AnchorPane>
+            <Label alignment="CENTER" text="Repository Statistics">
                <font>
                   <Font size="28.0" />
                </font>
                <VBox.margin>
-                  <Insets left="50.0" />
+                  <Insets />
                </VBox.margin>
             </Label>
             <HBox prefHeight="100.0" prefWidth="200.0">
@@ -143,16 +159,46 @@
                </children>
             </HBox>
          </children>
+         <BorderPane.margin>
+            <Insets right="50.0" top="20.0" />
+         </BorderPane.margin>
       </VBox>
-   </center>
-   <right>
-      <AnchorPane fx:id="forRadar" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="277.0" prefWidth="200.0" BorderPane.alignment="BOTTOM_CENTER" />
    </right>
    <bottom> 
-      <AnchorPane prefHeight="174.0" prefWidth="929.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="36.0" prefWidth="950.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="returnButton" layoutX="27.0" layoutY="151.0" mnemonicParsing="false" onAction="#returnToSearchController" style="-fx-border-radius: 50%;" />
+            <Button fx:id="returnButton" layoutX="139.0" layoutY="44.0" mnemonicParsing="false" onAction="#returnToSearchController" prefHeight="23.0" prefWidth="109.0" style="-fx-border-radius: 50%;" />
          </children>
       </AnchorPane>
    </bottom>
+   <top>
+      <VBox prefHeight="62.0" prefWidth="950.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="50.0" prefWidth="950.0">
+               <children>
+                  <Hyperlink fx:id="labelOwnerName">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Hyperlink>
+                  <Label text="/">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Label>
+                  <Hyperlink fx:id="labelRepoName" disable="true">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Hyperlink>
+               </children>
+            </HBox>
+            <Separator prefWidth="200.0">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Separator>
+         </children>
+      </VBox>
+   </top>
 </BorderPane>

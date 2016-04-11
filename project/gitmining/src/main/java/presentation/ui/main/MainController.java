@@ -21,7 +21,6 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
@@ -80,18 +79,9 @@ public class MainController extends Application implements Observer{
 		initialImage();
 		initialProgressBar();
 		flowpane.getStylesheets().add(MainController.class.getResource("menu.css").toExternalForm());
+		rightComponentParent.getStylesheets().add(MainController.class.getResource("rightParentPane.css").toExternalForm());
 		registerToLoader();
 //		initialToggleButtonGroup();
-		buttonUserType.setOnAction((ae)->{
-			Button button = (Button) ae.getSource();
-			rightComponentParent.getChildren().clear();
-			WaitLoader waitLoader = new WaitLoader();
-			rightComponentParent.getChildren().add(waitLoader);
-			long time1 = System.currentTimeMillis();
-			rightComponentParent.getChildren().add(MAP_BUTTON_TO_PANE.get(button.getId()).getInstance(rightComponentParent));
-			System.out.println("Time used:"+(System.currentTimeMillis()-time1)+"ms");
-			rightComponentParent.getChildren().remove(waitLoader);
-		});
 	}
 
 	private void initialImage() {

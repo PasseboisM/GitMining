@@ -1,20 +1,16 @@
 package software.nju.gitmining;
 
-import static org.junit.Assert.*;
-
 import java.util.List;
-
-import network.data.MassiveDataSourceDefault;
-import network.service.MassiveDataSource;
 
 import org.junit.Test;
 
 import common.exception.DataTransferException;
 import common.exception.NetworkException;
 import common.service.GitUser;
-import common.service.Repository;
 import common.service.RepositoryMin;
 import common.util.ObjChannel;
+import network.data.MassiveDataSourceDefault;
+import network.service.MassiveDataSource;
 
 /**
  * 测试网络层获取数据Channel的功能
