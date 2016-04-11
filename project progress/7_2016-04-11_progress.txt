@@ -18,9 +18,9 @@ todo：
 
 who：徐家逸xjyi14
 when：第7周
-what：
-problem：
-todo：
+what：进行界面美化和局部调整
+problem：未统一的风格和部分实现困难
+todo：完成界面美化工作
 
 组长总结：
     第7周内我们组主要的任务是集成测试与进行界面的美化。

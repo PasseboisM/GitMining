@@ -167,7 +167,7 @@
    <bottom> 
       <AnchorPane prefHeight="36.0" prefWidth="950.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="returnButton" layoutX="139.0" layoutY="44.0" mnemonicParsing="false" onAction="#returnToSearchController" prefHeight="23.0" prefWidth="109.0" style="-fx-border-radius: 50%;" />
+            <Button fx:id="returnButton" layoutX="14.0" layoutY="22.0" mnemonicParsing="false" onAction="#returnToSearchController" prefHeight="23.0" prefWidth="109.0" style="-fx-background-color: rgba(0,0,0,0);" />
          </children>
       </AnchorPane>
    </bottom>
