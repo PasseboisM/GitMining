@@ -51,70 +51,8 @@ public class RepositorySearchController{
 		return rootUINode;
 	}
 	
-	private void loadImgFile() {
-		String imageFilename ="searchBackground_2.jpg";
-		try {
-			bgImage = ImageFactory.getImageByFileName(imageFilename);
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
-	}
-	private void initialImage() {
-		image = new ImageView();
-		image.setImage(bgImage);
-		image.setFitWidth(1050);
-		image.setFitHeight(675);
-		sonPane.getChildren().add(image);
-	}
-	
-
-	@FXML	private Button search;
-	@FXML   private ToggleButton  noSort,starSort,forkSort;
-	@FXML	private FlowPane flowPaneCategory;
-	@FXML	private FlowPane flowPaneLanguage;
-	@FXML	private VBox repoVBox;
-	@FXML 	private Pagination pag;
-	@FXML 	private TextField keyword;
-	@FXML 	private AnchorPane mainPane;
-	@FXML 	private AnchorPane sonPane;
-	private List<CheckBox> categoryCheckBoxes;
-	private List<CheckBox> languageCheckBoxes;
-	private AnchorPane rightComponentParent;
-	final ToggleGroup Group = new ToggleGroup();
-	
-	private List<Repository> repositoriesdatas;
-	
-	private LogicServiceFactory logicServiceFactory;
-	private GeneralGetter generalGetter;
-	private SearchService searchService;
-	
-	private Language[] langs;
-	private Category[] cates;
-	private String[]  keywords = {}; 
-	private RepoSortStadard sortStadard;
-	private ImageView image;
-	
-	private static Image bgImage = null;
-	
-	@FXML
-	private void changeSortStrategy(ActionEvent event) {
-		ToggleButton button = (ToggleButton) event.getSource();
-		sortStadard=RepoSortStadard.values()[Group.getToggles().indexOf(button)];
-		refreshPage();
-	}
-	
-	@FXML
-	private void onSearch(ActionEvent event) {
-		String key=keyword.getText();
-		keywords = key.trim().split(" ");
-		refreshLanguages(Language.values());
-		refreshCategories(Category.values());
-		refreshPage();
-	}
-	
 	
 	private void initial(AnchorPane rightComponentParent) {
-		loadImgFile();
 		initialImage();
 		initialCategoryCheckBoxes();
 		initialLanguageCheckBoxes();
@@ -125,64 +63,19 @@ public class RepositorySearchController{
 		this.rightComponentParent.getStylesheets().add(RepositorySearchController.class.getResource("repoSearch.css").toExternalForm());
 	}
 
-	private void initialSearchService() {
-		this.logicServiceFactory = LogicServiceFactory.getInstance();
-		this.generalGetter = logicServiceFactory.getGeneralGetter();
-		this.searchService = logicServiceFactory.getSearchService();
+	private void initialImage() {
+		try {
+			bgImage = ImageFactory.getImageByFileName(ImageFactory.SEARCH_BACKGROUND);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		image = new ImageView();
+		image.setImage(bgImage);
+		image.setFitWidth(1050);
+		image.setFitHeight(675);
+		sonPane.getChildren().add(image);
 	}
 
-	private void initialToggleButtonGroup() {
-		noSort.setToggleGroup(Group);
-		noSort.setSelected(true);
-		sortStadard = RepoSortStadard.NO_SORT;
-		starSort.setToggleGroup(Group);
-		forkSort.setToggleGroup(Group);
-	}
-	
-	private void initialLanguageCheckBoxes() {
-		//初始化项目语言checkbox
-		Language[] languages = Language.values();
-		languageCheckBoxes = new ArrayList<CheckBox>(languages.length);
-		for (Language language :languages) {
-			CheckBox checkBox = new CheckBox(language.getName());
-			languageCheckBoxes.add(checkBox);
-		}
-		languageCheckBoxes.get(0).setSelected(true);
-		refreshLanguages(languages);
-		flowPaneLanguage.getChildren().addAll(languageCheckBoxes);
-		
-		languageCheckBoxes.get(0).setOnAction((ActionEvent event)->{
-			CheckBox checkBoxAll = (CheckBox) event.getSource();
-			if(checkBoxAll.isSelected()){
-				//其他设为不选
-				for(int i = 1;i<languageCheckBoxes.size();i++){
-					languageCheckBoxes.get(i).setSelected(false);
-				}
-			}
-		});
-		
-		for(int i = 1;i<languageCheckBoxes.size();i++){
-			languageCheckBoxes.get(i).setOnAction((ActionEvent event)->{
-				CheckBox checkBoxi = (CheckBox) event.getSource();
-				if(checkBoxi.isSelected()){
-					//all设为不选
-					languageCheckBoxes.get(0).setSelected(false);
-				}
-			});
-		}
-	}
-
-	private void refreshLanguages(Language[] languages) {
-		List<Language> languagesList = new ArrayList<Language>();
-		for (CheckBox checkBox : languageCheckBoxes) {
-			if (checkBox.isSelected()) {
-				languagesList.add(languages[languageCheckBoxes.indexOf(checkBox)]);
-			}
-		}
-		langs = new Language[languagesList.size()];
-		langs = languagesList.toArray(langs);
-	}
-	
 	private void initialCategoryCheckBoxes() {
 		//初始化项目类型checkbox
 		Category[] categories = Category.values();
@@ -218,6 +111,91 @@ public class RepositorySearchController{
 		
 	}
 
+	private void refreshLanguages(Language[] languages) {
+		List<Language> languagesList = new ArrayList<Language>();
+		for (CheckBox checkBox : languageCheckBoxes) {
+			if (checkBox.isSelected()) {
+				languagesList.add(languages[languageCheckBoxes.indexOf(checkBox)]);
+			}
+		}
+		langs = new Language[languagesList.size()];
+		langs = languagesList.toArray(langs);
+	}
+
+	private void initialToggleButtonGroup() {
+		noSort.setToggleGroup(Group);
+		noSort.setSelected(true);
+		sortStadard = RepoSortStadard.NO_SORT;
+		starSort.setToggleGroup(Group);
+		forkSort.setToggleGroup(Group);
+	}
+
+	private void initialSearchService() {
+		this.logicServiceFactory = LogicServiceFactory.getInstance();
+		this.generalGetter = logicServiceFactory.getGeneralGetter();
+		this.searchService = logicServiceFactory.getSearchService();
+	}
+
+	private void initialPage(){
+		//除10上取整算法 加9之后再除10
+		pag.setPageCount((generalGetter.getNumOfRepositories()+9)/10);
+		pag.setPageFactory((Integer pageIndex)->initCreatePage(pageIndex));
+	}
+
+	private ScrollPane initCreatePage(Integer pageIndex) {
+		ScrollPane pane = new ScrollPane();
+		VBox vBox = new VBox();
+		int numPerPage = 10;
+		List<Repository> listPerPage = null;
+		try {
+			listPerPage = generalGetter.getRepositories(pageIndex+1, numPerPage, sortStadard);
+		} catch (NetworkException e) {
+			e.printStackTrace();
+		} catch (DataCorruptedException e) {
+			e.printStackTrace();
+		}
+		for (Repository repository : listPerPage) {
+			vBox.getChildren().add(new RepositoryMinBlock(rightComponentParent,repository));
+		}
+		pane.setContent(vBox);
+		return pane;
+	}
+
+	
+	
+	private void initialLanguageCheckBoxes() {
+		//初始化项目语言checkbox
+		Language[] languages = Language.values();
+		languageCheckBoxes = new ArrayList<CheckBox>(languages.length);
+		for (Language language :languages) {
+			CheckBox checkBox = new CheckBox(language.getName());
+			languageCheckBoxes.add(checkBox);
+		}
+		languageCheckBoxes.get(0).setSelected(true);
+		refreshLanguages(languages);
+		flowPaneLanguage.getChildren().addAll(languageCheckBoxes);
+		
+		languageCheckBoxes.get(0).setOnAction((ActionEvent event)->{
+			CheckBox checkBoxAll = (CheckBox) event.getSource();
+			if(checkBoxAll.isSelected()){
+				//其他设为不选
+				for(int i = 1;i<languageCheckBoxes.size();i++){
+					languageCheckBoxes.get(i).setSelected(false);
+				}
+			}
+		});
+		
+		for(int i = 1;i<languageCheckBoxes.size();i++){
+			languageCheckBoxes.get(i).setOnAction((ActionEvent event)->{
+				CheckBox checkBoxi = (CheckBox) event.getSource();
+				if(checkBoxi.isSelected()){
+					//all设为不选
+					languageCheckBoxes.get(0).setSelected(false);
+				}
+			});
+		}
+	}
+
 	private void refreshCategories(Category[] categories) {
 		List<Category> categoriesList = new ArrayList<Category>();
 		for (CheckBox checkBox : categoryCheckBoxes) {
@@ -243,36 +221,9 @@ public class RepositorySearchController{
 		pag.setPageFactory((Integer pageIndex)->createPage(pageIndex));
 	}
 	
-	private void initialPage(){
-		//除10上取整算法 加9之后再除10
-		pag.setPageCount((generalGetter.getNumOfRepositories()+9)/10);
-		pag.setPageFactory((Integer pageIndex)->initCreatePage(pageIndex));
-	}
-
-	private ScrollPane initCreatePage(Integer pageIndex) {
-		ScrollPane pane = new ScrollPane();
-		VBox vBox = new VBox();
-//		vBox.setPrefWidth(1010);
-		int numPerPage = 10;
-		List<Repository> listPerPage = null;
-		try {
-			listPerPage = generalGetter.getRepositories(pageIndex+1, numPerPage, sortStadard);
-		} catch (NetworkException e) {
-			e.printStackTrace();
-		} catch (DataCorruptedException e) {
-			e.printStackTrace();
-		}
-		for (Repository repository : listPerPage) {
-			vBox.getChildren().add(new RepositoryMinBlock(rightComponentParent,repository));
-		}
-		pane.setContent(vBox);
-		return pane;
-	}
-
 	private ScrollPane createPage(Integer pageIndex) {
 		ScrollPane pane = new ScrollPane();
 		VBox vBox = new VBox();
-//		vBox.setPrefWidth(1010);
 		int numPerPage = 10;
 		for (int i = 0; i < numPerPage; i++) {
 			if (numPerPage * pageIndex + i<repositoriesdatas.size()) {
@@ -284,4 +235,46 @@ public class RepositorySearchController{
 		return pane;
 	}
 	
+	@FXML	private Button search;
+	@FXML   private ToggleButton  noSort,starSort,forkSort;
+	@FXML	private FlowPane flowPaneCategory;
+	@FXML	private FlowPane flowPaneLanguage;
+	@FXML	private VBox repoVBox;
+	@FXML 	private Pagination pag;
+	@FXML 	private TextField keyword;
+	@FXML 	private AnchorPane mainPane;
+	@FXML 	private AnchorPane sonPane;
+	private List<CheckBox> categoryCheckBoxes;
+	private List<CheckBox> languageCheckBoxes;
+	private AnchorPane rightComponentParent;
+	private ToggleGroup Group = new ToggleGroup();
+	
+	private List<Repository> repositoriesdatas;
+	
+	private LogicServiceFactory logicServiceFactory;
+	private GeneralGetter generalGetter;
+	private SearchService searchService;
+	
+	private Language[] langs;
+	private Category[] cates;
+	private String[]  keywords = {}; 
+	private RepoSortStadard sortStadard;
+	private ImageView image;
+	
+	private static Image bgImage = null;
+	@FXML
+	private void changeSortStrategy(ActionEvent event) {
+		ToggleButton button = (ToggleButton) event.getSource();
+		sortStadard=RepoSortStadard.values()[Group.getToggles().indexOf(button)];
+		refreshPage();
+	}
+	
+	@FXML
+	private void onSearch(ActionEvent event) {
+		String key=keyword.getText();
+		keywords = key.trim().split(" ");
+		refreshLanguages(Language.values());
+		refreshCategories(Category.values());
+		refreshPage();
+	}
 }

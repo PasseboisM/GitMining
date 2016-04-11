@@ -40,50 +40,38 @@ public class UserSearchController {
 		controller.initial(rightComponentParent);
 		return pane;
 	}
-	private void loadImgFile() {
-		String imageFilename ="searchBackground_2.jpg";
-		try {
-			bgImage = ImageFactory.getImageByFileName(imageFilename);
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
-	}
-	private void initialImage() {
-		image = new ImageView();
-		image.setImage(bgImage);
-		image.setFitWidth(1050);
-		image.setFitHeight(675);
-		sonPane.getChildren().add(image);
-	}
-	private ImageView image;
-	@FXML 	private AnchorPane sonPane;
+	
 	private void initial(AnchorPane rightComponentParent) {
-		loadImgFile();
 		initialImage();
 		this.rightComponentParent = rightComponentParent;
 		initialSearchService();
 		initialPage();
 	}
 	
-	private void refreshPage(){
-		//除10上取整算法 加9之后再除10
-		UserSearchParam userSearchParam = new UserSearchParam(keyword,UserSortSandard.NO_SORT);
+	private void initialImage() {
 		try {
-			this.datas = searchService.searchUser(userSearchParam);
-		} catch (NetworkException e) {
-			e.printStackTrace();
-		} catch (DataCorruptedException e) {
+			bgImage = ImageFactory.getImageByFileName(ImageFactory.SEARCH_BACKGROUND);
+		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
-		pag.setPageCount((datas.size() + 9) / 10);
-		pag.setPageFactory((Integer pageIndex)->createPage(pageIndex));
+		image = new ImageView();
+		image.setImage(bgImage);
+		image.setFitWidth(1050);
+		image.setFitHeight(675);
+		sonPane.getChildren().add(image);
 	}
-	
+
+	private void initialSearchService() {
+		this.logicServiceFactory = LogicServiceFactory.getInstance();
+		this.searchService = logicServiceFactory.getSearchService();
+		this.generalGetter = logicServiceFactory.getGeneralGetter();
+	}
+
 	private void initialPage(){
 		pag.setPageCount((generalGetter.getNumOfUsers() + 9) / 10);
 		pag.setPageFactory((Integer pageIndex)->initialCreatePage(pageIndex));
 	}
-	
+
 	private ScrollPane initialCreatePage(Integer pageIndex) {
 		ScrollPane pane = new ScrollPane();
 		VBox vBox = new VBox();
@@ -104,7 +92,20 @@ public class UserSearchController {
 		return pane;
 	}
 
-
+	private void refreshPage(){
+		//除10上取整算法 加9之后再除10
+		UserSearchParam userSearchParam = new UserSearchParam(keyword,UserSortSandard.NO_SORT);
+		try {
+			this.datas = searchService.searchUser(userSearchParam);
+		} catch (NetworkException e) {
+			e.printStackTrace();
+		} catch (DataCorruptedException e) {
+			e.printStackTrace();
+		}
+		pag.setPageCount((datas.size() + 9) / 10);
+		pag.setPageFactory((Integer pageIndex)->createPage(pageIndex));
+	}
+	
 	private ScrollPane createPage(Integer pageIndex) {
 		ScrollPane pane = new ScrollPane();
 		VBox vBox = new VBox();
@@ -120,28 +121,25 @@ public class UserSearchController {
 		return pane;
 	}
 	
-	private static Image bgImage = null;
+	
 	@FXML 	private Pagination pag;
+	@FXML 	private AnchorPane sonPane;
 	@FXML 	private TextField vagename;
 	@FXML	private Button search;
 	
-	
+	private ImageView image;
 	private List<GitUser> datas;
 	private AnchorPane rightComponentParent;
 	private String  keyword = ""; 
 	private LogicServiceFactory logicServiceFactory;
 	private SearchService searchService;
 	private GeneralGetter generalGetter;
+	private Image bgImage = null;
 	
 	@FXML
 	private void onSearch(ActionEvent event) {
 		keyword = vagename.getText();
 		refreshPage();
-	}
-	private void initialSearchService() {
-		this.logicServiceFactory = LogicServiceFactory.getInstance();
-		this.searchService = logicServiceFactory.getSearchService();
-		this.generalGetter = logicServiceFactory.getGeneralGetter();
 	}
 	
 	

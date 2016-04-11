@@ -50,22 +50,19 @@ public class RepoDetailsController {
 	private Image btImage=null;
 	private ImageView image;
 	private void initial(AnchorPane rightComponentParent,Repository repository) {
-		btImage=loadImgFile();
+		loadImgFile();
 		initialButton();
 		initialComponentText(repository);
 		initialRadar(repository);
 		this.rightComponentParent = rightComponentParent;
 	}
 	
-	private Image loadImgFile() {
-		Image tempImage = null;
-		String imageFilename ="10.png";
+	private void loadImgFile() {
 		try {
-			tempImage = ImageFactory.getImageByFileName(imageFilename);
+			btImage = ImageFactory.getImageByFileName(ImageFactory.BACK);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
-		return tempImage;
 	}
 	
 	private void initialImage() {

@@ -37,26 +37,21 @@ public class RepoCreateTimeStatistic implements StatisticsPane {
 
 	private void initial(AnchorPane rightComponentParent) {
 		this.initialChart();
-		// this.rightComponentParent=rightComponentParent;
-		bgImage=loadImgFile();
+		loadImgFile();
 		initialImage();
 	}
 
 	@FXML
 	private AnchorPane anchorPane;
-	// private AnchorPane rightComponentParent;
     private ImageView image;
-	private static Image bgImage = null;
+	private Image bgImage = null;
 	
-	private Image loadImgFile() {
-		Image tempImage = null;
-		String imageFilename ="Background.jpg";
+	private void loadImgFile() {
 		try {
-			tempImage = ImageFactory.getImageByFileName(imageFilename);
+			bgImage = ImageFactory.getImageByFileName(ImageFactory.STATISTICS_REPO_CREATE_TIME);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
-		return tempImage;
 	}
 	private void initialImage() {
 		image = new ImageView();
