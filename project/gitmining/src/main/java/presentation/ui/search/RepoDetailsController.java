@@ -1,7 +1,12 @@
 package presentation.ui.search;
 
+import java.awt.Desktop;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import chart_data.radar.RepositoryRanks;
 import common.service.Repository;
@@ -47,6 +52,8 @@ public class RepoDetailsController {
 	@FXML private Hyperlink labelOwnerName;
 	@FXML private AnchorPane forRadar;
 	@FXML private Button returnButton;
+	@FXML private Button copyButton;
+	@FXML private Button openButton;
 	private Image btImage=null;
 	private ImageView image;
 	private void initial(AnchorPane rightComponentParent,Repository repository) {
@@ -106,6 +113,20 @@ public class RepoDetailsController {
 	@FXML
 	private void returnToSearchController() {
 		rightComponentParent.getChildren().remove(borderPane);
+	}
+	
+	//以下一旦出bug请注释掉
+	//这是一个复制东西的功能
+	@FXML
+	private void copyController() {
+		StringSelection stsel = new StringSelection(repo_url.getText());
+		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stsel, stsel);
+	}
+	//这是一个开网页的功能,存在问题：网址给的是git开头的，需要换成http开头
+	@FXML
+	private void openWebController() throws IOException, URISyntaxException {
+		Desktop desktop = Desktop.getDesktop();
+		desktop.browse(new URI("http"+repo_url.getText().substring(3)));
 	}
 	
 }
