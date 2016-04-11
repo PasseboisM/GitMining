@@ -2,7 +2,9 @@ package presentation.ui.search;
 
 import java.io.IOException;
 
+import chart_data.radar.UserRanks;
 import common.service.GitUser;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -35,13 +37,14 @@ public class UserDetailsController {
 		imageView.setImage(image);
 		
 		UserStatisticsService service = new UserStatisticsUtil();
-		Radar radar = null;
-		try {
-			radar = new Radar(service.getRanks(user));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		radarAnchorPane.getChildren().add(radar);
+		UserRanks ranks = service.getRanks(user);
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				Radar radar = new Radar(ranks);
+				radarAnchorPane.getChildren().add(radar);
+			}
+		});
 	}
 	
 	private void initialComponentText(GitUser user) {

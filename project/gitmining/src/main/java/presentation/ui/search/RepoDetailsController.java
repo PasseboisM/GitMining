@@ -71,6 +71,8 @@ public class RepoDetailsController {
 	private void initialImage() {
 		image = new ImageView();
 		image.setImage(btImage);
+		image.setX(5);
+		image.setY(5);
 	}
 	private void initialButton(){
 		initialImage();

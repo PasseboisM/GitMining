@@ -8,6 +8,7 @@ import chart_data.RepoDistOverLanguage.LanguageCount;
 import chart_data.UserDistOverType;
 import chart_data.UserDistOverType.UserTypeCount;
 import javafx.animation.TranslateTransitionBuilder;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -97,12 +98,18 @@ public class GitPieChart extends PieChart {
 	private void initialTooltip(String title, ObservableList<PieChart.Data> pieChartData) {
 		pieChart.setData(pieChartData);
 		pieChart.setLegendSide(Side.RIGHT);
-		for (PieChart.Data data : pieChart.getData()) {
-			Node node = data.getNode();
-			Tooltip tooltip = new Tooltip(String.format("%.2f", data.getPieValue()) + "%");
-			tooltip.setFont(new Font(25));
-			Tooltip.install(node, tooltip);
-		}
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				for (PieChart.Data data : pieChart.getData()) {
+					Node node = data.getNode();
+					Tooltip tooltip = new Tooltip(String.format("%.2f", data.getPieValue()) + "%");
+					tooltip.setFont(new Font(25));
+					Tooltip.install(node, tooltip);
+				}
+			}
+		});
+		
 		pieChart.setTitle(title);
 	}
 

@@ -146,12 +146,12 @@
       </VBox>
    </center>
    <right>
-      <AnchorPane fx:id="forRadar" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="414.0" prefWidth="200.0" BorderPane.alignment="BOTTOM_CENTER" />
+      <AnchorPane fx:id="forRadar" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="277.0" prefWidth="200.0" BorderPane.alignment="BOTTOM_CENTER" />
    </right>
    <bottom> 
-      <AnchorPane prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="174.0" prefWidth="929.0" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="27.0" layoutY="151.0" fx:id="returnButton" mnemonicParsing="false" onAction="#returnToSearchController" style="-fx-border-radius: 50%;" />
+            <Button fx:id="returnButton" layoutX="27.0" layoutY="151.0" mnemonicParsing="false" onAction="#returnToSearchController" style="-fx-border-radius: 50%;" />
          </children>
       </AnchorPane>
    </bottom>

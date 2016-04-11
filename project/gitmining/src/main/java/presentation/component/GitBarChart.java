@@ -13,6 +13,7 @@ import chart_data.UserDistOverCreateTime;
 import chart_data.UserDistOverCreateTime.UserCreateOnTimeCount;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -96,17 +97,22 @@ public class GitBarChart extends AnchorPane {
 		barChart.getData().add(series);
 		barChart.setCategoryGap(500.0 / repoDistOverCreateTime.getNumOfCounts());
 		
-		 iterator = repoDistOverCreateTime.getCounts();
-		for (int i = 0; i < repoDistOverCreateTime.getNumOfCounts(); i++) {
-			RepoCreateOnTimeCount repoCreateOnTimeCount = iterator.next();
-			String lowerBound = repoCreateOnTimeCount.timeLo;
-			String higherBound = repoCreateOnTimeCount.timeHi;
-			int number = repoCreateOnTimeCount.count;
-			XYChart.Data<String,Number> data = (Data<String,Number>) series.getData().get(i);
-			Node node = data.getNode();
-			Tooltip tooltip = new Tooltip("创建时间从"+lowerBound+"至"+higherBound+"的项目个数："+number+"个");
-			Tooltip.install(node, tooltip);
-		}
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				Iterator<RepoCreateOnTimeCount> runLaterIterator = repoDistOverCreateTime.getCounts();
+				for (int i = 0; i < repoDistOverCreateTime.getNumOfCounts(); i++) {
+					RepoCreateOnTimeCount repoCreateOnTimeCount = runLaterIterator.next();
+					String lowerBound = repoCreateOnTimeCount.timeLo;
+					String higherBound = repoCreateOnTimeCount.timeHi;
+					int number = repoCreateOnTimeCount.count;
+					XYChart.Data<String,Number> data = (Data<String,Number>) series.getData().get(i);
+					Node node = data.getNode();
+					Tooltip tooltip = new Tooltip("创建时间从"+lowerBound+"至"+higherBound+"的项目个数："+number+"个");
+					Tooltip.install(node, tooltip);
+				}
+			}
+		});
 		
 		Timeline tl = new Timeline();
 		tl.getKeyFrames().add(new KeyFrame(Duration.millis(DEFAULT_FRAME_DURATION),
@@ -141,17 +147,24 @@ public class GitBarChart extends AnchorPane {
 		barChart.getData().add(series);
 		barChart.setCategoryGap(500.0 / repoDistOverFork.getNumOfRanges());
 		
-		 iterator = repoDistOverFork.getRepositoryRanges();
-		for (int i = 0; i < repoDistOverFork.getNumOfRanges(); i++) {
-			ForkNumberRange forkNumberRange = iterator.next();
-			int lowerBound = forkNumberRange.lowerBound;
-			int higherBound = forkNumberRange.higherBound;
-			int number = forkNumberRange.numOfRepos;
-			XYChart.Data<String,Number> data = (Data<String,Number>) series.getData().get(i);
-			Node node = data.getNode();
-			Tooltip tooltip = new Tooltip("复刻数从"+lowerBound+"至"+higherBound+"的项目个数："+number+"个");
-			Tooltip.install(node, tooltip);
-		}
+		
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				Iterator<ForkNumberRange> runLaterIterator = repoDistOverFork.getRepositoryRanges();
+				for (int i = 0; i < repoDistOverFork.getNumOfRanges(); i++) {
+					ForkNumberRange forkNumberRange = runLaterIterator.next();
+					int lowerBound = forkNumberRange.lowerBound;
+					int higherBound = forkNumberRange.higherBound;
+					int number = forkNumberRange.numOfRepos;
+					XYChart.Data<String,Number> data = (Data<String,Number>) series.getData().get(i);
+					Node node = data.getNode();
+					Tooltip tooltip = new Tooltip("复刻数从"+lowerBound+"至"+higherBound+"的项目个数："+number+"个");
+					Tooltip.install(node, tooltip);
+				}
+			}
+		});
+		
 		
 		Timeline tl = new Timeline();
 		tl.getKeyFrames().add(new KeyFrame(Duration.millis(DEFAULT_FRAME_DURATION),
@@ -183,20 +196,26 @@ public class GitBarChart extends AnchorPane {
 		}
 		yAxis.setAnimated(false);
 		yAxis.setUpperBound(maxCount);
+		
+		
 		barChart.getData().add(series);
 		barChart.setCategoryGap(500.0 / repoDistOverStar.getNumOfRanges());
-		
-		 iterator = repoDistOverStar.getRanges();
-		for (int i = 0; i < repoDistOverStar.getNumOfRanges(); i++) {
-			StarCountRange starCountRange = iterator.next();
-			int lowerBound = starCountRange.lowerStar;
-			int higherBound = starCountRange.higherStar;
-			int number = starCountRange.numOfRepos;
-			XYChart.Data<String,Number> data = (Data<String,Number>) series.getData().get(i);
-			Node node = data.getNode();
-			Tooltip tooltip = new Tooltip("复刻数从"+lowerBound+"至"+higherBound+"的项目个数："+number+"个");
-			Tooltip.install(node, tooltip);
-		}
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				Iterator<StarCountRange> runLaterIterator = repoDistOverStar.getRanges();
+				for (int i = 0; i < repoDistOverStar.getNumOfRanges(); i++) {
+					StarCountRange starCountRange = runLaterIterator.next();
+					int lowerBound = starCountRange.lowerStar;
+					int higherBound = starCountRange.higherStar;
+					int number = starCountRange.numOfRepos;
+					XYChart.Data<String,Number> data = (Data<String,Number>) series.getData().get(i);
+					Node node = data.getNode();
+					Tooltip tooltip = new Tooltip("复刻数从"+lowerBound+"至"+higherBound+"的项目个数："+number+"个");
+					Tooltip.install(node, tooltip);
+				}
+			}
+		});
 		
 		Timeline tl = new Timeline();
 		tl.getKeyFrames().add(new KeyFrame(Duration.millis(DEFAULT_FRAME_DURATION),

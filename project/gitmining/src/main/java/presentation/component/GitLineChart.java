@@ -8,6 +8,7 @@ import chart_data.UserDistOverCreateTime;
 import chart_data.UserDistOverCreateTime.UserCreateOnTimeCount;
 import chart_data.UserDistOverFollower;
 import chart_data.UserDistOverFollower.FollowerNumberRange;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -97,16 +98,22 @@ public class GitLineChart extends AnchorPane {
 			int numOfFollower = followerNumberRange.numOfUsers;
 			series.getData().add(new XYChart.Data<String,Number>(lowerRange+"-"+higherRange, numOfFollower));
 		}
-		lineChart.getData().add(series);
-		iterator = followerNumberRanges.getUserRanges();
-		for (int i = 0; i <followerNumberRanges.getNumOfRange(); i++) {
-			FollowerNumberRange followerNumberRange = iterator.next();
-			int numOfFollower = followerNumberRange.numOfUsers;
-			XYChart.Data<String,Number> data = (Data<String,Number>) series.getData().get(i);
-			Node node = data.getNode();
-			Tooltip tooltip = new Tooltip("用户数量："+numOfFollower+"个");
-			Tooltip.install(node, tooltip);
-		}
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				lineChart.getData().add(series);
+				Iterator<FollowerNumberRange> runLaterIterator = followerNumberRanges.getUserRanges();
+				for (int i = 0; i <followerNumberRanges.getNumOfRange(); i++) {
+					FollowerNumberRange followerNumberRange = runLaterIterator.next();
+					int numOfFollower = followerNumberRange.numOfUsers;
+					XYChart.Data<String,Number> data = (Data<String,Number>) series.getData().get(i);
+					Node node = data.getNode();
+					Tooltip tooltip = new Tooltip("用户数量："+numOfFollower+"个");
+					Tooltip.install(node, tooltip);
+				}
+			}
+		});
+		
 	}
 	private void initial(UserDistOverCreateTime userDistOverCreateTime, String seriesName) {
 		XYChart.Series<String,Number> series = new XYChart.Series<>();
@@ -119,16 +126,23 @@ public class GitLineChart extends AnchorPane {
 			int numOfFollower = followerNumberRange.count;
 			series.getData().add(new XYChart.Data<String,Number>(lowerRange+"~"+higherRange, numOfFollower));
 		}
-		lineChart.getData().add(series);
-		iterator = userDistOverCreateTime.getCounts();
-		for (int i = 0; i <userDistOverCreateTime.getNumOfCount(); i++) {
-			UserCreateOnTimeCount followerNumberRange = iterator.next();
-			int numOfFollower = followerNumberRange.count;
-			XYChart.Data<String,Number> data = (Data<String,Number>) series.getData().get(i);
-			Node node = data.getNode();
-			Tooltip tooltip = new Tooltip("用户数量："+numOfFollower+"个");
-			Tooltip.install(node, tooltip);
-		}
+		
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				lineChart.getData().add(series);
+				Iterator<UserCreateOnTimeCount> runLaterIterator = userDistOverCreateTime.getCounts();
+				for (int i = 0; i <userDistOverCreateTime.getNumOfCount(); i++) {
+					UserCreateOnTimeCount followerNumberRange = runLaterIterator.next();
+					int numOfFollower = followerNumberRange.count;
+					XYChart.Data<String,Number> data = (Data<String,Number>) series.getData().get(i);
+					Node node = data.getNode();
+					Tooltip tooltip = new Tooltip("用户数量："+numOfFollower+"个");
+					Tooltip.install(node, tooltip);
+				}
+			}
+		});
+		
 	}
 
 }
