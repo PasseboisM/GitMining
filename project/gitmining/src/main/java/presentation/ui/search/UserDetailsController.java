@@ -1,12 +1,14 @@
 package presentation.ui.search;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 import chart_data.radar.UserRanks;
 import common.service.GitUser;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -14,8 +16,9 @@ import javafx.scene.layout.AnchorPane;
 import logic.calc.service.UserStatisticsService;
 import logic.calc.user.UserStatisticsUtil;
 import presentation.component.Radar;
+import presentation.image.ImageFactory;
 
-
+// mnemonicParsing="false" onAction="#returnToSearchController" prefHeight="28.0" prefWidth="64.0" text="返回"
 public class UserDetailsController {
 	public static AnchorPane getInstance(AnchorPane rightComponentParent,GitUser user)  {
 		FXMLLoader loader = new FXMLLoader(UserDetailsController.class.getResource("userDetails.fxml"));
@@ -31,6 +34,8 @@ public class UserDetailsController {
 	}
 	private AnchorPane rightComponentParent;
 	private void initial(AnchorPane rightComponentParent,GitUser user) {
+		btImage=loadImgFile();
+		initialButton();
 		initialComponentText(user);
 		this.rightComponentParent = rightComponentParent;
 		Image image = new Image(user.getAvatar_url());
@@ -45,6 +50,27 @@ public class UserDetailsController {
 				radarAnchorPane.getChildren().add(radar);
 			}
 		});
+	}
+	private Image loadImgFile() {
+		Image tempImage = null;
+		String imageFilename ="10.png";
+		try {
+			tempImage = ImageFactory.getImageByFileName(imageFilename);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		return tempImage;
+	}
+	
+	private void initialImage() {
+		imageV = new ImageView();
+		imageV.setImage(btImage);
+		imageV.setX(5);
+		imageV.setY(5);
+	}
+	private void initialButton(){
+		initialImage();
+		returnButton.setGraphic(imageV);
 	}
 	
 	private void initialComponentText(GitUser user) {
@@ -76,7 +102,9 @@ public class UserDetailsController {
 	@FXML    private AnchorPane anchorPane;
 	@FXML    private ImageView imageView;
 	@FXML    private AnchorPane radarAnchorPane;
-	
+	@FXML private Button returnButton;
+	private Image btImage=null;
+	private ImageView imageV;
 	@FXML
 	private void returnToSearchController() {
 		rightComponentParent.getChildren().remove(anchorPane);
