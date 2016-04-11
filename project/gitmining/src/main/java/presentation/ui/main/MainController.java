@@ -1,8 +1,8 @@
 package presentation.ui.main;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.HashMap;
+import java.util.List;
 
 import common.exception.NetworkException;
 import common.message.LoadProgress;
@@ -17,9 +17,11 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
@@ -31,6 +33,7 @@ import javafx.util.Duration;
 import logic.service.Loader;
 import logic.service.LogicServiceFactory;
 import logic.service.ServiceConfigure;
+import presentation.component.WaitLoader;
 import presentation.image.ImageFactory;
 import presentation.ui.search.RepositorySearchController;
 import presentation.ui.search.UserSearchController;
@@ -56,7 +59,6 @@ public class MainController extends Application implements Observer{
 		loadImgFile();
 		FXMLLoader loader = new FXMLLoader(MainController.class.getResource("mainController.fxml"));
 		mainAnchorPane = loader.load();
-//		mainAnchorPane.getStylesheets().add(MainController.class.getResource("main.css").toExternalForm());
 		MainController controller = loader.getController();
 		controller.initial();
 		Scene scene = new Scene(mainAnchorPane,1190,660);
@@ -80,6 +82,16 @@ public class MainController extends Application implements Observer{
 		flowpane.getStylesheets().add(MainController.class.getResource("menu.css").toExternalForm());
 		registerToLoader();
 //		initialToggleButtonGroup();
+		buttonUserType.setOnAction((ae)->{
+			Button button = (Button) ae.getSource();
+			rightComponentParent.getChildren().clear();
+			WaitLoader waitLoader = new WaitLoader();
+			rightComponentParent.getChildren().add(waitLoader);
+			long time1 = System.currentTimeMillis();
+			rightComponentParent.getChildren().add(MAP_BUTTON_TO_PANE.get(button.getId()).getInstance(rightComponentParent));
+			System.out.println("Time used:"+(System.currentTimeMillis()-time1)+"ms");
+			rightComponentParent.getChildren().remove(waitLoader);
+		});
 	}
 
 	private void initialImage() {
@@ -120,13 +132,15 @@ public class MainController extends Application implements Observer{
 	
 	@Override
 	public void update() {
+		if(startViewing) return;
 		LoadProgress lp = Loader.getProgress();
-		double loadRate = (lp.getLoadedRepoNum()+lp.getLoadedUser())*1.0/(lp.getTotalRepoNum()+lp.getTotalUserNum());
+		double loadRate = (lp.getLoadedRepoNum()+lp.getLoadedUser())*1.0/(lp.getTotalRepoNum()+lp.getTotalUserNum())/LOADING_RATE;
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
 				progressBar.setProgress(loadRate);}});
 		if (loadRate >= 1.0) {
+			startViewing = true;
 			FadeTransition ft = new FadeTransition(Duration.millis(FADE_DURATION), progressBar);
 			ft.setFromValue(1.0);
 			ft.setToValue(0);
@@ -179,33 +193,46 @@ public class MainController extends Application implements Observer{
 	@FXML
 	private void onRepoSearchClicked() {
 		rightComponentParent.getChildren().clear();
-		try {
-			rightComponentParent.getChildren().add(RepositorySearchController.getInstance(rightComponentParent));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		long time1 = System.currentTimeMillis();
+		rightComponentParent.getChildren().add(RepositorySearchController.getInstance(rightComponentParent));
+		System.out.println("Time used:"+(System.currentTimeMillis()-time1)+"ms");
 	}
 	
 	@FXML 
 	private void onUserSearchClicked(){
 		rightComponentParent.getChildren().clear();
-		try {
-			rightComponentParent.getChildren().add(UserSearchController.getInstance(rightComponentParent));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		WaitLoader waitLoader = new WaitLoader();
+		rightComponentParent.getChildren().add(waitLoader);
+		rightComponentParent.getChildren().add(UserSearchController.getInstance(rightComponentParent));
+		rightComponentParent.getChildren().remove(waitLoader);
 	}
 	
 	@FXML 
 	private void onStatisticClicked(ActionEvent event){
 		Button button = (Button) event.getSource();
 		rightComponentParent.getChildren().clear();
-		try {
-			rightComponentParent.getChildren().add(MAP_BUTTON_TO_PANE.get(button.getId()).getInstance(rightComponentParent));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		WaitLoader waitLoader = new WaitLoader();
+		rightComponentParent.getChildren().add(waitLoader);
+		Runnable runnable = new Runnable() {
+			@Override
+			public void run() {
+				AnchorPane anchorPane = MAP_BUTTON_TO_PANE.get(button.getId()).getInstance(rightComponentParent);
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						List<Node> childred = rightComponentParent.getChildren();
+						if (childred.get(childred.size()-1).equals(waitLoader)) {
+							childred.add(anchorPane);
+						}
+						childred.remove(waitLoader);
+					}
+				});
+			}
+		};
+		Thread t = new Thread(runnable);
+		t.start();
 	}
+	
 
 	@FXML private AnchorPane rightComponentParent;
 	@FXML private Button buttonRepoSearch;
@@ -216,6 +243,7 @@ public class MainController extends Application implements Observer{
 	@FXML private ToggleButton buttonOnlineMode;
 	@FXML private AnchorPane mainAnchorPane;
 	@FXML private FlowPane flowpane;
+	private boolean startViewing = false;
 	private ToggleGroup toggleGroup;
 	private ImageView image;
 	private ProgressBar progressBar;
@@ -225,6 +253,7 @@ public class MainController extends Application implements Observer{
 	
 	private static Image bgImage = null;
 	private static final int FADE_DURATION = 3000;
+	private static final double LOADING_RATE = 1.0;
 	private static final HashMap<String, StatisticsPane> MAP_BUTTON_TO_PANE = new HashMap<String,StatisticsPane>() {
 		private static final long serialVersionUID = 1L;
 		{

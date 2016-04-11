@@ -36,10 +36,15 @@ import presentation.image.ImageFactory;
 public class RepositorySearchController{
 	
 	
-	public static AnchorPane getInstance(AnchorPane rightComponentParent) throws IOException {
+	public static AnchorPane getInstance(AnchorPane rightComponentParent){
 		
 		FXMLLoader loader = new FXMLLoader(RepositorySearchController.class.getResource("repositorySearch.fxml"));
-		AnchorPane rootUINode = loader.load();
+		AnchorPane rootUINode = null;
+		try {
+			rootUINode = loader.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		rootUINode.getStylesheets().add(RepositorySearchController.class.getResource("repoSearch.css").toExternalForm());
 		RepositorySearchController controller = loader.getController();
 		controller.initial(rightComponentParent);
@@ -216,14 +221,6 @@ public class RepositorySearchController{
 			});
 		}
 		
-		/*categoryCheckBoxes.get(0).setOnAction(new EventHandler<ActionEvent>() {
-			
-			@Override
-			public void handle(ActionEvent event) {
-				// TODO Auto-generated method stub
-				
-			}
-		});*/
 	}
 
 	private void refreshCategories(Category[] categories) {

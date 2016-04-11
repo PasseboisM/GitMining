@@ -13,9 +13,14 @@ import presentation.ui.statistics.StatisticsPane;
 
 public class UserTypeStatisticsPane implements StatisticsPane {
 
-	public AnchorPane getInstance(AnchorPane rightComponentParent) throws IOException {
+	public AnchorPane getInstance(AnchorPane rightComponentParent) {
 		FXMLLoader loader = new FXMLLoader(UserTypeStatisticsPane.class.getResource("userTypeStatistics.fxml"));
-		AnchorPane rootUINode = loader.load();
+		AnchorPane rootUINode = null;
+		try {
+			rootUINode = loader.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		UserTypeStatisticsPane controller = loader.getController();
 		controller.initial(rightComponentParent);
 		return rootUINode;

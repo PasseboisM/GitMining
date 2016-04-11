@@ -1,10 +1,13 @@
 package presentation.component;
 
 import java.io.IOException;
+import java.util.List;
 
 import common.service.Repository;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -19,7 +22,6 @@ public class RepositoryMinBlock  extends BorderPane{
 	@FXML private Label forksCount;
 	@FXML private Label subscribersCount;
 	private Repository repository;
-//	private FakeData fakeData;
 	private AnchorPane rightComponentParent;
 	
 	private RepositoryMinBlock(){
@@ -51,12 +53,26 @@ public class RepositoryMinBlock  extends BorderPane{
 	
 	@FXML
 	private void jumpToRepositoryDetails() {
-//		rightComponentParent.getChildren().clear();
-		try {
-			rightComponentParent.getChildren().add(RepoDetailsController.getInstance(rightComponentParent,repository));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		WaitLoader waitLoader = new WaitLoader();
+		rightComponentParent.getChildren().add(waitLoader);
+		Runnable runnable = new Runnable() {
+			@Override
+			public void run() {
+				BorderPane borderPane = RepoDetailsController.getInstance(rightComponentParent,repository);
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						List<Node> childred = rightComponentParent.getChildren();
+						if (childred.get(childred.size()-1).equals(waitLoader)) {
+							childred.add(borderPane);
+						}
+						childred.remove(waitLoader);
+					}
+				});
+			}
+		};
+		Thread t = new Thread(runnable);
+		t.start();
 	}
 	
 }

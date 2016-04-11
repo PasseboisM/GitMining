@@ -1,7 +1,5 @@
 package common.model.beans;
 
-import com.google.gson.Gson;
-
 import common.service.GitUser;
 
 /**

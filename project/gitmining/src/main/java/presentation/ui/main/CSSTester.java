@@ -14,7 +14,6 @@ public class CSSTester extends Application {
 		AnchorPane mainAnchorPane = loader.load();
 		mainAnchorPane.getStylesheets().add(CSSTester.class.getResource("menu.css").toExternalForm());
 		Scene scene = new Scene(mainAnchorPane,1190,660);
-//		scene.getStylesheets().add(CSSTester.class.getResource("main.css").toExternalForm());
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
 		primaryStage.show();

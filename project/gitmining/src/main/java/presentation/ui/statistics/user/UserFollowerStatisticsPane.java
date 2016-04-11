@@ -13,9 +13,14 @@ import presentation.ui.statistics.StatisticsPane;
 
 public class UserFollowerStatisticsPane implements StatisticsPane {
 
-	public AnchorPane getInstance(AnchorPane rightComponentParent) throws IOException {
+	public AnchorPane getInstance(AnchorPane rightComponentParent) {
 		FXMLLoader loader = new FXMLLoader(UserFollowerStatisticsPane.class.getResource("userFollowerStatistics.fxml"));
-		AnchorPane rootUINode = loader.load();
+		AnchorPane rootUINode = null;
+		try {
+			rootUINode = loader.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		UserFollowerStatisticsPane controller = loader.getController();
 		controller.initial(rightComponentParent);
 		return rootUINode;
@@ -23,12 +28,10 @@ public class UserFollowerStatisticsPane implements StatisticsPane {
 
 	private void initial(AnchorPane rightComponentParent) {
 		this.initialChart();
-//		this.rightComponentParent = rightComponentParent;
 	}
 
 	@FXML
 	private AnchorPane anchorPane;
-//	private AnchorPane rightComponentParent;
 
 	public void initialChart() {
 		GeneralStatisticsService generalStatisticsService = new GeneralStatisticsUtil();

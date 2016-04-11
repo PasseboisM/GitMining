@@ -3,8 +3,6 @@ package presentation.ui.search;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
-import com.google.gson.Gson;
-
 import common.service.Repository;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,9 +21,14 @@ import presentation.image.ImageFactory;
 
 public class RepoDetailsController {
 	
-	public static BorderPane getInstance(AnchorPane rightComponentParent,Repository repository) throws IOException {
+	public static BorderPane getInstance(AnchorPane rightComponentParent,Repository repository){
 		FXMLLoader loader = new FXMLLoader(RepoDetailsController.class.getResource("repositoryDetails.fxml"));
-		BorderPane pane = loader.load();
+		BorderPane pane = null;
+		try {
+			pane = loader.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		RepoDetailsController controller = loader.getController();
 		controller.initial(rightComponentParent,repository);
 		return pane;
@@ -66,13 +69,10 @@ public class RepoDetailsController {
 	private void initialImage() {
 		image = new ImageView();
 		image.setImage(btImage);
-	
-
-		
 	}
 	private void initialButton(){
 		initialImage();
-		returnButton.setGraphic(image);;
+		returnButton.setGraphic(image);
 	}
 	private void initialComponentText(Repository repository) {
 		repo_url.setText(repository.getGit_url());
@@ -89,9 +89,6 @@ public class RepoDetailsController {
 	private void initialRadar(Repository r){
 		RepositoryStatisticsService service = new RepoStatisticsUtil();
 		Radar radar = null;
-		Gson gson = new Gson();
-		String json = gson.toJson(r);
-		System.out.println(json);
 		try {
 			radar = new Radar(service.getRanks(r));
 		} catch (Exception e) {

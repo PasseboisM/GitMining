@@ -16,9 +16,14 @@ import presentation.ui.statistics.StatisticsPane;
  */
 
 public class RepoLanguageStatistic implements StatisticsPane {
-	public AnchorPane getInstance(AnchorPane rightComponentParent) throws IOException {
+	public AnchorPane getInstance(AnchorPane rightComponentParent) {
 		FXMLLoader loader = new FXMLLoader(RepoLanguageStatistic.class.getResource("repositoryLanguageStatistic.fxml"));
-		AnchorPane rootUINode = loader.load();
+		AnchorPane rootUINode = null;
+		try {
+			rootUINode = loader.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		RepoLanguageStatistic controller = loader.getController();
 		controller.initial(rightComponentParent);
 		return rootUINode;

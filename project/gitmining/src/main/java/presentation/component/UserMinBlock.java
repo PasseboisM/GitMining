@@ -1,10 +1,13 @@
 package presentation.component;
 
 import java.io.IOException;
+import java.util.List;
 
 import common.service.GitUser;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -52,11 +55,25 @@ public class UserMinBlock extends BorderPane{
 	private AnchorPane rightComponentParent;
 	@FXML
 	private void jumpToUserDetails() {
-		try {
-			rightComponentParent.getChildren().add(UserDetailsController.getInstance(rightComponentParent,user));
-			System.out.println(user.getLogin());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		WaitLoader waitLoader = new WaitLoader();
+		rightComponentParent.getChildren().add(waitLoader);
+		Runnable runnable = new Runnable() {
+			@Override
+			public void run() {
+				AnchorPane anchorPane = UserDetailsController.getInstance(rightComponentParent,user);
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						List<Node> childred = rightComponentParent.getChildren();
+						if (childred.get(childred.size()-1).equals(waitLoader)) {
+							childred.add(anchorPane);
+						}
+						childred.remove(waitLoader);
+					}
+				});
+			}
+		};
+		Thread t = new Thread(runnable);
+		t.start();
 	}
 }

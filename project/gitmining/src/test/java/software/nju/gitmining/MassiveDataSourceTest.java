@@ -16,6 +16,11 @@ import common.service.Repository;
 import common.service.RepositoryMin;
 import common.util.ObjChannel;
 
+/**
+ * 测试网络层获取数据Channel的功能
+ * @author xjh14
+ * Ver: 1.0
+ */
 public class MassiveDataSourceTest {
 
 	@Test
