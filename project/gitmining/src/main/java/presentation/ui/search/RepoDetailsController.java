@@ -42,6 +42,7 @@ public class RepoDetailsController {
 	}
 	
 	private AnchorPane rightComponentParent;
+	private String url;
 	@FXML private BorderPane borderPane;
 	@FXML private TextField repo_url;
 	@FXML private Label labelStar;
@@ -83,7 +84,8 @@ public class RepoDetailsController {
 		returnButton.setGraphic(image);
 	}
 	private void initialComponentText(Repository repository) {
-		repo_url.setText(repository.getGit_url());
+		url = repository.getSvn_url();
+		repo_url.setText(url);
 		labelStar.setText(repository.getStargazers_count()+"");
 		labelFork.setText(repository.getForks_count()+"");
 		labelWatch.setText(repository.getSubscribers_count()+"");
@@ -112,18 +114,15 @@ public class RepoDetailsController {
 		rightComponentParent.getChildren().remove(borderPane);
 	}
 	
-	//以下一旦出bug请注释掉
-	//这是一个复制东西的功能
 	@FXML
 	private void copyController() {
 		StringSelection stsel = new StringSelection(repo_url.getText());
-		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stsel, stsel);
+		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stsel, null);
 	}
-	//这是一个开网页的功能,存在问题：网址给的是git开头的，需要换成http开头
 	@FXML
 	private void openWebController() throws IOException, URISyntaxException {
 		Desktop desktop = Desktop.getDesktop();
-		desktop.browse(new URI("http"+repo_url.getText().substring(3)));
+		desktop.browse(new URI(url));
 	}
 	
 }

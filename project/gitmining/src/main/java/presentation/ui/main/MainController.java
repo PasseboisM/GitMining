@@ -53,6 +53,7 @@ import presentation.ui.statistics.user.UserTypeStatisticsPane;
 
 public class MainController extends Application implements Observer{
 	
+	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		loadImgFile();
@@ -69,6 +70,7 @@ public class MainController extends Application implements Observer{
 	private void loadImgFile() {
 		try {
 			bgImage = ImageFactory.getImageByFileName(ImageFactory.LOADING_BACKGROUND);
+			icon = ImageFactory.getImageByFileName(ImageFactory.GIT_LOGO);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
@@ -87,6 +89,7 @@ public class MainController extends Application implements Observer{
 		image.setFitWidth(1200);
 		image.setFitHeight(675);
 		mainAnchorPane.getChildren().add(image);
+		gitLogoIV.setImage(icon);
 	}
 	
 	private void initialProgressBar(){
@@ -230,6 +233,7 @@ public class MainController extends Application implements Observer{
 	@FXML private ToggleButton buttonOnlineMode;
 	@FXML private AnchorPane mainAnchorPane;
 	@FXML private FlowPane flowpane;
+	@FXML private ImageView gitLogoIV;
 	private boolean startViewing = false;
 	private ToggleGroup toggleGroup;
 	private ImageView image;
@@ -239,6 +243,7 @@ public class MainController extends Application implements Observer{
 	private ServiceConfigure serviceConfigure;
 	
 	private static Image bgImage = null;
+	private static Image icon = null;
 	private static final int FADE_DURATION = 3000;
 	private static final double LOADING_RATE = 1.0;
 	private static final HashMap<String, StatisticsPane> MAP_BUTTON_TO_PANE = new HashMap<String,StatisticsPane>() {

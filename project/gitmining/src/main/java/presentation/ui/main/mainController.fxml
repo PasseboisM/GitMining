@@ -187,6 +187,17 @@
                         <AnchorPane fx:id="rightComponentParent" prefHeight="200.0" prefWidth="1050.0" stylesheets="@rightParentPane.css" />
                      </children>
                   </HBox>
+                  <ImageView fx:id="gitLogoIV" fitHeight="76.0" fitWidth="76.0" layoutX="36.0" layoutY="529.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="37.0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutY="598.0" prefHeight="37.0" prefWidth="150.0" text="GitMining" textFill="WHITE" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="0.0">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutY="628.0" prefHeight="37.0" prefWidth="150.0" text="By Team Mole" textFill="WHITE" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="0.0">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </Label>
                   <!-- <ProgressBar fx:id="progressBar" layoutX="455.0" layoutY="636.0" prefWidth="200.0" progress="0.0" /> -->
                </children>
             </AnchorPane>
