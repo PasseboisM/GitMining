@@ -1,0 +1,26 @@
+﻿who：徐江河xjh14
+when：第7周
+what：进行逻辑层（统计模块）集成测试与debug
+problem：统计程序调用Python速度是比较慢的
+todo：进行项目封装，准备迭代二项目提交
+
+who：王子安wza14
+when：第7周
+what：
+problem：
+todo：
+
+who：孙婧sj14
+when：第7周
+what：
+problem：
+todo：
+
+who：徐家逸xjyi14
+when：第7周
+what：
+problem：
+todo：
+
+组长总结：
+    第7周内我们组主要的任务是集成测试与进行界面的美化。
