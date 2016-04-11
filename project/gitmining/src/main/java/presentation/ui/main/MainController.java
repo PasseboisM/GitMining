@@ -68,7 +68,7 @@ public class MainController extends Application implements Observer{
 	}
 
 	private void loadImgFile() {
-		String imageFilename ="userSearchBackground.jpg";
+		String imageFilename ="userSearchBackground_2.jpg";
 		try {
 			bgImage = ImageFactory.getImageByFileName(imageFilename);
 		} catch (MalformedURLException e) {

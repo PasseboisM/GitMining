@@ -53,7 +53,7 @@ public class RepositorySearchController{
 	
 	private Image loadImgFile() {
 		Image tempImage = null;
-		String imageFilename ="searchBackground.jpg";
+		String imageFilename ="searchBackground_2.jpg";
 		try {
 			tempImage = ImageFactory.getImageByFileName(imageFilename);
 		} catch (MalformedURLException e) {
