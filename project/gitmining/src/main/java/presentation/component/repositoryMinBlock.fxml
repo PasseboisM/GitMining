@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root minWidth="-Infinity" prefWidth="900.0" style="-fx-border-color: #46c7c7;" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minWidth="-Infinity" prefWidth="975.0" style="-fx-border-color: #46c7c7;" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <left>
       <VBox alignment="CENTER_LEFT" minWidth="-Infinity" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -29,7 +29,7 @@
       </VBox>
    </left>
    <right>
-      <VBox alignment="CENTER" prefWidth="219.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER_RIGHT">
                <children>

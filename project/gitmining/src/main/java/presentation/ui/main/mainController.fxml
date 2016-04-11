@@ -18,7 +18,7 @@
                <children>
                   <HBox fx:id="hbox" minHeight="-Infinity" prefHeight="700.0" prefWidth="1200.0">
                      <children>
-                        <FlowPane fx:id="flowpane" prefHeight="641.0" prefWidth="150.0">
+                        <FlowPane fx:id="flowpane" prefHeight="641.0" prefWidth="150.0" stylesheets="@menu.css">
                            <children>
                               <Accordion prefWidth="150.0">
                                 <panes>
@@ -184,7 +184,7 @@
                               </Accordion>
                            </children>
                         </FlowPane>
-                        <AnchorPane fx:id="rightComponentParent" prefHeight="200.0" prefWidth="1050.0" />
+                        <AnchorPane fx:id="rightComponentParent" prefHeight="200.0" prefWidth="1050.0" stylesheets="@rightParentPane.css" />
                      </children>
                   </HBox>
                   <!-- <ProgressBar fx:id="progressBar" layoutX="455.0" layoutY="636.0" prefWidth="200.0" progress="0.0" /> -->

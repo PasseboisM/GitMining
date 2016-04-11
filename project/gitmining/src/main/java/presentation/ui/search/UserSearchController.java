@@ -1,6 +1,7 @@
 package presentation.ui.search;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
 
 import common.enumeration.sort_standard.UserSortSandard;
@@ -15,12 +16,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import logic.service.GeneralGetter;
 import logic.service.LogicServiceFactory;
 import logic.service.SearchService;
 import presentation.component.UserMinBlock;
+import presentation.image.ImageFactory;
 
 public class UserSearchController {
 	
@@ -36,8 +40,26 @@ public class UserSearchController {
 		controller.initial(rightComponentParent);
 		return pane;
 	}
-	
+	private void loadImgFile() {
+		String imageFilename ="searchBackground_2.jpg";
+		try {
+			bgImage = ImageFactory.getImageByFileName(imageFilename);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+	}
+	private void initialImage() {
+		image = new ImageView();
+		image.setImage(bgImage);
+		image.setFitWidth(1050);
+		image.setFitHeight(675);
+		sonPane.getChildren().add(image);
+	}
+	private ImageView image;
+	@FXML 	private AnchorPane sonPane;
 	private void initial(AnchorPane rightComponentParent) {
+		loadImgFile();
+		initialImage();
 		this.rightComponentParent = rightComponentParent;
 		initialSearchService();
 		initialPage();
@@ -98,7 +120,7 @@ public class UserSearchController {
 		return pane;
 	}
 	
-	
+	private static Image bgImage = null;
 	@FXML 	private Pagination pag;
 	@FXML 	private TextField vagename;
 	@FXML	private Button search;

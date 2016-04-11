@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import java.lang.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1050.0" style="-fx-background-color: #2f4f4f;" stylesheets="@userSearch.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.ui.search.UserSearchController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.ui.search.UserSearchController">
    <children>
+      <AnchorPane fx:id="sonPane" prefHeight="675.0" prefWidth="1050.0" />
       <TextField fx:id="vagename" layoutX="180.0" layoutY="55.0" prefHeight="30.0" prefWidth="659.0" promptText="搜索用户" />
       <Button fx:id="search" layoutX="839.0" layoutY="55.0" mnemonicParsing="false" onAction="#onSearch" prefHeight="30.0" prefWidth="55.0" text="搜索" />
-      <AnchorPane layoutX="7.0" layoutY="103.0" prefHeight="561.0" prefWidth="1025.0">
-         <children>
-            <AnchorPane opacity="0.42" prefHeight="561.0" prefWidth="1039.0" style="-fx-background-color: white;" />
-            <Pagination fx:id="pag" prefHeight="561.0" prefWidth="1039.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
-         </children>
-      </AnchorPane>
+      <AnchorPane layoutX="9.0" layoutY="100.0" opacity="0.42" prefHeight="573.0" prefWidth="1030.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="9.0" />
+      <Pagination fx:id="pag" layoutX="32.0" layoutY="123.0" prefHeight="539.0" prefWidth="987.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="123.0" />
    </children>
 </AnchorPane>

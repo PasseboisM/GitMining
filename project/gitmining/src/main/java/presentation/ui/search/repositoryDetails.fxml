@@ -83,12 +83,12 @@
                   <Insets right="50.0" />
                </BorderPane.margin>
             </AnchorPane>
-            <Label alignment="CENTER" text="Repository Statistics">
+            <Label alignment="CENTER" prefHeight="52.0" prefWidth="271.0" text="Repository Statistics">
                <font>
                   <Font size="28.0" />
                </font>
                <VBox.margin>
-                  <Insets />
+                  <Insets bottom="20.0" />
                </VBox.margin>
             </Label>
             <HBox prefHeight="100.0" prefWidth="200.0">
