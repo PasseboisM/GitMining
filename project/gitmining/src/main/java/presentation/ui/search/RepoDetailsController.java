@@ -3,7 +3,9 @@ package presentation.ui.search;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
+import chart_data.radar.RepositoryRanks;
 import common.service.Repository;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -88,13 +90,15 @@ public class RepoDetailsController {
 	
 	private void initialRadar(Repository r){
 		RepositoryStatisticsService service = new RepoStatisticsUtil();
-		Radar radar = null;
-		try {
-			radar = new Radar(service.getRanks(r));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		forRadar.getChildren().add(radar);
+		RepositoryRanks ranks = service.getRanks(r);
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				Radar radar = new Radar(ranks);
+				forRadar.getChildren().add(radar);
+			}
+		});
+		
 	}
 	
 	@FXML
