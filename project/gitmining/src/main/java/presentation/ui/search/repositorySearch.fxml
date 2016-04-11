@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="658.0" prefWidth="1051.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.ui.search.RepositorySearchController">
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1051.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.ui.search.RepositorySearchController">
    <children>
       <AnchorPane fx:id="sonPane" prefHeight="658.0" prefWidth="1051.0" />
       <VBox fx:id="repoVBox" maxHeight="-Infinity" maxWidth="-Infinity">
          <children>
-            <AnchorPane>
+            <AnchorPane prefHeight="202.0" prefWidth="1050.0">
                <children>
-                  <AnchorPane layoutX="20.0" layoutY="65.0" opacity="0.67" prefHeight="145.0" prefWidth="1030.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="0.0" />
-                  <GridPane minHeight="-Infinity" opacity="0.8" prefHeight="200.0" prefWidth="1030.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane layoutX="19.0" layoutY="79.0" opacity="0.67" prefHeight="129.0" prefWidth="1010.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="59.0" />
+                  <GridPane layoutX="26.0" layoutY="70.0" minHeight="-Infinity" opacity="0.8" prefHeight="154.0" prefWidth="1010.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="20.0">
                      <children>
-                        <TextField fx:id="keyword" prefHeight="23.0" prefWidth="936.0" promptText="搜索项目" GridPane.columnIndex="1" GridPane.columnSpan="2" />
-                        <Button fx:id="search" mnemonicParsing="false" onAction="#onSearch" text="查询" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
+                        <TextField fx:id="keyword" prefHeight="23.0" prefWidth="936.0" promptText="搜索项目" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.valignment="TOP" />
+                        <Button fx:id="search" mnemonicParsing="false" onAction="#onSearch" text="查询" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="TOP" />
                         <Label alignment="TOP_RIGHT" contentDisplay="TOP" text="项目种类：" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
                            <font>
                               <Font size="18.0" />
@@ -47,9 +46,9 @@
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                      </columnConstraints>
                      <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="82.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="76.0" minHeight="10.0" prefHeight="49.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <VBox.margin>
                         <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
@@ -57,24 +56,29 @@
                   </GridPane>
                </children>
                <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  <Insets left="10.0" right="10.0" top="10.0" />
                </padding>
             </AnchorPane>
-            <VBox prefHeight="450.0" prefWidth="1050.0">
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
+            <AnchorPane prefHeight="426.0" prefWidth="1033.0">
                <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <AnchorPane opacity="0.67" prefHeight="461.0" prefWidth="1030.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="21.0" />
+                  <VBox layoutX="20.0" prefHeight="472.0" prefWidth="1010.0">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
                      <children>
-                        <ToggleButton fx:id="noSort" mnemonicParsing="false" onAction="#changeSortStrategy" text="普通的排" />
-                        <ToggleButton fx:id="starSort" mnemonicParsing="false" onAction="#changeSortStrategy" text="关注降序" />
-                        <ToggleButton fx:id="forkSort" mnemonicParsing="false" onAction="#changeSortStrategy" text="拷贝降序" />
+                        <HBox prefHeight="20.0" prefWidth="990.0">
+                           <children>
+                              <ToggleButton fx:id="noSort" mnemonicParsing="false" onAction="#changeSortStrategy" text="普通的排" />
+                              <ToggleButton fx:id="starSort" mnemonicParsing="false" onAction="#changeSortStrategy" text="关注降序" />
+                              <ToggleButton fx:id="forkSort" mnemonicParsing="false" onAction="#changeSortStrategy" text="拷贝降序" />
+                           </children>
+                        </HBox>
+                        <Pagination fx:id="pag" pageCount="1" prefHeight="430.0" prefWidth="990.0" />
                      </children>
-                  </HBox>
-                  <Pagination fx:id="pag" pageCount="1" prefHeight="498.0" prefWidth="1030.0" />
+                  </VBox>
                </children>
-            </VBox>
+            </AnchorPane>
          </children>
       </VBox>
    </children>

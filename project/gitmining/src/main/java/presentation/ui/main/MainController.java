@@ -78,8 +78,6 @@ public class MainController extends Application implements Observer{
 	private void initial() {
 		initialImage();
 		initialProgressBar();
-		flowpane.getStylesheets().add(MainController.class.getResource("menu.css").toExternalForm());
-		rightComponentParent.getStylesheets().add(MainController.class.getResource("rightParentPane.css").toExternalForm());
 		registerToLoader();
 //		initialToggleButtonGroup();
 	}

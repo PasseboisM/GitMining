@@ -51,24 +51,19 @@ public class RepositorySearchController{
 		return rootUINode;
 	}
 	
-	private Image loadImgFile() {
-		Image tempImage = null;
+	private void loadImgFile() {
 		String imageFilename ="searchBackground_2.jpg";
 		try {
-			tempImage = ImageFactory.getImageByFileName(imageFilename);
+			bgImage = ImageFactory.getImageByFileName(imageFilename);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
-		return tempImage;
 	}
 	private void initialImage() {
 		image = new ImageView();
 		image.setImage(bgImage);
 		image.setFitWidth(1050);
 		image.setFitHeight(675);
-//	System.out.println(bgImage.toString()+"1");
-//		下两行中请注释掉一行或两行观察区别,建议调整图片大小之后，对于VBox上方控件进行半透明化的css处理
-//		repoVBox.getChildren().add(image);
 		sonPane.getChildren().add(image);
 	}
 	
@@ -119,7 +114,7 @@ public class RepositorySearchController{
 	
 	
 	private void initial(AnchorPane rightComponentParent) {
-		bgImage=loadImgFile();
+		loadImgFile();
 		initialImage();
 		initialCategoryCheckBoxes();
 		initialLanguageCheckBoxes();
@@ -257,7 +252,7 @@ public class RepositorySearchController{
 	private ScrollPane initCreatePage(Integer pageIndex) {
 		ScrollPane pane = new ScrollPane();
 		VBox vBox = new VBox();
-		vBox.setPrefWidth(1010);
+//		vBox.setPrefWidth(1010);
 		int numPerPage = 10;
 		List<Repository> listPerPage = null;
 		try {
@@ -277,7 +272,7 @@ public class RepositorySearchController{
 	private ScrollPane createPage(Integer pageIndex) {
 		ScrollPane pane = new ScrollPane();
 		VBox vBox = new VBox();
-		vBox.setPrefWidth(1010);
+//		vBox.setPrefWidth(1010);
 		int numPerPage = 10;
 		for (int i = 0; i < numPerPage; i++) {
 			if (numPerPage * pageIndex + i<repositoriesdatas.size()) {
