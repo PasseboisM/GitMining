@@ -16,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
+import javafx.scene.text.Font;
 
 public class Radar extends AnchorPane{
 	/**
@@ -25,7 +26,7 @@ public class Radar extends AnchorPane{
 	/**
 	 * 文字显示距中心点距离和外圈多边形边长的比例
 	 */
-	private final static double RADIO = 1.35;
+	private final static double RADIO = 1.25;
 	/**
 	 * 多边形边数
 	 */
@@ -126,8 +127,8 @@ public class Radar extends AnchorPane{
 		labels = new ArrayList<>();
 		for (int i = 0; i < numberOfEdge; i++) {
 			Label label = new Label();
-			label.setLayoutX(143+points.get(i*2)*RADIO-12);
-			label.setLayoutY(127+points.get(i*2+1)*RADIO-12);
+			label.setLayoutX(143+points.get(i*2)*RADIO);
+			label.setLayoutY(127+points.get(i*2+1)*RADIO);
 			labels.add(label);
 			this.getChildren().add(label);
 		}
@@ -138,7 +139,7 @@ public class Radar extends AnchorPane{
 	 */
 	public void setRadarDatas(Iterator<RadarVertex> iterator){
 		ObservableList<Double> polygonPoints = polygon.getPoints();
-		Tooltip tooltip = new Tooltip("Score of Repository");
+		Tooltip tooltip = new Tooltip("统计评分指数：");
 		for (int i = 0; i < numberOfEdge; i++) {
 			RadarVertex radarVertex = iterator.next();
 			String header = radarVertex.header;
@@ -146,8 +147,9 @@ public class Radar extends AnchorPane{
 			labels.get(i).setText(header);
 			polygonPoints.add(points.get(i * 2) * mark);
 			polygonPoints.add(points.get(i * 2 + 1) * mark);
-			tooltip.setText(tooltip.getText()+"\n"+header+" : "+String.format("%.2f", mark*100)+"%");
+			tooltip.setText(tooltip.getText()+"\n"+header+"："+String.format("%.2f", mark*100)+"%");
 		}
+		tooltip.setFont(new Font(18));
 		Tooltip.install(this, tooltip);
 	}
 }

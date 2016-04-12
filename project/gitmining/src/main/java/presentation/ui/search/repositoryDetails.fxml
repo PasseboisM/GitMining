@@ -8,7 +8,7 @@
 
 <AnchorPane fx:id="mainSubAnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.ui.search.RepoDetailsController">
    <children>
-      <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1050.0" style="-fx-background-color: white;">
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1050.0" style="-fx-background-color: white;">
          <padding>
             <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
          </padding>
@@ -23,7 +23,7 @@
                         <Insets left="20.0" top="10.0" />
                      </VBox.margin>
                   </Label>
-                  <HBox alignment="BOTTOM_LEFT" prefHeight="124.0" prefWidth="565.0">
+                  <HBox alignment="BOTTOM_LEFT" prefHeight="98.0" prefWidth="565.0">
                      <children>
                         <Button fx:id="copyButton" graphicTextGap="5.0" layoutX="-2.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#copyController" prefHeight="34.0" prefWidth="68.0" stylesheets="@buttoncopy.css" text="复制" />
                         <TextField fx:id="repo_url" prefHeight="35.0" prefWidth="328.0" />
@@ -37,7 +37,7 @@
                         <Insets left="10.0" />
                      </padding>
                   </HBox>
-                  <VBox alignment="BOTTOM_LEFT" prefHeight="287.0" prefWidth="565.0" spacing="10.0">
+                  <VBox alignment="BOTTOM_LEFT" prefHeight="270.0" prefWidth="565.0" spacing="10.0">
                      <children>
                         <Label fx:id="labelSize" textFill="#8d8d8d" wrapText="true">
                            <font>
@@ -137,6 +137,9 @@
                      <VBox.margin>
                         <Insets bottom="20.0" />
                      </VBox.margin>
+                     <padding>
+                        <Insets left="30.0" />
+                     </padding>
                   </Label>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                      <children>
@@ -189,7 +192,7 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Label text="浏览量" textFill="#545454" GridPane.rowIndex="1">
+                              <Label text="浏览" textFill="#545454" GridPane.rowIndex="1">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -204,6 +207,9 @@
                            </rowConstraints>
                         </GridPane>
                      </children>
+                     <padding>
+                        <Insets left="30.0" />
+                     </padding>
                   </HBox>
                </children>
                <BorderPane.margin>

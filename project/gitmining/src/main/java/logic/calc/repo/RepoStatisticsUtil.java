@@ -26,6 +26,7 @@ public class RepoStatisticsUtil implements RepositoryStatisticsService{
 		@Override
 		public RepositoryRanks getRanks(Repository r) {
 			List<String> headers = RepositoryRanks.defaultHeaders;
+			List<String> chHeaders = RepositoryRanks.chineseHeaders;
 			String headerStr = gson.toJson(headers);
 			String repoStr = gson.toJson(r);
 			
@@ -41,7 +42,7 @@ public class RepoStatisticsUtil implements RepositoryStatisticsService{
 			}
 			RepositoryRanks radarDatas = new RepositoryRanks();
 			for (int i = 0; i < headers.size(); i++) {
-				radarDatas.addVertex(headers.get(i), Double.parseDouble(strResult.get(i)));
+				radarDatas.addVertex(chHeaders.get(i), Double.parseDouble(strResult.get(i)));
 			}
 			return radarDatas;
 		}

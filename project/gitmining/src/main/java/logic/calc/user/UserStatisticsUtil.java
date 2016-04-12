@@ -28,6 +28,7 @@ public class UserStatisticsUtil implements UserStatisticsService {
 	public UserRanks getRanks(GitUser u){
 		
 		List<String> headers = UserRanks.defaultHeaders;
+		List<String> chHeaders = UserRanks.chineseHeaders;
 		String headerStr = gson.toJson(headers);
 		String userStr = gson.toJson(u);
 		
@@ -41,7 +42,7 @@ public class UserStatisticsUtil implements UserStatisticsService {
 		UserRanks userRanks = new UserRanks();
 
 		for (int i = 0; i < headers.size(); i++) {
-			userRanks.addVertex(headers.get(i), Double.parseDouble(strResult.get(i)));
+			userRanks.addVertex(chHeaders.get(i), Double.parseDouble(strResult.get(i)));
 		}
 		return userRanks;
 	}

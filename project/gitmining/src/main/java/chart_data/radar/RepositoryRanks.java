@@ -16,6 +16,8 @@ public class RepositoryRanks extends RadarDatas {
 
 	public static final List<String> defaultHeaders = Arrays.asList("forks",
 			"open_issues", "size", "subscribers_count", "watchers");
+	public static final List<String> chineseHeaders = Arrays.asList("复刻",
+			"讨论", "大小", "订阅", "关注");
 	
 	
 	public void addVertex(String rankTitle, double rank) {
