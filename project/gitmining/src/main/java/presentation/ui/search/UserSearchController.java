@@ -134,7 +134,7 @@ public class UserSearchController {
 	private LogicServiceFactory logicServiceFactory;
 	private SearchService searchService;
 	private GeneralGetter generalGetter;
-	private Image bgImage = null;
+	private static Image bgImage = null;
 	
 	@FXML
 	private void onSearch(ActionEvent event) {

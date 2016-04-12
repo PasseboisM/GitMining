@@ -55,7 +55,7 @@ public class RepoDetailsController {
 	@FXML private Button copyButton;
 	@FXML private Button openButton;
 	@FXML private Label labelSize,labelLanguage,labelCreatedAt,labelUpdatedAt,labelPushedAt;
-	private Image btImage=null;
+	private static Image btImage=null;
 	private ImageView image;
 	private void initial(AnchorPane rightComponentParent,Repository repository) {
 		loadImgFile();

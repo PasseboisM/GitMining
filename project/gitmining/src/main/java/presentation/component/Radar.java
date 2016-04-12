@@ -127,8 +127,8 @@ public class Radar extends AnchorPane{
 		labels = new ArrayList<>();
 		for (int i = 0; i < numberOfEdge; i++) {
 			Label label = new Label();
-			label.setLayoutX(143+points.get(i*2)*RADIO);
-			label.setLayoutY(127+points.get(i*2+1)*RADIO);
+			label.setLayoutX(143+points.get(i*2)*RADIO-5);
+			label.setLayoutY(127+points.get(i*2+1)*RADIO-5);
 			labels.add(label);
 			this.getChildren().add(label);
 		}

@@ -99,7 +99,7 @@ public class UserDetailsController {
 	@FXML    private ImageView imageView;
 	@FXML    private AnchorPane radarAnchorPane;
 	@FXML private Button returnButton;
-	private Image btImage=null;
+	private static Image btImage=null;
 	private ImageView imageV;
 	@FXML
 	private void returnToSearchController() {
