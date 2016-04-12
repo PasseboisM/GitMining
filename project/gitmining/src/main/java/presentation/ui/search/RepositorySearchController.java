@@ -45,7 +45,6 @@ public class RepositorySearchController{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		rootUINode.getStylesheets().add(RepositorySearchController.class.getResource("repoSearch.css").toExternalForm());
 		RepositorySearchController controller = loader.getController();
 		controller.initial(rightComponentParent);
 		return rootUINode;
@@ -60,7 +59,6 @@ public class RepositorySearchController{
 		initialSearchService();
 		this.rightComponentParent = rightComponentParent;
 		initialPage();
-		this.rightComponentParent.getStylesheets().add(RepositorySearchController.class.getResource("repoSearch.css").toExternalForm());
 	}
 
 	private void initialImage() {

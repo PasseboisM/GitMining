@@ -1,12 +1,9 @@
-.toggle-button{
+.button{
 	-fx-background-color: #2A2728;
 	-fx-border-color: #161314;
 	-fx-text-fill: white;
 }
-.toggle-button:hover{
+.button:hover{
 	-fx-background-color: #201D1E;
 	-fx-border-color: #161314;
-}
-.toggle-button:selected{
-	-fx-background-color: #0C090A; 
 }
