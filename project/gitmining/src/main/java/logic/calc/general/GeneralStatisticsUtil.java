@@ -14,6 +14,7 @@ import chart_data.RepoDistOverLanguage;
 import chart_data.RepoDistOverCreateTime;
 import chart_data.RepoDistOverStar;
 import chart_data.UserDistOverCreateTime;
+import chart_data.UserDistOverCreateTime.UserCreateOnTimeCount;
 import chart_data.UserDistOverType;
 import common.enumeration.attribute.Language;
 import logic.calc.python.PythonRunner;
@@ -73,8 +74,11 @@ public class GeneralStatisticsUtil implements GeneralStatisticsService{
 //		for(int i=0;i<10;i++) gaps.add(10);
 //		for(int i=0;i<9;i++) gaps.add(100);
 //		for(int i=0;i<3;i++) gaps.add(3000);
-		for(int i=0;i<12;i++) gaps.add(20);
-		for(int i=0;i<1;i++) gaps.add(8760);
+		//TODO
+		gaps.add(40);
+		for(int i=0;i<6;i++) gaps.add(60);
+		for(int i=0;i<5;i++) gaps.add(200);
+		for(int i=0;i<1;i++) gaps.add(7760);
 		
 		String gapsJSON = gson.toJson(gaps);
 		List<String> result = null;
@@ -205,9 +209,20 @@ public class GeneralStatisticsUtil implements GeneralStatisticsService{
 		 * 最高为37000
 		 */
 		List<Integer> gaps = new ArrayList<>();
-		for(int i=0;i<5;i++) gaps.add(20);//0--100 5份
-		for(int i=0;i<5;i++) gaps.add(200);//100--1100 5份
-		for(int i=0;i<3;i++) gaps.add(3000);//1100--10100 3份
+		gaps.add(40);//0--40 1份
+		gaps.add(60);//40--100 1份
+		for(int i=0;i<2;i++) gaps.add(80);//100--260 2份
+		gaps.add(100);//260--360 1份
+		gaps.add(120);//360--480 1份
+		gaps.add(150);//480--6300 1份
+		gaps.add(200);//630--830 1份
+		gaps.add(250);//830--1080 1份
+		gaps.add(300);//1080--1380 1份
+		gaps.add(400);//1380--1780 1份
+		gaps.add(800);//1780--2580 1份
+		gaps.add(1000);//2580--3580 1份
+		gaps.add(2000);//3580--5580 1份
+		gaps.add(3000);//5580--8580 1份
 		gaps.add(30000);
 		
 		String gapsJSON = gson.toJson(gaps);
@@ -262,7 +277,7 @@ public class GeneralStatisticsUtil implements GeneralStatisticsService{
 		System.out.println("1");
 		UserDistOverCreateTime lang = util.getUserDistOverCreateTime();
 		System.out.println("2");
-		Iterator ite = lang.getCounts();
+		Iterator<UserCreateOnTimeCount> ite = lang.getCounts();
 		while(ite.hasNext()) {
 			System.out.println(ite.next());
 		}
