@@ -16,8 +16,8 @@
                   <AnchorPane layoutX="19.0" layoutY="79.0" opacity="0.67" prefHeight="129.0" prefWidth="1010.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="59.0" />
                   <GridPane layoutX="26.0" layoutY="70.0" minHeight="-Infinity" opacity="0.8" prefHeight="154.0" prefWidth="1010.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="20.0">
                      <children>
-                        <TextField fx:id="keyword" prefHeight="23.0" prefWidth="936.0" promptText="搜索项目" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.valignment="TOP" />
-                        <Button fx:id="search" mnemonicParsing="false" onAction="#onSearch" text="查询" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="TOP" />
+                        <TextField fx:id="keyword" prefHeight="25.0" prefWidth="936.0" promptText="搜索项目" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.valignment="TOP" />
+                        <Button fx:id="search" mnemonicParsing="false" onAction="#onSearch" stylesheets="@button.css" text="查询" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.valignment="TOP" />
                         <Label alignment="TOP_RIGHT" contentDisplay="TOP" text="项目种类：" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
                            <font>
                               <Font size="18.0" />

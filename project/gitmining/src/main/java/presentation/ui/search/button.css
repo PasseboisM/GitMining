@@ -1,9 +1,9 @@
 .button{
-	-fx-background-color: #2A2728;
-	-fx-border-color: #161314;
+	-fx-background-color:  #868686;
+	-fx-border-color: #666666;
 	-fx-text-fill: white;
 }
 .button:hover{
-	-fx-background-color: #201D1E;
-	-fx-border-color: #161314;
+	-fx-background-color: #767676;
+	-fx-border-color: #666666;
 }
