@@ -6,9 +6,9 @@ todo：进行项目封装，准备迭代二项目提交
 
 who：王子安wza14
 when：第7周
-what：
-problem：
-todo：
+what：界面美化和较难控件实现，处理了之前的界面控件线程问题
+problem：无
+todo：界面细节调整
 
 who：孙婧sj14
 when：第7周

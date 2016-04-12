@@ -20,10 +20,10 @@
                         <Font size="20.0" />
                      </font>
                      <VBox.margin>
-                        <Insets left="20.0" />
+                        <Insets left="20.0" top="10.0" />
                      </VBox.margin>
                   </Label>
-                  <HBox alignment="CENTER_LEFT" prefHeight="79.0" prefWidth="534.0">
+                  <HBox alignment="BOTTOM_LEFT" prefHeight="124.0" prefWidth="565.0">
                      <children>
                         <Button fx:id="copyButton" graphicTextGap="5.0" layoutX="-2.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#copyController" prefHeight="34.0" prefWidth="68.0" stylesheets="@buttoncopy.css" text="复制" />
                         <TextField fx:id="repo_url" prefHeight="35.0" prefWidth="328.0" />
@@ -34,10 +34,10 @@
                         </Button>
                      </children>
                      <padding>
-                        <Insets left="25.0" />
+                        <Insets left="10.0" />
                      </padding>
                   </HBox>
-                  <VBox alignment="BOTTOM_LEFT" prefHeight="295.0" prefWidth="526.0" spacing="10.0">
+                  <VBox alignment="BOTTOM_LEFT" prefHeight="287.0" prefWidth="565.0" spacing="10.0">
                      <children>
                         <Label fx:id="labelSize" textFill="#8d8d8d" wrapText="true">
                            <font>
@@ -125,12 +125,12 @@
          <right>
             <VBox alignment="CENTER">
                <children>
-                  <AnchorPane fx:id="forRadar" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="344.0" prefWidth="344.0" BorderPane.alignment="TOP_CENTER">
+                  <AnchorPane fx:id="forRadar" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="245.0" prefWidth="305.0" BorderPane.alignment="TOP_CENTER">
                      <BorderPane.margin>
                         <Insets right="50.0" />
                      </BorderPane.margin>
                   </AnchorPane>
-                  <Label alignment="CENTER" prefHeight="52.0" prefWidth="271.0" text="项目统计数据">
+                  <Label prefHeight="52.0" prefWidth="263.0" text="项目统计数据">
                      <font>
                         <Font size="28.0" />
                      </font>
@@ -138,9 +138,9 @@
                         <Insets bottom="20.0" />
                      </VBox.margin>
                   </Label>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <GridPane>
+                        <GridPane prefHeight="100.0" prefWidth="67.0">
                           <columnConstraints>
                             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                           </columnConstraints>
@@ -161,7 +161,7 @@
                               </Label>
                            </children>
                         </GridPane>
-                        <GridPane>
+                        <GridPane prefHeight="100.0" prefWidth="63.0">
                            <children>
                               <Label fx:id="labelFork">
                                  <font>
@@ -182,7 +182,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
                            </rowConstraints>
                         </GridPane>
-                        <GridPane>
+                        <GridPane prefHeight="100.0" prefWidth="88.0">
                            <children>
                               <Label fx:id="labelWatch">
                                  <font>
