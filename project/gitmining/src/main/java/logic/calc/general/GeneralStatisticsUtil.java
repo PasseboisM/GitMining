@@ -74,7 +74,6 @@ public class GeneralStatisticsUtil implements GeneralStatisticsService{
 //		for(int i=0;i<10;i++) gaps.add(10);
 //		for(int i=0;i<9;i++) gaps.add(100);
 //		for(int i=0;i<3;i++) gaps.add(3000);
-		//TODO
 		gaps.add(40);
 		for(int i=0;i<6;i++) gaps.add(60);
 		for(int i=0;i<5;i++) gaps.add(200);
