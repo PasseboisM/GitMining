@@ -61,8 +61,8 @@ public class UserDetailsController {
 	private void initialImage() {
 		imageV = new ImageView();
 		imageV.setImage(btImage);
-		imageV.setFitWidth(25);
-		imageV.setFitHeight(25);
+		imageV.setFitWidth(60);
+		imageV.setFitHeight(60);
 	}
 	private void initialButton(){
 		initialImage();

@@ -246,6 +246,6 @@
             </VBox>
          </right>
       </BorderPane>
-      <Button fx:id="returnButton" layoutX="67.0" layoutY="596.0" mnemonicParsing="false" onAction="#returnToSearchController" prefHeight="61.0" prefWidth="64.0" style="-fx-background-color: rgba(0,0,0,0);" />
+      <Button fx:id="returnButton" layoutX="20.0" layoutY="600.0" mnemonicParsing="false" onAction="#returnToSearchController" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: rgba(0,0,0,0);" />
    </children>
 </AnchorPane>

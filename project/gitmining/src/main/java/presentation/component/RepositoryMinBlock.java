@@ -58,13 +58,13 @@ public class RepositoryMinBlock  extends BorderPane{
 		Runnable runnable = new Runnable() {
 			@Override
 			public void run() {
-				BorderPane borderPane = RepoDetailsController.getInstance(rightComponentParent,repository);
+				AnchorPane anchorPane = RepoDetailsController.getInstance(rightComponentParent,repository);
 				Platform.runLater(new Runnable() {
 					@Override
 					public void run() {
 						List<Node> childred = rightComponentParent.getChildren();
 						if (childred.get(childred.size()-1).equals(waitLoader)) {
-							childred.add(borderPane);
+							childred.add(anchorPane);
 						}
 						childred.remove(waitLoader);
 					}

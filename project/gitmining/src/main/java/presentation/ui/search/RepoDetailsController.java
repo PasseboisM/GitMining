@@ -20,7 +20,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import logic.calc.repo.RepoStatisticsUtil;
 import logic.calc.service.RepositoryStatisticsService;
 import presentation.component.Radar;
@@ -28,9 +27,9 @@ import presentation.image.ImageFactory;
 
 public class RepoDetailsController {
 	
-	public static BorderPane getInstance(AnchorPane rightComponentParent,Repository repository){
+	public static AnchorPane getInstance(AnchorPane rightComponentParent,Repository repository){
 		FXMLLoader loader = new FXMLLoader(RepoDetailsController.class.getResource("repositoryDetails.fxml"));
-		BorderPane pane = null;
+		AnchorPane pane = null;
 		try {
 			pane = loader.load();
 		} catch (IOException e) {
@@ -43,7 +42,7 @@ public class RepoDetailsController {
 	
 	private AnchorPane rightComponentParent;
 	private String url;
-	@FXML private BorderPane borderPane;
+	@FXML private AnchorPane mainSubAnchorPane;
 	@FXML private TextField repo_url;
 	@FXML private Label labelStar;
 	@FXML private Label labelFork;
@@ -76,8 +75,8 @@ public class RepoDetailsController {
 	private void initialImage() {
 		image = new ImageView();
 		image.setImage(btImage);
-		image.setX(5);
-		image.setY(5);
+		image.setFitWidth(60);
+		image.setFitHeight(60);
 	}
 	private void initialButton(){
 		initialImage();
@@ -111,7 +110,7 @@ public class RepoDetailsController {
 	
 	@FXML
 	private void returnToSearchController() {
-		rightComponentParent.getChildren().remove(borderPane);
+		rightComponentParent.getChildren().remove(mainSubAnchorPane);
 	}
 	
 	@FXML

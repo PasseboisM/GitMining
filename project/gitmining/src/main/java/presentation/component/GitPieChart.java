@@ -36,9 +36,28 @@ public class GitPieChart extends PieChart {
 		this.initial(repoDistOverLanguage);
 	}
 
+	private void initialFXML() {
+		FXMLLoader fxmlLoader = new FXMLLoader(GitPieChart.class.getResource("pieChart.fxml"));
+		fxmlLoader.setController(this);
+		fxmlLoader.setRoot(this);
+		try {
+			fxmlLoader.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	private void initial(RepoDistOverLanguage repoDistOverLanguage) {
 		ObservableList<PieChart.Data> pieChartData = initialDatas(repoDistOverLanguage);
-		this.initialTooltip("项目语言统计图", pieChartData);
+		this.initialTooltip("项目语言统计图", pieChartData,repoDistOverLanguage);
+		this.initialAnimation(pieChartData);
+	}
+
+	
+
+	private void initial(UserDistOverType userTypeCounts) {
+		ObservableList<PieChart.Data> pieChartData = initialDatas(userTypeCounts);
+		this.initialTooltip(UserDistOverType.title, pieChartData,userTypeCounts);
 		this.initialAnimation(pieChartData);
 	}
 
@@ -59,24 +78,6 @@ public class GitPieChart extends PieChart {
 		return pieChartData;
 	}
 
-	private void initialFXML() {
-		FXMLLoader fxmlLoader = new FXMLLoader(GitPieChart.class.getResource("pieChart.fxml"));
-		fxmlLoader.setController(this);
-		fxmlLoader.setRoot(this);
-		try {
-			fxmlLoader.load();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private void initial(UserDistOverType userTypeCounts) {
-		ObservableList<PieChart.Data> pieChartData = initialDatas(userTypeCounts);
-		this.initialTooltip(UserDistOverType.title, pieChartData);
-		this.initialAnimation(pieChartData);
-	}
-	
-
 	private ObservableList<PieChart.Data> initialDatas(UserDistOverType userTypeCounts) {
 		ObservableList<PieChart.Data> pieChartData =FXCollections.observableArrayList();
 		Iterator<UserTypeCount> iterator = userTypeCounts.getCounts();
@@ -94,24 +95,48 @@ public class GitPieChart extends PieChart {
 		return pieChartData;
 	}
 
-
-	private void initialTooltip(String title, ObservableList<PieChart.Data> pieChartData) {
+	private void initialTooltip(String title, ObservableList<Data> pieChartData,
+			RepoDistOverLanguage repoDistOverLanguage) {
+		Iterator<LanguageCount> iterator = repoDistOverLanguage.getLanguageCount();
 		pieChart.setData(pieChartData);
 		pieChart.setLegendSide(Side.RIGHT);
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
 				for (PieChart.Data data : pieChart.getData()) {
+					LanguageCount userTypeCount = iterator.next();
+					String type = userTypeCount.language.getName();
 					Node node = data.getNode();
-					Tooltip tooltip = new Tooltip(String.format("%.2f", data.getPieValue()) + "%");
-					tooltip.setFont(new Font(25));
+					Tooltip tooltip = new Tooltip(type+" : \n"+String.format("%.2f", data.getPieValue()) + "%");
+					tooltip.setFont(new Font(18));
 					Tooltip.install(node, tooltip);
 				}
 			}
 		});
-		
 		pieChart.setTitle(title);
 	}
+	private void initialTooltip(String title, ObservableList<Data> pieChartData, UserDistOverType userTypeCounts) {
+		Iterator<UserTypeCount> iterator = userTypeCounts.getCounts();
+		pieChart.setData(pieChartData);
+		pieChart.setLegendSide(Side.RIGHT);
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				for (PieChart.Data data : pieChart.getData()) {
+					UserTypeCount userTypeCount = iterator.next();
+					String type = userTypeCount.type;
+					Node node = data.getNode();
+					Tooltip tooltip = new Tooltip(type+" : \n"+String.format("%.2f", data.getPieValue()) + "%");
+					tooltip.setFont(new Font(18));
+					Tooltip.install(node, tooltip);
+				}
+			}
+		});
+		pieChart.setTitle(title);
+		
+	}
+
+
 
 	private void initialAnimation(ObservableList<PieChart.Data> pieChartData) {
 		pieChart.setClockwise(false);
