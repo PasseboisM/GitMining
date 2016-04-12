@@ -39,7 +39,7 @@
                   </HBox>
                   <VBox alignment="BOTTOM_LEFT" prefHeight="295.0" prefWidth="526.0" spacing="10.0">
                      <children>
-                        <Label fx:id="labelCreatedAt" textFill="#8d8d8d" wrapText="true">
+                        <Label fx:id="labelSize" textFill="#8d8d8d" wrapText="true">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -54,7 +54,7 @@
                               </Label>
                            </graphic>
                         </Label>
-                        <Label fx:id="labelUpdatedAt" textFill="#8d8d8d" wrapText="true">
+                        <Label fx:id="labelLanguage" textFill="#8d8d8d" wrapText="true">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -69,7 +69,7 @@
                               </Label>
                            </graphic>
                         </Label>
-                        <Label fx:id="labelUpdatedAt1" textFill="#8d8d8d" wrapText="true">
+                        <Label fx:id="labelCreatedAt" textFill="#8d8d8d" wrapText="true">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -84,7 +84,7 @@
                               </Label>
                            </graphic>
                         </Label>
-                        <Label fx:id="labelUpdatedAt2" textFill="#8d8d8d" wrapText="true">
+                        <Label fx:id="labelUpdatedAt" textFill="#8d8d8d" wrapText="true">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -99,7 +99,7 @@
                               </Label>
                            </graphic>
                         </Label>
-                        <Label fx:id="labelUpdatedAt3" textFill="#8d8d8d" wrapText="true">
+                        <Label fx:id="labelPushedAt" textFill="#8d8d8d" wrapText="true">
                            <font>
                               <Font size="20.0" />
                            </font>

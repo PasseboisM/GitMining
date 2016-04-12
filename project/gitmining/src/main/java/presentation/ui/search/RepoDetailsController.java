@@ -54,6 +54,7 @@ public class RepoDetailsController {
 	@FXML private Button returnButton;
 	@FXML private Button copyButton;
 	@FXML private Button openButton;
+	@FXML private Label labelSize,labelLanguage,labelCreatedAt,labelUpdatedAt,labelPushedAt;
 	private Image btImage=null;
 	private ImageView image;
 	private void initial(AnchorPane rightComponentParent,Repository repository) {
@@ -93,6 +94,11 @@ public class RepoDetailsController {
 		assert full_name.split("/").length==2;
 		labelOwnerName.setText(full_name.split("/")[0]);
 		labelRepoName.setText(full_name.split("/")[1]);
+		labelSize.setText(repository.getSize()+"");
+		labelLanguage.setText(repository.getMainLanguage().getName());
+		labelCreatedAt.setText(repository.getCreated_at());
+		labelUpdatedAt.setText(repository.getUpdated_at());
+		labelPushedAt.setText(repository.getPushed_at());
 	}
 	
 	private void initialRadar(Repository r){
