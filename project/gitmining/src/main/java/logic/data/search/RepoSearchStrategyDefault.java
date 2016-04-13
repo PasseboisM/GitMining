@@ -26,6 +26,7 @@ public class RepoSearchStrategyDefault implements RepositorySearchStrategy {
 				break;
 			} else if (lang == Language.ALL) {
 				languageMatched = true;
+				matchCount += 1.0;
 				break;
 			}
 		}
@@ -46,7 +47,7 @@ public class RepoSearchStrategyDefault implements RepositorySearchStrategy {
 			keywordMatched = true;
 		} else {
 			for(String keyword:params.getKeywords()) {
-				if(obj.getFull_name().contains(keyword)&&(!keyword.equals(""))) {
+				if(containssIgnoreCase(obj.getFull_name(),keyword)&&(!keyword.equals(""))) {
 					matchCount += 10;
 					keywordMatched = true;
 				} else if(keyword.equals("")) {
@@ -59,12 +60,16 @@ public class RepoSearchStrategyDefault implements RepositorySearchStrategy {
 		//If the object cannot match the choice params, it dosen't match the whole search param.
 		boolean choicesMatched = languageMatched && categoryMatched;
 		
-		if(choicesMatched) {
-			return Math.max(1,matchCount);
+		if(choicesMatched&&keywordMatched) {
+			return matchCount;
 		} else {
 			return 0.0;
 		}
 		
+	}
+
+	private boolean containssIgnoreCase(String full_name, String keyword) {
+		return full_name.toLowerCase().contains(keyword.toLowerCase());
 	}
 
 }
