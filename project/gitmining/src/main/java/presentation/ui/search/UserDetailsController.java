@@ -37,7 +37,13 @@ public class UserDetailsController {
 		initialButton();
 		initialComponentText(user);
 		this.rightComponentParent = rightComponentParent;
+		
 		Image image = new Image(user.getAvatar_url());
+		if(image.isError()){
+			image = avatarImage;
+		}
+		//System.out.println(""+user.getAvatar_url().toString());
+	//	System.out.println("Image error?->"+image.isError());
 		imageView.setImage(image);
 		
 		UserStatisticsService service = new UserStatisticsUtil();
@@ -53,6 +59,7 @@ public class UserDetailsController {
 	private void loadImgFile() {
 		try {
 			btImage = ImageFactory.getImageByFileName(ImageFactory.BACK);
+			avatarImage =ImageFactory.getImageByFileName(ImageFactory.AVATAR_DEFAULT);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
@@ -100,6 +107,7 @@ public class UserDetailsController {
 	@FXML    private AnchorPane radarAnchorPane;
 	@FXML private Button returnButton;
 	private static Image btImage=null;
+	private static Image avatarImage=null;
 	private ImageView imageV;
 	@FXML
 	private void returnToSearchController() {

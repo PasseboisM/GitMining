@@ -11,6 +11,7 @@ public class ImageFactory {
 	public static final String STATISTICS_REPO_CREATE_TIME = "Background.jpg";
 	public static final String LOADING_BACKGROUND = "userSearchBackground_2.jpg";
 	public static final String GIT_LOGO = "icon.png";
+	public static final String AVATAR_DEFAULT = "avatar.png";
 	public static Image getImageByFileName(String filename) throws MalformedURLException{
 		File file = new File("resources/images/"+filename);
 		Image image = new Image(file.toURI().toURL().toString(),true);
