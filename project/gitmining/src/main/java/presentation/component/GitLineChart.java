@@ -78,12 +78,18 @@ public class GitLineChart extends AnchorPane {
 			series.getData().add(new XYChart.Data<String,Number>(labels.get(i), datas.get(i)));
 		}
 		lineChart.getData().add(series);
-		for (int i = 0; i < labels.size(); i++) {
-			XYChart.Data<String,Number> data = (Data<String,Number>) series.getData().get(i);
-			Node node = data.getNode();
-			Tooltip tooltip = new Tooltip(String.valueOf(datas.get(i)));
-			Tooltip.install(node, tooltip);
-		}
+		Platform.runLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				for (int i = 0; i < labels.size(); i++) {
+					XYChart.Data<String,Number> data = (Data<String,Number>) series.getData().get(i);
+					Node node = data.getNode();
+					Tooltip tooltip = new Tooltip(String.valueOf(datas.get(i)));
+					Tooltip.install(node, tooltip);
+				}
+			}
+		});
 	}
 	//TODO 可能要改一下chart_data数据包类
 	private void initial(UserDistOverFollower followerNumberRanges, String seriesName) {
