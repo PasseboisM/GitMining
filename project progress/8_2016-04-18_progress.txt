@@ -6,9 +6,9 @@ todo：分析迭代三需求
 
 who：王子安wza14
 when：第8周
-what：界面美化和较难控件实现，处理了之前的界面控件线程问题
-problem：无
-todo：界面细节调整
+what：
+problem：
+todo：
 
 who：孙婧sj14
 when：第8周
