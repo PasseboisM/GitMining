@@ -1,0 +1,13 @@
+GitMining By Team Mole (Iteration 2) 部署说明
+
+运行环境要求：
+    1. JVM： 版本最低为1.8.0
+    2. Python: 最低版本为2.7，要求配置系统PATH路径，使得在系统命令行中输入"python"即可启动Python运行命令；
+            要求Python中安装有以下第三方统计包：（建议直接安装最新版本Anaconda）
+                scipy, numpy, pandas （第三方包版本不限）
+    3. 建议在有Internet链接的环境下使用，以体验最佳效果
+                
+系统部署说明：
+    1. 将zipped_resource.zip解压至与Iter2.jar相同目录下（请直接解压，不要将其中内容解压至额外的zipped_resource目录下）
+        解压后Iter2.jar应该与LocalData, python等在同一目录下
+    2. 执行Iter2.jar即可使用系统
