@@ -1,8 +1,13 @@
 package logic.data;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+
+import javax.swing.event.ListSelectionEvent;
 
 import common.exception.DataCorruptedException;
 import common.exception.NetworkException;
@@ -32,19 +37,42 @@ public class SearchServiceDefault implements SearchService {
 	@Override
 	public List<Repository> searchRepository(RepositorySearchParam params) throws NetworkException, DataCorruptedException {
 		List<RepositoryMin> minInfoList = minInfoManager.getRepoMin();
-		List<RepositoryMin> matched = new LinkedList<>();
-		List<Repository> result = new ArrayList<>(500);
-		
-		//TODO Not using the relation index really
-		for(RepositoryMin minInfo:minInfoList) {
-			if(repoMatcher.match(minInfo, params)>0.0) {
-				matched.add(minInfo);
+		for(String s:params.getKeywords()) {
+			System.out.println(s);
+		}
+		class Pair{
+
+			double relation;
+			RepositoryMin content;
+			public Pair(double relation, RepositoryMin content) {
+				super();
+				this.relation = relation;
+				this.content = content;
 			}
 		}
+		List<Pair> matched = new ArrayList<>();
+		List<Repository> result = new ArrayList<>(500);
+		
+		
+		double relationIndex = 0;
+		for(RepositoryMin minInfo:minInfoList) {
+			relationIndex = repoMatcher.match(minInfo, params);
+			if(relationIndex>0.0) {
+				matched.add(new Pair(relationIndex, minInfo));
+			}
+		}
+
+		matched.sort(new Comparator<Pair>() {
+
+			@Override
+			public int compare(Pair o1, Pair o2) {
+				return (int) (100*(o2.relation-o1.relation));
+			}
+		});
 		
 		// TODO try with multi-threads
-		for(RepositoryMin matches:matched) {
-			result.add(dataGetter.getSpecificRepo(matches));
+		for(Pair matches:matched) {
+			result.add(dataGetter.getSpecificRepo(matches.content));
 		}
 		
 		result.sort(params.getSortStandard().getComparator());
@@ -56,19 +84,38 @@ public class SearchServiceDefault implements SearchService {
 	public List<GitUser> searchUser(UserSearchParam params) throws NetworkException, DataCorruptedException {
 
 		List<GitUserMin> minInfo = minInfoManager.getUserMin();
-		List<GitUserMin> matched = new LinkedList<>();
+		
+		class Pair{
+			double relation;
+			GitUserMin content;
+			public Pair(double relation, GitUserMin content) {
+				super();
+				this.relation = relation;
+				this.content = content;
+			}
+		}
+		List<Pair> matched = new LinkedList<>();
 		List<GitUser> result = new ArrayList<>();
 		
-		//TODO Not using the relation index really
+		double relationIndex = 0.0;
 		for(GitUserMin min:minInfo) {
-			if(userMatcher.match(min, params)>0) {
-				matched.add(min);
+			relationIndex = userMatcher.match(min, params);
+			if(relationIndex>0.0) {
+				matched.add(new Pair(relationIndex, min));
 			}
 		}
 		
+		matched.sort(new Comparator<Pair>() {
+
+			@Override
+			public int compare(Pair o1, Pair o2) {
+				return (int) (100*(o2.relation-o1.relation));
+			}
+		});
+		
 		// TODO try with multi-threads
-		for(GitUserMin matches:matched) {
-			result.add(dataGetter.getSpecificGitUser(matches));
+		for(Pair matches:matched) {
+			result.add(dataGetter.getSpecificGitUser(matches.content));
 		}
 		
 		result.sort(params.getSortStandard().getComparator());
