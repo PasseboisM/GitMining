@@ -12,9 +12,9 @@ todo：界面细节调整
 
 who：孙婧sj14
 when：第7周
-what：
-problem：
-todo：
+what：找背景图，p图
+problem：图片颜色效果不太容易调
+todo：界面美化
 
 who：徐家逸xjyi14
 when：第7周

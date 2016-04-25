@@ -6,21 +6,21 @@ todo：分析迭代三需求
 
 who：王子安wza14
 when：第8周
-what：
-problem：
-todo：
+what：进度条css美化，处理界面线程问题，界面美化
+problem：无
+todo：研究数据分析的问题
 
 who：孙婧sj14
 when：第8周
-what：
-problem：
-todo：
+what：只添加了图表的背景图
+problem：屏幕分辨率
+todo：修改界面，准备迭代三需求
 
 who：徐家逸xjyi14
 when：第8周
-what：
-problem：
-todo：
+what：完成美化图部分修改
+problem：检查时发现屏幕分辨率问题
+todo：修改界面，满足分辨率问题
 
 组长总结：
     第8周内我们组主要的任务是继续界面的美化，准备参加迭代二的检查。在检查中，我们发现在接入投影仪后，屏幕分辨率变化会导致较大的界面被截下一部分，显示不全。
