@@ -18,6 +18,11 @@ public class WaitLoader extends AnchorPane{
 			e.printStackTrace();
 		}
 		this.text.setText(text);
+		//set anchor
+		AnchorPane.setBottomAnchor(this, 0.0);
+		AnchorPane.setLeftAnchor(this, 0.0);
+		AnchorPane.setRightAnchor(this, 0.0);
+		AnchorPane.setTopAnchor(this, 0.0);
 	}
 	public WaitLoader(){
 		this("  数据加载中...");

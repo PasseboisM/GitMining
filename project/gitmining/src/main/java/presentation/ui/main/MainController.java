@@ -26,6 +26,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -59,11 +60,15 @@ public class MainController extends Application implements Observer{
 		loadImgFile();
 		FXMLLoader loader = new FXMLLoader(MainController.class.getResource("mainController.fxml"));
 		mainAnchorPane = loader.load();
+//		BorderPane borderPane = loader.load();
 		MainController controller = loader.getController();
 		controller.initial();
 		Scene scene = new Scene(mainAnchorPane,1190,660);
+//		Scene scene = new Scene(borderPane,1190,660);
+		primaryStage.setMinHeight(640);
+		primaryStage.setMinWidth(800);
 		primaryStage.setScene(scene);
-		primaryStage.setResizable(false);
+		//primaryStage.setResizable(false);
 		primaryStage.show();
 	}
 
@@ -78,28 +83,28 @@ public class MainController extends Application implements Observer{
 
 	private void initial() {
 		initialImage();
-		initialProgressBar();
+//		initialProgressBar();
 		registerToLoader();
 //		initialToggleButtonGroup();
 	}
 
 	private void initialImage() {
-		image = new ImageView();
-		image.setImage(bgImage);
-		image.setFitWidth(1200);
-		image.setFitHeight(675);
-		mainAnchorPane.getChildren().add(image);
+//		image = new ImageView();
+//		image.setImage(bgImage);
+//		image.setFitWidth(1200);
+//		image.setFitHeight(675);
+//		mainAnchorPane.getChildren().add(image);
 		gitLogoIV.setImage(icon);
 	}
 	
-	private void initialProgressBar(){
+	/*private void initialProgressBar(){
 		progressBar = new ProgressBar(0);
 		progressBar.setLayoutX(100);
 		progressBar.setLayoutY(625);
 		progressBar.setPrefHeight(30);
 		progressBar.setPrefWidth(972);
 		mainAnchorPane.getChildren().add(progressBar);
-	}
+	}*/
 	
 	
 	private void registerToLoader() {
@@ -128,13 +133,14 @@ public class MainController extends Application implements Observer{
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-				progressBar.setProgress(loadRate);}});
+//				progressBar.setProgress(loadRate);
+				}});
 		if (loadRate >= 1.0) {
 			startViewing = true;
-			FadeTransition ft = new FadeTransition(Duration.millis(FADE_DURATION), progressBar);
-			ft.setFromValue(1.0);
-			ft.setToValue(0);
-			ft.play();
+//			FadeTransition ft = new FadeTransition(Duration.millis(FADE_DURATION), progressBar);
+//			ft.setFromValue(1.0);
+//			ft.setToValue(0);
+//			ft.play();
 			Platform.runLater(new Runnable() {
 				@Override
 				public void run() {
@@ -144,8 +150,9 @@ public class MainController extends Application implements Observer{
 				Platform.runLater(new Runnable() {
 					@Override
 					public void run() {
-						progressBar.setVisible(false);}});
-				imageMoveFrame();
+//						progressBar.setVisible(false);
+						}});
+//				imageMoveFrame();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -232,6 +239,7 @@ public class MainController extends Application implements Observer{
 	@FXML private ToggleButton buttonLocalMode;
 	@FXML private ToggleButton buttonOnlineMode;
 	@FXML private AnchorPane mainAnchorPane;
+//	@FXML 
 	@FXML private FlowPane flowpane;
 	@FXML private ImageView gitLogoIV;
 	private boolean startViewing = false;

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.paint.*?>
@@ -10,14 +11,16 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="mainAnchorPane" stylesheets="@progressbar.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.ui.main.MainController">
+
+<AnchorPane fx:id="mainAnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.ui.main.MainController">
    <children>
-      <BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0">         <center>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <HBox fx:id="hbox" maxHeight="800.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
                <children>
-                  <HBox fx:id="hbox" minHeight="-Infinity" prefHeight="700.0" prefWidth="1200.0">
+                  <VBox fx:id="menu" maxHeight="800.0" maxWidth="150.0" minHeight="600.0" minWidth="150.0" stylesheets="@menu.css">
                      <children>
-                        <FlowPane fx:id="flowpane" prefHeight="641.0" prefWidth="150.0" stylesheets="@menu.css">
+                        <VBox VBox.vgrow="ALWAYS">
                            <children>
                               <Accordion prefWidth="150.0">
                                 <panes>
@@ -182,24 +185,27 @@
                                 </panes>
                               </Accordion>
                            </children>
-                        </FlowPane>
-                        <AnchorPane fx:id="rightComponentParent" prefHeight="200.0" prefWidth="1050.0" stylesheets="@rightParentPane.css" />
+                        </VBox>
+                        <VBox alignment="BOTTOM_CENTER" prefHeight="171.0" prefWidth="150.0" VBox.vgrow="NEVER">
+                           <children>
+                              <ImageView fx:id="gitLogoIV" fitHeight="76.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="37.0" prefWidth="150.0" text="GitMining" textFill="WHITE" VBox.vgrow="ALWAYS">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" prefHeight="37.0" prefWidth="150.0" text="By Team Mole" textFill="WHITE" VBox.vgrow="ALWAYS">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
                      </children>
-                  </HBox>
-                  <ImageView fx:id="gitLogoIV" fitHeight="76.0" fitWidth="76.0" layoutX="36.0" layoutY="529.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="37.0" />
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutY="598.0" prefHeight="37.0" prefWidth="150.0" text="GitMining" textFill="WHITE" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="0.0">
-                     <font>
-                        <Font size="21.0" />
-                     </font>
-                  </Label>
-                  <Label alignment="CENTER" layoutY="628.0" prefHeight="37.0" prefWidth="150.0" text="By Team Mole" textFill="WHITE" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="0.0">
-                     <font>
-                        <Font size="21.0" />
-                     </font>
-                  </Label>
-                  <!-- <ProgressBar fx:id="progressBar" layoutX="455.0" layoutY="636.0" prefWidth="200.0" progress="0.0" /> -->
+                  </VBox>
+                  <AnchorPane fx:id="rightComponentParent" stylesheets="@rightParentPane.css" HBox.hgrow="ALWAYS" />
                </children>
-            </AnchorPane>
+            </HBox>
          </center>
       </BorderPane>
    </children>

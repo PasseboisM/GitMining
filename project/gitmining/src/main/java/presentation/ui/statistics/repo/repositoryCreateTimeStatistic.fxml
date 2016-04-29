@@ -3,8 +3,8 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.ui.statistics.repo.RepoCreateTimeStatistic">
+<AnchorPane fx:id="anchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.ui.statistics.repo.RepoCreateTimeStatistic">
    <children>
-      <AnchorPane fx:id="sonPane" layoutX="20.0" layoutY="20.0" opacity="0.62" prefHeight="610.0" prefWidth="1010.0" style="-fx-background-color: white;" />
+      <AnchorPane fx:id="sonPane" opacity="0.62" style="-fx-background-color: white;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
    </children>
 </AnchorPane>
