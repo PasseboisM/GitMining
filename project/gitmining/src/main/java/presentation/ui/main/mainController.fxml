@@ -11,12 +11,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane fx:id="mainAnchorPane" stylesheets="@progressbar.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.ui.main.MainController">
    <children>
       <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
-            <HBox fx:id="hbox" maxHeight="800.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
+            <HBox fx:id="hbox" maxHeight="800.0" BorderPane.alignment="CENTER">
                <children>
                   <VBox fx:id="menu" maxHeight="800.0" maxWidth="150.0" minHeight="600.0" minWidth="150.0" stylesheets="@menu.css">
                      <children>
@@ -203,10 +202,12 @@
                         </VBox>
                      </children>
                   </VBox>
-                  <AnchorPane fx:id="rightComponentParent" stylesheets="@rightParentPane.css" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
          </center>
+         <right>
+            <AnchorPane fx:id="rightComponentParent" stylesheets="@rightParentPane.css" BorderPane.alignment="CENTER" />
+         </right>
       </BorderPane>
       <ImageView pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
    </children>

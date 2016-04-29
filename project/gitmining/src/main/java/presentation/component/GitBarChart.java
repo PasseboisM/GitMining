@@ -39,24 +39,28 @@ public class GitBarChart extends AnchorPane {
 	
 	public GitBarChart(UserDistOverCreateTime userCreateOnTimeCounts) {
 		this.initialFXML();
+		this.initialLayout();
 		this.initialText("用户创建时间统计图", "创建时间", "用户个数");
 		this.initial(userCreateOnTimeCounts, "用户");
 	}
 	
 	public GitBarChart(RepoDistOverCreateTime repoDistOverCreateTime){
 		this.initialFXML();
+		this.initialLayout();
 		this.initialText("项目创建时间统计图", "创建时间", "项目个数");
 		this.initial(repoDistOverCreateTime, "项目");
 	}
 
 	public GitBarChart(RepoDistOverFork repoDistOverFork) {
 		this.initialFXML();
+		this.initialLayout();
 		this.initialText("项目复刻数分区间统计图", "复刻数区间", "项目个数");
 		this.initial(repoDistOverFork, "项目");
 	}
 	
 	public GitBarChart(RepoDistOverStar repoDistOverStar) {
 		this.initialFXML();
+		this.initialLayout();
 		this.initialText("项目关注度分区间统计图", "关注度区间", "项目个数");
 		this.initial(repoDistOverStar, "项目");
 	}
@@ -78,6 +82,13 @@ public class GitBarChart extends AnchorPane {
 		}
 	}
 	
+	private void initialLayout() {
+		AnchorPane.setBottomAnchor(this, 0.0);
+		AnchorPane.setLeftAnchor(this, 0.0);
+		AnchorPane.setRightAnchor(this, 0.0);
+		AnchorPane.setTopAnchor(this, 0.0);
+	}
+
 	private void initial(RepoDistOverCreateTime repoDistOverCreateTime, String seriesName) {
 		XYChart.Series<String,Number> series = new XYChart.Series<>();
 		series.setName(seriesName);
