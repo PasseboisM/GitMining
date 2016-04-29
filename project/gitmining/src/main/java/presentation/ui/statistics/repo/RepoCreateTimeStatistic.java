@@ -1,5 +1,6 @@
 package presentation.ui.statistics.repo;
 
+import java.awt.print.Printable;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
@@ -32,17 +33,33 @@ public class RepoCreateTimeStatistic implements StatisticsPane {
 		}
 		RepoCreateTimeStatistic controller = loader.getController();
 		controller.initial(rightComponentParent);
+		initialLayout(rootUINode);
 		return rootUINode;
 	}
 
+	private void initialLayout(AnchorPane rootUINode) {
+		AnchorPane.setBottomAnchor(rootUINode, 0.0);
+		AnchorPane.setLeftAnchor(rootUINode, 0.0);
+		AnchorPane.setRightAnchor(rootUINode, 0.0);
+		AnchorPane.setTopAnchor(rootUINode, 0.0);
+	}
+
 	private void initial(AnchorPane rightComponentParent) {
+		this.rightComponentParent = rightComponentParent;
 		this.initialChart();
 		loadImgFile();
-		initialImage();
+		initialImage(rightComponentParent);
+		
+	}
+	
+	public void print(){
+		System.out.println(rightComponentParent.getWidth());
+		System.out.println(rightComponentParent.getHeight());
 	}
 
 	@FXML
 	private AnchorPane anchorPane;
+	private AnchorPane rightComponentParent;
     private ImageView image;
 	private Image bgImage = null;
 	
@@ -53,18 +70,18 @@ public class RepoCreateTimeStatistic implements StatisticsPane {
 			e.printStackTrace();
 		}
 	}
-	private void initialImage() {
+	private void initialImage(AnchorPane rightComponentParent) {
 		image = new ImageView();
 		image.setImage(bgImage);
-		image.setFitWidth(1050);
-		image.setFitHeight(675);
+		image.fitWidthProperty().bind(rightComponentParent.widthProperty());
+		image.fitHeightProperty().bind(rightComponentParent.heightProperty());
 		anchorPane.getChildren().add(0,image);
 	}
 
 	public void initialChart() {
-		GeneralStatisticsService statisticsService = new GeneralStatisticsUtil();
-		RepoDistOverCreateTime repoCreateOnTimeCounts = statisticsService.getRepoDistOverCreateTime();
-		GitBarChart barChart = new GitBarChart(repoCreateOnTimeCounts);
-		anchorPane.getChildren().add(barChart);
+//		GeneralStatisticsService statisticsService = new GeneralStatisticsUtil();
+//		RepoDistOverCreateTime repoCreateOnTimeCounts = statisticsService.getRepoDistOverCreateTime();
+//		GitBarChart barChart = new GitBarChart(repoCreateOnTimeCounts);
+//		anchorPane.getChildren().add(barChart);
 	}
 }

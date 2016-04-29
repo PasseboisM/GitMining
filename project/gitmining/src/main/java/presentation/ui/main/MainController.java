@@ -14,6 +14,8 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,6 +28,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -60,10 +63,13 @@ public class MainController extends Application implements Observer{
 		FXMLLoader loader = new FXMLLoader(MainController.class.getResource("mainController.fxml"));
 		mainAnchorPane = loader.load();
 		MainController controller = loader.getController();
+//		primaryStage.setResizable(false);
 		controller.initial();
 		Scene scene = new Scene(mainAnchorPane,1190,660);
+		primaryStage.setMinHeight(640);
+		primaryStage.setMinWidth(960);
 		primaryStage.setScene(scene);
-		primaryStage.setResizable(false);
+//		primaryStage.setResizable(false);
 		primaryStage.show();
 	}
 
@@ -86,18 +92,34 @@ public class MainController extends Application implements Observer{
 	private void initialImage() {
 		image = new ImageView();
 		image.setImage(bgImage);
-		image.setFitWidth(1200);
-		image.setFitHeight(675);
+		image.fitWidthProperty().bind(mainAnchorPane.widthProperty());
+		image.fitHeightProperty().bind(mainAnchorPane.heightProperty());
 		mainAnchorPane.getChildren().add(image);
 		gitLogoIV.setImage(icon);
 	}
 	
 	private void initialProgressBar(){
 		progressBar = new ProgressBar(0);
-		progressBar.setLayoutX(100);
-		progressBar.setLayoutY(625);
-		progressBar.setPrefHeight(30);
-		progressBar.setPrefWidth(972);
+		
+		mainAnchorPane.widthProperty().addListener(new ChangeListener<Number>() {
+			@Override
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+				double apWidth = newValue.doubleValue();
+				double pbWidth = apWidth*0.8;
+				double pbLayoutX = apWidth*0.1;
+				progressBar.setPrefWidth(pbWidth);
+				progressBar.setLayoutX(pbLayoutX);
+			}
+		});
+		
+		mainAnchorPane.heightProperty().addListener(new ChangeListener<Number>() {
+			@Override
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+				double apHeight = newValue.doubleValue();
+				progressBar.setPrefHeight(30);
+				progressBar.setLayoutY(apHeight-45);
+			}
+		});
 		mainAnchorPane.getChildren().add(progressBar);
 	}
 	
@@ -128,7 +150,8 @@ public class MainController extends Application implements Observer{
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-				progressBar.setProgress(loadRate);}});
+				progressBar.setProgress(loadRate);
+				}});
 		if (loadRate >= 1.0) {
 			startViewing = true;
 			FadeTransition ft = new FadeTransition(Duration.millis(FADE_DURATION), progressBar);
@@ -144,7 +167,8 @@ public class MainController extends Application implements Observer{
 				Platform.runLater(new Runnable() {
 					@Override
 					public void run() {
-						progressBar.setVisible(false);}});
+						progressBar.setVisible(false);
+						}});
 				imageMoveFrame();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -159,12 +183,22 @@ public class MainController extends Application implements Observer{
 				new KeyValue(image.translateXProperty(), 0),
 				new KeyValue(image.translateYProperty(), 0)),
 				new KeyFrame(new Duration(1000), // set middle position at 1s
-						new KeyValue(image.translateXProperty(), 750),
+						new KeyValue(image.translateXProperty(), mainAnchorPane.getWidth()*0.6),
 						new KeyValue(image.translateYProperty(), 0)),
 				new KeyFrame(new Duration(2000), // set end position at 2s
-						new KeyValue(image.translateXProperty(), 1200),
+						new KeyValue(image.translateXProperty(), mainAnchorPane.getWidth()),
 						new KeyValue(image.translateYProperty(), 0)));
 		timeline.play();
+		try {
+			Thread.sleep(2000);
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					image.setVisible(false);
+					}});
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@FXML
@@ -232,6 +266,7 @@ public class MainController extends Application implements Observer{
 	@FXML private ToggleButton buttonLocalMode;
 	@FXML private ToggleButton buttonOnlineMode;
 	@FXML private AnchorPane mainAnchorPane;
+//	@FXML 
 	@FXML private FlowPane flowpane;
 	@FXML private ImageView gitLogoIV;
 	private boolean startViewing = false;
