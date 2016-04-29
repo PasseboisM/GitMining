@@ -15,7 +15,7 @@
    <children>
       <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
-            <HBox fx:id="hbox" maxHeight="800.0" BorderPane.alignment="CENTER">
+            <HBox fx:id="hbox" BorderPane.alignment="CENTER">
                <children>
                   <VBox fx:id="menu" maxHeight="800.0" maxWidth="150.0" minHeight="600.0" minWidth="150.0" stylesheets="@menu.css">
                      <children>
