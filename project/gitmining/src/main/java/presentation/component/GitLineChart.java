@@ -34,20 +34,30 @@ public class GitLineChart extends AnchorPane {
 	public GitLineChart(List<String> labels, List<Number> datas, String seriesName, String title, String xLabel,
 			String yLabel) {
 		this.initialFXML();
+		this.initialLayout();
 		this.initialText(title, xLabel, yLabel);
 		this.initial(labels, datas, seriesName);
 	}
 	
 	public GitLineChart(UserDistOverFollower followerNumberRanges) {
 		this.initialFXML();
+		this.initialLayout();
 		this.initialText("被关注数统计图", "用户","被关注数");
 		this.initial(followerNumberRanges,"用户");
 	}
 	
 	public GitLineChart(UserDistOverCreateTime userDistOverCreateTime){
 		this.initialFXML();
+		this.initialLayout();
 		this.initialText("用户创建时间统计图", "创建时间", "用户个数");
 		this.initial(userDistOverCreateTime, "用户");
+	}
+	
+	private void initialLayout() {
+		AnchorPane.setBottomAnchor(this, 0.0);
+		AnchorPane.setLeftAnchor(this, 0.0);
+		AnchorPane.setRightAnchor(this, 0.0);
+		AnchorPane.setTopAnchor(this, 0.0);
 	}
 
 
