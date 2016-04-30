@@ -11,7 +11,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import logic.calc.general.GeneralStatisticsUtil;
 import logic.calc.service.GeneralStatisticsService;
-import presentation.component.GitLineChart;
+
+import presentation.component.GitMixChart;
 import presentation.image.ImageFactory;
 import presentation.ui.statistics.StatisticsPane;
 
@@ -63,7 +64,7 @@ public class UserCreateTimeStatisticsPane implements StatisticsPane {
 	public void initialChart(){
 		GeneralStatisticsService statisticsService = new GeneralStatisticsUtil();
 		UserDistOverCreateTime userCreateOnTimeCounts = statisticsService.getUserDistOverCreateTime();
-		GitLineChart lineChart = new GitLineChart(userCreateOnTimeCounts);
-		anchorPane.getChildren().add(lineChart);
+		GitMixChart mixChart = new GitMixChart(userCreateOnTimeCounts);
+		anchorPane.getChildren().add(mixChart);
 	}
 }
