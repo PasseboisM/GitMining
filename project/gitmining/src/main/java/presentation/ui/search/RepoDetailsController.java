@@ -87,6 +87,8 @@ public class RepoDetailsController {
 		image.setFitWidth(60);
 		image.setFitHeight(60);
 	}
+	
+	
 	private void initialButton(){
 		initialImage();
 		returnButton.setGraphic(image);
