@@ -1,6 +1,5 @@
 package presentation.ui.statistics.repo;
 
-import java.awt.print.Printable;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
@@ -48,14 +47,9 @@ public class RepoCreateTimeStatistic implements StatisticsPane {
 		this.rightComponentParent = rightComponentParent;
 		this.initialChart();
 		loadImgFile();
-		initialImage(rightComponentParent);
-		
+		initialImage();
 	}
 	
-	public void print(){
-		System.out.println(rightComponentParent.getWidth());
-		System.out.println(rightComponentParent.getHeight());
-	}
 
 	@FXML
 	private AnchorPane anchorPane;
@@ -70,7 +64,7 @@ public class RepoCreateTimeStatistic implements StatisticsPane {
 			e.printStackTrace();
 		}
 	}
-	private void initialImage(AnchorPane rightComponentParent) {
+	private void initialImage() {
 		image = new ImageView();
 		image.setImage(bgImage);
 		image.fitWidthProperty().bind(rightComponentParent.widthProperty());
@@ -79,9 +73,9 @@ public class RepoCreateTimeStatistic implements StatisticsPane {
 	}
 
 	public void initialChart() {
-//		GeneralStatisticsService statisticsService = new GeneralStatisticsUtil();
-//		RepoDistOverCreateTime repoCreateOnTimeCounts = statisticsService.getRepoDistOverCreateTime();
-//		GitBarChart barChart = new GitBarChart(repoCreateOnTimeCounts);
-//		anchorPane.getChildren().add(barChart);
+		GeneralStatisticsService statisticsService = new GeneralStatisticsUtil();
+		RepoDistOverCreateTime repoCreateOnTimeCounts = statisticsService.getRepoDistOverCreateTime();
+		GitBarChart barChart = new GitBarChart(repoCreateOnTimeCounts);
+		anchorPane.getChildren().add(barChart);
 	}
 }
