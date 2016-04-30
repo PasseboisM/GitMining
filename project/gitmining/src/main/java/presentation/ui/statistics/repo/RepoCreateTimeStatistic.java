@@ -1,11 +1,9 @@
 package presentation.ui.statistics.repo;
 
-import java.awt.print.Printable;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
 import chart_data.RepoDistOverCreateTime;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
@@ -49,14 +47,9 @@ public class RepoCreateTimeStatistic implements StatisticsPane {
 		this.rightComponentParent = rightComponentParent;
 		this.initialChart();
 		loadImgFile();
-//		initialImage(rightComponentParent);
 		initialImage();
 	}
 	
-	public void print(){
-		System.out.println(rightComponentParent.getWidth());
-		System.out.println(rightComponentParent.getHeight());
-	}
 
 	@FXML
 	private AnchorPane anchorPane;
@@ -77,7 +70,6 @@ public class RepoCreateTimeStatistic implements StatisticsPane {
 		image.fitWidthProperty().bind(rightComponentParent.widthProperty());
 		image.fitHeightProperty().bind(rightComponentParent.heightProperty());
 		anchorPane.getChildren().add(0,image);
-		
 	}
 
 	public void initialChart() {
