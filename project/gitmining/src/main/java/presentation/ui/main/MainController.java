@@ -30,6 +30,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import logic.service.Loader;
@@ -109,6 +110,8 @@ public class MainController extends Application implements Observer{
 				double pbLayoutX = apWidth*0.1;
 				progressBar.setPrefWidth(pbWidth);
 				progressBar.setLayoutX(pbLayoutX);
+				rightComponentParent.setMinWidth(apWidth-150);
+				rightComponentParent.setMaxWidth(apWidth-150);
 			}
 		});
 		
@@ -118,6 +121,8 @@ public class MainController extends Application implements Observer{
 				double apHeight = newValue.doubleValue();
 				progressBar.setPrefHeight(30);
 				progressBar.setLayoutY(apHeight-45);
+				rightComponentParent.setMinHeight(apHeight);
+				rightComponentParent.setMaxHeight(apHeight);
 			}
 		});
 		mainAnchorPane.getChildren().add(progressBar);
@@ -267,7 +272,8 @@ public class MainController extends Application implements Observer{
 	@FXML private ToggleButton buttonOnlineMode;
 	@FXML private AnchorPane mainAnchorPane;
 //	@FXML 
-	@FXML private FlowPane flowpane;
+//	@FXML private FlowPane flowpane;
+	@FXML private VBox menu;
 	@FXML private ImageView gitLogoIV;
 	private boolean startViewing = false;
 	private ToggleGroup toggleGroup;
