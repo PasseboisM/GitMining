@@ -7,4 +7,4 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<fx:root fx:id="pieChart" prefHeight="675.0" prefWidth="1050.0" type="PieChart" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" />
+<fx:root fx:id="pieChart" type="PieChart" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" />
