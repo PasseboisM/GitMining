@@ -1,0 +1,6 @@
+who：徐江河，王子安，徐家逸，孙婧
+when：第九周，04-24（星期日）晚上
+what： 进行迭代三任务分析、任务安排
+how long:3hrs
+arrived solution：
+    任务分析、初步任务安排见《GitMining迭代三软件需求规格说明文档V1.0》与《GitMining项目计划文档V1.2》
