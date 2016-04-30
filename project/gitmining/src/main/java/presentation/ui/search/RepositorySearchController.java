@@ -47,18 +47,26 @@ public class RepositorySearchController{
 		}
 		RepositorySearchController controller = loader.getController();
 		controller.initial(rightComponentParent);
+		controller.initialLayout(rootUINode);
 		return rootUINode;
 	}
 	
 	
 	private void initial(AnchorPane rightComponentParent) {
+		this.rightComponentParent = rightComponentParent;
 		initialImage();
 		initialCategoryCheckBoxes();
 		initialLanguageCheckBoxes();
 		initialToggleButtonGroup();
 		initialSearchService();
-		this.rightComponentParent = rightComponentParent;
 		initialPage();
+	}
+	
+	private void initialLayout(AnchorPane rootUINode) {
+		AnchorPane.setBottomAnchor(rootUINode, 0.0);
+		AnchorPane.setLeftAnchor(rootUINode, 0.0);
+		AnchorPane.setRightAnchor(rootUINode, 0.0);
+		AnchorPane.setTopAnchor(rootUINode, 0.0);
 	}
 
 	private void initialImage() {
@@ -69,9 +77,9 @@ public class RepositorySearchController{
 		}
 		image = new ImageView();
 		image.setImage(bgImage);
-		image.setFitWidth(1050);
-		image.setFitHeight(675);
-		sonPane.getChildren().add(image);
+		image.fitWidthProperty().bind(rightComponentParent.widthProperty());
+		image.fitHeightProperty().bind(rightComponentParent.heightProperty());
+		mainPane.getChildren().add(0,image);
 	}
 
 	private void initialCategoryCheckBoxes() {
@@ -241,7 +249,7 @@ public class RepositorySearchController{
 	@FXML 	private Pagination pag;
 	@FXML 	private TextField keyword;
 	@FXML 	private AnchorPane mainPane;
-	@FXML 	private AnchorPane sonPane;
+//	@FXML 	private AnchorPane sonPane;
 	private List<CheckBox> categoryCheckBoxes;
 	private List<CheckBox> languageCheckBoxes;
 	private AnchorPane rightComponentParent;

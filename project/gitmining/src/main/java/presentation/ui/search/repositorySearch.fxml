@@ -6,29 +6,28 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1051.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.ui.search.RepositorySearchController">
+<AnchorPane fx:id="mainPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.ui.search.RepositorySearchController">
    <children>
-      <AnchorPane fx:id="sonPane" prefHeight="658.0" prefWidth="1051.0" />
-      <VBox fx:id="repoVBox" maxHeight="-Infinity" maxWidth="-Infinity">
+      <VBox fx:id="repoVBox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <AnchorPane prefHeight="202.0" prefWidth="1050.0">
+            <AnchorPane maxHeight="220.0" minHeight="220.0" VBox.vgrow="NEVER">
                <children>
-                  <AnchorPane layoutX="19.0" layoutY="79.0" opacity="0.67" prefHeight="129.0" prefWidth="1010.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="59.0" />
-                  <GridPane layoutX="26.0" layoutY="70.0" minHeight="-Infinity" opacity="0.8" prefHeight="154.0" prefWidth="1010.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="20.0">
+                  <AnchorPane opacity="0.67" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0" />
+                  <GridPane opacity="0.8" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="20.0">
                      <children>
-                        <TextField fx:id="keyword" prefHeight="25.0" prefWidth="936.0" promptText="搜索项目" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.valignment="TOP" />
+                        <TextField fx:id="keyword" prefWidth="800.0" promptText="搜索项目" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.valignment="TOP" />
                         <Button fx:id="search" mnemonicParsing="false" onAction="#onSearch" stylesheets="@button.css" text="查询" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.valignment="TOP" />
                         <Label alignment="TOP_RIGHT" contentDisplay="TOP" text="项目种类：" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <FlowPane fx:id="flowPaneCategory" hgap="5.0" prefHeight="200.0" prefWidth="200.0" vgap="10.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1">
+                        <FlowPane fx:id="flowPaneCategory" hgap="5.0" vgap="10.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1">
                            <padding>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>
                         </FlowPane>
-                        <FlowPane fx:id="flowPaneLanguage" hgap="5.0" prefHeight="200.0" prefWidth="200.0" vgap="10.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="2">
+                        <FlowPane fx:id="flowPaneLanguage" hgap="5.0" vgap="10.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="2">
                            <padding>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>
@@ -46,35 +45,29 @@
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                      </columnConstraints>
                      <rowConstraints>
-                        <RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="82.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="76.0" minHeight="10.0" prefHeight="49.0" vgrow="SOMETIMES" />
+                        <RowConstraints percentHeight="20.0" vgrow="SOMETIMES" />
+                        <RowConstraints percentHeight="40.0" vgrow="SOMETIMES" />
+                        <RowConstraints percentHeight="40.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <VBox.margin>
                         <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
                      </VBox.margin>
                   </GridPane>
                </children>
-               <padding>
-                  <Insets left="10.0" right="10.0" top="10.0" />
-               </padding>
             </AnchorPane>
-            <AnchorPane prefHeight="426.0" prefWidth="1033.0">
+            <AnchorPane VBox.vgrow="ALWAYS">
                <children>
-                  <AnchorPane opacity="0.67" prefHeight="461.0" prefWidth="1030.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="21.0" />
-                  <VBox layoutX="20.0" prefHeight="472.0" prefWidth="1010.0">
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
+                  <AnchorPane opacity="0.67" style="-fx-background-color: white;" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0" />
+                  <VBox layoutX="20.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
                      <children>
-                        <HBox prefHeight="20.0" prefWidth="990.0">
+                        <HBox VBox.vgrow="NEVER">
                            <children>
                               <ToggleButton fx:id="noSort" mnemonicParsing="false" onAction="#changeSortStrategy" text="随机项目" />
                               <ToggleButton fx:id="starSort" mnemonicParsing="false" onAction="#changeSortStrategy" text="关注降序" />
                               <ToggleButton fx:id="forkSort" mnemonicParsing="false" onAction="#changeSortStrategy" text="拷贝降序" />
                            </children>
                         </HBox>
-                        <Pagination fx:id="pag" pageCount="1" prefHeight="430.0" prefWidth="990.0" />
+                        <Pagination fx:id="pag" pageCount="1" prefHeight="430.0" prefWidth="990.0" VBox.vgrow="ALWAYS" />
                      </children>
                   </VBox>
                </children>
