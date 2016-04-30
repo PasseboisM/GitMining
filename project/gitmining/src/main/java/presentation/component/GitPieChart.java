@@ -19,6 +19,7 @@ import javafx.scene.Node;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
 
@@ -28,12 +29,21 @@ public class GitPieChart extends PieChart {
 	private PieChart pieChart;
 	public GitPieChart(UserDistOverType userTypeCounts) {
 		this.initialFXML();
+		initialLayout();
 		this.initial(userTypeCounts);
 	}
 	
 	public GitPieChart(RepoDistOverLanguage repoDistOverLanguage){
 		this.initialFXML();
+		initialLayout();
 		this.initial(repoDistOverLanguage);
+	}
+	
+	private void initialLayout() {
+		AnchorPane.setBottomAnchor(this, 25.0);
+		AnchorPane.setLeftAnchor(this, 25.0);
+		AnchorPane.setRightAnchor(this, 25.0);
+		AnchorPane.setTopAnchor(this, 25.0);
 	}
 
 	private void initialFXML() {

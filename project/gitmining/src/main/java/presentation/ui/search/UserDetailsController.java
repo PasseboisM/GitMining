@@ -29,6 +29,7 @@ public class UserDetailsController {
 		}
 		UserDetailsController controller = loader.getController();
 		controller.initial(rightComponentParent,user);
+		controller.initialLayout(pane);
 		return pane;
 	}
 	private AnchorPane rightComponentParent;
@@ -42,8 +43,6 @@ public class UserDetailsController {
 		if(image.isError()){
 			image = avatarImage;
 		}
-		//System.out.println(""+user.getAvatar_url().toString());
-	//	System.out.println("Image error?->"+image.isError());
 		imageView.setImage(image);
 		
 		UserStatisticsService service = new UserStatisticsUtil();
@@ -55,6 +54,13 @@ public class UserDetailsController {
 				radarAnchorPane.getChildren().add(radar);
 			}
 		});
+	}
+	
+	private void initialLayout(AnchorPane rootUINode) {
+		AnchorPane.setBottomAnchor(rootUINode, 0.0);
+		AnchorPane.setLeftAnchor(rootUINode, 0.0);
+		AnchorPane.setRightAnchor(rootUINode, 0.0);
+		AnchorPane.setTopAnchor(rootUINode, 0.0);
 	}
 	private void loadImgFile() {
 		try {

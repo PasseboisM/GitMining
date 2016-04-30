@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -38,12 +39,13 @@ public class UserSearchController {
 		}
 		UserSearchController controller = loader.getController();
 		controller.initial(rightComponentParent);
+		controller.initialLayout(pane);
 		return pane;
 	}
 	
 	private void initial(AnchorPane rightComponentParent) {
-		initialImage();
 		this.rightComponentParent = rightComponentParent;
+		initialImage();
 		initialSearchService();
 		initialPage();
 	}
@@ -56,9 +58,9 @@ public class UserSearchController {
 		}
 		image = new ImageView();
 		image.setImage(bgImage);
-		image.setFitWidth(1050);
-		image.setFitHeight(675);
-		sonPane.getChildren().add(image);
+		image.fitWidthProperty().bind(rightComponentParent.widthProperty());
+		image.fitHeightProperty().bind(rightComponentParent.heightProperty());
+		mainPane.getChildren().add(0,image);
 	}
 
 	private void initialSearchService() {
@@ -89,7 +91,17 @@ public class UserSearchController {
 			vBox.getChildren().add(new UserMinBlock(rightComponentParent, gitUser));
 		}
 		pane.setContent(vBox);
+		vBox.minWidthProperty().bind(pane.widthProperty());
+		vBox.maxWidthProperty().bind(pane.widthProperty());
+		pane.setHbarPolicy(ScrollBarPolicy.NEVER);
 		return pane;
+	}
+	
+	private void initialLayout(AnchorPane rootUINode) {
+		AnchorPane.setBottomAnchor(rootUINode, 0.0);
+		AnchorPane.setLeftAnchor(rootUINode, 0.0);
+		AnchorPane.setRightAnchor(rootUINode, 0.0);
+		AnchorPane.setTopAnchor(rootUINode, 0.0);
 	}
 
 	private void refreshPage(){
@@ -118,12 +130,15 @@ public class UserSearchController {
 			}
 		}
 		pane.setContent(vBox);
+		vBox.minWidthProperty().bind(pane.widthProperty());
+		vBox.maxWidthProperty().bind(pane.widthProperty());
+		pane.setHbarPolicy(ScrollBarPolicy.NEVER);
 		return pane;
 	}
 	
 	
 	@FXML 	private Pagination pag;
-	@FXML 	private AnchorPane sonPane;
+	@FXML 	private AnchorPane mainPane;
 	@FXML 	private TextField vagename;
 	@FXML	private Button search;
 	

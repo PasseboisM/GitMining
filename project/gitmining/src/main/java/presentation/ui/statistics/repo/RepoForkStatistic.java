@@ -21,8 +21,7 @@ import presentation.ui.statistics.StatisticsPane;
 
 public class RepoForkStatistic implements StatisticsPane {
 	public AnchorPane getInstance(AnchorPane rightComponentParent) {
-		FXMLLoader loader = new FXMLLoader(
-				RepoForkStatistic.class.getResource("repositoryForkStatistic.fxml"));
+		FXMLLoader loader = new FXMLLoader(RepoForkStatistic.class.getResource("repositoryForkStatistic.fxml"));
 		AnchorPane rootUINode = null;
 		try {
 			rootUINode = loader.load();
@@ -31,14 +30,22 @@ public class RepoForkStatistic implements StatisticsPane {
 		}
 		RepoForkStatistic controller = loader.getController();
 		controller.initial(rightComponentParent);
+		controller.initialLayout(rootUINode);
 		return rootUINode;
 	}
 
 	private void initial(AnchorPane rightComponentParent) {
 		this.initialChart();
-		// this.rightComponentParent=rightComponentParent;
+		 this.rightComponentParent=rightComponentParent;
 		bgImage=loadImgFile();
 		initialImage();
+	}
+	
+	private void initialLayout(AnchorPane rootUINode) {
+		AnchorPane.setBottomAnchor(rootUINode, 0.0);
+		AnchorPane.setLeftAnchor(rootUINode, 0.0);
+		AnchorPane.setRightAnchor(rootUINode, 0.0);
+		AnchorPane.setTopAnchor(rootUINode, 0.0);
 	}
 
 	@FXML
@@ -46,7 +53,7 @@ public class RepoForkStatistic implements StatisticsPane {
 	private ImageView image;
 	private static Image bgImage = null;
 
-	// private AnchorPane rightComponentParent;
+	 private AnchorPane rightComponentParent;
 	private Image loadImgFile() {
 		Image tempImage = null;
 		String imageFilename ="Background.jpg";
@@ -60,8 +67,8 @@ public class RepoForkStatistic implements StatisticsPane {
 	private void initialImage() {
 		image = new ImageView();
 		image.setImage(bgImage);
-		image.setFitWidth(1050);
-		image.setFitHeight(675);
+		image.fitWidthProperty().bind(rightComponentParent.widthProperty());
+		image.fitHeightProperty().bind(rightComponentParent.heightProperty());
 		anchorPane.getChildren().add(0,image);
 	}
 

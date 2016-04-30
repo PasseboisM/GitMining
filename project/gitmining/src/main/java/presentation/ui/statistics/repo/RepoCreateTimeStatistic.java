@@ -32,17 +32,28 @@ public class RepoCreateTimeStatistic implements StatisticsPane {
 		}
 		RepoCreateTimeStatistic controller = loader.getController();
 		controller.initial(rightComponentParent);
+		initialLayout(rootUINode);
 		return rootUINode;
 	}
 
+	private void initialLayout(AnchorPane rootUINode) {
+		AnchorPane.setBottomAnchor(rootUINode, 0.0);
+		AnchorPane.setLeftAnchor(rootUINode, 0.0);
+		AnchorPane.setRightAnchor(rootUINode, 0.0);
+		AnchorPane.setTopAnchor(rootUINode, 0.0);
+	}
+
 	private void initial(AnchorPane rightComponentParent) {
+		this.rightComponentParent = rightComponentParent;
 		this.initialChart();
 		loadImgFile();
 		initialImage();
 	}
+	
 
 	@FXML
 	private AnchorPane anchorPane;
+	private AnchorPane rightComponentParent;
     private ImageView image;
 	private Image bgImage = null;
 	
@@ -56,8 +67,8 @@ public class RepoCreateTimeStatistic implements StatisticsPane {
 	private void initialImage() {
 		image = new ImageView();
 		image.setImage(bgImage);
-		image.setFitWidth(1050);
-		image.setFitHeight(675);
+		image.fitWidthProperty().bind(rightComponentParent.widthProperty());
+		image.fitHeightProperty().bind(rightComponentParent.heightProperty());
 		anchorPane.getChildren().add(0,image);
 	}
 

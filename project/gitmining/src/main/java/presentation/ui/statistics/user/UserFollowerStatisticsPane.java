@@ -27,17 +27,20 @@ public class UserFollowerStatisticsPane implements StatisticsPane {
 		}
 		UserFollowerStatisticsPane controller = loader.getController();
 		controller.initial(rightComponentParent);
+		controller.initialLayout(rootUINode);
 		return rootUINode;
 	}
 
 	private void initial(AnchorPane rightComponentParent) {
 		this.initialChart();
+		this.rightComponentParent = rightComponentParent;
 		bgImage=loadImgFile();
 		initialImage();
 	}
 
 	@FXML
 	private AnchorPane anchorPane;
+	private AnchorPane rightComponentParent;
 	private ImageView image;
 	private static Image bgImage = null;
 	
@@ -51,11 +54,17 @@ public class UserFollowerStatisticsPane implements StatisticsPane {
 		}
 		return tempImage;
 	}
+	private void initialLayout(AnchorPane rootUINode) {
+		AnchorPane.setBottomAnchor(rootUINode, 0.0);
+		AnchorPane.setLeftAnchor(rootUINode, 0.0);
+		AnchorPane.setRightAnchor(rootUINode, 0.0);
+		AnchorPane.setTopAnchor(rootUINode, 0.0);
+	}
 	private void initialImage() {
 		image = new ImageView();
 		image.setImage(bgImage);
-		image.setFitWidth(1050);
-		image.setFitHeight(675);
+		image.fitWidthProperty().bind(rightComponentParent.widthProperty());
+		image.fitHeightProperty().bind(rightComponentParent.heightProperty());
 		anchorPane.getChildren().add(0,image);
 	}
 

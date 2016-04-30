@@ -6,59 +6,70 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root minWidth="-Infinity" prefWidth="975.0" style="-fx-border-color: #46c7c7;" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <left>
-      <VBox alignment="CENTER_LEFT" minWidth="-Infinity" prefWidth="600.0" BorderPane.alignment="CENTER">
-         <children>
-            <Hyperlink fx:id="repoFullName" onAction="#jumpToRepositoryDetails">
-               <font>
-                  <Font name="System Bold Italic" size="18.0" />
-               </font>
-            </Hyperlink>
-            <Label fx:id="description" prefWidth="600.0" textFill="#000000c2" wrapText="true">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Label fx:id="lastUpdated" textFill="#00000095" wrapText="true">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-         </children>
-      </VBox>
-   </left>
-   <right>
-      <VBox alignment="CENTER" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <HBox alignment="CENTER_RIGHT">
-               <children>
-                  <VBox alignment="CENTER" minHeight="-Infinity" prefHeight="100.0" prefWidth="50.0">
-                     <children>
-                        <Label fx:id="stargazersCount" textFill="#000000a5" />
-                        <Label text="stars" textFill="#000000a5" />
-                     </children>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </VBox>
-                  <VBox alignment="CENTER" minHeight="-Infinity" prefHeight="100.0" prefWidth="50.0">
-                     <children>
-                        <Label fx:id="forksCount" textFill="#000000a5" />
-                        <Label text="forks" textFill="#000000a5" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" minHeight="-Infinity" prefHeight="100.0" prefWidth="75.0">
-                     <children>
-                        <Label fx:id="subscribersCount" textFill="#000000a5" />
-                        <Label text="contributors" textFill="#000000a5" />
-                     </children>
-                  </VBox>
-               </children>
-            </HBox>
-         </children></VBox>
-   </right>
+<fx:root type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <padding>
-      <Insets left="10.0" right="10.0" />
+      <Insets right="15.0" />
    </padding>
+   <center>
+      <BorderPane style="-fx-border-color: #46c7c7;" BorderPane.alignment="CENTER">
+         <right>
+            <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox alignment="CENTER_RIGHT">
+                     <children>
+                        <VBox alignment="CENTER" minHeight="-Infinity" prefHeight="100.0" prefWidth="50.0">
+                           <children>
+                              <Label fx:id="stargazersCount" textFill="#000000a5" />
+                              <Label text="stars" textFill="#000000a5" />
+                           </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </VBox>
+                        <VBox alignment="CENTER" minHeight="-Infinity" prefHeight="100.0" prefWidth="50.0">
+                           <children>
+                              <Label fx:id="forksCount" textFill="#000000a5" />
+                              <Label text="forks" textFill="#000000a5" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" minHeight="-Infinity" prefHeight="100.0" prefWidth="75.0">
+                           <children>
+                              <Label fx:id="subscribersCount" textFill="#000000a5" />
+                              <Label text="contributors" textFill="#000000a5" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </right>
+         <left>
+            <VBox alignment="CENTER_LEFT" BorderPane.alignment="CENTER">
+               <children>
+                  <Hyperlink fx:id="repoFullName" onAction="#jumpToRepositoryDetails">
+                     <font>
+                        <Font name="System Bold Italic" size="18.0" />
+                     </font>
+                  </Hyperlink>
+                  <Label fx:id="description" prefWidth="500.0" textFill="#000000c2" wrapText="true">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lastUpdated" textFill="#00000095" wrapText="true">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </left>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+      </BorderPane>
+   </center>
 </fx:root>

@@ -37,6 +37,7 @@ public class RepoDetailsController {
 		}
 		RepoDetailsController controller = loader.getController();
 		controller.initial(rightComponentParent,repository);
+		controller.initialLayout(pane);
 		return pane;
 	}
 	
@@ -58,11 +59,11 @@ public class RepoDetailsController {
 	private static Image btImage=null;
 	private ImageView image;
 	private void initial(AnchorPane rightComponentParent,Repository repository) {
+		this.rightComponentParent = rightComponentParent;
 		loadImgFile();
 		initialButton();
 		initialComponentText(repository);
 		initialRadar(repository);
-		this.rightComponentParent = rightComponentParent;
 	}
 	
 	private void loadImgFile() {
@@ -73,12 +74,21 @@ public class RepoDetailsController {
 		}
 	}
 	
+	private void initialLayout(AnchorPane rootUINode) {
+		AnchorPane.setBottomAnchor(rootUINode, 0.0);
+		AnchorPane.setLeftAnchor(rootUINode, 0.0);
+		AnchorPane.setRightAnchor(rootUINode, 0.0);
+		AnchorPane.setTopAnchor(rootUINode, 0.0);
+	}
+	
 	private void initialImage() {
 		image = new ImageView();
 		image.setImage(btImage);
 		image.setFitWidth(60);
 		image.setFitHeight(60);
 	}
+	
+	
 	private void initialButton(){
 		initialImage();
 		returnButton.setGraphic(image);
