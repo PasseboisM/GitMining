@@ -1,16 +1,13 @@
 package presentation.component;
 
 import java.io.IOException;
-
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 import chart_data.UserDistOverCreateTime;
 import chart_data.UserDistOverCreateTime.UserCreateOnTimeCount;
-
 import javafx.application.Platform;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Side;
 import javafx.scene.Node;
@@ -27,12 +24,12 @@ public class GitMixChart extends AnchorPane {
 	
 
 	
-	
+//	final CategoryAxis xAxis = new CategoryAxis();
 	final CategoryAxis xAxis2 = new CategoryAxis();
-	final NumberAxis yAxis2 =new NumberAxis(0,60000,5000);
-	final NumberAxis yAxis =new NumberAxis(0,12000,1000);
-	BarChart barChart =new BarChart(xAxis2,yAxis);
-	LineChart lineChart =new LineChart(xAxis2,yAxis2);
+	final NumberAxis yAxis2 =new NumberAxis();
+	final NumberAxis yAxis =new NumberAxis();
+	BarChart<String,Number> barChart =new BarChart<String,Number>(xAxis2,yAxis);
+	LineChart<String,Number> lineChart =new LineChart<String,Number>(xAxis2,yAxis2);
 	/**
 	 * 折线图构造函数
 	 */
@@ -49,16 +46,15 @@ public class GitMixChart extends AnchorPane {
 		this.initialFXML();
 		this.initialText("用户创建时间统计图", "创建时间", "用户个数");
 		this.initial(userDistOverCreateTime, "用户");
-		
 	}
 
 
 	private void initialText(String title, String xLabel, String yLabel) {
 		lineChart.setTitle(title);
+//		xAxis.setLabel(xLabel);
 		xAxis2.setLabel(xLabel);
+		yAxis.setLabel(yLabel);
 		yAxis2.setLabel(yLabel);
-		
-		
 	}
 
 	private void initialFXML() {
@@ -72,25 +68,25 @@ public class GitMixChart extends AnchorPane {
 			e.printStackTrace();
 		}
 		
-		AnchorPane.setBottomAnchor(pane, (double) 20);
-		AnchorPane.setTopAnchor(pane, (double) 40);
-		AnchorPane.setLeftAnchor(pane, (double) 30);
-		AnchorPane.setRightAnchor(pane,(double) 30);
-		barChart.setPrefHeight(600);
-		barChart.setPrefWidth(1000);
+		AnchorPane.setBottomAnchor(pane, 20.0);
+		AnchorPane.setTopAnchor(pane, 20.0);
+		AnchorPane.setLeftAnchor(pane, 20.0);
+		AnchorPane.setRightAnchor(pane, 20.0);
+		barChart.prefHeightProperty().bind(pane.heightProperty());
+		barChart.prefWidthProperty().bind(pane.widthProperty());
 		barChart.setHorizontalGridLinesVisible(false);
 		barChart.setVerticalGridLinesVisible(false);
-		//barChart.setHorizontalZeroLineVisible(false);
-		barChart.setBarGap(34);
 		barChart.getYAxis().setSide(Side.RIGHT);
-		lineChart.setPrefHeight(600);
-		lineChart.setPrefWidth(1000);
+		lineChart.prefHeightProperty().bind(pane.heightProperty());
+		lineChart.prefWidthProperty().bind(pane.widthProperty());
 		lineChart.setHorizontalGridLinesVisible(false);
 		lineChart.setVerticalGridLinesVisible(false);
+//		xAxis.maxWidthProperty().bind(pane.widthProperty());
+//		xAxis.minWidthProperty().bind(pane.widthProperty());
+//		xAxis2.maxWidthProperty().bind(pane.widthProperty());
+//		xAxis2.minWidthProperty().bind(pane.widthProperty());
 		pane.getChildren().add(barChart);
 		pane.getChildren().add(lineChart);
-		
-		
 	}
 
 	/**
@@ -100,7 +96,7 @@ public class GitMixChart extends AnchorPane {
 		XYChart.Series<String,Number> series = new XYChart.Series<>();
 		XYChart.Series<String,Number> series_2 = new XYChart.Series<>();
 		series.setName(seriesName);
-		List<Number> datasLine=new LinkedList();  
+		List<Number> datasLine=new LinkedList<>();  
 		datasLine.add(datasBar.get(0));
 		for(int i= 1;i<labels.size();i++){
 			datasLine.add(datasLine.get(i-1).intValue()+datasBar.get(i).intValue());
@@ -130,6 +126,7 @@ public class GitMixChart extends AnchorPane {
 		XYChart.Series<String,Number> series = new XYChart.Series<>();
 		XYChart.Series<String,Number> series_2 = new XYChart.Series<>();
 		series.setName(seriesName);
+		series_2.setName(seriesName);
 		Iterator<UserCreateOnTimeCount> iterator = userDistOverCreateTime.getCounts();
 		int sumFollower=0;
 		while (iterator.hasNext()) {
@@ -147,6 +144,7 @@ public class GitMixChart extends AnchorPane {
 			public void run() {
 				lineChart.getData().add(series_2);
 				barChart.getData().add(series);
+				barChart.setCategoryGap(500.0 / userDistOverCreateTime.getNumOfCount());
 				Iterator<UserCreateOnTimeCount> runLaterIterator = userDistOverCreateTime.getCounts();
 				for (int i = 0; i <userDistOverCreateTime.getNumOfCount(); i++) {
 					UserCreateOnTimeCount followerNumberRange = runLaterIterator.next();
@@ -158,7 +156,6 @@ public class GitMixChart extends AnchorPane {
 				}
 			}
 		});
-		
 	}
 
 }
