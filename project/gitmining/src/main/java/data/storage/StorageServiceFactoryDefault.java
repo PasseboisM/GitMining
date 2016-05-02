@@ -13,7 +13,6 @@ public class StorageServiceFactoryDefault extends StorageServiceFactory {
 	
 	
 	private StorageServiceFactoryDefault(){
-		// TODO Init matters? Or nothing?
 	}
 	
 	public static StorageServiceFactoryDefault getInstance() {
