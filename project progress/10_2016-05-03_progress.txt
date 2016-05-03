@@ -1,0 +1,27 @@
+who：徐江河xjh14
+when：第10周
+what：进行Jenkins配置；开始进行数据库实现
+problem:未能按时完成数据库实现
+todo：按时完成数据库实现，进行登录功能接口设计
+
+who：
+when：
+what：
+problem：
+todo：
+
+who：
+when：
+what：
+problem：
+todo：
+
+who：
+when：
+what：
+problem：
+todo：
+
+组长总结：
+    第9周内我们组主要是在进行迭代二产品一些问题的修补，比如统计图使用不佳、界面不可进行比例调整等。同时也进行了迭代三的一些配置工作。
+    
