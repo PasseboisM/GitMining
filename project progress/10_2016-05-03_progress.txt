@@ -1,14 +1,14 @@
-who：徐江河xjh14
+﻿who：徐江河xjh14
 when：第10周
 what：进行Jenkins配置；开始进行数据库实现
 problem:未能按时完成数据库实现
 todo：按时完成数据库实现，进行登录功能接口设计
 
-who：
-when：
-what：
-problem：
-todo：
+who：王子安wza14
+when：第10周
+what：完成界面分辨率自适应工作
+problem：GitHub服务器限制开发者在一个IP地址只能访问5000次/小时，所以无法一次下载GitHub服务器上的大量数据
+todo：调整网络端API接口来适应迭代三需求
 
 who：
 when：
