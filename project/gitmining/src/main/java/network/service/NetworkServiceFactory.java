@@ -1,9 +1,14 @@
 package network.service;
 
+import java.io.IOException;
+
+import org.kohsuke.github.GHRepository;
+
 import common.exception.DataCorruptedException;
 import common.exception.NetworkException;
 import network.data.BasicNetworkServiceFactory;
 import network.data.GHNetworkServiceFactory;
+import network.data.GHSpecificDataSource;
 
 /**
  * 
@@ -24,36 +29,23 @@ public abstract class NetworkServiceFactory {
 		return new GHNetworkServiceFactory();
 	}
 	
-	public static void main(String[] args) {
-		for(int i=0;i<80;i++){
-			//80次测试
-			System.out.println("time for "+i);
-			NetworkServiceFactory factory = NetworkServiceFactory.getInstance();
-			SpecificDataSource dataSource = factory.getSpecificDataSource();
-			try {
-				dataSource.getSpecificRepo("kohsuke/github-api");
-			} catch (NetworkException e) {
-				e.printStackTrace();
-			} catch (DataCorruptedException e) {
-				e.printStackTrace();
-			}
-			
-		}
-		
-		for(int i=0;i<5010;i++){
-			//5000次测试
-			System.out.println("time for "+i);
-			NetworkServiceFactory factory = NetworkServiceFactory.getInstance();
-			SpecificDataSource dataSource = factory.getSpecificDataSource();
-			try {
-				dataSource.getSpecificRepo("kohsuke/github-api");
-			} catch (NetworkException e) {
-				e.printStackTrace();
-			} catch (DataCorruptedException e) {
-				e.printStackTrace();
-			}
-			
-		}
+	public static void main(String[] args) throws NetworkException, DataCorruptedException, IOException {
+//		for(int i=0;i<80;i++){
+//			//80次测试
+//			System.out.println("time for "+i);
+//			NetworkServiceFactory factory = NetworkServiceFactory.getInstance();
+//			SpecificDataSource dataSource = factory.getSpecificDataSource();
+//			try {
+//				dataSource.getSpecificRepo("kohsuke/github-api");
+//			} catch (NetworkException e) {
+//				e.printStackTrace();
+//			} catch (DataCorruptedException e) {
+//				e.printStackTrace();
+//			}
+//		}
+		GHSpecificDataSource source = new GHSpecificDataSource();
+		GHRepository repository = source.getSpecificRepo("kohsuke/github-api");
+		System.out.println(repository.getFullName());
 	}
 	
 	

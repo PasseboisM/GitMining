@@ -4,47 +4,35 @@ import java.io.File;
 import java.io.IOException;
 
 import org.kohsuke.github.GHRepository;
+import org.kohsuke.github.GHUser;
 import org.kohsuke.github.GitHub;
 import org.kohsuke.github.GitHubBuilder;
 
 import common.exception.DataCorruptedException;
 import common.exception.NetworkException;
-import common.service.GitUser;
 import common.service.GitUserMin;
 import common.service.Repository;
 import common.service.RepositoryMin;
-import network.service.SpecificDataSource;
 
-public class GHSpecificDataSource implements SpecificDataSource{
+public class GHSpecificDataSource{
 
 	private GitHub gh = null;
-	@Override
-	public Repository getSpecificRepo(RepositoryMin source) throws NetworkException, DataCorruptedException {
+	public Repository getSpecificRepo(RepositoryMin source) throws NetworkException, DataCorruptedException, IOException {
 		this.getSpecificRepo(source.getFull_name());
 		return null;
 	}
 
-	@Override
-	public Repository getSpecificRepo(String fullName) throws NetworkException, DataCorruptedException {
-		try {
-			GHRepository repository = gh.getRepository(fullName);
-			System.out.println("fullname : "+repository.getFullName()+"\nname : "+repository.getName());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
+	public GHRepository getSpecificRepo(String fullName) throws NetworkException, DataCorruptedException, IOException {
+		GHRepository repository = gh.getRepository(fullName);
+		return repository;
 	}
 
-	@Override
-	public GitUser getSpecificUser(GitUserMin source) throws NetworkException {
-		// TODO Auto-generated method stub
-		return null;
+	public GHUser getSpecificUser(GitUserMin source) throws NetworkException, IOException {
+		return this.getSpecificUser(source.getLogin());
 	}
 
-	@Override
-	public GitUser getSpecificUser(String login) throws NetworkException {
-		// TODO Auto-generated method stub
-		return null;
+	public GHUser getSpecificUser(String login) throws NetworkException, IOException {
+		return gh.getUser(login);
 	}
 	
 	public GHSpecificDataSource() {
