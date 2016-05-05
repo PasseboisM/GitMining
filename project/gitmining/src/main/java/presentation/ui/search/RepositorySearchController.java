@@ -19,6 +19,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
@@ -164,6 +165,9 @@ public class RepositorySearchController{
 			vBox.getChildren().add(new RepositoryMinBlock(rightComponentParent,repository));
 		}
 		pane.setContent(vBox);
+		vBox.minWidthProperty().bind(pane.widthProperty());
+		vBox.maxWidthProperty().bind(pane.widthProperty());
+		pane.setHbarPolicy(ScrollBarPolicy.NEVER);
 		return pane;
 	}
 
@@ -238,6 +242,9 @@ public class RepositorySearchController{
 			}
 		}
 		pane.setContent(vBox);
+		vBox.minWidthProperty().bind(pane.widthProperty());
+		vBox.maxWidthProperty().bind(pane.widthProperty());
+		pane.setHbarPolicy(ScrollBarPolicy.NEVER);
 		return pane;
 	}
 	

@@ -39,8 +39,8 @@
                         </Label>
                      </children>
                      <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="109.0" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                      </columnConstraints>
@@ -67,7 +67,7 @@
                               <ToggleButton fx:id="forkSort" mnemonicParsing="false" onAction="#changeSortStrategy" text="拷贝降序" />
                            </children>
                         </HBox>
-                        <Pagination fx:id="pag" pageCount="1" prefHeight="430.0" prefWidth="990.0" VBox.vgrow="ALWAYS" />
+                        <Pagination fx:id="pag" pageCount="1" VBox.vgrow="ALWAYS" />
                      </children>
                   </VBox>
                </children>

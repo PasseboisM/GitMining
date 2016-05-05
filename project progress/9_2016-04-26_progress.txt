@@ -1,14 +1,14 @@
-who：徐江河xjh14
+﻿who：徐江河xjh14
 when：第9周
 what：进行新一轮需求分析
 problem:最新（小组自主）提出的待实现需求较多，从日程表上计算不能全部完成。
 todo：完成Jenkins平台的调试
 
-who：
-when：
-what：
-problem：
-todo：
+who：王子安wza14
+when：第9周
+what：进行新一轮需求分析
+problem：界面分辨率调整可能难度较大，制作网页端可能难度较大
+todo：进行界面分辨率自适应的工作
 
 who：
 when：

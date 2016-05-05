@@ -7,132 +7,207 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="anchorPane" minWidth="-Infinity" prefHeight="675.0" prefWidth="1050.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.ui.search.UserDetailsController">
+<AnchorPane fx:id="anchorPane" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.ui.search.UserDetailsController">
    <children>
-      <BorderPane layoutX="57.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="643.0" prefWidth="1050.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane layoutX="57.0" layoutY="20.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
          <center>
-            <VBox prefHeight="475.0" prefWidth="578.0" spacing="3.0" BorderPane.alignment="CENTER">
+            <HBox>
                <children>
-                  <ImageView fx:id="imageView" fitHeight="260.0" fitWidth="260.0" pickOnBounds="true" preserveRatio="true">
-                     <VBox.margin>
-                        <Insets bottom="5.0" left="20.0" top="20.0" />
-                     </VBox.margin></ImageView>
-                  <Label fx:id="labelType" textFill="#8d8d8d" wrapText="true">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="20.0" />
-                     </VBox.margin>
-                     <graphic>
-                        <Label text="用户类型：" wrapText="true">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Label>
-                     </graphic>
-                  </Label>
-                  <Label fx:id="labelBlog" textFill="#8d8d8d" wrapText="true">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                     <graphic>
-                        <Label text="用户博客：" wrapText="true">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                           <padding>
+                  <VBox spacing="3.0" BorderPane.alignment="CENTER" HBox.hgrow="ALWAYS">
+                     <children>
+                        <ImageView fx:id="imageView" fitHeight="260.0" fitWidth="260.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="NEVER">
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="20.0" top="20.0" />
+                           </VBox.margin>
+                        </ImageView>
+                        <VBox alignment="CENTER_LEFT" spacing="4.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <Label fx:id="labelType" textFill="#8d8d8d" wrapText="true">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                                 <graphic>
+                                    <Label text="用户类型：" wrapText="true">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </graphic>
+                              </Label>
+                              <Label fx:id="labelBlog" textFill="#8d8d8d" wrapText="true">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                                 <graphic>
+                                    <Label text="用户博客：" wrapText="true">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </graphic>
+                              </Label>
+                              <Label fx:id="labelUserLocation" textFill="#8d8d8d" wrapText="true">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                                 <graphic>
+                                    <Label text="用户地点：" wrapText="true">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </graphic>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </Label>
+                              <Label fx:id="labelEmail" textFill="#8d8d8d" wrapText="true">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                                 <graphic>
+                                    <Label text="个人邮箱：" wrapText="true">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </graphic>
+                              </Label>
+                              <Label fx:id="labelBio" textFill="#8d8d8d" wrapText="true">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                                 <graphic>
+                                    <Label text="个人简介：" wrapText="true">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </graphic>
+                              </Label>
+                              <Label fx:id="labelCreatedAt" textFill="#8d8d8d" wrapText="true">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                                 <graphic>
+                                    <Label text="创建时间：" wrapText="true">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </graphic>
+                              </Label>
+                              <Label fx:id="labelUpdatedAt" textFill="#8d8d8d" wrapText="true">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                                 <graphic>
+                                    <Label text="更新时间：" wrapText="true">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </graphic>
+                              </Label>
+                           </children>
+                           <VBox.margin>
                               <Insets left="20.0" />
-                           </padding>
-                        </Label>
-                     </graphic>
-                  </Label>
-                  <Label fx:id="labelUserLocation" textFill="#8d8d8d" wrapText="true">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                     <graphic>
-                        <Label text="用户地点：" wrapText="true">
+                           </VBox.margin>
+                        </VBox>
+                     </children>
+                     <BorderPane.margin>
+                        <Insets left="30.0" />
+                     </BorderPane.margin>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER" prefWidth="322.0" HBox.hgrow="NEVER">
+                     <children>
+                        <AnchorPane fx:id="radarAnchorPane" prefHeight="314.0" prefWidth="322.0">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </AnchorPane>
+                        <Label text="用户统计数据" BorderPane.alignment="CENTER">
                            <font>
-                              <Font size="20.0" />
+                              <Font size="28.0" />
                            </font>
                         </Label>
-                     </graphic>
-                     <VBox.margin>
-                        <Insets left="20.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label fx:id="labelEmail" textFill="#8d8d8d" wrapText="true">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                     <graphic>
-                        <Label text="个人邮箱" wrapText="true">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                           <padding>
-                              <Insets left="20.0" />
-                           </padding>
-                        </Label>
-                     </graphic>
-                  </Label>
-                  <Label fx:id="labelBio" textFill="#8d8d8d" wrapText="true">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                     <graphic>
-                        <Label text="个人简介：" wrapText="true">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                           <padding>
-                              <Insets left="20.0" />
-                           </padding>
-                        </Label>
-                     </graphic>
-                  </Label>
-                  <Label fx:id="labelCreatedAt" textFill="#8d8d8d" wrapText="true">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                     <graphic>
-                        <Label text="创建时间：" wrapText="true">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                           <padding>
-                              <Insets left="20.0" />
-                           </padding>
-                        </Label>
-                     </graphic>
-                  </Label>
-                  <Label fx:id="labelUpdatedAt" textFill="#8d8d8d" wrapText="true">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                     <graphic>
-                        <Label text="更新时间：" wrapText="true">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                           <padding>
-                              <Insets left="20.0" />
-                           </padding>
-                        </Label>
-                     </graphic>
-                  </Label>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <GridPane>
+                                 <children>
+                                    <Label fx:id="labelFollowers">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="被关注人数" textFill="#545454" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <columnConstraints>
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BOTTOM" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                              </GridPane>
+                              <GridPane>
+                                 <children>
+                                    <Label fx:id="labelFollowing">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="关注人数" textFill="#545454" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <columnConstraints>
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BOTTOM" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                              </GridPane>
+                              <GridPane>
+                                 <children>
+                                    <Label fx:id="labelRepos">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="公开项目" textFill="#545454" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <columnConstraints>
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BOTTOM" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                              </GridPane>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                </children>
-               <BorderPane.margin>
-                  <Insets left="30.0" />
-               </BorderPane.margin>
-            </VBox>
+            </HBox>
          </center>
-         <padding>
-            <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
-         </padding>
          <top>
-            <VBox prefHeight="53.0" prefWidth="923.0">
+            <VBox prefHeight="53.0">
                <children>
                   <HBox prefHeight="50.0" prefWidth="923.0" BorderPane.alignment="CENTER">
                      <children>
@@ -162,92 +237,7 @@
                </children>
             </VBox>
          </top>
-         <right>
-            <VBox alignment="TOP_CENTER" prefHeight="494.0" prefWidth="322.0">
-               <children>
-                  <AnchorPane fx:id="radarAnchorPane" prefHeight="314.0" prefWidth="322.0">
-                     <VBox.margin>
-                        <Insets top="20.0" />
-                     </VBox.margin></AnchorPane>
-                  <Label text="用户统计数据" BorderPane.alignment="CENTER">
-                     <font>
-                        <Font size="28.0" />
-                     </font>
-                  </Label>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <GridPane>
-                           <children>
-                              <Label fx:id="labelFollowers">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <Label text="被关注人数" textFill="#545454" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                           <columnConstraints>
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BOTTOM" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
-                           </rowConstraints>
-                        </GridPane>
-                        <GridPane>
-                           <children>
-                              <Label fx:id="labelFollowing">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <Label text="关注人数" textFill="#545454" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                           <columnConstraints>
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BOTTOM" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
-                           </rowConstraints>
-                        </GridPane>
-                        <GridPane>
-                           <children>
-                              <Label fx:id="labelRepos">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <Label text="公开项目" textFill="#545454" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                           <columnConstraints>
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BOTTOM" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
-                           </rowConstraints>
-                        </GridPane>
-                     </children>
-                  </HBox>
-               </children>
-               <BorderPane.margin>
-                  <Insets right="50.0" />
-               </BorderPane.margin>
-            </VBox>
-         </right>
       </BorderPane>
-      <Button fx:id="returnButton" layoutY="600.0" mnemonicParsing="false" onAction="#returnToSearchController" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: rgba(0,0,0,0);" />
+      <Button fx:id="returnButton" mnemonicParsing="false" onAction="#returnToSearchController" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: rgba(0,0,0,0);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
    </children>
 </AnchorPane>
