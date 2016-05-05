@@ -3,12 +3,14 @@ package software.nju.gitmining;
 import java.util.List;
 
 import org.junit.Test;
+import org.kohsuke.github.GHRepository;
 
 import common.exception.DataTransferException;
 import common.exception.NetworkException;
 import common.service.GitUser;
 import common.service.RepositoryMin;
 import common.util.ObjChannel;
+import network.data.GHMassiveDataSourse;
 import network.data.MassiveDataSourceDefault;
 import network.service.MassiveDataSource;
 
@@ -18,8 +20,25 @@ import network.service.MassiveDataSource;
  * Ver: 1.0
  */
 public class MassiveDataSourceTest {
-
+	
 	@Test
+	public void ghrepoTest() throws DataTransferException, NetworkException{
+		GHMassiveDataSourse source = new GHMassiveDataSourse();
+		ObjChannel<GHRepository> repoChan = source.getRepo();
+		int total = 0;
+		while(repoChan.hasMore()){
+			List<GHRepository> repositories = repoChan.getObj(100);
+			System.out.println("Got:"+repositories.size());
+			total+=repositories.size();
+			if (repositories.size()>0) {
+				System.out.println(repositories.get(0).getFullName());
+				System.out.println();
+			}
+		}
+		System.out.println(total);
+	}
+
+	//@Test
 	public void repoTest() throws NetworkException, DataTransferException {
 		MassiveDataSource source = new MassiveDataSourceDefault();
 		

@@ -23,7 +23,7 @@ public class BeansTranslator {
 			return GitUserMinBeans.class;
 		} else if (imp==GitUser.class) {
 			return GitUserBeans.class;
-		} else {
+		}  else {
 			return null;
 		}
 	}

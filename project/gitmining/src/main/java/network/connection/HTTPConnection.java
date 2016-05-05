@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -17,6 +18,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 import common.exception.NetworkException;
+import network.api.stub.UserApiMaker_stub;
 import network.connection.service.HTTPConnectionService;
 
 @SuppressWarnings("deprecation")
@@ -94,12 +96,20 @@ public class HTTPConnection extends HTTPConnectionService {
 //        return body;
 //    }
 //    
-//    public static void main(String[] args) throws ClientProtocolException, IOException {
+//    public static void main(String[] args) throws ClientProtocolException, IOException, NetworkException {
 //		HTTPConnection con = new HTTPConnection();
 //		con.do_get_performanceTest(new UserApiMaker_stub().makeUserAPI("XRiver"));
 //		con.do_get_performanceTest(new UserApiMaker_stub().makeUserAPI("kylin1"));
 //		con.do_get_performanceTest(new UserApiMaker_stub().makeUserAPI("Summer222"));
 //		con.do_get_performanceTest(new UserApiMaker_stub().makeUserAPI("iDimple"));
+		
+//		System.out.println(con.do_get(new UserApiMaker_stub().makeUserAPI("XRiver")));System.out.println();
+//		System.out.println(con.do_get(new UserApiMaker_stub().makeUserAPI("kylin1")));System.out.println();
+//		System.out.println(con.do_get(new UserApiMaker_stub().makeUserAPI("Summer222")));System.out.println();
+//		System.out.println(con.do_get(new UserApiMaker_stub().makeUserAPI("iDimple")));System.out.println();
+		
+		
+
 //	}
     
 }
