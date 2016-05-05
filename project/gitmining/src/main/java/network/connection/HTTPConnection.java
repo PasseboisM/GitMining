@@ -46,13 +46,7 @@ public class HTTPConnection extends HTTPConnectionService {
         HttpClient httpclient = HttpClients.createMinimal();
         try {
             HttpGet httpget = new HttpGet(url);
-//            httpget.addHeader("title", "Auth Code Required");
-//            httpget.addHeader("description", "Auth Code is required");
-//            httpget.addHeader("Authorization", " token OAUTH-TOKEN");
             HttpResponse response = httpclient.execute(httpget);
-            for (Header header : response.getAllHeaders()) {
-				System.out.println(header);
-			}
             HttpEntity entity = response.getEntity();
             body = EntityUtils.toString(entity);
         } catch (ClientProtocolException e) {
@@ -102,8 +96,8 @@ public class HTTPConnection extends HTTPConnectionService {
 //        return body;
 //    }
 //    
-    public static void main(String[] args) throws ClientProtocolException, IOException, NetworkException {
-		HTTPConnection con = new HTTPConnection();
+//    public static void main(String[] args) throws ClientProtocolException, IOException, NetworkException {
+//		HTTPConnection con = new HTTPConnection();
 //		con.do_get_performanceTest(new UserApiMaker_stub().makeUserAPI("XRiver"));
 //		con.do_get_performanceTest(new UserApiMaker_stub().makeUserAPI("kylin1"));
 //		con.do_get_performanceTest(new UserApiMaker_stub().makeUserAPI("Summer222"));
@@ -115,8 +109,7 @@ public class HTTPConnection extends HTTPConnectionService {
 //		System.out.println(con.do_get(new UserApiMaker_stub().makeUserAPI("iDimple")));System.out.println();
 		
 		
-		System.out.println(con.do_get("https://api.github.com/?client_id=ShiAnni&client_secret=sa19951229"));
 
-	}
+//	}
     
 }
