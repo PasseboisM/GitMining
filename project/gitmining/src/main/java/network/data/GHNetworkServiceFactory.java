@@ -15,19 +15,17 @@ public class GHNetworkServiceFactory extends NetworkServiceFactory {
 
 	@Override
 	public SpecificDataSource getSpecificDataSource() {
-//		return new GHSpecificDataSource();
-		return null;
+		return new GHSpecificDataSource();
 	}
 
 	@Override
 	public MassiveDataSource getMassiveDataSource() {
-		return null;
+		return new MassiveDataSourceDefault();
 	}
 
 	@Override
 	public NetworkConnectionTester getNetworkConnectionTester() {
-		// TODO Auto-generated method stub
-		return null;
+		return new NetworkConnectionTesterDefault();
 	}
 	
 	private static GitHub github = null;

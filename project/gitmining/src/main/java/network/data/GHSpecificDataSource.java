@@ -3,38 +3,53 @@ package network.data;
 import java.io.File;
 import java.io.IOException;
 
-import org.kohsuke.github.GHRateLimit;
 import org.kohsuke.github.GHRepository;
-import org.kohsuke.github.GHRepositorySearchBuilder;
 import org.kohsuke.github.GHUser;
 import org.kohsuke.github.GitHub;
 import org.kohsuke.github.GitHubBuilder;
 
 import common.exception.DataCorruptedException;
 import common.exception.NetworkException;
+import common.model.beans.BeansTranslator;
+import common.service.GitUser;
 import common.service.GitUserMin;
 import common.service.Repository;
 import common.service.RepositoryMin;
+import network.service.SpecificDataSource;
 
-public class GHSpecificDataSource{
+public class GHSpecificDataSource implements SpecificDataSource{
 
 	private GitHub gh = null;
-	public Repository getSpecificRepo(RepositoryMin source) throws NetworkException, DataCorruptedException, IOException {
-		this.getSpecificRepo(source.getFull_name());
-		return null;
+	public Repository getSpecificRepo(RepositoryMin source) throws NetworkException, DataCorruptedException {
+		return this.getSpecificRepo(source.getFull_name());
 	}
 
-	public GHRepository getSpecificRepo(String fullName) throws NetworkException, DataCorruptedException, IOException {
-		GHRepository repository = gh.getRepository(fullName);
-		return repository;
+	public Repository getSpecificRepo(String fullName) throws NetworkException, DataCorruptedException {
+		GHRepository repository = null;
+		Repository hyberRepo = null;
+		try {
+			repository = gh.getRepository(fullName);
+			hyberRepo = BeansTranslator.getRepository(repository);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return hyberRepo;
 	}
 
-	public GHUser getSpecificUser(GitUserMin source) throws NetworkException, IOException {
+	public GitUser getSpecificUser(GitUserMin source) throws NetworkException {
 		return this.getSpecificUser(source.getLogin());
 	}
 
-	public GHUser getSpecificUser(String login) throws NetworkException, IOException {
-		return gh.getUser(login);
+	public GitUser getSpecificUser(String login) throws NetworkException {
+		GHUser ghUser = null;
+		GitUser hyberUser = null;
+		try {
+			ghUser = gh.getUser(login);
+			hyberUser =  BeansTranslator.getUser(ghUser);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return hyberUser;
 	}
 	
 	public GHSpecificDataSource() {

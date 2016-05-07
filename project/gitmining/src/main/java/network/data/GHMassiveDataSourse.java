@@ -16,7 +16,6 @@ import common.exception.NetworkException;
 import common.model.BasicSourceSwitch;
 import common.model.ObjChannelWithBlockingQueue;
 import common.model.filter.GeneralProcessFilter;
-import common.model.filter.JSONStringRPOFilter;
 import common.model.filter.PureDataTransFilter;
 import common.util.MultiSourceSwitch;
 import common.util.ObjChannel;
