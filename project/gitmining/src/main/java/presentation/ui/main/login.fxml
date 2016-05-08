@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane  fx:id="loginPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"  prefHeight="516.0" prefWidth="417.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.ui.main.LoginController">
+   <children>
+      <Label layoutX="153.0" layoutY="39.0" prefHeight="53.0" prefWidth="94.0" text="GitHub登录" />
+      <Label layoutX="40.0" layoutY="215.0" prefHeight="35.0" prefWidth="72.0" text="用户名" />
+      <Label layoutX="40.0" layoutY="119.0" prefHeight="35.0" prefWidth="72.0" text="密码" />
+      <TextField fx:id="userName" layoutX="42.0" layoutY="173.0" prefHeight="23.0" prefWidth="186.0" />
+      <PasswordField fx:id="password" layoutX="42.0" layoutY="277.0" prefHeight="23.0" prefWidth="186.0" />
+      <Button fx:id="loginButton" layoutX="200.0" layoutY="435.0" mnemonicParsing="false" text="登录" onMousePressed="#onLogin"/>
+      <Button   fx:id="cancelButton" layoutX="292.0" layoutY="435.0" mnemonicParsing="false" text="取消" onMousePressed="#onCancel" />
+   </children>
+</AnchorPane>

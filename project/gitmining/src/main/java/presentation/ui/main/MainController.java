@@ -31,11 +31,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import logic.ServiceConfigureDefault;
 import logic.service.Loader;
 import logic.service.LogicServiceFactory;
 import logic.service.ServiceConfigure;
 import presentation.component.WaitLoader;
 import presentation.image.ImageFactory;
+import presentation.ui.search.RepoDetailsController;
 import presentation.ui.search.RepositorySearchController;
 import presentation.ui.search.UserSearchController;
 import presentation.ui.statistics.StatisticsPane;
@@ -58,6 +60,7 @@ public class MainController extends Application implements Observer{
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		
 		loadImgFile();
 		FXMLLoader loader = new FXMLLoader(MainController.class.getResource("mainController.fxml"));
 		mainAnchorPane = loader.load();
@@ -67,9 +70,11 @@ public class MainController extends Application implements Observer{
 		Scene scene = new Scene(mainAnchorPane,1190,660);
 		primaryStage.setMinHeight(640);
 		primaryStage.setMinWidth(960);
+		primaryStage.getIcons().add(new Image("avatar.png"));
 		primaryStage.setScene(scene);
 //		primaryStage.setResizable(false);
 		primaryStage.show();
+		
 	}
 
 	private void loadImgFile() {
@@ -84,8 +89,21 @@ public class MainController extends Application implements Observer{
 	private void initial() {
 		initialImage();
 		initialProgressBar();
+		isNetWork();
 		registerToLoader();
 //		initialToggleButtonGroup();
+	}
+	
+	
+	private void isNetWork(){
+		ServiceConfigureDefault netService =new ServiceConfigureDefault();
+		try {
+			netService.setOnlineActive(true);
+		} catch (NetworkException e) {
+			// TODO Auto-generated catch block
+			
+			e.printStackTrace();
+		}
 	}
 
 	private void initialImage() {
@@ -260,10 +278,68 @@ public class MainController extends Application implements Observer{
 		t.start();
 	}
 	
+	
+	
+	
+	@FXML 
+	private void onLoginClicked(){
+		//TODO
+		System.out.println("do this");
+		if(buttonLogin.getText().equals("GitHub登录")){
+			//进行登录操作
+			
+			WaitLoader waitLoader = new WaitLoader();
+			rightComponentParent.getChildren().add(waitLoader);
+			Runnable runnable = new Runnable() {
+				@Override
+				public void run() {
+					
+					AnchorPane anchorPane = LoginController.getInstance(rightComponentParent);
+					Platform.runLater(new Runnable() {
+						@Override
+						public void run() {
+							List<Node> childred = rightComponentParent.getChildren();
+							if (childred.get(childred.size()-1).equals(waitLoader)) {
+								childred.add(anchorPane);
+							}
+							childred.remove(waitLoader);
+						}
+					});
+				}
+			};
+			Thread t = new Thread(runnable);
+			t.start();
+			
+			
+			
+			buttonLogin.setText("");
+		}else{
+		//已登录，跳转进入某个有待讨论的界面
+			
+			
+			
+			
+		}
+		
+	}
+	
+	@FXML 
+	private void onLogoutClicked(){
+		//TODO
+		
+		
+		
+		
+		
+		
+		buttonLogin.setText("GitHub登录");
+	}
+	
 
 	@FXML private AnchorPane rightComponentParent;
 	@FXML private Button buttonRepoSearch;
 	@FXML private Button buttonUserSearch;
+	@FXML private Button buttonLogin,buttonLogout;
 	@FXML private Button buttonLanguage,buttonRepoCreateTime,buttonFork,buttonStar;
 	@FXML private Button buttonUserType,buttonUserCreateTime,buttonInEachCompany,buttonBlogCount,buttonLocationCount,buttonEmailCount,buttonFollower,buttonFollowing;
 	@FXML private ToggleButton buttonLocalMode;
