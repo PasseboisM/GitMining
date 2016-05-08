@@ -1,5 +1,9 @@
 package network.data;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,21 +23,12 @@ import common.model.filter.GeneralProcessFilter;
 import common.model.filter.PureDataTransFilter;
 import common.util.MultiSourceSwitch;
 import common.util.ObjChannel;
-import network.api.service.ApiMakerService;
-import network.api.service.RepoApiMaker;
-import network.connection.service.HTTPConnectionService;
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class GHMassiveDataSourse {
 	private Gson gson = new Gson(); 
-	private RepoApiMaker repoApi = null;
-	private HTTPConnectionService conn = null;
 	
 	private static final int SUGGESTED_THREAD_NUM = Runtime.getRuntime().availableProcessors() *2;
-	public GHMassiveDataSourse() {
-		ApiMakerService apiMaker = ApiMakerService.getInstance();
-		this.repoApi = apiMaker.getRepoApiMaker();
-		this.conn = HTTPConnectionService.getInstance();
-	}
+	
 	private void execute(Runnable[] runnables) {
 		Executor exec = Executors.newCachedThreadPool();
 		for(Runnable r: runnables) {
@@ -59,14 +54,16 @@ public class GHMassiveDataSourse {
 		
 		return result;
 	}
-	public ObjChannel<String> getRepoNames() throws NetworkException {
+	public ObjChannel<String> getRepoNames() throws NetworkException, IOException {
 		//新建管道、集流器，获取URL
 		ObjChannel<String> channel = new ObjChannelWithBlockingQueue<String>();
 		MultiSourceSwitch<String> sourceSwitch = new BasicSourceSwitch<String>(channel);
-		String url = repoApi.makeRepoNamesApi();
+		BufferedReader reader = new BufferedReader(new FileReader(new File(System.getProperty("user.dir"), "names.json")));
+//		String url = repoApi.makeRepoNamesApi();
 		
 		//获取并处理JSON，转化为Java的List对象
-		String json = conn.do_get(url);
+		String json = reader.readLine();
+		reader.close();
 		Type listTypeType = new TypeToken<List<String>>(){}.getType();
 		List<String> repoLists = gson.fromJson(json, listTypeType);
 		//分割列表为多个子列表，分别进行传输
@@ -83,7 +80,7 @@ public class GHMassiveDataSourse {
 	}
 	
 	
-	public ObjChannel<GHRepository> getRepo() throws NetworkException {
+	public ObjChannel<GHRepository> getRepo() throws NetworkException, IOException {
 		
 		//初始化传输Github项目名称的管道
 		ObjChannel<String> namesChannel = this.getRepoNames();
