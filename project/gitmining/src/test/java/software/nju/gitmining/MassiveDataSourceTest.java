@@ -1,5 +1,6 @@
 package software.nju.gitmining;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.junit.Test;
@@ -22,7 +23,7 @@ import network.service.MassiveDataSource;
 public class MassiveDataSourceTest {
 	
 	@Test
-	public void ghrepoTest() throws DataTransferException, NetworkException{
+	public void ghrepoTest() throws DataTransferException, NetworkException, IOException{
 		GHMassiveDataSourse source = new GHMassiveDataSourse();
 		ObjChannel<GHRepository> repoChan = source.getRepo();
 		int total = 0;

@@ -2,18 +2,21 @@ package network.data;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Properties;
 
 import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GHRepositorySearchBuilder;
 import org.kohsuke.github.GHUser;
 import org.kohsuke.github.GHUserSearchBuilder;
 import org.kohsuke.github.GitHub;
+import org.kohsuke.github.GitHubBuilder;
 
 import common.enumeration.attribute.Language;
 import common.enumeration.sort_standard.RepoSortStadard;
 import common.exception.DataCorruptedException;
 import common.exception.NetworkException;
-import common.model.beans.BeansTranslator;
+import common.model.HyberRepository;
+import common.model.HyberUser;
 import common.param_obj.RepositorySearchParam;
 import common.param_obj.UserSearchParam;
 import common.service.GitUser;
@@ -34,7 +37,7 @@ public class GHSpecificDataSource implements SpecificDataSource{
 		Repository hyberRepo = null;
 		try {
 			repository = gh.getRepository(fullName);
-			hyberRepo = BeansTranslator.getRepository(repository);
+			hyberRepo = new HyberRepository(repository);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -50,7 +53,7 @@ public class GHSpecificDataSource implements SpecificDataSource{
 		GitUser hyberUser = null;
 		try {
 			ghUser = gh.getUser(login);
-			hyberUser =  BeansTranslator.getUser(ghUser);
+			hyberUser =  new HyberUser(ghUser);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -79,6 +82,21 @@ public class GHSpecificDataSource implements SpecificDataSource{
 		return builder.list().asList();
 	}
 	
+	public static void main(String[] args) {
+		Properties properties = new Properties();
+		properties.setProperty("login", "XRiver");
+		properties.setProperty("password", "jianghe369258");
+		GitHubBuilder builder = GitHubBuilder.fromProperties(properties);
+		try {
+			GitHub github = builder.build();
+			System.out.println(github.isCredentialValid());
+			System.out.println(github.getRateLimit().remaining);
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+//			e.printStackTrace();
+		}
+		
+	}
 	public GHSpecificDataSource() {
 		this.gh = GHNetworkServiceFactory.getGitHub();
 	}

@@ -1,6 +1,9 @@
 package common.model;
 
-import com.google.gson.annotations.SerializedName;
+import java.io.IOException;
+
+import org.kohsuke.github.GHRepository;
+import org.kohsuke.github.GHUser;
 
 import common.enumeration.attribute.Category;
 import common.enumeration.attribute.Language;
@@ -11,94 +14,42 @@ import common.service.RepositoryPermission;
 
 public class HyberRepository implements Repository{
 
-	private int id;
-	private String name;
-	private String full_name;
-	private RepositoryOwner owner;
-	@SerializedName("private") private boolean isPrivate;
-	private String html_url;
-	private String description;
-	private boolean fork;
-	private String url;
-	private String created_at;
-	private String updated_at;
-	private String pushed_at;
-	private String git_url;
-	private String ssh_url;
-	private String svn_url;
-	private String homepage;
-	private int size;
-	private int stargazers_count;
-	private int watchers_count;
-	private String language;
-	private boolean has_issues;
-	private boolean has_downloads;
-	private boolean has_wiki;
-	private int forks_count;
-	private int open_issues_count;
-	private int forks;
-	private int open_issues;
-	private int watchers;
-	private String default_branch;
-	private RepositoryPermission permissions;
-	private RepositoryOrganization organization;
-	private int network_count;
-	private int subscribers_count;
 	
+	
+	private GHRepository ghRepository;
+	private GHUser ghOwner;
+	
+	private RepositoryOwner owner;
+	private RepositoryPermission permission;
+	private RepositoryOrganization organization;
 	
 
-	public HyberRepository(int id, String name, String full_name, RepositoryOwner owner, boolean isPrivate,
-			String html_url, String description, boolean fork, String url, String created_at, String updated_at,
-			String pushed_at, String git_url, String ssh_url, String svn_url, String homepage, int size,
-			int stargazers_count, int watchers_count, String language, boolean has_issues, boolean has_downloads,
-			boolean has_wiki, int forks_count, int open_issues_count, int forks, int open_issues, int watchers,
-			String default_branch, RepositoryPermission permissions, RepositoryOrganization organization,
-			int network_count, int subscribers_count) {
-		this.id = id;
-		this.name = name;
-		this.full_name = full_name;
-		this.owner = owner;
-		this.isPrivate = isPrivate;
-		this.html_url = html_url;
-		this.description = description;
-		this.fork = fork;
-		this.url = url;
-		this.created_at = created_at;
-		this.updated_at = updated_at;
-		this.pushed_at = pushed_at;
-		this.git_url = git_url;
-		this.ssh_url = ssh_url;
-		this.svn_url = svn_url;
-		this.homepage = homepage;
-		this.size = size;
-		this.stargazers_count = stargazers_count;
-		this.watchers_count = watchers_count;
-		this.language = language;
-		this.has_issues = has_issues;
-		this.has_downloads = has_downloads;
-		this.has_wiki = has_wiki;
-		this.forks_count = forks_count;
-		this.open_issues_count = open_issues_count;
-		this.forks = forks;
-		this.open_issues = open_issues;
-		this.watchers = watchers;
-		this.default_branch = default_branch;
-		this.permissions = permissions;
-		this.organization = organization;
-		this.network_count = network_count;
-		this.subscribers_count = subscribers_count;
+
+	public HyberRepository(GHRepository ghRepository) {
+		this.ghRepository = ghRepository;
+		try {
+			this.ghOwner = ghRepository.getOwner();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		this.owner = new HyberOwner(ghOwner);
+		boolean admin = ghRepository.hasAdminAccess();
+		boolean push = ghRepository.hasPushAccess();
+		boolean pull = ghRepository.hasPullAccess();
+		this.permission = new HyberPermission(admin, push, pull);
+		this.organization = new HyberOrganization(ghOwner);
 	}
 
 	public int getId() {
-		return id;
+		return ghRepository.getId();
 	}
 
 	public String getName() {
-		return name;
+		return ghRepository.getName();
 	}
 
 	public String getFull_name() {
-		return full_name;
+		return ghRepository.getFullName();
 	}
 
 	public RepositoryOwner getOwner() {
@@ -106,10 +57,18 @@ public class HyberRepository implements Repository{
 	}
 	
 	public boolean isPrivate() {
-		return isPrivate;
+		return ghRepository.isPrivate();
 	}
 	
-	public static class HyberOwner implements RepositoryOwner {
+	class HyberOwner implements RepositoryOwner {
+		
+		
+		private GHUser ghOwner;
+		
+		public HyberOwner(GHUser ghOwner) {
+			this.ghOwner = ghOwner;
+		}
+
 		/*
 		 * "owner":
 		 * {"login":"rubinius",
@@ -130,47 +89,30 @@ public class HyberRepository implements Repository{
 		 * "type":"Organization",
 		 * "site_admin":false}
 		 */
-		private String login;
-		private int id;
-		private String avatar_url;
-		private String gravatar_id;
-		private String url;
-		private String html_url;
 		
-		
-		
-		public HyberOwner(String login, int id, String avatar_url, String gravatar_id, String url, String html_url) {
-			super();
-			this.login = login;
-			this.id = id;
-			this.avatar_url = avatar_url;
-			this.gravatar_id = gravatar_id;
-			this.url = url;
-			this.html_url = html_url;
-		}
-
 		public String getLogin() {
-			return login;
+			return this.ghOwner.getLogin();
 		}
 
 		public int getId() {
-			return id;
+			return this.ghOwner.getId();
 		}
 
 		public String getAvatar_url() {
-			return avatar_url;
+			return this.ghOwner.getAvatarUrl();
 		}
 
+		@SuppressWarnings("deprecation")
 		public String getGravatar_id() {
-			return gravatar_id;
+			return this.ghOwner.getGravatarId();
 		}
 
 		public String getUrl() {
-			return url;
+			return this.ghOwner.getUrl().toString();
 		}
 
 		public String getHtml_url() {
-			return html_url;
+			return this.ghOwner.getHtmlUrl().toString();
 		}
 
 		public String getFollowers_url() {
@@ -218,7 +160,7 @@ public class HyberRepository implements Repository{
 		}
 	}
 	
-	public static class HyberPermission implements RepositoryPermission {
+	class HyberPermission implements RepositoryPermission {
 		/*"permissions":{
 		 * 				"admin":false,
 		 * 				"push":false,
@@ -229,8 +171,6 @@ public class HyberRepository implements Repository{
 		private boolean admin;
 		private boolean push;
 		private boolean pull;
-		
-		
 		
 		public HyberPermission(boolean admin, boolean push, boolean pull) {
 			this.admin = admin;
@@ -248,41 +188,38 @@ public class HyberRepository implements Repository{
 		}
 	}
 	
-	public static class HyberOrganization implements RepositoryOrganization {
-		private String login;
-		private int id;
-		private String avatar_url;
-		private String gravatar_id;
-		private String url;
-		private String html_url;
+	class HyberOrganization implements RepositoryOrganization {
+
+		private GHUser ghOwner;
 		
-		
-		public HyberOrganization(String login, int id, String avatar_url, String gravatar_id, String url, String html_url) {
-			this.login = login;
-			this.id = id;
-			this.avatar_url = avatar_url;
-			this.gravatar_id = gravatar_id;
-			this.url = url;
-			this.html_url = html_url;
+		public HyberOrganization(GHUser ghOwner) {
+			this.ghOwner = ghOwner;
 		}
 		public String getLogin() {
-			return login;
+			return this.ghOwner.getLogin();
 		}
+
 		public int getId() {
-			return id;
+			return this.ghOwner.getId();
 		}
+
 		public String getAvatar_url() {
-			return avatar_url;
+			return this.ghOwner.getAvatarUrl();
 		}
+
+		@SuppressWarnings("deprecation")
 		public String getGravatar_id() {
-			return gravatar_id;
+			return this.ghOwner.getGravatarId();
 		}
+
 		public String getUrl() {
-			return url;
+			return this.ghOwner.getUrl().toString();
 		}
+
 		public String getHtml_url() {
-			return html_url;
+			return this.ghOwner.getHtmlUrl().toString();
 		}
+
 		public String getFollowers_url() {
 			return null;
 		}
@@ -320,19 +257,19 @@ public class HyberRepository implements Repository{
 
 
 	public String getHtml_url() {
-		return html_url;
+		return ghRepository.getHtmlUrl().toString();
 	}
 
 	public String getDescription() {
-		return description;
+		return ghRepository.getDescription();
 	}
 
 	public boolean isFork() {
-		return fork;
+		return ghRepository.isFork();
 	}
 
 	public String getUrl() {
-		return url;
+		return ghRepository.getUrl().toString();
 	}
 
 	public String getFork_url() {
@@ -476,23 +413,33 @@ public class HyberRepository implements Repository{
 	}
 
 	public String getCreated_at() {
-		return created_at;
+		try {
+			return ghRepository.getCreatedAt().toString();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public String getUpdated_at() {
-		return updated_at;
+		try {
+			return ghRepository.getUpdatedAt().toString();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public String getPushed_at() {
-		return pushed_at;
+		return ghRepository.getPushedAt().toString();
 	}
 
 	public String getGit_url() {
-		return git_url;
+		return ghRepository.getGitTransportUrl();
 	}
 
 	public String getSsh_url() {
-		return ssh_url;
+		return ghRepository.getSshUrl();
 	}
 
 	public String getClone_url() {
@@ -500,39 +447,39 @@ public class HyberRepository implements Repository{
 	}
 
 	public String getSvn_url() {
-		return svn_url;
+		return ghRepository.getSvnUrl();
 	}
 
 	public String getHomepage() {
-		return homepage;
+		return ghRepository.getHomepage();
 	}
 
 	public int getSize() {
-		return size;
+		return ghRepository.getSize();
 	}
 
 	public int getStargazers_count() {
-		return stargazers_count;
+		return ghRepository.getWatchers();
 	}
 
 	public int getWatchers_count() {
-		return watchers_count;
+		return ghRepository.getWatchers();
 	}
 
 	public String getLanguage() {
-		return language;
+		return ghRepository.getLanguage();
 	}
 
 	public boolean isHas_issues() {
-		return has_issues;
+		return ghRepository.hasIssues();
 	}
 
 	public boolean isHas_downloads() {
-		return has_downloads;
+		return ghRepository.hasDownloads();
 	}
 
 	public boolean isHas_wiki() {
-		return has_wiki;
+		return ghRepository.hasWiki();
 	}
 
 	public boolean isHas_pages() {
@@ -540,31 +487,31 @@ public class HyberRepository implements Repository{
 	}
 
 	public int getForks_count() {
-		return forks_count;
+		return ghRepository.getForks();
 	}
 
 	public int getOpen_issues_count() {
-		return open_issues_count;
+		return ghRepository.getOpenIssueCount();
 	}
 
 	public int getForks() {
-		return forks;
+		return ghRepository.getForks();
 	}
 
 	public int getOpen_issues() {
-		return open_issues;
+		return ghRepository.getOpenIssueCount();
 	}
 
 	public int getWatchers() {
-		return watchers;
+		return ghRepository.getWatchers();
 	}
 
 	public String getDefault_branch() {
-		return default_branch;
+		return ghRepository.getDefaultBranch();
 	}
 
 	public RepositoryPermission getPermissions() {
-		return permissions;
+		return permission;
 	}
 
 	public RepositoryOrganization getOrganization() {
@@ -572,11 +519,11 @@ public class HyberRepository implements Repository{
 	}
 
 	public int getNetwork_count() {
-		return network_count;
+		return ghRepository.getNetworkCount();
 	}
 
 	public int getSubscribers_count() {
-		return subscribers_count;
+		return ghRepository.getSubscribersCount();
 	}
 
 	@Override
@@ -591,15 +538,15 @@ public class HyberRepository implements Repository{
 
 	@Override
 	public boolean checkValidity() {
-		boolean fullNameValid = (full_name!=null) && (full_name.split("/").length==2);
-		boolean nameValid = (name!=null) && (!name.equals(""));
-		boolean idValid = id > -1;
-		boolean starsValid = stargazers_count > -1;
-		boolean forksValid = forks_count > -1;
-		boolean createdAtValid = (created_at!=null) && 
-				(created_at.matches("\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z"));
-		boolean updatedAtValid = (updated_at!=null) && 
-				(updated_at.matches("\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z"));
+		boolean fullNameValid = (getFull_name()!=null) && (getFull_name().split("/").length==2);
+		boolean nameValid = (getName()!=null) && (!getName().equals(""));
+		boolean idValid = getId() > -1;
+		boolean starsValid = getStargazers_count() > -1;
+		boolean forksValid = getForks_count() > -1;
+		boolean createdAtValid = (getCreated_at()!=null) && 
+				(getCreated_at().matches("\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z"));
+		boolean updatedAtValid = (getUpdated_at()!=null) && 
+				(getUpdated_at().matches("\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z"));
 		
 		return fullNameValid && nameValid && idValid && starsValid && forksValid
 				&& createdAtValid && updatedAtValid;
