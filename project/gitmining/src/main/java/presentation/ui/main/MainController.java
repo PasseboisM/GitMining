@@ -70,6 +70,7 @@ public class MainController extends Application implements Observer{
 		Scene scene = new Scene(mainAnchorPane,1190,660);
 		primaryStage.setMinHeight(640);
 		primaryStage.setMinWidth(960);
+		primaryStage.getIcons().add(new Image("avatar.png"));
 		primaryStage.setScene(scene);
 //		primaryStage.setResizable(false);
 		primaryStage.show();
