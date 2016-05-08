@@ -37,6 +37,7 @@ import logic.service.LogicServiceFactory;
 import logic.service.ServiceConfigure;
 import presentation.component.WaitLoader;
 import presentation.image.ImageFactory;
+import presentation.ui.search.RepoDetailsController;
 import presentation.ui.search.RepositorySearchController;
 import presentation.ui.search.UserSearchController;
 import presentation.ui.statistics.StatisticsPane;
@@ -275,14 +276,62 @@ public class MainController extends Application implements Observer{
 		Thread t = new Thread(runnable);
 		t.start();
 	}
+	
+	
+	
+	
 	@FXML 
-	private void onLoginClicked(ActionEvent event){
+	private void onLoginClicked(){
 		//TODO
+		System.out.println("do this");
+		if(buttonLogin.getText().equals("GitHub登录")){
+			//进行登录操作
+			
+			WaitLoader waitLoader = new WaitLoader();
+			rightComponentParent.getChildren().add(waitLoader);
+			Runnable runnable = new Runnable() {
+				@Override
+				public void run() {
+					
+					AnchorPane anchorPane = LoginController.getInstance(rightComponentParent);
+					Platform.runLater(new Runnable() {
+						@Override
+						public void run() {
+							List<Node> childred = rightComponentParent.getChildren();
+							if (childred.get(childred.size()-1).equals(waitLoader)) {
+								childred.add(anchorPane);
+							}
+							childred.remove(waitLoader);
+						}
+					});
+				}
+			};
+			Thread t = new Thread(runnable);
+			t.start();
+			
+			
+			
+			buttonLogin.setText("");
+		}else{
+		//已登录，跳转进入某个有待讨论的界面
+			
+			
+			
+			
+		}
+		
 	}
 	
 	@FXML 
-	private void onLogoutClicked(ActionEvent event){
+	private void onLogoutClicked(){
 		//TODO
+		
+		
+		
+		
+		
+		
+		buttonLogin.setText("GitHub登录");
 	}
 	
 

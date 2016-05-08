@@ -2,12 +2,11 @@ package presentation.ui.main;
 
 import java.io.IOException;
 
-import common.service.Repository;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
+
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -16,6 +15,7 @@ import javafx.scene.layout.AnchorPane;
 public class LoginController {
 	public static AnchorPane getInstance(AnchorPane rightComponentParent){
 		FXMLLoader loader = new FXMLLoader(LoginController.class.getResource("login.fxml"));
+		//System.out.println("do this");
 		AnchorPane pane = null;
 		try {
 			pane = loader.load();
@@ -28,7 +28,7 @@ public class LoginController {
 		return pane;
 	}
 	
-	
+	public  String UserName="";
 	
 	
 	
@@ -39,25 +39,35 @@ public class LoginController {
 	
 	private void initial(AnchorPane rightComponentParent) {
 		// TODO Auto-generated method stub
-		
+		this.rightComponentParent = rightComponentParent;
+
 	}
 
 
 	@FXML
 	private void onLogin() {
 		//TODO
+		String code;
+		code=password.getText();
+		if(true){
+			UserName=userName.getText();
+		}else{
+			
+		}
+		
 	}
 	
 	
 	@FXML
 	private void onCancel() {
 		//TODO
+		rightComponentParent.getChildren().remove(loginPane);
 	}
 	
 	
 
 
-
+	private AnchorPane rightComponentParent;
 
 
 

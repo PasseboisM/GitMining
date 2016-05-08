@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 
 
-<AnchorPane  fx:id="loginPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.72" prefHeight="516.0" prefWidth="417.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.ui.main.LoginController">
+<AnchorPane  fx:id="loginPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"  prefHeight="516.0" prefWidth="417.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.ui.main.LoginController">
    <children>
       <Label layoutX="153.0" layoutY="39.0" prefHeight="53.0" prefWidth="94.0" text="GitHub登录" />
       <Label layoutX="40.0" layoutY="215.0" prefHeight="35.0" prefWidth="72.0" text="用户名" />
