@@ -2,10 +2,8 @@ package common.model.beans;
 
 import java.io.IOException;
 
-import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GHUser;
 
-import common.model.HyberRepository;
 import common.model.HyberUser;
 import common.service.GitUser;
 import common.service.GitUserMin;
@@ -35,7 +33,7 @@ public class BeansTranslator {
 		}
 	}
 	
-	public static Repository getRepository(GHRepository ghRepository){
+	/*public static Repository getRepository(GHRepository ghRepository){
 		HyberRepository.HyberOwner owner =getOwner(ghRepository);
 		boolean admin = ghRepository.hasAdminAccess();
 		boolean push = ghRepository.hasPushAccess();
@@ -79,9 +77,9 @@ public class BeansTranslator {
 		int subscribers_count = ghRepository.getSubscribersCount();
 		HyberRepository hyberRepo = new HyberRepository(id, name, full_name, owner, isPrivate, html_url, description, fork, html_url, created_at, updated_at, pushed_at, git_url, ssh_url, svn_url, homepage, size, stargazers_count, watchers_count, language, has_issues, has_downloads, has_wiki, forks_count, open_issues_count, forks, open_issues, watchers, default_branch, permissions, organization, network_count, subscribers_count);
 		return hyberRepo;
-	}
+	}*/
 
-	private static HyberRepository.HyberOwner getOwner(GHRepository ghRepository) {
+	/*private static HyberRepository.HyberOwner getOwner(GHRepository ghRepository) {
 		GHUser ghUser = null;
 		try {
 			ghUser = ghRepository.getOwner();
@@ -113,7 +111,7 @@ public class BeansTranslator {
 		String url = ghUser.getUrl().toString();
 		String html_url = ghUser.getHtmlUrl().toString();
 		return new HyberRepository.HyberOrganization(login, id, avatar_url, gravatar_id, url, html_url);
-	}
+	}*/
 	
 	public static GitUser getUser(GHUser ghUser) throws IOException{
 		String login = ghUser.getLogin();
