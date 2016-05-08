@@ -53,7 +53,7 @@ public class GHDataSourceDefault implements GHDataSource {
 		System.out.println("sort done");
 		
 		long time1 = System.currentTimeMillis();
-		System.out.println(builder.list().getTotalCount());
+		System.out.println(builder.list().asList());
 		System.out.println("Time used:"+(System.currentTimeMillis()-time1)+"ms");
 				
 		

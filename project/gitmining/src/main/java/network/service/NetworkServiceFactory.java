@@ -12,6 +12,7 @@ public abstract class NetworkServiceFactory {
 	
 	public abstract SpecificDataSource getSpecificDataSource();
 	
+	@Deprecated
 	public abstract MassiveDataSource getMassiveDataSource();
 	
 	public abstract NetworkConnectionTester getNetworkConnectionTester();

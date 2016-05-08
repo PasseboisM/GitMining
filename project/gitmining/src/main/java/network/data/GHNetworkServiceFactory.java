@@ -20,6 +20,7 @@ public class GHNetworkServiceFactory extends NetworkServiceFactory {
 	}
 
 	@Override
+	@Deprecated
 	public MassiveDataSource getMassiveDataSource() {
 		return new MassiveDataSourceDefault();
 	}
