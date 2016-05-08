@@ -6,6 +6,7 @@ import java.io.IOException;
 import org.kohsuke.github.GitHub;
 import org.kohsuke.github.GitHubBuilder;
 
+import network.service.GHDataSource;
 import network.service.MassiveDataSource;
 import network.service.NetworkConnectionTester;
 import network.service.NetworkServiceFactory;
@@ -28,6 +29,10 @@ public class GHNetworkServiceFactory extends NetworkServiceFactory {
 		return new NetworkConnectionTesterDefault();
 	}
 	
+	@Override
+	public GHDataSource getGHDataSource() {
+		return new GHDataSourceDefault();
+	}
 	private static GitHub github = null;
 	public static GitHub getGitHub(){
 		if (github==null) {
@@ -41,5 +46,6 @@ public class GHNetworkServiceFactory extends NetworkServiceFactory {
 		}
 		return github;
 	}
+
 
 }

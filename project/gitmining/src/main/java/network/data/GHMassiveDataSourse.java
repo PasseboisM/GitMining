@@ -58,12 +58,11 @@ public class GHMassiveDataSourse {
 		//新建管道、集流器，获取URL
 		ObjChannel<String> channel = new ObjChannelWithBlockingQueue<String>();
 		MultiSourceSwitch<String> sourceSwitch = new BasicSourceSwitch<String>(channel);
+
 		BufferedReader reader = new BufferedReader(new FileReader(new File(System.getProperty("user.dir"), "names.json")));
-//		String url = repoApi.makeRepoNamesApi();
-		
-		//获取并处理JSON，转化为Java的List对象
 		String json = reader.readLine();
 		reader.close();
+		
 		Type listTypeType = new TypeToken<List<String>>(){}.getType();
 		List<String> repoLists = gson.fromJson(json, listTypeType);
 		//分割列表为多个子列表，分别进行传输
@@ -84,19 +83,6 @@ public class GHMassiveDataSourse {
 		
 		//初始化传输Github项目名称的管道
 		ObjChannel<String> namesChannel = this.getRepoNames();
-		//初始化传输Github项目内容（JSON格式）的管道
-		//ObjChannel<String> JSONChannel = new ObjChannelWithBlockingQueue<String>();
-
-		
-		/*//初始化由项目名称向项目管道进行转化的过滤器、初始化集流器
-		GeneralProcessFilter[] repoJSONGetter = new GeneralProcessFilter[SUGGESTED_THREAD_NUM];
-		MultiSourceSwitch switchNameToJSON = new BasicSourceSwitch(JSONChannel);
-		for(int i=0;i<SUGGESTED_THREAD_NUM;i++) {
-			repoJSONGetter[i] = new RepoJSONGetter(namesChannel,switchNameToJSON,50);
-		}
-		//执行由项目名称向项目内容进行转化的线程
-		execute(repoJSONGetter);*/
-		
 		
 		//初始化项目内容对象（Java Object）的传输管道及由JSON向JavaObject进行转化的过滤器数组
 		ObjChannel<GHRepository> objChannel = new ObjChannelWithBlockingQueue<GHRepository>();
