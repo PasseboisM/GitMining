@@ -54,18 +54,6 @@ public class GHSpecificDataSource implements SpecificDataSource{
 	}
 	
 	
-	public static void main(String[] args) {
-		Properties properties = new Properties();
-		properties.setProperty("login", "XRiver");
-		properties.setProperty("password", "jianghe36928");
-		GitHubBuilder builder = GitHubBuilder.fromProperties(properties);
-		try {
-			GitHub github = builder.build();
-			System.out.println(github.isCredentialValid());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 	public GHSpecificDataSource() {
 		this.gh = GHNetworkServiceFactory.getGitHub();
 	}

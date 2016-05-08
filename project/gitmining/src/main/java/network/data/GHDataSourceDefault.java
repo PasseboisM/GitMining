@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import javax.management.timer.Timer;
+
 import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GHRepositorySearchBuilder;
 import org.kohsuke.github.GHUser;
@@ -35,16 +37,26 @@ public class GHDataSourceDefault implements GHDataSource {
 	@Override
 	public List<Repository> searchRepository(RepositorySearchParam repositorySearchParam) {
 		GHRepositorySearchBuilder builder = gh.searchRepositories();
+		System.out.println(builder);
 		Language[] langs = repositorySearchParam.getLangs();
 		String[] keywords = repositorySearchParam.getKeywords();
 		RepoSortStadard sortStandard = repositorySearchParam.getSortStandard();
 		for (String string : keywords) {
 			builder.q(string);
 		}
+		System.out.println("keywords search done");
 		for (Language language : langs) {
 			builder.language(language.getName());
 		}
+		System.out.println("language search done");
 		builder.sort(sortStandard.getSort());
+		System.out.println("sort done");
+		
+		long time1 = System.currentTimeMillis();
+		System.out.println(builder.list().getTotalCount());
+		System.out.println("Time used:"+(System.currentTimeMillis()-time1)+"ms");
+				
+		
 		List<Repository> repositories = new ArrayList<>();
 		builder.list().asList().forEach((GHRepository ghRepo)->{
 			repositories.add(new HyberRepository(ghRepo));
