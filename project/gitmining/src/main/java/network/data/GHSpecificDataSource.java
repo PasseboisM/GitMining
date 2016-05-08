@@ -16,7 +16,7 @@ import common.enumeration.sort_standard.RepoSortStadard;
 import common.exception.DataCorruptedException;
 import common.exception.NetworkException;
 import common.model.HyberRepository;
-import common.model.beans.BeansTranslator;
+import common.model.HyberUser;
 import common.param_obj.RepositorySearchParam;
 import common.param_obj.UserSearchParam;
 import common.service.GitUser;
@@ -53,7 +53,7 @@ public class GHSpecificDataSource implements SpecificDataSource{
 		GitUser hyberUser = null;
 		try {
 			ghUser = gh.getUser(login);
-			hyberUser =  BeansTranslator.getUser(ghUser);
+			hyberUser =  new HyberUser(ghUser);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -1,10 +1,5 @@
 package common.model.beans;
 
-import java.io.IOException;
-
-import org.kohsuke.github.GHUser;
-
-import common.model.HyberUser;
 import common.service.GitUser;
 import common.service.GitUserMin;
 import common.service.Repository;
@@ -113,7 +108,7 @@ public class BeansTranslator {
 		return new HyberRepository.HyberOrganization(login, id, avatar_url, gravatar_id, url, html_url);
 	}*/
 	
-	public static GitUser getUser(GHUser ghUser) throws IOException{
+	/*public static GitUser getUser(GHUser ghUser) throws IOException{
 		String login = ghUser.getLogin();
 		int id = ghUser.getId();
 		String name = ghUser.getName();
@@ -133,5 +128,5 @@ public class BeansTranslator {
 		String updated_at = ghUser.getUpdatedAt().toString();
 		GitUser hyberUser = new HyberUser(login, id, name, followers, avatar_url, gravatar_id, url, html_url, blog, location, email, public_repos, public_gists, following, created_at, updated_at);
 		return hyberUser;
-	}
+	}*/
 }
