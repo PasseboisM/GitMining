@@ -2,12 +2,8 @@ package logic.data;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-
-import javax.swing.event.ListSelectionEvent;
 
 import common.exception.DataCorruptedException;
 import common.exception.NetworkException;

@@ -22,7 +22,7 @@ import common.util.ObjChannel;
 import network.api.service.ApiMakerService;
 import network.api.service.RepoApiMaker;
 import network.connection.service.HTTPConnectionService;
-
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class GHMassiveDataSourse {
 	private Gson gson = new Gson(); 
 	private RepoApiMaker repoApi = null;
@@ -42,6 +42,7 @@ public class GHMassiveDataSourse {
 	}
 	private <T> List[] splitList(List<T> origin, int pieces) {
 		assert pieces > 0;
+		
 		
 		List<T>[] result = new List[pieces];
 		int totalLength = origin.size();

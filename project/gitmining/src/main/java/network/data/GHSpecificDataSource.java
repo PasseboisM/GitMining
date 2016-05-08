@@ -1,6 +1,5 @@
 package network.data;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -9,7 +8,6 @@ import org.kohsuke.github.GHRepositorySearchBuilder;
 import org.kohsuke.github.GHUser;
 import org.kohsuke.github.GHUserSearchBuilder;
 import org.kohsuke.github.GitHub;
-import org.kohsuke.github.GitHubBuilder;
 
 import common.enumeration.attribute.Language;
 import common.enumeration.sort_standard.RepoSortStadard;
@@ -82,12 +80,6 @@ public class GHSpecificDataSource implements SpecificDataSource{
 	}
 	
 	public GHSpecificDataSource() {
-		try {
-			File propertyFile = new File(System.getProperty("user.dir"), ".github");
-			GitHubBuilder builder = GitHubBuilder.fromPropertyFile(propertyFile.getPath());
-			this.gh = builder.build();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		this.gh = GHNetworkServiceFactory.getGitHub();
 	}
 }

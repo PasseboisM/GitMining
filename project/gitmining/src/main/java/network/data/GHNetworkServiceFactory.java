@@ -32,7 +32,7 @@ public class GHNetworkServiceFactory extends NetworkServiceFactory {
 	public static GitHub getGitHub(){
 		if (github==null) {
 			try {
-				File propertyFile = new File(System.getProperty("user.dir"), ".github");
+				File propertyFile = new File(System.getProperty("user.dir"), "github.dll");
 				GitHubBuilder builder = GitHubBuilder.fromPropertyFile(propertyFile.getPath());
 				github = builder.build();
 			} catch (IOException e) {
