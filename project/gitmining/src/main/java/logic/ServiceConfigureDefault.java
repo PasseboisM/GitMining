@@ -8,16 +8,17 @@ public class ServiceConfigureDefault implements ServiceConfigure {
 	
 	@Override
 	public void setOnlineActive(boolean useOnlineMode) throws NetworkException {
-		if(DataServiceFactory.isUsingNetwork()==useOnlineMode) {
-			return;
-		} else {
-			try {
-				DataServiceFactory.tryUseNetwork(useOnlineMode);
-			} catch (NetworkException e) {
-				e.printStackTrace();
-				throw e;
-			}
-		}
+//		if(DataServiceFactory.isUsingNetwork()==useOnlineMode) {
+//			return;
+//		} else {
+//			try {
+//				DataServiceFactory.tryUseNetwork(useOnlineMode);
+//			} catch (NetworkException e) {
+//				e.printStackTrace();
+//				throw e;
+//			}
+//		}
+		//TODO
 
 	}	
 }

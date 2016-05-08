@@ -31,6 +31,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import logic.ServiceConfigureDefault;
 import logic.service.Loader;
 import logic.service.LogicServiceFactory;
 import logic.service.ServiceConfigure;
@@ -58,6 +59,7 @@ public class MainController extends Application implements Observer{
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		
 		loadImgFile();
 		FXMLLoader loader = new FXMLLoader(MainController.class.getResource("mainController.fxml"));
 		mainAnchorPane = loader.load();
@@ -70,6 +72,7 @@ public class MainController extends Application implements Observer{
 		primaryStage.setScene(scene);
 //		primaryStage.setResizable(false);
 		primaryStage.show();
+		
 	}
 
 	private void loadImgFile() {
@@ -84,8 +87,21 @@ public class MainController extends Application implements Observer{
 	private void initial() {
 		initialImage();
 		initialProgressBar();
+		isNetWork();
 		registerToLoader();
 //		initialToggleButtonGroup();
+	}
+	
+	
+	private void isNetWork(){
+		ServiceConfigureDefault netService =new ServiceConfigureDefault();
+		try {
+			netService.setOnlineActive(true);
+		} catch (NetworkException e) {
+			// TODO Auto-generated catch block
+			
+			e.printStackTrace();
+		}
 	}
 
 	private void initialImage() {
@@ -259,11 +275,21 @@ public class MainController extends Application implements Observer{
 		Thread t = new Thread(runnable);
 		t.start();
 	}
+	@FXML 
+	private void onLoginClicked(ActionEvent event){
+		//TODO
+	}
+	
+	@FXML 
+	private void onLogoutClicked(ActionEvent event){
+		//TODO
+	}
 	
 
 	@FXML private AnchorPane rightComponentParent;
 	@FXML private Button buttonRepoSearch;
 	@FXML private Button buttonUserSearch;
+	@FXML private Button buttonLogin,buttonLogout;
 	@FXML private Button buttonLanguage,buttonRepoCreateTime,buttonFork,buttonStar;
 	@FXML private Button buttonUserType,buttonUserCreateTime,buttonInEachCompany,buttonBlogCount,buttonLocationCount,buttonEmailCount,buttonFollower,buttonFollowing;
 	@FXML private ToggleButton buttonLocalMode;
