@@ -27,6 +27,8 @@ public abstract class ApiMakerService {
 	 */
 	public abstract TestConnectionApiMaker getTestConnectionApiMaker();
 	
+	public abstract SearchApiMaker getSearchApiMaker();
+	
 	public static ApiMakerService getInstance() {
 		return new ApiMakerGitMining();
 	}

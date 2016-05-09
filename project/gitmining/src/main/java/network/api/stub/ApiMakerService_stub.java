@@ -2,6 +2,7 @@ package network.api.stub;
 
 import network.api.service.ApiMakerService;
 import network.api.service.RepoApiMaker;
+import network.api.service.SearchApiMaker;
 import network.api.service.TestConnectionApiMaker;
 import network.api.service.UserApiMaker;
 
@@ -19,6 +20,12 @@ public class ApiMakerService_stub extends ApiMakerService {
 
 	@Override
 	public TestConnectionApiMaker getTestConnectionApiMaker() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public SearchApiMaker getSearchApiMaker() {
 		// TODO Auto-generated method stub
 		return null;
 	}
