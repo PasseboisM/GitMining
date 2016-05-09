@@ -13,13 +13,14 @@ import common.enumeration.sort_standard.UserSortSandard;
 import common.exception.NetworkException;
 import common.param_obj.RepositorySearchParam;
 import common.param_obj.UserSearchParam;
+import common.service.GitUser;
 import common.service.Repository;
 import network.data.GHDataSourceDefault;
 
 public class GHDataSourceTest {
 
 	@Test
-	public void repoSearchTest() {
+	public void repoSearchTest() throws NetworkException {
 		GHDataSourceDefault source = new GHDataSourceDefault();
 		Language langs[] = {Language.C};
 		Category[] cates = {};
@@ -31,9 +32,10 @@ public class GHDataSourceTest {
 	@Test
 	public void userSearchTest() throws NetworkException {
 		GHDataSourceDefault source = new GHDataSourceDefault();
-		String loginName = "river";
+		String loginName = "xriver";
 		UserSearchParam userSearchParam = new UserSearchParam(loginName, UserSortSandard.NO_SORT);
-		source.searchUser(userSearchParam);
+		List<GitUser> users = source.searchUser(userSearchParam);
+		System.out.println(users.size());
 	}
 	
 	@Test

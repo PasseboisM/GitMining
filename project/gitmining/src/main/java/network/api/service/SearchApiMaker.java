@@ -1,5 +1,6 @@
 package network.api.service;
 
+import common.param_obj.RepositorySearchParam;
 import common.param_obj.UserSearchParam;
 
 public interface SearchApiMaker {
@@ -7,4 +8,5 @@ public interface SearchApiMaker {
 	static final String USER = "/users";
 	static final String REPO = "/repositories";
 	public String makeSearchUserApi(UserSearchParam param,int page);
+	public String makeSearchRepoApi(RepositorySearchParam param,int page);
 }
