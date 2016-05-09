@@ -12,12 +12,16 @@ import data.manage.MassiveDataGetterDefault;
  */
 public abstract class MassiveDataGetter {
 
+	/**
+	 * @return 数据层存储的总共Repository数目
+	 */
 	public abstract int getRepoNumber();
 	
 	/**
 	 * 获取提供Repository数据索引的通道
 	 * @return 包含所有Repository数据索引的Channel服务
 	 * @throws NetworkException 设置为在线模式而网络中途出现异常
+	 * @deprecated
 	 */
 	public abstract ObjChannel<RepositoryMin> getRepoMinInfo() throws NetworkException;
 	
@@ -25,6 +29,7 @@ public abstract class MassiveDataGetter {
 	 * 获取提供GitUser数据索引的通道
 	 * @return 包含所有GitUser数据索引的Channel服务
 	 * @throws NetworkException 设置为在线模式而网络中途出现异常
+	 * @deprecated
 	 */
 	public abstract ObjChannel<GitUserMin> getUserMinInfo() throws NetworkException;
 	
