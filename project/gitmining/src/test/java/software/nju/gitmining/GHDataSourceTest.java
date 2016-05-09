@@ -9,8 +9,10 @@ import org.junit.Test;
 import common.enumeration.attribute.Category;
 import common.enumeration.attribute.Language;
 import common.enumeration.sort_standard.RepoSortStadard;
+import common.enumeration.sort_standard.UserSortSandard;
 import common.exception.NetworkException;
 import common.param_obj.RepositorySearchParam;
+import common.param_obj.UserSearchParam;
 import common.service.Repository;
 import network.data.GHDataSourceDefault;
 
@@ -27,8 +29,11 @@ public class GHDataSourceTest {
 		System.out.println(repositories.size());
 	}
 	@Test
-	public void userSearchTest() {
-		
+	public void userSearchTest() throws NetworkException {
+		GHDataSourceDefault source = new GHDataSourceDefault();
+		String loginName = "river";
+		UserSearchParam userSearchParam = new UserSearchParam(loginName, UserSortSandard.NO_SORT);
+		source.searchUser(userSearchParam);
 	}
 	
 	@Test
