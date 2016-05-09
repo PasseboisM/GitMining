@@ -97,12 +97,9 @@ public class MainController extends Application implements Observer{
 	
 	private void isNetWork(){
 		ServiceConfigureDefault netService =new ServiceConfigureDefault();
-		try {
-			netService.setOnlineActive(true);
-		} catch (NetworkException e) {
-			// TODO Auto-generated catch block
-			
-			e.printStackTrace();
+		boolean networkAvailable = netService.checkNetwork();
+		if (!networkAvailable) {
+			//TODO 提示网络不通，然后系统退出
 		}
 	}
 
@@ -227,11 +224,8 @@ public class MainController extends Application implements Observer{
 		logicServiceFactory = LogicServiceFactory.getInstance();
 		serviceConfigure = logicServiceFactory.getServiceConfigure();
 		boolean isOnlineMode = (toggleGroup.getSelectedToggle()==buttonOnlineMode);
-		try {
-			serviceConfigure.setOnlineActive(isOnlineMode);
-		} catch (NetworkException e) {
-			e.printStackTrace();
-		}
+		//TODO 这个方法已经没用了，准备删掉吧
+		serviceConfigure.checkNetwork();
 	}
 	
 	

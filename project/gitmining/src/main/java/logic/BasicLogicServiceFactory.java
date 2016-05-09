@@ -3,6 +3,7 @@ package logic;
 import logic.calc.StatisticsMakerDefault;
 import logic.data.GeneralGetterDefault;
 import logic.data.SearchServiceDefault;
+import logic.service.LogInHelper;
 import logic.service.StatisticsMaker;
 import logic.service.GeneralGetter;
 import logic.service.LogicServiceFactory;
@@ -38,6 +39,12 @@ public class BasicLogicServiceFactory extends LogicServiceFactory {
 	@Override
 	public ServiceConfigure getServiceConfigure() {
 		return configure;
+	}
+
+	@Override
+	public LogInHelper getLogInHelper() {
+		// TODO 稍后再写出 LogInHelper实现
+		return null;
 	}
 
 }
