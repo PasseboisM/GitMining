@@ -28,21 +28,27 @@
 	</dependency>
     
     <dependency>  
-    <groupId>xom</groupId>  
-    <artifactId>xom</artifactId>  
-    <version>1.2.5</version>  
+    	<groupId>xom</groupId>  
+    	<artifactId>xom</artifactId>  
+    	<version>1.2.5</version>  
 	</dependency> 
     
     <dependency>
-	<groupId>org.apache.httpcomponents</groupId>
-	<artifactId>httpclient</artifactId>
-	<version>4.5.1</version>
+		<groupId>org.apache.httpcomponents</groupId>
+		<artifactId>httpclient</artifactId>
+		<version>4.5.1</version>
 	</dependency>
 	
 	<dependency>
 		<groupId>org.kohsuke</groupId>
 		<artifactId>github-api</artifactId>
 		<version>1.75</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>org.json</groupId>
+		<artifactId>json</artifactId>
+		<version>20160212</version>
 	</dependency>
 	
 	
