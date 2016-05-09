@@ -1,12 +1,10 @@
 package network.data;
 
 import java.io.IOException;
-import java.util.Properties;
 
 import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GHUser;
 import org.kohsuke.github.GitHub;
-import org.kohsuke.github.GitHubBuilder;
 
 import common.exception.DataCorruptedException;
 import common.exception.NetworkException;

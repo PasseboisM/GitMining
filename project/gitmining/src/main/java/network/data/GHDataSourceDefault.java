@@ -7,17 +7,12 @@ import java.util.Properties;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.kohsuke.github.GHRepository;
-import org.kohsuke.github.GHRepositorySearchBuilder;
 import org.kohsuke.github.GitHub;
 import org.kohsuke.github.GitHubBuilder;
 
 import com.google.gson.Gson;
 
-import common.enumeration.attribute.Language;
-import common.enumeration.sort_standard.RepoSortStadard;
 import common.exception.NetworkException;
-import common.model.HyberRepository;
 import common.model.beans.GitUserBeans;
 import common.model.beans.RepositoryBeans;
 import common.param_obj.RepositorySearchParam;
@@ -34,7 +29,6 @@ public class GHDataSourceDefault implements GHDataSource {
 	private Gson gson = new Gson(); 
 	private SearchApiMaker searchApi = null;
 	private HTTPConnectionService conn = null;
-	private GitHub gh;
 	private static final int ITEM_PER_PAGE=30;
 	
 
@@ -124,7 +118,6 @@ public class GHDataSourceDefault implements GHDataSource {
 	}
 	
 	public GHDataSourceDefault() {
-		this.gh = GHNetworkServiceFactory.getGitHub();
 		ApiMakerService apiMaker = ApiMakerService.getInstance();
 		this.searchApi = apiMaker.getSearchApiMaker();
 		this.conn = HTTPConnectionService.getInstance();
