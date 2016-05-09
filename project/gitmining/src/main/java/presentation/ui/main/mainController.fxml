@@ -15,46 +15,21 @@
    <children>
       <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
-            <HBox fx:id="hbox" BorderPane.alignment="CENTER">
+            <HBox  BorderPane.alignment="CENTER">
                <children>
                   <VBox fx:id="menu" maxHeight="800.0" maxWidth="150.0" minHeight="600.0" minWidth="150.0" stylesheets="@menu.css">
                      <children>
                         <VBox VBox.vgrow="ALWAYS">
                            <children>
+                              <AnchorPane prefHeight="197.0" prefWidth="150.0">
+                                 <children>
+                                    <ImageView fitHeight="116.0" fitWidth="121.0" layoutX="15.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Label fx:id="userName" layoutX="26.0" layoutY="141.0" prefHeight="15.0" prefWidth="100.0" text="GitUser" />
+                                    <Button fx:id="buttonLogin"  layoutX="71.0" layoutY="161.0" mnemonicParsing="false" text="登录"  onMousePressed="#onLoginClicked" />
+                                 </children>
+                              </AnchorPane>
                               <Accordion prefWidth="150.0">
                                 <panes>
-                                    <TitledPane animated="false" text="登录">
-                                       <content>
-                                          <VBox prefHeight="100.0" prefWidth="100.0">
-                                             <children>
-                                                <Button fx:id="buttonLogin" mnemonicParsing="false" onMousePressed="#onLoginClicked" prefHeight="50.0" prefWidth="150.0" text="GitHub登录">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Button>
-                                                <Button fx:id="buttonLogout" mnemonicParsing="false" onMousePressed="#onLogoutClicked" prefHeight="50.0" prefWidth="150.0" text="退出登录">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Button>
-                                             </children>
-                                             <padding>
-                                                <Insets bottom="0" left="0" right="0" top="0" />
-                                             </padding>
-                                          </VBox>
-                                       </content>
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                       <textFill>
-                                          <LinearGradient endX="0.5" endY="0.8952380952380953" startX="0.4904761904761905" startY="0.1619047619047619">
-                                             <stops>
-                                                <Stop color="#09968c" />
-                                                <Stop color="#ace6ff" offset="1.0" />
-                                             </stops>
-                                          </LinearGradient>
-                                       </textFill>
-                                    </TitledPane>
                                   <TitledPane animated="false" text="查询">
                                        <content>
                                           <VBox prefHeight="100.0" prefWidth="100.0">

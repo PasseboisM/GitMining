@@ -22,6 +22,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
@@ -33,6 +34,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import logic.ServiceConfigureDefault;
 import logic.service.Loader;
+import logic.service.LogInHelper;
 import logic.service.LogicServiceFactory;
 import logic.service.ServiceConfigure;
 import presentation.component.WaitLoader;
@@ -278,8 +280,8 @@ public class MainController extends Application implements Observer{
 	@FXML 
 	private void onLoginClicked(){
 		//TODO
-		System.out.println("do this");
-		if(buttonLogin.getText().equals("GitHub登录")){
+	//	System.out.println("do this");
+		if(buttonLogin.getText().equals("登录")){
 			//进行登录操作
 			
 			WaitLoader waitLoader = new WaitLoader();
@@ -306,34 +308,32 @@ public class MainController extends Application implements Observer{
 			
 			
 			
-			buttonLogin.setText("");
+			buttonLogin.setText("退出登录");
 		}else{
-		//已登录，跳转进入某个有待讨论的界面
-			
-			
-			
-			
+		//已登录，跳转进入某个有待讨论的界面	
+			if(buttonLogin.getText().equals("退出登录")){
+				LogicServiceFactory logicServiceFactory;
+				LogInHelper logInHelper;
+				logicServiceFactory=LogicServiceFactory.getInstance();
+				logInHelper=logicServiceFactory.getLogInHelper();
+				logInHelper.logOut();
+				buttonLogin.setText("登录");
+			}else{
+				
+			}
 		}
+		
 		
 	}
 	
-	@FXML 
-	private void onLogoutClicked(){
-		//TODO
-		
-		
-		
-		
-		
-		
-		buttonLogin.setText("GitHub登录");
-	}
+
 	
 
 	@FXML private AnchorPane rightComponentParent;
 	@FXML private Button buttonRepoSearch;
 	@FXML private Button buttonUserSearch;
-	@FXML private Button buttonLogin,buttonLogout;
+	@FXML private Button buttonLogin;
+	@FXML private Label userName;
 	@FXML private Button buttonLanguage,buttonRepoCreateTime,buttonFork,buttonStar;
 	@FXML private Button buttonUserType,buttonUserCreateTime,buttonInEachCompany,buttonBlogCount,buttonLocationCount,buttonEmailCount,buttonFollower,buttonFollowing;
 	@FXML private ToggleButton buttonLocalMode;
