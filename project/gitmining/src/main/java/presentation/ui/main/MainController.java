@@ -310,7 +310,7 @@ public class MainController extends Application implements Observer{
 			
 			buttonLogin.setText("退出登录");
 		}else{
-		//已登录，跳转进入某个有待讨论的界面	
+		//进行登出工作
 			if(buttonLogin.getText().equals("退出登录")){
 				LogicServiceFactory logicServiceFactory;
 				LogInHelper logInHelper;
