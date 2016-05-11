@@ -9,7 +9,7 @@ import common.service.GitUser;
 import common.service.Repository;
 
 public interface GHDataSource {
-	public List<Repository> searchRepository(RepositorySearchParam repositorySearchParam);
-	public List<GitUser> searchUser(UserSearchParam userSearchParam);
+	public List<Repository> searchRepository(RepositorySearchParam repositorySearchParam) throws NetworkException;
+	public List<GitUser> searchUser(UserSearchParam userSearchParam) throws NetworkException;
 	public boolean isCredentialValid(String login,String password) throws NetworkException;
 }

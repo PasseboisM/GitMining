@@ -457,6 +457,7 @@ public class RepositoryBeans implements Repository {
 		
 		
 		System.out.println(gson.toJson(re));
+		
 	}
 
 	public String getHtml_url() {

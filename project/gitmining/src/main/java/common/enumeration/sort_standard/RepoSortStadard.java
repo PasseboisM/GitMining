@@ -2,8 +2,6 @@ package common.enumeration.sort_standard;
 
 import java.util.Comparator;
 
-import org.kohsuke.github.GHRepositorySearchBuilder.Sort;
-
 import common.service.RepositoryMin;
 
 /**
@@ -21,19 +19,19 @@ public enum RepoSortStadard {
 		public int compare(RepositoryMin arg0, RepositoryMin arg1) {
 			return arg1.getStargazers_count()-arg0.getStargazers_count();
 		}	
-	},Sort.STARS),
+	},"stars"),
 	FORKS_DESCENDING(new Comparator<RepositoryMin>() {
 		public int compare(RepositoryMin arg0, RepositoryMin arg1) {
 			 return arg1.getForks_count()-arg0.getForks_count();
 		}	
-	},Sort.FORKS),
+	},"forks"),
 	;//TODO More compare standards
 	
 	
 	private Comparator<RepositoryMin> cpr;
-	private Sort sort;
+	private String sort;
 	
-	RepoSortStadard(Comparator<RepositoryMin> cpr,Sort sort) {
+	RepoSortStadard(Comparator<RepositoryMin> cpr,String sort) {
 		this.cpr = cpr;
 		this.sort = sort;
 	}
@@ -42,7 +40,7 @@ public enum RepoSortStadard {
 		return cpr;
 	}
 	
-	public Sort getSort(){
+	public String getSort(){
 		return sort;
 	}
 }
