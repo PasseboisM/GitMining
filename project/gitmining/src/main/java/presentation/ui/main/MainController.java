@@ -5,7 +5,6 @@ import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.List;
 
-import common.exception.NetworkException;
 import common.message.LoadProgress;
 import common.util.Observable;
 import common.util.Observer;
@@ -38,7 +37,6 @@ import logic.service.LogicServiceFactory;
 import logic.service.ServiceConfigure;
 import presentation.component.WaitLoader;
 import presentation.image.ImageFactory;
-import presentation.ui.search.RepoDetailsController;
 import presentation.ui.search.RepositorySearchController;
 import presentation.ui.search.UserSearchController;
 import presentation.ui.statistics.StatisticsPane;
@@ -96,34 +94,30 @@ public class MainController extends Application implements Observer{
 	}
 	
 	
-	/*private static AnchorPane showAlertDialog(AnchorPane alertDialog,Button buttonOut) {
-		FXMLLoader loader = new FXMLLoader(MainController.class.getResource("alertDialog.fxml"));
-		AnchorPane pane = null;
-		try {
-			pane = loader.load();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		MainController controller = loader.getController();
-		controller.initialLayout(pane);
-		return pane;
-	}
-	
-	private void initialLayout(AnchorPane rootUINode) {
-		AnchorPane.setBottomAnchor(rootUINode, 0.0);
-		AnchorPane.setLeftAnchor(rootUINode, 0.0);
-		AnchorPane.setRightAnchor(rootUINode, 0.0);
-		AnchorPane.setTopAnchor(rootUINode, 0.0);
-	}*/
 
 	private void isNetWork(){
 		ServiceConfigureDefault netService =new ServiceConfigureDefault();
+		//AlertController alert = new AlertController();
 		boolean networkAvailable = false;
 		if (!networkAvailable) {
 			//TODO 提示网络不通，然后系统退出
-			//showAlertDialog(alertDialog,buttonOut);
+			//rightComponentParent.getChildren().clear();
+			//rightComponentParent.getChildren().add(AlertController.showAlertDialog(rightComponentParent));
+			FXMLLoader loader = new FXMLLoader(MainController.class.getResource("alertDialog.fxml"));
+			AnchorPane pane = null;
+			try {
+				pane = loader.load();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			Stage alertStage = new Stage();
+			Scene scene = new Scene(pane,300,270);
+			alertStage.setTitle("提示");
+			alertStage.setScene(scene);
+			alertStage.show();
 		}
+			System.out.println("提示！！");
 	}
 
 	private void initialImage() {
@@ -362,11 +356,12 @@ public class MainController extends Application implements Observer{
 	@FXML private ToggleButton buttonLocalMode;
 	@FXML private ToggleButton buttonOnlineMode;
 	@FXML private AnchorPane mainAnchorPane;
-	@FXML private Button buttonOut;
 //	@FXML private FlowPane flowpane;
 	@FXML private VBox menu;
 	@FXML private ImageView gitLogoIV;
+	
 	@FXML private AnchorPane alertDialog;
+	@FXML private Button buttonOut;
 	private boolean startViewing = false;
 	private ToggleGroup toggleGroup;
 	private ImageView image;
