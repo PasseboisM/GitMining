@@ -103,7 +103,7 @@ public class MainController extends Application implements Observer{
 	private void isNetWork(){
 		ServiceConfigureDefault netService =new ServiceConfigureDefault();
 		boolean networkAvailable = netService.checkNetwork();
-		AlertDialog alert = new AlertDialog();
+		AlertDialogController alert = new AlertDialogController();
 		if (networkAvailable) {
 			//TODO 提示网络不通，然后系统退出
             alert.showAlert();
