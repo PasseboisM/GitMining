@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import common.exception.TargetNotFoundException;
 import common.service.GitUser;
+import common.service.GitUserTest;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -14,6 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import logic.service.LogInHelper;
 import logic.service.LogicServiceFactory;
 import presentation.component.LoginUser;
+import presentation.image.ImageFactory;
 
 
 public class LoginController {
@@ -64,7 +66,7 @@ public class LoginController {
 	
 	@FXML
 	private void onLogin() {
-		System.out.println(userAnchorPane);
+	//	System.out.println(userAnchorPane);
 		//TODO
 		String code;
 		code=password.getText();
@@ -82,7 +84,12 @@ public class LoginController {
 //			}
 		
 		rightComponentParent.getChildren().remove(loginPane);
-		LoginUser loginUser=new LoginUser(userAnchorPane,iUser);
+		
+		uuuser.setImage_url("abcdefg");
+		uuuser.setName("LiuQing");
+		AnchorPane anchorPane = LoginUser.getInstance(userAnchorPane,uuuser);
+		userAnchorPane.getChildren().add(anchorPane);
+	//	LoginUser loginUser=new LoginUser(userAnchorPane,iUser);
 		
 	}
 	
@@ -120,6 +127,7 @@ public class LoginController {
 	private LogicServiceFactory logicServiceFactory;
 	private LogInHelper logInHelper;
 	private GitUser iUser;
+	private GitUserTest uuuser=new GitUserTest();
 	private AnchorPane userAnchorPane;
 
 	@FXML private AnchorPane loginPane;
