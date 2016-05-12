@@ -5,6 +5,8 @@ import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.List;
 
+import common.enumeration.attribute.Category;
+import common.enumeration.attribute.Language;
 import common.message.LoadProgress;
 import common.util.Observable;
 import common.util.Observer;
@@ -21,6 +23,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -99,27 +102,13 @@ public class MainController extends Application implements Observer{
 
 	private void isNetWork(){
 		ServiceConfigureDefault netService =new ServiceConfigureDefault();
-		//AlertController alert = new AlertController();
-		boolean networkAvailable = false;
-		if (!networkAvailable) {
+		boolean networkAvailable = netService.checkNetwork();
+		AlertDialog alert = new AlertDialog();
+		if (networkAvailable) {
 			//TODO 提示网络不通，然后系统退出
-			//rightComponentParent.getChildren().clear();
-			//rightComponentParent.getChildren().add(AlertController.showAlertDialog(rightComponentParent));
-			FXMLLoader loader = new FXMLLoader(MainController.class.getResource("alertDialog.fxml"));
-			AnchorPane pane = null;
-			try {
-				pane = loader.load();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			Stage alertStage = new Stage();
-			Scene scene = new Scene(pane,300,270);
-			alertStage.setTitle("提示");
-			alertStage.setScene(scene);
-			alertStage.show();
+            alert.showAlert();
+			System.out.println("提示！");
 		}
-			System.out.println("提示！！");
 	}
 
 	private void initialImage() {
