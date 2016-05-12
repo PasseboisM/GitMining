@@ -30,6 +30,12 @@ public abstract class LogicServiceFactory {
 	public abstract StatisticsMaker getStatisticsMaker();
 	
 	/**
+	 * 获取可以进行用户登录的接口
+	 * @return 提供登录功能的接口LogInHelper
+	 */
+	public abstract LogInHelper getLogInHelper();
+	
+	/**
 	 * 获取对逻辑层服务进行设置的对象。
 	 * @return
 	 */

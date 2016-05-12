@@ -94,12 +94,20 @@ public class HTTPConnection extends HTTPConnectionService {
 //        return body;
 //    }
 //    
-//    public static void main(String[] args) throws ClientProtocolException, IOException {
+//    public static void main(String[] args) throws ClientProtocolException, IOException, NetworkException {
 //		HTTPConnection con = new HTTPConnection();
 //		con.do_get_performanceTest(new UserApiMaker_stub().makeUserAPI("XRiver"));
 //		con.do_get_performanceTest(new UserApiMaker_stub().makeUserAPI("kylin1"));
 //		con.do_get_performanceTest(new UserApiMaker_stub().makeUserAPI("Summer222"));
 //		con.do_get_performanceTest(new UserApiMaker_stub().makeUserAPI("iDimple"));
+		
+//		System.out.println(con.do_get(new UserApiMaker_stub().makeUserAPI("XRiver")));System.out.println();
+//		System.out.println(con.do_get(new UserApiMaker_stub().makeUserAPI("kylin1")));System.out.println();
+//		System.out.println(con.do_get(new UserApiMaker_stub().makeUserAPI("Summer222")));System.out.println();
+//		System.out.println(con.do_get(new UserApiMaker_stub().makeUserAPI("iDimple")));System.out.println();
+		
+		
+
 //	}
     
 }

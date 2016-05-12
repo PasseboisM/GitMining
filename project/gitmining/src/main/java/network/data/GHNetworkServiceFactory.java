@@ -1,19 +1,26 @@
 package network.data;
 
+import java.io.File;
+import java.io.IOException;
+
+import org.kohsuke.github.GitHub;
+import org.kohsuke.github.GitHubBuilder;
+
 import network.service.GHDataSource;
 import network.service.MassiveDataSource;
 import network.service.NetworkConnectionTester;
 import network.service.NetworkServiceFactory;
 import network.service.SpecificDataSource;
 
-public class BasicNetworkServiceFactory extends NetworkServiceFactory {
+public class GHNetworkServiceFactory extends NetworkServiceFactory {
 
 	@Override
 	public SpecificDataSource getSpecificDataSource() {
-		return new SpecificDataSourceDefault();
+		return new GHSpecificDataSource();
 	}
 
 	@Override
+	@Deprecated
 	public MassiveDataSource getMassiveDataSource() {
 		return new MassiveDataSourceDefault();
 	}
@@ -22,10 +29,24 @@ public class BasicNetworkServiceFactory extends NetworkServiceFactory {
 	public NetworkConnectionTester getNetworkConnectionTester() {
 		return new NetworkConnectionTesterDefault();
 	}
-
+	
 	@Override
 	public GHDataSource getGHDataSource() {
 		return new GHDataSourceDefault();
 	}
+	private static GitHub github = null;
+	public static GitHub getGitHub(){
+		if (github==null) {
+			try {
+				File propertyFile = new File(System.getProperty("user.dir"), "github.dll");
+				GitHubBuilder builder = GitHubBuilder.fromPropertyFile(propertyFile.getPath());
+				github = builder.build();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return github;
+	}
+
 
 }

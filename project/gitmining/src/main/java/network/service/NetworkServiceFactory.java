@@ -1,6 +1,6 @@
 package network.service;
 
-import network.data.BasicNetworkServiceFactory;
+import network.data.GHNetworkServiceFactory;
 
 /**
  * 
@@ -12,13 +12,16 @@ public abstract class NetworkServiceFactory {
 	
 	public abstract SpecificDataSource getSpecificDataSource();
 	
+	@Deprecated
 	public abstract MassiveDataSource getMassiveDataSource();
 	
 	public abstract NetworkConnectionTester getNetworkConnectionTester();
 	
-	public static NetworkServiceFactory getInstance() {
-		return new BasicNetworkServiceFactory();
-	}
+	public abstract GHDataSource getGHDataSource();
 	
+	public static NetworkServiceFactory getInstance() {
+//		return new BasicNetworkServiceFactory();
+		return new GHNetworkServiceFactory();
+	}
 	
 }

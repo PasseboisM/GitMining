@@ -1,10 +1,10 @@
 package presentation.ui.main;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.List;
 
-import common.exception.NetworkException;
 import common.message.LoadProgress;
 import common.util.Observable;
 import common.util.Observer;
@@ -22,6 +22,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
@@ -31,7 +32,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import logic.ServiceConfigureDefault;
 import logic.service.Loader;
+import logic.service.LogInHelper;
 import logic.service.LogicServiceFactory;
 import logic.service.ServiceConfigure;
 import presentation.component.WaitLoader;
@@ -58,6 +61,7 @@ public class MainController extends Application implements Observer{
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		
 		loadImgFile();
 		FXMLLoader loader = new FXMLLoader(MainController.class.getResource("mainController.fxml"));
 		mainAnchorPane = loader.load();
@@ -67,9 +71,11 @@ public class MainController extends Application implements Observer{
 		Scene scene = new Scene(mainAnchorPane,1190,660);
 		primaryStage.setMinHeight(640);
 		primaryStage.setMinWidth(960);
+		primaryStage.getIcons().add(new Image("avatar.png"));
 		primaryStage.setScene(scene);
 //		primaryStage.setResizable(false);
 		primaryStage.show();
+		
 	}
 
 	private void loadImgFile() {
@@ -84,8 +90,36 @@ public class MainController extends Application implements Observer{
 	private void initial() {
 		initialImage();
 		initialProgressBar();
+		isNetWork();
 		registerToLoader();
 //		initialToggleButtonGroup();
+	}
+	
+	
+
+	private void isNetWork(){
+		ServiceConfigureDefault netService =new ServiceConfigureDefault();
+		//AlertController alert = new AlertController();
+		boolean networkAvailable = false;
+		if (!networkAvailable) {
+			//TODO 提示网络不通，然后系统退出
+			//rightComponentParent.getChildren().clear();
+			//rightComponentParent.getChildren().add(AlertController.showAlertDialog(rightComponentParent));
+			FXMLLoader loader = new FXMLLoader(MainController.class.getResource("alertDialog.fxml"));
+			AnchorPane pane = null;
+			try {
+				pane = loader.load();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			Stage alertStage = new Stage();
+			Scene scene = new Scene(pane,300,270);
+			alertStage.setTitle("提示");
+			alertStage.setScene(scene);
+			alertStage.show();
+		}
+			System.out.println("提示！！");
 	}
 
 	private void initialImage() {
@@ -209,11 +243,8 @@ public class MainController extends Application implements Observer{
 		logicServiceFactory = LogicServiceFactory.getInstance();
 		serviceConfigure = logicServiceFactory.getServiceConfigure();
 		boolean isOnlineMode = (toggleGroup.getSelectedToggle()==buttonOnlineMode);
-		try {
-			serviceConfigure.setOnlineActive(isOnlineMode);
-		} catch (NetworkException e) {
-			e.printStackTrace();
-		}
+		//TODO 这个方法已经没用了，准备删掉吧
+		serviceConfigure.checkNetwork();
 	}
 	
 	
@@ -260,19 +291,77 @@ public class MainController extends Application implements Observer{
 		t.start();
 	}
 	
+	
+	
+	
+	@FXML 
+	private void onLoginClicked(){
+		//TODO
+	//	System.out.println("do this");
+		if(buttonLogin.getText().equals("登录")){
+			//进行登录操作
+			
+			WaitLoader waitLoader = new WaitLoader();
+			rightComponentParent.getChildren().add(waitLoader);
+			Runnable runnable = new Runnable() {
+				@Override
+				public void run() {
+					
+					AnchorPane anchorPane = LoginController.getInstance(rightComponentParent);
+					Platform.runLater(new Runnable() {
+						@Override
+						public void run() {
+							List<Node> childred = rightComponentParent.getChildren();
+							if (childred.get(childred.size()-1).equals(waitLoader)) {
+								childred.add(anchorPane);
+							}
+							childred.remove(waitLoader);
+						}
+					});
+				}
+			};
+			Thread t = new Thread(runnable);
+			t.start();
+			
+			
+			
+			buttonLogin.setText("退出登录");
+		}else{
+		//进行登出工作
+			if(buttonLogin.getText().equals("退出登录")){
+				LogicServiceFactory logicServiceFactory;
+				LogInHelper logInHelper;
+				logicServiceFactory=LogicServiceFactory.getInstance();
+				logInHelper=logicServiceFactory.getLogInHelper();
+				logInHelper.logOut();
+				buttonLogin.setText("登录");
+			}else{
+				
+			}
+		}
+		
+		
+	}
+	
+
+	
 
 	@FXML private AnchorPane rightComponentParent;
 	@FXML private Button buttonRepoSearch;
 	@FXML private Button buttonUserSearch;
+	@FXML private Button buttonLogin;
+	@FXML private Label userName;
 	@FXML private Button buttonLanguage,buttonRepoCreateTime,buttonFork,buttonStar;
 	@FXML private Button buttonUserType,buttonUserCreateTime,buttonInEachCompany,buttonBlogCount,buttonLocationCount,buttonEmailCount,buttonFollower,buttonFollowing;
 	@FXML private ToggleButton buttonLocalMode;
 	@FXML private ToggleButton buttonOnlineMode;
 	@FXML private AnchorPane mainAnchorPane;
-//	@FXML 
 //	@FXML private FlowPane flowpane;
 	@FXML private VBox menu;
 	@FXML private ImageView gitLogoIV;
+	
+	@FXML private AnchorPane alertDialog;
+	@FXML private Button buttonOut;
 	private boolean startViewing = false;
 	private ToggleGroup toggleGroup;
 	private ImageView image;

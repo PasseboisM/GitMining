@@ -150,6 +150,7 @@ public class RepositorySearchController{
 	}
 
 	private ScrollPane initCreatePage(Integer pageIndex) {
+//		System.out.println(pageIndex);
 		ScrollPane pane = new ScrollPane();
 		VBox vBox = new VBox();
 		int numPerPage = 10;
