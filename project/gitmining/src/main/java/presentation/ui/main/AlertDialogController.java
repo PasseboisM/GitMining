@@ -2,17 +2,23 @@ package presentation.ui.main;
 
 import java.io.IOException;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
-public class AlertDialog {
+/**
+ * 用来提示网络未连接
+ * @author sj14
+ *
+ */
+public class AlertDialogController {
 	@FXML private AnchorPane alertDialog;
 	@FXML private Button buttonOut;
-	void showAlert(){
+	
+	public void showAlert(){
 		FXMLLoader loader = new FXMLLoader(MainController.class.getResource("alertDialog.fxml"));
 		AnchorPane pane = null;
 		try {
@@ -21,11 +27,17 @@ public class AlertDialog {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		AlertDialogController controller = loader.getController();
 		Stage alertStage = new Stage();
 		Scene scene = new Scene(pane,300,270);
 		alertStage.setTitle("提示");
 		alertStage.setScene(scene);
 		alertStage.show();
+	}
+	
+	@FXML
+	private void exitAlert(ActionEvent event){
+		System.out.println("!!!");
 	}
 
 }
