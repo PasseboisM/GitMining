@@ -1,5 +1,7 @@
 package network.service;
 
+import java.io.IOException;
+
 import common.exception.DataCorruptedException;
 import common.exception.NetworkException;
 import common.service.GitUser;

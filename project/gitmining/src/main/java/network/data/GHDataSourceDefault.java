@@ -1,5 +1,6 @@
 package network.data;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -7,12 +8,16 @@ import java.util.Properties;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.kohsuke.github.GHRepository;
+import org.kohsuke.github.GHUser;
 import org.kohsuke.github.GitHub;
 import org.kohsuke.github.GitHubBuilder;
+import org.kohsuke.github.PagedIterable;
 
 import com.google.gson.Gson;
 
 import common.exception.NetworkException;
+import common.model.HyberRepository;
 import common.model.beans.GitUserBeans;
 import common.model.beans.RepositoryBeans;
 import common.param_obj.RepositorySearchParam;
@@ -30,8 +35,6 @@ public class GHDataSourceDefault implements GHDataSource {
 	private SearchApiMaker searchApi = null;
 	private HTTPConnectionService conn = null;
 	private static final int ITEM_PER_PAGE=30;
-	
-
 	
 	@Override
 	public List<Repository> searchRepository(RepositorySearchParam repositorySearchParam) throws NetworkException {
@@ -121,6 +124,8 @@ public class GHDataSourceDefault implements GHDataSource {
 		ApiMakerService apiMaker = ApiMakerService.getInstance();
 		this.searchApi = apiMaker.getSearchApiMaker();
 		this.conn = HTTPConnectionService.getInstance();
+		
 	}
+
 
 }
