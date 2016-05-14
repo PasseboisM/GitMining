@@ -73,4 +73,16 @@ public class GHRelatedDataSourceDefault implements GHRelatedDataSource {
 		this.gh = GHNetworkServiceFactory.getGitHub();
 	}
 
+	@Override
+	public List<GitUser> listContributors(String fullName) throws IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<GitUser> listCollaborators(String fullName) throws IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -12,4 +12,6 @@ public interface GHRelatedDataSource {
 	public List<Repository> listSubscrippedRepositories(String login) throws IOException;
 	public List<GitUser> listFollowers(String login) throws IOException;
 	public List<GitUser> listFollowings(String login) throws IOException;
+	public List<GitUser> listContributors(String fullName) throws IOException;
+	public List<GitUser> listCollaborators(String fullName) throws IOException;
 }
