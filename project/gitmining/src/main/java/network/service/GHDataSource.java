@@ -1,6 +1,5 @@
 package network.service;
 
-import java.io.IOException;
 import java.util.List;
 
 import common.exception.NetworkException;

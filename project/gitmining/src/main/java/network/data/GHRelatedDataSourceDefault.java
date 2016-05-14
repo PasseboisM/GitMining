@@ -51,7 +51,19 @@ public class GHRelatedDataSourceDefault implements GHRelatedDataSource {
 		return listUsers(ghUser.listFollows());
 	}
 
-	private List<GitUser> listUsers(PagedIterable<GHUser> pagedIterable) {
+	@Override
+	public List<GitUser> listContributors(String fullName) throws IOException {
+		GHRepository ghRepository = gh.getRepository(fullName);
+		return listUsers(ghRepository.listContributors());
+	}
+
+	@Override
+	public List<GitUser> listCollaborators(String fullName) throws IOException {
+		GHRepository ghRepository = gh.getRepository(fullName);
+		return listUsers(ghRepository.listCollaborators());
+	}
+
+	private <T extends GHUser> List<GitUser> listUsers(PagedIterable<T> pagedIterable) {
 		List<GitUser> result = new ArrayList<>();
 		pagedIterable.forEach(user->{
 			GitUser hyberUser =  new HyberUser(user);
@@ -71,18 +83,6 @@ public class GHRelatedDataSourceDefault implements GHRelatedDataSource {
 	
 	public GHRelatedDataSourceDefault() {
 		this.gh = GHNetworkServiceFactory.getGitHub();
-	}
-
-	@Override
-	public List<GitUser> listContributors(String fullName) throws IOException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<GitUser> listCollaborators(String fullName) throws IOException {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
