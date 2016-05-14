@@ -32,13 +32,13 @@ public class GHSpecificDataSource implements SpecificDataSource{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		try {
+		/*try {
 			repository.listLabels().forEach(label->{
 				System.out.println(label.getName());
 			});
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		}*/
 		return hyberRepo;
 	}
 
