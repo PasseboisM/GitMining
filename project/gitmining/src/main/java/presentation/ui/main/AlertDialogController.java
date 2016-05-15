@@ -35,7 +35,6 @@ public class AlertDialogController {
 		alertStage.setTitle("提示");
 		alertStage.setScene(scene);
 		alertStage.show();
-		exitAlert(null);
 		if(exitAlert == 1){
 			alertStage.close();
 		}
@@ -46,7 +45,8 @@ public class AlertDialogController {
 	public void exitAlert(ActionEvent event){
 		MainController maincontroller = new MainController();
 		maincontroller.exitMain = 1;
-		//exitAlert = 1;
+		exitAlert = 1;
+		showAlert();
 	}
 
 }

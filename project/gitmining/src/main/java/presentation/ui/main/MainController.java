@@ -111,7 +111,6 @@ public class MainController extends Application implements Observer{
 		if (!networkAvailable) {
 			//TODO 提示网络不通，然后系统退出
             alert.showAlert();
-            alert.exitAlert(null);
 			System.out.println("提示！");
 		}
 	}
