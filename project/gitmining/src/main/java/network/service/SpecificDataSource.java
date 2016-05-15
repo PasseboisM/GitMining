@@ -1,6 +1,5 @@
 package network.service;
 
-import common.exception.DataCorruptedException;
 import common.exception.NetworkException;
 import common.service.GitUser;
 import common.service.GitUserMin;
@@ -21,7 +20,7 @@ public interface SpecificDataSource {
 	 * @return 查询的Repository数据对象
 	 * @throws NetworkException 发生网络异常，无法获取信息
 	 */
-	public Repository getSpecificRepo(RepositoryMin source) throws NetworkException, DataCorruptedException;
+	public Repository getSpecificRepo(RepositoryMin source) throws NetworkException;
 	
 	/**
 	 * 根据FullName查询Repository详细信息
@@ -29,7 +28,7 @@ public interface SpecificDataSource {
 	 * @return 查询的Repository数据对象
 	 * @throws NetworkException 发生网络异常，无法获取信息
 	 */
-	public Repository getSpecificRepo(String fullName) throws NetworkException, DataCorruptedException;
+	public Repository getSpecificRepo(String fullName) throws NetworkException;
 	
 	/**
 	 * @deprecated

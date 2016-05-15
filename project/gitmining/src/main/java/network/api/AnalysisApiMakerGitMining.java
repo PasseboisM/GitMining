@@ -23,6 +23,7 @@ public class AnalysisApiMakerGitMining implements AnalysisApiMaker {
 	}
 
 	private String getStandardizeRequire(Language language) {
+		if(language==null)	return "";
 		String lang = language.getName();
 		lang=lang.replaceAll(" ", "%20");
 		lang=lang.replaceAll("#", "sharp");

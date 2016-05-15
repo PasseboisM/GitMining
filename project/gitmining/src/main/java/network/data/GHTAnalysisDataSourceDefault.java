@@ -1,6 +1,5 @@
 package network.data;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -8,11 +7,12 @@ import java.util.regex.Pattern;
 
 import common.enumeration.attribute.Language;
 import common.exception.NetworkException;
-import network.api.AnalysisApiMakerGitMining;
 import network.api.service.AnalysisApiMaker;
+import network.api.service.ApiMakerService;
 import network.connection.service.HTTPConnectionService;
+import network.service.AnalysisDataSource;
 
-public class GHTAnalysisDataSourceDefault {
+public class GHTAnalysisDataSourceDefault implements AnalysisDataSource{
 	
 	private AnalysisApiMaker analysisApi = null;
 	private HTTPConnectionService conn = null;
@@ -20,7 +20,7 @@ public class GHTAnalysisDataSourceDefault {
 	private final static String REPO_RE = "<li.*?prefix\">(.*?)</span>.*?slash\">/</span>(.*?)</a>.*?</li>";
 	private final static String USER_RE = "user-leaderboard-list-name\">.*?<a.*?>(.*?)(<span.*?/span>.*?)?</a>";
 	
-	public List<String> recommendRepositories(Language language) throws NetworkException, IOException{
+	public List<String> recommendRepositories(Language language) throws NetworkException{
 		String url = analysisApi.makeRepositoryTrendingApi(language);
 		String html = conn.do_get(url);
 		return findRepoMatchItems(html);
@@ -57,8 +57,8 @@ public class GHTAnalysisDataSourceDefault {
 	
 	
 	public GHTAnalysisDataSourceDefault() {
-//		ApiMakerService apiMaker = ApiMakerService.getInstance();
-		this.analysisApi = new AnalysisApiMakerGitMining();
+		ApiMakerService apiMaker = ApiMakerService.getInstance();
+		this.analysisApi = apiMaker.getAnalysisApiMaker();
 		this.conn = HTTPConnectionService.getInstance();
 	}
 }

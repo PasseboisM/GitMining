@@ -23,6 +23,8 @@ public abstract class NetworkServiceFactory {
 	
 	public abstract RepoRelatedDataSource getRepoRelatedDataSource();
 	
+	public abstract AnalysisDataSource getAnalysisDataSource();
+	
 	public static NetworkServiceFactory getInstance() {
 //		return new BasicNetworkServiceFactory();
 		return new GHNetworkServiceFactory();
