@@ -47,7 +47,7 @@ public class LoginController {
 		this.rightComponentParent = rightComponentParent;
 		this.userAnchorPane = userAnchorPane;
 		initialLoginService();
-		codeLabel.setText("密码：");
+		//codeLabel.setText("密码：");
 	}
 	
 	
@@ -59,10 +59,10 @@ public class LoginController {
 
 	
 	private void initialLayout(AnchorPane rightComponentParent) {
-		AnchorPane.setBottomAnchor(rightComponentParent,70.0);
-		AnchorPane.setLeftAnchor(rightComponentParent,300.0);
-		AnchorPane.setRightAnchor(rightComponentParent,300.0);
-		AnchorPane.setTopAnchor(rightComponentParent,70.0);
+	//	AnchorPane.setBottomAnchor(rightComponentParent,150.0);
+		AnchorPane.setLeftAnchor(rightComponentParent,340.0);
+		AnchorPane.setRightAnchor(rightComponentParent,340.0);
+		AnchorPane.setTopAnchor(rightComponentParent,80.0);
 	}
 	
 	
@@ -89,7 +89,7 @@ public class LoginController {
 			AnchorPane anchorPane = LoginUser.getInstance(userAnchorPane,testUser,logInHelperT);
 			userAnchorPane.getChildren().add(anchorPane);
 		}else{
-			codeLabel.setText("INCORRECT PASSWORD,TRY AGAIN:");
+			warnLabel.setText("用户名或密码错误请重新输入！");
 		}
 		
 		
@@ -128,7 +128,7 @@ public class LoginController {
 	@FXML private AnchorPane loginPane;
 	@FXML private TextField userName;
 	@FXML private PasswordField password;
-	@FXML private Label codeLabel;
+	@FXML private Label codeLabel,warnLabel;
 	@FXML private Button loginButton;
 	@FXML private Button cancelButton;
 	
