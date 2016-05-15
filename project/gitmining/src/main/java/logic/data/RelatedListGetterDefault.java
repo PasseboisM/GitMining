@@ -7,13 +7,13 @@ import java.util.List;
 import common.service.GitUser;
 import common.service.Repository;
 import data.service.DataServiceFactory;
-import data.service.ListDataGetter;
+import data.service.UserListDataGetter;
 import logic.service.RelatedListGetter;
 
 public class RelatedListGetterDefault implements RelatedListGetter {
 
 	
-	private ListDataGetter getter = DataServiceFactory.getInstance().getListDataGetter();
+	private UserListDataGetter getter = DataServiceFactory.getInstance().getUserListDataGetter();
 	
 	@Override
 	public List<String> getOwnedRepositoryNames(String login) throws IOException {
