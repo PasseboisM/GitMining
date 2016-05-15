@@ -4,13 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import common.enumeration.attribute.Language;
-import common.exception.DataCorruptedException;
 import common.exception.NetworkException;
+import common.service.GitUser;
 import common.service.Repository;
-import data.service.MassiveDataGetter;
 import data.service.RecommendDataGetter;
 import network.service.AnalysisDataSource;
-import network.service.MassiveDataSource;
 import network.service.NetworkServiceFactory;
 import network.service.SpecificDataSource;
 
@@ -27,15 +25,19 @@ public class RecommendDataGetterDefault extends RecommendDataGetter{
 	public List<Repository> getRecommendRepos(Language language) throws NetworkException{
 		List<Repository> repositories = new ArrayList<>();
 		List<String> recommendRepos = analysis.recommendRepositories(language);
-		recommendRepos.forEach(fullName->{
-				try {
-					repositories.add(specific.getSpecificRepo(fullName));
-				} catch (Exception e) {
-					System.out.println("no such repo:"+fullName);
-					e.printStackTrace();
-				}
-		});
+		for (String fullName : recommendRepos) {
+			repositories.add(specific.getSpecificRepo(fullName));
+		}
 		return repositories;
+	}
+	
+	public List<GitUser> getRecommendUsers(Language language) throws NetworkException{
+		List<GitUser> users = new ArrayList<>();
+		List<String> recommendUsers = analysis.recommendUsers(language);
+		for (String login : recommendUsers) {
+			users.add(specific.getSpecificUser(login));
+		}
+		return users;
 	}
 	public static RecommendDataGetter getInstance() {
 		return instance;
