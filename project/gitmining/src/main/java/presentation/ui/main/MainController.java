@@ -296,7 +296,7 @@ public class MainController extends Application implements Observer{
 				@Override
 				public void run() {
 					
-					AnchorPane anchorPane = LoginController.getInstance(rightComponentParent);
+					AnchorPane anchorPane = LoginController.getInstance(userAnchorPane,rightComponentParent);
 					Platform.runLater(new Runnable() {
 						@Override
 						public void run() {
@@ -348,6 +348,8 @@ public class MainController extends Application implements Observer{
 //	@FXML private FlowPane flowpane;
 	@FXML private VBox menu;
 	@FXML private ImageView gitLogoIV;
+	@FXML private ImageView avatarV;
+	@FXML private AnchorPane userAnchorPane;
 	
 	@FXML private AnchorPane alertDialog;
 	@FXML private Button buttonOut;
