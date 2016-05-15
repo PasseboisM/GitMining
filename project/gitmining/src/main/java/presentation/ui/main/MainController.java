@@ -119,6 +119,7 @@ public class MainController extends Application implements Observer{
 		image.fitHeightProperty().bind(mainAnchorPane.heightProperty());
 		mainAnchorPane.getChildren().add(image);
 		gitLogoIV.setImage(icon);
+		avatarV.setImage(avatar);
 	}
 	
 	private void initialProgressBar(){
