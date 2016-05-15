@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 public class AlertDialogController {
 	@FXML private AnchorPane alertDialog;
 	@FXML private Button buttonOut;
+	int exitAlert = 0;
 	
 	public void showAlert(){
 		FXMLLoader loader = new FXMLLoader(MainController.class.getResource("alertDialog.fxml"));
@@ -33,11 +34,17 @@ public class AlertDialogController {
 		alertStage.setTitle("提示");
 		alertStage.setScene(scene);
 		alertStage.show();
+		if(exitAlert == 1){
+			alertStage.close();
+		}
+		System.out.println(exitAlert);
 	}
 	
 	@FXML
 	private void exitAlert(ActionEvent event){
-		System.out.println("!!!");
+		exitAlert = 1;
+//		System.out.println(maincontroller.exitMain);
+		System.out.println("!!");
 	}
 
 }
