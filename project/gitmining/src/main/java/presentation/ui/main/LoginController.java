@@ -3,6 +3,7 @@ package presentation.ui.main;
 import java.io.IOException;
 
 import common.exception.TargetNotFoundException;
+import common.model.beans.GitUserBeans;
 import common.service.GitUser;
 import common.service.GitUserTest;
 import javafx.fxml.FXML;
@@ -76,17 +77,16 @@ public class LoginController {
 		boolean isLogLegal=false ;
 	//未实现部分先等待，采用假数据尝试	
 		try {
-			iUser=logInHelper.tryLogIn(user, code);
+		testUser=	logInHelperT.tryLogIn(user, code);
+			//iUser=logInHelper.tryLogIn(user, code);
 			isLogLegal=true;
 			} catch (TargetNotFoundException e) {
-			// TODO Auto-generated catch block
-				
-			e.printStackTrace();
+				 isLogLegal=false ;
 		
 			}
 		if(isLogLegal){
 			rightComponentParent.getChildren().remove(loginPane);
-			AnchorPane anchorPane = LoginUser.getInstance(userAnchorPane,uuuser,logInHelper);
+			AnchorPane anchorPane = LoginUser.getInstance(userAnchorPane,testUser,logInHelperT);
 			userAnchorPane.getChildren().add(anchorPane);
 		}else{
 			codeLabel.setText("INCORRECT PASSWORD,TRY AGAIN:");
@@ -94,8 +94,8 @@ public class LoginController {
 		
 		
 		
-		uuuser.setImage_url("abcdefg");
-		uuuser.setName("LiuQing");
+	//	uuuser.setImage_url("abcdefg");
+	//	uuuser.setName("LiuQing");
 		
 	
 		
@@ -119,8 +119,10 @@ public class LoginController {
 	private AnchorPane rightComponentParent;
 	private LogicServiceFactory logicServiceFactory;
 	private LogInHelper logInHelper;
-	private GitUser iUser;
-	private GitUserTest uuuser=new GitUserTest();
+	private LogInHelperTest logInHelperT=new LogInHelperTest();
+	private GitUserBeans iUser;
+	private GitUser testUser; 
+	private GitUserTest mockUser=new GitUserTest();
 	private AnchorPane userAnchorPane;
 
 	@FXML private AnchorPane loginPane;

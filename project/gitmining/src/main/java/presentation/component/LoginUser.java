@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 
 import common.service.GitUser;
-import common.service.GitUserTest;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -14,15 +14,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import logic.service.LogInHelper;
 import presentation.image.ImageFactory;
-import presentation.ui.main.LoginController;
+
 
 public class LoginUser {
 
 	
 	
-	public static AnchorPane getInstance(AnchorPane userAnchorPane,GitUserTest user,LogInHelper logInHelper){
+	public static AnchorPane getInstance(AnchorPane userAnchorPane,GitUser user,LogInHelper logInHelper){
 		FXMLLoader loader = new FXMLLoader(LoginUser.class.getResource("loginUser.fxml"));
-		System.out.println("do this");
+	//	System.out.println("do this");
 		AnchorPane pane = null;
 		try {
 			pane = loader.load();
@@ -30,18 +30,18 @@ public class LoginUser {
 			e.printStackTrace();
 		}
 		LoginUser controller = loader.getController();
-		controller.initial(userAnchorPane,user);
+		controller.initial(userAnchorPane,user,logInHelper);
 	
 		return pane;
 	}
 	
 	
-		private void initial(AnchorPane rootParent,GitUserTest gitUser){
+		private void initial(AnchorPane rootParent,GitUser gitUser, LogInHelper logInHelper){
 		
 		loadImgFile();
 		this.setComponent(gitUser);
-		//this.user = gitUser;
-		this.test=gitUser;
+		this.user = gitUser;
+	//	this.test=gitUser;
 		this.rootParent = rootParent;
 		this.logInHelper = logInHelper;
 		initialLayout(rootParent);
@@ -54,9 +54,10 @@ public class LoginUser {
 			AnchorPane.setRightAnchor(rootUINode, 0.0);
 			AnchorPane.setTopAnchor(rootUINode, 0.0);
 		}
-	private void setComponent(GitUserTest gitUser) {
+	private void setComponent(GitUser gitUser) {
 		userName.setText(gitUser.getName());
 		Image image = avatarImage;
+		//Image image = new Image(gitUser.getAvatar_url());
 		if(image.isError()){
 			image = avatarImage;
 		}
@@ -89,8 +90,9 @@ public class LoginUser {
 	@FXML
 	private AnchorPane anchorPane ;
 	
+	@SuppressWarnings("unused")
 	private GitUser user;
-	private GitUserTest test;
+//	private GitUserTest test;
 	private AnchorPane rootParent;
 	private static Image avatarImage=null;
 	private LogInHelper logInHelper;
