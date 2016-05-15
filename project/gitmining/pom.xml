@@ -18,7 +18,12 @@
 		<artifactId>junit</artifactId>
 		<version>4.12</version>
 	</dependency>
-
+	
+    <dependency>  
+    	<groupId>xom</groupId>  
+    	<artifactId>xom</artifactId>  
+    	<version>1.2.5</version>  
+	</dependency> 
     
     <dependency>
 		<groupId>com.google.code.gson</groupId>
@@ -26,12 +31,6 @@
 		<version>2.6.2</version>
 		<scope>compile</scope>
 	</dependency>
-    
-    <dependency>  
-    	<groupId>xom</groupId>  
-    	<artifactId>xom</artifactId>  
-    	<version>1.2.5</version>  
-	</dependency> 
     
     <dependency>
 		<groupId>org.apache.httpcomponents</groupId>
