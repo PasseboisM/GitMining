@@ -30,7 +30,7 @@ public class BasicDataServiceFactory extends DataServiceFactory {
 	}
 
 	@Override
-	public RecommendDataGetter getRecommendDataGettet() {
+	public RecommendDataGetter getRecommendDataGetter() {
 		return RecommendDataGetter.getInstance();
 	}
 

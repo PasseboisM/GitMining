@@ -26,7 +26,7 @@ public abstract class DataServiceFactory {
 	
 	public abstract RepoListDataGetter getRepoListDataGetter();
 	
-	public abstract RecommendDataGetter getRecommendDataGettet();
+	public abstract RecommendDataGetter getRecommendDataGetter();
 	
 	private static boolean getNetworkAvailability() {
 		networkAvailable = NetworkServiceFactory.getInstance().getNetworkConnectionTester().testNetwork();
