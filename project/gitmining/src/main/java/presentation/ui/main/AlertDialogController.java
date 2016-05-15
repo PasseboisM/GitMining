@@ -45,6 +45,7 @@ public class AlertDialogController {
 		//TODO 徐江河在更新master分支内容时，此处发生了conflict。
 		//现已修改，请做界面的同学看看这是不是正确的版本
 		//		05/15
+		//TODO 王子安表示我也不知道哪个是正确的版本
 		MainController maincontroller = new MainController();
 		maincontroller.exitMain = 1;
 		exitAlert = 1;
