@@ -7,19 +7,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import data.service.DataServiceMaker;
+import data.service.RepositoryRequestHandler;
+
 /**
  * Servlet implementation class RepositoryServlet
  */
 @WebServlet("/repo")
 public class RepositoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    
+	private static final RepositoryRequestHandler handler = 
+			DataServiceMaker.getInstance().getRepositoryService();
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
     public RepositoryServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -27,7 +32,7 @@ public class RepositoryServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		handler.handleRequest(request, response);
 	}
 
 }

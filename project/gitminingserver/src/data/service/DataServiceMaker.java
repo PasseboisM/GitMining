@@ -10,9 +10,9 @@ public abstract class DataServiceMaker {
 	
 	public abstract UserRequestHandler getUserService();
 	
-	public abstract StatiticRequestHandler getStatisticHandler();
+	public abstract StatisticRequestHandler getStatisticHandler();
 	
-	public DataServiceMaker getInstance() {
+	public static DataServiceMaker getInstance() {
 		return instance;
 	}
 }

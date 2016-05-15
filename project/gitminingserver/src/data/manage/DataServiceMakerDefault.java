@@ -1,16 +1,19 @@
 package data.manage;
 
+import javax.servlet.http.HttpServletRequest;
+
 import data.service.DataServiceMaker;
 import data.service.RepositoryRequestHandler;
-import data.service.StatiticRequestHandler;
+import data.service.StatisticRequestHandler;
 import data.service.UserRequestHandler;
 
 public class DataServiceMakerDefault extends DataServiceMaker {
 
+	RepositoryRequestHandler repoHandler = new RepositoryRequestHandlerDefault();
+	
 	@Override
 	public RepositoryRequestHandler getRepositoryService() {
-		// TODO Auto-generated method stub
-		return null;
+		return repoHandler;
 	}
 
 	@Override
@@ -20,7 +23,7 @@ public class DataServiceMakerDefault extends DataServiceMaker {
 	}
 
 	@Override
-	public StatiticRequestHandler getStatisticHandler() {
+	public StatisticRequestHandler getStatisticHandler() {
 		// TODO Auto-generated method stub
 		return null;
 	}
