@@ -1,55 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="loginPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="516.0" prefWidth="417.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.ui.main.LoginController">
+<AnchorPane fx:id="loginPane" maxHeight="600.0" maxWidth="450.0" minHeight="400.0" minWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.ui.main.LoginController">
    <children>
-      <VBox layoutX="93.0" layoutY="82.0" spacing="50.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
+      <AnchorPane maxHeight="600.0" maxWidth="450.0" minHeight="400.0" minWidth="300.0" opacity="0.67" style="-fx-background-color: white;" />
+      <AnchorPane prefHeight="400.0" prefWidth="300.0">
          <children>
-            <HBox alignment="CENTER">
+            <VBox spacing="50.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
                <children>
-                  <Label layoutX="148.0" layoutY="82.0" text="GitHub登录">
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <VBox maxHeight="250.0" minHeight="200.0" spacing="20.0" VBox.vgrow="NEVER">
-               <children>
-                  <Label layoutX="93.0" layoutY="135.0" text="用户名:">
-                     <padding>
-                        <Insets left="20.0" />
-                     </padding>
-                  </Label>
-                  <TextField fx:id="userName" layoutX="93.0" layoutY="190.0">
-                     <VBox.margin>
-                        <Insets left="50.0" />
-                     </VBox.margin>
-                  </TextField>
-                  <Label fx:id="codeLabel"  layoutX="93.0" layoutY="241.0" text="密码:">
-                     <VBox.margin>
-                        <Insets left="20.0" />
-                     </VBox.margin>
-                  </Label>
-                  <PasswordField fx:id="password" layoutX="93.0" layoutY="296.0">
-                     <VBox.margin>
-                        <Insets left="50.0" />
-                     </VBox.margin>
-                  </PasswordField>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Label layoutX="148.0" layoutY="82.0" text="GitHub登录">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <VBox maxHeight="250.0" minHeight="150.0" spacing="20.0" VBox.vgrow="NEVER">
+                     <children>
+                        <Label layoutX="93.0" layoutY="135.0" text="用户名:">
+                           <padding>
+                              <Insets left="20.0" />
+                           </padding>
+                        </Label>
+                        <TextField fx:id="userName" layoutX="93.0" layoutY="190.0">
+                           <VBox.margin>
+                              <Insets left="50.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Label fx:id="codeLabel" layoutX="93.0" layoutY="241.0" text="密码:">
+                           <VBox.margin>
+                              <Insets left="20.0" />
+                           </VBox.margin>
+                        </Label>
+                        <PasswordField fx:id="password" layoutX="93.0" layoutY="296.0">
+                           <VBox.margin>
+                              <Insets left="50.0" />
+                           </VBox.margin>
+                        </PasswordField>
+                        <Label fx:id="warnLabel" textFill="RED">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <HBox alignment="CENTER_RIGHT" spacing="10.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Button fx:id="loginButton" layoutX="186.0" layoutY="354.0" mnemonicParsing="false" onMousePressed="#onLogin" text="登录" />
+                        <Button fx:id="cancelButton" layoutX="259.0" layoutY="354.0" mnemonicParsing="false" onMousePressed="#onCancel" text="取消" />
+                     </children>
+                  </HBox>
                </children>
             </VBox>
-            <HBox alignment="CENTER_RIGHT" spacing="10.0" VBox.vgrow="ALWAYS">
-               <children>
-                  <Button fx:id="loginButton" layoutX="186.0" layoutY="354.0" mnemonicParsing="false" onMousePressed="#onLogin" text="登录" />
-                  <Button fx:id="cancelButton" layoutX="259.0" layoutY="354.0" mnemonicParsing="false" onMousePressed="#onCancel" text="取消" />
-               </children>
-            </HBox>
          </children>
-      </VBox>
+      </AnchorPane>
    </children>
 </AnchorPane>

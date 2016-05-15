@@ -106,7 +106,7 @@ public class MainController extends Application implements Observer{
 
 	private void isNetWork(){
 		ServiceConfigureDefault netService =new ServiceConfigureDefault();
-		boolean networkAvailable = netService.checkNetwork();
+		boolean networkAvailable =netService.checkNetwork();
 		AlertDialogController alert = new AlertDialogController();
 		if (!networkAvailable) {
 			//TODO 提示网络不通，然后系统退出
@@ -320,19 +320,19 @@ public class MainController extends Application implements Observer{
 			
 			
 			
-			buttonLogin.setText("退出登录");
-		}else{
-		//进行登出工作
-			if(buttonLogin.getText().equals("退出登录")){
-				LogicServiceFactory logicServiceFactory;
-				LogInHelper logInHelper;
-				logicServiceFactory=LogicServiceFactory.getInstance();
-				logInHelper=logicServiceFactory.getLogInHelper();
-				logInHelper.logOut();
-				buttonLogin.setText("登录");
-			}else{
-				
-			}
+		
+	}else{
+//		//进行登出工作
+//			if(buttonLogin.getText().equals("退出登录")){
+//				LogicServiceFactory logicServiceFactory;
+//				LogInHelper logInHelper;
+//				logicServiceFactory=LogicServiceFactory.getInstance();
+//				logInHelper=logicServiceFactory.getLogInHelper();
+//				logInHelper.logOut();
+//				buttonLogin.setText("登录");
+//			}else{
+//				
+//			}
 		}
 		
 		
