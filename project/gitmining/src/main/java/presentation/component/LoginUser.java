@@ -12,25 +12,15 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import logic.service.LogInHelper;
 import presentation.image.ImageFactory;
 import presentation.ui.main.LoginController;
 
 public class LoginUser {
-	@FXML
-	private ImageView  userV ;
-	@FXML
-	private  Label userName;
-	@FXML
-	private Button cancelButton ;
-	
-	
-	private GitUser user;
-	private GitUserTest test;
-	private AnchorPane rootParent;
-	private static Image avatarImage=null;
 
 	
-	public static AnchorPane getInstance(AnchorPane userAnchorPane,GitUserTest user){
+	
+	public static AnchorPane getInstance(AnchorPane userAnchorPane,GitUserTest user,LogInHelper logInHelper){
 		FXMLLoader loader = new FXMLLoader(LoginUser.class.getResource("loginUser.fxml"));
 		System.out.println("do this");
 		AnchorPane pane = null;
@@ -53,6 +43,7 @@ public class LoginUser {
 		//this.user = gitUser;
 		this.test=gitUser;
 		this.rootParent = rootParent;
+		this.logInHelper = logInHelper;
 		initialLayout(rootParent);
 		//System.out.println(rootParent);
 	}
@@ -85,7 +76,23 @@ public class LoginUser {
 	
 	@FXML
 	private void logout(){
-		rootParent.getChildren().remove(this);
+		rootParent.getChildren().remove(anchorPane);
+		logInHelper.logOut();
 	}
+	
+	@FXML
+	private ImageView  userV ;
+	@FXML
+	private  Label userName;
+	@FXML
+	private Button cancelButton ;
+	@FXML
+	private AnchorPane anchorPane ;
+	
+	private GitUser user;
+	private GitUserTest test;
+	private AnchorPane rootParent;
+	private static Image avatarImage=null;
+	private LogInHelper logInHelper;
 	
 }

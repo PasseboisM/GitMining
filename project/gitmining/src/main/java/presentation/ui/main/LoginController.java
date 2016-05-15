@@ -8,7 +8,7 @@ import common.service.GitUserTest;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -46,6 +46,7 @@ public class LoginController {
 		this.rightComponentParent = rightComponentParent;
 		this.userAnchorPane = userAnchorPane;
 		initialLoginService();
+		codeLabel.setText("密码：");
 	}
 	
 	
@@ -72,24 +73,31 @@ public class LoginController {
 		code=password.getText();
 		String user;
 		user=userName.getText();
+		boolean isLogLegal=false ;
 	//未实现部分先等待，采用假数据尝试	
-//		try {
-//			iUser=logInHelper.tryLogIn(user, code);
-//			
-//			} catch (TargetNotFoundException e) {
-//			// TODO Auto-generated catch block
-//				
-//			e.printStackTrace();
-//		
-//			}
+		try {
+			iUser=logInHelper.tryLogIn(user, code);
+			isLogLegal=true;
+			} catch (TargetNotFoundException e) {
+			// TODO Auto-generated catch block
+				
+			e.printStackTrace();
 		
-		rightComponentParent.getChildren().remove(loginPane);
+			}
+		if(isLogLegal){
+			rightComponentParent.getChildren().remove(loginPane);
+			AnchorPane anchorPane = LoginUser.getInstance(userAnchorPane,uuuser,logInHelper);
+			userAnchorPane.getChildren().add(anchorPane);
+		}else{
+			codeLabel.setText("INCORRECT PASSWORD,TRY AGAIN:");
+		}
+		
+		
 		
 		uuuser.setImage_url("abcdefg");
 		uuuser.setName("LiuQing");
-		AnchorPane anchorPane = LoginUser.getInstance(userAnchorPane,uuuser);
-		userAnchorPane.getChildren().add(anchorPane);
-	//	LoginUser loginUser=new LoginUser(userAnchorPane,iUser);
+		
+	
 		
 	}
 	
@@ -103,22 +111,7 @@ public class LoginController {
 	
 
 
-	public GitUser getiUser() {
-		return iUser;
-	}
-
-
-
-
-
-
-
-
-
-	public void setiUser(GitUser iUser) {
-		this.iUser = iUser;
-		
-	}
+	
 
 
 
@@ -133,7 +126,7 @@ public class LoginController {
 	@FXML private AnchorPane loginPane;
 	@FXML private TextField userName;
 	@FXML private PasswordField password;
-	
+	@FXML private Label codeLabel;
 	@FXML private Button loginButton;
 	@FXML private Button cancelButton;
 	
