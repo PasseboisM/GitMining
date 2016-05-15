@@ -8,9 +8,9 @@ import common.service.GitUser;
 import common.service.Repository;
 import data.service.DataServiceFactory;
 import data.service.UserListDataGetter;
-import logic.service.RelatedListGetter;
+import logic.service.UserRelatedListGetter;
 
-public class RelatedListGetterDefault implements RelatedListGetter {
+public class UserRelatedListGetterDefault implements UserRelatedListGetter {
 
 	
 	private UserListDataGetter getter = DataServiceFactory.getInstance().getUserListDataGetter();
@@ -39,16 +39,6 @@ public class RelatedListGetterDefault implements RelatedListGetter {
 	@Override
 	public List<String> getFollowingNames(String login) throws IOException {
 		return getUserName(getter.getFollowings(login));
-	}
-
-	@Override
-	public List<String> getContributorNames(String fullName) throws IOException {
-		return getUserName(getter.getContributors(fullName));
-	}
-
-	@Override
-	public List<String> getCollaboratorNames(String fullName) throws IOException {
-		return getUserName(getter.getCollaborators(fullName));
 	}
 
 	private List<String> getRepoName(List<Repository> repositories) {

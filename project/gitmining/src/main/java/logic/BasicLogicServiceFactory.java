@@ -2,11 +2,15 @@ package logic;
 
 import logic.calc.StatisticsMakerDefault;
 import logic.data.GeneralGetterDefault;
+import logic.data.RepoRelatedListGetterDefault;
 import logic.data.SearchServiceDefault;
+import logic.data.UserRelatedListGetterDefault;
 import logic.service.LogInHelper;
 import logic.service.StatisticsMaker;
+import logic.service.UserRelatedListGetter;
 import logic.service.GeneralGetter;
 import logic.service.LogicServiceFactory;
+import logic.service.RepoRelatedListGetter;
 import logic.service.SearchService;
 import logic.service.ServiceConfigure;
 
@@ -23,6 +27,8 @@ public class BasicLogicServiceFactory extends LogicServiceFactory {
 	ServiceConfigure configure = new ServiceConfigureDefault();
 	StatisticsMaker statistics = new StatisticsMakerDefault();
 	SearchService search = new SearchServiceDefault();
+	RepoRelatedListGetter repoRelatedListGetter = new RepoRelatedListGetterDefault();
+	UserRelatedListGetter userRelatedListGetter = new UserRelatedListGetterDefault();
 	
 	public GeneralGetter getGeneralGetter() {
 		return getter;
@@ -45,6 +51,16 @@ public class BasicLogicServiceFactory extends LogicServiceFactory {
 	public LogInHelper getLogInHelper() {
 		// TODO 稍后再写出 LogInHelper实现
 		return null;
+	}
+
+	@Override
+	public RepoRelatedListGetter getRepoRelatedListGetter() {
+		return repoRelatedListGetter;
+	}
+
+	@Override
+	public UserRelatedListGetter getUserRelatedListGetter() {
+		return userRelatedListGetter;
 	}
 
 }
