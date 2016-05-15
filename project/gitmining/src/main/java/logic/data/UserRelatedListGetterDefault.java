@@ -16,44 +16,29 @@ public class UserRelatedListGetterDefault implements UserRelatedListGetter {
 	private UserListDataGetter getter = DataServiceFactory.getInstance().getUserListDataGetter();
 	
 	@Override
-	public List<String> getOwnedRepositoryNames(String login) throws IOException {
-		return getRepoName(getter.getOwnedRepositories(login));
+	public List<Repository> getOwnedRepositoryNames(String login) throws IOException {
+		return getter.getOwnedRepositories(login);
 	}
 
 
 	@Override
-	public List<String> getStarredRepositoryNames(String login) throws IOException {
-		return getRepoName(getter.getStarredRepositories(login));
+	public List<Repository> getStarredRepositoryNames(String login) throws IOException {
+		return getter.getStarredRepositories(login);
 	}
 
 	@Override
-	public List<String> getSubscrippedRepositoryNames(String login) throws IOException {
-		return getRepoName(getter.getSubscrippedRepositories(login));
+	public List<Repository> getSubscrippedRepositoryNames(String login) throws IOException {
+		return getter.getSubscrippedRepositories(login);
 	}
 
 	@Override
-	public List<String> getFollowerNames(String login) throws IOException {
-		return getUserName(getter.getFollowers(login));
+	public List<GitUser> getFollowerNames(String login) throws IOException {
+		return getter.getFollowers(login);
 	}
 
 	@Override
-	public List<String> getFollowingNames(String login) throws IOException {
-		return getUserName(getter.getFollowings(login));
+	public List<GitUser> getFollowingNames(String login) throws IOException {
+		return getter.getFollowings(login);
 	}
 
-	private List<String> getRepoName(List<Repository> repositories) {
-		List<String> result = new ArrayList<>();
-		repositories.forEach(repo->{
-			result.add(repo.getFull_name());
-		});
-		return result;
-	}
-	
-	private List<String> getUserName(List<GitUser> users) {
-		List<String> result = new ArrayList<>();
-		users.forEach(user->{
-			result.add(user.getLogin());
-		});
-		return result;
-	}
 }

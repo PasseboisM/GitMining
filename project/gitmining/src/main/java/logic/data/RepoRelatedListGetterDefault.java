@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import common.service.GitUser;
+import common.service.Repository;
 import data.service.DataServiceFactory;
 import data.service.RepoListDataGetter;
 import logic.service.RepoRelatedListGetter;
@@ -15,20 +16,18 @@ public class RepoRelatedListGetterDefault implements RepoRelatedListGetter {
 	private RepoListDataGetter getter = DataServiceFactory.getInstance().getRepoListDataGetter();
 
 	@Override
-	public List<String> getContributorNames(String fullName) throws IOException {
-		return getUserName(getter.getContributors(fullName));
+	public List<GitUser> getContributorNames(String fullName) throws IOException {
+		return getter.getContributors(fullName);
 	}
 
 	@Override
-	public List<String> getCollaboratorNames(String fullName) throws IOException {
-		return getUserName(getter.getCollaborators(fullName));
+	public List<GitUser> getCollaboratorNames(String fullName) throws IOException {
+		return getter.getCollaborators(fullName);
 	}
 
-	private List<String> getUserName(List<GitUser> users) {
-		List<String> result = new ArrayList<>();
-		users.forEach(user->{
-			result.add(user.getLogin());
-		});
-		return result;
+
+	@Override
+	public List<Repository> getRelatedRepoNames(String fullName) {
+		return new ArrayList<>();
 	}
 }
