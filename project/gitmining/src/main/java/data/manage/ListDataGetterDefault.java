@@ -6,13 +6,13 @@ import java.util.List;
 import common.service.GitUser;
 import common.service.Repository;
 import data.service.ListDataGetter;
-import network.service.GHRelatedDataSource;
+import network.service.UserRelatedDataSource;
 import network.service.NetworkServiceFactory;
 
 public class ListDataGetterDefault extends ListDataGetter {
 	private static ListDataGetter instance = new ListDataGetterDefault();
 	
-	private GHRelatedDataSource fromNetwork = NetworkServiceFactory.getInstance().getGHRelatedDataSource();
+	private UserRelatedDataSource fromNetwork = NetworkServiceFactory.getInstance().getUserRelatedDataSource();
 			
 	private ListDataGetterDefault() {}
 	

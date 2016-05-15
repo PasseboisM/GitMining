@@ -13,9 +13,9 @@ import common.model.HyberRepository;
 import common.model.HyberUser;
 import common.service.GitUser;
 import common.service.Repository;
-import network.service.GHRelatedDataSource;
+import network.service.UserRelatedDataSource;
 
-public class GHRelatedDataSourceDefault implements GHRelatedDataSource {
+public class UserRelatedDataSourceDefault implements UserRelatedDataSource {
 
 	
 	private GitHub gh = null;
@@ -51,19 +51,7 @@ public class GHRelatedDataSourceDefault implements GHRelatedDataSource {
 		return listUsers(ghUser.listFollows());
 	}
 
-	@Override
-	public List<GitUser> listContributors(String fullName) throws IOException {
-		GHRepository ghRepository = gh.getRepository(fullName);
-		return listUsers(ghRepository.listContributors());
-	}
-
-	@Override
-	public List<GitUser> listCollaborators(String fullName) throws IOException {
-		GHRepository ghRepository = gh.getRepository(fullName);
-		return listUsers(ghRepository.listCollaborators());
-	}
-
-	private <T extends GHUser> List<GitUser> listUsers(PagedIterable<T> pagedIterable) {
+	private List<GitUser> listUsers(PagedIterable<GHUser> pagedIterable) {
 		List<GitUser> result = new ArrayList<>();
 		pagedIterable.forEach(user->{
 			GitUser hyberUser =  new HyberUser(user);
@@ -81,7 +69,7 @@ public class GHRelatedDataSourceDefault implements GHRelatedDataSource {
 		return result;
 	}
 	
-	public GHRelatedDataSourceDefault() {
+	public UserRelatedDataSourceDefault() {
 		this.gh = GHNetworkServiceFactory.getGitHub();
 	}
 
