@@ -19,6 +19,10 @@ public abstract class NetworkServiceFactory {
 	
 	public abstract GHDataSource getGHDataSource();
 	
+	public abstract UserRelatedDataSource getUserRelatedDataSource();
+	
+	public abstract RepoRelatedDataSource getRepoRelatedDataSource();
+	
 	public static NetworkServiceFactory getInstance() {
 //		return new BasicNetworkServiceFactory();
 		return new GHNetworkServiceFactory();

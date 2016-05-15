@@ -1,0 +1,9 @@
+diff a/project/gitmining/src/main/java/presentation/ui/main/AlertDialogController.java b/project/gitmining/src/main/java/presentation/ui/main/AlertDialogController.java	(rejected hunks)
+@@ -17,6 +17,7 @@
+ public class AlertDialogController {
+ 	@FXML private AnchorPane alertDialog;
+ 	@FXML private Button buttonOut;
++//	private Stage stage ;
+ 	
+ 	public void showAlert(){
+ 		FXMLLoader loader = new FXMLLoader(MainController.class.getResource("alertDialog.fxml"));

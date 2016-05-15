@@ -23,7 +23,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -69,8 +69,8 @@ public class MainController extends Application implements Observer{
 		FXMLLoader loader = new FXMLLoader(MainController.class.getResource("mainController.fxml"));
 		mainAnchorPane = loader.load();
 		MainController controller = loader.getController();
-//		primaryStage.setResizable(false);
 		controller.initial();
+//		primaryStage.setResizable(false);
 		Scene scene = new Scene(mainAnchorPane,1190,660);
 		primaryStage.setMinHeight(640);
 		primaryStage.setMinWidth(960);
@@ -78,13 +78,18 @@ public class MainController extends Application implements Observer{
 		primaryStage.setScene(scene);
 //		primaryStage.setResizable(false);
 		primaryStage.show();
-		
+		isNetWork();
+		if(exitMain == 1){
+			primaryStage.close();
+		}
+		System.out.println(exitMain);
 	}
 
 	private void loadImgFile() {
 		try {
 			bgImage = ImageFactory.getImageByFileName(ImageFactory.LOADING_BACKGROUND);
 			icon = ImageFactory.getImageByFileName(ImageFactory.GIT_LOGO);
+			avatar = ImageFactory.getImageByFileName(ImageFactory.AVATAR_DEFAULT);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
@@ -93,7 +98,6 @@ public class MainController extends Application implements Observer{
 	private void initial() {
 		initialImage();
 		initialProgressBar();
-		isNetWork();
 		registerToLoader();
 //		initialToggleButtonGroup();
 	}
@@ -102,10 +106,11 @@ public class MainController extends Application implements Observer{
 
 	private void isNetWork(){
 		ServiceConfigureDefault netService =new ServiceConfigureDefault();
-		boolean networkAvailable = netService.checkNetwork();
+		boolean networkAvailable =netService.checkNetwork();
 		AlertDialogController alert = new AlertDialogController();
-		if (networkAvailable) {
+		if (!networkAvailable) {
 			//TODO 提示网络不通，然后系统退出
+			exitMain = 1;
             alert.showAlert();
 			System.out.println("提示！");
 		}
@@ -118,6 +123,7 @@ public class MainController extends Application implements Observer{
 		image.fitHeightProperty().bind(mainAnchorPane.heightProperty());
 		mainAnchorPane.getChildren().add(image);
 		gitLogoIV.setImage(icon);
+		avatarV.setImage(avatar);
 	}
 	
 	private void initialProgressBar(){
@@ -296,7 +302,7 @@ public class MainController extends Application implements Observer{
 				@Override
 				public void run() {
 					
-					AnchorPane anchorPane = LoginController.getInstance(rightComponentParent);
+					AnchorPane anchorPane = LoginController.getInstance(userAnchorPane,rightComponentParent);
 					Platform.runLater(new Runnable() {
 						@Override
 						public void run() {
@@ -314,19 +320,19 @@ public class MainController extends Application implements Observer{
 			
 			
 			
-			buttonLogin.setText("退出登录");
-		}else{
-		//进行登出工作
-			if(buttonLogin.getText().equals("退出登录")){
-				LogicServiceFactory logicServiceFactory;
-				LogInHelper logInHelper;
-				logicServiceFactory=LogicServiceFactory.getInstance();
-				logInHelper=logicServiceFactory.getLogInHelper();
-				logInHelper.logOut();
-				buttonLogin.setText("登录");
-			}else{
-				
-			}
+		
+	}else{
+//		//进行登出工作
+//			if(buttonLogin.getText().equals("退出登录")){
+//				LogicServiceFactory logicServiceFactory;
+//				LogInHelper logInHelper;
+//				logicServiceFactory=LogicServiceFactory.getInstance();
+//				logInHelper=logicServiceFactory.getLogInHelper();
+//				logInHelper.logOut();
+//				buttonLogin.setText("登录");
+//			}else{
+//				
+//			}
 		}
 		
 		
@@ -334,7 +340,7 @@ public class MainController extends Application implements Observer{
 	
 
 	
-
+    public int exitMain;
 	@FXML private AnchorPane rightComponentParent;
 	@FXML private Button buttonRepoSearch;
 	@FXML private Button buttonUserSearch;
@@ -348,6 +354,8 @@ public class MainController extends Application implements Observer{
 //	@FXML private FlowPane flowpane;
 	@FXML private VBox menu;
 	@FXML private ImageView gitLogoIV;
+	@FXML private ImageView avatarV;
+	@FXML private AnchorPane userAnchorPane;
 	
 	@FXML private AnchorPane alertDialog;
 	@FXML private Button buttonOut;
@@ -361,6 +369,7 @@ public class MainController extends Application implements Observer{
 	
 	private static Image bgImage = null;
 	private static Image icon = null;
+	private static Image avatar = null;
 	private static final int FADE_DURATION = 3000;
 	private static final double LOADING_RATE = 1.0;
 	private static final HashMap<String, StatisticsPane> MAP_BUTTON_TO_PANE = new HashMap<String,StatisticsPane>() {
