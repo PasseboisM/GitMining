@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import data.service.UserRequestHandler;
 
-public class UserRequestHandlerDefault extends UserRequestHandler {
+class UserRequestHandlerDefault extends UserRequestHandler {
 
 	@Override
 	public void handleRequest(HttpServletRequest httpRequest, HttpServletResponse httpResponse) {

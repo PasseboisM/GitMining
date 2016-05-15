@@ -1,7 +1,5 @@
 package data.manage;
 
-import javax.servlet.http.HttpServletRequest;
-
 import data.service.DataServiceMaker;
 import data.service.RepositoryRequestHandler;
 import data.service.StatisticRequestHandler;
@@ -9,7 +7,10 @@ import data.service.UserRequestHandler;
 
 public class DataServiceMakerDefault extends DataServiceMaker {
 
-	RepositoryRequestHandler repoHandler = new RepositoryRequestHandlerDefault();
+	private RepositoryRequestHandler repoHandler = new RepositoryRequestHandlerDefault();
+	private UserRequestHandler userHandler = new UserRequestHandlerDefault();
+	private StatisticRequestHandler statHandler = new StatisticRequestHandlerDefault();
+	
 	
 	@Override
 	public RepositoryRequestHandler getRepositoryService() {
@@ -18,14 +19,12 @@ public class DataServiceMakerDefault extends DataServiceMaker {
 
 	@Override
 	public UserRequestHandler getUserService() {
-		// TODO Auto-generated method stub
-		return null;
+		return userHandler;
 	}
 
 	@Override
 	public StatisticRequestHandler getStatisticHandler() {
-		// TODO Auto-generated method stub
-		return null;
+		return statHandler;
 	}
 
 }

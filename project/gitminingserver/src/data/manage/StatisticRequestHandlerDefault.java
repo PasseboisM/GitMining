@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import data.service.StatisticRequestHandler;
 
-public class StatisticRequestHandlerDefault extends StatisticRequestHandler {
+class StatisticRequestHandlerDefault extends StatisticRequestHandler {
 
 	@Override
 	public void handleRequest(HttpServletRequest httpRequest, HttpServletResponse httpResponse) {

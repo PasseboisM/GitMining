@@ -15,8 +15,8 @@ import data.service.RepositoryRequestHandler;
  */
 @WebServlet("/repo")
 public class RepositoryServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-    
+
+	private static final long serialVersionUID = -1172282505153057641L;
 	private static final RepositoryRequestHandler handler = 
 			DataServiceMaker.getInstance().getRepositoryService();
 	
@@ -31,7 +31,6 @@ public class RepositoryServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		handler.handleRequest(request, response);
 	}
 
