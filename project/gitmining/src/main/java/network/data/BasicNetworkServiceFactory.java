@@ -1,5 +1,6 @@
 package network.data;
 
+import network.service.AnalysisDataSource;
 import network.service.GHDataSource;
 import network.service.UserRelatedDataSource;
 import network.service.MassiveDataSource;
@@ -38,6 +39,11 @@ public class BasicNetworkServiceFactory extends NetworkServiceFactory {
 	@Override
 	public RepoRelatedDataSource getRepoRelatedDataSource() {
 		return new RepoRelatedDataSourceDefault();
+	}
+
+	@Override
+	public AnalysisDataSource getAnalysisDataSource() {
+		return new GHTAnalysisDataSourceDefault();
 	}
 
 }

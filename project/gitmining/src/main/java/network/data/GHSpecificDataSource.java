@@ -6,7 +6,6 @@ import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GHUser;
 import org.kohsuke.github.GitHub;
 
-import common.exception.DataCorruptedException;
 import common.exception.NetworkException;
 import common.model.HyberRepository;
 import common.model.HyberUser;
@@ -19,11 +18,11 @@ import network.service.SpecificDataSource;
 public class GHSpecificDataSource implements SpecificDataSource{
 
 	private GitHub gh = null;
-	public Repository getSpecificRepo(RepositoryMin source) throws NetworkException, DataCorruptedException {
+	public Repository getSpecificRepo(RepositoryMin source) throws NetworkException {
 		return this.getSpecificRepo(source.getFull_name());
 	}
 
-	public Repository getSpecificRepo(String fullName) throws NetworkException, DataCorruptedException {
+	public Repository getSpecificRepo(String fullName) throws NetworkException {
 		GHRepository repository = null;
 		Repository hyberRepo = null;
 		try {

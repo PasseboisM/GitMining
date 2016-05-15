@@ -10,9 +10,9 @@ import common.exception.NetworkException;
 import network.api.service.AnalysisApiMaker;
 import network.api.service.ApiMakerService;
 import network.connection.service.HTTPConnectionService;
-import network.service.GHTAnalysisDataSource;
+import network.service.AnalysisDataSource;
 
-public class GHTAnalysisDataSourceDefault implements GHTAnalysisDataSource{
+public class GHTAnalysisDataSourceDefault implements AnalysisDataSource{
 	
 	private AnalysisApiMaker analysisApi = null;
 	private HTTPConnectionService conn = null;
