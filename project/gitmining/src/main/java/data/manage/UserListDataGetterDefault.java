@@ -5,18 +5,19 @@ import java.util.List;
 
 import common.service.GitUser;
 import common.service.Repository;
-import data.service.ListDataGetter;
-import network.service.GHRelatedDataSource;
+import data.service.UserListDataGetter;
+import network.service.UserRelatedDataSource;
 import network.service.NetworkServiceFactory;
 
-public class ListDataGetterDefault extends ListDataGetter {
-	private static ListDataGetter instance = new ListDataGetterDefault();
+public class UserListDataGetterDefault extends UserListDataGetter {
 	
-	private GHRelatedDataSource fromNetwork = NetworkServiceFactory.getInstance().getGHRelatedDataSource();
+	private static UserListDataGetter instance = new UserListDataGetterDefault();
+	
+	private UserRelatedDataSource fromNetwork = NetworkServiceFactory.getInstance().getUserRelatedDataSource();
 			
-	private ListDataGetterDefault() {}
+	private UserListDataGetterDefault() {}
 	
-	public static ListDataGetter getInstance() {
+	public static UserListDataGetter getInstance() {
 		return instance;
 	}
 
@@ -43,15 +44,6 @@ public class ListDataGetterDefault extends ListDataGetter {
 	@Override
 	public List<GitUser> getFollowings(String login) throws IOException {
 		return fromNetwork.listFollowings(login);
-	}
-	@Override
-	public List<GitUser> getContributors(String fullName) throws IOException {
-		return fromNetwork.listContributors(fullName);
-	}
-
-	@Override
-	public List<GitUser> getCollaborators(String fullName) throws IOException {
-		return fromNetwork.listCollaborators(fullName);
 	}
 
 }

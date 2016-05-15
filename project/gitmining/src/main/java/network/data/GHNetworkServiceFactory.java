@@ -7,10 +7,11 @@ import org.kohsuke.github.GitHub;
 import org.kohsuke.github.GitHubBuilder;
 
 import network.service.GHDataSource;
-import network.service.GHRelatedDataSource;
+import network.service.UserRelatedDataSource;
 import network.service.MassiveDataSource;
 import network.service.NetworkConnectionTester;
 import network.service.NetworkServiceFactory;
+import network.service.RepoRelatedDataSource;
 import network.service.SpecificDataSource;
 
 public class GHNetworkServiceFactory extends NetworkServiceFactory {
@@ -32,9 +33,20 @@ public class GHNetworkServiceFactory extends NetworkServiceFactory {
 	}
 	
 	@Override
+	public UserRelatedDataSource getUserRelatedDataSource() {
+		return new UserRelatedDataSourceDefault();
+	}
+	
+	@Override
+	public RepoRelatedDataSource getRepoRelatedDataSource() {
+		return new RepoRelatedDataSourceDefault();
+	}
+	
+	@Override
 	public GHDataSource getGHDataSource() {
 		return new GHDataSourceDefault();
 	}
+	
 	private static GitHub github = null;
 	public static GitHub getGitHub(){
 		if (github==null) {
@@ -47,11 +59,6 @@ public class GHNetworkServiceFactory extends NetworkServiceFactory {
 			}
 		}
 		return github;
-	}
-
-	@Override
-	public GHRelatedDataSource getGHRelatedDataSource() {
-		return new GHRelatedDataSourceDefault();
 	}
 
 

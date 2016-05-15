@@ -1,10 +1,11 @@
 package network.data;
 
 import network.service.GHDataSource;
-import network.service.GHRelatedDataSource;
+import network.service.UserRelatedDataSource;
 import network.service.MassiveDataSource;
 import network.service.NetworkConnectionTester;
 import network.service.NetworkServiceFactory;
+import network.service.RepoRelatedDataSource;
 import network.service.SpecificDataSource;
 
 public class BasicNetworkServiceFactory extends NetworkServiceFactory {
@@ -30,8 +31,13 @@ public class BasicNetworkServiceFactory extends NetworkServiceFactory {
 	}
 
 	@Override
-	public GHRelatedDataSource getGHRelatedDataSource() {
-		return new GHRelatedDataSourceDefault();
+	public UserRelatedDataSource getUserRelatedDataSource() {
+		return new UserRelatedDataSourceDefault();
+	}
+
+	@Override
+	public RepoRelatedDataSource getRepoRelatedDataSource() {
+		return new RepoRelatedDataSourceDefault();
 	}
 
 }

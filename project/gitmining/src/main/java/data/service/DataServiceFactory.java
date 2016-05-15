@@ -1,9 +1,8 @@
 package data.service;
 
 import common.exception.NetworkException;
-
-import network.service.NetworkServiceFactory;
 import data.BasicDataServiceFactory;
+import network.service.NetworkServiceFactory;
 
 /**
  * 
@@ -23,7 +22,9 @@ public abstract class DataServiceFactory {
 	
 	public abstract SpecificDataGetter getSpecificDataGetter();
 	
-	public abstract ListDataGetter getListDataGetter();
+	public abstract UserListDataGetter getUserListDataGetter();
+	
+	public abstract RepoListDataGetter getRepoListDataGetter();
 	
 	private static boolean getNetworkAvailability() {
 		networkAvailable = NetworkServiceFactory.getInstance().getNetworkConnectionTester().testNetwork();
