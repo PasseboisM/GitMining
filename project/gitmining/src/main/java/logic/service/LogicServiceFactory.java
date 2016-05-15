@@ -42,6 +42,7 @@ public abstract class LogicServiceFactory {
 	public abstract ServiceConfigure getServiceConfigure();
 	public abstract RepoRelatedListGetter getRepoRelatedListGetter();
 	public abstract UserRelatedListGetter getUserRelatedListGetter();
+	public abstract Recommender getRecommender();
 	/**
 	 * 获取本接口默认实现。
 	 * @return 可用于获取各种逻辑层服务的LogicServiceFactory对象

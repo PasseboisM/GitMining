@@ -31,4 +31,9 @@ public class RepoRelatedListGetterDefault implements RepoRelatedListGetter {
 		});
 		return result;
 	}
+
+	@Override
+	public List<String> getRelatedRepoNames(String fullName) {
+		return new ArrayList<>();
+	}
 }
