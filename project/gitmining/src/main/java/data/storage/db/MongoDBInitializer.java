@@ -3,9 +3,13 @@ package data.storage.db;
 import org.bson.Document;
 
 import com.mongodb.MongoClient;
+import com.mongodb.MongoCredential;
+import com.mongodb.ServerAddress;
+import com.mongodb.WriteConcern;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.Block;
 import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
 
 import static com.mongodb.client.model.Filters.*;
 import static com.mongodb.client.model.Sorts.ascending;
@@ -14,13 +18,32 @@ import static java.util.Arrays.asList;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Locale;
 
 
-public class MongoDBTest {
+public class MongoDBInitializer {
+	
+	private static MongoClient client = null;
+	private static MongoDatabase gitminingDatabase = null;
+	private static MongoCollection<Document> userColl = null;
+	private static MongoCollection<Document> repoColl = null;
+	
+	static {
+		ArrayList<MongoCredential> credentials = new ArrayList<>();
+		credentials.add(MongoCredential.createCredential(
+				"gitminer", "gitmining", "teammole".toCharArray()));
+		client = new MongoClient(new ServerAddress("10.19.74.64", 27017),
+				credentials);
+		gitminingDatabase = client.getDatabase("gitmining");
+		userColl = gitminingDatabase.getCollection("user");
+		repoColl = gitminingDatabase.getCollection("repository");
+	}
+	
 	public static void main(String[] args) throws ParseException {
 		
-		MongoClient mongoClient = new MongoClient();		
+		MongoClient mongoClient = new MongoClient();
 		MongoDatabase db = mongoClient.getDatabase("test");
 		
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH);
@@ -54,5 +77,13 @@ public class MongoDBTest {
 		        System.out.println(document);
 		    }
 		});
+	}
+	
+	public static void insertUserIntoDB(String userJSON) {
+		userColl.insertOne(new Document().parse(userJSON));
+	}
+	
+	public static void insertRepoIntoDB(String repoJSON) {
+		repoColl.insertOne(new Document().parse(repoJSON));
 	}
 }
