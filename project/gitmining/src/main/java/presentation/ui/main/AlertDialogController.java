@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBase;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 /**
@@ -34,6 +35,7 @@ public class AlertDialogController {
 		alertStage.setTitle("提示");
 		alertStage.setScene(scene);
 		alertStage.show();
+		exitAlert(null);
 		if(exitAlert == 1){
 			alertStage.close();
 		}
@@ -41,10 +43,10 @@ public class AlertDialogController {
 	}
 	
 	@FXML
-	private void exitAlert(ActionEvent event){
-		exitAlert = 1;
-//		System.out.println(maincontroller.exitMain);
-		System.out.println("!!");
+	public void exitAlert(ActionEvent event){
+		MainController maincontroller = new MainController();
+		maincontroller.exitMain = 1;
+		//exitAlert = 1;
 	}
 
 }

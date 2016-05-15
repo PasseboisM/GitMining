@@ -82,7 +82,7 @@ public class MainController extends Application implements Observer{
 		if(exitMain == 1){
 			primaryStage.close();
 		}
-		System.out.println(exitMain);
+		System.out.println("exitmain"+exitMain);
 	}
 
 	private void loadImgFile() {
@@ -106,12 +106,12 @@ public class MainController extends Application implements Observer{
 
 	private void isNetWork(){
 		ServiceConfigureDefault netService =new ServiceConfigureDefault();
-		boolean networkAvailable = netService.checkNetwork();
+		boolean networkAvailable = false;
 		AlertDialogController alert = new AlertDialogController();
 		if (!networkAvailable) {
 			//TODO 提示网络不通，然后系统退出
-			exitMain = 1;
             alert.showAlert();
+            alert.exitAlert(null);
 			System.out.println("提示！");
 		}
 	}
