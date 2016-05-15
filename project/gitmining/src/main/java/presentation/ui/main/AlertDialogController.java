@@ -41,18 +41,15 @@ public class AlertDialogController {
 	}
 	
 	@FXML
-<<<<<<< HEAD
-	private void exitAlert(ActionEvent event){
-		exitAlert = 1;
-//		System.out.println(maincontroller.exitMain);
-		System.out.println("!!");
-=======
 	public void exitAlert(ActionEvent event){
+		//TODO 徐江河在更新master分支内容时，此处发生了conflict。
+		//现已修改，请做界面的同学看看这是不是正确的版本
+		//		05/15
 		MainController maincontroller = new MainController();
 		maincontroller.exitMain = 1;
 		exitAlert = 1;
 		showAlert();
->>>>>>> b736856ee87b78f079481ab9fa7f03ff119ee3d8
+
 	}
 
 }
