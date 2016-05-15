@@ -69,8 +69,8 @@ public class MainController extends Application implements Observer{
 		FXMLLoader loader = new FXMLLoader(MainController.class.getResource("mainController.fxml"));
 		mainAnchorPane = loader.load();
 		MainController controller = loader.getController();
-//		primaryStage.setResizable(false);
 		controller.initial();
+//		primaryStage.setResizable(false);
 		Scene scene = new Scene(mainAnchorPane,1190,660);
 		primaryStage.setMinHeight(640);
 		primaryStage.setMinWidth(960);
@@ -78,7 +78,11 @@ public class MainController extends Application implements Observer{
 		primaryStage.setScene(scene);
 //		primaryStage.setResizable(false);
 		primaryStage.show();
-		
+		isNetWork();
+		if(exitMain == 1){
+			primaryStage.close();
+		}
+		System.out.println(exitMain);
 	}
 
 	private void loadImgFile() {
@@ -94,7 +98,6 @@ public class MainController extends Application implements Observer{
 	private void initial() {
 		initialImage();
 		initialProgressBar();
-		isNetWork();
 		registerToLoader();
 //		initialToggleButtonGroup();
 	}
@@ -105,8 +108,9 @@ public class MainController extends Application implements Observer{
 		ServiceConfigureDefault netService =new ServiceConfigureDefault();
 		boolean networkAvailable = netService.checkNetwork();
 		AlertDialogController alert = new AlertDialogController();
-		if (networkAvailable) {
+		if (!networkAvailable) {
 			//TODO 提示网络不通，然后系统退出
+			exitMain = 1;
             alert.showAlert();
 			System.out.println("提示！");
 		}
@@ -336,7 +340,7 @@ public class MainController extends Application implements Observer{
 	
 
 	
-
+    public int exitMain;
 	@FXML private AnchorPane rightComponentParent;
 	@FXML private Button buttonRepoSearch;
 	@FXML private Button buttonUserSearch;
