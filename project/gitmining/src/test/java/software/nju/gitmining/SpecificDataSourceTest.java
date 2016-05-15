@@ -1,8 +1,6 @@
 package software.nju.gitmining;
 
-import static org.junit.Assert.*;
-import network.data.SpecificDataSourceDefault;
-import network.service.SpecificDataSource;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
@@ -10,6 +8,8 @@ import common.exception.DataCorruptedException;
 import common.exception.NetworkException;
 import common.service.GitUser;
 import common.service.Repository;
+import network.data.SpecificDataSourceDefault;
+import network.service.SpecificDataSource;
 
 /**
  * 测试网络层获取特定数据对象的功能

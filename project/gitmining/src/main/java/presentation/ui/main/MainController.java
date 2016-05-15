@@ -23,7 +23,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -85,6 +84,7 @@ public class MainController extends Application implements Observer{
 		try {
 			bgImage = ImageFactory.getImageByFileName(ImageFactory.LOADING_BACKGROUND);
 			icon = ImageFactory.getImageByFileName(ImageFactory.GIT_LOGO);
+			avatar = ImageFactory.getImageByFileName(ImageFactory.AVATAR_DEFAULT);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
@@ -103,7 +103,7 @@ public class MainController extends Application implements Observer{
 	private void isNetWork(){
 		ServiceConfigureDefault netService =new ServiceConfigureDefault();
 		boolean networkAvailable = netService.checkNetwork();
-		AlertDialog alert = new AlertDialog();
+		AlertDialogController alert = new AlertDialogController();
 		if (networkAvailable) {
 			//TODO 提示网络不通，然后系统退出
             alert.showAlert();
@@ -118,6 +118,7 @@ public class MainController extends Application implements Observer{
 		image.fitHeightProperty().bind(mainAnchorPane.heightProperty());
 		mainAnchorPane.getChildren().add(image);
 		gitLogoIV.setImage(icon);
+		avatarV.setImage(avatar);
 	}
 	
 	private void initialProgressBar(){
@@ -296,7 +297,7 @@ public class MainController extends Application implements Observer{
 				@Override
 				public void run() {
 					
-					AnchorPane anchorPane = LoginController.getInstance(rightComponentParent);
+					AnchorPane anchorPane = LoginController.getInstance(userAnchorPane,rightComponentParent);
 					Platform.runLater(new Runnable() {
 						@Override
 						public void run() {
@@ -314,7 +315,7 @@ public class MainController extends Application implements Observer{
 			
 			
 			
-			buttonLogin.setText("退出登录");
+			
 		}else{
 		//进行登出工作
 			if(buttonLogin.getText().equals("退出登录")){
@@ -347,8 +348,8 @@ public class MainController extends Application implements Observer{
 	@FXML private AnchorPane mainAnchorPane;
 //	@FXML private FlowPane flowpane;
 	@FXML private VBox menu;
-	@FXML private ImageView gitLogoIV;
-	
+	@FXML private ImageView gitLogoIV,avatarV;
+	@FXML private AnchorPane userAnchorPane;
 	@FXML private AnchorPane alertDialog;
 	@FXML private Button buttonOut;
 	private boolean startViewing = false;
@@ -361,6 +362,7 @@ public class MainController extends Application implements Observer{
 	
 	private static Image bgImage = null;
 	private static Image icon = null;
+	private static Image avatar =null;
 	private static final int FADE_DURATION = 3000;
 	private static final double LOADING_RATE = 1.0;
 	private static final HashMap<String, StatisticsPane> MAP_BUTTON_TO_PANE = new HashMap<String,StatisticsPane>() {

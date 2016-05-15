@@ -31,8 +31,6 @@ public class GHDataSourceDefault implements GHDataSource {
 	private HTTPConnectionService conn = null;
 	private static final int ITEM_PER_PAGE=30;
 	
-
-	
 	@Override
 	public List<Repository> searchRepository(RepositorySearchParam repositorySearchParam) throws NetworkException {
 		int page=1;
@@ -121,6 +119,8 @@ public class GHDataSourceDefault implements GHDataSource {
 		ApiMakerService apiMaker = ApiMakerService.getInstance();
 		this.searchApi = apiMaker.getSearchApiMaker();
 		this.conn = HTTPConnectionService.getInstance();
+		
 	}
+
 
 }

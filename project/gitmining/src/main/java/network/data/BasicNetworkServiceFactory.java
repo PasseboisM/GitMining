@@ -1,6 +1,7 @@
 package network.data;
 
 import network.service.GHDataSource;
+import network.service.GHRelatedDataSource;
 import network.service.MassiveDataSource;
 import network.service.NetworkConnectionTester;
 import network.service.NetworkServiceFactory;
@@ -26,6 +27,11 @@ public class BasicNetworkServiceFactory extends NetworkServiceFactory {
 	@Override
 	public GHDataSource getGHDataSource() {
 		return new GHDataSourceDefault();
+	}
+
+	@Override
+	public GHRelatedDataSource getGHRelatedDataSource() {
+		return new GHRelatedDataSourceDefault();
 	}
 
 }
