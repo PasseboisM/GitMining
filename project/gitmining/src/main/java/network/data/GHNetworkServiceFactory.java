@@ -7,6 +7,7 @@ import org.kohsuke.github.GitHub;
 import org.kohsuke.github.GitHubBuilder;
 
 import network.service.GHDataSource;
+import network.service.GHRelatedDataSource;
 import network.service.MassiveDataSource;
 import network.service.NetworkConnectionTester;
 import network.service.NetworkServiceFactory;
@@ -46,6 +47,11 @@ public class GHNetworkServiceFactory extends NetworkServiceFactory {
 			}
 		}
 		return github;
+	}
+
+	@Override
+	public GHRelatedDataSource getGHRelatedDataSource() {
+		return new GHRelatedDataSourceDefault();
 	}
 
 
