@@ -7,6 +7,6 @@ public class ServiceConfigureDefault implements ServiceConfigure {
 	@Override
 	public boolean checkNetwork() {
 		//TODO
-		return false;
+		return true;
 	}	
 }

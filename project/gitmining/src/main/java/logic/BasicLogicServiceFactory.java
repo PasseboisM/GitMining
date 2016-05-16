@@ -25,19 +25,27 @@ import logic.service.ServiceConfigure;
  */
 public class BasicLogicServiceFactory extends LogicServiceFactory {
 
-	GeneralGetter getter = new GeneralGetterDefault();
+	//若未联网则不进行数据下载
+	GeneralGetter getter = null;
 	ServiceConfigure configure = new ServiceConfigureDefault();
 	StatisticsMaker statistics = new StatisticsMakerDefault();
-	SearchService search = new SearchServiceDefault();
+	//若未联网则不进行数据下载
+	SearchService search = null;
 	RepoRelatedListGetter repoRelatedListGetter = new RepoRelatedListGetterDefault();
 	UserRelatedListGetter userRelatedListGetter = new UserRelatedListGetterDefault();
 	Recommender recommender = new RecommenderDefault();
 	
 	public GeneralGetter getGeneralGetter() {
+		if (getter==null) {
+			getter = new GeneralGetterDefault();
+		}
 		return getter;
 	}
 
 	public SearchService getSearchService() {
+		if (search==null) {
+			search =  new SearchServiceDefault();
+		}
 		return search;
 	}
 

@@ -61,8 +61,9 @@ public class MainController extends Application implements Observer{
 	public void start(Stage primaryStage) throws Exception {
 		if (isNetConnected()) {
 			startShowMainScene(primaryStage);
+		}else{
+			startShowAlertDialog(primaryStage);
 		}
-		startShowAlertDialog(primaryStage);
 	}
 
 	private void startShowAlertDialog(Stage stage) {
@@ -100,8 +101,6 @@ public class MainController extends Application implements Observer{
 		registerToLoader();
 //		initialToggleButtonGroup();
 	}
-	
-	
 
 	private boolean isNetConnected(){
 		ServiceConfigure netService =LogicServiceFactory.getInstance().getServiceConfigure();
@@ -146,7 +145,6 @@ public class MainController extends Application implements Observer{
 		});
 		mainAnchorPane.getChildren().add(progressBar);
 	}
-	
 	
 	private void registerToLoader() {
 		Loader.getInstance().addObserver(this);
