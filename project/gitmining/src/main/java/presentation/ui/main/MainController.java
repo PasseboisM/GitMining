@@ -25,7 +25,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -59,6 +58,7 @@ public class MainController extends Application implements Observer{
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		primaryStage.getIcons().add(new Image("avatar.png"));
 		if (isNetConnected()) {
 			startShowMainScene(primaryStage);
 		}else{
@@ -80,7 +80,6 @@ public class MainController extends Application implements Observer{
 		Scene scene = new Scene(mainAnchorPane,1190,660);
 		primaryStage.setMinHeight(640);
 		primaryStage.setMinWidth(960);
-		primaryStage.getIcons().add(new Image("avatar.png"));
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
@@ -223,14 +222,14 @@ public class MainController extends Application implements Observer{
 		}
 	}
 
-	@FXML
+	/*@FXML
 	private void setOnlineOrLocalMode(){
 		logicServiceFactory = LogicServiceFactory.getInstance();
 		serviceConfigure = logicServiceFactory.getServiceConfigure();
 		boolean isOnlineMode = (toggleGroup.getSelectedToggle()==buttonOnlineMode);
-		//TODO 这个方法已经没用了，准备删掉吧
+		//这个方法已经没用了，准备删掉吧
 		serviceConfigure.checkNetwork();
-	}
+	}*/
 	
 	
 	@FXML
@@ -349,12 +348,12 @@ public class MainController extends Application implements Observer{
 	@FXML private AnchorPane alertDialog;
 	@FXML private Button buttonOut;
 	private boolean startViewing = false;
-	private ToggleGroup toggleGroup;
+//	private ToggleGroup toggleGroup;
 	private ImageView image;
 	private ProgressBar progressBar;
 	
-	private LogicServiceFactory logicServiceFactory;
-	private ServiceConfigure serviceConfigure;
+//	private LogicServiceFactory logicServiceFactory;
+//	private ServiceConfigure serviceConfigure;
 	
 	private static Image bgImage = null;
 	private static Image icon = null;
