@@ -56,6 +56,8 @@ public class RepositorySearchController{
 		controller.initialLayout(rootUINode);
 		return rootUINode;
 	}
+
+	
 	
 	
 	private void initial(AnchorPane rightComponentParent) {
@@ -184,6 +186,7 @@ public class RepositorySearchController{
 		this.generalGetter = logicServiceFactory.getGeneralGetter();
 		this.searchService = logicServiceFactory.getSearchService();
 		this.recommender = logicServiceFactory.getRecommender();
+//		this.relatedListGetter = logicServiceFactory.getRepoRelatedListGetter();
 	}
 
 	private void initialPage(){
@@ -314,6 +317,7 @@ public class RepositorySearchController{
 	private GeneralGetter generalGetter;
 	private Recommender recommender;
 	private SearchService searchService;
+	
 	
 	private Language[] langs;
 	private Category[] cates;

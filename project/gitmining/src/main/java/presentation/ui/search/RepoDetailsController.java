@@ -22,6 +22,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import logic.calc.repo.RepoStatisticsUtil;
+import logic.service.LogicServiceFactory;
+import logic.service.RepoRelatedListGetter;
 import presentation.component.Radar;
 import presentation.image.ImageFactory;
 
@@ -42,6 +44,7 @@ public class RepoDetailsController {
 	}
 	
 	private AnchorPane rightComponentParent;
+	private RepoRelatedListGetter relatedListGetter;
 	private String url;
 	@FXML private AnchorPane mainSubAnchorPane;
 	@FXML private TextField repo_url;
@@ -64,8 +67,12 @@ public class RepoDetailsController {
 		initialButton();
 		initialComponentText(repository);
 		initialRadar(repository);
+//		initialComboBox(repository);
 	}
 	
+//	private void initialComboBox(Repository repository) {
+//	}
+
 	private void loadImgFile() {
 		try {
 			btImage = ImageFactory.getImageByFileName(ImageFactory.BACK);
