@@ -5,8 +5,6 @@ import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.List;
 
-import common.enumeration.attribute.Category;
-import common.enumeration.attribute.Language;
 import common.message.LoadProgress;
 import common.util.Observable;
 import common.util.Observer;
@@ -23,21 +21,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import logic.ServiceConfigureDefault;
 import logic.service.Loader;
-import logic.service.LogInHelper;
 import logic.service.LogicServiceFactory;
 import logic.service.ServiceConfigure;
 import presentation.component.WaitLoader;
@@ -64,25 +58,30 @@ public class MainController extends Application implements Observer{
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		
+		primaryStage.getIcons().add(new Image("avatar.png"));
+		if (isNetConnected()) {
+			startShowMainScene(primaryStage);
+		}else{
+			startShowAlertDialog(primaryStage);
+		}
+	}
+
+	private void startShowAlertDialog(Stage stage) {
+		AlertDialogController controller = new AlertDialogController();
+		controller.start(stage);
+	}
+
+	private void startShowMainScene(Stage primaryStage) throws IOException {
 		loadImgFile();
 		FXMLLoader loader = new FXMLLoader(MainController.class.getResource("mainController.fxml"));
 		mainAnchorPane = loader.load();
 		MainController controller = loader.getController();
 		controller.initial();
-//		primaryStage.setResizable(false);
 		Scene scene = new Scene(mainAnchorPane,1190,660);
 		primaryStage.setMinHeight(640);
 		primaryStage.setMinWidth(960);
-		primaryStage.getIcons().add(new Image("avatar.png"));
 		primaryStage.setScene(scene);
-//		primaryStage.setResizable(false);
 		primaryStage.show();
-		isNetWork();
-		if(exitMain == 1){
-			primaryStage.close();
-		}
-		System.out.println("exitmain"+exitMain);
 	}
 
 	private void loadImgFile() {
@@ -101,18 +100,10 @@ public class MainController extends Application implements Observer{
 		registerToLoader();
 //		initialToggleButtonGroup();
 	}
-	
-	
 
-	private void isNetWork(){
-		ServiceConfigureDefault netService =new ServiceConfigureDefault();
-		boolean networkAvailable = false;
-		AlertDialogController alert = new AlertDialogController();
-		if (!networkAvailable) {
-			//TODO 提示网络不通，然后系统退出
-            alert.showAlert();
-			System.out.println("提示！");
-		}
+	private boolean isNetConnected(){
+		ServiceConfigure netService =LogicServiceFactory.getInstance().getServiceConfigure();
+		return netService.checkNetwork();
 	}
 
 	private void initialImage() {
@@ -153,7 +144,6 @@ public class MainController extends Application implements Observer{
 		});
 		mainAnchorPane.getChildren().add(progressBar);
 	}
-	
 	
 	private void registerToLoader() {
 		Loader.getInstance().addObserver(this);
@@ -232,14 +222,14 @@ public class MainController extends Application implements Observer{
 		}
 	}
 
-	@FXML
+	/*@FXML
 	private void setOnlineOrLocalMode(){
 		logicServiceFactory = LogicServiceFactory.getInstance();
 		serviceConfigure = logicServiceFactory.getServiceConfigure();
 		boolean isOnlineMode = (toggleGroup.getSelectedToggle()==buttonOnlineMode);
-		//TODO 这个方法已经没用了，准备删掉吧
+		//这个方法已经没用了，准备删掉吧
 		serviceConfigure.checkNetwork();
-	}
+	}*/
 	
 	
 	@FXML
@@ -319,19 +309,19 @@ public class MainController extends Application implements Observer{
 			
 			
 			
-			buttonLogin.setText("退出登录");
-		}else{
-		//进行登出工作
-			if(buttonLogin.getText().equals("退出登录")){
-				LogicServiceFactory logicServiceFactory;
-				LogInHelper logInHelper;
-				logicServiceFactory=LogicServiceFactory.getInstance();
-				logInHelper=logicServiceFactory.getLogInHelper();
-				logInHelper.logOut();
-				buttonLogin.setText("登录");
-			}else{
-				
-			}
+		
+	}else{
+//		//进行登出工作
+//			if(buttonLogin.getText().equals("退出登录")){
+//				LogicServiceFactory logicServiceFactory;
+//				LogInHelper logInHelper;
+//				logicServiceFactory=LogicServiceFactory.getInstance();
+//				logInHelper=logicServiceFactory.getLogInHelper();
+//				logInHelper.logOut();
+//				buttonLogin.setText("登录");
+//			}else{
+//				
+//			}
 		}
 		
 		
@@ -339,7 +329,6 @@ public class MainController extends Application implements Observer{
 	
 
 	
-    public int exitMain;
 	@FXML private AnchorPane rightComponentParent;
 	@FXML private Button buttonRepoSearch;
 	@FXML private Button buttonUserSearch;
@@ -359,12 +348,12 @@ public class MainController extends Application implements Observer{
 	@FXML private AnchorPane alertDialog;
 	@FXML private Button buttonOut;
 	private boolean startViewing = false;
-	private ToggleGroup toggleGroup;
+//	private ToggleGroup toggleGroup;
 	private ImageView image;
 	private ProgressBar progressBar;
 	
-	private LogicServiceFactory logicServiceFactory;
-	private ServiceConfigure serviceConfigure;
+//	private LogicServiceFactory logicServiceFactory;
+//	private ServiceConfigure serviceConfigure;
 	
 	private static Image bgImage = null;
 	private static Image icon = null;

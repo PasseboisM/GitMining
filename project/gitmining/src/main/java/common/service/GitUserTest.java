@@ -3,6 +3,11 @@ package common.service;
 public class GitUserTest implements GitUser {
 	private String name;
 	private String avatar_url;
+	private String password="123456";
+	
+	public String getPassword(){
+		return password;
+	}
 	@Override
 	public String getLogin() {
 		// TODO Auto-generated method stub

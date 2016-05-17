@@ -7,8 +7,8 @@ import com.google.gson.Gson;
 
 import common.service.GitUser;
 import chart_data.radar.UserRanks;
+import chart_data.service.UserStatisticsService;
 import logic.calc.python.PythonRunner;
-import logic.calc.service.UserStatisticsService;
 
 public class UserStatisticsUtil implements UserStatisticsService {
 	

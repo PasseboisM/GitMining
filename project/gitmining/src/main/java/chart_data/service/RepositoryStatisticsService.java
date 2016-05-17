@@ -1,4 +1,4 @@
-package logic.calc.service;
+package chart_data.service;
 
 import chart_data.radar.RepositoryRanks;
 import common.service.Repository;

@@ -9,6 +9,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import chart_data.radar.RepositoryRanks;
+import chart_data.service.RepositoryStatisticsService;
 import common.service.Repository;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -21,7 +22,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import logic.calc.repo.RepoStatisticsUtil;
-import logic.calc.service.RepositoryStatisticsService;
 import presentation.component.Radar;
 import presentation.image.ImageFactory;
 

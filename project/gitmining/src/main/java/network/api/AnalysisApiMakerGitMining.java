@@ -7,20 +7,26 @@ public class AnalysisApiMakerGitMining implements AnalysisApiMaker {
 
 	@Override
 	public String makeRepositoryTrendingApi(Language language) {
-		String api = BASE+REPO;
-		String lang = language.getName();
-		lang=lang.replaceAll(" ", "%20");
-		lang=lang.replaceAll("#", "sharp");
-		api+=lang;
-		return api;
+		return makeUrlByType(REPO,language);
 	}
 
 	@Override
 	public String makeUserTrendingApi(Language language) {
-		String api = BASE+DEVELOPER;
-		String lang = language.getName();
+		return makeUrlByType(DEVELOPER,language);
+	}
+
+	private String makeUrlByType(String type,Language language) {
+		String api = BASE+type;
+		String lang = getStandardizeRequire(language);
 		api+=lang;
 		return api;
 	}
 
+	private String getStandardizeRequire(Language language) {
+		if(language==null)	return "";
+		String lang = language.getName();
+		lang=lang.replaceAll(" ", "%20");
+		lang=lang.replaceAll("#", "sharp");
+		return lang;
+	}
 }

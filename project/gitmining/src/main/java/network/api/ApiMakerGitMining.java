@@ -1,5 +1,6 @@
 package network.api;
 
+import network.api.service.AnalysisApiMaker;
 import network.api.service.ApiMakerService;
 import network.api.service.RepoApiMaker;
 import network.api.service.SearchApiMaker;
@@ -12,6 +13,7 @@ public class ApiMakerGitMining extends ApiMakerService {
 	private UserApiMaker user = new UserApiMakerGitMining();
 	private TestConnectionApiMaker conn = new TestConnectionApiMakerGitMining();
 	private SearchApiMaker search = new SearchApiMakerGitMining();
+	private AnalysisApiMaker analysis = new AnalysisApiMakerGitMining();
 	
 	@Override
 	public RepoApiMaker getRepoApiMaker() {
@@ -31,6 +33,11 @@ public class ApiMakerGitMining extends ApiMakerService {
 	@Override
 	public SearchApiMaker getSearchApiMaker() {
 		return search;
+	}
+	
+	@Override
+	public AnalysisApiMaker getAnalysisApiMaker(){
+		return analysis;
 	}
 
 }

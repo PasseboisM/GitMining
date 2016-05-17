@@ -1,8 +1,8 @@
 package logic.service;
 
-import logic.calc.service.GeneralStatisticsService;
-import logic.calc.service.RepositoryStatisticsService;
-import logic.calc.service.UserStatisticsService;
+import chart_data.service.GeneralStatisticsService;
+import chart_data.service.RepositoryStatisticsService;
+import chart_data.service.UserStatisticsService;
 
 /**
  * 生成提供数据统计服务的接口。<br />
