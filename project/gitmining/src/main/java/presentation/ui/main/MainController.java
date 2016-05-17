@@ -222,22 +222,13 @@ public class MainController extends Application implements Observer{
 		}
 	}
 
-	/*@FXML
-	private void setOnlineOrLocalMode(){
-		logicServiceFactory = LogicServiceFactory.getInstance();
-		serviceConfigure = logicServiceFactory.getServiceConfigure();
-		boolean isOnlineMode = (toggleGroup.getSelectedToggle()==buttonOnlineMode);
-		//这个方法已经没用了，准备删掉吧
-		serviceConfigure.checkNetwork();
-	}*/
-	
-	
 	@FXML
 	private void onRepoSearchClicked() {
 		rightComponentParent.getChildren().clear();
 		long time1 = System.currentTimeMillis();
 		rightComponentParent.getChildren().add(RepositorySearchController.getInstance(rightComponentParent));
 		System.out.println("Time used:"+(System.currentTimeMillis()-time1)+"ms");
+		
 	}
 	
 	@FXML 
@@ -347,6 +338,7 @@ public class MainController extends Application implements Observer{
 	
 	@FXML private AnchorPane alertDialog;
 	@FXML private Button buttonOut;
+	
 	private boolean startViewing = false;
 //	private ToggleGroup toggleGroup;
 	private ImageView image;

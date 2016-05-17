@@ -55,23 +55,33 @@
                   </GridPane>
                </children>
             </AnchorPane>
-            <AnchorPane VBox.vgrow="ALWAYS">
+            <HBox alignment="CENTER_RIGHT">
                <children>
-                  <AnchorPane opacity="0.67" style="-fx-background-color: white;" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0" />
-                  <VBox layoutX="20.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+                  <AnchorPane HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                      <children>
-                        <HBox VBox.vgrow="NEVER">
+                        <AnchorPane opacity="0.67" style="-fx-background-color: white;" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                        <VBox layoutX="20.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
                            <children>
-                              <ToggleButton fx:id="noSort" mnemonicParsing="false" onAction="#changeSortStrategy" text="随机项目" />
-                              <ToggleButton fx:id="starSort" mnemonicParsing="false" onAction="#changeSortStrategy" text="关注降序" />
-                              <ToggleButton fx:id="forkSort" mnemonicParsing="false" onAction="#changeSortStrategy" text="拷贝降序" />
+                              <HBox VBox.vgrow="NEVER">
+                                 <children>
+                                    <ToggleButton fx:id="noSort" mnemonicParsing="false" onAction="#changeSortStrategy" text="随机项目" />
+                                    <ToggleButton fx:id="starSort" mnemonicParsing="false" onAction="#changeSortStrategy" text="关注降序" />
+                                    <ToggleButton fx:id="forkSort" mnemonicParsing="false" onAction="#changeSortStrategy" text="拷贝降序" />
+                                 </children>
+                              </HBox>
+                              <Pagination fx:id="pag" pageCount="1" VBox.vgrow="ALWAYS" />
                            </children>
-                        </HBox>
-                        <Pagination fx:id="pag" pageCount="1" VBox.vgrow="ALWAYS" />
+                        </VBox>
                      </children>
-                  </VBox>
+                  </AnchorPane>
+                  <AnchorPane HBox.hgrow="NEVER">
+                     <children>
+                        <AnchorPane opacity="0.67" style="-fx-background-color: white;" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0" />
+                        <ScrollPane fx:id="topReposPane" hbarPolicy="NEVER" maxWidth="177.0" minWidth="177.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="10.0" />
+                     </children>
+                  </AnchorPane>
                </children>
-            </AnchorPane>
+            </HBox>
          </children>
       </VBox>
    </children>

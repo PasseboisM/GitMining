@@ -16,7 +16,6 @@ import javafx.scene.layout.AnchorPane;
 import logic.service.LogInHelper;
 import logic.service.LogicServiceFactory;
 import presentation.component.LoginUser;
-import presentation.image.ImageFactory;
 
 
 public class LoginController {

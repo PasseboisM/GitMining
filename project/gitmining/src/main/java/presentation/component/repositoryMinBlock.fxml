@@ -11,9 +11,31 @@
       <Insets right="15.0" />
    </padding>
    <center>
-      <BorderPane style="-fx-border-color: #46c7c7;" BorderPane.alignment="CENTER">
-         <right>
-            <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+      <HBox style="-fx-border-color: #46c7c7;" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+         <children>
+            <VBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+               <children>
+                  <Hyperlink fx:id="repoFullName" onAction="#jumpToRepositoryDetails">
+                     <font>
+                        <Font name="System Bold Italic" size="18.0" />
+                     </font>
+                  </Hyperlink>
+                  <Label fx:id="description" textFill="#000000c2" wrapText="true">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lastUpdated" textFill="#00000095" wrapText="true">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" maxWidth="175.0" minWidth="175.0" HBox.hgrow="NEVER">
                <children>
                   <HBox alignment="CENTER_RIGHT">
                      <children>
@@ -42,34 +64,7 @@
                   </HBox>
                </children>
             </VBox>
-         </right>
-         <left>
-            <VBox alignment="CENTER_LEFT" BorderPane.alignment="CENTER">
-               <children>
-                  <Hyperlink fx:id="repoFullName" onAction="#jumpToRepositoryDetails">
-                     <font>
-                        <Font name="System Bold Italic" size="18.0" />
-                     </font>
-                  </Hyperlink>
-                  <Label fx:id="description" prefWidth="500.0" textFill="#000000c2" wrapText="true">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="lastUpdated" textFill="#00000095" wrapText="true">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </VBox>
-         </left>
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin>
-         <padding>
-            <Insets left="10.0" />
-         </padding>
-      </BorderPane>
+         </children>
+      </HBox>
    </center>
 </fx:root>

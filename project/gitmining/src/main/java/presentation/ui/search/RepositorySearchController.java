@@ -30,8 +30,10 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import logic.service.GeneralGetter;
 import logic.service.LogicServiceFactory;
+import logic.service.Recommender;
 import logic.service.SearchService;
 import presentation.component.RepositoryMinBlock;
+import presentation.component.TopRepositoryMinBlock;
 import presentation.image.ImageFactory;
 
 public class RepositorySearchController{
@@ -61,8 +63,24 @@ public class RepositorySearchController{
 		initialToggleButtonGroup();
 		initialSearchService();
 		initialPage();
+		initialTopRepos();
 	}
 	
+	private void initialTopRepos() {
+		List<Repository> recommendRepos = new ArrayList<>();
+		try {
+			recommendRepos = recommender.getRecommendRepos();
+		} catch (NetworkException e) {
+			e.printStackTrace();
+		}
+		VBox vBox = new VBox();
+		for (Repository repository : recommendRepos) {
+			vBox.getChildren().add(new TopRepositoryMinBlock(rightComponentParent,repository));
+		}
+		topReposPane.setContent(vBox);
+	}
+
+
 	private void initialLayout(AnchorPane rootUINode) {
 		AnchorPane.setBottomAnchor(rootUINode, 0.0);
 		AnchorPane.setLeftAnchor(rootUINode, 0.0);
@@ -141,6 +159,7 @@ public class RepositorySearchController{
 		this.logicServiceFactory = LogicServiceFactory.getInstance();
 		this.generalGetter = logicServiceFactory.getGeneralGetter();
 		this.searchService = logicServiceFactory.getSearchService();
+		this.recommender = logicServiceFactory.getRecommender();
 	}
 
 	private void initialPage(){
@@ -250,13 +269,14 @@ public class RepositorySearchController{
 	}
 	
 	@FXML	private Button search;
-	@FXML   private ToggleButton  noSort,starSort,forkSort;
+	@FXML    private ToggleButton  noSort,starSort,forkSort;
 	@FXML	private FlowPane flowPaneCategory;
 	@FXML	private FlowPane flowPaneLanguage;
 	@FXML	private VBox repoVBox;
 	@FXML 	private Pagination pag;
 	@FXML 	private TextField keyword;
 	@FXML 	private AnchorPane mainPane;
+	@FXML	private ScrollPane topReposPane;
 //	@FXML 	private AnchorPane sonPane;
 	private List<CheckBox> categoryCheckBoxes;
 	private List<CheckBox> languageCheckBoxes;
@@ -267,6 +287,7 @@ public class RepositorySearchController{
 	
 	private LogicServiceFactory logicServiceFactory;
 	private GeneralGetter generalGetter;
+	private Recommender recommender;
 	private SearchService searchService;
 	
 	private Language[] langs;
