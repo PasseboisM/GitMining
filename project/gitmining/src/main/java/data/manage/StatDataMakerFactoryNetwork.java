@@ -8,7 +8,7 @@ import data.manage.statistic.RepositoryStatGetterNetwork;
 import data.manage.statistic.UserStatGetterNetwork;
 import data.service.StatDataMakerFactory;
 
-public class StatDataMakerFactoryDefault implements StatDataMakerFactory {
+public class StatDataMakerFactoryNetwork implements StatDataMakerFactory {
 
 	@Override
 	public GeneralStatisticsService getGeneralStatistics() {

@@ -120,7 +120,7 @@ public class GitMixChart extends AnchorPane {
 			}
 		});
 	}
-	//TODO 可能要改一下chart_data数据包类
+	
 
 	private void initial(UserDistOverCreateTime userDistOverCreateTime, String seriesName) {
 		XYChart.Series<String,Number> series = new XYChart.Series<>();

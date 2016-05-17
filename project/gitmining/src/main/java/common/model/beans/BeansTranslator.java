@@ -9,7 +9,7 @@ public class BeansTranslator {
 	
 	/**
 	 * 获取接口对应的Beans模型
-	 * TODO 将职责分散给各个接口
+	 * 
 	 * @param imp 接口类型
 	 * @return Beans类型
 	 */

@@ -3,6 +3,7 @@ package logic.calc;
 import chart_data.service.GeneralStatisticsService;
 import chart_data.service.RepositoryStatisticsService;
 import chart_data.service.UserStatisticsService;
+import data.manage.statistic.GeneralStatGetterNetwork;
 import logic.calc.repo.RepoStatisticsUtil;
 import logic.calc.user.UserStatisticsUtil;
 import logic.service.StatisticsMaker;
@@ -17,8 +18,7 @@ public class StatisticsMakerDefault implements StatisticsMaker {
 
 	@Override
 	public GeneralStatisticsService getGeneralStatistics() {
-		// TODO Auto-generated method stub
-		return null;
+		return new GeneralStatGetterNetwork();
 	}
 
 	@Override

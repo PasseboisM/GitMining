@@ -14,6 +14,11 @@ import data.service.SpecificDataGetter;
 import data.storage.service.DataStorageOutput;
 import data.storage.service.StorageServiceFactory;
 
+/**
+ * 
+ * @author River
+ * @deprecated 迭代三已经不再提供本地数据支持
+ */
 public class SpecificDataGetterDefault extends SpecificDataGetter {
 
 	private static SpecificDataGetter instance = new SpecificDataGetterDefault();
