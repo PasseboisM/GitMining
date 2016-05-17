@@ -10,7 +10,6 @@ import common.service.RepositoryMin;
  * @author xjh14
  * 包含排序、搜索使用的最简信息的RepositoryMin的Beans，用于降低内存消耗、提升响应时间
  * 对本类实际不包含的不包含的数据进行query将会抛出异常
- * TODO 尚未决定其中所包含的具体信息条目
  */
 public class RepositoryMinBeans implements RepositoryMin {
 

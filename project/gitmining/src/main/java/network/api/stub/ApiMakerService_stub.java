@@ -21,19 +21,16 @@ public class ApiMakerService_stub extends ApiMakerService {
 
 	@Override
 	public TestConnectionApiMaker getTestConnectionApiMaker() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public SearchApiMaker getSearchApiMaker() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public AnalysisApiMaker getAnalysisApiMaker() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	

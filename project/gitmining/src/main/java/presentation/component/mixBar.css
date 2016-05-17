@@ -1,13 +1,15 @@
 #barChart {
-	-fx-background-color: transparent; 
-	-fx-horizontal-grid-lines-visible	: false;	 
-	-fx-vertical-grid-lines-visible		: false;	 
+	-fx-background-color: transparent;
+	-fx-horizontal-grid-lines-visible: false;
+	-fx-vertical-grid-lines-visible: false;
 }
+
 #lineChart {
-	-fx-background-color: transparent; 
-	-fx-horizontal-grid-lines-visible	: false;	 
-	-fx-vertical-grid-lines-visible		: false;	 
+	-fx-background-color: transparent;
+	-fx-horizontal-grid-lines-visible: false;
+	-fx-vertical-grid-lines-visible: false;
 }
-.chart-plot-background{
-	-fx-background-color : #ffffff00 ;
+
+.chart-plot-background {
+	-fx-background-color: #ffffff00;
 }

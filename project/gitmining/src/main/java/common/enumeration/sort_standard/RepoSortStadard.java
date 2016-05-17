@@ -25,7 +25,7 @@ public enum RepoSortStadard {
 			 return arg1.getForks_count()-arg0.getForks_count();
 		}	
 	},"forks"),
-	;//TODO More compare standards
+	;
 	
 	
 	private Comparator<RepositoryMin> cpr;

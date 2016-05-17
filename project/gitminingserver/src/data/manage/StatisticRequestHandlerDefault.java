@@ -9,7 +9,7 @@ class StatisticRequestHandlerDefault extends StatisticRequestHandler {
 
 	@Override
 	public void handleRequest(HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
-		// TODO Auto-generated method stub
+		// TODO 处理（统计）数据请求
 
 	}
 

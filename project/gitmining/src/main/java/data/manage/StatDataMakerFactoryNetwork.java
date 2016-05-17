@@ -1,20 +1,14 @@
-package logic.calc;
+package data.manage;
 
 import chart_data.service.GeneralStatisticsService;
 import chart_data.service.RepositoryStatisticsService;
 import chart_data.service.UserStatisticsService;
 import data.manage.statistic.GeneralStatGetterNetwork;
-import logic.calc.repo.RepoStatisticsUtil;
-import logic.calc.user.UserStatisticsUtil;
-import logic.service.StatisticsMaker;
+import data.manage.statistic.RepositoryStatGetterNetwork;
+import data.manage.statistic.UserStatGetterNetwork;
+import data.service.StatDataMakerFactory;
 
-/**
- * StatisticsMaker的默认实现（用于迭代二）
- * @author xjh14
- * Ver: 0.1（尚未实现）
- * Created at: 2016年3月28日
- */
-public class StatisticsMakerDefault implements StatisticsMaker {
+public class StatDataMakerFactoryNetwork implements StatDataMakerFactory {
 
 	@Override
 	public GeneralStatisticsService getGeneralStatistics() {
@@ -23,12 +17,12 @@ public class StatisticsMakerDefault implements StatisticsMaker {
 
 	@Override
 	public UserStatisticsService getUserStatistics() {
-		return new UserStatisticsUtil();
+		return new UserStatGetterNetwork();
 	}
 
 	@Override
 	public RepositoryStatisticsService getRepositoryStatistics() {
-		return new RepoStatisticsUtil();
+		return new RepositoryStatGetterNetwork();
 	}
 
 }

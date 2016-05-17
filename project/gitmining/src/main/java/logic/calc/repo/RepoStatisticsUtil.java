@@ -6,9 +6,9 @@ import java.util.List;
 import com.google.gson.Gson;
 
 import chart_data.radar.RepositoryRanks;
+import chart_data.service.RepositoryStatisticsService;
 import common.service.Repository;
 import logic.calc.python.PythonRunner;
-import logic.calc.service.RepositoryStatisticsService;
 
 public class RepoStatisticsUtil implements RepositoryStatisticsService{
 	
@@ -35,7 +35,7 @@ public class RepoStatisticsUtil implements RepositoryStatisticsService{
 			try {
 				strResult = PythonRunner.runPython(SINGLE_REPO_FILE, headerStr, repoStr);
 			} catch (IOException e) {
-				//TODO Better catch block
+				//TODO Better catch block?
 				e.printStackTrace();
 			} catch (InterruptedException e) {
 				e.printStackTrace();

@@ -1,9 +1,9 @@
 package common.service;
 
 /**
- * 
  * @author River
- * TODO 注释
+ * 
+ * 用于表示Repository信息中的Owner，与User有很大重合部分
  */
 public interface RepositoryOwner {
 

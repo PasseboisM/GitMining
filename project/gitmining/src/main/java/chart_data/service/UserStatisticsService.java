@@ -1,4 +1,4 @@
-package logic.calc.service;
+package chart_data.service;
 
 import common.service.GitUser;
 

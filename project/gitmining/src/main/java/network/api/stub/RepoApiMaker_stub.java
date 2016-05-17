@@ -19,19 +19,16 @@ public class RepoApiMaker_stub implements RepoApiMaker {
 
 	@Override
 	public String makeRepoContributorLoginsApi(String repoFullName) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public String makeBranchesApi(RepositoryMin source) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public String makeBranchesApi(String fullName) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

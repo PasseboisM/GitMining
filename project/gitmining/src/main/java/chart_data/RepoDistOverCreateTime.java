@@ -8,8 +8,6 @@ import java.util.List;
 /**
  * Type: GeneralStatistics<br />
  * 系统内仓库创建时间分布，预期以年为单位。
- * 
- * TODO 应该与UserCreateOnTimeCounts共享一个父类
  * */
 
 public class RepoDistOverCreateTime {

@@ -101,7 +101,7 @@ public class GitLineChart extends AnchorPane {
 			}
 		});
 	}
-	//TODO 可能要改一下chart_data数据包类
+	
 	private void initial(UserDistOverFollower followerNumberRanges, String seriesName) {
 		XYChart.Series<String,Number> series = new XYChart.Series<>();
 		series.setName(seriesName);

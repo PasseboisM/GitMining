@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 
 import chart_data.radar.UserRanks;
+import chart_data.service.UserStatisticsService;
 import common.service.GitUser;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -13,7 +14,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import logic.calc.service.UserStatisticsService;
 import logic.calc.user.UserStatisticsUtil;
 import presentation.component.Radar;
 import presentation.image.ImageFactory;
