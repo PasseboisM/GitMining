@@ -1,0 +1,14 @@
+diff a/project/gitmining/src/main/java/presentation/ui/main/AlertDialogController.java b/project/gitmining/src/main/java/presentation/ui/main/AlertDialogController.java	(rejected hunks)
+@@ -34,8 +34,10 @@
+ 		Scene scene = new Scene(pane,300,270);
+ 		alertStage.setTitle("提示");
+ 		alertStage.setScene(scene);
+-		alertStage.show();
+-		if(exitAlert == 1){
++		
++		if(exitAlert == 0){
++			alertStage.show();
++		}else if(exitAlert == 1){
+ 			alertStage.close();
+ 		}
+ 		System.out.println(exitAlert);
