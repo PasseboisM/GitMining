@@ -15,10 +15,10 @@ import chart_data.RepoDistOverCreateTime;
 import chart_data.RepoDistOverStar;
 import chart_data.UserDistOverCreateTime;
 import chart_data.UserDistOverCreateTime.UserCreateOnTimeCount;
+import chart_data.service.GeneralStatisticsService;
 import chart_data.UserDistOverType;
 import common.enumeration.attribute.Language;
 import logic.calc.python.PythonRunner;
-import logic.calc.service.GeneralStatisticsService;
 
 public class GeneralStatisticsUtil implements GeneralStatisticsService{
 

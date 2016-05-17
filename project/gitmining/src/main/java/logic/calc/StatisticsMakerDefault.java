@@ -1,9 +1,9 @@
 package logic.calc;
 
+import chart_data.service.GeneralStatisticsService;
+import chart_data.service.RepositoryStatisticsService;
+import chart_data.service.UserStatisticsService;
 import logic.calc.repo.RepoStatisticsUtil;
-import logic.calc.service.GeneralStatisticsService;
-import logic.calc.service.RepositoryStatisticsService;
-import logic.calc.service.UserStatisticsService;
 import logic.calc.user.UserStatisticsUtil;
 import logic.service.StatisticsMaker;
 

@@ -6,9 +6,9 @@ import java.util.List;
 import com.google.gson.Gson;
 
 import chart_data.radar.RepositoryRanks;
+import chart_data.service.RepositoryStatisticsService;
 import common.service.Repository;
 import logic.calc.python.PythonRunner;
-import logic.calc.service.RepositoryStatisticsService;
 
 public class RepoStatisticsUtil implements RepositoryStatisticsService{
 	

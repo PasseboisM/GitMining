@@ -4,14 +4,13 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 
 import chart_data.UserDistOverCreateTime;
+import chart_data.service.GeneralStatisticsService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import logic.calc.general.GeneralStatisticsUtil;
-import logic.calc.service.GeneralStatisticsService;
-
 import presentation.component.GitMixChart;
 import presentation.image.ImageFactory;
 import presentation.ui.statistics.StatisticsPane;

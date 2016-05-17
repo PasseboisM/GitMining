@@ -2,8 +2,18 @@ package data.manage;
 
 import network.service.MassiveDataSource;
 import network.service.NetworkServiceFactory;
+
+import java.util.List;
+
+import common.enumeration.sort_standard.RepoSortStadard;
+import common.enumeration.sort_standard.UserSortSandard;
+import common.exception.DataCorruptedException;
 import common.exception.NetworkException;
+import common.param_obj.RepositorySearchParam;
+import common.param_obj.UserSearchParam;
+import common.service.GitUser;
 import common.service.GitUserMin;
+import common.service.Repository;
 import common.service.RepositoryMin;
 import common.util.ObjChannel;
 import data.service.DataServiceFactory;
@@ -59,6 +69,44 @@ public class MassiveDataGetterDefault extends MassiveDataGetter {
 
 	public static MassiveDataGetter getInstance() {
 		return instance;
+	}
+
+
+	@Override
+	public List<Repository> getRepositories(int page, int numPerPage, RepoSortStadard sortStandard)
+			throws NetworkException, DataCorruptedException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public int getNumOfRepositories() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public List<GitUser> getUsers(int page, int numPerPage, UserSortSandard sortStandard)
+			throws NetworkException, DataCorruptedException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<Repository> searchRepository(RepositorySearchParam params)
+			throws NetworkException, DataCorruptedException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<GitUser> searchUser(UserSearchParam params) throws NetworkException, DataCorruptedException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	
