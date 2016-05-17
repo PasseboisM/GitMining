@@ -6,6 +6,7 @@ import data.service.MassiveDataGetter;
 import data.service.RecommendDataGetter;
 import data.service.RepoListDataGetter;
 import data.service.SpecificDataGetter;
+import data.service.StatDataMakerFactory;
 
 public class BasicDataServiceFactory extends DataServiceFactory {
 
@@ -32,6 +33,12 @@ public class BasicDataServiceFactory extends DataServiceFactory {
 	@Override
 	public RecommendDataGetter getRecommendDataGetter() {
 		return RecommendDataGetter.getInstance();
+	}
+
+	@Override
+	public StatDataMakerFactory getStatDataMakerFactory() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

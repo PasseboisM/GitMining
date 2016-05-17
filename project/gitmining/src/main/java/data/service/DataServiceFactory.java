@@ -26,6 +26,8 @@ public abstract class DataServiceFactory {
 	
 	public abstract RepoListDataGetter getRepoListDataGetter();
 	
+	public abstract StatDataMakerFactory getStatDataMakerFactory();
+	
 	public abstract RecommendDataGetter getRecommendDataGetter();
 	
 	private static boolean getNetworkAvailability() {

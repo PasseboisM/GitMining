@@ -1,37 +1,43 @@
-.accordion .title { 
-	-fx-background-color: linear-gradient(#2A2728,#201D1E,#201D1E,#3E3B3C); 
+.accordion .title {
+	-fx-background-color: linear-gradient(#2A2728, #201D1E, #201D1E, #3E3B3C);
 }
+
 #flowpane {
-	-fx-background-color: linear-gradient(#2A2728,#201D1E,#201D1E,#3E3B3C); 
+	-fx-background-color: linear-gradient(#2A2728, #201D1E, #201D1E, #3E3B3C);
 }
+
 .accordion .content {
 	-fx-background-color: #201D1E;
 	-fx-border-color: #3E3B3C;
 }
-.button{
+
+.button {
 	-fx-background-color: #2A2728;
 	-fx-border-color: #161314;
 	-fx-text-fill: white;
 }
-.button:hover{
+
+.button:hover {
 	-fx-background-color: #201D1E;
 	-fx-border-color: #161314;
 }
-.button:disabled{
+
+.button:disabled {
 	-fx-background-color: #2A2728;
 	-fx-text-fill: white;
 }
-.toggle-button{
+
+.toggle-button {
 	-fx-background-color: #2A2728;
 	-fx-border-color: #161314;
 	-fx-text-fill: white;
 }
-.toggle-button:hover{
+
+.toggle-button:hover {
 	-fx-background-color: #201D1E;
 	-fx-border-color: #161314;
 }
-.toggle-button:selected{
-	-fx-background-color: #0C090A; 
+
+.toggle-button:selected {
+	-fx-background-color: #0C090A;
 }
-
-
