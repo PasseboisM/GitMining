@@ -12,9 +12,11 @@ import common.exception.DataCorruptedException;
 import common.exception.NetworkException;
 import common.param_obj.RepositorySearchParam;
 import common.service.Repository;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Pagination;
@@ -34,6 +36,7 @@ import logic.service.Recommender;
 import logic.service.SearchService;
 import presentation.component.RepositoryMinBlock;
 import presentation.component.TopRepositoryMinBlock;
+import presentation.component.WaitLoader;
 import presentation.image.ImageFactory;
 
 public class RepositorySearchController{
@@ -67,17 +70,37 @@ public class RepositorySearchController{
 	}
 	
 	private void initialTopRepos() {
-		List<Repository> recommendRepos = new ArrayList<>();
-		try {
-			recommendRepos = recommender.getRecommendRepos();
-		} catch (NetworkException e) {
-			e.printStackTrace();
-		}
+		WaitLoader waitLoader = new WaitLoader();
+		topReposAnchorPane.getChildren().add(waitLoader);
+		
 		VBox vBox = new VBox();
-		for (Repository repository : recommendRepos) {
-			vBox.getChildren().add(new TopRepositoryMinBlock(rightComponentParent,repository));
-		}
-		topReposPane.setContent(vBox);
+		
+		Runnable runnable = new Runnable() {
+			@Override
+			public void run() {
+				try {
+					List<Repository> recommendRepos = recommender.getRecommendRepos();
+					Platform.runLater(new Runnable() {
+						@Override
+						public void run() {
+							List<Node> children = rightComponentParent.getChildren();
+							if (children.get(children.size() - 1).equals(waitLoader)) {
+								for (Repository repository : recommendRepos) {
+									vBox.getChildren().add(new TopRepositoryMinBlock(rightComponentParent, repository));
+								}
+							}
+							children.remove(waitLoader);
+							topReposPane.setContent(vBox);
+						}
+					});
+				} catch (NetworkException e) {
+					e.printStackTrace();
+				}
+			}
+		};
+		Thread t = new Thread(runnable);
+		t.start();
+		
 	}
 
 
@@ -277,6 +300,7 @@ public class RepositorySearchController{
 	@FXML 	private TextField keyword;
 	@FXML 	private AnchorPane mainPane;
 	@FXML	private ScrollPane topReposPane;
+	@FXML	private AnchorPane topReposAnchorPane;
 //	@FXML 	private AnchorPane sonPane;
 	private List<CheckBox> categoryCheckBoxes;
 	private List<CheckBox> languageCheckBoxes;
