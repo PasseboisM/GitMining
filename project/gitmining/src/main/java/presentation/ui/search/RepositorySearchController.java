@@ -80,10 +80,11 @@ public class RepositorySearchController{
 			public void run() {
 				try {
 					List<Repository> recommendRepos = recommender.getRecommendRepos();
+					System.out.println(recommendRepos.size());
 					Platform.runLater(new Runnable() {
 						@Override
 						public void run() {
-							List<Node> children = rightComponentParent.getChildren();
+							List<Node> children = topReposAnchorPane.getChildren();
 							if (children.get(children.size() - 1).equals(waitLoader)) {
 								for (Repository repository : recommendRepos) {
 									vBox.getChildren().add(new TopRepositoryMinBlock(rightComponentParent, repository));
