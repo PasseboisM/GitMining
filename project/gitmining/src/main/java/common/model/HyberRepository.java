@@ -5,6 +5,8 @@ import java.io.IOException;
 import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GHUser;
 
+import com.google.gson.annotations.SerializedName;
+
 import common.enumeration.attribute.Category;
 import common.enumeration.attribute.Language;
 import common.service.Repository;
@@ -16,19 +18,86 @@ public class HyberRepository implements Repository{
 
 	
 	
-	private GHRepository ghRepository;
-	private GHUser ghOwner;
 	
 	private RepositoryOwner owner;
-	private RepositoryPermission permission;
+	private RepositoryPermission permissions;
 	private RepositoryOrganization organization;
+	
+	
+	private int id;
+	private String name;
+	private String full_name;
+	@SerializedName("private") private boolean isPrivate;
+	private String html_url;
+	private String description;
+	private boolean fork;
+	private String url;
+	private String fork_url;
+	private String keys_url;
+	private String collaborators_url;
+	private String teams_url;
+	private String hooks_url;
+	private String issue_events_url;
+	private String events_url;
+	private String assignees_url;
+	private String branches_url;
+	private String tags_url;
+	private String blobs_url;
+	private String git_tags_url;
+	private String git_refs_url;
+	private String tree_url;
+	private String statuses_url;
+	private String languages_url;
+	private String stargazers_url;
+	private String contributors_url;
+	private String subscibers_url;
+	private String subscription_url;
+	private String commits_url;
+	private String git_commits_url;
+	private String comments_url;
+	private String issue_comment_url;
+	private String contents_url;
+	private String compare_url;
+	private String merges_url;
+	private String archive_url;
+	private String downloads_url;
+	private String issues_url;
+	private String pulls_url;
+	private String milestones_url;
+	private String notifications_url;
+	private String labels_url;
+	private String releases_url;
+	private String created_at;
+	private String updated_at;
+	private String pushed_at;
+	private String git_url;
+	private String ssh_url;
+	private String clone_url;
+	private String svn_url;
+	private String homepage;
+	private int size;
+	private int stargazers_count;
+	private int watchers_count;
+	private String language;
+	private boolean has_issues;
+	private boolean has_downloads;
+	private boolean has_wiki;
+	private boolean has_pages;
+	private int forks_count;
+	private int open_issues_count;
+	private int forks;
+	private int open_issues;
+	private int watchers;
+	private String default_branch;
+	private int network_count;
+	private int subscribers_count;
 	
 
 
 	public HyberRepository(GHRepository ghRepository) {
-		this.ghRepository = ghRepository;
+		GHUser ghOwner = null;
 		try {
-			this.ghOwner = ghRepository.getOwner();
+			ghOwner = ghRepository.getOwner();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -36,128 +105,132 @@ public class HyberRepository implements Repository{
 		boolean admin = ghRepository.hasAdminAccess();
 		boolean push = ghRepository.hasPushAccess();
 		boolean pull = ghRepository.hasPullAccess();
-		this.permission = new HyberPermission(admin, push, pull);
+		this.permissions = new HyberPermission(admin, push, pull);
 		this.organization = new HyberOrganization(ghOwner);
+		
+		
+		id =  ghRepository.getId();
+		name =  ghRepository.getName();
+		full_name = ghRepository.getFullName();
+		isPrivate =ghRepository.isPrivate();
+		html_url=ghRepository.getHtmlUrl().toString();
+		description=ghRepository.getDescription();
+		fork=ghRepository.isFork();
+		url=ghRepository.getUrl().toString();
+		try {
+			created_at=ghRepository.getCreatedAt().toString();
+			updated_at=ghRepository.getUpdatedAt().toString();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		pushed_at=ghRepository.getPushedAt().toString();
+		git_url=ghRepository.getGitTransportUrl();
+		ssh_url=ghRepository.getSshUrl();
+		svn_url=ghRepository.getSvnUrl();
+		homepage=ghRepository.getHomepage();
+		size=ghRepository.getSize();
+		stargazers_count=ghRepository.getWatchers();
+		watchers_count=ghRepository.getWatchers();
+		language=ghRepository.getLanguage();
+		has_issues=ghRepository.hasIssues();
+		has_downloads= ghRepository.hasDownloads();
+		has_wiki=ghRepository.hasWiki();
+		has_pages=false;
+		forks_count=ghRepository.getForks();
+		open_issues_count=ghRepository.getOpenIssueCount();
+		forks=ghRepository.getForks();
+		open_issues=ghRepository.getOpenIssueCount();
+		watchers= ghRepository.getWatchers();
+		default_branch=ghRepository.getDefaultBranch();
+		network_count=ghRepository.getNetworkCount();
+		subscribers_count=ghRepository.getSubscribersCount();
 	}
 
-	public int getId() {
-		return ghRepository.getId();
-	}
-
-	public String getName() {
-		return ghRepository.getName();
-	}
-
-	public String getFull_name() {
-		return ghRepository.getFullName();
-	}
-
-	public RepositoryOwner getOwner() {
-		return owner;
-	}
 	
-	public boolean isPrivate() {
-		return ghRepository.isPrivate();
-	}
 	
 	class HyberOwner implements RepositoryOwner {
 		
 		
-		private GHUser ghOwner;
+		private String login;
+		private int id;
+		private String avatar_url;
+		private String gravatar_id;
+		private String url;
+		private String html_url;
+		private String followers_url;
+		private String following_url;
+		private String gists_url;
+		private String starred_url;
+		private String subscriptions_url;
+		private String organizations_url;
+		private String repos_url;
+		private String events_url;
+		private String received_events_url;
+		private String type;
+		private boolean site_admin;
 		
+		@SuppressWarnings("deprecation")
 		public HyberOwner(GHUser ghOwner) {
-			this.ghOwner = ghOwner;
+			login=ghOwner.getLogin();
+			id=ghOwner.getId();
+			avatar_url=ghOwner.getAvatarUrl();
+			gravatar_id=ghOwner.getGravatarId();
+			url=ghOwner.getUrl().toString();
+			html_url=ghOwner.getHtmlUrl().toString();
 		}
-
-		/*
-		 * "owner":
-		 * {"login":"rubinius",
-		 * "id":317747,
-		 * "avatar_url":"https://avatars.githubusercontent.com/u/317747?v\u003d3",
-		 * "gravatar_id":"",
-		 * "url":"https://api.github.com/users/rubinius",
-		 * "html_url":"https://github.com/rubinius",
-		 * "followers_url":"https://api.github.com/users/rubinius/followers",
-		 * "following_url":"https://api.github.com/users/rubinius/following{/other_user}",
-		 * "gists_url":"https://api.github.com/users/rubinius/gists{/gist_id}",
-		 * "starred_url":"https://api.github.com/users/rubinius/starred{/owner}{/repo}",
-		 * "subscriptions_url":"https://api.github.com/users/rubinius/subscriptions",
-		 * "organizations_url":"https://api.github.com/users/rubinius/orgs",
-		 * "repos_url":"https://api.github.com/users/rubinius/repos",
-		 * "events_url":"https://api.github.com/users/rubinius/events{/privacy}",
-		 * "received_events_url":"https://api.github.com/users/rubinius/received_events",
-		 * "type":"Organization",
-		 * "site_admin":false}
-		 */
 		
 		public String getLogin() {
-			return this.ghOwner.getLogin();
+			return login;
 		}
-
 		public int getId() {
-			return this.ghOwner.getId();
+			return id;
 		}
-
 		public String getAvatar_url() {
-			return this.ghOwner.getAvatarUrl();
+			return avatar_url;
 		}
-
-		@SuppressWarnings("deprecation")
 		public String getGravatar_id() {
-			return this.ghOwner.getGravatarId();
+			return gravatar_id;
 		}
-
 		public String getUrl() {
-			return this.ghOwner.getUrl().toString();
+			return url;
 		}
-
 		public String getHtml_url() {
-			return this.ghOwner.getHtmlUrl().toString();
+			return html_url;
 		}
-
 		public String getFollowers_url() {
-			return null;
+			return followers_url;
 		}
-
 		public String getFollowing_url() {
-			return null;
+			return following_url;
 		}
-
 		public String getGists_url() {
-			return null;
+			return gists_url;
 		}
-
 		public String getStarred_url() {
-			return null;
+			return starred_url;
 		}
-
 		public String getSubscriptions_url() {
-			return null;
+			return subscriptions_url;
 		}
-
 		public String getOrganizations_url() {
-			return null;
+			return organizations_url;
 		}
-
 		public String getRepos_url() {
-			return null;
+			return repos_url;
 		}
-
 		public String getEvents_url() {
-			return null;
+			return events_url;
 		}
-
 		public String getReceived_events_url() {
-			return null;
+			return received_events_url;
 		}
-
 		public String getType() {
-			return null;
+			return type;
+		}
+		public boolean isSite_admin() {
+			return site_admin;
 		}
 
-		public boolean isSite_admin() {
-			return false;
-		}
 	}
 	
 	class HyberPermission implements RepositoryPermission {
@@ -190,328 +263,356 @@ public class HyberRepository implements Repository{
 	
 	class HyberOrganization implements RepositoryOrganization {
 
-		private GHUser ghOwner;
 		
-		public HyberOrganization(GHUser ghOwner) {
-			this.ghOwner = ghOwner;
-		}
-		public String getLogin() {
-			return this.ghOwner.getLogin();
-		}
-
-		public int getId() {
-			return this.ghOwner.getId();
-		}
-
-		public String getAvatar_url() {
-			return this.ghOwner.getAvatarUrl();
-		}
-
+		private String login;
+		private int id;
+		private String avatar_url;
+		private String gravatar_id;
+		private String url;
+		private String html_url;
+		private String followers_url;
+		private String following_url;
+		private String gist_url;
+		private String starred_url;
+		private String subscriprions_url;
+		private String organizations_url;
+		private String repos_url;
+		private String events_url;
+		private String received_events_url;
+		private String type;
+		private boolean site_admin;
+		
 		@SuppressWarnings("deprecation")
+		public HyberOrganization(GHUser ghOwner) {
+			login=ghOwner.getLogin();
+			id=ghOwner.getId();
+			avatar_url=ghOwner.getAvatarUrl();
+			gravatar_id=ghOwner.getGravatarId();
+			url=ghOwner.getUrl().toString();
+			html_url=ghOwner.getHtmlUrl().toString();
+		}
+		
+		public String getLogin() {
+			return login;
+		}
+		public int getId() {
+			return id;
+		}
+		public String getAvatar_url() {
+			return avatar_url;
+		}
 		public String getGravatar_id() {
-			return this.ghOwner.getGravatarId();
+			return gravatar_id;
 		}
-
 		public String getUrl() {
-			return this.ghOwner.getUrl().toString();
+			return url;
 		}
-
 		public String getHtml_url() {
-			return this.ghOwner.getHtmlUrl().toString();
+			return html_url;
 		}
-
 		public String getFollowers_url() {
-			return null;
+			return followers_url;
 		}
 		public String getFollowing_url() {
-			return null;
+			return following_url;
 		}
 		public String getGist_url() {
-			return null;
+			return gist_url;
 		}
 		public String getStarred_url() {
-			return null;
+			return starred_url;
 		}
 		public String getSubscriprions_url() {
-			return null;
+			return subscriprions_url;
 		}
 		public String getOrganizations_url() {
-			return null;
+			return organizations_url;
 		}
 		public String getRepos_url() {
-			return null;
+			return repos_url;
 		}
 		public String getEvents_url() {
-			return null;
+			return events_url;
 		}
 		public String getReceived_events_url() {
-			return null;
+			return received_events_url;
 		}
 		public String getType() {
-			return null;
+			return type;
 		}
 		public boolean isSite_admin() {
-			return false;
+			return site_admin;
 		}
+		
 	}
 
 
+	public int getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getFull_name() {
+		return full_name;
+	}
+
+	public RepositoryOwner getOwner() {
+		return owner;
+	}
+	
+	public boolean isPrivate() {
+		return isPrivate;
+	}
+	
 	public String getHtml_url() {
-		return ghRepository.getHtmlUrl().toString();
+		return html_url;
 	}
 
 	public String getDescription() {
-		return ghRepository.getDescription();
+		return description;
 	}
 
 	public boolean isFork() {
-		return ghRepository.isFork();
+		return fork;
 	}
 
 	public String getUrl() {
-		return ghRepository.getUrl().toString();
+		return url;
 	}
 
 	public String getFork_url() {
-		return null;
+		return fork_url;
 	}
 
 	public String getKeys_url() {
-		return null;
+		return keys_url;
 	}
 
 	public String getCollaborators_url() {
-		return null;
+		return collaborators_url;
 	}
 
 	public String getTeams_url() {
-		return null;
+		return teams_url;
 	}
 
 	public String getHooks_url() {
-		return null;
+		return hooks_url;
 	}
 
 	public String getIssue_events_url() {
-		return null;
+		return issue_events_url;
 	}
 
 	public String getEvents_url() {
-		return null;
+		return events_url;
 	}
 
 	public String getAssignees_url() {
-		return null;
+		return assignees_url;
 	}
 
 	public String getBranches_url() {
-		return null;
+		return branches_url;
 	}
 
 	public String getTags_url() {
-		return null;
+		return tags_url;
 	}
 
 	public String getBlobs_url() {
-		return null;
+		return blobs_url;
 	}
 
 	public String getGit_tags_url() {
-		return null;
+		return git_tags_url;
 	}
 
 	public String getGit_refs_url() {
-		return null;
+		return git_refs_url;
 	}
 
 	public String getTree_url() {
-		return null;
+		return tree_url;
 	}
 
 	public String getStatuses_url() {
-		return null;
+		return statuses_url;
 	}
 
 	public String getLanguages_url() {
-		return null;
+		return languages_url;
 	}
 
 	public String getStargazers_url() {
-		return null;
+		return stargazers_url;
 	}
 
 	public String getContributors_url() {
-		return null;
+		return contributors_url;
 	}
 
 	public String getSubscibers_url() {
-		return null;
+		return subscibers_url;
 	}
 
 	public String getSubscription_url() {
-		return null;
+		return subscription_url;
 	}
 
 	public String getCommits_url() {
-		return null;
+		return commits_url;
 	}
 
 	public String getGit_commits_url() {
-		return null;
+		return git_commits_url;
 	}
 
 	public String getComments_url() {
-		return null;
+		return comments_url;
 	}
 
 	public String getIssue_comment_url() {
-		return null;
+		return issue_comment_url;
 	}
 
 	public String getContents_url() {
-		return null;
+		return contents_url;
 	}
 
 	public String getCompare_url() {
-		return null;
+		return compare_url;
 	}
 
 	public String getMerges_url() {
-		return null;
+		return merges_url;
 	}
 
 	public String getArchive_url() {
-		return null;
+		return archive_url;
 	}
 
 	public String getDownloads_url() {
-		return null;
+		return downloads_url;
 	}
 
 	public String getIssues_url() {
-		return null;
+		return issues_url;
 	}
 
 	public String getPulls_url() {
-		return null;
+		return pulls_url;
 	}
 
 	public String getMilestones_url() {
-		return null;
+		return milestones_url;
 	}
 
 	public String getNotifications_url() {
-		return null;
+		return notifications_url;
 	}
 
 	public String getLabels_url() {
-		return null;
+		return labels_url;
 	}
 
 	public String getReleases_url() {
-		return null;
+		return releases_url;
 	}
 
 	public String getCreated_at() {
-		try {
-			return ghRepository.getCreatedAt().toString();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
+		return created_at;
 	}
 
 	public String getUpdated_at() {
-		try {
-			return ghRepository.getUpdatedAt().toString();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
+		return updated_at;
 	}
 
 	public String getPushed_at() {
-		return ghRepository.getPushedAt().toString();
+		return pushed_at;
 	}
 
 	public String getGit_url() {
-		return ghRepository.getGitTransportUrl();
+		return git_url;
 	}
 
 	public String getSsh_url() {
-		return ghRepository.getSshUrl();
+		return ssh_url;
 	}
 
 	public String getClone_url() {
-		return null;
+		return clone_url;
 	}
 
 	public String getSvn_url() {
-		return ghRepository.getSvnUrl();
+		return svn_url;
 	}
 
 	public String getHomepage() {
-		return ghRepository.getHomepage();
+		return homepage;
 	}
 
 	public int getSize() {
-		return ghRepository.getSize();
+		return size;
 	}
 
 	public int getStargazers_count() {
-		return ghRepository.getWatchers();
+		return stargazers_count;
 	}
 
 	public int getWatchers_count() {
-		return ghRepository.getWatchers();
+		return watchers_count;
 	}
 
 	public String getLanguage() {
-		return ghRepository.getLanguage();
+		return language;
 	}
 
 	public boolean isHas_issues() {
-		return ghRepository.hasIssues();
+		return has_issues;
 	}
 
 	public boolean isHas_downloads() {
-		return ghRepository.hasDownloads();
+		return has_downloads;
 	}
 
 	public boolean isHas_wiki() {
-		return ghRepository.hasWiki();
+		return has_wiki;
 	}
 
 	public boolean isHas_pages() {
-		return false;
+		return has_pages;
 	}
 
 	public int getForks_count() {
-		return ghRepository.getForks();
+		return forks_count;
 	}
 
 	public int getOpen_issues_count() {
-		return ghRepository.getOpenIssueCount();
+		return open_issues_count;
 	}
 
 	public int getForks() {
-		return ghRepository.getForks();
+		return forks;
 	}
 
 	public int getOpen_issues() {
-		return ghRepository.getOpenIssueCount();
+		return open_issues;
 	}
 
 	public int getWatchers() {
-		return ghRepository.getWatchers();
+		return watchers;
 	}
 
 	public String getDefault_branch() {
-		return ghRepository.getDefaultBranch();
+		return default_branch;
 	}
 
 	public RepositoryPermission getPermissions() {
-		return permission;
+		return permissions;
 	}
 
 	public RepositoryOrganization getOrganization() {
@@ -519,11 +620,11 @@ public class HyberRepository implements Repository{
 	}
 
 	public int getNetwork_count() {
-		return ghRepository.getNetworkCount();
+		return network_count;
 	}
 
 	public int getSubscribers_count() {
-		return ghRepository.getSubscribersCount();
+		return subscribers_count;
 	}
 
 	@Override

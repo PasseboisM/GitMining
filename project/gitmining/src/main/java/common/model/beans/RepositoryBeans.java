@@ -364,9 +364,9 @@ public class RepositoryBeans implements Repository {
 		private String html_url;
 		private String followers_url;
 		private String following_url;
-		private String gist_url;
+		private String gists_url;
 		private String starred_url;
-		private String subscriprions_url;
+		private String subscriptions_url;
 		private String organizations_url;
 		private String repos_url;
 		private String events_url;
@@ -399,13 +399,13 @@ public class RepositoryBeans implements Repository {
 			return following_url;
 		}
 		public String getGist_url() {
-			return gist_url;
+			return gists_url;
 		}
 		public String getStarred_url() {
 			return starred_url;
 		}
 		public String getSubscriprions_url() {
-			return subscriprions_url;
+			return subscriptions_url;
 		}
 		public String getOrganizations_url() {
 			return organizations_url;
