@@ -35,7 +35,7 @@ public class RepoStatisticsUtil implements RepositoryStatisticsService{
 			try {
 				strResult = PythonRunner.runPython(SINGLE_REPO_FILE, headerStr, repoStr);
 			} catch (IOException e) {
-				//TODO Better catch block
+				//TODO Better catch block?
 				e.printStackTrace();
 			} catch (InterruptedException e) {
 				e.printStackTrace();

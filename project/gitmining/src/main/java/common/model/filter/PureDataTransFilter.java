@@ -8,7 +8,6 @@ import common.util.Writable;
 
 	/**
 	 * 自行注册、解注册的纯数据传送源
-	 * TODO 修改为继承GeneralProcessSource的类
 	 * @author xjh14
 	 * @param <T>
 	 */

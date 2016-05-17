@@ -5,9 +5,7 @@ import logic.BasicLogicServiceFactory;
 /**
  * 
  * @author xjh14
- * 采用抽象工厂模式，为界面层提供逻辑层服务对象
- * TODO 注释没写
- * 
+ * 采用抽象工厂模式，为界面层提供逻辑层服务对象 
  */
 public abstract class LogicServiceFactory {
 	

@@ -1,8 +1,5 @@
 package data.manage;
 
-import network.service.MassiveDataSource;
-import network.service.NetworkServiceFactory;
-
 import java.util.List;
 
 import common.enumeration.sort_standard.RepoSortStadard;
@@ -16,93 +13,73 @@ import common.service.GitUserMin;
 import common.service.Repository;
 import common.service.RepositoryMin;
 import common.util.ObjChannel;
-import data.service.DataServiceFactory;
 import data.service.MassiveDataGetter;
-import data.storage.service.DataStorageOutput;
-import data.storage.service.StorageServiceFactory;
 
 /**
- * 单例对象。
- * @author xjh14
- * @deprecated 迭代三已经不再提供本地数据支持，MassiveDataGetter接口的新功能在本类中没有实现
+ * 本类为迭代三使用的通过与GitMiningServer通信实现功能的MassiveDataGetter<br />
+ * 与之前相比增加了不少接口（但都是直接转化为request给GitMiningServer），之前的<br />
+ * MassiveDataGetterDefault直接弃用，不再为本地数据版实现新增接口功能。
+ * 
+ * @author River
+ *
  */
-public class MassiveDataGetterDefault extends MassiveDataGetter {
-	
-	private static MassiveDataGetter instance = new MassiveDataGetterDefault();
-	
-	private DataStorageOutput fromStorage = null;
-	private MassiveDataSource fromNetwork = null;
-	
-	private MassiveDataGetterDefault() {
-		fromStorage = StorageServiceFactory.getInstance().getOutput();
-		fromNetwork = NetworkServiceFactory.getInstance().getMassiveDataSource();
-	}
-	
-	
+public class MassiveDataGetterNetwork extends MassiveDataGetter {
+
 	@Override
 	public int getRepoNumber() {
-		return fromStorage.getRepoNumber();
-	}
-	
-	@Override
-	public int getUserNumber() {
-		return fromStorage.getUserNumber();
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
 	public ObjChannel<RepositoryMin> getRepoMinInfo() throws NetworkException {
-		if(DataServiceFactory.isUsingNetwork()) {
-			return fromNetwork.getRepoMinInfo();
-		} else {
-			return fromStorage.getRepoMin();
-		}
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public ObjChannel<GitUserMin> getUserMinInfo() throws NetworkException {
-		if(DataServiceFactory.isUsingNetwork()) {
-			return fromNetwork.getUserMinInfo();
-		} else {
-			return fromStorage.getUserMin();
-		}
+		// TODO Auto-generated method stub
+		return null;
 	}
-
-	public static MassiveDataGetter getInstance() {
-		return instance;
-	}
-
 
 	@Override
 	public List<Repository> getRepositories(int page, int numPerPage, RepoSortStadard sortStandard)
 			throws NetworkException, DataCorruptedException {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
-
 	@Override
 	public int getNumOfRepositories() {
+		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	@Override
+	public int getUserNumber() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 	@Override
 	public List<GitUser> getUsers(int page, int numPerPage, UserSortSandard sortStandard)
 			throws NetworkException, DataCorruptedException {
+		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 	@Override
 	public List<Repository> searchRepository(RepositorySearchParam params)
 			throws NetworkException, DataCorruptedException {
+		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 	@Override
 	public List<GitUser> searchUser(UserSearchParam params) throws NetworkException, DataCorruptedException {
+		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
+
 }

@@ -15,7 +15,6 @@ public class UserApiMaker_stub implements UserApiMaker {
 
 	@Override
 	public String[] allUserAPIs() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

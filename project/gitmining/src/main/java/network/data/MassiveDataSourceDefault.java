@@ -241,7 +241,6 @@ public class MassiveDataSourceDefault implements MassiveDataSource {
 				try {
 					String rawNames = conn.do_get(repoApi.makeRepoContributorLoginsApi(repoName));
 					names = gson.fromJson(rawNames, stringListType);
-					//TODO noise
 					if(names!=null) {
 						for(String name:names) {
 							String rawUserJSON = conn.do_get(userApi.makeUserAPI(name));

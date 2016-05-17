@@ -29,7 +29,6 @@ import common.service.RepositoryMin;
 import common.util.Checkable;
 import common.util.MultiSourceSwitch;
 import common.util.ObjChannel;
-import data.storage.db.MongoDBInitializer;
 import data.storage.directory.DirectoryMakerDefault;
 import data.storage.directory.service.DirectoryMaker;
 import data.storage.service.DataStorageOutput;
@@ -280,7 +279,6 @@ public class DataOutputDefault implements DataStorageOutput {
 
 						T partial = (T) gson.fromJson(s, BeansTranslator.getBeans(objectiveType));
 
-						// TODO 尽快将系统中大范围修改为Checkable，避免强制转型
 						Checkable check = (Checkable) partial;
 						if (!check.checkValidity()) {
 							continue;
@@ -335,7 +333,6 @@ public class DataOutputDefault implements DataStorageOutput {
 						
 					T partial = (T) gson.fromJson(s, BeansTranslator.getBeans(objectiveType));
 					
-					//TODO 尽快将系统中大范围修改为Checkable，避免强制转型
 					Checkable check = (Checkable)partial;
 					if(!check.checkValidity()) {
 						continue;
@@ -449,142 +446,11 @@ public class DataOutputDefault implements DataStorageOutput {
 
 	@Override
 	public int getRepoNumber() {
-		//TODO 真正实现
 		return 3086;
 	}
 	
 	@Override
 	public int getUserNumber() {
-		//TODO 真正实现
 		return 57068;
-	}
-//	
-	public void insertUserIntoDB() {
-		File root = new File(dir.userRoot());
-		System.out.println(root);
-		File[] rootSubs = root.listFiles();
-		File[][] splitSubs = splitFileArray(rootSubs, OUTPUT_THREAD_NUM);
-		
-		//Create a channel transferring file directories.
-		ObjChannel<File> directoryChan = new ObjChannelWithBlockingQueue<>();
-		PureDataTransFilter[] directoryTransfer = new PureDataTransFilter[OUTPUT_THREAD_NUM];
-		MultiSourceSwitch<File> directorySwitch = new BasicSourceSwitch<>(directoryChan);
-		for(int i=0;i<OUTPUT_THREAD_NUM;i++) {
-			directoryTransfer[i] = new PureDataTransFilter<File>(Arrays.asList(splitSubs[i]), directorySwitch);
-		}
-		execute(directoryTransfer);
-		
-		ObjChannel<GitUser> minInfoChan = new ObjChannelWithBlockingQueue<>();
-		JSONFileUserInserterFilter[] deserializers = new JSONFileUserInserterFilter[OUTPUT_THREAD_NUM];
-		MultiSourceSwitch<GitUser> minInfoSwitch = new BasicSourceSwitch<>(minInfoChan);
-		for(int i=0;i<OUTPUT_THREAD_NUM;i++) {
-			deserializers[i] = new JSONFileUserInserterFilter<GitUser>
-				(directoryChan, minInfoSwitch, 20, GitUser.class);
-		}
-		execute(deserializers);
-		
-	}
-	
-	public void insertRepoIntoDB() {
-		File root = new File(dir.repositoryRoot());
-		System.out.println(root);
-		File[] rootSubs = root.listFiles();
-		File[][] splitSubs = splitFileArray(rootSubs, OUTPUT_THREAD_NUM);
-		
-		//Create a channel transferring file directories.
-		ObjChannel<File> directoryChan = new ObjChannelWithBlockingQueue<>();
-		PureDataTransFilter[] directoryTransfer = new PureDataTransFilter[OUTPUT_THREAD_NUM];
-		MultiSourceSwitch<File> directorySwitch = new BasicSourceSwitch<>(directoryChan);
-		for(int i=0;i<OUTPUT_THREAD_NUM;i++) {
-			directoryTransfer[i] = new PureDataTransFilter<File>(Arrays.asList(splitSubs[i]), directorySwitch);
-		}
-		execute(directoryTransfer);
-		
-		ObjChannel<GitUser> minInfoChan = new ObjChannelWithBlockingQueue<>();
-		JSONFileRepoInserterFilter[] deserializers = new JSONFileRepoInserterFilter[OUTPUT_THREAD_NUM];
-		MultiSourceSwitch<GitUser> minInfoSwitch = new BasicSourceSwitch<>(minInfoChan);
-		for(int i=0;i<OUTPUT_THREAD_NUM;i++) {
-			deserializers[i] = new JSONFileRepoInserterFilter<GitUser>
-				(directoryChan, minInfoSwitch, 20, GitUser.class);
-		}
-		execute(deserializers);
-		
-	}
-	
-	private static volatile int totalCleaned = 0;
-	private static volatile int totalPassed = 0;
-	class JSONFileUserInserterFilter<T> extends GeneralProcessFilter<File, T> {
-
-		Class<T> objectiveType = null;
-		FileReader fr = null;
-		BufferedReader br = null;
-		
-		public JSONFileUserInserterFilter(ObjChannel<File> directories,
-				MultiSourceSwitch<T> output, int page, Class<T> objective) {
-			super(directories, output, page);
-			this.objectiveType = objective;
-		}
-
-		@Override
-		public List<T> process(List<File> get) {
-			List<T> result = new ArrayList<>(page);
-				for(File content:get) {
-					try {
-						fr = new FileReader(content);
-						br = new BufferedReader(fr);
-						String s = br.readLine();
-						
-						if(s!=null&&!s.equals("")) {
-							MongoDBInitializer.insertUserIntoDB(s);
-						}
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			return result;
-		}
-	}
-	
-	class JSONFileRepoInserterFilter<T> extends GeneralProcessFilter<File, T> {
-
-		Class<T> objectiveType = null;
-		FileReader fr = null;
-		BufferedReader br = null;
-		
-		public JSONFileRepoInserterFilter(ObjChannel<File> directories,
-				MultiSourceSwitch<T> output, int page, Class<T> objective) {
-			super(directories, output, page);
-			this.objectiveType = objective;
-		}
-
-		@Override
-		public List<T> process(List<File> get) {
-			List<T> result = new ArrayList<>(page);
-				for(File content:get) {
-					for(File f: content.listFiles()) {
-						try {
-							fr = new FileReader(f);
-							br = new BufferedReader(fr);
-							String s = br.readLine();
-						
-							if(s!=null&&!s.equals("")) {
-								MongoDBInitializer.insertRepoIntoDB(s);
-							}
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-					
-				}
-			return result;
-		}
-	}
-	
-//	
-//	
-//	
-	public static void main(String[] args) {
-		DataOutputDefault data = new DataOutputDefault();
-		data.insertUserIntoDB();
 	}
 }

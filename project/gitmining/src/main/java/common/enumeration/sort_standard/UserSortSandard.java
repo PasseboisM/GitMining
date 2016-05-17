@@ -8,7 +8,6 @@ import common.service.GitUserMin;
  * 
  * @author xjh14
  * GitUserMin排序方式，表示各种排序策略
- * TODO 似乎Comparator里面的比较顺序是反的？
  */
 public enum UserSortSandard {
 	
@@ -22,7 +21,7 @@ public enum UserSortSandard {
 			 return arg0.getFollowers()-arg1.getFollowers();
 		}	
 	}),
-	;//TODO More compare standards
+	;
 	
 	
 	private Comparator<GitUserMin> cpr;
