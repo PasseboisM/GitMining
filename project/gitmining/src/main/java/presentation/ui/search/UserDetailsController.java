@@ -2,19 +2,23 @@ package presentation.ui.search;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.List;
 
 import chart_data.radar.UserRanks;
 import chart_data.service.UserStatisticsService;
 import common.service.GitUser;
+import common.service.Repository;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import logic.calc.user.UserStatisticsUtil;
+import logic.service.LogicServiceFactory;
+import logic.service.UserRelatedListGetter;
 import presentation.component.Radar;
 import presentation.image.ImageFactory;
 
@@ -34,18 +38,27 @@ public class UserDetailsController {
 	}
 	private AnchorPane rightComponentParent;
 	private void initial(AnchorPane rightComponentParent,GitUser user) {
+		this.rightComponentParent = rightComponentParent;
 		loadImgFile();
 		initialButton();
 		initialComponentText(user);
-		this.rightComponentParent = rightComponentParent;
-		
-		Image image = new Image(user.getAvatar_url());
-		if(image.isError()){
-			image = avatarImage;
+		initialAvatarImage(user);
+		initialRadar(user);
+		initialComboBox(user);
+	}
+
+	private void initialComboBox(GitUser user) {
+		UserRelatedListGetter getter = LogicServiceFactory.getInstance().getUserRelatedListGetter();
+		try {
+			List<Repository> repositories = getter.getOwnedRepositoryNames(user.getLogin());
+			System.out.println(repositories.size());
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		imageView.setImage(image);
-		
-		UserStatisticsService service = new UserStatisticsUtil();
+	}
+
+	private void initialRadar(GitUser user) {
+		UserStatisticsService service = LogicServiceFactory.getInstance().getStatisticsMaker().getUserStatistics();
 		UserRanks ranks = service.getRanks(user);
 		Platform.runLater(new Runnable() {
 			@Override
@@ -54,6 +67,14 @@ public class UserDetailsController {
 				radarAnchorPane.getChildren().add(radar);
 			}
 		});
+	}
+
+	private void initialAvatarImage(GitUser user) {
+		Image image = new Image(user.getAvatar_url());
+		if(image.isError()){
+			image = avatarImage;
+		}
+		imageView.setImage(image);
 	}
 	
 	private void initialLayout(AnchorPane rootUINode) {
@@ -111,7 +132,8 @@ public class UserDetailsController {
 	@FXML    private AnchorPane anchorPane;
 	@FXML    private ImageView imageView;
 	@FXML    private AnchorPane radarAnchorPane;
-	@FXML private Button returnButton;
+	@FXML	private Button returnButton;
+	@FXML	private ComboBox<String> repoComboBox;
 	private static Image btImage=null;
 	private static Image avatarImage=null;
 	private ImageView imageV;

@@ -21,9 +21,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import logic.calc.repo.RepoStatisticsUtil;
 import logic.service.LogicServiceFactory;
-import logic.service.RepoRelatedListGetter;
 import presentation.component.Radar;
 import presentation.image.ImageFactory;
 
@@ -44,7 +42,6 @@ public class RepoDetailsController {
 	}
 	
 	private AnchorPane rightComponentParent;
-	private RepoRelatedListGetter relatedListGetter;
 	private String url;
 	@FXML private AnchorPane mainSubAnchorPane;
 	@FXML private TextField repo_url;
@@ -119,7 +116,7 @@ public class RepoDetailsController {
 	}
 	
 	private void initialRadar(Repository r){
-		RepositoryStatisticsService service = new RepoStatisticsUtil();
+		RepositoryStatisticsService service = LogicServiceFactory.getInstance().getStatisticsMaker().getRepositoryStatistics();
 		RepositoryRanks ranks = service.getRanks(r);
 		Platform.runLater(new Runnable() {
 			@Override
