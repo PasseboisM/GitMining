@@ -1,7 +1,5 @@
 package common.model;
 
-import java.io.IOException;
-
 import org.kohsuke.github.GHUser;
 
 import common.service.GitUser;
@@ -45,10 +43,11 @@ public class HyberUser implements GitUser {
 		id = ghUser.getId();
 		avatar_url = ghUser.getAvatarUrl();
 		gravatar_id = ghUser.getGravatarId();
-		url = ghUser.getUrl().toString();
-		html_url = ghUser.getHtmlUrl().toString();
 		site_admin = false;
 		try {
+			url = ghUser.getUrl().toString();
+			html_url = ghUser.getHtmlUrl().toString();
+			
 			name = ghUser.getName();
 			blog = ghUser.getBlog();
 			location = ghUser.getLocation();
@@ -59,9 +58,7 @@ public class HyberUser implements GitUser {
 			following = ghUser.getFollowingCount();
 			created_at = ghUser.getCreatedAt().toString();
 			updated_at = ghUser.getUpdatedAt().toString();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		} catch (Exception e) {}
 	}
 
 	public String getLogin() {

@@ -113,21 +113,15 @@ public class HyberRepository implements Repository{
 		name =  ghRepository.getName();
 		full_name = ghRepository.getFullName();
 		isPrivate =ghRepository.isPrivate();
-		html_url=ghRepository.getHtmlUrl().toString();
 		description=ghRepository.getDescription();
 		fork=ghRepository.isFork();
-		url=ghRepository.getUrl().toString();
 		try {
+			html_url=ghRepository.getHtmlUrl().toString();
+			url=ghRepository.getUrl().toString();
 			created_at=ghRepository.getCreatedAt().toString();
 			updated_at=ghRepository.getUpdatedAt().toString();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		try {
 			pushed_at=ghRepository.getPushedAt().toString();
-		} catch (NullPointerException e) {
-			pushed_at=null;
-		}
+		} catch (Exception e) {}
 		git_url=ghRepository.getGitTransportUrl();
 		ssh_url=ghRepository.getSshUrl();
 		svn_url=ghRepository.getSvnUrl();
