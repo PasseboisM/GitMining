@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<fx:root type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <BorderPane style="-fx-border-color: #46c7c7;" BorderPane.alignment="CENTER">
+         <left>
+            <VBox alignment="CENTER_LEFT" BorderPane.alignment="CENTER">
+               <children>
+                  <Hyperlink fx:id="userLogin" maxWidth="150.0" minWidth="150.0" onAction="#jumpToUserDetails">
+                     <font>
+                        <Font name="System Bold Italic" size="18.0" />
+                     </font>
+                  </Hyperlink>
+                  <VBox alignment="CENTER">
+                     <children>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <VBox alignment="CENTER" prefWidth="75.0">
+                                 <children>
+                                    <Label fx:id="followers" textFill="#000000a5" />
+                                    <Label text="followers" textFill="#000000a5" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox alignment="CENTER" prefWidth="75.0">
+                                 <children>
+                                    <Label fx:id="following" textFill="#000000a5" />
+                                    <Label text="followings" textFill="#000000a5" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </left>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </BorderPane>
+   </center>
+   <padding>
+      <Insets right="15.0" />
+   </padding>
+</fx:root>

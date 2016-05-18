@@ -9,22 +9,27 @@ import common.exception.DataCorruptedException;
 import common.exception.NetworkException;
 import common.param_obj.UserSearchParam;
 import common.service.GitUser;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import logic.service.GeneralGetter;
 import logic.service.LogicServiceFactory;
+import logic.service.Recommender;
 import logic.service.SearchService;
+import presentation.component.TopUserMinBlock;
 import presentation.component.UserMinBlock;
+import presentation.component.WaitLoader;
 import presentation.image.ImageFactory;
 
 public class UserSearchController {
@@ -48,6 +53,42 @@ public class UserSearchController {
 		initialImage();
 		initialSearchService();
 		initialPage();
+		initialTopRepos();
+	}
+	
+	private void initialTopRepos() {
+		WaitLoader waitLoader = new WaitLoader();
+		topUsersAnchorPane.getChildren().add(waitLoader);
+		
+		VBox vBox = new VBox();
+		
+		Runnable runnable = new Runnable() {
+			@Override
+			public void run() {
+				try {
+					List<GitUser> recommendUsers = recommender.getRecommendUsers();
+					System.out.println(recommendUsers.size());
+					Platform.runLater(new Runnable() {
+						@Override
+						public void run() {
+							List<Node> children = topUsersAnchorPane.getChildren();
+							if (children.get(children.size() - 1).equals(waitLoader)) {
+								for (GitUser user : recommendUsers) {
+									vBox.getChildren().add(new TopUserMinBlock(rightComponentParent, user));
+								}
+							}
+							children.remove(waitLoader);
+							topUsersPane.setContent(vBox);
+						}
+					});
+				} catch (NetworkException e) {
+					e.printStackTrace();
+				}
+			}
+		};
+		Thread t = new Thread(runnable);
+		t.start();
+		
 	}
 	
 	private void initialImage() {
@@ -67,6 +108,7 @@ public class UserSearchController {
 		this.logicServiceFactory = LogicServiceFactory.getInstance();
 		this.searchService = logicServiceFactory.getSearchService();
 		this.generalGetter = logicServiceFactory.getGeneralGetter();
+		this.recommender = logicServiceFactory.getRecommender();
 	}
 
 	private void initialPage(){
@@ -139,6 +181,8 @@ public class UserSearchController {
 	
 	@FXML 	private Pagination pag;
 	@FXML 	private AnchorPane mainPane;
+	@FXML	private AnchorPane topUsersAnchorPane;
+	@FXML 	private ScrollPane topUsersPane;
 	@FXML 	private TextField vagename;
 	@FXML	private Button search;
 	
@@ -149,6 +193,7 @@ public class UserSearchController {
 	private LogicServiceFactory logicServiceFactory;
 	private SearchService searchService;
 	private GeneralGetter generalGetter;
+	private Recommender recommender;
 	private static Image bgImage = null;
 	
 	@FXML

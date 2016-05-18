@@ -7,19 +7,41 @@
 
 <AnchorPane fx:id="mainPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.ui.search.UserSearchController">
    <children>
-      <AnchorPane layoutX="9.0" layoutY="100.0" opacity="0.42" style="-fx-background-color: white;" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="95.0" />
-      <VBox layoutX="10.0" layoutY="55.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
+      <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
          <children>
-            <HBox alignment="CENTER" layoutX="180.0" layoutY="55.0" AnchorPane.bottomAnchor="590.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="55.0" VBox.vgrow="NEVER">
+            <HBox alignment="CENTER" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
                <children>
-                  <TextField fx:id="vagename" layoutX="180.0" layoutY="55.0" prefHeight="30.0" prefWidth="650.0" promptText="搜索用户" />
-                  <Button fx:id="search" layoutX="839.0" layoutY="55.0" mnemonicParsing="false" onAction="#onSearch" prefHeight="30.0" prefWidth="55.0" stylesheets="@button.css" text="搜索" />
+                  <TextField fx:id="vagename" prefHeight="30.0" promptText="搜索用户" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="search" mnemonicParsing="false" onAction="#onSearch" prefHeight="30.0" stylesheets="@button.css" text="搜索" HBox.hgrow="NEVER" />
                </children>
                <padding>
-                  <Insets bottom="40.0" />
+                  <Insets left="50.0" right="50.0" />
                </padding>
             </HBox>
-            <Pagination fx:id="pag" layoutX="32.0" layoutY="123.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="123.0" VBox.vgrow="ALWAYS" />
+            <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <AnchorPane layoutX="10.0" layoutY="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <AnchorPane layoutY="45.0" opacity="0.42" style="-fx-background-color: white;" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="30.0" />
+                        <VBox layoutX="10.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
+                           <children>
+                              <Pagination fx:id="pag" layoutX="32.0" layoutY="123.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="123.0" VBox.vgrow="ALWAYS" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane HBox.hgrow="NEVER">
+                     <children>
+                        <AnchorPane layoutY="45.0" maxWidth="180.0" minWidth="180.0" opacity="0.42" style="-fx-background-color: white;" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="30.0" />
+                        <AnchorPane fx:id="topUsersAnchorPane" layoutX="15.0" layoutY="40.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="40.0">
+                           <children>
+                              <ScrollPane hbarPolicy="ALWAYS" maxWidth="177.0" minWidth="177.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
          </children>
       </VBox>
    </children>
