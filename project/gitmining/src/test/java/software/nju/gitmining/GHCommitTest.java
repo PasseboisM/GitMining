@@ -30,9 +30,11 @@ public class GHCommitTest {
 //		System.out.println(users.size());
 //		users = source.listFollowers("rubinius");
 //		System.out.println(users.size());
-		List<Repository> repositories = source.listSubscrippedRepositories("rubinius");
+		List<Repository> repositories = source.listOwnedRepositories("BryanCunningham");
 		
-		System.out.println(repositories.size());
+		for (Repository repository : repositories) {
+			System.out.println(repository.getFull_name());
+		}
 		
 	}
 

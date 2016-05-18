@@ -39,6 +39,7 @@ public class UserDetailsController {
 		return pane;
 	}
 	private AnchorPane rightComponentParent;
+	private List<Repository> repositories;
 	private void initial(AnchorPane rightComponentParent,GitUser user) {
 		this.rightComponentParent = rightComponentParent;
 		loadImgFile();
@@ -50,23 +51,35 @@ public class UserDetailsController {
 	}
 
 	private void initialComboBox(GitUser user) {
+		
 		UserRelatedListGetter getter = LogicServiceFactory.getInstance().getUserRelatedListGetter();
 		Runnable runnable = new Runnable() {
 			@Override
 			public void run() {
 				try {
 					long time1 = System.currentTimeMillis();
-					List<Repository> repositories = getter.getOwnedRepositoryNames(user.getLogin());
+					repositories = getter.getOwnedRepositoryNames(user.getLogin());
 					System.out.println("loading related repos time used:" + (System.currentTimeMillis() - time1) + "ms");
-					ObservableList<Button> options = FXCollections.observableArrayList(new Button("hello"),new Button("hi"));
-					/*repositories.forEach(repository->{
+					ObservableList<String> options = FXCollections.observableArrayList();
+					repositories.forEach(repository->{
 						options.add(repository.getFull_name());
-					});*/
+					});
 					Platform.runLater(new Runnable() {
 						@Override
 						public void run() {
 							repoComboBox.setItems(options);
-//							repoComboBox.
+							repoComboBox.setOnAction(value->{
+								int index = repoComboBox.getSelectionModel().getSelectedIndex();
+								try {
+									rightComponentParent.getChildren().add(RepoDetailsController
+											.getInstance(rightComponentParent, repositories.get(index)));
+								} catch (Exception e) {
+									System.out.println("excuse me?");
+								}
+								Platform.runLater(new Runnable() {
+									@Override
+									public void run() {repoComboBox.getSelectionModel().clearSelection();}});
+							});
 						}
 					});
 				} catch (IOException e) {
@@ -76,6 +89,7 @@ public class UserDetailsController {
 		};
 		Thread t = new Thread(runnable);
 		t.start();
+		
 	}
 
 	private void initialRadar(GitUser user) {
@@ -154,7 +168,7 @@ public class UserDetailsController {
 	@FXML    private ImageView imageView;
 	@FXML    private AnchorPane radarAnchorPane;
 	@FXML	private Button returnButton;
-	@FXML	private ComboBox<Button> repoComboBox;
+	@FXML	private ComboBox<String> repoComboBox;
 	private static Image btImage=null;
 	private static Image avatarImage=null;
 	private ImageView imageV;
