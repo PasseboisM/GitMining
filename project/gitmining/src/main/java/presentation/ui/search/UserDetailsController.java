@@ -39,7 +39,10 @@ public class UserDetailsController {
 		return pane;
 	}
 	private AnchorPane rightComponentParent;
-	private List<Repository> repositories;
+	private List<Repository> ownedRepositories;
+	private List<Repository> starredRepositories;
+	private List<Repository> substribedRepositories;
+	
 	private void initial(AnchorPane rightComponentParent,GitUser user) {
 		this.rightComponentParent = rightComponentParent;
 		loadImgFile();
@@ -58,10 +61,10 @@ public class UserDetailsController {
 			public void run() {
 				try {
 					long time1 = System.currentTimeMillis();
-					repositories = getter.getOwnedRepositoryNames(user.getLogin());
+					ownedRepositories = getter.getOwnedRepositoryNames(user.getLogin());
 					System.out.println("loading related repos time used:" + (System.currentTimeMillis() - time1) + "ms");
 					ObservableList<String> options = FXCollections.observableArrayList();
-					repositories.forEach(repository->{
+					ownedRepositories.forEach(repository->{
 						options.add(repository.getFull_name());
 					});
 					Platform.runLater(new Runnable() {
@@ -72,7 +75,7 @@ public class UserDetailsController {
 								int index = repoComboBox.getSelectionModel().getSelectedIndex();
 								try {
 									rightComponentParent.getChildren().add(RepoDetailsController
-											.getInstance(rightComponentParent, repositories.get(index)));
+											.getInstance(rightComponentParent, ownedRepositories.get(index)));
 								} catch (Exception e) {
 									System.out.println("excuse me?");
 								}
@@ -85,11 +88,70 @@ public class UserDetailsController {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+				
+				try {
+					long time1 = System.currentTimeMillis();
+					starredRepositories = getter.getStarredRepositoryNames(user.getLogin());
+					System.out.println("loading related repos time used:" + (System.currentTimeMillis() - time1) + "ms");
+					ObservableList<String> options = FXCollections.observableArrayList();
+					starredRepositories.forEach(repository->{
+						options.add(repository.getFull_name());
+					});
+					Platform.runLater(new Runnable() {
+						@Override
+						public void run() {
+							repoComboBoxStar.setItems(options);
+							repoComboBoxStar.setOnAction(value->{
+								int index = repoComboBoxStar.getSelectionModel().getSelectedIndex();
+								try {
+									rightComponentParent.getChildren().add(RepoDetailsController
+											.getInstance(rightComponentParent, starredRepositories.get(index)));
+								} catch (Exception e) {
+									System.out.println("excuse me?");
+								}
+								Platform.runLater(new Runnable() {
+									@Override
+									public void run() {repoComboBoxStar.getSelectionModel().clearSelection();}});
+							});
+						}
+					});
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+				try {
+					long time1 = System.currentTimeMillis();
+					substribedRepositories = getter.getOwnedRepositoryNames(user.getLogin());
+					System.out.println("loading related repos time used:" + (System.currentTimeMillis() - time1) + "ms");
+					ObservableList<String> options = FXCollections.observableArrayList();
+					substribedRepositories.forEach(repository->{
+						options.add(repository.getFull_name());
+					});
+					Platform.runLater(new Runnable() {
+						@Override
+						public void run() {
+							repoComboBoxSub.setItems(options);
+							repoComboBoxSub.setOnAction(value->{
+								int index = repoComboBoxSub.getSelectionModel().getSelectedIndex();
+								try {
+									rightComponentParent.getChildren().add(RepoDetailsController
+											.getInstance(rightComponentParent, substribedRepositories.get(index)));
+								} catch (Exception e) {
+									System.out.println("excuse me?");
+								}
+								Platform.runLater(new Runnable() {
+									@Override
+									public void run() {repoComboBoxSub.getSelectionModel().clearSelection();}});
+							});
+						}
+					});
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		};
 		Thread t = new Thread(runnable);
 		t.start();
-		
 	}
 
 	private void initialRadar(GitUser user) {
@@ -142,10 +204,8 @@ public class UserDetailsController {
 		labelName.setText(user.getName());
 		labelId.setText("ID : "+user.getId());
 		labelType.setText(user.getType());
-		labelBlog.setText(user.getBlog());
 		labelUserLocation.setText(user.getLocation());
 		labelEmail.setText(user.getEmail());
-		labelBio.setText(user.getBio());
 		labelFollowers.setText(user.getFollowers()+"");
 		labelFollowing.setText(user.getFollowing()+"");
 		labelRepos.setText(user.getPublic_repos()+"");
@@ -155,10 +215,8 @@ public class UserDetailsController {
 	@FXML	private Label labelName;
 	@FXML	private Label labelId;
 	@FXML	private Label labelType;
-	@FXML	private Label labelBlog;
 	@FXML	private Label labelUserLocation;
 	@FXML	private Label labelEmail;
-	@FXML	private Label labelBio;
 	@FXML	private Label labelFollowers;
 	@FXML	private Label labelFollowing;
 	@FXML	private Label labelRepos;
@@ -169,6 +227,8 @@ public class UserDetailsController {
 	@FXML    private AnchorPane radarAnchorPane;
 	@FXML	private Button returnButton;
 	@FXML	private ComboBox<String> repoComboBox;
+	@FXML	private ComboBox<String> repoComboBoxStar;
+	@FXML	private ComboBox<String> repoComboBoxSub;
 	private static Image btImage=null;
 	private static Image avatarImage=null;
 	private ImageView imageV;

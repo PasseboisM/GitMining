@@ -76,18 +76,6 @@
                                     </Label>
                                  </graphic>
                               </Label>
-                              <Label fx:id="labelBio" textFill="#8d8d8d" wrapText="true">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                                 <graphic>
-                                    <Label text="个人简介：" wrapText="true">
-                                       <font>
-                                          <Font size="20.0" />
-                                       </font>
-                                    </Label>
-                                 </graphic>
-                              </Label>
                               <Label fx:id="labelCreatedAt" textFill="#8d8d8d" wrapText="true">
                                  <font>
                                     <Font size="20.0" />
@@ -120,6 +108,26 @@
                                        </font>
                                     </Label>
                                     <ComboBox fx:id="repoComboBox" prefWidth="150.0" />
+                                 </children>
+                              </HBox>
+                              <HBox>
+                                 <children>
+                                    <Label text="关注项目：" wrapText="true">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="repoComboBoxStar" prefWidth="150.0" />
+                                 </children>
+                              </HBox>
+                              <HBox>
+                                 <children>
+                                    <Label text="订阅项目：" wrapText="true">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="repoComboBoxSub" prefWidth="150.0" />
                                  </children>
                               </HBox>
                            </children>
