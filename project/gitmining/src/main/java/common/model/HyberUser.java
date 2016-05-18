@@ -8,217 +8,163 @@ import common.service.GitUser;
 
 public class HyberUser implements GitUser {
 
-	private GHUser ghUser;
 	
+	private String login;
+	private int id;
+	private String avatar_url;
+	private String gravatar_id;
+	private String url;
+	private String html_url;
+	private String followers_url;
+	private String following_url;
+	private String gists_url;
+	private String starred_url;
+	private String subscriptions_url;
+	private String organizations_url;
+	private String repos_url;
+	private String events_url;
+	private String received_events_url;
+	private String type;
+	private boolean site_admin;
+	private String name;
+	private String blog;
+	private String location;
+	private String email;
+	private String bio;
+	private int public_repos;
+	private int public_gists;
+	private int followers;
+	private int following;
+	private String created_at;
+	private String updated_at;
+	  
+	
+	@SuppressWarnings("deprecation")
 	public HyberUser(GHUser ghUser) {
-		this.ghUser = ghUser;
+		login = ghUser.getLogin();
+		id = ghUser.getId();
+		avatar_url = ghUser.getAvatarUrl();
+		gravatar_id = ghUser.getGravatarId();
+		url = ghUser.getUrl().toString();
+		html_url = ghUser.getHtmlUrl().toString();
+		site_admin = false;
+		try {
+			name = ghUser.getName();
+			blog = ghUser.getBlog();
+			location = ghUser.getLocation();
+			email = ghUser.getEmail();
+			public_repos = ghUser.getPublicRepoCount();
+			public_gists = ghUser.getPublicGistCount();
+			followers = ghUser.getFollowersCount();
+			following = ghUser.getFollowingCount();
+			created_at = ghUser.getCreatedAt().toString();
+			updated_at = ghUser.getUpdatedAt().toString();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
-	@Override
 	public String getLogin() {
-		return ghUser.getLogin();
+		return login;
 	}
-
-	@Override
 	public int getId() {
-		return ghUser.getId();
+		return id;
 	}
-
-	@Override
+	public String getAvatar_url() {
+		return avatar_url;
+	}
+	public String getGravatar_id() {
+		return gravatar_id;
+	}
+	public String getUrl() {
+		return url;
+	}
+	public String getHtml_url() {
+		return html_url;
+	}
+	public String getFollowers_url() {
+		return followers_url;
+	}
+	public String getFollowing_url() {
+		return following_url;
+	}
+	public String getGists_url() {
+		return gists_url;
+	}
+	public String getStarred_url() {
+		return starred_url;
+	}
+	public String getSubscriptions_url() {
+		return subscriptions_url;
+	}
+	public String getOrganizations_url() {
+		return organizations_url;
+	}
+	public String getRepos_url() {
+		return repos_url;
+	}
+	public String getEvents_url() {
+		return events_url;
+	}
+	public String getReceived_events_url() {
+		return received_events_url;
+	}
+	public String getType() {
+		return type;
+	}
+	public boolean isSite_admin() {
+		return site_admin;
+	}
 	public String getName() {
-		try {
-			return ghUser.getName();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
+		return name;
 	}
-
-	@Override
+	public String getBlog() {
+		return blog;
+	}
+	public String getLocation() {
+		return location;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public String getBio() {
+		return bio;
+	}
+	public int getPublic_repos() {
+		return public_repos;
+	}
+	public int getPublic_gists() {
+		return public_gists;
+	}
 	public int getFollowers() {
-		try {
-			return ghUser.getFollowersCount();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return 0;
+		return followers;
 	}
-
+	public int getFollowing() {
+		return following;
+	}
+	public String getCreated_at() {
+		return created_at;
+	}
+	public String getUpdated_at() {
+		return updated_at;
+	}
 	@Override
 	public boolean checkValidity() {
-		boolean loginValid = (getLogin()!=null) && (!getLogin().equals(""));
-		boolean nameValid = (getName()!=null) && (!getName().equals(""));
-		boolean followersValid = getFollowers() > -1;
-		boolean idValid = getId() > -1;
-		boolean createdAtValid = (getCreated_at()!=null) && 
-				(getCreated_at().matches("\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z"));
+		
+		boolean loginValid = (login!=null) && (!login.equals(""));
+		boolean nameValid = (name!=null) && (!name.equals(""));
+		boolean followersValid = followers > -1;
+		boolean idValid = id > -1;
+		boolean createdAtValid = (created_at!=null) && 
+				(created_at.matches("\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z"));
+		boolean typeValid = (type!=null) && (type.equals("User")||type.equals("Organization"));
 		
 		return loginValid 
 				&& nameValid
 				&& followersValid 
 				&& idValid 
-				&& createdAtValid;
-	}
-
-	@Override
-	public String getAvatar_url() {
-		return ghUser.getAvatarUrl();
-	}
-
-	@SuppressWarnings("deprecation")
-	@Override
-	public String getGravatar_id() {
-		return ghUser.getGravatarId();
-	}
-
-	@Override
-	public String getUrl() {
-		return ghUser.getUrl().toString();
-	}
-
-	@Override
-	public String getHtml_url() {
-		return ghUser.getHtmlUrl().toString();
-	}
-
-	@Override
-	public String getFollowers_url() {
-		return null;
-	}
-
-	@Override
-	public String getFollowing_url() {
-		return null;
-	}
-
-	@Override
-	public String getGists_url() {
-		return null;
-	}
-
-	@Override
-	public String getStarred_url() {
-		return null;
-	}
-
-	@Override
-	public String getSubscriptions_url() {
-		return null;
-	}
-
-	@Override
-	public String getOrganizations_url() {
-		return null;
-	}
-
-	@Override
-	public String getRepos_url() {
-		return null;
-	}
-
-	@Override
-	public String getEvents_url() {
-		return null;
-	}
-
-	@Override
-	public String getReceived_events_url() {
-		return null;
-	}
-
-	@Override
-	public String getType() {
-		return null;
-	}
-
-	@Override
-	public boolean isSite_admin() {
-		return false;
-	}
-
-	@Override
-	public String getBlog() {
-		try {
-			return ghUser.getBlog();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	@Override
-	public String getLocation() {
-		try {
-			return ghUser.getLocation();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	@Override
-	public String getEmail() {
-		try {
-			return ghUser.getEmail();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	@Override
-	public String getBio() {
-		return null;
-	}
-
-	@Override
-	public int getPublic_repos() {
-		try {
-			return ghUser.getPublicRepoCount();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return 0;
-	}
-
-	@Override
-	public int getPublic_gists() {
-		try {
-			return ghUser.getPublicGistCount();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return 0;
-	}
-
-	@Override
-	public int getFollowing() {
-		try {
-			return ghUser.getFollowingCount();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return 0;
-	}
-
-	@Override
-	public String getCreated_at() {
-		try {
-			return ghUser.getCreatedAt().toString();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	@Override
-	public String getUpdated_at() {
-		try {
-			return ghUser.getUpdatedAt().toString();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
+				&& createdAtValid
+				&& typeValid;
 	}
 
 }
