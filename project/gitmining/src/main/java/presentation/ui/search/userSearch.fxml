@@ -35,7 +35,7 @@
                         <AnchorPane layoutY="45.0" maxWidth="180.0" minWidth="180.0" opacity="0.42" style="-fx-background-color: white;" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="30.0" />
                         <AnchorPane fx:id="topUsersAnchorPane" layoutX="15.0" layoutY="40.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="40.0">
                            <children>
-                              <ScrollPane hbarPolicy="ALWAYS" maxWidth="177.0" minWidth="177.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <ScrollPane fx:id="topUsersPane" hbarPolicy="NEVER" maxWidth="177.0" minWidth="177.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children>
                         </AnchorPane>
                      </children>

@@ -36,7 +36,7 @@ public class TopUserMinBlock extends BorderPane{
 	}
 
 	private void setComponentText(GitUser userData) {
-		userLogin.setText(userData.getName());
+		userLogin.setText(userData.getLogin());
 		followers.setText(userData.getFollowers()+"");
 		following.setText(userData.getFollowing()+"");
 	}
