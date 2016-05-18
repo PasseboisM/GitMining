@@ -123,7 +123,11 @@ public class HyberRepository implements Repository{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		pushed_at=ghRepository.getPushedAt().toString();
+		try {
+			pushed_at=ghRepository.getPushedAt().toString();
+		} catch (NullPointerException e) {
+			pushed_at=null;
+		}
 		git_url=ghRepository.getGitTransportUrl();
 		ssh_url=ghRepository.getSshUrl();
 		svn_url=ghRepository.getSvnUrl();

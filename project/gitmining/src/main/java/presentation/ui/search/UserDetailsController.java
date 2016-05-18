@@ -9,6 +9,8 @@ import chart_data.service.UserStatisticsService;
 import common.service.GitUser;
 import common.service.Repository;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -49,12 +51,31 @@ public class UserDetailsController {
 
 	private void initialComboBox(GitUser user) {
 		UserRelatedListGetter getter = LogicServiceFactory.getInstance().getUserRelatedListGetter();
-		try {
-			List<Repository> repositories = getter.getOwnedRepositoryNames(user.getLogin());
-			System.out.println(repositories.size());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		Runnable runnable = new Runnable() {
+			@Override
+			public void run() {
+				try {
+					long time1 = System.currentTimeMillis();
+					List<Repository> repositories = getter.getOwnedRepositoryNames(user.getLogin());
+					System.out.println("loading related repos time used:" + (System.currentTimeMillis() - time1) + "ms");
+					ObservableList<Button> options = FXCollections.observableArrayList(new Button("hello"),new Button("hi"));
+					/*repositories.forEach(repository->{
+						options.add(repository.getFull_name());
+					});*/
+					Platform.runLater(new Runnable() {
+						@Override
+						public void run() {
+							repoComboBox.setItems(options);
+//							repoComboBox.
+						}
+					});
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		};
+		Thread t = new Thread(runnable);
+		t.start();
 	}
 
 	private void initialRadar(GitUser user) {
@@ -133,7 +154,7 @@ public class UserDetailsController {
 	@FXML    private ImageView imageView;
 	@FXML    private AnchorPane radarAnchorPane;
 	@FXML	private Button returnButton;
-	@FXML	private ComboBox<String> repoComboBox;
+	@FXML	private ComboBox<Button> repoComboBox;
 	private static Image btImage=null;
 	private static Image avatarImage=null;
 	private ImageView imageV;
