@@ -31,9 +31,10 @@ import javafx.util.Duration;
  * CandleStickExtraValues object.
  */
 public class GitParetoChart extends XYChart<String, Number> {
-
+	
 	// -------------- CONSTRUCTORS
 	// ----------------------------------------------
+	
 	/**
 	 * Construct a new CandleStickChart with the given axis.
 	 *
@@ -88,7 +89,7 @@ public class GitParetoChart extends XYChart<String, Number> {
 				double x = getXAxis().getDisplayPosition(getCurrentDisplayedXValue(item));
 				double y = getYAxis().getDisplayPosition(getCurrentDisplayedYValue(item));
 				Node itemNode = item.getNode();
-				CandleStickExtraValues extra = (CandleStickExtraValues) item.getExtraValue();
+				GitParetoExtraValues extra = (GitParetoExtraValues) item.getExtraValue();
 				if (itemNode instanceof Candle && extra != null) {
 					Candle candle = (Candle) itemNode;
 
@@ -174,7 +175,7 @@ public class GitParetoChart extends XYChart<String, Number> {
 	protected void seriesAdded(Series<String, Number> series, int seriesIndex) {
 		// handle any data already in series
 		for (int j = 0; j < series.getData().size(); j++) {
-			Data item = series.getData().get(j);
+			Data<String,Number> item = series.getData().get(j);
 			Node candle = createCandle(seriesIndex, item, j);
 			if (shouldAnimate()) {
 				candle.setOpacity(0);
@@ -228,7 +229,7 @@ public class GitParetoChart extends XYChart<String, Number> {
 	 *            The index of the data item in the series
 	 * @return New candle node to represent the give data item
 	 */
-	private Node createCandle(int seriesIndex, final Data item, int itemIndex) {
+	private Node createCandle(int seriesIndex, final Data<String,Number> item, int itemIndex) {
 		Node candle = item.getNode();
 		// check if candle has already been created
 		if (candle instanceof Candle) {
@@ -269,7 +270,7 @@ public class GitParetoChart extends XYChart<String, Number> {
 						xData.add(data.getXValue());
 					}
 					if (yData != null) {
-						CandleStickExtraValues extras = (CandleStickExtraValues) data.getExtraValue();
+						GitParetoExtraValues extras = (GitParetoExtraValues) data.getExtraValue();
 						if (extras != null) {
 							yData.add(extras.getHigh());
 							yData.add(extras.getLow());
@@ -288,36 +289,7 @@ public class GitParetoChart extends XYChart<String, Number> {
 		}
 	}
 
-	/** Data extra values for storing close, high and low. */
-	private class CandleStickExtraValues {
-		private double close;
-		private double high;
-		private double low;
-		private double average;
-
-		public CandleStickExtraValues(double close, double high, double low, double average) {
-			this.close = close;
-			this.high = high;
-			this.low = low;
-			this.average = average;
-		}
-
-		public double getClose() {
-			return close;
-		}
-
-		public double getHigh() {
-			return high;
-		}
-
-		public double getLow() {
-			return low;
-		}
-
-		public double getAverage() {
-			return average;
-		}
-	}
+	
 
 	/** Candle node used for drawing a candle */
 	private class Candle extends Group {
@@ -407,18 +379,6 @@ public class GitParetoChart extends XYChart<String, Number> {
 			closeValue.setText(Double.toString(close));
 			highValue.setText(Double.toString(high));
 			lowValue.setText(Double.toString(low));
-		}
-	}
-
-	private class ParetoData {
-		private String date;
-		private int actual;
-		private int percent;
-
-		public ParetoData(String date, int actual, int percent) {
-			this.date = date;
-			this.actual = actual;
-			this.percent = percent;
 		}
 	}
 }

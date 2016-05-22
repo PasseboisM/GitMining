@@ -74,5 +74,7 @@ public class UserCreateTimeStatisticsPane implements StatisticsPane {
 		UserDistOverCreateTime userCreateOnTimeCounts = statisticsService.getUserDistOverCreateTime();
 		GitMixChart mixChart = new GitMixChart(userCreateOnTimeCounts);
 		anchorPane.getChildren().add(mixChart);
+//		GitParetoChartController controller = new GitParetoChartController();
+//		GitParetoChart paretoChart = controller.createChart();
 	}
 }
