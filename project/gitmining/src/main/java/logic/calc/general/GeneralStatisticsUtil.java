@@ -17,6 +17,7 @@ import chart_data.UserDistOverCreateTime;
 import chart_data.UserDistOverCreateTime.UserCreateOnTimeCount;
 import chart_data.service.GeneralStatisticsService;
 import chart_data.UserDistOverType;
+import chart_data.UserDistOverType.UserTypeCount;
 import common.enumeration.attribute.Language;
 import logic.calc.python.PythonRunner;
 
@@ -273,13 +274,8 @@ public class GeneralStatisticsUtil implements GeneralStatisticsService{
 
 	public static void main(String[] args) {
 		GeneralStatisticsUtil util = new GeneralStatisticsUtil();
-		System.out.println("1");
-		UserDistOverCreateTime lang = util.getUserDistOverCreateTime();
-		System.out.println("2");
-		Iterator<UserCreateOnTimeCount> ite = lang.getCounts();
-		while(ite.hasNext()) {
-			System.out.println(ite.next());
-		}
+		String s = new Gson().toJson(util.getRepoDistOverLanguage());
+		System.out.println(s);
 	}
 	
 }
