@@ -12,6 +12,9 @@ import java.util.List;
 
 public class UserDistOverCreateTime {
 
+	public static String title = "用户创建时间统计图",
+								  xAxisLabel = "时间",
+								  yAxisLabel = "用户创建数量";
 	private List<UserCreateOnTimeCount> counts = new LinkedList<>();
 	
 	public void addCreateCount(String timeLo, String timeHi, int count) {
