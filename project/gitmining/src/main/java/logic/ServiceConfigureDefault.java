@@ -1,12 +1,13 @@
 package logic;
 
 import logic.service.ServiceConfigure;
+import network.service.NetworkServiceFactory;
 
 public class ServiceConfigureDefault implements ServiceConfigure {
 	
 	@Override
 	public boolean checkNetwork() {
-		//TODO  实现网络连接（到GitServer服务器）连通情况测试
-		return true;
+		return NetworkServiceFactory.getInstance().getNetworkConnectionTester().testNetwork();
 	}	
+
 }
