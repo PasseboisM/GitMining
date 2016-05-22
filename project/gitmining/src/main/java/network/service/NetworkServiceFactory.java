@@ -21,8 +21,6 @@ public abstract class NetworkServiceFactory {
 	
 	public abstract UserRelatedDataSource getUserRelatedDataSource();
 	
-	public abstract RepoRelatedDataSource getRepoRelatedDataSource();
-	
 	public abstract AnalysisDataSource getAnalysisDataSource();
 	
 	public static NetworkServiceFactory getInstance() {

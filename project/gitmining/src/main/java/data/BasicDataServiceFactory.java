@@ -1,12 +1,11 @@
 package data;
 
 import data.service.DataServiceFactory;
-import data.service.UserListDataGetter;
 import data.service.MassiveDataGetter;
 import data.service.RecommendDataGetter;
-import data.service.RepoListDataGetter;
 import data.service.SpecificDataGetter;
 import data.service.StatDataMakerFactory;
+import data.service.UserListDataGetter;
 
 public class BasicDataServiceFactory extends DataServiceFactory {
 
@@ -23,11 +22,6 @@ public class BasicDataServiceFactory extends DataServiceFactory {
 	@Override
 	public UserListDataGetter getUserListDataGetter() {
 		return UserListDataGetter.getInstance();
-	}
-
-	@Override
-	public RepoListDataGetter getRepoListDataGetter() {
-		return RepoListDataGetter.getInstance();
 	}
 
 	@Override

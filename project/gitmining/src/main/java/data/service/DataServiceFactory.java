@@ -24,8 +24,6 @@ public abstract class DataServiceFactory {
 	
 	public abstract UserListDataGetter getUserListDataGetter();
 	
-	public abstract RepoListDataGetter getRepoListDataGetter();
-	
 	public abstract StatDataMakerFactory getStatDataMakerFactory();
 	
 	public abstract RecommendDataGetter getRecommendDataGetter();
