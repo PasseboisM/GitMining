@@ -35,16 +35,17 @@ import presentation.image.ImageFactory;
 public class UserSearchController {
 	
 	public static AnchorPane getInstance(AnchorPane rightComponentParent){
-		FXMLLoader loader = new FXMLLoader(UserSearchController.class.getResource("userSearch.fxml"));
-		AnchorPane pane = null;
-		try {
-			pane = loader.load();
-		} catch (IOException e) {
-			e.printStackTrace();
+		if (pane==null) {
+			FXMLLoader loader = new FXMLLoader(UserSearchController.class.getResource("userSearch.fxml"));
+			try {
+				pane = loader.load();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			UserSearchController controller = loader.getController();
+			controller.initial(rightComponentParent);
+			controller.initialLayout(pane);
 		}
-		UserSearchController controller = loader.getController();
-		controller.initial(rightComponentParent);
-		controller.initialLayout(pane);
 		return pane;
 	}
 	
@@ -185,15 +186,18 @@ public class UserSearchController {
 	@FXML 	private ScrollPane topUsersPane;
 	@FXML 	private TextField vagename;
 	@FXML	private Button search;
-	
-	private ImageView image;
-	private List<GitUser> datas;
 	private AnchorPane rightComponentParent;
-	private String  keyword = ""; 
+	private ImageView image;
+	private static AnchorPane pane = null;
+	
+	private List<GitUser> datas;
+	
 	private LogicServiceFactory logicServiceFactory;
 	private SearchService searchService;
 	private GeneralGetter generalGetter;
 	private Recommender recommender;
+	
+	private String  keyword = ""; 
 	private static Image bgImage = null;
 	
 	@FXML

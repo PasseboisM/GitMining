@@ -67,8 +67,6 @@ public class RepoDetailsController {
 //		initialComboBox(repository);
 	}
 	
-//	private void initialComboBox(Repository repository) {
-//	}
 
 	private void loadImgFile() {
 		try {
