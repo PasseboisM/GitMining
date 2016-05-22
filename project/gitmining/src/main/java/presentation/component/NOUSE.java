@@ -39,11 +39,13 @@ import javafx.util.Duration;
  * @see javafx.scene.chart.NumberAxis
  * @see javafx.scene.chart.XYChart
  */
-public class AdvCandleStickChartSample extends Application {
+public class NOUSE extends Application {
 
     // DAY, OPEN, CLOSE, HIGH, LOW, AVERAGE
-    private static double[][] data = new double[][]{
-            {1,  25, 20, 32, 16, 20},
+//	private ParetoData data = 
+//	private ArrayList<ParetoData> data = new ArrayList<>();
+    private double[][] data = new double[][]{
+            {1,  500, 20, 32, 16, 20},
             {2,  26, 30, 33, 22, 25},
             {3,  30, 38, 40, 20, 32},
             {4,  24, 30, 34, 22, 30},
@@ -91,6 +93,7 @@ public class AdvCandleStickChartSample extends Application {
  		AnchorPane.setRightAnchor(rootUINode, 0.0);
  		AnchorPane.setTopAnchor(rootUINode, 0.0);
  	}
+     
 
     protected CandleStickChart createChart() {
 //        final NumberAxis xAxis = new NumberAxis(0,32,1);
@@ -122,6 +125,17 @@ public class AdvCandleStickChartSample extends Application {
         return bc;
     }
 
+    private class ParetoData{
+    	private String date;
+    	private int actual;
+    	private int percent;
+    	
+		public ParetoData(String date, int actual, int percent) {
+			this.date = date;
+			this.actual = actual;
+			this.percent = percent;
+		}
+    }
     /**
      * A candlestick chart is a style of bar-chart used primarily to describe price movements of a security, derivative,
      * or currency over time.
@@ -129,7 +143,7 @@ public class AdvCandleStickChartSample extends Application {
      * The Data Y value is used for the opening price and then the close, high and low values are stored in the Data's
      * extra value property using a CandleStickExtraValues object.
      */
-    private class CandleStickChart extends XYChart<String, Number> {
+    public class CandleStickChart extends XYChart<String, Number> {
 
         // -------------- CONSTRUCTORS ----------------------------------------------
         /**

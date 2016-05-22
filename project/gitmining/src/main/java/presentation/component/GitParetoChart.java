@@ -1,633 +1,424 @@
-///*
-// * Copyright (c) 2010, 2015, Oracle and/or its affiliates. All rights reserved.
-// * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
-// *
-// *
-// *
-// *
-// *
-// *
-// *
-// *
-// *
-// *
-// *
-// *
-// *
-// *
-// *
-// *
-// *
-// *
-// *
-// *
-// */
-//
-//package presentation.component;
-//
-//import static javafx.scene.chart.XYChart.DEFAULT_COLOR;
-//
-//import java.util.ArrayList;
-//import java.util.Collections;
-//import java.util.HashMap;
-//import java.util.Iterator;
-//import java.util.List;
-//import java.util.Map;
-//
-//import com.sun.javafx.charts.Legend;
-//import com.sun.javafx.charts.Legend.LegendItem;
-//import com.sun.javafx.css.converters.SizeConverter;
-//
-//import javafx.animation.Animation;
-//import javafx.animation.FadeTransition;
-//import javafx.animation.Interpolator;
-//import javafx.animation.KeyFrame;
-//import javafx.animation.KeyValue;
-//import javafx.animation.ParallelTransition;
-//import javafx.animation.Timeline;
-//import javafx.application.Platform;
-//import javafx.beans.NamedArg;
-//import javafx.beans.property.DoubleProperty;
-//import javafx.beans.value.WritableValue;
-//import javafx.collections.FXCollections;
-//import javafx.collections.ObservableList;
-//import javafx.css.CssMetaData;
-//import javafx.css.PseudoClass;
-//import javafx.css.Styleable;
-//import javafx.css.StyleableDoubleProperty;
-//import javafx.css.StyleableProperty;
-//import javafx.event.ActionEvent;
-//import javafx.event.EventHandler;
-//import javafx.geometry.Orientation;
-//import javafx.scene.AccessibleRole;
-//import javafx.scene.Node;
-//import javafx.scene.chart.Axis;
-//import javafx.scene.chart.CategoryAxis;
-//import javafx.scene.chart.ValueAxis;
-//import javafx.scene.chart.XYChart;
-//import javafx.scene.layout.StackPane;
-//import javafx.util.Duration;
-//
-///**
-// * A chart that plots bars indicating data values for a category. The bars can be vertical or horizontal depending on
-// * which axis is a category axis.
-// * @since JavaFX 2.0
-// */
-//public class GitParetoChart<X,Y> extends XYChart<X,Y> {
-//
-//    // -------------- PRIVATE FIELDS -------------------------------------------
-//    
-//    private Map<Series<X,Y>, Map<String, Data<X,Y>>> seriesCategoryMap = new HashMap<>();
-//    private Legend legend = new Legend();
-//    private final Orientation orientation;
-//    private CategoryAxis categoryAxis;
-//    private ValueAxis valueAxis;
-//    private Timeline dataRemoveTimeline;
-//    private double bottomPos  = 0;
-//    private static String NEGATIVE_STYLE = "negative";
-//    private ParallelTransition pt;
-//    // For storing data values in case removed and added immediately.
-//    private Map<Data<X,Y>, Double> XYValueMap = 
-//                                new HashMap<Data<X,Y>, Double>();
-//    // -------------- PUBLIC PROPERTIES ----------------------------------------
-//
-//    /** The gap to leave between bars in the same category */
-//    private DoubleProperty barGap = new StyleableDoubleProperty(4) {
-//        @Override protected void invalidated() {
-//            get();
-//            requestChartLayout();
-//        }
-//        
-//        public Object getBean() {
-//            return GitParetoChart.this;
-//        }
-//
-//        public String getName() {
-//            return "barGap";
-//        }
-//
-//        public CssMetaData<GitParetoChart<?,?>,Number> getCssMetaData() {
-//            return StyleableProperties.BAR_GAP;
-//        }
-//    };
-//    public final double getBarGap() { return barGap.getValue(); }
-//    public final void setBarGap(double value) { barGap.setValue(value); }
-//    public final DoubleProperty barGapProperty() { return barGap; }
-//
-//    /** The gap to leave between bars in separate categories */
-//    private DoubleProperty categoryGap = new StyleableDoubleProperty(10) {
-//        @Override protected void invalidated() {
-//            get();
-//            requestChartLayout();
-//        }
-//
-//        @Override
-//        public Object getBean() {
-//            return GitParetoChart.this;
-//        }
-//
-//        @Override
-//        public String getName() {
-//            return "categoryGap";
-//        }
-//
-//        public CssMetaData<GitParetoChart<?,?>,Number> getCssMetaData() {
-//            return StyleableProperties.CATEGORY_GAP;
-//        }
-//    };
-//    public final double getCategoryGap() { return categoryGap.getValue(); }
-//    public final void setCategoryGap(double value) { categoryGap.setValue(value); }
-//    public final DoubleProperty categoryGapProperty() { return categoryGap; }
-//
-//    // -------------- CONSTRUCTOR ----------------------------------------------
-//
-//    /**
-//     * Construct a new BarChart with the given axis. The two axis should be a ValueAxis/NumberAxis and a CategoryAxis,
-//     * they can be in either order depending on if you want a horizontal or vertical bar chart.
-//     *
-//     * @param xAxis The x axis to use
-//     * @param yAxis The y axis to use
-//     */
-//    public GitParetoChart(@NamedArg("xAxis") Axis<X> xAxis, @NamedArg("yAxis") Axis<Y> yAxis) {
-//        this(xAxis, yAxis, FXCollections.<Series<X, Y>>observableArrayList());
-//    }
-//
-//    /**
-//     * Construct a new BarChart with the given axis and data. The two axis should be a ValueAxis/NumberAxis and a
-//     * CategoryAxis, they can be in either order depending on if you want a horizontal or vertical bar chart.
-//     *
-//     * @param xAxis The x axis to use
-//     * @param yAxis The y axis to use
-//     * @param data The data to use, this is the actual list used so any changes to it will be reflected in the chart
-//     */
-//    public GitParetoChart(@NamedArg("xAxis") Axis<X> xAxis, @NamedArg("yAxis") Axis<Y> yAxis, @NamedArg("data") ObservableList<Series<X,Y>> data) {
-//        super(xAxis, yAxis);
-//        getStyleClass().add("bar-chart");
-//        setLegend(legend);
-//        if (!((xAxis instanceof ValueAxis && yAxis instanceof CategoryAxis) ||
-//             (yAxis instanceof ValueAxis && xAxis instanceof CategoryAxis))) {
-//            throw new IllegalArgumentException("Axis type incorrect, one of X,Y should be CategoryAxis and the other NumberAxis");
-//        }
-//        if (xAxis instanceof CategoryAxis) {
-//            categoryAxis = (CategoryAxis)xAxis;
-//            valueAxis = (ValueAxis)yAxis;
-//            orientation = Orientation.VERTICAL;
-//        } else {
-//            categoryAxis = (CategoryAxis)yAxis;
-//            valueAxis = (ValueAxis)xAxis;
-//            orientation = Orientation.HORIZONTAL;
-//        }
-//        // update css
-//        pseudoClassStateChanged(HORIZONTAL_PSEUDOCLASS_STATE, orientation == Orientation.HORIZONTAL);
-//        pseudoClassStateChanged(VERTICAL_PSEUDOCLASS_STATE, orientation == Orientation.VERTICAL);
-//        setData(data);
-//    }
-//
-//    /**
-//     * Construct a new BarChart with the given axis and data. The two axis should be a ValueAxis/NumberAxis and a
-//     * CategoryAxis, they can be in either order depending on if you want a horizontal or vertical bar chart.
-//     *
-//     * @param xAxis The x axis to use
-//     * @param yAxis The y axis to use
-//     * @param data The data to use, this is the actual list used so any changes to it will be reflected in the chart
-//     * @param categoryGap The gap to leave between bars in separate categories
-//     */
-//     public GitParetoChart(@NamedArg("xAxis") Axis<X> xAxis, @NamedArg("yAxis") Axis<Y> yAxis, @NamedArg("data") ObservableList<Series<X,Y>> data, @NamedArg("categoryGap") double categoryGap) {
-//        this(xAxis, yAxis);
-//        setData(data);
-//        setCategoryGap(categoryGap);
-//    }
-//     
-//    // -------------- PROTECTED METHODS ----------------------------------------
-//     
-//    @Override protected void dataItemAdded(Series<X,Y> series, int itemIndex, Data<X,Y> item) {
-//        String category;
-//        if (orientation == Orientation.VERTICAL) {
-//            category = (String)item.getXValue();
-//        } else {
-//            category = (String)item.getYValue();
-//        }
-//         Map<String, Data<X,Y>> categoryMap = seriesCategoryMap.get(series);
-//
-//        if (categoryMap == null) {
-//            categoryMap = new HashMap<String, Data<X,Y>>();
-//            seriesCategoryMap.put(series, categoryMap);
-//        }
-//        // check if category is already present
-//        if (!categoryAxis.getCategories().contains(category)) {
-//            // note: cat axis categories can be updated only when autoranging is true.
-//            categoryAxis.getCategories().add(itemIndex, category);
-//        } else if (categoryMap.containsKey(category)){
-//            // RT-21162 : replacing the previous data, first remove the node from scenegraph.
-//            Data<X,Y> data = categoryMap.get(category);
-//            getPlotChildren().remove(data.getNode());
-//            removeDataItemFromDisplay(series, data);
-//            requestChartLayout();
-//            categoryMap.remove(category);
-//        }
-//        categoryMap.put(category, item);
-//        Node bar = createBar(series, getData().indexOf(series), item, itemIndex);
-//        if (shouldAnimate()) {
-//            animateDataAdd(item, bar);
-//        } else {
-//            getPlotChildren().add(bar);
-//        }
-//    }
-//
-//    @Override protected void dataItemRemoved(final Data<X,Y> item, final Series<X,Y> series) {
-//        /*final Node bar = item.getNode();
-//        if (bar != null) {
-//            bar.focusTraversableProperty().unbind();
-//        }
-//        if (shouldAnimate()) {
-//            XYValueMap.clear();
-//            dataRemoveTimeline = createDataRemoveTimeline(item, bar, series);
-//            dataRemoveTimeline.setOnFinished(event -> {
-//                item.setSeries(null);
-//                removeDataItemFromDisplay(series, item);
-//            });
-//            dataRemoveTimeline.play();
-//        } else {
-//            processDataRemove(series, item);
-//            removeDataItemFromDisplay(series, item);
-//        }
-//        */
-//        final Node bar = item.getNode();
-//        if (shouldAnimate()) {
-//            // fade out old candle
-//            FadeTransition ft = new FadeTransition(Duration.millis(500), bar);
-//            ft.setToValue(0);
-//            ft.setOnFinished(new EventHandler<ActionEvent>() {
-//                @Override
-//                public void handle(ActionEvent actionEvent) {
-//                    getPlotChildren().remove(bar);
-//                }
-//            });
-//            ft.play();
-//        } else {
-//            getPlotChildren().remove(bar);
-//        }
-//    }
-//
-//    /** @inheritDoc */
-//    @Override protected void dataItemChanged(Data<X, Y> item) {
-//    }
-//
-//    @Override protected void seriesAdded(Series<X,Y> series, int seriesIndex) {
-//        // handle any data already in series
-//        // create entry in the map
-//        Map<String, Data<X,Y>> categoryMap = new HashMap<String, Data<X,Y>>();
-//        for (int j=0; j<series.getData().size(); j++) {
-//            Data<X,Y> item = series.getData().get(j);
-//            Node bar = createBar(series, seriesIndex, item, j);
-//            String category;
-//            if (orientation == Orientation.VERTICAL) {
-//                category = (String)item.getXValue();
-//            } else {
-//                category = (String)item.getYValue();
-//            }
-//            categoryMap.put(category, item);
-//            if (shouldAnimate()) {
-//                animateDataAdd(item, bar);
-//            } else {
-//                // RT-21164 check if bar value is negative to add NEGATIVE_STYLE style class 
-//                double barVal = (orientation == Orientation.VERTICAL) ? ((Number)item.getYValue()).doubleValue() :
-//                        ((Number)item.getXValue()).doubleValue();
-//                if (barVal < 0) {
-//                    bar.getStyleClass().add(NEGATIVE_STYLE);
-//                }
-//                getPlotChildren().add(bar);
-//            }
-//        }
-//        if (categoryMap.size() > 0) seriesCategoryMap.put(series, categoryMap);
-//    }
-//    
-//    @Override protected void seriesRemoved(final Series<X,Y> series) {
-//    	// remove all candle nodes
-//        for (javafx.scene.chart.XYChart.Data<X, Y> d : series.getData()) {
-//            final Node candle = d.getNode();
-//            if (shouldAnimate()) {
-//                // fade out old candle
-//                FadeTransition ft = new FadeTransition(Duration.millis(500), candle);
-//                ft.setToValue(0);
-//                ft.setOnFinished(new EventHandler<ActionEvent>() {
-//                    @Override
-//                    public void handle(ActionEvent actionEvent) {
-//                        getPlotChildren().remove(candle);
-//                    }
-//                });
-//                ft.play();
-//            } else {
-//                getPlotChildren().remove(candle);
-//            }
-//        }
-//    }
-//
-//    /** @inheritDoc */
-//    @Override protected void layoutPlotChildren() {
-//        double catSpace = categoryAxis.getCategorySpacing();
-//        // calculate bar spacing
-//        final double avilableBarSpace = catSpace - (getCategoryGap() + getBarGap());
-//        double barWidth = (avilableBarSpace / getSeriesSize()) - getBarGap();
-//        final double barOffset = -((catSpace - getCategoryGap()) / 2);
-//        final double zeroPos = (valueAxis.getLowerBound() > 0) ? 
-//                valueAxis.getDisplayPosition(valueAxis.getLowerBound()) : valueAxis.getZeroPosition();
-//        // RT-24813 : if the data in a series gets too large, barWidth can get negative.
-//        if (barWidth <= 0) barWidth = 1;
-//        // update bar positions and sizes
-//        int catIndex = 0;
-//        for (String category : categoryAxis.getCategories()) {
-//            int index = 0;
-//            for (Iterator<Series<X, Y>> sit = getDisplayedSeriesIterator(); sit.hasNext(); ) {
-//                Series<X, Y> series = sit.next();
-//                final Data<X,Y> item = getDataItem(series, index, catIndex, category);
-//                if (item != null) {
-//                    final Node bar = item.getNode();
-//                    final double categoryPos;
-//                    final double valPos;
-//                    if (orientation == Orientation.VERTICAL) {
-//                        categoryPos = getXAxis().getDisplayPosition(item.getCurrentX());
-//                        valPos = getYAxis().getDisplayPosition(item.getCurrentY());
-//                    } else {
-//                        categoryPos = getYAxis().getDisplayPosition(item.getCurrentY());
-//                        valPos = getXAxis().getDisplayPosition(item.getCurrentX());
-//                    }
-//                    if (Double.isNaN(categoryPos) || Double.isNaN(valPos)) {
-//                        continue;
-//                    }
-//                    final double bottom = Math.min(valPos,zeroPos);
-//                    final double top = Math.max(valPos,zeroPos);
-//                    bottomPos = bottom;
-//                    if (orientation == Orientation.VERTICAL) {
-//                        bar.resizeRelocate( categoryPos + barOffset + (barWidth + getBarGap()) * index,
-//                                            bottom, barWidth, top-bottom);
-//                    } else {
-//                        //noinspection SuspiciousNameCombination
-//                        bar.resizeRelocate( bottom, categoryPos + barOffset + (barWidth + getBarGap()) * index,
-//                                            top-bottom, barWidth);
-//                    }
-//
-//                    index++;
-//                }
-//            }
-//            catIndex++;
-//        }
-//    }
-//
-//    /**
-//     * This is called whenever a series is added or removed and the legend needs to be updated
-//     */
-//    @Override protected void updateLegend() {
-//        legend.getItems().clear();
-//        if (getData() != null) {
-//            for (int seriesIndex=0; seriesIndex < getData().size(); seriesIndex++) {
-//                Series<X,Y> series = getData().get(seriesIndex);
-//                LegendItem legenditem = new LegendItem(series.getName());
-//                legenditem.getSymbol().getStyleClass().addAll("chart-bar","series"+seriesIndex,"bar-legend-symbol",
-//                        series.defaultColorStyleClass);
-//                legend.getItems().add(legenditem);
-//            }
-//        }
-//        if (legend.getItems().size() > 0) {
-//            if (getLegend() == null) {
-//                setLegend(legend);
-//            }
-//        } else {
-//            setLegend(null);
-//        }
-//    }
-//    
-//    // -------------- PRIVATE METHODS ------------------------------------------
-//    
-//    private void updateMap(Series<X,Y> series, Data<X,Y> item) {
-//        final String category = (orientation == Orientation.VERTICAL) ? (String)item.getXValue() :
-//                                     (String)item.getYValue();
-//        Map<String, Data<X,Y>> categoryMap = seriesCategoryMap.get(series);
-//        if (categoryMap != null) {
-//            categoryMap.remove(category);
-//            if (categoryMap.isEmpty()) seriesCategoryMap.remove(series);
-//        }
-//        if (seriesCategoryMap.isEmpty() && categoryAxis.isAutoRanging()) categoryAxis.getCategories().clear();
-//    }
-//    
-//    private void processDataRemove(final Series<X,Y> series, final Data<X,Y> item) {
-//        Node bar = item.getNode();
-//        getPlotChildren().remove(bar);
-//        updateMap(series, item);
-//    }
-//     
-//    private void animateDataAdd(Data<X,Y> item, Node bar) {
-//        double barVal;
-//        if (orientation == Orientation.VERTICAL) {
-//            barVal = ((Number)item.getYValue()).doubleValue();
-//            if (barVal < 0) {
-//                bar.getStyleClass().add(NEGATIVE_STYLE);
-//            }
-//            item.setCurrentY(getYAxis().toRealValue((barVal < 0) ? -bottomPos : bottomPos));
-//            getPlotChildren().add(bar);
-//            item.setYValue(getYAxis().toRealValue(barVal));
-//            animate(
-//                new KeyFrame(Duration.ZERO, new KeyValue(item.currentYProperty(),
-//                item.getCurrentY())),
-//                new KeyFrame(Duration.millis(700),
-//                new KeyValue(item.currentYProperty(), item.getYValue(), Interpolator.EASE_BOTH))
-//            );
-//        } else {
-//            barVal = ((Number)item.getXValue()).doubleValue();
-//            if (barVal < 0) {
-//                bar.getStyleClass().add(NEGATIVE_STYLE);
-//            }
-//            item.setCurrentX(getXAxis().toRealValue((barVal < 0) ? -bottomPos : bottomPos));
-//            getPlotChildren().add(bar);
-//            item.setXValue(getXAxis().toRealValue(barVal));
-//            animate(
-//                new KeyFrame(Duration.ZERO, new KeyValue(item.currentXProperty(),
-//                item.getCurrentX())),
-//                new KeyFrame(Duration.millis(700),
-//                new KeyValue(item.currentXProperty(), item.getXValue(), Interpolator.EASE_BOTH))
-//            );
-//        }
-//    }
-//
-//    private Timeline createDataRemoveTimeline(final Data<X,Y> item, final Node bar, final Series<X,Y> series) {
-//        Timeline t = new Timeline();
-//        if (orientation == Orientation.VERTICAL) {
-////            item.setYValue(getYAxis().toRealValue(getYAxis().getZeroPosition()));
-//            
-//            // save data values in case the same data item gets added immediately.
-//            XYValueMap.put(item, ((Number)item.getYValue()).doubleValue());
-//            item.setYValue(getYAxis().toRealValue(bottomPos));
-//            t.getKeyFrames().addAll(new KeyFrame(Duration.ZERO,
-//                                    new KeyValue(item.currentYProperty(), item.getCurrentY())),
-//                                    new KeyFrame(Duration.millis(700), actionEvent -> {
-//                                        processDataRemove(series, item);
-//                                        XYValueMap.clear();
-//                                    },
-//                                new KeyValue(item.currentYProperty(), item.getYValue(),
-//                                Interpolator.EASE_BOTH) ));
-//        } else {
-//            // save data values in case the same data item gets added immediately.
-//             XYValueMap.put(item, ((Number)item.getXValue()).doubleValue());
-//            item.setXValue(getXAxis().toRealValue(getXAxis().getZeroPosition()));
-//            t.getKeyFrames().addAll(new KeyFrame(Duration.ZERO, new KeyValue(item.currentXProperty(), item.getCurrentX())),
-//                new KeyFrame(Duration.millis(700), actionEvent -> {
-//                    processDataRemove(series, item);
-//                    XYValueMap.clear();
-//                },
-//                    new KeyValue(item.currentXProperty(), item.getXValue(),
-//                            Interpolator.EASE_BOTH) ));
-//        }
-//        return t;
-//    }
-//    
-//    @Override void dataBeingRemovedIsAdded(Data<X,Y> item, Series<X,Y> series) {
-//        if (dataRemoveTimeline != null) {
-//            dataRemoveTimeline.setOnFinished(null);
-//            dataRemoveTimeline.stop();
-//        }
-//        processDataRemove(series, item);
-//        item.setSeries(null);
-//        removeDataItemFromDisplay(series, item);
-//        restoreDataValues(item);
-//        XYValueMap.clear();
-//    }
-//    
-//    private void restoreDataValues(Data item) {
-//        Double value = XYValueMap.get(item);
-//        if (value != null) {
-//            // Restoring original X/Y values 
-//            if (orientation.equals(Orientation.VERTICAL)) {
-//                item.setYValue(value);
-//                item.setCurrentY(value);
-//            } else {
-//                item.setXValue(value);
-//                item.setCurrentX(value);
-//
-//            }
-//        }
-//    }
-//    @Override void seriesBeingRemovedIsAdded(Series<X,Y> series) {
-//        boolean lastSeries = (pt.getChildren().size() == 1) ? true : false;
-//        if (pt!= null) {
-//            if (!pt.getChildren().isEmpty()) {
-//                for (Animation a : pt.getChildren()) {
-//                    a.setOnFinished(null);
-//                }
-//            }
-//            for (Data<X,Y> item : series.getData()) {
-//                processDataRemove(series, item);
-//                if (!lastSeries) {
-//                    restoreDataValues(item);
-//                }
-//            }
-//            XYValueMap.clear();
-//            pt.setOnFinished(null);
-//            pt.getChildren().clear();
-//            pt.stop();
-//            removeSeriesFromDisplay(series);
-//        }
-//    }
-//     
-//    private void updateDefaultColorIndex(final Series<X,Y> series) {
-//        int clearIndex = seriesColorMap.get(series);
-//        for (Data<X,Y> d : series.getData()) {
-//            final Node bar = d.getNode();
-//            if (bar != null) {
-//                bar.getStyleClass().remove(DEFAULT_COLOR+clearIndex);
-//            }
-//        }
-//    }
-//
-//    private Node createBar(Series<X,Y> series, int seriesIndex, final Data<X,Y> item, int itemIndex) {
-//        Node bar = item.getNode();
-//        if (bar == null) {
-//            bar = new StackPane();
-//            bar.setAccessibleRole(AccessibleRole.TEXT);
-//            bar.setAccessibleRoleDescription("Bar");
-//            bar.focusTraversableProperty().bind(Platform.accessibilityActiveProperty());
-//            item.setNode(bar);
-//        }
-//        bar.getStyleClass().addAll("chart-bar", "series" + seriesIndex, "data" + itemIndex,series.defaultColorStyleClass);
-//        return bar;
-//    }
-//
-//    private Data<X,Y> getDataItem(Series<X,Y> series, int seriesIndex, int itemIndex, String category) {
-//        Map<String, Data<X,Y>> catmap = seriesCategoryMap.get(series);
-//        return (catmap != null) ? catmap.get(category) : null;
-//    }
-//    
-//    // -------------- STYLESHEET HANDLING ------------------------------------------------------------------------------
-//
-//    /**
-//      * Super-lazy instantiation pattern from Bill Pugh.
-//      * @treatAsPrivate implementation detail
-//      */
-//     private static class StyleableProperties {
-//         private static final CssMetaData<GitParetoChart<?,?>,Number> BAR_GAP = 
-//             new CssMetaData<GitParetoChart<?,?>,Number>("-fx-bar-gap",
-//                 SizeConverter.getInstance(), 4.0) {
-//
-//            @Override
-//            public boolean isSettable(GitParetoChart<?,?> node) {
-//                return node.barGap == null || !node.barGap.isBound();
-//            }
-//
-//            @Override
-//            public StyleableProperty<Number> getStyleableProperty(GitParetoChart<?,?> node) {
-//                return (StyleableProperty<Number>)(WritableValue<Number>)node.barGapProperty();
-//            }
-//        };
-//         
-//         private static final CssMetaData<GitParetoChart<?,?>,Number> CATEGORY_GAP = 
-//             new CssMetaData<GitParetoChart<?,?>,Number>("-fx-category-gap",
-//                 SizeConverter.getInstance(), 10.0)  {
-//
-//            @Override
-//            public boolean isSettable(GitParetoChart<?,?> node) {
-//                return node.categoryGap == null || !node.categoryGap.isBound();
-//            }
-//
-//            @Override
-//            public StyleableProperty<Number> getStyleableProperty(GitParetoChart<?,?> node) {
-//                return (StyleableProperty<Number>)(WritableValue<Number>)node.categoryGapProperty();
-//            }
-//        };
-//
-//         private static final List<CssMetaData<? extends Styleable, ?>> STYLEABLES;
-//         static {
-//
-//            final List<CssMetaData<? extends Styleable, ?>> styleables =
-//                new ArrayList<CssMetaData<? extends Styleable, ?>>(XYChart.getClassCssMetaData());
-//            styleables.add(BAR_GAP);
-//            styleables.add(CATEGORY_GAP);
-//            STYLEABLES = Collections.unmodifiableList(styleables);
-//         }
-//    }
-//
-//    /**
-//     * @return The CssMetaData associated with this class, which may include the
-//     * CssMetaData of its super classes.
-//     * @since JavaFX 8.0
-//     */
-//    public static List<CssMetaData<? extends Styleable, ?>> getClassCssMetaData() {
-//        return StyleableProperties.STYLEABLES;
-//    }
-//
-//    /**
-//     * {@inheritDoc}
-//     * @since JavaFX 8.0
-//     */
-//    @Override
-//    public List<CssMetaData<? extends Styleable, ?>> getCssMetaData() {
-//        return getClassCssMetaData();
-//    }
-//
-//    /** Pseudoclass indicating this is a vertical chart. */
-//    private static final PseudoClass VERTICAL_PSEUDOCLASS_STATE =
-//            PseudoClass.getPseudoClass("vertical");
-//
-//    /** Pseudoclass indicating this is a horizontal chart. */
-//    private static final PseudoClass HORIZONTAL_PSEUDOCLASS_STATE = 
-//            PseudoClass.getPseudoClass("horizontal");
-//
-//}
+package presentation.component;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import javafx.animation.FadeTransition;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.chart.Axis;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.XYChart;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Region;
+import javafx.scene.shape.LineTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
+import javafx.util.Duration;
+
+/**
+ * A candlestick chart is a style of bar-chart used primarily to describe price
+ * movements of a security, derivative, or currency over time.
+ *
+ * The Data Y value is used for the opening price and then the close, high and
+ * low values are stored in the Data's extra value property using a
+ * CandleStickExtraValues object.
+ */
+public class GitParetoChart extends XYChart<String, Number> {
+
+	// -------------- CONSTRUCTORS
+	// ----------------------------------------------
+	/**
+	 * Construct a new CandleStickChart with the given axis.
+	 *
+	 * @param xAxis
+	 *            The x axis to use
+	 * @param yAxis
+	 *            The y axis to use
+	 */
+	public GitParetoChart(Axis<String> xAxis, Axis<Number> yAxis) {
+		super(xAxis, yAxis);
+		setAnimated(false);
+		xAxis.setAnimated(false);
+		yAxis.setAnimated(false);
+	}
+
+	/**
+	 * Construct a new CandleStickChart with the given axis and data.
+	 *
+	 * @param xAxis
+	 *            The x axis to use
+	 * @param yAxis
+	 *            The y axis to use
+	 * @param data
+	 *            The data to use, this is the actual list used so any changes
+	 *            to it will be reflected in the chart
+	 */
+	public GitParetoChart(Axis<String> xAxis, Axis<Number> yAxis, ObservableList<Series<String, Number>> data) {
+		this(xAxis, yAxis);
+		setData(data);
+	}
+
+	// -------------- METHODS
+	// ------------------------------------------------------------------------------------------
+	/** Called to update and layout the content for the plot */
+	@Override
+	protected void layoutPlotChildren() {
+		// we have nothing to layout if no data is present
+		if (getData() == null) {
+			return;
+		}
+		// update candle positions
+		for (int seriesIndex = 0; seriesIndex < getData().size(); seriesIndex++) {
+			Series<String, Number> series = getData().get(seriesIndex);
+			Iterator<Data<String, Number>> iter = getDisplayedDataIterator(series);
+			Path seriesPath = null;
+			if (series.getNode() instanceof Path) {
+				seriesPath = (Path) series.getNode();
+				seriesPath.getElements().clear();
+			}
+			while (iter.hasNext()) {
+				Data<String, Number> item = iter.next();
+				double x = getXAxis().getDisplayPosition(getCurrentDisplayedXValue(item));
+				double y = getYAxis().getDisplayPosition(getCurrentDisplayedYValue(item));
+				Node itemNode = item.getNode();
+				CandleStickExtraValues extra = (CandleStickExtraValues) item.getExtraValue();
+				if (itemNode instanceof Candle && extra != null) {
+					Candle candle = (Candle) itemNode;
+
+					double close = getYAxis().getDisplayPosition(extra.getClose());
+					double high = getYAxis().getDisplayPosition(extra.getHigh());
+					double low = getYAxis().getDisplayPosition(extra.getLow());
+					// calculate candle width
+					double candleWidth = -1;
+					if (getXAxis() instanceof CategoryAxis) {
+						CategoryAxis xa = (CategoryAxis) getXAxis();
+						// System.out.println(xa.getTickLabelGap());
+						// System.out.println(xa.getDisplayPosition(xa.getTickLabelGap()+""));
+						candleWidth = xa.getDisplayPosition(xa.getTickLabelGap() + "") * 0.90; // use
+																								// 90%
+																								// width
+																								// between
+																								// ticks
+					}
+					// update candle
+					candle.update(close - y, high - y, low - y, candleWidth);
+					candle.updateTooltip(item.getYValue().doubleValue(), extra.getClose(), extra.getHigh(),
+							extra.getLow());
+
+					// position the candle
+					candle.setLayoutX(x);
+					candle.setLayoutY(y);
+				}
+				if (seriesPath != null) {
+					if (seriesPath.getElements().isEmpty()) {
+						seriesPath.getElements().add(new MoveTo(x, getYAxis().getDisplayPosition(extra.getAverage())));
+					} else {
+						seriesPath.getElements().add(new LineTo(x, getYAxis().getDisplayPosition(extra.getAverage())));
+					}
+				}
+			}
+		}
+	}
+
+	@Override
+	protected void dataItemChanged(Data<String, Number> item) {
+	}
+
+	@Override
+	protected void dataItemAdded(Series<String, Number> series, int itemIndex, Data<String, Number> item) {
+		Node candle = createCandle(getData().indexOf(series), item, itemIndex);
+		if (shouldAnimate()) {
+			candle.setOpacity(0);
+			getPlotChildren().add(candle);
+			// fade in new candle
+			FadeTransition ft = new FadeTransition(Duration.millis(500), candle);
+			ft.setToValue(1);
+			ft.play();
+		} else {
+			getPlotChildren().add(candle);
+		}
+		// always draw average line on top
+		if (series.getNode() != null) {
+			series.getNode().toFront();
+		}
+	}
+
+	@Override
+	protected void dataItemRemoved(Data<String, Number> item, Series<String, Number> series) {
+		final Node candle = item.getNode();
+		if (shouldAnimate()) {
+			// fade out old candle
+			FadeTransition ft = new FadeTransition(Duration.millis(500), candle);
+			ft.setToValue(0);
+			ft.setOnFinished(new EventHandler<ActionEvent>() {
+
+				@Override
+				public void handle(ActionEvent actionEvent) {
+					getPlotChildren().remove(candle);
+				}
+			});
+			ft.play();
+		} else {
+			getPlotChildren().remove(candle);
+		}
+	}
+
+	@Override
+	protected void seriesAdded(Series<String, Number> series, int seriesIndex) {
+		// handle any data already in series
+		for (int j = 0; j < series.getData().size(); j++) {
+			Data item = series.getData().get(j);
+			Node candle = createCandle(seriesIndex, item, j);
+			if (shouldAnimate()) {
+				candle.setOpacity(0);
+				getPlotChildren().add(candle);
+				// fade in new candle
+				FadeTransition ft = new FadeTransition(Duration.millis(500), candle);
+				ft.setToValue(1);
+				ft.play();
+			} else {
+				getPlotChildren().add(candle);
+			}
+		}
+		// create series path
+		Path seriesPath = new Path();
+		seriesPath.getStyleClass().setAll("candlestick-average-line", "series" + seriesIndex);
+		series.setNode(seriesPath);
+		getPlotChildren().add(seriesPath);
+	}
+
+	@Override
+	protected void seriesRemoved(Series<String, Number> series) {
+		// remove all candle nodes
+		for (XYChart.Data<String, Number> d : series.getData()) {
+			final Node candle = d.getNode();
+			if (shouldAnimate()) {
+				// fade out old candle
+				FadeTransition ft = new FadeTransition(Duration.millis(500), candle);
+				ft.setToValue(0);
+				ft.setOnFinished(new EventHandler<ActionEvent>() {
+
+					@Override
+					public void handle(ActionEvent actionEvent) {
+						getPlotChildren().remove(candle);
+					}
+				});
+				ft.play();
+			} else {
+				getPlotChildren().remove(candle);
+			}
+		}
+	}
+
+	/**
+	 * Create a new Candle node to represent a single data item
+	 *
+	 * @param seriesIndex
+	 *            The index of the series the data item is in
+	 * @param item
+	 *            The data item to create node for
+	 * @param itemIndex
+	 *            The index of the data item in the series
+	 * @return New candle node to represent the give data item
+	 */
+	private Node createCandle(int seriesIndex, final Data item, int itemIndex) {
+		Node candle = item.getNode();
+		// check if candle has already been created
+		if (candle instanceof Candle) {
+			((Candle) candle).setSeriesAndDataStyleClasses("series" + seriesIndex, "data" + itemIndex);
+		} else {
+			candle = new Candle("series" + seriesIndex, "data" + itemIndex);
+			item.setNode(candle);
+		}
+		return candle;
+	}
+
+	/**
+	 * This is called when the range has been invalidated and we need to update
+	 * it. If the axis are auto ranging then we compile a list of all data that
+	 * the given axis has to plot and call invalidateRange() on the axis passing
+	 * it that data.
+	 */
+	@Override
+	protected void updateAxisRange() {
+		// For candle stick chart we need to override this method as we need to
+		// let the axis know that they need to be able
+		// to cover the whole area occupied by the high to low range not just
+		// its center data value
+		final Axis<String> xa = getXAxis();
+		final Axis<Number> ya = getYAxis();
+		List<String> xData = null;
+		List<Number> yData = null;
+		if (xa.isAutoRanging()) {
+			xData = new ArrayList<String>();
+		}
+		if (ya.isAutoRanging()) {
+			yData = new ArrayList<Number>();
+		}
+		if (xData != null || yData != null) {
+			for (Series<String, Number> series : getData()) {
+				for (Data<String, Number> data : series.getData()) {
+					if (xData != null) {
+						xData.add(data.getXValue());
+					}
+					if (yData != null) {
+						CandleStickExtraValues extras = (CandleStickExtraValues) data.getExtraValue();
+						if (extras != null) {
+							yData.add(extras.getHigh());
+							yData.add(extras.getLow());
+						} else {
+							yData.add(data.getYValue());
+						}
+					}
+				}
+			}
+			if (xData != null) {
+				xa.invalidateRange(xData);
+			}
+			if (yData != null) {
+				ya.invalidateRange(yData);
+			}
+		}
+	}
+
+	/** Data extra values for storing close, high and low. */
+	private class CandleStickExtraValues {
+		private double close;
+		private double high;
+		private double low;
+		private double average;
+
+		public CandleStickExtraValues(double close, double high, double low, double average) {
+			this.close = close;
+			this.high = high;
+			this.low = low;
+			this.average = average;
+		}
+
+		public double getClose() {
+			return close;
+		}
+
+		public double getHigh() {
+			return high;
+		}
+
+		public double getLow() {
+			return low;
+		}
+
+		public double getAverage() {
+			return average;
+		}
+	}
+
+	/** Candle node used for drawing a candle */
+	private class Candle extends Group {
+		// private Line highLowLine = new Line();
+		private Region bar = new Region();
+		private String seriesStyleClass;
+		private String dataStyleClass;
+		private boolean openAboveClose = true;
+		private Tooltip tooltip = new Tooltip();
+
+		private Candle(String seriesStyleClass, String dataStyleClass) {
+			setAutoSizeChildren(false);
+			getChildren().addAll(bar);
+			this.seriesStyleClass = seriesStyleClass;
+			this.dataStyleClass = dataStyleClass;
+			updateStyleClasses();
+			tooltip.setGraphic(new TooltipContent());
+			Tooltip.install(bar, tooltip);
+		}
+
+		public void setSeriesAndDataStyleClasses(String seriesStyleClass, String dataStyleClass) {
+			this.seriesStyleClass = seriesStyleClass;
+			this.dataStyleClass = dataStyleClass;
+			updateStyleClasses();
+		}
+
+		public void update(double closeOffset, double highOffset, double lowOffset, double candleWidth) {
+			openAboveClose = closeOffset > 0;
+			updateStyleClasses();
+			// highLowLine.setStartY(highOffset);
+			// highLowLine.setEndY(lowOffset);
+			if (candleWidth == -1) {
+				candleWidth = bar.prefWidth(-1);
+			}
+			if (openAboveClose) {
+				bar.resizeRelocate(-candleWidth / 2, 0, candleWidth, closeOffset);
+			} else {
+				bar.resizeRelocate(-candleWidth / 2, closeOffset, candleWidth, closeOffset * -1);
+			}
+		}
+
+		public void updateTooltip(double open, double close, double high, double low) {
+			TooltipContent tooltipContent = (TooltipContent) tooltip.getGraphic();
+			tooltipContent.update(open, close, high, low);
+			// tooltip.setText("Open: "+open+"\nClose: "+close+"\nHigh:
+			// "+high+"\nLow: "+low);
+		}
+
+		private void updateStyleClasses() {
+			getStyleClass().setAll("candlestick-candle", seriesStyleClass, dataStyleClass);
+			// highLowLine.getStyleClass().setAll("candlestick-line",
+			// seriesStyleClass, dataStyleClass,
+			// openAboveClose ? "open-above-close" : "close-above-open");
+			bar.getStyleClass().setAll("candlestick-bar", seriesStyleClass, dataStyleClass,
+					openAboveClose ? "open-above-close" : "close-above-open");
+		}
+	}
+
+	private class TooltipContent extends GridPane {
+		private Label openValue = new Label();
+		private Label closeValue = new Label();
+		private Label highValue = new Label();
+		private Label lowValue = new Label();
+
+		private TooltipContent() {
+			Label open = new Label("OPEN:");
+			Label close = new Label("CLOSE:");
+			Label high = new Label("HIGH:");
+			Label low = new Label("LOW:");
+			open.getStyleClass().add("candlestick-tooltip-label");
+			close.getStyleClass().add("candlestick-tooltip-label");
+			high.getStyleClass().add("candlestick-tooltip-label");
+			low.getStyleClass().add("candlestick-tooltip-label");
+			setConstraints(open, 0, 0);
+			setConstraints(openValue, 1, 0);
+			setConstraints(close, 0, 1);
+			setConstraints(closeValue, 1, 1);
+			setConstraints(high, 0, 2);
+			setConstraints(highValue, 1, 2);
+			setConstraints(low, 0, 3);
+			setConstraints(lowValue, 1, 3);
+			getChildren().addAll(open, openValue, close, closeValue, high, highValue, low, lowValue);
+		}
+
+		public void update(double open, double close, double high, double low) {
+			openValue.setText(Double.toString(open));
+			closeValue.setText(Double.toString(close));
+			highValue.setText(Double.toString(high));
+			lowValue.setText(Double.toString(low));
+		}
+	}
+
+	private class ParetoData {
+		private String date;
+		private int actual;
+		private int percent;
+
+		public ParetoData(String date, int actual, int percent) {
+			this.date = date;
+			this.actual = actual;
+			this.percent = percent;
+		}
+	}
+}
