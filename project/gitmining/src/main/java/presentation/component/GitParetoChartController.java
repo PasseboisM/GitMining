@@ -82,14 +82,14 @@ public class GitParetoChartController {
 //        int num = userDistOverCreateTime.getNumOfCount();
         XYChart.Series<String,Number> series = new XYChart.Series<String,Number>();
         int sum=userDistOverCreateTime.getSum();
-        int leiji=0;
+        int cumulation=0;
         while(itr.hasNext()){
         	UserCreateOnTimeCount userCreateOnTimeCount = itr.next();
         	String label = userCreateOnTimeCount.timeLo+"~"+userCreateOnTimeCount.timeHi;
         	int count = userCreateOnTimeCount.count;
-        	leiji+=count;
+        	cumulation+=count;
         	series.getData().add(
-           		 new XYChart.Data<String,Number>(label,count,new GitParetoExtraValues(0,count,count*1.0/sum,leiji/5.0))
+           		 new XYChart.Data<String,Number>(label,count,new GitParetoExtraValues(0,count,cumulation*1.0/sum,cumulation/4.5))
            );
         }
         

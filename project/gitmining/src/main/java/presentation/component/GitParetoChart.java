@@ -355,7 +355,7 @@ public class GitParetoChart extends XYChart<String, Number> {
 		private TooltipContent() {
 			Label open = new Label("用户数量：");
 //			Label close = new Label("CLOSE:");
-			Label high = new Label("百分比：");
+			Label high = new Label("累计百分比：");
 //			Label low = new Label("LOW:");
 			open.getStyleClass().add("candlestick-tooltip-label");
 //			close.getStyleClass().add("candlestick-tooltip-label");
@@ -373,9 +373,9 @@ public class GitParetoChart extends XYChart<String, Number> {
 		}
 
 		public void update(double open, double close, double high, double low) {
-			openValue.setText(Double.toString(open));
+			openValue.setText(Integer.toString((int) open));
 //			closeValue.setText(Double.toString(close));
-			highValue.setText(Double.toString(low));
+			highValue.setText(String.format("%.2f", low*100) + "%");
 //			lowValue.setText(Double.toString(low));
 		}
 	}
