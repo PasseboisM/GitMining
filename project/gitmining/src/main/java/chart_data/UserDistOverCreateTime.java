@@ -25,6 +25,25 @@ public class UserDistOverCreateTime {
 		return counts.size();
 	}
 	
+	public int getSum(){
+		int sum=0;
+		for (UserCreateOnTimeCount userCreateOnTimeCount : counts) {
+			sum+=userCreateOnTimeCount.count;
+		}
+		return sum;
+	}
+	
+	public int getMax(){
+		counts.sort(new Comparator<UserCreateOnTimeCount>() {
+			@Override
+			public int compare(UserCreateOnTimeCount o1,
+					UserCreateOnTimeCount o2) {
+				return o2.count-o1.count;
+			}
+		});
+		return counts.get(0).count;
+	}
+	
 	/**
 	 * 获取关于时间的用户创建数目分布，<br />
 	 * 迭代器<strong>按照时间顺序先后</strong>给出各个时间段的条目。

@@ -3,20 +3,13 @@ import java.util.Iterator;
 
 import chart_data.UserDistOverCreateTime;
 import chart_data.UserDistOverCreateTime.UserCreateOnTimeCount;
-/**
- * Copyright (c) 2008, 2012 Oracle and/or its affiliates.
- * All rights reserved. Use is subject to license terms.
- */
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
 /**
  * A custom candlestick chart.
@@ -26,7 +19,7 @@ import javafx.stage.Stage;
  * @see javafx.scene.chart.NumberAxis
  * @see javafx.scene.chart.XYChart
  */
-public class GitParetoChartController extends Application {
+public class GitParetoChartController {
 
     // DAY, OPEN, CLOSE, HIGH, LOW, AVERAGE
 //	private ParetoData data = 
@@ -66,29 +59,11 @@ public class GitParetoChartController extends Application {
 //        {31, 28, 18, 30, 12, 22}
 //    };
 
-    private void init(Stage primaryStage) {
-        AnchorPane root = new AnchorPane();
-         root.getStylesheets().add(getClass().getResource("mixChart.css").toExternalForm());
-         primaryStage.setScene(new Scene(root));
-         UserDistOverCreateTime userDistOverCreateTime = new UserDistOverCreateTime();
-         userDistOverCreateTime.addCreateCount("1", "2", 2);
-         userDistOverCreateTime.addCreateCount("2", "3", 500);
-         userDistOverCreateTime.addCreateCount("3", "4", 1500);
-         userDistOverCreateTime.addCreateCount("4", "5", 10000);
-         userDistOverCreateTime.addCreateCount("5", "6", 5000);
-         userDistOverCreateTime.addCreateCount("6", "7", 2000);
-         userDistOverCreateTime.addCreateCount("7", "8", 1000);
-         userDistOverCreateTime.addCreateCount("8", "9", 25);
-         GitParetoChart chart = createChart(userDistOverCreateTime);
-         initialLayout(chart);
-         root.getChildren().add(chart);
-     }
-     
-     private void initialLayout(Node rootUINode) {
- 		AnchorPane.setBottomAnchor(rootUINode, 0.0);
- 		AnchorPane.setLeftAnchor(rootUINode, 0.0);
- 		AnchorPane.setRightAnchor(rootUINode, 0.0);
- 		AnchorPane.setTopAnchor(rootUINode, 0.0);
+    private void initialLayout(Node rootUINode) {
+ 		AnchorPane.setBottomAnchor(rootUINode, 40.0);
+ 		AnchorPane.setLeftAnchor(rootUINode, 40.0);
+ 		AnchorPane.setRightAnchor(rootUINode, 40.0);
+ 		AnchorPane.setTopAnchor(rootUINode, 40.0);
  	}
      
 
@@ -106,14 +81,15 @@ public class GitParetoChartController extends Application {
         Iterator<UserCreateOnTimeCount> itr = userDistOverCreateTime.getCounts();
 //        int num = userDistOverCreateTime.getNumOfCount();
         XYChart.Series<String,Number> series = new XYChart.Series<String,Number>();
-        int sum=0;
+        int sum=userDistOverCreateTime.getSum();
+        int leiji=0;
         while(itr.hasNext()){
         	UserCreateOnTimeCount userCreateOnTimeCount = itr.next();
         	String label = userCreateOnTimeCount.timeLo+"~"+userCreateOnTimeCount.timeHi;
         	int count = userCreateOnTimeCount.count;
-        	sum+=count;
+        	leiji+=count;
         	series.getData().add(
-           		 new XYChart.Data<String,Number>(label,count,new GitParetoExtraValues(0,count,0,sum/5.0))
+           		 new XYChart.Data<String,Number>(label,count,new GitParetoExtraValues(0,count,count*1.0/sum,leiji/5.0))
            );
         }
         
@@ -128,10 +104,4 @@ public class GitParetoChartController extends Application {
         initialLayout(bc);
         return bc;
     }
-
-    @Override public void start(Stage primaryStage) throws Exception {
-        init(primaryStage);
-        primaryStage.show();
-    }
-    public static void main(String[] args) { launch(args); }
 }
