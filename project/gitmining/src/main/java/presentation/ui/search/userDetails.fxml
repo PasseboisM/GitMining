@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-
 <AnchorPane minHeight="1000.0" minWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.ui.search.UserDetailsController">
    <children>
       <ScrollPane fitToWidth="true" pannable="true" style="-fx-background-color: transparent; -fx-background-inner-color: trnasparent; -fx-background-insets: 0; -fx-padding: 0;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -16,7 +15,7 @@
                <children>
                   <BorderPane layoutX="57.0" layoutY="20.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
                      <center>
-                        <HBox>
+                        <HBox spacing="10.0">
                            <children>
                               <VBox spacing="3.0" BorderPane.alignment="CENTER" HBox.hgrow="ALWAYS">
                                  <children>
@@ -226,7 +225,121 @@
                                     </HBox>
                                  </children>
                               </VBox>
-                              <VBox minWidth="240.0" />
+                              <VBox maxWidth="274.0" minWidth="274.0" spacing="10.0">
+                                 <children>
+                                    <Label text="持有项目列表" wrapText="true" VBox.vgrow="NEVER">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <ScrollPane fitToWidth="true" hbarPolicy="NEVER" maxHeight="260.0" minHeight="260.0" vbarPolicy="ALWAYS" VBox.vgrow="ALWAYS">
+                                       <content>
+                                          <VBox>
+                                             <children>
+                                                <Hyperlink text="Hyperlink">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Hyperlink>
+                                                <Separator prefWidth="200.0" />
+                                                <Hyperlink text="Hyperlink">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Hyperlink>
+                                                <Separator prefWidth="200.0" />
+                                                <Hyperlink text="Hyperlink">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Hyperlink>
+                                                <Separator prefWidth="200.0" />
+                                                <Hyperlink text="Hyperlink">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Hyperlink>
+                                                <Separator prefWidth="200.0" />
+                                                <Hyperlink text="Hyperlink">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Hyperlink>
+                                                <Separator prefWidth="200.0" />
+                                                <Hyperlink text="Hyperlink">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Hyperlink>
+                                                <Separator prefWidth="200.0" />
+                                                <Hyperlink text="Hyperlink">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Hyperlink>
+                                             </children>
+                                          </VBox>
+                                       </content>
+                                       <GridPane.margin>
+                                          <Insets left="20.0" right="20.0" top="20.0" />
+                                       </GridPane.margin>
+                                    </ScrollPane>
+                                    <Label text="持有项目列表" wrapText="true">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <ScrollPane fitToWidth="true" hbarPolicy="NEVER" maxHeight="260.0" minHeight="260.0" vbarPolicy="ALWAYS">
+                                       <content>
+                                          <VBox>
+                                             <children>
+                                                <Hyperlink text="Hyperlink">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Hyperlink>
+                                                <Separator prefWidth="200.0" />
+                                                <Hyperlink text="Hyperlink">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Hyperlink>
+                                                <Separator prefWidth="200.0" />
+                                                <Hyperlink text="Hyperlink">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Hyperlink>
+                                                <Separator prefWidth="200.0" />
+                                                <Hyperlink text="Hyperlink">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Hyperlink>
+                                                <Separator prefWidth="200.0" />
+                                                <Hyperlink text="Hyperlink">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Hyperlink>
+                                                <Separator prefWidth="200.0" />
+                                                <Hyperlink text="Hyperlink">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Hyperlink>
+                                                <Separator prefWidth="200.0" />
+                                                <Hyperlink text="Hyperlink">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Hyperlink>
+                                             </children>
+                                          </VBox>
+                                       </content>
+                                    </ScrollPane>
+                                 </children>
+                              </VBox>
                            </children>
                         </HBox>
                      </center>
@@ -262,7 +375,7 @@
                         </VBox>
                      </top>
                      <bottom>
-                        <GridPane hgap="10.0" minHeight="300.0" BorderPane.alignment="CENTER">
+                        <GridPane hgap="20.0" minHeight="300.0" BorderPane.alignment="CENTER">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -328,6 +441,9 @@
                                                    </font>
                                                 </Hyperlink>
                                              </children>
+                                             <padding>
+                                                <Insets top="5.0" />
+                                             </padding>
                                           </VBox>
                                        </content>
                                     </ScrollPane>
@@ -335,7 +451,7 @@
                               </VBox>
                               <VBox spacing="10.0" GridPane.columnIndex="1">
                                  <children>
-                                    <Label text="持有项目列表" wrapText="true" VBox.vgrow="NEVER">
+                                    <Label text="推荐项目列表" wrapText="true" VBox.vgrow="NEVER">
                                        <font>
                                           <Font size="20.0" />
                                        </font>
@@ -386,6 +502,9 @@
                                                    </font>
                                                 </Hyperlink>
                                              </children>
+                                             <padding>
+                                                <Insets top="5.0" />
+                                             </padding>
                                           </VBox>
                                        </content>
                                        <GridPane.margin>
@@ -396,7 +515,7 @@
                               </VBox>
                               <VBox spacing="10.0" GridPane.columnIndex="2">
                                  <children>
-                                    <Label text="持有项目列表" wrapText="true" VBox.vgrow="NEVER">
+                                    <Label text="订阅项目列表" wrapText="true" VBox.vgrow="NEVER">
                                        <font>
                                           <Font size="20.0" />
                                        </font>
@@ -447,6 +566,9 @@
                                                    </font>
                                                 </Hyperlink>
                                              </children>
+                                             <padding>
+                                                <Insets top="5.0" />
+                                             </padding>
                                           </VBox>
                                        </content>
                                        <GridPane.margin>
@@ -457,7 +579,7 @@
                               </VBox>
                            </children>
                            <BorderPane.margin>
-                              <Insets left="20.0" right="20.0" top="20.0" />
+                              <Insets left="20.0" top="20.0" />
                            </BorderPane.margin>
                         </GridPane>
                      </bottom>
