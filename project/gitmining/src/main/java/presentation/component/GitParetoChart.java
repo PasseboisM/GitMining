@@ -19,6 +19,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
+import javafx.scene.text.Font;
 import javafx.util.Duration;
 
 /**
@@ -353,6 +354,8 @@ public class GitParetoChart extends XYChart<String, Number> {
 //		private Label lowValue = new Label();
 
 		private TooltipContent() {
+			openValue.setFont(new Font(18));
+			highValue.setFont(new Font(18));
 			Label open = new Label("用户数量：");
 //			Label close = new Label("CLOSE:");
 			Label high = new Label("累计百分比：");
