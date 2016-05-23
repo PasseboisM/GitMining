@@ -197,57 +197,14 @@
                               </VBox>
                               <VBox maxWidth="274.0" minWidth="274.0" spacing="10.0">
                                  <children>
-                                    <Label text="持有项目列表" wrapText="true" VBox.vgrow="NEVER">
+                                    <Label text="关注者用户列表" wrapText="true" VBox.vgrow="NEVER">
                                        <font>
                                           <Font size="20.0" />
                                        </font>
                                     </Label>
                                     <ScrollPane fitToWidth="true" hbarPolicy="NEVER" maxHeight="260.0" minHeight="260.0" vbarPolicy="ALWAYS" VBox.vgrow="ALWAYS">
                                        <content>
-                                          <VBox spacing="5.0">
-                                             <children>
-                                                <Hyperlink text="Hyperlink">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Hyperlink>
-                                                <Separator prefWidth="200.0" />
-                                                <Hyperlink text="Hyperlink">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Hyperlink>
-                                                <Separator prefWidth="200.0" />
-                                                <Hyperlink text="Hyperlink">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Hyperlink>
-                                                <Separator prefWidth="200.0" />
-                                                <Hyperlink text="Hyperlink">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Hyperlink>
-                                                <Separator prefWidth="200.0" />
-                                                <Hyperlink text="Hyperlink">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Hyperlink>
-                                                <Separator prefWidth="200.0" />
-                                                <Hyperlink text="Hyperlink">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Hyperlink>
-                                                <Separator prefWidth="200.0" />
-                                                <Hyperlink text="Hyperlink">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Hyperlink>
-                                             </children>
+                                          <VBox fx:id="vboxListFollower" spacing="5.0">
                                              <padding>
                                                 <Insets top="5.0" />
                                              </padding>
@@ -257,57 +214,14 @@
                                           <Insets left="20.0" right="20.0" top="20.0" />
                                        </GridPane.margin>
                                     </ScrollPane>
-                                    <Label text="持有项目列表" wrapText="true">
+                                    <Label text="关注用户列表" wrapText="true">
                                        <font>
                                           <Font size="20.0" />
                                        </font>
                                     </Label>
                                     <ScrollPane fitToWidth="true" hbarPolicy="NEVER" maxHeight="260.0" minHeight="260.0" vbarPolicy="ALWAYS">
                                        <content>
-                                          <VBox spacing="5.0">
-                                             <children>
-                                                <Hyperlink text="Hyperlink">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Hyperlink>
-                                                <Separator prefWidth="200.0" />
-                                                <Hyperlink text="Hyperlink">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Hyperlink>
-                                                <Separator prefWidth="200.0" />
-                                                <Hyperlink text="Hyperlink">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Hyperlink>
-                                                <Separator prefWidth="200.0" />
-                                                <Hyperlink text="Hyperlink">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Hyperlink>
-                                                <Separator prefWidth="200.0" />
-                                                <Hyperlink text="Hyperlink">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Hyperlink>
-                                                <Separator prefWidth="200.0" />
-                                                <Hyperlink text="Hyperlink">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Hyperlink>
-                                                <Separator prefWidth="200.0" />
-                                                <Hyperlink text="Hyperlink">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Hyperlink>
-                                             </children>
+                                          <VBox fx:id="vboxListFollowing" spacing="5.0">
                                              <padding>
                                                 <Insets top="5.0" />
                                              </padding>
