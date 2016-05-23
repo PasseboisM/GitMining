@@ -104,36 +104,6 @@
                                                 </Label>
                                              </graphic>
                                           </Label>
-                                          <HBox>
-                                             <children>
-                                                <Label text="持有项目：" wrapText="true">
-                                                   <font>
-                                                      <Font size="20.0" />
-                                                   </font>
-                                                </Label>
-                                                <ComboBox fx:id="repoComboBox" prefWidth="150.0" />
-                                             </children>
-                                          </HBox>
-                                          <HBox>
-                                             <children>
-                                                <Label text="关注项目：" wrapText="true">
-                                                   <font>
-                                                      <Font size="20.0" />
-                                                   </font>
-                                                </Label>
-                                                <ComboBox fx:id="repoComboBoxStar" prefWidth="150.0" />
-                                             </children>
-                                          </HBox>
-                                          <HBox>
-                                             <children>
-                                                <Label text="订阅项目：" wrapText="true">
-                                                   <font>
-                                                      <Font size="20.0" />
-                                                   </font>
-                                                </Label>
-                                                <ComboBox fx:id="repoComboBoxSub" prefWidth="150.0" />
-                                             </children>
-                                          </HBox>
                                        </children>
                                        <VBox.margin>
                                           <Insets left="20.0" />
