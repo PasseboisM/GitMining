@@ -204,7 +204,7 @@
                                     </Label>
                                     <ScrollPane fitToWidth="true" hbarPolicy="NEVER" maxHeight="260.0" minHeight="260.0" vbarPolicy="ALWAYS" VBox.vgrow="ALWAYS">
                                        <content>
-                                          <VBox>
+                                          <VBox spacing="5.0">
                                              <children>
                                                 <Hyperlink text="Hyperlink">
                                                    <font>
@@ -248,6 +248,9 @@
                                                    </font>
                                                 </Hyperlink>
                                              </children>
+                                             <padding>
+                                                <Insets top="5.0" />
+                                             </padding>
                                           </VBox>
                                        </content>
                                        <GridPane.margin>
@@ -261,7 +264,7 @@
                                     </Label>
                                     <ScrollPane fitToWidth="true" hbarPolicy="NEVER" maxHeight="260.0" minHeight="260.0" vbarPolicy="ALWAYS">
                                        <content>
-                                          <VBox>
+                                          <VBox spacing="5.0">
                                              <children>
                                                 <Hyperlink text="Hyperlink">
                                                    <font>
@@ -305,6 +308,9 @@
                                                    </font>
                                                 </Hyperlink>
                                              </children>
+                                             <padding>
+                                                <Insets top="5.0" />
+                                             </padding>
                                           </VBox>
                                        </content>
                                     </ScrollPane>
