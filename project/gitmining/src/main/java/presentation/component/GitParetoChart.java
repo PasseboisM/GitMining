@@ -11,7 +11,6 @@ import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.chart.Axis;
-import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
@@ -97,17 +96,16 @@ public class GitParetoChart extends XYChart<String, Number> {
 					double high = getYAxis().getDisplayPosition(extra.getHigh());
 					double low = getYAxis().getDisplayPosition(extra.getLow());
 					// calculate candle width
-					double candleWidth = -1;
-					if (getXAxis() instanceof CategoryAxis) {
-						CategoryAxis xa = (CategoryAxis) getXAxis();
-						// System.out.println(xa.getTickLabelGap());
+					double candleWidth = 50;
+//					if (getXAxis() instanceof CategoryAxis) {
+//						CategoryAxis xa = (CategoryAxis) getXAxis();
 						// System.out.println(xa.getDisplayPosition(xa.getTickLabelGap()+""));
-						candleWidth = xa.getDisplayPosition(xa.getTickLabelGap() + "") * 0.90; // use
+//						candleWidth = xa.getDisplayPosition(xa.getTickLabelGap() + "") * 0.90; // use
 																								// 90%
 																								// width
 																								// between
 																								// ticks
-					}
+//					}
 					// update candle
 					candle.update(close - y, high - y, low - y, candleWidth);
 					candle.updateTooltip(item.getYValue().doubleValue(), extra.getClose(), extra.getHigh(),
