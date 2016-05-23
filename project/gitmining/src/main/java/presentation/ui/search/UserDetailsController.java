@@ -15,10 +15,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.Separator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import logic.service.LogicServiceFactory;
 import logic.service.UserRelatedListGetter;
 import presentation.component.Radar;
@@ -70,19 +74,7 @@ public class UserDetailsController {
 					Platform.runLater(new Runnable() {
 						@Override
 						public void run() {
-							repoComboBox.setItems(options);
-							repoComboBox.setOnAction(value->{
-								int index = repoComboBox.getSelectionModel().getSelectedIndex();
-								try {
-									rightComponentParent.getChildren().add(RepoDetailsController
-											.getInstance(rightComponentParent, ownedRepositories.get(index)));
-								} catch (Exception e) {
-									System.out.println("excuse me?");
-								}
-								Platform.runLater(new Runnable() {
-									@Override
-									public void run() {repoComboBox.getSelectionModel().clearSelection();}});
-							});
+							fillListRepositories(ownedRepositories,vboxListOwn);
 						}
 					});
 				} catch (IOException e) {
@@ -100,19 +92,7 @@ public class UserDetailsController {
 					Platform.runLater(new Runnable() {
 						@Override
 						public void run() {
-							repoComboBoxStar.setItems(options);
-							repoComboBoxStar.setOnAction(value->{
-								int index = repoComboBoxStar.getSelectionModel().getSelectedIndex();
-								try {
-									rightComponentParent.getChildren().add(RepoDetailsController
-											.getInstance(rightComponentParent, starredRepositories.get(index)));
-								} catch (Exception e) {
-									System.out.println("excuse me?");
-								}
-								Platform.runLater(new Runnable() {
-									@Override
-									public void run() {repoComboBoxStar.getSelectionModel().clearSelection();}});
-							});
+							fillListRepositories(starredRepositories,vboxListStar);
 						}
 					});
 				} catch (IOException e) {
@@ -130,19 +110,7 @@ public class UserDetailsController {
 					Platform.runLater(new Runnable() {
 						@Override
 						public void run() {
-							repoComboBoxSub.setItems(options);
-							repoComboBoxSub.setOnAction(value->{
-								int index = repoComboBoxSub.getSelectionModel().getSelectedIndex();
-								try {
-									rightComponentParent.getChildren().add(RepoDetailsController
-											.getInstance(rightComponentParent, substribedRepositories.get(index)));
-								} catch (Exception e) {
-									System.out.println("excuse me?");
-								}
-								Platform.runLater(new Runnable() {
-									@Override
-									public void run() {repoComboBoxSub.getSelectionModel().clearSelection();}});
-							});
+							fillListRepositories(substribedRepositories,vboxListSub);
 						}
 					});
 				} catch (IOException e) {
@@ -229,11 +197,28 @@ public class UserDetailsController {
 	@FXML	private ComboBox<String> repoComboBox;
 	@FXML	private ComboBox<String> repoComboBoxStar;
 	@FXML	private ComboBox<String> repoComboBoxSub;
+	@FXML	private VBox vboxListOwn;
+	@FXML	private VBox vboxListStar;
+	@FXML	private VBox vboxListSub;
+//	private static AnchorPane pane = null;
 	private static Image btImage=null;
 	private static Image avatarImage=null;
 	private ImageView imageV;
 	@FXML
 	private void returnToSearchController() {
 		rightComponentParent.getChildren().remove(anchorPane);
+	}
+
+	private void fillListRepositories(List<Repository> repositories,VBox vBox) {
+		for (Repository repository : repositories) {
+			Hyperlink hyperlink = new Hyperlink(repository.getFull_name());
+			hyperlink.setFont(new Font(18));
+			hyperlink.setOnAction(value->{
+				rightComponentParent.getChildren().add(RepoDetailsController
+						.getInstance(rightComponentParent, repository));
+			});
+			Separator separator = new Separator();
+			vBox.getChildren().addAll(hyperlink,separator);
+		}
 	}
 }

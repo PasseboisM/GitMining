@@ -7,11 +7,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane minHeight="1000.0" minWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.ui.search.UserDetailsController">
+<AnchorPane fx:id="anchorPane" minHeight="1000.0" minWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.ui.search.UserDetailsController">
    <children>
       <ScrollPane fitToWidth="true" pannable="true" style="-fx-background-color: transparent; -fx-background-inner-color: trnasparent; -fx-background-insets: 0; -fx-padding: 0;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <content>
-            <AnchorPane fx:id="anchorPane" style="-fx-background-color: white;">
+            <AnchorPane style="-fx-background-color: white;">
                <children>
                   <BorderPane layoutX="57.0" layoutY="20.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
                      <center>
@@ -397,50 +397,7 @@
                                           <Insets left="20.0" right="20.0" top="20.0" />
                                        </GridPane.margin>
                                        <content>
-                                          <VBox spacing="5.0">
-                                             <children>
-                                                <Hyperlink text="Hyperlink">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Hyperlink>
-                                                <Separator prefWidth="200.0" />
-                                                <Hyperlink text="Hyperlink">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Hyperlink>
-                                                <Separator prefWidth="200.0" />
-                                                <Hyperlink text="Hyperlink">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Hyperlink>
-                                                <Separator prefWidth="200.0" />
-                                                <Hyperlink text="Hyperlink">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Hyperlink>
-                                                <Separator prefWidth="200.0" />
-                                                <Hyperlink text="Hyperlink">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Hyperlink>
-                                                <Separator prefWidth="200.0" />
-                                                <Hyperlink text="Hyperlink">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Hyperlink>
-                                                <Separator prefWidth="200.0" />
-                                                <Hyperlink text="Hyperlink">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Hyperlink>
-                                             </children>
+                                          <VBox fx:id="vboxListOwn" spacing="5.0">
                                              <padding>
                                                 <Insets top="5.0" />
                                              </padding>
@@ -458,50 +415,7 @@
                                     </Label>
                                     <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="ALWAYS" VBox.vgrow="ALWAYS">
                                        <content>
-                                          <VBox spacing="5.0">
-                                             <children>
-                                                <Hyperlink text="Hyperlink">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Hyperlink>
-                                                <Separator prefWidth="200.0" />
-                                                <Hyperlink text="Hyperlink">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Hyperlink>
-                                                <Separator prefWidth="200.0" />
-                                                <Hyperlink text="Hyperlink">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Hyperlink>
-                                                <Separator prefWidth="200.0" />
-                                                <Hyperlink text="Hyperlink">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Hyperlink>
-                                                <Separator prefWidth="200.0" />
-                                                <Hyperlink text="Hyperlink">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Hyperlink>
-                                                <Separator prefWidth="200.0" />
-                                                <Hyperlink text="Hyperlink">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Hyperlink>
-                                                <Separator prefWidth="200.0" />
-                                                <Hyperlink text="Hyperlink">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Hyperlink>
-                                             </children>
+                                          <VBox fx:id="vboxListStar" spacing="5.0">
                                              <padding>
                                                 <Insets top="5.0" />
                                              </padding>
@@ -522,50 +436,7 @@
                                     </Label>
                                     <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="ALWAYS" VBox.vgrow="ALWAYS">
                                        <content>
-                                          <VBox spacing="5.0">
-                                             <children>
-                                                <Hyperlink text="Hyperlink">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Hyperlink>
-                                                <Separator prefWidth="200.0" />
-                                                <Hyperlink text="Hyperlink">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Hyperlink>
-                                                <Separator prefWidth="200.0" />
-                                                <Hyperlink text="Hyperlink">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Hyperlink>
-                                                <Separator prefWidth="200.0" />
-                                                <Hyperlink text="Hyperlink">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Hyperlink>
-                                                <Separator prefWidth="200.0" />
-                                                <Hyperlink text="Hyperlink">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Hyperlink>
-                                                <Separator prefWidth="200.0" />
-                                                <Hyperlink text="Hyperlink">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Hyperlink>
-                                                <Separator prefWidth="200.0" />
-                                                <Hyperlink text="Hyperlink">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Hyperlink>
-                                             </children>
+                                          <VBox fx:id="vboxListSub" spacing="5.0">
                                              <padding>
                                                 <Insets top="5.0" />
                                              </padding>
