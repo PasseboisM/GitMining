@@ -11,5 +11,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.8.0_91"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/HTTPClient"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/HTTPCore"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/GitServerUsed"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
