@@ -13,7 +13,7 @@ import common.service.GitUserMin;
 import common.service.Repository;
 import common.service.RepositoryMin;
 import common.util.ObjChannel;
-import data.manage.MassiveDataGetterDefault;
+import data.manage.MassiveDataGetterNetwork;
 
 /**
  * @author xjh14
@@ -101,6 +101,7 @@ public abstract class MassiveDataGetter {
 	 * 获取实例对象。
 	 */
 	public static MassiveDataGetter getInstance() {
-		return MassiveDataGetterDefault.getInstance();
+		return MassiveDataGetterNetwork.getInstance();
 	}
+	
 }

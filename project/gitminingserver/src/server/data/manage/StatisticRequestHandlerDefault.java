@@ -45,15 +45,6 @@ class StatisticRequestHandlerDefault extends StatisticRequestHandler {
 			return;
 		}
 		
-		/**
-		 * UserDistOverFollower
-					RepoDistOverFork
-					RepoDistOverLanguage
-					RepoDistOverCreateTime
-					UserDistOverCreateTime
-					RepoDistOverStar
-					UserDistOverType	
-		 */
 		switch (type) {
 		//TODO 实现数据返回（由于实际上数据是不变的，所以可以静态存储）
 		case "UserDistOverFollower":

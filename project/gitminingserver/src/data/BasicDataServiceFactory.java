@@ -1,5 +1,6 @@
 package data;
 
+import data.manage.StatDataMakerFactoryNetwork;
 import data.service.DataServiceFactory;
 import data.service.MassiveDataGetter;
 import data.service.RecommendDataGetter;
@@ -31,8 +32,7 @@ public class BasicDataServiceFactory extends DataServiceFactory {
 
 	@Override
 	public StatDataMakerFactory getStatDataMakerFactory() {
-		// TODO Auto-generated method stub
-		return null;
+		return new StatDataMakerFactoryNetwork();
 	}
 
 }

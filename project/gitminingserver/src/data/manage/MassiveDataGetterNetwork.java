@@ -25,6 +25,8 @@ import data.service.MassiveDataGetter;
  */
 public class MassiveDataGetterNetwork extends MassiveDataGetter {
 
+	private static MassiveDataGetterNetwork instance = new MassiveDataGetterNetwork();
+	
 	@Override
 	public int getRepoNumber() {
 		// TODO Auto-generated method stub
@@ -80,6 +82,10 @@ public class MassiveDataGetterNetwork extends MassiveDataGetter {
 	public List<GitUser> searchUser(UserSearchParam params) throws NetworkException, DataCorruptedException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public static MassiveDataGetterNetwork getInstance() {
+		return instance;
 	}
 
 }
