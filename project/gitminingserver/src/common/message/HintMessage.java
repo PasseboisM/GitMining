@@ -3,8 +3,6 @@ package common.message;
 import com.google.gson.Gson;
 
 public class HintMessage {
-
-	private static Gson gson = new Gson();
 	
 	public String message = null;
 	

@@ -5,6 +5,8 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import common.message.HintMessage;
 import data.service.DataServiceFactory;
 import data.service.StatDataMakerFactory;
@@ -53,8 +55,12 @@ class StatisticRequestHandlerDefault extends StatisticRequestHandler {
 	public void printGeneralStat (HttpServletRequest httpRequest,PrintWriter out) {
 		String type = null;
 		String result = null;
+		
 		try {
 			type = httpRequest.getParameter("param");
+			if (type==null) {
+				out.println(new HintMessage("No param for statistics name!").toJSON());
+			}
 		} catch (Exception e) {
 			return;
 		}
@@ -82,7 +88,7 @@ class StatisticRequestHandlerDefault extends StatisticRequestHandler {
 			result = generalStat.getUserDistOverType();
 			break;
 		default:
-			result = new HintMessage("Cannot find general statistics type '"+type+"'.").toJSON();
+			result = new HintMessage("Cannot find general statistics type ("+type+").").toJSON();
 			break;
 		}
 		
@@ -91,11 +97,11 @@ class StatisticRequestHandlerDefault extends StatisticRequestHandler {
 	}
 	
 	public void getRepoStat (HttpServletRequest httpRequest,PrintWriter out) {
-		
+		//TODO RepoRank
 	}
 
 	public void getUserStat (HttpServletRequest httpRequest,PrintWriter out) {
-	
+		//TODO UserRank
 	}
 
 }

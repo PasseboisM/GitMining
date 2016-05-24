@@ -13,6 +13,7 @@ import data.service.stat.GeneralStatGetter;
 
 public class GeneralStatGetterNetwork implements GeneralStatGetter {
 
+	private static String root = "D:/SE3/project/gitminingserver";
 	private static List<String> types = Arrays.asList(
 					"UserDistOverFollower",
 					"RepoDistOverFork",
@@ -29,7 +30,7 @@ public class GeneralStatGetterNetwork implements GeneralStatGetter {
 		FileReader reader = null;
 		BufferedReader bufferdReader = null;
 		for (String type: types) {
-			staticFile = new File("stat/"+type+".stat");
+			staticFile = new File(root+"/stat/"+type+".stat");
 			try {
 				reader = new FileReader(staticFile);
 				bufferdReader = new BufferedReader(reader);
@@ -74,6 +75,5 @@ public class GeneralStatGetterNetwork implements GeneralStatGetter {
 	public String getUserDistOverType() {
 		return staticStatistics.get("UserDistOverType");
 	}
-
-
+	
 }
