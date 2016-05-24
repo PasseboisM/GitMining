@@ -1,7 +1,7 @@
 package data.service;
 
 import common.exception.NetworkException;
-import data.BasicDataServiceFactory;
+import data.DataServiceFactoryNetwork;
 import network.service.NetworkServiceFactory;
 
 /**
@@ -34,7 +34,7 @@ public abstract class DataServiceFactory {
 	}
 	
 	public static DataServiceFactory getInstance() {
-		return new BasicDataServiceFactory();
+		return new DataServiceFactoryNetwork();
 	}
 	
 	public static boolean tryUseNetwork(boolean useNetwork) throws NetworkException {

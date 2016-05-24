@@ -8,7 +8,7 @@ import data.service.SpecificDataGetter;
 import data.service.StatDataMakerFactory;
 import data.service.UserListDataGetter;
 
-public class BasicDataServiceFactory extends DataServiceFactory {
+public class DataServiceFactoryNetwork extends DataServiceFactory {
 
 	@Override
 	public MassiveDataGetter getMassiveDataGetter() {
@@ -32,7 +32,7 @@ public class BasicDataServiceFactory extends DataServiceFactory {
 
 	@Override
 	public StatDataMakerFactory getStatDataMakerFactory() {
-		return new StatDataMakerFactoryNetwork();
+		return StatDataMakerFactoryNetwork.getInstance();
 	}
 
 }

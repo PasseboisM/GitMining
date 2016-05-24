@@ -5,10 +5,22 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import common.message.HintMessage;
+import data.service.DataServiceFactory;
+import data.service.StatDataMakerFactory;
+import data.service.stat.GeneralStatGetter;
 import server.data.service.StatisticRequestHandler;
 
 class StatisticRequestHandlerDefault extends StatisticRequestHandler {
 
+	private GeneralStatGetter generalStat = null;
+	
+	public StatisticRequestHandlerDefault() {
+		StatDataMakerFactory statData = DataServiceFactory.getInstance().getStatDataMakerFactory();
+		
+		generalStat = statData.getGeneralStatGetter();
+	}
+	
 	@Override
 	public void handleRequest(HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
 		PrintWriter out = null;
@@ -18,25 +30,27 @@ class StatisticRequestHandlerDefault extends StatisticRequestHandler {
 			type = httpRequest.getParameter("type");
 			out = httpResponse.getWriter();
 		} catch (Exception e) {
+			e.printStackTrace();
 			return;
 		}
 		
 		switch (type) {
 		case "general":
+			printGeneralStat(httpRequest, out);
 			break;
 		case "user":
 			break;
 		case "repo":
 			break;
 		default:
-			out.print("{\"message\":\"Unknown type.\"}");
+			out.print(new HintMessage("Unknown statistics type.").toJSON());
 			break;
 		}
 		
 		out.close();
 	}
 	
-	public void getGeneralStat (HttpServletRequest httpRequest,PrintWriter out) {
+	public void printGeneralStat (HttpServletRequest httpRequest,PrintWriter out) {
 		String type = null;
 		String result = null;
 		try {
@@ -46,23 +60,29 @@ class StatisticRequestHandlerDefault extends StatisticRequestHandler {
 		}
 		
 		switch (type) {
-		//TODO 实现数据返回（由于实际上数据是不变的，所以可以静态存储）
 		case "UserDistOverFollower":
-			result = null;
+			result = generalStat.getUserDistOverFollower();
 			break;
 		case "RepoDistOverFork":
+			result = generalStat.getRepoDistOverFork();
 			break;
 		case "RepoDistOverLanguage":
+			result = generalStat.getRepoDistOverLanguage();
 			break;
 		case "RepoDistOverCreateTime":
+			result = generalStat.getRepoDistOverCreateTime();
 			break;
 		case "UserDistOverCreateTime":
+			result = generalStat.getUserDistOverCreateTime();
 			break;
 		case "RepoDistOverStar":
+			result = generalStat.getRepoDistOverStar();
 			break;
 		case "UserDistOverType":
+			result = generalStat.getUserDistOverType();
 			break;
 		default:
+			result = new HintMessage("Cannot find general statistics type '"+type+"'.").toJSON();
 			break;
 		}
 		

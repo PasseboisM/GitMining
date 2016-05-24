@@ -24,59 +24,55 @@ public class GeneralStatGetterNetwork implements GeneralStatGetter {
 				);
 	private HashMap<String,String> staticStatistics = new HashMap<>(10);
 	
-	public GeneralStatGetterNetwork() throws IOException {
+	public GeneralStatGetterNetwork() {
 		File staticFile = null;
 		FileReader reader = null;
 		BufferedReader bufferdReader = null;
 		for (String type: types) {
 			staticFile = new File("stat/"+type+".stat");
-			reader = new FileReader(staticFile);
-			bufferdReader = new BufferedReader(reader);
-			staticStatistics.put(type, bufferdReader.readLine());
-			System.out.println("Got:"+type+"  "+staticStatistics.get(type));
+			try {
+				reader = new FileReader(staticFile);
+				bufferdReader = new BufferedReader(reader);
+				staticStatistics.put(type, bufferdReader.readLine());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	@Override
 	public String getUserDistOverFollower() {
-		// TODO Auto-generated method stub
-		return null;
+		return staticStatistics.get("UserDistOverFollower");
 	}
 
 	@Override
 	public String getRepoDistOverFork() {
-		// TODO Auto-generated method stub
-		return null;
+		return staticStatistics.get("RepoDistOverFork");
 	}
 
 	@Override
 	public String getRepoDistOverLanguage() {
-		// TODO Auto-generated method stub
-		return null;
+		return staticStatistics.get("RepoDistOverLanguage");
 	}
 
 	@Override
 	public String getRepoDistOverCreateTime() {
-		// TODO Auto-generated method stub
-		return null;
+		return staticStatistics.get("RepoDistOverCreateTime");
 	}
 
 	@Override
 	public String getUserDistOverCreateTime() {
-		// TODO Auto-generated method stub
-		return null;
+		return staticStatistics.get("UserDistOverCreateTime");
 	}
 
 	@Override
 	public String getRepoDistOverStar() {
-		// TODO Auto-generated method stub
-		return null;
+		return staticStatistics.get("RepoDistOverStar");
 	}
 
 	@Override
 	public String getUserDistOverType() {
-		// TODO Auto-generated method stub
-		return null;
+		return staticStatistics.get("UserDistOverType");
 	}
 
 
