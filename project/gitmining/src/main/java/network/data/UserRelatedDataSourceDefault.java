@@ -42,7 +42,7 @@ public class UserRelatedDataSourceDefault implements UserRelatedDataSource {
 	@Override
 	public List<GitUser> listFollowers(String login) throws IOException {
 		GHUser ghUser = gh.getUser(login);
-		return listUsers(ghUser.listFollows());
+		return listUsers(ghUser.listFollowers());
 	}
 	
 	@Override

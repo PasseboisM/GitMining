@@ -8,12 +8,11 @@ import org.kohsuke.github.GitHubBuilder;
 
 import network.service.AnalysisDataSource;
 import network.service.GHDataSource;
-import network.service.UserRelatedDataSource;
 import network.service.MassiveDataSource;
 import network.service.NetworkConnectionTester;
 import network.service.NetworkServiceFactory;
-import network.service.RepoRelatedDataSource;
 import network.service.SpecificDataSource;
+import network.service.UserRelatedDataSource;
 
 public class GHNetworkServiceFactory extends NetworkServiceFactory {
 
@@ -38,10 +37,10 @@ public class GHNetworkServiceFactory extends NetworkServiceFactory {
 		return new UserRelatedDataSourceDefault();
 	}
 	
-	@Override
+	/*@Override
 	public RepoRelatedDataSource getRepoRelatedDataSource() {
 		return new RepoRelatedDataSourceDefault();
-	}
+	}*/
 	
 	@Override
 	public GHDataSource getGHDataSource() {

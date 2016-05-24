@@ -12,6 +12,9 @@ import java.util.List;
 
 public class UserDistOverCreateTime {
 
+	public static String title = "用户创建时间统计图",
+								  xAxisLabel = "时间",
+								  yAxisLabel = "用户创建数量";
 	private List<UserCreateOnTimeCount> counts = new LinkedList<>();
 	
 	public void addCreateCount(String timeLo, String timeHi, int count) {
@@ -20,6 +23,25 @@ public class UserDistOverCreateTime {
 	
 	public int getNumOfCount(){
 		return counts.size();
+	}
+	
+	public int getSum(){
+		int sum=0;
+		for (UserCreateOnTimeCount userCreateOnTimeCount : counts) {
+			sum+=userCreateOnTimeCount.count;
+		}
+		return sum;
+	}
+	
+	public int getMax(){
+		counts.sort(new Comparator<UserCreateOnTimeCount>() {
+			@Override
+			public int compare(UserCreateOnTimeCount o1,
+					UserCreateOnTimeCount o2) {
+				return o2.count-o1.count;
+			}
+		});
+		return counts.get(0).count;
 	}
 	
 	/**

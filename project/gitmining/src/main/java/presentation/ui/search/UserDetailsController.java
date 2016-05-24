@@ -9,16 +9,17 @@ import chart_data.service.UserStatisticsService;
 import common.service.GitUser;
 import common.service.Repository;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.Separator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import logic.service.LogicServiceFactory;
 import logic.service.UserRelatedListGetter;
 import presentation.component.Radar;
@@ -38,10 +39,6 @@ public class UserDetailsController {
 		controller.initialLayout(pane);
 		return pane;
 	}
-	private AnchorPane rightComponentParent;
-	private List<Repository> ownedRepositories;
-	private List<Repository> starredRepositories;
-	private List<Repository> substribedRepositories;
 	
 	private void initial(AnchorPane rightComponentParent,GitUser user) {
 		this.rightComponentParent = rightComponentParent;
@@ -61,90 +58,11 @@ public class UserDetailsController {
 			public void run() {
 				try {
 					long time1 = System.currentTimeMillis();
-					ownedRepositories = getter.getOwnedRepositoryNames(user.getLogin());
-					System.out.println("loading related repos time used:" + (System.currentTimeMillis() - time1) + "ms");
-					ObservableList<String> options = FXCollections.observableArrayList();
-					ownedRepositories.forEach(repository->{
-						options.add(repository.getFull_name());
-					});
+					followers = getter.getFollowerNames(user.getLogin());
+					System.out.println("loading related users time used:" + (System.currentTimeMillis() - time1) + "ms");
 					Platform.runLater(new Runnable() {
 						@Override
-						public void run() {
-							repoComboBox.setItems(options);
-							repoComboBox.setOnAction(value->{
-								int index = repoComboBox.getSelectionModel().getSelectedIndex();
-								try {
-									rightComponentParent.getChildren().add(RepoDetailsController
-											.getInstance(rightComponentParent, ownedRepositories.get(index)));
-								} catch (Exception e) {
-									System.out.println("excuse me?");
-								}
-								Platform.runLater(new Runnable() {
-									@Override
-									public void run() {repoComboBox.getSelectionModel().clearSelection();}});
-							});
-						}
-					});
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				
-				try {
-					long time1 = System.currentTimeMillis();
-					starredRepositories = getter.getStarredRepositoryNames(user.getLogin());
-					System.out.println("loading related repos time used:" + (System.currentTimeMillis() - time1) + "ms");
-					ObservableList<String> options = FXCollections.observableArrayList();
-					starredRepositories.forEach(repository->{
-						options.add(repository.getFull_name());
-					});
-					Platform.runLater(new Runnable() {
-						@Override
-						public void run() {
-							repoComboBoxStar.setItems(options);
-							repoComboBoxStar.setOnAction(value->{
-								int index = repoComboBoxStar.getSelectionModel().getSelectedIndex();
-								try {
-									rightComponentParent.getChildren().add(RepoDetailsController
-											.getInstance(rightComponentParent, starredRepositories.get(index)));
-								} catch (Exception e) {
-									System.out.println("excuse me?");
-								}
-								Platform.runLater(new Runnable() {
-									@Override
-									public void run() {repoComboBoxStar.getSelectionModel().clearSelection();}});
-							});
-						}
-					});
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				
-				try {
-					long time1 = System.currentTimeMillis();
-					substribedRepositories = getter.getOwnedRepositoryNames(user.getLogin());
-					System.out.println("loading related repos time used:" + (System.currentTimeMillis() - time1) + "ms");
-					ObservableList<String> options = FXCollections.observableArrayList();
-					substribedRepositories.forEach(repository->{
-						options.add(repository.getFull_name());
-					});
-					Platform.runLater(new Runnable() {
-						@Override
-						public void run() {
-							repoComboBoxSub.setItems(options);
-							repoComboBoxSub.setOnAction(value->{
-								int index = repoComboBoxSub.getSelectionModel().getSelectedIndex();
-								try {
-									rightComponentParent.getChildren().add(RepoDetailsController
-											.getInstance(rightComponentParent, substribedRepositories.get(index)));
-								} catch (Exception e) {
-									System.out.println("excuse me?");
-								}
-								Platform.runLater(new Runnable() {
-									@Override
-									public void run() {repoComboBoxSub.getSelectionModel().clearSelection();}});
-							});
-						}
-					});
+						public void run() {fillListUsers(followers, vboxListFollower);}});
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -152,6 +70,78 @@ public class UserDetailsController {
 		};
 		Thread t = new Thread(runnable);
 		t.start();
+		
+		Runnable runnable2 = new Runnable() {
+			@Override
+			public void run() {
+				try {
+					long time1 = System.currentTimeMillis();
+					following = getter.getFollowingNames(user.getLogin());
+					System.out.println("loading related users time used:" + (System.currentTimeMillis() - time1) + "ms");
+					Platform.runLater(new Runnable() {
+						@Override
+						public void run() {fillListUsers(following, vboxListFollowing);}});
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		};
+		Thread t2 = new Thread(runnable2);
+		t2.start();
+		
+		Runnable runnable3 = new Runnable() {
+			@Override
+			public void run() {
+				try {
+					long time1 = System.currentTimeMillis();
+					ownedRepositories = getter.getOwnedRepositoryNames(user.getLogin());
+					System.out.println("loading related repos time used:" + (System.currentTimeMillis() - time1) + "ms");
+					Platform.runLater(new Runnable() {
+						@Override
+						public void run() {fillListRepositories(ownedRepositories,vboxListOwn);}});
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		};
+		Thread t3 = new Thread(runnable3);
+		t3.start();
+		
+		Runnable runnable4 = new Runnable() {
+			@Override
+			public void run() {
+				try {
+					long time1 = System.currentTimeMillis();
+					starredRepositories = getter.getStarredRepositoryNames(user.getLogin());
+					System.out.println("loading related repos time used:" + (System.currentTimeMillis() - time1) + "ms");
+					Platform.runLater(new Runnable() {
+						@Override
+						public void run() {fillListRepositories(starredRepositories,vboxListStar);}});
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		};
+		Thread t4 = new Thread(runnable4);
+		t4.start();
+		
+		Runnable runnable5 = new Runnable() {
+			@Override
+			public void run() {
+				try {
+					long time1 = System.currentTimeMillis();
+					substribedRepositories = getter.getOwnedRepositoryNames(user.getLogin());
+					System.out.println("loading related repos time used:" + (System.currentTimeMillis() - time1) + "ms");
+					Platform.runLater(new Runnable() {
+						@Override
+						public void run() {fillListRepositories(substribedRepositories,vboxListSub);}});
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		};
+		Thread t5 = new Thread(runnable5);
+		t5.start();
 	}
 
 	private void initialRadar(GitUser user) {
@@ -167,11 +157,23 @@ public class UserDetailsController {
 	}
 
 	private void initialAvatarImage(GitUser user) {
-		Image image = new Image(user.getAvatar_url());
-		if(image.isError()){
-			image = avatarImage;
-		}
-		imageView.setImage(image);
+		Runnable runnable = new Runnable() {
+			@Override
+			public void run() {
+				Image image = new Image(user.getAvatar_url());
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						if (image.isError())
+							imageView.setImage(avatarImage);
+						else
+							imageView.setImage(image);
+					}
+				});
+			}
+		};
+		Thread t = new Thread(runnable);
+		t.start();
 	}
 	
 	private void initialLayout(AnchorPane rootUINode) {
@@ -226,14 +228,48 @@ public class UserDetailsController {
 	@FXML    private ImageView imageView;
 	@FXML    private AnchorPane radarAnchorPane;
 	@FXML	private Button returnButton;
-	@FXML	private ComboBox<String> repoComboBox;
-	@FXML	private ComboBox<String> repoComboBoxStar;
-	@FXML	private ComboBox<String> repoComboBoxSub;
+	@FXML	private VBox vboxListOwn;
+	@FXML	private VBox vboxListStar;
+	@FXML	private VBox vboxListSub;
+	@FXML	private VBox vboxListFollower;
+	@FXML	private VBox vboxListFollowing;
 	private static Image btImage=null;
 	private static Image avatarImage=null;
 	private ImageView imageV;
+	private AnchorPane rightComponentParent;
+	private List<Repository> ownedRepositories;
+	private List<Repository> starredRepositories;
+	private List<Repository> substribedRepositories;
+	private List<GitUser> followers;
+	private List<GitUser> following;
 	@FXML
 	private void returnToSearchController() {
 		rightComponentParent.getChildren().remove(anchorPane);
+	}
+
+	private void fillListRepositories(List<Repository> repositories,VBox vBox) {
+		for (Repository repository : repositories) {
+			Hyperlink hyperlink = new Hyperlink(repository.getFull_name());
+			hyperlink.setFont(new Font(18));
+			hyperlink.setOnAction(value->{
+				rightComponentParent.getChildren().add(RepoDetailsController
+						.getInstance(rightComponentParent, repository));
+			});
+			Separator separator = new Separator();
+			vBox.getChildren().addAll(hyperlink,separator);
+		}
+	}
+	
+	private void fillListUsers(List<GitUser> users,VBox vBox) {
+		for (GitUser user : users) {
+			Hyperlink hyperlink = new Hyperlink(user.getLogin());
+			hyperlink.setFont(new Font(18));
+			hyperlink.setOnAction(value->{
+				rightComponentParent.getChildren().add(UserDetailsController
+						.getInstance(rightComponentParent, user));
+			});
+			Separator separator = new Separator();
+			vBox.getChildren().addAll(hyperlink,separator);
+		}
 	}
 }
