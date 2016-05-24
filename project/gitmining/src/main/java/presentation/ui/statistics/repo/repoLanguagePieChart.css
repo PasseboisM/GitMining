@@ -1,75 +1,75 @@
 .default-color0.chart-pie{
-	-fx-pie-color:#ffd700;
+	-fx-pie-color:#f0ffff;
 }
 .default-color1.chart-pie{
-	-fx-pie-color:#7fff00;
+	-fx-pie-color:#add8e6;
 }
 .default-color2.chart-pie{
-	-fx-pie-color:#00ffff;
+	-fx-pie-color:#afeeee;
 }
 .default-color3.chart-pie{
-	-fx-pie-color:#8b008b;
-}
-.default-color4.chart-pie{
-	-fx-pie-color:#006400;
-}
-.default-color5.chart-pie{
-	-fx-pie-color:#8a2be2;
-}
-.default-color6.chart-pie{
-	-fx-pie-color:#008000;
-}
-.default-color7.chart-pie{
-	-fx-pie-color:#00bfff;
-}
-.default-color8.chart-pie{
-	-fx-pie-color:#4b0082;
-}
-.default-color9.chart-pie{
-	-fx-pie-color:#b22222;
-}
-.default-color10.chart-pie{
-	-fx-pie-color:#228b22;
-}
-.default-color11.chart-pie{
-	-fx-pie-color:#ffd700;
-}
-.default-color12.chart-pie{
-	-fx-pie-color:#adff2f;
-}
-.default-color13.chart-pie{
-	-fx-pie-color:#ff69b4;
-}
-.default-color14.chart-pie{
-	-fx-pie-color:#7cfc00;
-}
-.default-color15.chart-pie{
-	-fx-pie-color:#32cd32;
-}
-.default-color16.chart-pie{
-	-fx-pie-color:#2e8b57;
-}
-.default-color17.chart-pie{
-	-fx-pie-color:#008080;
-}
-.default-color18.chart-pie{
-	-fx-pie-color:#d8bfd8;
-}
-.default-color19.chart-pie{
-	-fx-pie-color:#4169e1;
-}
-.default-color20.chart-pie{
 	-fx-pie-color:#87ceeb;
 }
+.default-color4.chart-pie{
+	-fx-pie-color:#008080;
+}
+.default-color5.chart-pie{
+	-fx-pie-color:#4169e1;
+}
+.default-color6.chart-pie{
+	-fx-pie-color:#6a5acd;
+}
+.default-color7.chart-pie{
+	-fx-pie-color:#7b68ee;
+}
+.default-color8.chart-pie{
+	-fx-pie-color:#9932cc;
+}
+.default-color9.chart-pie{
+	-fx-pie-color:#9400d3;
+}
+.default-color10.chart-pie{
+	-fx-pie-color:#191970;
+}
+.default-color11.chart-pie{
+	-fx-pie-color:#0000cd;
+}
+.default-color12.chart-pie{
+	-fx-pie-color:#000080;
+}
+.default-color13.chart-pie{
+	-fx-pie-color:#0000ff;
+}
+.default-color14.chart-pie{
+	-fx-pie-color:#4b0082;
+}
+.default-color15.chart-pie{
+	-fx-pie-color:#66cdaa;
+}
+.default-color16.chart-pie{
+	-fx-pie-color:#b0c4de;
+}
+.default-color17.chart-pie{
+	-fx-pie-color:#87cefa;
+}
+.default-color18.chart-pie{
+	-fx-pie-color:#29b2aa;
+}
+.default-color19.chart-pie{
+	-fx-pie-color:#90ee90;
+}
+.default-color20.chart-pie{
+	-fx-pie-color:#3cb371;
+}
 .default-color21.chart-pie{
-	-fx-pie-color:#ff6347;
+	-fx-pie-color:#32cd32;
 }
 .chart-pie-label-line{
-	-fx-stroke:#8b4513;
-	-fx-fill:#8b4513;
+	-fx-stroke:#00008b;
+	-fx-fill:#00008b;
 }
 .chart-pie-label{
-	-fx-fill:#8b4513;
+	-fx-fill:#00008b;
 	-fx-font-size:1em;
 }
 .chart-legend{
