@@ -76,7 +76,7 @@ public class RepoCreateTimeStatistic implements StatisticsPane {
 		GeneralStatisticsService statisticsService = new GeneralStatisticsUtil();
 		RepoDistOverCreateTime repoCreateOnTimeCounts = statisticsService.getRepoDistOverCreateTime();
 		GitBarChart barChart = new GitBarChart(repoCreateOnTimeCounts);
-		barChart.getStylesheets().add("bar.css");
+		
 		anchorPane.getChildren().add(barChart);
 	}
 }
