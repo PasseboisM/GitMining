@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import java.lang.*?>
@@ -36,13 +37,13 @@
                         <AnchorPane layoutY="45.0" maxWidth="180.0" minWidth="180.0" opacity="0.42" style="-fx-background-color: white;" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="30.0" />
                         <VBox alignment="TOP_CENTER" layoutX="15.0" layoutY="40.0" spacing="5.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="40.0">
                            <children>
-                              <Label text="大家感兴趣的用户">
+                              <Label text="大家感兴趣的用户" VBox.vgrow="NEVER">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Separator prefWidth="200.0" />
-                              <AnchorPane fx:id="topUsersAnchorPane" layoutX="15.0" layoutY="40.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="40.0">
+                              <Separator style="-fx-background-color: grey;" VBox.vgrow="NEVER" />
+                              <AnchorPane fx:id="topUsersAnchorPane" layoutX="15.0" layoutY="40.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="40.0" VBox.vgrow="ALWAYS">
                                  <children>
                                     <ScrollPane fx:id="topUsersPane" hbarPolicy="NEVER" maxWidth="177.0" minWidth="177.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                  </children>
