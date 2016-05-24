@@ -5,8 +5,6 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-
 import common.message.HintMessage;
 import data.service.DataServiceFactory;
 import data.service.StatDataMakerFactory;
@@ -41,8 +39,10 @@ class StatisticRequestHandlerDefault extends StatisticRequestHandler {
 			printGeneralStat(httpRequest, out);
 			break;
 		case "user":
+			printUserStat(httpRequest, out);
 			break;
 		case "repo":
+			printRepoStat(httpRequest, out);
 			break;
 		default:
 			out.print(new HintMessage("Unknown statistics type.").toJSON());
@@ -96,11 +96,11 @@ class StatisticRequestHandlerDefault extends StatisticRequestHandler {
 
 	}
 	
-	public void getRepoStat (HttpServletRequest httpRequest,PrintWriter out) {
+	public void printRepoStat (HttpServletRequest httpRequest,PrintWriter out) {
 		//TODO RepoRank
 	}
 
-	public void getUserStat (HttpServletRequest httpRequest,PrintWriter out) {
+	public void printUserStat (HttpServletRequest httpRequest,PrintWriter out) {
 		//TODO UserRank
 	}
 
