@@ -211,9 +211,9 @@
             </HBox>
          </center>
          <top>
-            <VBox prefHeight="88.0" prefWidth="950.0" BorderPane.alignment="CENTER">
+            <VBox prefHeight="88.0" BorderPane.alignment="CENTER">
                <children>
-                  <HBox alignment="BOTTOM_LEFT" prefHeight="95.0" prefWidth="950.0">
+                  <HBox alignment="BOTTOM_LEFT" prefHeight="95.0">
                      <children>
                         <Hyperlink fx:id="labelOwnerName">
                            <font>
@@ -232,7 +232,7 @@
                         </Hyperlink>
                      </children>
                   </HBox>
-                  <Separator prefWidth="200.0">
+                  <Separator>
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>

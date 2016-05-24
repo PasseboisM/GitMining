@@ -43,22 +43,19 @@ public class RepositorySearchController{
 	
 	
 	public static AnchorPane getInstance(AnchorPane rightComponentParent){
-		
-		FXMLLoader loader = new FXMLLoader(RepositorySearchController.class.getResource("repositorySearch.fxml"));
-		AnchorPane rootUINode = null;
-		try {
-			rootUINode = loader.load();
-		} catch (IOException e) {
-			e.printStackTrace();
+		if (rootUINode == null) {
+			FXMLLoader loader = new FXMLLoader(RepositorySearchController.class.getResource("repositorySearch.fxml"));
+			try {
+				rootUINode = loader.load();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			RepositorySearchController controller = loader.getController();
+			controller.initial(rightComponentParent);
+			controller.initialLayout(rootUINode);
 		}
-		RepositorySearchController controller = loader.getController();
-		controller.initial(rightComponentParent);
-		controller.initialLayout(rootUINode);
 		return rootUINode;
 	}
-
-	
-	
 	
 	private void initial(AnchorPane rightComponentParent) {
 		this.rightComponentParent = rightComponentParent;
@@ -74,9 +71,7 @@ public class RepositorySearchController{
 	private void initialTopRepos() {
 		WaitLoader waitLoader = new WaitLoader();
 		topReposAnchorPane.getChildren().add(waitLoader);
-		
 		VBox vBox = new VBox();
-		
 		Runnable runnable = new Runnable() {
 			@Override
 			public void run() {
@@ -310,6 +305,7 @@ public class RepositorySearchController{
 	private List<CheckBox> languageCheckBoxes;
 	private AnchorPane rightComponentParent;
 	private ToggleGroup Group = new ToggleGroup();
+	private static AnchorPane rootUINode = null;
 	
 	private List<Repository> repositoriesdatas;
 	
@@ -318,13 +314,12 @@ public class RepositorySearchController{
 	private Recommender recommender;
 	private SearchService searchService;
 	
-	
 	private Language[] langs;
 	private Category[] cates;
 	private String[]  keywords = {}; 
 	private RepoSortStadard sortStadard;
-	private ImageView image;
 	
+	private ImageView image;
 	private static Image bgImage = null;
 	@FXML
 	private void changeSortStrategy(ActionEvent event) {

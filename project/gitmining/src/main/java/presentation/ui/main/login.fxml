@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
@@ -9,7 +10,7 @@
 
 <AnchorPane fx:id="loginPane" maxHeight="600.0" maxWidth="450.0" minHeight="400.0" minWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.ui.main.LoginController">
    <children>
-      <AnchorPane maxHeight="600.0" maxWidth="450.0" minHeight="400.0" minWidth="300.0" opacity="0.67" style="-fx-background-color: white;" />
+      <AnchorPane maxHeight="600.0" maxWidth="450.0" minHeight="400.0" minWidth="300.0" opacity="0.67" style="-fx-background-color: white; -fx-border-color: black;" />
       <AnchorPane prefHeight="400.0" prefWidth="300.0">
          <children>
             <VBox spacing="50.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
