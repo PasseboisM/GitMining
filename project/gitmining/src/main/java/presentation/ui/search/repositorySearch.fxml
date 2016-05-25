@@ -77,11 +77,21 @@
                   <AnchorPane HBox.hgrow="NEVER">
                      <children>
                         <AnchorPane opacity="0.67" style="-fx-background-color: white;" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0" />
-                        <AnchorPane fx:id="topReposAnchorPane" layoutX="10.0" layoutY="10.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="10.0">
+                        <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" spacing="5.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="10.0">
                            <children>
-                              <ScrollPane fx:id="topReposPane" hbarPolicy="NEVER" maxWidth="177.0" minWidth="177.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <Label text="大家感兴趣的项目" VBox.vgrow="NEVER">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Separator style="-fx-background-color: grey;" VBox.vgrow="NEVER" />
+                              <AnchorPane fx:id="topReposAnchorPane" layoutX="10.0" layoutY="10.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="10.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <ScrollPane fx:id="topReposPane" hbarPolicy="NEVER" maxWidth="177.0" minWidth="177.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
                            </children>
-                        </AnchorPane>
+                        </VBox>
                      </children>
                   </AnchorPane>
                </children>
