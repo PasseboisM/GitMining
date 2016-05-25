@@ -7,7 +7,7 @@
 }
  
 .data0.chart-bar {
-    -fx-background-color: rgba(0,100,80,0.7);
+    -fx-background-color: rgba(0,100,80,0.7) ;
 }
 .data1.chart-bar {
     -fx-background-color: rgba(0,100,100,0.7);
@@ -34,17 +34,23 @@
     -fx-background-color: rgba(0,100,240,0.7);
 }
 .data9.chart-bar {
-    -fx-background-color: rgba(0,100,240,0.7);
+    -fx-background-color: rgba(0,100,255,0.7);
 }
 .data10.chart-bar {
-    -fx-background-color: rgba(0,100,240,0.7);
+    -fx-background-color: rgba(20,100,255,0.7);
 }
 .data11.chart-bar {
-    -fx-background-color: rgba(0,100,240,0.7);
+    -fx-background-color: rgba(40,100,255,0.7);
 }
 .data12.chart-bar {
-    -fx-background-color: rgba(0,100,240,0.7);
+    -fx-background-color: rgba(60,100,255,0.7);
 }
 .data13.chart-bar {
-    -fx-background-color: rgba(0,100,240,0.7);
+    -fx-background-color: rgba(80,100,255,0.7);
+}
+.data14.chart-bar {
+    -fx-background-color: rgba(100,100,255,0.7);
+}
+.data15.chart-bar {
+    -fx-background-color: rgba(120,100,255,0.7);
 }
