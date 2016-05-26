@@ -9,12 +9,20 @@ $(function() {
 			// async : false,
 			// contentType : 'application/json',
 			// dataType : 'json',
+			data : {type:'general',param:'UserDistOverFollower'},
 			success : function(data) {
 				// Set up the chart
-				window.alert(data);
+				var ranges = data.ranges;
+				var catagories = []
+				var showdatas = []
+				for (var i = 0; i < ranges.length; i++) {
+					var range = ranges[i];
+					catagories[i] = range.lowerRange+"~"+range.higherRange;
+					showdatas[i] = range.numOfUsers;
+				}
 				var companychart = new Highcharts.Chart({
 					chart : {
-						renderTo : 'company1',
+						renderTo : 'follower',
 						type : 'column',
 						margin : 100,
 						options3d : {
@@ -26,7 +34,7 @@ $(function() {
 						}
 					},
 					title : {
-						text : 'Numbers of Users in each Company'
+						text : '用户关注数'
 					},
 					plotOptions : {
 						column : {
@@ -34,19 +42,19 @@ $(function() {
 						}
 					},
 					xAxis : {
-						categories : data.companyName
+						categories : catagories
 					},
 					yAxis : {
 						title : {
-							text : 'Numbers of Users'
+							text : '用户个数'
 						},
 					},
 					tooltip : {
-						valueSuffix : 'people'
+						valueSuffix : '人'
 					},
 					series : [ {
-						name : 'User',
-						data : data.companyCount
+						name : '用户',
+						data : showdatas
 					} ]
 				});
 			}
