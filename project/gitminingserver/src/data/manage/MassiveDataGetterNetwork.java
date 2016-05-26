@@ -4,11 +4,8 @@ import java.util.List;
 
 import common.enumeration.sort_standard.RepoSortStadard;
 import common.enumeration.sort_standard.UserSortSandard;
-import common.exception.NetworkException;
 import common.param_obj.RepositorySearchParam;
 import common.param_obj.UserSearchParam;
-import common.service.GitUser;
-import common.service.Repository;
 import data.service.MassiveDataGetter;
 
 /**
@@ -24,14 +21,8 @@ public class MassiveDataGetterNetwork extends MassiveDataGetter {
 	private static MassiveDataGetterNetwork instance = new MassiveDataGetterNetwork();
 	
 	@Override
-	public int getRepoNumber() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public List<Repository> getRepositories(int page, int numPerPage, RepoSortStadard sortStandard)
-			throws NetworkException {
+	public List<String> getRepositories(int page, int numPerPage, RepoSortStadard sortStandard)
+			throws IndexOutOfBoundsException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -43,27 +34,26 @@ public class MassiveDataGetterNetwork extends MassiveDataGetter {
 	}
 
 	@Override
-	public int getUserNumber() {
+	public int getNumOfUsers() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public List<GitUser> getUsers(int page, int numPerPage, UserSortSandard sortStandard)
-			throws NetworkException {
+	public List<String> getUsers(int page, int numPerPage, UserSortSandard sortStandard)
+			throws IndexOutOfBoundsException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Repository> searchRepository(RepositorySearchParam params)
-			throws NetworkException {
+	public List<String> searchRepository(RepositorySearchParam params) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<GitUser> searchUser(UserSearchParam params) throws NetworkException {
+	public List<String> searchUser(UserSearchParam params) {
 		// TODO Auto-generated method stub
 		return null;
 	}
