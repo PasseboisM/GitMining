@@ -1,0 +1,41 @@
+Return types of all APIs are JSON Strings.
+
+Server address:http://106.75.5.61:8080/GitMiningServer/
+
+Repository query:
+	URL:http://106.75.5.61:8080/GitMiningServer/repo?{param1=...}&{param2=...}&...
+	Parameters:
+		
+
+User query:
+	URL:http://106.75.5.61:8080/GitMiningServer/user?{param1=...}&{param2=...}&...
+	Parameters:
+		
+	
+
+statistic query:
+	URL:http://106.75.5.61:8080/GitMiningServer/stat?{param1=...}&{param2=...}&...
+	Paratemers:
+		type=?
+			general:obtain data from original GeneralStatisticsService			//Complete
+				param=?
+					UserDistOverFollower
+					RepoDistOverFork
+					RepoDistOverLanguage
+					RepoDistOverCreateTime
+					UserDistOverCreateTime
+					RepoDistOverStar
+					UserDistOverType		
+			user:obtain data from original UserStatisticsService				//TODO
+				param=(login_of_the_user)
+					Returns UserRank in JSON
+			repo:obtain data from original RepositoryStatisticsService			//TODO
+				param=(fullname_of_the repository)
+					Returns RepoRank in JSON
+
+	
+API hint:
+	URL:http://106.75.5.61:8080/GitMiningServer/api?{param1=...}&{param2=...}&...
+	Parameters:
+		action=?
+			test:Used for testing network connectivity, returns  {"message":"Connected."}
