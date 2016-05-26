@@ -3,7 +3,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="anchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.ui.statistics.user.UserTypeStatisticsPane">
+<AnchorPane fx:id="anchorPane" stylesheets="@UserTypeStatistic.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.ui.statistics.user.UserTypeStatisticsPane">
    <children>
       <AnchorPane opacity="0.6" style="-fx-background-color: white;" stylesheets="@UserTypeStatistic.css" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
    </children>
