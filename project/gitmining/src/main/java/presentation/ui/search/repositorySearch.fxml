@@ -69,7 +69,7 @@
                                     <ToggleButton fx:id="forkSort" mnemonicParsing="false" onAction="#changeSortStrategy" text="拷贝降序" />
                                  </children>
                               </HBox>
-                              <Pagination fx:id="pag" pageCount="1" VBox.vgrow="ALWAYS" />
+                              <Pagination fx:id="pag" pageCount="1" stylesheets="@scrollBar.css" VBox.vgrow="ALWAYS" />
                            </children>
                         </VBox>
                      </children>
