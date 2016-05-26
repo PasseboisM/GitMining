@@ -2,10 +2,10 @@
 	-fx-pie-color: #5f9ea0;
 }
 .default-color1.chart-pie{
-	-fx-pie-color:  #6495ed;
+	-fx-pie-color:#008b8b;
 }
 .default-color2.chart-pie{
-	-fx-pie-color: #008b8b;
+	-fx-pie-color: #6495ed;
 }
 .default-color3.chart-pie{
 	-fx-pie-color:#1e90ff;
@@ -14,10 +14,10 @@
 	-fx-pie-color:#0000ff;
 }
 .default-color5.chart-pie{
-	-fx-pie-color:#00008b;
+	-fx-pie-color:#0000cd;
 }
 .default-color6.chart-pie{
-	-fx-pie-color:#0000cd;
+	-fx-pie-color:#00008b;
 }
 .default-color7.chart-pie{
 	-fx-pie-color:#000080;
