@@ -3,7 +3,7 @@ $(function() {
 
 	$(document).ready(function() {
 		// get company
-		var url = "/GitMiningServer/stat?type=general&param=UserDistOverFollower"
+		var url = "/GitMiningServer/stat"
 		$.ajax(url, {
 			type : 'GET',
 			// async : false,
@@ -12,7 +12,7 @@ $(function() {
 			data : {type:'general',param:'UserDistOverFollower'},
 			success : function(data) {
 				// Set up the chart
-				var ranges = data.ranges;
+				var ranges = JSON.parse(data).ranges;
 				var catagories = []
 				var showdatas = []
 				for (var i = 0; i < ranges.length; i++) {
@@ -20,6 +20,8 @@ $(function() {
 					catagories[i] = range.lowerRange+"~"+range.higherRange;
 					showdatas[i] = range.numOfUsers;
 				}
+				window.alert(catagories);
+				window.alert(showdatas);
 				var companychart = new Highcharts.Chart({
 					chart : {
 						renderTo : 'follower',
