@@ -1,8 +1,8 @@
 .default-color0.chart-pie{
-	-fx-pie-color:#ffd700;
+	-fx-pie-color:#0000cd;
 }
 .default-color1.chart-pie{
-	-fx-pie-color:#7fff00;
+	-fx-pie-color:#1e90ff;
 }
 .chart-pie-label-line{
 	-fx-stroke:#8b4513;
