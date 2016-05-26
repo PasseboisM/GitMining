@@ -96,6 +96,10 @@ public class RepoDetailsController {
 		returnButton.setGraphic(image);
 	}
 	private void initialComponentText(Repository repository) {
+		//TODO
+		String createDate=repository.getCreated_at().substring(0, 10)+" "+repository.getCreated_at().substring(12, repository.getCreated_at().length()-1);
+		String updateDate=repository.getUpdated_at().substring(0, 10)+" "+repository.getUpdated_at().substring(12, repository.getUpdated_at().length()-1);
+		String pushDate=repository.getPushed_at().substring(0, 10)+" "+repository.getPushed_at().substring(12, repository.getPushed_at().length()-1);
 		url = repository.getSvn_url();
 		repo_url.setText(url);
 		labelStar.setText(repository.getStargazers_count()+"");
@@ -108,9 +112,9 @@ public class RepoDetailsController {
 		labelRepoName.setText(full_name.split("/")[1]);
 		labelSize.setText(repository.getSize()+"");
 		labelLanguage.setText(repository.getMainLanguage().getName());
-		labelCreatedAt.setText(repository.getCreated_at());
-		labelUpdatedAt.setText(repository.getUpdated_at());
-		labelPushedAt.setText(repository.getPushed_at());
+		labelCreatedAt.setText(createDate);
+		labelUpdatedAt.setText(updateDate);
+		labelPushedAt.setText(pushDate);
 	}
 	
 	private void initialRadar(Repository r){

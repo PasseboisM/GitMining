@@ -24,7 +24,7 @@
                                           <Insets bottom="5.0" left="20.0" top="20.0" />
                                        </VBox.margin>
                                     </ImageView>
-                                    <VBox alignment="CENTER_LEFT" spacing="4.0" VBox.vgrow="ALWAYS">
+                                    <VBox  fx:id="labelBox"    alignment="CENTER_LEFT" spacing="4.0" VBox.vgrow="ALWAYS">
                                        <children>
                                           <Label fx:id="labelType" textFill="#8d8d8d" wrapText="true">
                                              <font>
