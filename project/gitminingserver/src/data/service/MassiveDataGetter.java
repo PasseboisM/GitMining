@@ -4,15 +4,11 @@ import java.util.List;
 
 import common.enumeration.sort_standard.RepoSortStadard;
 import common.enumeration.sort_standard.UserSortSandard;
-import common.exception.DataCorruptedException;
 import common.exception.NetworkException;
 import common.param_obj.RepositorySearchParam;
 import common.param_obj.UserSearchParam;
 import common.service.GitUser;
-import common.service.GitUserMin;
 import common.service.Repository;
-import common.service.RepositoryMin;
-import common.util.ObjChannel;
 import data.manage.MassiveDataGetterNetwork;
 
 /**
@@ -27,22 +23,6 @@ public abstract class MassiveDataGetter {
 	public abstract int getRepoNumber();
 	
 	/**
-	 * 获取提供Repository数据索引的通道
-	 * @return 包含所有Repository数据索引的Channel服务
-	 * @throws NetworkException 设置为在线模式而网络中途出现异常
-	 * @deprecated
-	 */
-	public abstract ObjChannel<RepositoryMin> getRepoMinInfo() throws NetworkException;
-	
-	/**
-	 * 获取提供GitUser数据索引的通道
-	 * @return 包含所有GitUser数据索引的Channel服务
-	 * @throws NetworkException 设置为在线模式而网络中途出现异常
-	 * @deprecated
-	 */
-	public abstract ObjChannel<GitUserMin> getUserMinInfo() throws NetworkException;
-	
-	/**
 	 * 获取一页Repository详细信息，页与页之间不重复；
 	 * 按给定的的排序方式给出
 	 * @param page 所请求的页数（从1开始）
@@ -53,7 +33,7 @@ public abstract class MassiveDataGetter {
 	 * @throws NetworkException 
 	 */
 	public abstract List<Repository> getRepositories(int page, int numPerPage,
-			RepoSortStadard sortStandard) throws NetworkException, DataCorruptedException;
+			RepoSortStadard sortStandard) throws NetworkException;
 	
 	/**
 	 * 获取系统内Repository总共数目
@@ -77,7 +57,7 @@ public abstract class MassiveDataGetter {
 	 * @throws DataCorruptedException 
 	 * @throws NetworkException 
 	 */
-	public abstract List<GitUser> getUsers(int page, int numPerPage,UserSortSandard sortStandard) throws NetworkException, DataCorruptedException;
+	public abstract List<GitUser> getUsers(int page, int numPerPage,UserSortSandard sortStandard) throws NetworkException;
 	
 	/**
 	 * 提供根据参数中关键词属性枚举与关键词字符串获取Repository的搜索结果
@@ -86,7 +66,7 @@ public abstract class MassiveDataGetter {
 	 * @throws DataCorruptedException 
 	 * @throws NetworkException 
 	 */
-	public abstract List<Repository> searchRepository(RepositorySearchParam params) throws NetworkException, DataCorruptedException;
+	public abstract List<Repository> searchRepository(RepositorySearchParam params) throws NetworkException;
 	
 	/**
 	 * 提供根据参数中属性获取GitUser的搜索结果
@@ -95,7 +75,7 @@ public abstract class MassiveDataGetter {
 	 * @throws DataCorruptedException 
 	 * @throws NetworkException 
 	 */
-	public abstract List<GitUser> searchUser(UserSearchParam params) throws NetworkException, DataCorruptedException;
+	public abstract List<GitUser> searchUser(UserSearchParam params) throws NetworkException;
 	
 	/**
 	 * 获取实例对象。

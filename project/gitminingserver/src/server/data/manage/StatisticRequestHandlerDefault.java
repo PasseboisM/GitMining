@@ -34,6 +34,12 @@ class StatisticRequestHandlerDefault extends StatisticRequestHandler {
 			return;
 		}
 		
+		if (type==null) {
+			out.println(new HintMessage("Parameter (type) is necessary.").toJSON());
+			out.close();
+			return;
+		}
+		
 		switch (type) {
 		case "general":
 			printGeneralStat(httpRequest, out);

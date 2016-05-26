@@ -1,12 +1,7 @@
 package data.service;
 
-import common.exception.DataCorruptedException;
-import common.exception.NetworkException;
-import common.service.GitUser;
-import common.service.GitUserMin;
-import common.service.Repository;
-import common.service.RepositoryMin;
-import data.manage.SpecificDataGetterDefault;
+import common.exception.TargetNotFoundException;
+import data.manage.SpecificDataGetterNetwork;
 
 /**
  * @author xjh14
@@ -15,25 +10,26 @@ import data.manage.SpecificDataGetterDefault;
 public abstract class SpecificDataGetter {
 	
 	/**
-	 * 根据Repository索引查询Repository详细信息
-	 * @param request 封装查询基础信息的数据索引对象RepositoryMin
-	 * @return 查询的Repository对象
-	 * @throws DataCorruptedException 
+	 * 根据Repository全名查询Repository详细信息
+	 * @param fullName Repository的全名(owner_name/repo_name)
+	 * @return 查询的Repository对象的JSON序列化表示
+	 * @throws TargetNotFoundException 未能找到fullName标识的Repository
 	 */
-	public abstract Repository getSpecificRepo(RepositoryMin source) throws NetworkException, DataCorruptedException;
+	public abstract String getSpecificRepo(String fullName) throws TargetNotFoundException;
 
 	/**
-	 * 根据GitUser索引查询GitUser详细信息
-	 * @param source 封装查询基础信息的数据索引GitUserMin
-	 * @return 查询的GitUser对象
+	 * 根据GitUser的login查询GitUser详细信息
+	 * @param login GitUser的login，可为注册名可为邮箱地址
+	 * @return 查询的GitUser对象的JSON序列化表示
+	 * @throws TargetNotFoundException 未能找到login标识的GitUser
 	 */
-	public abstract GitUser getSpecificGitUser(GitUserMin source) throws NetworkException, DataCorruptedException;
+	public abstract String getSpecificGitUser(String login) throws TargetNotFoundException;
 	
 	/**
 	 * 获取实例对象。
 	 */
 	public static SpecificDataGetter getInstance() {
-		return SpecificDataGetterDefault.getInstance();
+		return SpecificDataGetterNetwork.getInstance();
 	}
 	
 }

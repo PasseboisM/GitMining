@@ -12,9 +12,6 @@ public abstract class NetworkServiceFactory {
 	
 	public abstract SpecificDataSource getSpecificDataSource();
 	
-	@Deprecated
-	public abstract MassiveDataSource getMassiveDataSource();
-	
 	public abstract NetworkConnectionTester getNetworkConnectionTester();
 	
 	public abstract GHDataSource getGHDataSource();
@@ -26,7 +23,6 @@ public abstract class NetworkServiceFactory {
 	public abstract AnalysisDataSource getAnalysisDataSource();
 	
 	public static NetworkServiceFactory getInstance() {
-//		return new BasicNetworkServiceFactory();
 		return new GHNetworkServiceFactory();
 	}
 	

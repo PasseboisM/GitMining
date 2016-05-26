@@ -3,7 +3,6 @@ package network.data;
 import network.service.AnalysisDataSource;
 import network.service.GHDataSource;
 import network.service.UserRelatedDataSource;
-import network.service.MassiveDataSource;
 import network.service.NetworkConnectionTester;
 import network.service.NetworkServiceFactory;
 import network.service.RepoRelatedDataSource;
@@ -15,12 +14,7 @@ public class BasicNetworkServiceFactory extends NetworkServiceFactory {
 	public SpecificDataSource getSpecificDataSource() {
 		return new SpecificDataSourceDefault();
 	}
-
-	@Override
-	public MassiveDataSource getMassiveDataSource() {
-		return new MassiveDataSourceDefault();
-	}
-
+	
 	@Override
 	public NetworkConnectionTester getNetworkConnectionTester() {
 		return new NetworkConnectionTesterDefault();

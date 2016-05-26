@@ -9,7 +9,6 @@ import org.kohsuke.github.GitHubBuilder;
 import network.service.AnalysisDataSource;
 import network.service.GHDataSource;
 import network.service.UserRelatedDataSource;
-import network.service.MassiveDataSource;
 import network.service.NetworkConnectionTester;
 import network.service.NetworkServiceFactory;
 import network.service.RepoRelatedDataSource;
@@ -20,12 +19,6 @@ public class GHNetworkServiceFactory extends NetworkServiceFactory {
 	@Override
 	public SpecificDataSource getSpecificDataSource() {
 		return new GHSpecificDataSource();
-	}
-
-	@Override
-	@Deprecated
-	public MassiveDataSource getMassiveDataSource() {
-		return new MassiveDataSourceDefault();
 	}
 
 	@Override

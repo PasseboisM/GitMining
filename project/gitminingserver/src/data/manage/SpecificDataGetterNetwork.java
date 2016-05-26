@@ -1,25 +1,26 @@
 package data.manage;
 
-import common.exception.DataCorruptedException;
-import common.exception.NetworkException;
-import common.service.GitUser;
-import common.service.GitUserMin;
-import common.service.Repository;
-import common.service.RepositoryMin;
+import common.exception.TargetNotFoundException;
 import data.service.SpecificDataGetter;
 
 public class SpecificDataGetterNetwork extends SpecificDataGetter {
+	
+	private static SpecificDataGetterNetwork instance = new SpecificDataGetterNetwork();
 
 	@Override
-	public Repository getSpecificRepo(RepositoryMin source) throws NetworkException, DataCorruptedException {
+	public String getSpecificRepo(String fullName) throws TargetNotFoundException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public GitUser getSpecificGitUser(GitUserMin source) throws NetworkException, DataCorruptedException {
+	public String getSpecificGitUser(String login) throws TargetNotFoundException {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	public static SpecificDataGetterNetwork getInstance() {
+		return instance;
+	}
+	
 }
