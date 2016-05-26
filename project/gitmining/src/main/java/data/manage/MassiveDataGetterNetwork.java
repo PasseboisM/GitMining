@@ -24,7 +24,7 @@ import data.service.MassiveDataGetter;
  *
  */
 public class MassiveDataGetterNetwork extends MassiveDataGetter {
-
+	
 	@Override
 	public int getRepoNumber() {
 		// TODO Auto-generated method stub
