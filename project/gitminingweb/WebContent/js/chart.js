@@ -20,8 +20,6 @@ $(function() {
 					catagories[i] = range.lowerRange+"~"+range.higherRange;
 					showdatas[i] = range.numOfUsers;
 				}
-				window.alert(catagories);
-				window.alert(showdatas);
 				var companychart = new Highcharts.Chart({
 					chart : {
 						renderTo : 'follower',
