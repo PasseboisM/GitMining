@@ -219,88 +219,74 @@ $(function() {
                 for (var i = 0; i < ranges.length; i++) {
                     var range = ranges[i];
                     catagories[i] = range.language;
-                    showdatas[i] = range.repositoryCount;
+                    showdatas[i] = {value:range.repositoryCount,name:range.language};
                 }
 
                 // 使用
                 require(
                     [
                     'echarts',
-                    'echarts/chart/bar',
-                    'echarts/chart/line' 
+                    'echarts/chart/pie',
+                    'echarts/chart/funnel' 
                     ],
                 function (ec) {
                 // 基于准备好的dom，初始化echarts图表
                 var myChart = ec.init(document.getElementById('language')); 
                
-                var option = {
+                 var option = {
                     title : {
-                        text: '项目语言统计图表',
-                        // subtext: '纯属虚构'
+                        text: '用户类型统计图',
+                        x:'center'
                     },
                     tooltip : {
-                        trigger: 'axis'
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b} : {c} ({d}%)"
                     },
-                    //legend: {
-                        // data:['蒸发量']
-                    //},
+                    legend: {
+                        orient : 'vertical',
+                        x : 'left',
+                        data:catagories
+                    },
                     toolbox: {
                         show : true,
                         feature : {
                             mark : {show: true},
                             dataView : {show: true, readOnly: false},
-                            magicType : {show: true, type: ['line', 'bar']},
+                            magicType : {
+                                show: true, 
+                                type: ['pie', 'funnel'],
+                                option: {
+                                    funnel: {
+                                        x: '25%',
+                                        width: '50%',
+                                        funnelAlign: 'left',
+                                        max: 1548
+                                    }
+                                }
+                            },
                             restore : {show: true},
                             saveAsImage : {show: true}
                         }
                     },
                     calculable : true,
-                    xAxis : [
-                    {
-                        type : 'category',
-                        data : catagories,
-                        axisLabel :{  
-                            interval:0 ,
-                            rotate: -40
-                        }
-                    }
-                    ],
-                    yAxis : [
-                    {
-                        type : 'value'
-                    }
-                    ],
                     series : [
                     {
-                        name:'项目个数',
-                        type:'bar',
-                        data:showdatas,
-                        markPoint : {
-                            data : [
-                            {type : 'max', name: '最大值'},
-                            {type : 'min', name: '最小值'}
-                            ]
-                        },
-                        markLine : {
-                            data : [
-                            {type : 'average', name: '平均值'}
-                            ]
-                        }
-                    },
-
-                    ],
-                    color: [ 
-                            '#1e90ff', '#87cefa', '#da70d6', '#32cd32', '#6495ed', 
-                            '#ff69b4', '#ba55d3', '#cd5c5c', '#ffa500', '#40e0d0', 
-                            '#ff7f50', '#ff6347', '#7b68ee', '#00fa9a', '#ffd700', 
-                            '#6b8e23', '#ff00ff', '#3cb371', '#b8860b', '#30e0e0' 
-                        ]
+                        name:'访问来源',
+                        type:'pie',
+                        radius : '55%',
+                        center: ['50%', '60%'],
+                        data:showdatas
+                    }
+                    ]
                 };
+                
 
                 // 为echarts对象加载数据 
                 myChart.setOption(option); 
             }
             );
+
+
                 
             }
         });
@@ -619,15 +605,15 @@ $(function() {
                 for (var i = 0; i < ranges.length; i++) {
                     var range = ranges[i];
                     catagories[i] = range.type;
-                    showdatas[i] = range.count;
+                    showdatas[i] = {value:range.count,name:range.type};
                 }
 
                 // 使用
                 require(
                     [
                     'echarts',
-                    'echarts/chart/bar',
-                    'echarts/chart/line' 
+                    'echarts/chart/funnel',
+                    'echarts/chart/pie'
                     ],
                 function (ec) {
                 // 基于准备好的dom，初始化echarts图表
@@ -635,7 +621,6 @@ $(function() {
                 var option = {
                     title : {
                         text: '用户类型统计图',
-                        // subtext: '纯属虚构',
                         x:'center'
                     },
                     tooltip : {
@@ -675,13 +660,6 @@ $(function() {
                         type:'pie',
                         radius : '55%',
                         center: ['50%', '60%'],
-                        /*data:[
-                        {value:335, name:'直接访问'},
-                        {value:310, name:'邮件营销'},
-                        {value:234, name:'联盟广告'},
-                        {value:135, name:'视频广告'},
-                        {value:1548, name:'搜索引擎'}
-                        ]*/
                         data:showdatas
                     }
                     ]
