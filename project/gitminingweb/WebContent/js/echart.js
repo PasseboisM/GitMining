@@ -272,7 +272,7 @@ $(function() {
                     ],
                     series : [
                     {
-                        name:'用户数',
+                        name:'项目个数',
                         type:'bar',
                         data:showdatas,
                         markPoint : {
@@ -414,12 +414,19 @@ $(function() {
             success : function(data) {
                 // Set up the chart
                 var ranges = JSON.parse(data).counts;
-                var catagories = []
-                var showdatas = []
+                var catagories = [];
+                var showdatas = [];
+                var sum = 0;
+                var percent = [];
                 for (var i = 0; i < ranges.length; i++) {
                     var range = ranges[i];
                     catagories[i] = range.timeLo+"~"+range.timeHi;
                     showdatas[i] = range.count;
+                    sum += range.count;
+                }
+                for (var i = 0; i < ranges.length; i++) {
+                    var range = ranges[i];
+                    percent[i] = range.count * 100.0 / sum;
                 }
 
                 // 使用
@@ -432,62 +439,59 @@ $(function() {
                 function (ec) {
                 // 基于准备好的dom，初始化echarts图表
                 var myChart = ec.init(document.getElementById('user_time')); 
-               
                 var option = {
-                    title : {
-                        text: '用户创建时间统计图表',
-                        // subtext: '纯属虚构'
-                    },
                     tooltip : {
                         trigger: 'axis'
                     },
-                    //legend: {
-                        // data:['蒸发量']
-                    //},
                     toolbox: {
                         show : true,
                         feature : {
                             mark : {show: true},
                             dataView : {show: true, readOnly: false},
-                            magicType : {show: true, type: ['line', 'bar']},
+                            magicType: {show: true, type: ['line', 'bar']},
                             restore : {show: true},
                             saveAsImage : {show: true}
                         }
                     },
                     calculable : true,
+                    legend: {
+                        data:['用户数','百分比']
+                    },
                     xAxis : [
                     {
                         type : 'category',
-                        data : catagories,
-                        axisLabel :{  
-                            interval:0 ,
-                            rotate: -40
-                        }
+                        data : catagories
                     }
                     ],
                     yAxis : [
                     {
-                        type : 'value'
+                        type : 'value',
+                        name : '用户数',
+                        axisLabel : {
+                            formatter: '{value} 个'
+                        }
+                    },
+                    {
+                        type : 'value',
+                        name : '百分比',
+                        axisLabel : {
+                            formatter: '{value} %'
+                        }
                     }
                     ],
                     series : [
-                    {
-                        name:'用户数',
-                        type:'bar',
-                        data:showdatas,
-                        markPoint : {
-                            data : [
-                            {type : 'max', name: '最大值'},
-                            {type : 'min', name: '最小值'}
-                            ]
-                        },
-                        markLine : {
-                            data : [
-                            {type : 'average', name: '平均值'}
-                            ]
-                        }
-                    },
 
+                    {
+                        name:'蒸发量',
+                        type:'bar',
+                        data:percent
+                    },
+                    {
+                        name:'平均温度',
+                        type:'line',
+                        yAxisIndex: 1,
+                        data:showdatas
+                    }
                     ],
                     color: [ 
                             '#1e90ff', '#87cefa', '#da70d6', '#32cd32', '#6495ed', 
@@ -496,7 +500,7 @@ $(function() {
                             '#6b8e23', '#ff00ff', '#3cb371', '#b8860b', '#30e0e0' 
                         ]
                 };
-
+                
                 // 为echarts对象加载数据 
                 myChart.setOption(option); 
             }
