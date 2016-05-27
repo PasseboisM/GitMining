@@ -78,7 +78,7 @@ $(function() {
                     series : [
                     {
                         name:'用户数',
-                        type:'bar',
+                        type:'line',
                         data:showdatas,
                         markPoint : {
                             data : [
@@ -414,7 +414,7 @@ $(function() {
                 for (var i = 0; i < ranges.length; i++) {
                     var range = ranges[i];
                     cultivate += range.count * 100.0 / sum;
-                    percent[i] = cultivate;
+                    percent[i] = cultivate.toFixed(2);
                 }
 
                 // 使用
@@ -470,12 +470,12 @@ $(function() {
                     series : [
 
                     {
-                        name:'蒸发量',
+                        name:'项目个数',
                         type:'bar',
                         data:showdatas
                     },
                     {
-                        name:'平均温度',
+                        name:'累计百分比',
                         type:'line',
                         yAxisIndex: 1,
                         data:percent
