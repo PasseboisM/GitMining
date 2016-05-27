@@ -31,19 +31,35 @@ $(function() {
                 require(
                     [
                     'echarts',
-                    'echarts/chart/bar' // 使用柱状图就加载bar模块，按需加载
+                    'echarts/chart/bar' 
+
                     ],
                 function (ec) {
                 // 基于准备好的dom，初始化echarts图表
                 var myChart = ec.init(document.getElementById('follower')); 
                
                 var option = {
-                    tooltip: {
-                        show: true
+                    title : {
+                        text: '用户关注统计图表',
+                        // subtext: '纯属虚构'
                     },
-                    legend: {
-                        data:['销量']
+                    tooltip : {
+                        trigger: 'axis'
                     },
+                    //legend: {
+                        // data:['蒸发量']
+                    //},
+                    toolbox: {
+                        show : true,
+                        feature : {
+                            mark : {show: true},
+                            dataView : {show: true, readOnly: false},
+                            magicType : {show: true, type: ['line', 'bar']},
+                            restore : {show: true},
+                            saveAsImage : {show: true}
+                        }
+                    },
+                    calculable : true,
                     xAxis : [
                     {
                         type : 'category',
@@ -57,55 +73,31 @@ $(function() {
                     ],
                     series : [
                     {
-                        "name":"销量",
-                        "type":"bar",
-                        "data":showdatas
-                    }
+                        name:'用户数',
+                        type:'bar',
+                        data:showdatas,
+                        markPoint : {
+                            data : [
+                            {type : 'max', name: '最大值'},
+                            {type : 'min', name: '最小值'}
+                            ]
+                        },
+                        markLine : {
+                            data : [
+                            {type : 'average', name: '平均值'}
+                            ]
+                        }
+                    },
+
                     ]
                 };
 
                 // 为echarts对象加载数据 
                 myChart.setOption(option); 
-                }
+            }
             );
 
-                /*var companychart = new Highcharts.Chart({
-                    chart : {
-                        renderTo : 'follower',
-                        type : 'column',
-                        margin : 100,
-                        options3d : {
-                            enabled : true,
-                            alpha : 5,
-                            beta : 15,
-                            depth : 50,
-                            viewDistance : 25
-                        }
-                    },
-                    title : {
-                        text : '用户关注数'
-                    },
-                    plotOptions : {
-                        column : {
-                            depth : 25
-                        }
-                    },
-                    xAxis : {
-                        categories : catagories
-                    },
-                    yAxis : {
-                        title : {
-                            text : '用户个数'
-                        },
-                    },
-                    tooltip : {
-                        valueSuffix : '人'
-                    },
-                    series : [ {
-                        name : '用户',
-                        data : showdatas
-                    } ]
-                });*/
+               
             }
         });
 
