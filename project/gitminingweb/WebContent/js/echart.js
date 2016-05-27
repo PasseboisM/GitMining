@@ -63,7 +63,11 @@ $(function() {
                     xAxis : [
                     {
                         type : 'category',
-                        data : catagories
+                        data : catagories,
+                        axisLabel :{  
+                            interval:0 ,
+                            rotate: -40
+                        }
                     }
                     ],
                     yAxis : [
@@ -254,7 +258,11 @@ $(function() {
                     xAxis : [
                     {
                         type : 'category',
-                        data : catagories
+                        data : catagories,
+                        axisLabel :{  
+                            interval:0 ,
+                            rotate: -40
+                        }
                     }
                     ],
                     yAxis : [
