@@ -467,8 +467,7 @@ $(function() {
                     ],
                     yAxis : [
                     {
-                        type : 'value'，
-                        formatter: '{value} 人'
+                        type : 'value'
                     }
                     ],
                     series : [
