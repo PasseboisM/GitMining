@@ -424,9 +424,11 @@ $(function() {
                     showdatas[i] = range.count;
                     sum += range.count;
                 }
+                var cultivate = 0;
                 for (var i = 0; i < ranges.length; i++) {
                     var range = ranges[i];
-                    percent[i] = range.count * 100.0 / sum;
+                    cultivate += range.count * 100.0 / sum;
+                    percent[i] = cultivate;
                 }
 
                 // 使用
@@ -484,13 +486,13 @@ $(function() {
                     {
                         name:'蒸发量',
                         type:'bar',
-                        data:percent
+                        data:showdatas
                     },
                     {
                         name:'平均温度',
                         type:'line',
                         yAxisIndex: 1,
-                        data:showdatas
+                        data:percent
                     }
                     ],
                     color: [ 
