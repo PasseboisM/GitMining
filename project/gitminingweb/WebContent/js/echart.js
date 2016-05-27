@@ -47,7 +47,7 @@ $(function() {
                     xAxis : [
                     {
                         type : 'category',
-                        data : showdatas
+                        data : catagories
                     }
                     ],
                     yAxis : [
@@ -59,7 +59,7 @@ $(function() {
                     {
                         "name":"销量",
                         "type":"bar",
-                        "data":[5, 20, 40, 10, 10, 20]
+                        "data":showdatas
                     }
                     ]
                 };
