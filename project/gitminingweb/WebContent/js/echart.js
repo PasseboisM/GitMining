@@ -267,8 +267,7 @@ $(function() {
                     ],
                     yAxis : [
                     {
-                        type : 'value'，
-                        formatter: '{value} 个'
+                        type : 'value'
                     }
                     ],
                     series : [
@@ -368,8 +367,7 @@ $(function() {
                     ],
                     yAxis : [
                     {
-                        type : 'value'，
-                        formatter: '{value} 个'
+                        type : 'value'
                     }
                     ],
                     series : [
