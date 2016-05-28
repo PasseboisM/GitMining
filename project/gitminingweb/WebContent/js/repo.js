@@ -1,4 +1,4 @@
-var repositories = [{fullName:"haha/ss",describe:"sldkfjslkdjflskdjflskdjflskdjflskdjf",
+var repositories1 = [{fullName:"haha/ss",describe:"sldkfjslkdjflskdjflskdjflskdjflskdjf",
     lastUpdate:"2014-09-08",stars:58,forks:79,contributors:18},
     {fullName:"hdddd/soiusdf",describe:"ooowowoow",
     lastUpdate:"2016-02-07",stars:3,forks:12,contributors:2},
@@ -31,6 +31,26 @@ var repositories = [{fullName:"haha/ss",describe:"sldkfjslkdjflskdjflskdjflskdjf
     {fullName:"hdddd/soiusdf",describe:"ooowowoow",
     lastUpdate:"2016-02-07",stars:3,forks:12,contributors:2}];
 
+var repositories2 = [{fullName:"haha/ss",describe:"sldkfjslkdjflskdjflskdjflskdjflskdjf",
+    lastUpdate:"2014-09-08",stars:0,forks:0,contributors:0},
+    {fullName:"hdddd/soiusdf",describe:"ooowowoow",
+    lastUpdate:"2016-02-07",stars:0,forks:0,contributors:0},{fullName:"haha/ss",describe:"sldkfjslkdjflskdjflskdjflskdjflskdjf",
+    lastUpdate:"2014-09-08",stars:0,forks:0,contributors:0},
+    {fullName:"hdddd/soiusdf",describe:"ooowowoow",
+    lastUpdate:"2016-02-07",stars:0,forks:0,contributors:0},{fullName:"haha/ss",describe:"sldkfjslkdjflskdjflskdjflskdjflskdjf",
+    lastUpdate:"2014-09-08",stars:0,forks:0,contributors:0},
+    {fullName:"hdddd/soiusdf",describe:"ooowowoow",
+    lastUpdate:"2016-02-07",stars:0,forks:0,contributors:0},{fullName:"haha/ss",describe:"sldkfjslkdjflskdjflskdjflskdjflskdjf",
+    lastUpdate:"2014-09-08",stars:0,forks:0,contributors:0},
+    {fullName:"hdddd/soiusdf",describe:"ooowowoow",
+    lastUpdate:"2016-02-07",stars:0,forks:0,contributors:0},{fullName:"haha/ss",describe:"sldkfjslkdjflskdjflskdjflskdjflskdjf",
+    lastUpdate:"2014-09-08",stars:0,forks:0,contributors:0},
+    {fullName:"hdddd/soiusdf",describe:"ooowowoow",
+    lastUpdate:"2016-02-07",stars:0,forks:0,contributors:0},{fullName:"haha/ss",describe:"sldkfjslkdjflskdjflskdjflskdjflskdjf",
+    lastUpdate:"2014-09-08",stars:0,forks:0,contributors:0},
+    {fullName:"hdddd/soiusdf",describe:"ooowowoow",
+    lastUpdate:"2016-02-07",stars:0,forks:0,contributors:0}];
+
 var app = angular.module('test', ['tm.pagination']);
 
  
@@ -42,9 +62,10 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
 			pageSize: $scope.paginationConf.itemsPerPage
 		}
 		// BusinessService.list(postData).success(function (response) {
+
 			$scope.paginationConf.totalItems = 16;
 			// window.alert(response);
-			$scope.repos = repositories;
+			$scope.repos = BusinessService.list(postData);
 		// });
 	}
         //配置分页基本参数
@@ -61,7 +82,9 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
     //业务类
     app.factory('BusinessService', ['$http', function ($http) {
     	var list = function (postData) {
-    		return $http.post('/Employee/GetAllEmployee', postData);
+    		// return $http.post('/Employee/GetAllEmployee', postData);
+    		if(postData.pageIndex%2==0)	return repositories2;
+    		else	return repositories1;
     	}
     	return {
     		list: function (postData) {
