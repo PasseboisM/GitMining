@@ -42,7 +42,7 @@
     </div>
     <br/>
     <div class="container" ng-app="test" ng-controller="testCtrl">
-    	<div class="list-group col-md-8">
+    	<div class="well list-group col-md-8">
 
     		<div ng-repeat="repo in repos" class="list-group-item">
 
@@ -91,7 +91,7 @@
 			<tm-pagination conf="paginationConf"></tm-pagination>
     	</div>
 
-    	<div class="list-group col-md-4">
+    	<div class="well list-group col-md-offset-1 col-md-3">
 
     		<div ng-repeat="repo in repos" class="list-group-item">
 
@@ -112,6 +112,10 @@
     			</div>
     		</div>
 
+    </div>
+
+    <div class="well row col-md-12">
+    	<button class="btn btn-default" type="button">Go!</button>
     </div>
 	
 </body>
