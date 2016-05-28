@@ -271,7 +271,7 @@ $(function() {
                     calculable : true,
                     series : [
                     {
-                        name:'访问来源',
+                        name:'用户类型',
                         type:'pie',
                         radius : '55%',
                         center: ['50%', '60%'],
@@ -656,7 +656,7 @@ $(function() {
                     calculable : true,
                     series : [
                     {
-                        name:'访问来源',
+                        name:'项目语言',
                         type:'pie',
                         radius : '55%',
                         center: ['50%', '60%'],
