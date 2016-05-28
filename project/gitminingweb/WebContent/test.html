@@ -34,9 +34,15 @@
       </div>
     </nav>
 
-    
-    <div class="container col-md-7" ng-app="test" ng-controller="testCtrl">
-    	<div class="list-group">
+    <div class="input-group col-md-offset-2 col-md-8">
+      <input type="text" class="form-control" placeholder="Search for...">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Go!</button>
+      </span>
+    </div>
+    <br/>
+    <div class="container" ng-app="test" ng-controller="testCtrl">
+    	<div class="list-group col-md-8">
 
     		<div ng-repeat="repo in repos" class="list-group-item">
 
@@ -84,6 +90,28 @@
 
 			<tm-pagination conf="paginationConf"></tm-pagination>
     	</div>
+
+    	<div class="list-group col-md-4">
+
+    		<div ng-repeat="repo in repos" class="list-group-item">
+
+    			<div class="row">
+    				<div class="col-md-12">
+    					<!-- <h4>{{repo.fullName}}</h4> -->
+    					<a ng-href="#{{repo.fullName}}">{{repo.fullName}}</a>
+    				</div>
+    				<div class="col-md-7">
+    					<div class="col-md-12">
+    						<p>{{repo.describe}}</p>
+    					</div>
+    					<div class="col-md-12">
+    						<p>{{repo.lastUpdate}}</p>
+    					</div>
+    				</div>
+    				
+    			</div>
+    		</div>
+
     </div>
 	
 </body>
