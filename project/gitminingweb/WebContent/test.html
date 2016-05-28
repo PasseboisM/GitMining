@@ -34,14 +34,16 @@
       </div>
     </nav>
 
+    
     <div class="container col-md-7" ng-app="test" ng-controller="testCtrl">
     	<div class="list-group">
 
-    		<a ng-repeat="repo in repos" class="list-group-item">
+    		<div ng-repeat="repo in repos" class="list-group-item">
 
     			<div class="row">
     				<div class="col-md-12">
-    					<h4>{{repo.fullName}}</h4>
+    					<!-- <h4>{{repo.fullName}}</h4> -->
+    					<a ng-href="#{{repo.fullName}}">{{repo.fullName}}</a>
     				</div>
     				<div class="col-md-7">
     					<div class="col-md-12">
@@ -77,7 +79,7 @@
     					</div>
     				</div>
     			</div>
-    		</a>
+    		</div>
 
 
 			<tm-pagination conf="paginationConf"></tm-pagination>
