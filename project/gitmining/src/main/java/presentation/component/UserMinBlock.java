@@ -38,7 +38,8 @@ public class UserMinBlock extends BorderPane{
 	private void setComponentText(GitUser userData) {
 		userName.setText(userData.getName());
 		userLocation.setText(userData.getLocation());
-		lastUpdated.setText(userData.getUpdated_at());
+		String updateDate=userData.getUpdated_at().substring(0, 10)+" "+userData.getUpdated_at().substring(12, userData.getUpdated_at().length()-1);
+		lastUpdated.setText(updateDate);
 		followers.setText(userData.getFollowers()+"");
 		following.setText(userData.getFollowing()+"");
 		repos.setText(userData.getPublic_repos()+"");
