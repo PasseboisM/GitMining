@@ -148,8 +148,10 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
 app.factory('BusinessService', ['$http', function ($http) {
 	var list = function (postData) {
 		console.log("now change business");
-		console.log(repotype);
     	// return $http.post('/Employee/GetAllEmployee', postData);
+    	$(document).ready(function() {
+    		console.log("good");
+		});
     	if(postData.pageIndex%2==0)	return repositories2;
     	else	return repositories1;
     }
