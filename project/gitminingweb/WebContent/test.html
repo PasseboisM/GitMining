@@ -3,6 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>GitMiningChart</title>
+	<script src="js/jquery-1.11.3.js"></script>
+	<!-- <script src="http://code.jquery.com/jquery.js"></script> -->
 	<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script> 
 	<script src="js/repo.js"></script> 
 	<script src="js/tm.pagination.js"></script> 
@@ -11,6 +13,7 @@
 </head>
 
 <body>
+	<!-- <p id="x">sdfsdf</p> -->
 	<nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -52,54 +55,54 @@
     			<div class="panel-body">
     				<div class="container-fluid">
 						<div class="col-md-2">
-							Language:
-						</div>
-    					<div class="col-md-10">
-    						<button type="button" class="btn btn-default">Left</button>
-    						<button type="button" class="btn btn-default">Middle</button>
-    						<button type="button" class="btn btn-default">Right</button>
-    						<button type="button" class="btn btn-default">Left</button>
-    						<button type="button" class="btn btn-default">Middle</button>
-    						<button type="button" class="btn btn-default">Right</button>
-    						<button type="button" class="btn btn-default">Left</button>
-    						<button type="button" class="btn btn-default">Middle</button>
-    						<button type="button" class="btn btn-default">Right</button>
-    						<button type="button" class="btn btn-default">Left</button>
-    						<button type="button" class="btn btn-default">Middle</button>
-    						<button type="button" class="btn btn-default">Right</button>
-    						<button type="button" class="btn btn-default">Left</button>
-    						<button type="button" class="btn btn-default">Middle</button>
-    						<button type="button" class="btn btn-default">Right</button>
-    					</div>
-    					<hr class="col-md-11"/>
-    					<div class="col-md-2">
 							Catagories:
 						</div>
     					<div class="col-md-10">
-    						<button type="button" class="btn btn-default">Left</button>
-    						<button type="button" class="btn btn-default">Middle</button>
-    						<button type="button" class="btn btn-default">Right</button>
-    						<button type="button" class="btn btn-default">Left</button>
-    						<button type="button" class="btn btn-default">Middle</button>
-    						<button type="button" class="btn btn-default">Right</button>
-    						<button type="button" class="btn btn-default">Left</button>
-    						<button type="button" class="btn btn-default">Middle</button>
-    						<button type="button" class="btn btn-default">Right</button>
-    						<button type="button" class="btn btn-default">Left</button>
-    						<button type="button" class="btn btn-default">Middle</button>
-    						<button type="button" class="btn btn-default">Right</button>
-    						<button type="button" class="btn btn-default">Left</button>
-    						<button type="button" class="btn btn-default">Middle</button>
-    						<button type="button" class="btn btn-default">Right</button>
+    						<button type="button" class="btn btn-default othertype">Left</button>
+    						<button type="button" class="btn btn-default othertype">Middle</button>
+    						<button type="button" class="btn btn-default othertype">Right</button>
+    						<button type="button" class="btn btn-default othertype">Left</button>
+    						<button type="button" class="btn btn-default othertype">Middle</button>
+    						<button type="button" class="btn btn-default othertype">Right</button>
+    						<button type="button" class="btn btn-default othertype">Left</button>
+    						<button type="button" class="btn btn-default othertype">Middle</button>
+    						<button type="button" class="btn btn-default othertype">Right</button>
+    						<button type="button" class="btn btn-default othertype">Left</button>
+    						<button type="button" class="btn btn-default othertype">Middle</button>
+    						<button type="button" class="btn btn-default othertype">Right</button>
+    						<button type="button" class="btn btn-default othertype">Left</button>
+    						<button type="button" class="btn btn-default othertype">Middle</button>
+    						<button type="button" class="btn btn-default othertype">Right</button>
+    					</div>
+    					<hr class="col-md-11"/>
+    					<div class="col-md-2">
+							Language:
+						</div>
+    					<div class="col-md-10">
+    						<button id="chooselan" type="button" class="btn btn-default otherlan">Left</button>
+    						<button type="button" class="btn btn-default otherlan">Middle</button>
+    						<button type="button" class="btn btn-default otherlan">Right</button>
+    						<button type="button" class="btn btn-default otherlan">Left</button>
+    						<button type="button" class="btn btn-default otherlan">Middle</button>
+    						<button type="button" class="btn btn-default otherlan">Right</button>
+    						<button type="button" class="btn btn-default otherlan">Left</button>
+    						<button type="button" class="btn btn-default otherlan">Middle</button>
+    						<button type="button" class="btn btn-default otherlan">Right</button>
+    						<button type="button" class="btn btn-default otherlan">Left</button>
+    						<button type="button" class="btn btn-default otherlan">Middle</button>
+    						<button type="button" class="btn btn-default otherlan">Right</button>
+    						<button type="button" class="btn btn-default otherlan">Left</button>
+    						<button type="button" class="btn btn-default otherlan">Middle</button>
+    						<button type="button" class="btn btn-default otherlan">Right</button>
     					</div>
     					
     				</div>
     			</div>
     		</div>
     		<div class="btn-group" role="group" aria-label="...">
-    			<button type="button" class="btn btn-default">Left</button>
-    			<button type="button" class="btn btn-default">Middle</button>
-    			<button type="button" class="btn btn-default">Right</button>
+    			<button type="button" class="btn btn-default" ng-class="{active: isActive.isGen}" ng-click="changerepo(1)">随机项目</button>
+    			<button type="button" class="btn btn-default"ng-class="{active: isActive.isStar}" ng-click="changerepo(2)">关注降序</button>
+    			<button type="button" class="btn btn-default"ng-class="{active: isActive.isFork}" ng-click="changerepo(3)">拷贝降序</button>
     		</div>
     		<div class="panel panel-default" ng-repeat="repo in repos" class="list-group-item">
 
