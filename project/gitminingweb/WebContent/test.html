@@ -58,42 +58,14 @@
 							Catagories:
 						</div>
     					<div class="col-md-10">
-    						<button id="choosetype" type="button" class="btn btn-default">Left</button>
-    						<button type="button" class="btn btn-default othertype">Middle</button>
-    						<button type="button" class="btn btn-default othertype">Right</button>
-    						<button type="button" class="btn btn-default othertype">Left</button>
-    						<button type="button" class="btn btn-default othertype">Middle</button>
-    						<button type="button" class="btn btn-default othertype">Right</button>
-    						<button type="button" class="btn btn-default othertype">Left</button>
-    						<button type="button" class="btn btn-default othertype">Middle</button>
-    						<button type="button" class="btn btn-default othertype">Right</button>
-    						<button type="button" class="btn btn-default othertype">Left</button>
-    						<button type="button" class="btn btn-default othertype">Middle</button>
-    						<button type="button" class="btn btn-default othertype">Right</button>
-    						<button type="button" class="btn btn-default othertype">Left</button>
-    						<button type="button" class="btn btn-default othertype">Middle</button>
-    						<button type="button" class="btn btn-default othertype">Right</button>
+    						<button type="button" ng-repeat="cata in catas" ng-class="{active: cata == repotype }" ng-click="changetype(cata)"class="btn btn-default choosetype">{{cata}}</button>
     					</div>
     					<hr class="col-md-11"/>
     					<div class="col-md-2">
 							Language:
 						</div>
     					<div class="col-md-10">
-    						<button id="chooselan" type="button" class="btn btn-default">Left</button>
-    						<button type="button" class="btn btn-default otherlan">Middle</button>
-    						<button type="button" class="btn btn-default otherlan">Right</button>
-    						<button type="button" class="btn btn-default otherlan">Left</button>
-    						<button type="button" class="btn btn-default otherlan">Middle</button>
-    						<button type="button" class="btn btn-default otherlan">Right</button>
-    						<button type="button" class="btn btn-default otherlan">Left</button>
-    						<button type="button" class="btn btn-default otherlan">Middle</button>
-    						<button type="button" class="btn btn-default otherlan">Right</button>
-    						<button type="button" class="btn btn-default otherlan">Left</button>
-    						<button type="button" class="btn btn-default otherlan">Middle</button>
-    						<button type="button" class="btn btn-default otherlan">Right</button>
-    						<button type="button" class="btn btn-default otherlan">Left</button>
-    						<button type="button" class="btn btn-default otherlan">Middle</button>
-    						<button type="button" class="btn btn-default otherlan">Right</button>
+    						<button type="button" ng-repeat="lang in langs" ng-class="{active: lang == language }" ng-click="changelang(lang)" class="btn btn-default chooselan">{{lang}}</button>
     					</div>
     					
     				</div>

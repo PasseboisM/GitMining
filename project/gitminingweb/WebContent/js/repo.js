@@ -51,37 +51,27 @@ lastUpdate:"2014-09-08",stars:0,forks:0,contributors:0},
 {fullName:"hdddd/soiusdf",describe:"ooowowoow",
 lastUpdate:"2016-02-07",stars:0,forks:0,contributors:0}];
 
-$(document).ready(function() {
-var repotype=$("#choosetype").text();
-var language=$("#chooselan").text();
+var lang = ["All","Java","Ruby","Python","C","JavaScript","Perl","PHP","C++","html","shell","Objective-C","VIML","C#","EmacsList","Erlang","Lua","Clojure","css","Haskell","Scala","CommonLisp","R","Others"];
+var cata = ["All","ActiveRecord","API","app","CMS","Django","Emacs","framework","interface","IRC","JSON","library","Linux","Mac","management","OS","plugin","Rails","Redis","server","source","template","TextMate","tool","Web","website","Others"];
 
-$(".othertype").each(function() {
-	var text = $(this).text();
+function GetQueryString(name) { 
+var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)","i"); 
+var r = window.location.search.substr(1).match(reg); 
+if (r!=null) return (r[2]); return null; 
+}
 
-	$(this).click(function() {
-		repotype = text;
-		console.log(repotype);
-		window.location.href = "#";
-	});
-});
+var repotype=GetQueryString("type"); 
+if(repotype!=null)	repotype = decodeURIComponent(repotype); 
+else				repotype = "All"
+var language=GetQueryString("lang"); 
+if(language!=null)	language = decodeURIComponent(language); 
+else				language = "All"
 
-$(".otherlan").each(function() {
-	var text = $(this).text();
+// $(document).ready(function() {
 
-	$(this).click(function() {
-		language = text;
-		console.log(language);
-		window.location.href = "#";
-	});
-});
-});
-
-
-
-
-
-
+// });
 var app = angular.module('test', ['tm.pagination']);
+
 
 
 
@@ -92,6 +82,8 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
 			pageIndex: $scope.paginationConf.currentPage,
 			pageSize: $scope.paginationConf.itemsPerPage
 		}
+
+		
 		// BusinessService.list(postData).success(function (response) {
 
 		$scope.paginationConf.totalItems = 16;
@@ -104,12 +96,30 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
     	currentPage: 1,
     	itemsPerPage: 5
     };
+	$scope.langs = lang;
+	$scope.catas = cata;
+    $scope.language = language;
+    $scope.repotype = repotype;
 
     $scope.isActive={
     	isGen:true,
     	isStar:false,
     	isFork:false,
     };
+
+
+	$scope.changetype = function(text) {
+		repotype = text;
+		console.log(language);
+		window.location.href = "test.html?type="+repotype+"&lang="+language;
+	};
+
+    $scope.changelang = function(text) {
+		language = text;
+		console.log(language);
+		window.location.href = "test.html?type="+repotype+"&lang="+language;
+	};
+
 
     $scope.changerepo = function(retype) {
     	$scope.type = retype;
@@ -138,6 +148,7 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
 app.factory('BusinessService', ['$http', function ($http) {
 	var list = function (postData) {
 		console.log("now change business");
+		console.log(repotype);
     	// return $http.post('/Employee/GetAllEmployee', postData);
     	if(postData.pageIndex%2==0)	return repositories2;
     	else	return repositories1;
@@ -148,3 +159,9 @@ app.factory('BusinessService', ['$http', function ($http) {
     	}
     }
 }]);
+
+
+
+
+
+
