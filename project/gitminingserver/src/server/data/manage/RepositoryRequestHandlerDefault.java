@@ -6,7 +6,14 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.bson.Document;
+
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+
 import common.message.HintMessage;
+import data.db.core.ConnectionPool;
 import server.data.service.RepositoryRequestHandler;
 
 class RepositoryRequestHandlerDefault extends RepositoryRequestHandler {
@@ -21,10 +28,13 @@ class RepositoryRequestHandlerDefault extends RepositoryRequestHandler {
 		}
 		try {
 			if (httpRequest.getParameter("isTest").equals("true")) {
-				out.println(new HintMessage("This is a testing message.").toJSON());
+				
+				out.print(new HintMessage("This is a test message!").toJSON());
+				
 				out.close();
 				return;
 			}
+			
 		} catch (Exception e) {
 		}
 		
