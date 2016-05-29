@@ -6,6 +6,8 @@ import common.enumeration.sort_standard.RepoSortStadard;
 import common.enumeration.sort_standard.UserSortSandard;
 import common.param_obj.RepositorySearchParam;
 import common.param_obj.UserSearchParam;
+import data.db.service.DBRepoService;
+import data.db.service.DBService;
 import data.service.MassiveDataGetter;
 
 /**
@@ -20,6 +22,8 @@ public class MassiveDataGetterNetwork extends MassiveDataGetter {
 
 	private static MassiveDataGetterNetwork instance = new MassiveDataGetterNetwork();
 	
+	private DBRepoService repoDB = DBService.getInstance().getRepoService();
+	
 	@Override
 	public List<String> getRepositories(int page, int numPerPage, RepoSortStadard sortStandard)
 			throws IndexOutOfBoundsException {
@@ -29,8 +33,7 @@ public class MassiveDataGetterNetwork extends MassiveDataGetter {
 
 	@Override
 	public int getNumOfRepositories() {
-		// TODO Auto-generated method stub
-		return 0;
+		return repoDB.getNumOfRepo();
 	}
 
 	@Override
