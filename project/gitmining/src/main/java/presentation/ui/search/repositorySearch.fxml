@@ -69,7 +69,7 @@
                                     <ToggleButton fx:id="forkSort" mnemonicParsing="false" onAction="#changeSortStrategy" text="拷贝降序" />
                                  </children>
                               </HBox>
-                              <Pagination fx:id="pag" pageCount="1" stylesheets="@scrollBar.css" VBox.vgrow="ALWAYS" />
+                              <Pagination fx:id="pag" pageCount="1" VBox.vgrow="ALWAYS" />
                            </children>
                         </VBox>
                      </children>
@@ -87,7 +87,7 @@
                               <Separator style="-fx-background-color: grey;" VBox.vgrow="NEVER" />
                               <AnchorPane fx:id="topReposAnchorPane" layoutX="10.0" layoutY="10.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="10.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <ScrollPane fx:id="topReposPane" hbarPolicy="NEVER" maxWidth="177.0" minWidth="177.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <ScrollPane fx:id="topReposPane" hbarPolicy="NEVER" layoutY="14.0" maxWidth="177.0" minWidth="177.0" stylesheets="@scrollBar.css" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="-14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0" />
                                  </children>
                               </AnchorPane>
                            </children>
