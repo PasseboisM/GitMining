@@ -9,6 +9,7 @@
 	<link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/top.css" rel="stylesheet" media="screen">
 </head>
+
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -34,14 +35,78 @@
       </div>
     </nav>
 
-    <div class="container col-md-7" ng-app="test" ng-controller="testCtrl">
-    	<div class="list-group">
+	
+    <div class="input-group col-md-offset-2 col-md-8">
+      <input type="text" class="form-control" placeholder="Search for...">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Go!</button>
+      </span>
+    </div>
 
-    		<a ng-repeat="repo in repos" class="list-group-item">
+    <br/>
 
-    			<div class="row">
+    <div class="container" ng-app="test" ng-controller="testCtrl">
+    	<div class="list-group col-md-8">
+    		
+    		<div class="panel panel-default">
+    			<div class="panel-body">
+    				<div class="container-fluid">
+						<div class="col-md-2">
+							Language:
+						</div>
+    					<div class="col-md-10">
+    						<button type="button" class="btn btn-default">Left</button>
+    						<button type="button" class="btn btn-default">Middle</button>
+    						<button type="button" class="btn btn-default">Right</button>
+    						<button type="button" class="btn btn-default">Left</button>
+    						<button type="button" class="btn btn-default">Middle</button>
+    						<button type="button" class="btn btn-default">Right</button>
+    						<button type="button" class="btn btn-default">Left</button>
+    						<button type="button" class="btn btn-default">Middle</button>
+    						<button type="button" class="btn btn-default">Right</button>
+    						<button type="button" class="btn btn-default">Left</button>
+    						<button type="button" class="btn btn-default">Middle</button>
+    						<button type="button" class="btn btn-default">Right</button>
+    						<button type="button" class="btn btn-default">Left</button>
+    						<button type="button" class="btn btn-default">Middle</button>
+    						<button type="button" class="btn btn-default">Right</button>
+    					</div>
+    					<hr class="col-md-11"/>
+    					<div class="col-md-2">
+							Catagories:
+						</div>
+    					<div class="col-md-10">
+    						<button type="button" class="btn btn-default">Left</button>
+    						<button type="button" class="btn btn-default">Middle</button>
+    						<button type="button" class="btn btn-default">Right</button>
+    						<button type="button" class="btn btn-default">Left</button>
+    						<button type="button" class="btn btn-default">Middle</button>
+    						<button type="button" class="btn btn-default">Right</button>
+    						<button type="button" class="btn btn-default">Left</button>
+    						<button type="button" class="btn btn-default">Middle</button>
+    						<button type="button" class="btn btn-default">Right</button>
+    						<button type="button" class="btn btn-default">Left</button>
+    						<button type="button" class="btn btn-default">Middle</button>
+    						<button type="button" class="btn btn-default">Right</button>
+    						<button type="button" class="btn btn-default">Left</button>
+    						<button type="button" class="btn btn-default">Middle</button>
+    						<button type="button" class="btn btn-default">Right</button>
+    					</div>
+    					
+    				</div>
+    			</div>
+    		</div>
+    		<div class="btn-group" role="group" aria-label="...">
+    			<button type="button" class="btn btn-default">Left</button>
+    			<button type="button" class="btn btn-default">Middle</button>
+    			<button type="button" class="btn btn-default">Right</button>
+    		</div>
+    		<div class="panel panel-default" ng-repeat="repo in repos" class="list-group-item">
+
+    			<div class="panel-body row">
     				<div class="col-md-12">
-    					<h4>{{repo.fullName}}</h4>
+    					<!-- <h4>{{repo.fullName}}</h4> -->
+    					<a ng-href="#{{repo.fullName}}">{{repo.fullName}}</a>
     				</div>
     				<div class="col-md-7">
     					<div class="col-md-12">
@@ -77,12 +142,41 @@
     					</div>
     				</div>
     			</div>
-    		</a>
+    		</div>
 
 
 			<tm-pagination conf="paginationConf"></tm-pagination>
     	</div>
+
+    	<div class="list-group col-md-offset-1 col-md-3">
+
+    		<div class="panel panel-default" ng-repeat="repo in repos" class="list-group-item">
+
+    			<div class="panel-body row">
+    				<div class="col-md-12">
+    					<!-- <h4>{{repo.fullName}}</h4> -->
+    					<a ng-href="#{{repo.fullName}}">{{repo.fullName}}</a>
+    				</div>
+    				<div class="col-md-7">
+    					<div class="col-md-12">
+    						<p>{{repo.describe}}</p>
+    					</div>
+    					<div class="col-md-12">
+    						<p>{{repo.lastUpdate}}</p>
+    					</div>
+    				</div>
+    				
+    			</div>
+    		</div>
+
     </div>
+
+    <footer class="container footer col-md-12 footer-reverse">
+    	<div class="container">
+    		<p class="text-muted">Place sticky footer content here.</p>
+    	</div>
+    </footer>
+
 	
 </body>
 </html>
