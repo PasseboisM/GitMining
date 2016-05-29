@@ -52,12 +52,8 @@ lastUpdate:"2014-09-08",stars:0,forks:0,contributors:0},
 lastUpdate:"2016-02-07",stars:0,forks:0,contributors:0}];
 
 $(document).ready(function() {
-});
-
-var repotype=$("#x").text();
+var repotype=$("#choosetype").text();
 var language=$("#chooselan").text();
-
-console.log(repotype);
 
 $(".othertype").each(function() {
 	var text = $(this).text();
@@ -78,6 +74,11 @@ $(".otherlan").each(function() {
 		window.location.href = "#";
 	});
 });
+});
+
+
+
+
 
 
 var app = angular.module('test', ['tm.pagination']);
