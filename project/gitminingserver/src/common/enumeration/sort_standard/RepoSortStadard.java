@@ -2,6 +2,7 @@ package common.enumeration.sort_standard;
 
 import java.util.Comparator;
 
+import common.exception.TargetNotFoundException;
 import common.service.RepositoryMin;
 
 /**
@@ -14,7 +15,7 @@ public enum RepoSortStadard {
 		public int compare(RepositoryMin arg0, RepositoryMin arg1) {
 			return 0;
 		}	
-	},null),
+	},"no"),
 	STARS_DESCENDING(new Comparator<RepositoryMin>() {
 		public int compare(RepositoryMin arg0, RepositoryMin arg1) {
 			return arg1.getStargazers_count()-arg0.getStargazers_count();
@@ -40,7 +41,16 @@ public enum RepoSortStadard {
 		return cpr;
 	}
 	
-	public String getSort(){
+	public String getName(){
 		return sort;
+	}
+	
+	public static RepoSortStadard fromName(String sortName) throws TargetNotFoundException{
+		for (RepoSortStadard sort:RepoSortStadard.values()) {
+			if (sort.getName().equals(sortName)) {
+				return sort;
+			}
+		}
+		throw new TargetNotFoundException();
 	}
 }

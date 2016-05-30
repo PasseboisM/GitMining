@@ -2,6 +2,7 @@ package server.data.manage;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +14,7 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
+import common.enumeration.sort_standard.RepoSortStadard;
 import common.exception.TargetNotFoundException;
 import common.message.HintMessage;
 import data.db.core.ConnectionPool;
@@ -41,7 +43,7 @@ class RepositoryRequestHandlerDefault extends RepositoryRequestHandler {
 		
 		String type = httpRequest.getParameter("type");
 		if (type==null) {
-			out.print(new HintMessage("Parameter (type) is necessary!"));
+			out.print(new HintMessage("Parameter (type) is necessary!").toJSON());
 			out.close();
 		}
 		
@@ -53,7 +55,7 @@ class RepositoryRequestHandlerDefault extends RepositoryRequestHandler {
 			printTypeData(httpRequest, out);
 			break;
 		default:
-			out.println(new HintMessage("Unknown value for parameter (type)."));
+			out.println(new HintMessage("Unknown value for parameter (type).").toJSON());
 			break;
 		}
 		
@@ -68,7 +70,7 @@ class RepositoryRequestHandlerDefault extends RepositoryRequestHandler {
 	private void printTypeData(HttpServletRequest httpRequest,PrintWriter out) {
 		String method = httpRequest.getParameter("method");
 		if (method==null) {
-			out.println(new HintMessage("Parameter (method) is necessary."));
+			out.println(new HintMessage("Parameter (method) is necessary.").toJSON());
 		}
 		
 		switch (method) {
@@ -82,7 +84,7 @@ class RepositoryRequestHandlerDefault extends RepositoryRequestHandler {
 			printTypeDataMethodPaged(httpRequest, out);
 			break;
 		default:
-			out.println(new HintMessage("Unknown value for parameter (method)."));
+			out.println(new HintMessage("Unknown value for parameter (method).").toJSON());
 			break;
 		}
 	}
@@ -90,7 +92,7 @@ class RepositoryRequestHandlerDefault extends RepositoryRequestHandler {
 	private void printTypeDataMethodSpec(HttpServletRequest httpRequest,PrintWriter out) {
 		String param = httpRequest.getParameter("param");
 		if(param==null) {
-			out.println(new HintMessage("Parameter (param) is necessary."));
+			out.println(new HintMessage("Parameter (param) is necessary.").toJSON());
 			return;
 		}
 		
@@ -98,7 +100,7 @@ class RepositoryRequestHandlerDefault extends RepositoryRequestHandler {
 			String result = specific.getSpecificRepo(param);
 			out.println(result);
 		} catch (TargetNotFoundException e) {
-			out.println(new HintMessage("Repository "+param+" not found."));
+			out.println(new HintMessage("Repository "+param+" not found.").toJSON());
 		}
 	}
 	
@@ -107,6 +109,22 @@ class RepositoryRequestHandlerDefault extends RepositoryRequestHandler {
 	}
 
 	private void printTypeDataMethodPaged(HttpServletRequest httpRequest,PrintWriter out) {
-		//TODO
+		int page = 0,numPerPage = 0;
+		RepoSortStadard sort = RepoSortStadard.NO_SORT;
+		
+		try {
+			page = Integer.parseInt(httpRequest.getParameter("page"));
+			numPerPage = Integer.parseInt(httpRequest.getParameter("numPerPage"));
+			sort = RepoSortStadard.fromName(httpRequest.getParameter("sort"));
+		} catch (Exception e) {
+			out.println(new HintMessage("Please check your request parameter.").toJSON());
+			return;
+		}
+		List<String> result = massive.getRepositories(page, numPerPage, sort);
+		out.println('[');
+		for (String s:result) {
+			out.println(s);
+		}
+		out.println(']');
 	}
 }

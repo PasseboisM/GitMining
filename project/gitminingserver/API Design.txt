@@ -19,10 +19,10 @@ Repository query:
 						param=JSON object of RepositorySearchParam
 						e.g. .../repo?type=data&method=search&page=1&numPerPage=
 							param={"langs":["C"],"cates":[],"keywords":["all"],"sortStandard":"STARS_DESCENDING"}
-					paged:get a list of repositories with a sort parameter	//TODO
-						page=..
-						numPerPage=..
-						sortStandard=..
+					paged:get a list of repositories with a sort parameter	//Complete
+						page=..  Start from 1
+						numPerPage=..  No less than 1
+						sort=no/forks/stars
 					
 User query:
 	URL:http://106.75.5.61:8080/GitMiningServer/user?{param1=...}&{param2=...}&...

@@ -45,7 +45,7 @@ public class SearchApiMakerGitMining implements SearchApiMaker {
 		for (Language language : langs) {
 			api+="+language:"+language.getName();
 		}
-		String sort = sortStandard.getSort();
+		String sort = sortStandard.getName();
 		if(sort!=null)
 			api+="&sort="+sort;
 		return api+"&page="+page;
