@@ -92,11 +92,15 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
 			sort:"no"
 		}
 		
-		$scope.paginationConf.totalItems = 16;
+		
+		BusinessService.initial().success(
+			function(response) {
+				$scope.paginationConf.totalItems = response.numOfRepo;
+			});
 		BusinessService.list(postData).success(
-				function(response) {
-					console.log(response);
-				});
+			function(response) {
+				$scope.repos=response;
+			});
 		
 	}
     
@@ -156,21 +160,31 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
     $scope.$watch('paginationConf.currentPage + paginationConf.itemsPerPage + type', GetAllEmployee);}]);
 //业务类
 app.factory('BusinessService', ['$http', function ($http) {
-	var list = function (postData,$scope) {
+	var url = "/GitMiningServer/repo";
+	var list = function (postData) {
 		console.log("now change business");
 		console.log(postData);
 		return $http({
 			 method:'GET',
-			 url:"/GitMiningServer/repo",
+			 url:url,
 			 params:postData
 			 });
-		/*$http.get("http://106.75.5.61:8080/GitMiningServer/repo?type=data&method=paged&page=1&numPerPage=2&sort=no")
-	    .success(function(response) {console.log(1);});*/
-
     }
+	var getTotal = function () {
+		console.log("getTotal");
+		return $http({
+			 method:'GET',
+			 url:url,
+			 params:{type:"stat"}
+			 });
+    }
+
     return {
     	list: function (postData) {
     		return list(postData);
+    	}
+    	initial:function(){
+    		return getTotal();
     	}
     }
 }]);
