@@ -77,19 +77,20 @@ var app = angular.module('test', ['tm.pagination']);
 
 app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, BusinessService) {
 	//配置分页基本参数
-    $scope.paginationConf = {
-    	currentPage: 1,
-    	itemsPerPage: 5
-    };
+    
 	var GetAllEmployee = function () {
+		$scope.paginationConf = {
+		    	currentPage: 1,
+		    	itemsPerPage: 5
+		    };
 		console.log("now get new repos");
 		var postData = {
 			type:"data",
 			method:"paged",
-			page:1,
-			numPerPage:1,
-//			page: $scope.paginationConf.currentPage,
-//			numPerPage: $scope.paginationConf.itemsPerPage,
+//			page:1,
+//			numPerPage:1,
+			page: $scope.paginationConf.currentPage,
+			numPerPage: $scope.paginationConf.itemsPerPage,
 			sort:"no"
 		}
 		
