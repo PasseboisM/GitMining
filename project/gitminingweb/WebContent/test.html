@@ -3,13 +3,18 @@
 <head>
 	<meta charset="UTF-8">
 	<title>GitMiningChart</title>
+	<script src="js/jquery-1.11.3.js"></script>
+	<!-- <script src="http://code.jquery.com/jquery.js"></script> -->
 	<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script> 
 	<script src="js/repo.js"></script> 
+	<!-- <script src="js/reposervice.js"></script>  -->
 	<script src="js/tm.pagination.js"></script> 
 	<link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/top.css" rel="stylesheet" media="screen">
 </head>
+
 <body>
+	<!-- <p id="x">sdfsdf</p> -->
 	<nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -34,19 +39,47 @@
       </div>
     </nav>
 
+	
     <div class="input-group col-md-offset-2 col-md-8">
       <input type="text" class="form-control" placeholder="Search for...">
       <span class="input-group-btn">
         <button class="btn btn-default" type="button">Go!</button>
       </span>
     </div>
+
     <br/>
+
     <div class="container" ng-app="test" ng-controller="testCtrl">
-    	<div class="well list-group col-md-8">
+    	<div class="list-group col-md-8">
+    		
+    		<div class="panel panel-default">
+    			<div class="panel-body">
+    				<div class="container-fluid">
+						<div class="col-md-2">
+							Catagories:
+						</div>
+    					<div class="col-md-10">
+    						<button type="button" ng-repeat="cata in catas" ng-class="{active: cata == repotype }" ng-click="changetype(cata)"class="btn btn-default choosetype">{{cata}}</button>
+    					</div>
+    					<hr class="col-md-11"/>
+    					<div class="col-md-2">
+							Language:
+						</div>
+    					<div class="col-md-10">
+    						<button type="button" ng-repeat="lang in langs" ng-class="{active: lang == language }" ng-click="changelang(lang)" class="btn btn-default chooselan">{{lang}}</button>
+    					</div>
+    					
+    				</div>
+    			</div>
+    		</div>
+    		<div class="btn-group" role="group" aria-label="...">
+    			<button type="button" class="btn btn-default" ng-class="{active: isActive.isGen}" ng-click="changerepo(1)">随机项目</button>
+    			<button type="button" class="btn btn-default"ng-class="{active: isActive.isStar}" ng-click="changerepo(2)">关注降序</button>
+    			<button type="button" class="btn btn-default"ng-class="{active: isActive.isFork}" ng-click="changerepo(3)">拷贝降序</button>
+    		</div>
+    		<div class="panel panel-default" ng-repeat="repo in repos" class="list-group-item">
 
-    		<div ng-repeat="repo in repos" class="list-group-item">
-
-    			<div class="row">
+    			<div class="panel-body row">
     				<div class="col-md-12">
     					<!-- <h4>{{repo.fullName}}</h4> -->
     					<a ng-href="#{{repo.fullName}}">{{repo.fullName}}</a>
@@ -91,11 +124,11 @@
 			<tm-pagination conf="paginationConf"></tm-pagination>
     	</div>
 
-    	<div class="well list-group col-md-offset-1 col-md-3">
+    	<div class="list-group col-md-offset-1 col-md-3">
 
-    		<div ng-repeat="repo in repos" class="list-group-item">
+    		<div class="panel panel-default" ng-repeat="repo in repos" class="list-group-item">
 
-    			<div class="row">
+    			<div class="panel-body row">
     				<div class="col-md-12">
     					<!-- <h4>{{repo.fullName}}</h4> -->
     					<a ng-href="#{{repo.fullName}}">{{repo.fullName}}</a>
@@ -114,9 +147,12 @@
 
     </div>
 
-    <div class="well row col-md-12">
-    	<button class="btn btn-default" type="button">Go!</button>
-    </div>
+    <footer class="container footer col-md-12 footer-reverse">
+    	<div class="container">
+    		<p class="text-muted">Place sticky footer content here.</p>
+    	</div>
+    </footer>
+
 	
 </body>
 </html>
