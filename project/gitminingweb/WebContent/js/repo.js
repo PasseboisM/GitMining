@@ -79,7 +79,7 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
 	//配置分页基本参数
 	$scope.paginationConf = {
 	    	currentPage: 1,
-	    	itemsPerPage: 5
+	    	itemsPerPage: 15
 	    };
 	var GetAllEmployee = function () {
 		
