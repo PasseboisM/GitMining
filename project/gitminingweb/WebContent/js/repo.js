@@ -94,7 +94,7 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
 		}
 		
 		$scope.paginationConf.totalItems = 16;
-		BusinessService.list(postData);
+		BusinessService.list(postData,$scope);
 		
 	}
     
@@ -153,8 +153,8 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
     ***************************************************************/
     $scope.$watch('paginationConf.currentPage + paginationConf.itemsPerPage + type', GetAllEmployee);}]);
 //业务类
-app.factory('BusinessService', ['$http','$scope', function ($http,$scope) {
-	var list = function (postData) {
+app.factory('BusinessService', ['$http', function ($http) {
+	var list = function (postData,$scope) {
 		console.log("now change business");
 		$http({
 			 method:'GET',
@@ -179,8 +179,8 @@ app.factory('BusinessService', ['$http','$scope', function ($http,$scope) {
     	return repodata;
     }
     return {
-    	list: function (postData) {
-    		return list(postData);
+    	list: function (postData,$scope) {
+    		return list(postData,$scope);
     	}
     }
 }]);
