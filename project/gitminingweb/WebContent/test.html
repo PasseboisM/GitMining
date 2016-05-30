@@ -74,9 +74,9 @@
     			</div>
     		</div>
     		<div class="btn-group" role="group" aria-label="...">
-    			<button type="button" class="btn btn-default" ng-class="{active: isActive.isGen}" ng-click="changerepo(1)">随机项目</button>
-    			<button type="button" class="btn btn-default"ng-class="{active: isActive.isStar}" ng-click="changerepo(2)">关注降序</button>
-    			<button type="button" class="btn btn-default"ng-class="{active: isActive.isFork}" ng-click="changerepo(3)">拷贝降序</button>
+    			<button type="button" class="btn btn-default" ng-class="{active: isActive.isGen}" ng-click="changerepo('no')">随机项目</button>
+    			<button type="button" class="btn btn-default"ng-class="{active: isActive.isStar}" ng-click="changerepo('stars')">关注降序</button>
+    			<button type="button" class="btn btn-default"ng-class="{active: isActive.isFork}" ng-click="changerepo('forks')">拷贝降序</button>
     		</div>
     		<div ng-repeat="repo in repos" class="list-group-item">
 

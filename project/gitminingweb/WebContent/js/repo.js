@@ -77,6 +77,7 @@ var app = angular.module('test', ['tm.pagination']);
 
 app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, BusinessService) {
 	//配置分页基本参数
+	$scope.type = "no";
 	$scope.paginationConf = {
 	    	currentPage: 1,
 	    	itemsPerPage: 15
@@ -89,7 +90,7 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
 			method:"paged",
 			page:$scope.paginationConf.currentPage,
 			numPerPage:$scope.paginationConf.itemsPerPage,
-			sort:"no"
+			sort:$scope.type
 		}
 		
 		
@@ -138,15 +139,15 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
     $scope.changerepo = function(retype) {
     	$scope.type = retype;
     	$scope.paginationConf.currentPage = 1
-    	if(retype==1){
+    	if(retype=="no"){
     		$scope.isActive.isGen=true;
     		$scope.isActive.isStar=false;
     		$scope.isActive.isFork=false;
-    	}else if(retype==2){
+    	}else if(retype=="stars"){
     		$scope.isActive.isStar=true;
     		$scope.isActive.isGen=false;
     		$scope.isActive.isFork=false;
-    	}else if(retype==3){
+    	}else if(retype=="forks"){
     		$scope.isActive.isFork=true;
     		$scope.isActive.isStar=false;
     		$scope.isActive.isGen=false;
