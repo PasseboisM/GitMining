@@ -101,6 +101,12 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
     $scope.language = language;
     $scope.repotype = repotype;
 
+    $scope.search = "";
+
+    $scope.getRepo = function(text) {
+		console.log(text);
+	};
+
     $scope.isActive={
     	isGen:true,
     	isStar:false,
