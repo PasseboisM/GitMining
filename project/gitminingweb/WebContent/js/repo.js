@@ -183,7 +183,7 @@ app.factory('BusinessService', ['$http', function ($http) {
     return {
     	list: function (postData) {
     		return list(postData);
-    	}
+    	},
     	initial:function(){
     		return getTotal();
     	}
