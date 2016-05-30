@@ -77,25 +77,27 @@ var app = angular.module('test', ['tm.pagination']);
 
 app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, BusinessService) {
 	//配置分页基本参数
-    
+	$scope.paginationConf = {
+	    	currentPage: 1,
+	    	itemsPerPage: 1
+	    };
 	var GetAllEmployee = function () {
-		$scope.paginationConf = {
-		    	currentPage: 1,
-		    	itemsPerPage: 5
-		    };
+		
 		console.log("now get new repos");
+		var pageD = $scope.paginationConf.currentPage;
+		var num = $scope.paginationConf.itemsPerPage;
 		var postData = {
 			type:"data",
 			method:"paged",
 //			page:1,
-//			numPerPage:1,
-			page: $scope.paginationConf.currentPage,
-			numPerPage: $scope.paginationConf.itemsPerPage,
+//			numPerPage:5,
+			page:pageD,
+			numPerPage:num,
 			sort:"no"
 		}
 		
 		$scope.paginationConf.totalItems = 16;
-		BusinessService.list(postData,$scope);
+		BusinessService.list(postData);
 		
 	}
     
@@ -157,31 +159,19 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
 app.factory('BusinessService', ['$http', function ($http) {
 	var list = function (postData,$scope) {
 		console.log("now change business");
-		$http({
+		console.log(postData);
+		return $http({
 			 method:'GET',
 			 url:"/GitMiningServer/repo",
 			 params:postData
-			 }).success(function(response) {$scope.repos = response;console.log($scope.repos);});
+			 });
 		/*$http.get("http://106.75.5.61:8080/GitMiningServer/repo?type=data&method=paged&page=1&numPerPage=2&sort=no")
 	    .success(function(response) {console.log(1);});*/
-		var repodata;
-    	$(document).ready(function() {
-    		var url = "/GitMiningServer/repo"
-    		$.ajax(url, {
-    			type : 'GET',
-    			data : postData,
-    			success : function(data) {
-    				repodata=data;
-    				console.log(repodata);
-    			}
-    		});
-		});
-    	
-    	return repodata;
+
     }
     return {
-    	list: function (postData,$scope) {
-    		return list(postData,$scope);
+    	list: function (postData) {
+    		return list(postData);
     	}
     }
 }]);
