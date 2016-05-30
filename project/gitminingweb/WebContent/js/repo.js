@@ -79,17 +79,20 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
 	var GetAllEmployee = function () {
 		console.log("now get new repos");
 		var postData = {
-			pageIndex: $scope.paginationConf.currentPage,
-			pageSize: $scope.paginationConf.itemsPerPage
+			type:"data",
+			method:"paged",
+			page: $scope.paginationConf.currentPage,
+			numPerPage: $scope.paginationConf.itemsPerPage,
+			sort:no
 		}
 
 		
-		// BusinessService.list(postData).success(function (response) {
-
+		BusinessService.list(postData).success(function (response) {
+			window.alert(response);
+		});
 		$scope.paginationConf.totalItems = 16;
-		// window.alert(response);
 		$scope.repos = BusinessService.list(postData);
-		// });
+		
 	}
     //配置分页基本参数
     $scope.paginationConf = {
@@ -154,12 +157,12 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
 app.factory('BusinessService', ['$http', function ($http) {
 	var list = function (postData) {
 		console.log("now change business");
-    	// return $http.post('/Employee/GetAllEmployee', postData);
-    	$(document).ready(function() {
+    	return $http.post('/GitMiningServer/repo', postData);
+    	/*$(document).ready(function() {
     		console.log("good");
 		});
     	if(postData.pageIndex%2==0)	return repositories2;
-    	else	return repositories1;
+    	else	return repositories1;*/
     }
     return {
     	list: function (postData) {
