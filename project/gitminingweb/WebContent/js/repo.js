@@ -93,7 +93,10 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
 		}
 		
 		$scope.paginationConf.totalItems = 16;
-		BusinessService.list(postData);
+		BusinessService.list(postData).success(
+				function(response) {
+					console.log(response);
+				});
 		
 	}
     
