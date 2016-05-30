@@ -1,6 +1,7 @@
-Return types of all APIs are JSON Strings.
+API Document of GitMiningServer
 
 Server address:http://106.75.5.61:8080/GitMiningServer/
+Return types of all APIs are JSON Strings.
 
 Repository query:
 	URL:http://106.75.5.61:8080/GitMiningServer/repo?{param1=...}&{param2=...}&...
@@ -54,5 +55,6 @@ statistic query:
 API hint:
 	URL:http://106.75.5.61:8080/GitMiningServer/api?{param1=...}&{param2=...}&...
 	Parameters:
+		(non)----Get the API document. (This page)
 		action=?
 			test:Used for testing network connectivity, returns  {"message":"Connected."}

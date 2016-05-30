@@ -1,4 +1,4 @@
-var repositories1 = [{fullName:"haha/ss",describe:"sldkfjslkdjflskdjflskdjflskdjflskdjf",
+/*var repositories1 = [{fullName:"haha/ss",describe:"sldkfjslkdjflskdjflskdjflskdjflskdjf",
 lastUpdate:"2014-09-08",stars:58,forks:79,contributors:18},
 {fullName:"hdddd/soiusdf",describe:"ooowowoow",
 lastUpdate:"2016-02-07",stars:3,forks:12,contributors:2},
@@ -49,7 +49,7 @@ lastUpdate:"2014-09-08",stars:0,forks:0,contributors:0},
 lastUpdate:"2016-02-07",stars:0,forks:0,contributors:0},{fullName:"haha/ss",describe:"sldkfjslkdjflskdjflskdjflskdjflskdjf",
 lastUpdate:"2014-09-08",stars:0,forks:0,contributors:0},
 {fullName:"hdddd/soiusdf",describe:"ooowowoow",
-lastUpdate:"2016-02-07",stars:0,forks:0,contributors:0}];
+lastUpdate:"2016-02-07",stars:0,forks:0,contributors:0}];*/
 
 var lang = ["All","Java","Ruby","Python","C","JavaScript","Perl","PHP","C++","html","shell","Objective-C","VIML","C#","EmacsList","Erlang","Lua","Clojure","css","Haskell","Scala","CommonLisp","R","Others"];
 var cata = ["All","ActiveRecord","API","app","CMS","Django","Emacs","framework","interface","IRC","JSON","library","Linux","Mac","management","OS","plugin","Rails","Redis","server","source","template","TextMate","tool","Web","website","Others"];
@@ -77,25 +77,31 @@ var app = angular.module('test', ['tm.pagination']);
 
 app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, BusinessService) {
 	//配置分页基本参数
-    
+	$scope.type = "no";
+	$scope.paginationConf = {
+	    	currentPage: 1,
+	    	itemsPerPage: 15
+	    };
 	var GetAllEmployee = function () {
-		$scope.paginationConf = {
-		    	currentPage: 1,
-		    	itemsPerPage: 5
-		    };
+		
 		console.log("now get new repos");
 		var postData = {
 			type:"data",
 			method:"paged",
-//			page:1,
-//			numPerPage:1,
-			page: $scope.paginationConf.currentPage,
-			numPerPage: $scope.paginationConf.itemsPerPage,
-			sort:"no"
+			page:$scope.paginationConf.currentPage,
+			numPerPage:$scope.paginationConf.itemsPerPage,
+			sort:$scope.type
 		}
 		
-		$scope.paginationConf.totalItems = 16;
-		BusinessService.list(postData,$scope);
+		
+		BusinessService.initial().success(
+			function(response) {
+				$scope.paginationConf.totalItems = response.numOfRepo;
+			});
+		BusinessService.list(postData).success(
+			function(response) {
+				$scope.repos=response;
+			});
 		
 	}
     
@@ -133,15 +139,15 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
     $scope.changerepo = function(retype) {
     	$scope.type = retype;
     	$scope.paginationConf.currentPage = 1
-    	if(retype==1){
+    	if(retype=="no"){
     		$scope.isActive.isGen=true;
     		$scope.isActive.isStar=false;
     		$scope.isActive.isFork=false;
-    	}else if(retype==2){
+    	}else if(retype=="stars"){
     		$scope.isActive.isStar=true;
     		$scope.isActive.isGen=false;
     		$scope.isActive.isFork=false;
-    	}else if(retype==3){
+    	}else if(retype=="forks"){
     		$scope.isActive.isFork=true;
     		$scope.isActive.isStar=false;
     		$scope.isActive.isGen=false;
@@ -155,33 +161,31 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
     $scope.$watch('paginationConf.currentPage + paginationConf.itemsPerPage + type', GetAllEmployee);}]);
 //业务类
 app.factory('BusinessService', ['$http', function ($http) {
-	var list = function (postData,$scope) {
+	var url = "/GitMiningServer/repo";
+	var list = function (postData) {
 		console.log("now change business");
-		$http({
+		console.log(postData);
+		return $http({
 			 method:'GET',
-			 url:"/GitMiningServer/repo",
+			 url:url,
 			 params:postData
-			 }).success(function(response) {$scope.repos = response;console.log($scope.repos);});
-		/*$http.get("http://106.75.5.61:8080/GitMiningServer/repo?type=data&method=paged&page=1&numPerPage=2&sort=no")
-	    .success(function(response) {console.log(1);});*/
-		var repodata;
-    	$(document).ready(function() {
-    		var url = "/GitMiningServer/repo"
-    		$.ajax(url, {
-    			type : 'GET',
-    			data : postData,
-    			success : function(data) {
-    				repodata=data;
-    				console.log(repodata);
-    			}
-    		});
-		});
-    	
-    	return repodata;
+			 });
     }
+	var getTotal = function () {
+		console.log("getTotal");
+		return $http({
+			 method:'GET',
+			 url:url,
+			 params:{type:"stat"}
+			 });
+    }
+
     return {
-    	list: function (postData,$scope) {
-    		return list(postData,$scope);
+    	list: function (postData) {
+    		return list(postData);
+    	},
+    	initial:function(){
+    		return getTotal();
     	}
     }
 }]);
