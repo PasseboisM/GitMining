@@ -79,20 +79,16 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
 	//配置分页基本参数
 	$scope.paginationConf = {
 	    	currentPage: 1,
-	    	itemsPerPage: 1
+	    	itemsPerPage: 5
 	    };
 	var GetAllEmployee = function () {
 		
 		console.log("now get new repos");
-		var pageD = $scope.paginationConf.currentPage;
-		var num = $scope.paginationConf.itemsPerPage;
 		var postData = {
 			type:"data",
 			method:"paged",
-//			page:1,
-//			numPerPage:5,
-			page:pageD,
-			numPerPage:num,
+			page:$scope.paginationConf.currentPage,
+			numPerPage:$scope.paginationConf.itemsPerPage,
 			sort:"no"
 		}
 		
