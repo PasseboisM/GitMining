@@ -157,16 +157,23 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
 app.factory('BusinessService', ['$http', function ($http) {
 	var list = function (postData) {
 		console.log("now change business");
-		transFn = function(postData) {
+		/*transFn = function(postData) {
 			return $.param(postData);
 		}, postCfg = {
 			transformRequest : transFn
 		};
-    	return $http.post('/GitMiningServer/repo', postData,postCfg);
-    	/*$(document).ready(function() {
-    		console.log("good");
+    	return $http.post('/GitMiningServer/repo', postData,postCfg);*/
+    	$(document).ready(function() {
+    		var url = "/GitMiningServer/repo"
+    		$.ajax(url, {
+    			type : 'GET',
+    			data : postData,
+    			success : function(data) {
+    				alert(1);
+    			}
+    		});
 		});
-    	if(postData.pageIndex%2==0)	return repositories2;
+    	/*if(postData.pageIndex%2==0)	return repositories2;
     	else	return repositories1;*/
     }
     return {
