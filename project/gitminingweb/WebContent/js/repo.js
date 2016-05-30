@@ -1,4 +1,4 @@
-var repositories1 = [{fullName:"haha/ss",describe:"sldkfjslkdjflskdjflskdjflskdjflskdjf",
+/*var repositories1 = [{fullName:"haha/ss",describe:"sldkfjslkdjflskdjflskdjflskdjflskdjf",
 lastUpdate:"2014-09-08",stars:58,forks:79,contributors:18},
 {fullName:"hdddd/soiusdf",describe:"ooowowoow",
 lastUpdate:"2016-02-07",stars:3,forks:12,contributors:2},
@@ -49,7 +49,7 @@ lastUpdate:"2014-09-08",stars:0,forks:0,contributors:0},
 lastUpdate:"2016-02-07",stars:0,forks:0,contributors:0},{fullName:"haha/ss",describe:"sldkfjslkdjflskdjflskdjflskdjflskdjf",
 lastUpdate:"2014-09-08",stars:0,forks:0,contributors:0},
 {fullName:"hdddd/soiusdf",describe:"ooowowoow",
-lastUpdate:"2016-02-07",stars:0,forks:0,contributors:0}];
+lastUpdate:"2016-02-07",stars:0,forks:0,contributors:0}];*/
 
 var lang = ["All","Java","Ruby","Python","C","JavaScript","Perl","PHP","C++","html","shell","Objective-C","VIML","C#","EmacsList","Erlang","Lua","Clojure","css","Haskell","Scala","CommonLisp","R","Others"];
 var cata = ["All","ActiveRecord","API","app","CMS","Django","Emacs","framework","interface","IRC","JSON","library","Linux","Mac","management","OS","plugin","Rails","Redis","server","source","template","TextMate","tool","Web","website","Others"];
