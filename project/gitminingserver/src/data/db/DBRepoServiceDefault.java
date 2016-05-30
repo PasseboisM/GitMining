@@ -10,21 +10,23 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.Block;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.model.Sorts;
-import com.mongodb.client.model.Filters;
-
-
 import common.enumeration.sort_standard.RepoSortStadard;
+import common.exception.NetworkException;
 import common.param_obj.RepositorySearchParam;
+import common.service.Repository;
 import data.db.core.CollectionHelper;
 import data.db.core.ConnectionPool;
 import data.db.core.GitCollections;
 import data.db.service.DBRepoService;
+import network.service.GHDataSource;
+import network.service.NetworkServiceFactory;
 
 
 
 public class DBRepoServiceDefault implements DBRepoService {
 
 	ConnectionPool cp = ConnectionPool.getInstance();
+	GHDataSource GHService = NetworkServiceFactory.getInstance().getGHDataSource();
 	
 	@Override
 	public int getNumOfRepo() {
@@ -87,8 +89,15 @@ public class DBRepoServiceDefault implements DBRepoService {
 
 	@Override
 	public List<String> searchRepository(RepositorySearchParam params) {
-		// TODO Auto-generated method stub
-		return null;
+		List<String> result = new ArrayList<String>(200);
+		List<Repository> fromNet = null;
+		try {
+			fromNet = GHService.searchRepository(params);
+		} catch (NetworkException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 
 	public static void main(String[] args) {
