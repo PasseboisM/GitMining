@@ -3,6 +3,7 @@ import java.util.Iterator;
 
 import chart_data.UserDistOverCreateTime;
 import chart_data.UserDistOverCreateTime.UserCreateOnTimeCount;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -93,13 +94,10 @@ public class GitParetoChartController {
            );
         }
         
-        ObservableList<XYChart.Series<String,Number>> data = bc.getData();
-        if (data == null) {
-            data = FXCollections.observableArrayList(series);
-            bc.setData(data);
-        } else {
-            bc.getData().add(series);
-        }
+        ObservableList<XYChart.Series<String,Number>> data = FXCollections.observableArrayList(series);
+        Platform.runLater(new Runnable() {
+			@Override
+			public void run() {bc.setData(data);}});
         bc.getStylesheets().add(getClass().getResource("mixChart.css").toExternalForm());
         initialLayout(bc);
         return bc;

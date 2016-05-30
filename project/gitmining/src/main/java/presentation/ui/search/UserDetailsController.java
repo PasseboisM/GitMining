@@ -203,16 +203,57 @@ public class UserDetailsController {
 	}
 	
 	private void initialComponentText(GitUser user) {
-		labelName.setText(user.getName());
-		labelId.setText("ID : "+user.getId());
-		labelType.setText(user.getType());
-		labelUserLocation.setText(user.getLocation());
-		labelEmail.setText(user.getEmail());
+		//TODO
+		
+		if((""+user.getName()).equals("null")){
+			labelBox.getChildren().remove(labelName);
+		}else{
+			labelName.setText(user.getName());
+		}
+		if((""+user.getId()).equals("null")){
+			labelBox.getChildren().remove(labelId);
+		}else{
+			labelId.setText("ID : "+user.getId());
+		}
+		if((""+user.getType()).equals("null")){
+			labelBox.getChildren().remove(labelType);
+		}else{
+			labelType.setText(user.getType());
+		}
+		if((""+user.getLocation()).equals("null")){
+			//System.out.println("do!");
+			labelBox.getChildren().remove(labelUserLocation);
+		}else{
+			
+			labelUserLocation.setText(user.getLocation());
+		}
+		if((user.getEmail()==null)){
+			//System.out.println("do!");
+			labelBox.getChildren().remove(labelEmail);
+		}else{
+			//System.out.println(user.getEmail()+"");
+			labelEmail.setText(user.getEmail());
+		}
+		
+		if((""+user.getPublic_repos()).equals("null")){
+		
+			labelBox.getChildren().remove(labelRepos);
+		}else{
+			
+			labelRepos.setText(user.getPublic_repos()+"");
+		}
+		if(user.getBlog()==null){
+			labelBox.getChildren().remove(labelBlog);
+		}else{
+			labelBlog.setText(""+user.getBlog());
+		}
+		
 		labelFollowers.setText(user.getFollowers()+"");
 		labelFollowing.setText(user.getFollowing()+"");
-		labelRepos.setText(user.getPublic_repos()+"");
-		labelCreatedAt.setText(user.getCreated_at());
-		labelUpdatedAt.setText(user.getUpdated_at());
+		String createDate=user.getCreated_at().substring(0, 10)+" "+user.getCreated_at().substring(12, user.getCreated_at().length()-1);
+		String updateDate=user.getUpdated_at().substring(0, 10)+" "+user.getUpdated_at().substring(12, user.getUpdated_at().length()-1);
+		labelCreatedAt.setText(createDate);
+		labelUpdatedAt.setText(updateDate);
 	}
 	@FXML	private Label labelName;
 	@FXML	private Label labelId;
@@ -224,6 +265,7 @@ public class UserDetailsController {
 	@FXML	private Label labelRepos;
 	@FXML	private Label labelCreatedAt;
 	@FXML	private Label labelUpdatedAt;
+	@FXML	private Label labelBlog;
 	@FXML    private AnchorPane anchorPane;
 	@FXML    private ImageView imageView;
 	@FXML    private AnchorPane radarAnchorPane;
@@ -233,6 +275,7 @@ public class UserDetailsController {
 	@FXML	private VBox vboxListSub;
 	@FXML	private VBox vboxListFollower;
 	@FXML	private VBox vboxListFollowing;
+	@FXML	private VBox labelBox;
 	private static Image btImage=null;
 	private static Image avatarImage=null;
 	private ImageView imageV;

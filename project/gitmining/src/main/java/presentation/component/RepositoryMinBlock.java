@@ -43,9 +43,14 @@ public class RepositoryMinBlock  extends BorderPane{
 	}
 
 	private void setComponentText(Repository repositoryData) {
+		
+		String updateDate=repositoryData.getUpdated_at().substring(0, 10)+" "+repositoryData.getUpdated_at().substring(12, repositoryData.getUpdated_at().length()-1);
+		
 		repoFullName.setText(repositoryData.getFull_name());
 		description.setText(repositoryData.getDescription());
-		lastUpdated.setText("Last updated : "+repositoryData.getUpdated_at());
+		//System.out.println(repositoryData.getUpdated_at());
+		//TODO
+		lastUpdated.setText("Last updated : "+updateDate);
 		stargazersCount.setText(repositoryData.getStargazers_count()+"");
 		forksCount.setText(repositoryData.getForks_count()+"");
 		subscribersCount.setText(repositoryData.getSubscribers_count()+"");

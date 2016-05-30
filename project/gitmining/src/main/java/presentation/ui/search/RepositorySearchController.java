@@ -20,6 +20,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Pagination;
+import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.TextField;
@@ -275,6 +276,7 @@ public class RepositorySearchController{
 	
 	private ScrollPane createPage(Integer pageIndex) {
 		ScrollPane pane = new ScrollPane();
+		ScrollBar bar = new ScrollBar();
 		VBox vBox = new VBox();
 		int numPerPage = 10;
 		for (int i = 0; i < numPerPage; i++) {
