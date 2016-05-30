@@ -5,8 +5,25 @@ Server address:http://106.75.5.61:8080/GitMiningServer/
 Repository query:
 	URL:http://106.75.5.61:8080/GitMiningServer/repo?{param1=...}&{param2=...}&...
 	Parameters:
-		
-
+		type=?
+			stat:obtain statistics about server's repository data
+				returns a JSON object containing attributes, "numOfRepo"	//Complete
+				e.g. {"numOfRepo":57000}
+			data:obtain data of certain repositories
+				method=?
+					spec:get a specific repository by its full name			//TODO
+						param=full_name_of_the_repository
+						e.g. .../repo?type=data&method=spec&param=gitmining
+					search:get a list of repositories with a search parameter, now the maximum number of repos is 200
+																			//TODO
+						param=JSON object of RepositorySearchParam
+						e.g. .../repo?type=data&method=search&page=1&numPerPage=
+							param={"langs":["C"],"cates":[],"keywords":["all"],"sortStandard":"STARS_DESCENDING"}
+					paged:get a list of repositories with a sort parameter	//Complete
+						page=..  Start from 1
+						numPerPage=..  No less than 1
+						sort=no/forks/stars
+					
 User query:
 	URL:http://106.75.5.61:8080/GitMiningServer/user?{param1=...}&{param2=...}&...
 	Parameters:

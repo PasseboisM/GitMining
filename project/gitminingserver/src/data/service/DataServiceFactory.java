@@ -3,7 +3,6 @@ package data.service;
 import data.DataServiceFactoryNetwork;
 
 /**
- * 提供服务器各个详细数据接口
  * @author xjh14
  */
 public abstract class DataServiceFactory {
