@@ -29,7 +29,8 @@ public class GHDataSourceDefault implements GHDataSource {
 	private Gson gson = new Gson(); 
 	private SearchApiMaker searchApi = null;
 	private HTTPConnectionService conn = null;
-	private static final int ITEM_PER_PAGE=30;
+	private static final int ITEM_PER_PAGE = 30;
+	private static final int PAGE_AMOUNT_LIMIT = 2;
 	
 	@Override
 	public List<Repository> searchRepository(RepositorySearchParam repositorySearchParam) throws NetworkException {
@@ -61,7 +62,7 @@ public class GHDataSourceDefault implements GHDataSource {
 				repos.add(result);
 			});
 			page++;
-			}while(page*ITEM_PER_PAGE<totalCount);
+			}while(page*ITEM_PER_PAGE<totalCount&&page<=PAGE_AMOUNT_LIMIT);
 			return repos;
 	}
 
@@ -95,7 +96,7 @@ public class GHDataSourceDefault implements GHDataSource {
 			users.add(result);
 		});
 		page++;
-		}while(page*ITEM_PER_PAGE<totalCount);
+		}while(page*ITEM_PER_PAGE<totalCount&&page<=PAGE_AMOUNT_LIMIT);
 		return users;
 	}
 
