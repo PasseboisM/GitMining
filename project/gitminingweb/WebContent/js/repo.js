@@ -83,7 +83,7 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
 			method:"paged",
 			page: $scope.paginationConf.currentPage,
 			numPerPage: $scope.paginationConf.itemsPerPage,
-			sort:no
+			sort:"no"
 		}
 
 		
@@ -157,7 +157,12 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
 app.factory('BusinessService', ['$http', function ($http) {
 	var list = function (postData) {
 		console.log("now change business");
-    	return $http.post('/GitMiningServer/repo', postData);
+		transFn = function(postData) {
+			return $.param(postData);
+		}, postCfg = {
+			transformRequest : transFn
+		};
+    	return $http.post('/GitMiningServer/repo', postData,postCfg);
     	/*$(document).ready(function() {
     		console.log("good");
 		});
