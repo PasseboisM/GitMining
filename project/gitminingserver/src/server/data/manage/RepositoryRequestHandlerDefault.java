@@ -121,10 +121,10 @@ class RepositoryRequestHandlerDefault extends RepositoryRequestHandler {
 			return;
 		}
 		List<String> result = massive.getRepositories(page, numPerPage, sort);
-		out.println('[');
+		out.print('[');
 		for (String s:result) {
-			out.println(s);
+			out.print(s);
 		}
-		out.println(']');
+		out.print(']');
 	}
 }
