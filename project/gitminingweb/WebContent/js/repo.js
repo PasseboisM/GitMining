@@ -76,30 +76,39 @@ var app = angular.module('test', ['tm.pagination']);
 
 
 app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, BusinessService) {
+	//配置分页基本参数
+    
 	var GetAllEmployee = function () {
+		$scope.paginationConf = {
+		    	currentPage: 1,
+		    	itemsPerPage: 5
+		    };
 		console.log("now get new repos");
 		var postData = {
-			pageIndex: $scope.paginationConf.currentPage,
-			pageSize: $scope.paginationConf.itemsPerPage
+			type:"data",
+			method:"paged",
+//			page:1,
+//			numPerPage:1,
+			page: $scope.paginationConf.currentPage,
+			numPerPage: $scope.paginationConf.itemsPerPage,
+			sort:"no"
 		}
-
 		
-		// BusinessService.list(postData).success(function (response) {
-
 		$scope.paginationConf.totalItems = 16;
-		// window.alert(response);
-		$scope.repos = BusinessService.list(postData);
-		// });
+		BusinessService.list(postData,$scope);
+		
 	}
-    //配置分页基本参数
-    $scope.paginationConf = {
-    	currentPage: 1,
-    	itemsPerPage: 5
-    };
+    
 	$scope.langs = lang;
 	$scope.catas = cata;
     $scope.language = language;
     $scope.repotype = repotype;
+
+    $scope.search = "";
+
+    $scope.getRepo = function(text) {
+		console.log(text);
+	};
 
     $scope.isActive={
     	isGen:true,
@@ -146,18 +155,33 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
     $scope.$watch('paginationConf.currentPage + paginationConf.itemsPerPage + type', GetAllEmployee);}]);
 //业务类
 app.factory('BusinessService', ['$http', function ($http) {
-	var list = function (postData) {
+	var list = function (postData,$scope) {
 		console.log("now change business");
-    	// return $http.post('/Employee/GetAllEmployee', postData);
+		$http({
+			 method:'GET',
+			 url:"/GitMiningServer/repo",
+			 params:postData
+			 }).success(function(response) {$scope.repos = response;console.log($scope.repos);});
+		/*$http.get("http://106.75.5.61:8080/GitMiningServer/repo?type=data&method=paged&page=1&numPerPage=2&sort=no")
+	    .success(function(response) {console.log(1);});*/
+		var repodata;
     	$(document).ready(function() {
-    		console.log("good");
+    		var url = "/GitMiningServer/repo"
+    		$.ajax(url, {
+    			type : 'GET',
+    			data : postData,
+    			success : function(data) {
+    				repodata=data;
+    				console.log(repodata);
+    			}
+    		});
 		});
-    	if(postData.pageIndex%2==0)	return repositories2;
-    	else	return repositories1;
+    	
+    	return repodata;
     }
     return {
-    	list: function (postData) {
-    		return list(postData);
+    	list: function (postData,$scope) {
+    		return list(postData,$scope);
     	}
     }
 }]);
