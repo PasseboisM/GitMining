@@ -46,7 +46,7 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
 			sort:$scope.sorttype
 		}
 		
-		if($scope.language=="All"&&$scope.catagories=="All"&&$scope.search==""){
+		if($scope.language=="All"&&$scope.catagory=="All"&&$scope.search==""){
 			BusinessService.initial().success(
 			function(response) {
 				$scope.paginationConf.totalItems = response.numOfRepo;
