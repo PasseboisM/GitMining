@@ -9,11 +9,10 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.Block;
 import com.mongodb.client.FindIterable;
+import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Sorts;
 import common.enumeration.sort_standard.RepoSortStadard;
-import common.exception.NetworkException;
 import common.param_obj.RepositorySearchParam;
-import common.service.Repository;
 import data.db.core.CollectionHelper;
 import data.db.core.ConnectionPool;
 import data.db.core.GitCollections;
@@ -95,6 +94,8 @@ public class DBRepoServiceDefault implements DBRepoService {
 		//TODO
 		
 		
+		
+		
 		cp.releaseDatabase(base);
 		
 		return result;
@@ -102,11 +103,14 @@ public class DBRepoServiceDefault implements DBRepoService {
 
 	public static void main(String[] args) {
 		DBRepoServiceDefault ti = new DBRepoServiceDefault();
-		List<String> sl = ti.getRepositories(3, 20, RepoSortStadard.NO_SORT);
-
-		for (String s:sl) {
-			System.out.println(s);
-		}
-		System.out.println("Size:"+sl.size());
+		MongoDatabase base = ti.cp.getDatabase();
+		MongoCollection repoColl = base.getCollection("Repository");
+		
+		FindIterable<Document> result = 
+				repoColl.find().filter(Filters.in("description", "multiple"));
+		System.out.println(result.first().toJson());
+		
+		
+		
 	}
 }
