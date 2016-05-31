@@ -128,7 +128,9 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
 		console.log(language);
 		window.location.href = "test.html?type="+repotype+"&lang="+language;
 	};
-
+	$scope.formattime = function(text) {
+		return text.replace("T"," ").replace("Z"," ");
+	};
     $scope.changelang = function(text) {
 		language = text;
 		console.log(language);
