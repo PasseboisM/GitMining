@@ -25,7 +25,7 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">项目搜索</a></li>
             <li><a href="#about">用户搜索</a></li>
-            <li><a href="#contact">统计图表</a></li>
+            <li><a href="statisticChart.html">统计图表</a></li>
           </ul>
           <!-- <form class="navbar-form navbar-right">
           	<div class="form-group">
@@ -60,14 +60,14 @@
 							Catagories:
 						</div>
     					<div class="col-md-10">
-    						<button type="button" ng-repeat="cata in catagories" ng-class="{active: cata == catagory }" ng-click="changexcata(cata)"class="btn btn-default choosecata">{{cata}}</button>
+    						<button type="button" ng-repeat="cata in catagories" ng-class="{active: cata == catagory }" ng-click="changecata(cata)"class="btn btn-default">{{cata}}</button>
     					</div>
     					<hr class="col-md-11"/>
     					<div class="col-md-2">
 							Language:
 						</div>
     					<div class="col-md-10">
-    						<button type="button" ng-repeat="lang in languages" ng-class="{active: lang == language }" ng-click="changelang(lang)" class="btn btn-default chooselang">{{lang}}</button>
+    						<button type="button" ng-repeat="lang in languages" ng-class="{active: lang == language }" ng-click="changelang(lang)" class="btn btn-default">{{lang}}</button>
     					</div>
     					
     				</div>

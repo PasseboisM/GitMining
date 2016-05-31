@@ -46,15 +46,17 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
 			sort:$scope.sorttype
 		}
 		
-		
-		BusinessService.initial().success(
+		if($scope.language=="All"&&$scope.catagories=="All"&&$scope.search==""){
+			BusinessService.initial().success(
 			function(response) {
 				$scope.paginationConf.totalItems = response.numOfRepo;
 			});
 		BusinessService.list(getAttribute).success(
 			function(response) {
 				$scope.repos=response;
-			});
+			});	
+		}
+		
 		
 	}
     
