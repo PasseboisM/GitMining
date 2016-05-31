@@ -1,6 +1,7 @@
 package data.db;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.bson.Document;
@@ -10,7 +11,10 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.Block;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.model.Filters;
+import static com.mongodb.client.model.Filters.*;
 import com.mongodb.client.model.Sorts;
+import com.mongodb.client.model.TextSearchOptions;
+
 import common.enumeration.sort_standard.RepoSortStadard;
 import common.param_obj.RepositorySearchParam;
 import data.db.core.CollectionHelper;
@@ -90,7 +94,7 @@ public class DBRepoServiceDefault implements DBRepoService {
 	public List<String> searchRepository(RepositorySearchParam params) {
 		List<String> result = new ArrayList<String>(200);
 		MongoDatabase base = cp.getDatabase();
-		MongoCollection repoColl = base.getCollection("Repository");
+
 		//TODO
 		
 		
@@ -104,13 +108,12 @@ public class DBRepoServiceDefault implements DBRepoService {
 	public static void main(String[] args) {
 		DBRepoServiceDefault ti = new DBRepoServiceDefault();
 		MongoDatabase base = ti.cp.getDatabase();
-		MongoCollection repoColl = base.getCollection("Repository");
-		
+		MongoCollection<Document> repository = CollectionHelper.getCollection(
+				base, GitCollections.REPOSITORY);
 		FindIterable<Document> result = 
-				repoColl.find().filter(Filters.in("description", "multiple"));
-		System.out.println(result.first().toJson());
-		
-		
-		
+				repository.find().filter(
+						and(regex("description","multiple"),regex("description","file")));
+		System.out.println(result==null);
+		System.out.println(result.first().toJson());	
 	}
 }
