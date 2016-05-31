@@ -74,7 +74,7 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
 		return text.replace("T"," ").replace("Z"," ");
 	};
 
-	$scope.changetype = function(text) {
+	$scope.changecata = function(text) {
 		$scope.catagory = text;
 		// console.log(language);
 		// window.location.href = "test.html?type="+repotype+"&lang="+language;
