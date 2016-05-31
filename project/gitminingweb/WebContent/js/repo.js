@@ -59,7 +59,7 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
 			var searchAttribute = {
 				cata:$scope.catagory,
 				lang:$scope.language,
-				keyword:$scope.keyword
+				keyword:$scope.search
 			};
 			BusinessService.search(searchAttribute);
 		}
