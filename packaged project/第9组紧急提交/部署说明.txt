@@ -1,0 +1,11 @@
+部署方法：将zipped_resource.zip解压至与JAR同目录下即可，要求目录结构如下；运行JAR文件即可启动系统
+--根目录
+ |
+ |--python
+ |--LocalData
+ |--*.css
+ |--GitMining.jar
+
+要求：
+    Java版本最低为1.8
+    Python版本最低为2.7，且安装了pandas,scipy数据分析包
