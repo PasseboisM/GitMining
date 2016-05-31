@@ -55,6 +55,13 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
 			function(response) {
 				$scope.repos=response;
 			});	
+		}else{
+			var searchAttribute = {
+				cata:$scope.catagory,
+				lang:$scope.language,
+				keyword:$scope.keyword
+			};
+			BusinessService.search(searchAttribute);
 		}
 		
 		
@@ -132,6 +139,9 @@ app.factory('BusinessService', ['$http', function ($http) {
 			 params:{type:"stat"}
 			 });
     }
+    var search = function (searchAttribute) {
+    	console.log(searchAttribute);
+    }
 
     return {
     	list: function (getAttribute) {
@@ -139,6 +149,9 @@ app.factory('BusinessService', ['$http', function ($http) {
     	},
     	initial:function(){
     		return getTotal();
+    	},
+    	search:function(searchAttribute){
+    		return search(searchAttribute);
     	}
     }
 }]);
