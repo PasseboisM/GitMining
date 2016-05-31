@@ -90,12 +90,12 @@ public class DBRepoServiceDefault implements DBRepoService {
 	@Override
 	public List<String> searchRepository(RepositorySearchParam params) {
 		List<String> result = new ArrayList<String>(200);
-		List<Repository> fromNet = null;
-		try {
-			fromNet = GHService.searchRepository(params);
-		} catch (NetworkException e) {
-			e.printStackTrace();
-		}
+		MongoDatabase base = cp.getDatabase();
+		MongoCollection repoColl = base.getCollection("Repository");
+		//TODO
+		
+		
+		cp.releaseDatabase(base);
 		
 		return result;
 	}

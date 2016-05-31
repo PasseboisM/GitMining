@@ -1,7 +1,11 @@
 package data.manage;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
+
+import javax.swing.event.ListSelectionEvent;
 
 import org.junit.experimental.categories.Categories;
 
@@ -12,6 +16,7 @@ import common.enumeration.attribute.Language;
 import common.enumeration.sort_standard.RepoSortStadard;
 import common.enumeration.sort_standard.UserSortSandard;
 import common.exception.NetworkException;
+import common.model.beans.RepositoryBeans;
 import common.param_obj.RepositorySearchParam;
 import common.param_obj.UserSearchParam;
 import common.service.Repository;
@@ -26,7 +31,7 @@ public class MassiveDataGetterNetwork extends MassiveDataGetter {
 	private static MassiveDataGetterNetwork instance = new MassiveDataGetterNetwork();
 	private GHDataSource networkSource = NetworkServiceFactory.getInstance().getGHDataSource();
 	private DBRepoService repoDB = DBService.getInstance().getRepoService();
-	
+	private Gson gson = new Gson();
 	@Override
 	public List<String> getRepositories(int page, int numPerPage, RepoSortStadard sortStandard)
 			throws IndexOutOfBoundsException {
@@ -53,13 +58,35 @@ public class MassiveDataGetterNetwork extends MassiveDataGetter {
 
 	@Override
 	public List<String> searchRepository(RepositorySearchParam params) {
-		//TODO More than DB source, data from GH should be included.
+		List<Repository> repos = new ArrayList<Repository>(200);
+		List<String> result = new ArrayList<String>(200);
 		
+		try {
+			repos.addAll(networkSource.searchRepository(params));
+		} catch (NetworkException e) {
+			e.printStackTrace();
+		}
+		List<String> fromDB = repoDB.searchRepository(params);
+		Iterator<String> iter = fromDB.iterator();
+		while (iter.hasNext()) {
+			Repository temp = gson.fromJson(iter.next(), RepositoryBeans.class);
+			for (Repository r:repos) {
+				if (temp.getFull_name().equals(r.getFull_name())) {
+					iter.remove();
+				}
+			}
+		}
+		for (String s:fromDB) {
+			repos.add(gson.fromJson(s, RepositoryBeans.class));
+		}
 		
+		repos.sort(params.getSortStandard().getComparator());
 		
+		for (Repository r:repos) {
+			result.add(gson.toJson(r));
+		}
 		
-		
-		return repoDB.searchRepository(params);
+		return result;
 	}
 
 	@Override
@@ -78,17 +105,18 @@ public class MassiveDataGetterNetwork extends MassiveDataGetter {
 		 */
 		MassiveDataGetterNetwork mass = new MassiveDataGetterNetwork();
 		Language[] ll = new Language[1];
-		ll[0] = Language.JAVA;
+		ll[0] = Language.JAVA_SCRIPT;
 		Category[] cl = new Category[1];
 		cl[0] = Category.ALL;
 		String[] sl = new String[1];
 		sl[0] = "jquery";
-		
-		List<Repository> list = mass.networkSource.searchRepository(
-				new RepositorySearchParam(ll,cl,sl,RepoSortStadard.NO_SORT));
-		
+		long stime = System.currentTimeMillis();
+		List<String> list = mass.searchRepository(
+				new RepositorySearchParam(ll,cl,sl,RepoSortStadard.STARS_DESCENDING));
+		System.out.println("Time:"+(System.currentTimeMillis()-stime));
+		System.out.println("Num of got:"+list.size());
 		Gson gson = new Gson();
-		System.out.println(gson.toJson(list.get(0)));
-		
+		System.out.println(list.get(0));
+		System.out.println(list.get(1));
 	}
 }
