@@ -21,7 +21,7 @@ else				language = "All"*/
 // });
 var app = angular.module('main_app', ['tm.pagination']);
 var isInitialStatus = true;
-
+var searchRepos=[];
 
 
 app.controller('main_ctrl', ['$scope', 'BusinessService', function ($scope, BusinessService) {

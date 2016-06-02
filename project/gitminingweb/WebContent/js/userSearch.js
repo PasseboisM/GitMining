@@ -33,6 +33,7 @@ user2=[{login:"haha",location:"LA",name:"HaHa",follower:0,following:0,repos:0},
 var isInitialStatus = true;
 var app = angular.module('test', ['tm.pagination']);
 app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, BusinessService) {
+	$scope.search = "";
 	$scope.paginationConf = {
 	    	currentPage: 1,
 	    	itemsPerPage: 15
@@ -61,7 +62,7 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
 					$scope.repos=response;
 				});*/
 		}else{
-			console.log("now get new repos in s type");
+			console.log("now get new users in search type");
 			var searchAttribute = {
 				cata:$scope.catagory,
 				lang:$scope.language,
