@@ -85,7 +85,7 @@ public class MassiveDataGetterNetwork extends MassiveDataGetter {
 		
 		repos.sort(params.getSortStandard().getComparator());
 		
-		for (int i=0;i<MAX_RETURN_NUM||i<repos.size();i++) {
+		for (int i=0;i<MAX_RETURN_NUM&&i<repos.size();i++) {
 			result.add(gson.toJson(repos.get(i)));
 		}
 		
