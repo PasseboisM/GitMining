@@ -3,8 +3,10 @@
 <head>
 	<meta charset="UTF-8">
 	<title>GitMiningChart</title>
+	<script src="http://code.jquery.com/jquery.js"></script>
+  <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
 	<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
-	<script src="js/repoFake.js"></script>
+	<script src="js/RepoRadar.js"></script>
 	<link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/top.css" rel="stylesheet" media="screen">
 </head>
@@ -31,15 +33,167 @@
           	<button type="submit" class="btn btn-success">Sign in</button>
           </form>
         </div><!--/.nav-collapse -->
-      </div>
-    </nav>
+      	</div>
+	</nav>
 
-    <div class="search">
-      <div>
-        <input type="text" placeholder="Repository...">
-      </div>
-      <button type="submit" class="btn btn-success">Search</button>
-    </div>
+	<div class="input-group col-md-offset-2 col-md-8">
+			<input type="text" class="form-control" placeholder="Search for...">
+			<span class="input-group-btn">
+				<button class="btn btn-default" type="button">Go!</button>
+			</span>
+	</div>
 
+	<hr/>
+
+	<div class="info-group ">
+		<div >
+		<h2 class="ui header">
+			<div class="headcontent  col-md-offset-2 col-md-10">
+			    <a href="TODO">technoweenie</a> / <a >attachment_fu</a>
+				<div class="sub header">
+					Treat an ActiveRecord model as a file attachment, storing its patch, size, content type, etc.<br />
+				</div>
+			</div>
+		</h2>
+		</div>
+		<div class="input-group col-md-offset-2 ">
+  			<button class="btn btn-default" type="button">Clone!</button>
+  			<input class=""  type="text" value="https://github.com/technoweenie/attachment_fu.git" readonly>
+				<button type="submit " class="btn btn-success  ">See More</button>
+		</div>
+
+	</div>
+
+	<div id="content" class=" col-md-8">
+				<div class=" col-md-offset-3">
+					<h3 class="col-md-offset-3">Repository Statistics</h3>
+					<div class="number repo">
+							<div class="fork col-md-2">
+								<div>
+									<span class="nums">1036</span>
+								</div>
+								<span  class="tips">stars</span>
+							</div>
+							<div class="fork col-md-2">
+								<div>
+									<span class="nums">295</span>
+								</div>
+								<span class="tips">forks</span>
+							</div>
+							<div class="fork col-md-2">
+								<div>
+									<span class="nums">5</span>
+								</div>
+								<span  class="tips">subscribers</span>
+							</div>
+							<div class="fork col-md-2">
+								<div>
+									<span class="nums">24</span>
+								</div>
+								<span  class="tips">contributors</span>
+							</div>
+							<div class="fork col-md-2">
+								<div>
+									<span class="nums">2</span>
+								</div>
+								<span  class="tips">collaborator</span>
+							</div>
+						</div>
+				</div>
+			</div>
+
+
+	<div id="qwe" class=" list-group col-md-offset-1 col-md-3">
+		<!--This is a Radar Chart-->
+		<!-- <h1>
+			show me the place
+		</h1> -->
+
+	</div>
+
+	<div class=" col-md-offset-2 col-md-8">
+		<h3 class="col-md-offset-3">Infomation</h3>
+		<div class="detail col-md-2">
+			<div>
+				<span class="type">更新日期</span>
+			</div>
+			<span class="info">2016-06-01</span>
+		</div>
+		<div class="detail col-md-2">
+			<div>
+				<span class="type">创建时间</span>
+			</div>
+			<span class="info">2012-02-11</span>
+		</div>
+		<div class="detail col-md-2">
+			<div>
+				<span class="type">项目语言</span>
+			</div>
+			<span class="info">Ruby</span>
+		</div>
+		<div class="detail col-md-2">
+			<div>
+				<span class="type">项目大小</span>
+			</div>
+			<span class="info">21212KB</span>
+		</div>
+	</div>
+
+	<div class=" list-group col-md-offset-2 col-md-9">
+		<!--This is a place for Recommendation -->
+		<h3 class="col-md-offset-2">
+			Recommend
+		</h3>
+		<hr/>
+		<div class="panel panel-default col-md-3">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">related by tag</h3>
+		  </div>
+		  <div class="panel-body">
+		    <a href="TODO">technoweenie</a>
+		  </div>
+			<div class="panel-body">
+		      <a href="TODO">technoweenie</a>
+		  </div>
+			<div class="panel-body">
+		    <a href="TODO">technoweenie</a>
+		  </div>
+		</div>
+		<div class="panel panel-default col-md-offset-1 col-md-3">
+			<div class="panel-heading">
+				<h3 class="panel-title">related by owner</h3>
+			</div>
+			<div class="panel-body">
+				  <a href="TODO">technoweenie</a>
+			</div>
+			<div class="panel-body">
+				  <a href="TODO">technoweenie</a>
+			</div>
+			<div class="panel-body">
+				  <a href="TODO">technoweenie</a>
+			</div>
+		</div>
+		<div class="panel panel-default col-md-offset-1 col-md-3">
+			<div class="panel-heading">
+				<h3 class="panel-title">related by viewer</h3>
+			</div>
+			<div class="panel-body">
+			  <a href="TODO">technoweenie</a>
+			</div>
+			<div class="panel-body">
+				  <a href="TODO">technoweenie</a>
+			</div>
+			<div class="panel-body">
+				  <a href="TODO">technoweenie</a>
+			</div>
+		</div>
+	</div>
+
+
+	<footer class="container footer col-md-12">
+		<div class="container">
+			<p class="text-muted">GitMining Made By Team Mole</p>
+		</div>
+	</footer>
 </body>
 </html>
