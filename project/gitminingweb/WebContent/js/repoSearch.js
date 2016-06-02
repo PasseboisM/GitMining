@@ -1,6 +1,11 @@
-var languages = ["All","Java","Ruby","Python","C","JavaScript","Perl","PHP","C++","html","shell","Objective-C","VIML","C#","EmacsList","Erlang","Lua","Clojure","css","Haskell","Scala","CommonLisp","R","Others"];
+var languages = ["All","Java","Ruby","Python","C","JavaScript","Perl","PHP","C++","html","shell","Objective-C","VIML","C#","EmacsLisp","Erlang","Lua","Clojure","css","Haskell","Scala","CommonLisp","R","Others"];
 var catagories = ["All","ActiveRecord","API","app","CMS","Django","Emacs","framework","interface","IRC","JSON","library","Linux","Mac","management","OS","plugin","Rails","Redis","server","source","template","TextMate","tool","Web","website","Others"];
+var sorttypes = ["no","stars","forks"];
 
+
+var http_languages = ["ALL","JAVA","RUBY","PYTHON","C","JAVA_SCRIPT","PERL","PHP","C_PLUS_PLUS","HTML","SHELL","OBJECTIVE_C","VIML","C_SHARP","EMACS_LISP","ERLANG","LUA","CLOJURE","CSS","HASKELL","SCALA","COMMON_LISP","R","OTHERS"];
+var http_catagories = ["ALL","ACTIVE_RECORD","API","APP","CMS","DJANGO","EMACS","FRAMEWORK","INTERFACE","IRC","JSON","LIBRARY","LINUX","MAC","MANAGEMENT","OS","PLUGIN","RAILS","REDIS","SERVER","SOURCE","TEMPLATE","TEXT_MATE","TOOL","WEB","WEBSITE","OTHERS"];
+var http_sorttypes = ["NO_SORT","STARS_DESCENDING","FORKS_DESCENDING"];
 function GetQueryString(name) { 
 var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)","i"); 
 var r = window.location.search.substr(1).match(reg); 
@@ -23,6 +28,17 @@ var app = angular.module('main_app', ['tm.pagination']);
 var isInitialStatus = true;
 var searchRepos=[];
 
+function transParams(searchAttribute){
+	var http_attributes = {
+		type:"data",
+		method:"search"
+	};
+	http_attributes.params.cates = [http_catagories[catagories.indexOf(searchAttribute.cates)]];
+	http_attributes.params.langs = [http_languages[languages.indexOf(searchAttribute.langs)]];
+	http_attributes.params.sortStandard = http_sorttypes[sorttypes.indexOf(searchAttribute.sortStandard)];
+	http_attributes.params.keywords = searchAttribute.keywords;
+	return http_attributes;
+}
 
 app.controller('main_ctrl', ['$scope', 'BusinessService', function ($scope, BusinessService) {
 	$scope.sorttype = "no";
@@ -70,12 +86,12 @@ app.controller('main_ctrl', ['$scope', 'BusinessService', function ($scope, Busi
 			var searchAttribute = {
 				type:"data",
 				method:"search",
-				cates:[$scope.catagory],
-				langs:[$scope.language],
+				cates:$scope.catagory,
+				langs:$scope.language,
 				keywords:$scope.search.split(" "),
 				sortStandard:$scope.sorttype
 			};
-			BusinessService.search(searchAttribute).success(
+			BusinessService.search(transParams(searchAttribute)).success(
 				function(response) {
 					searchRepos=response;
 				});
