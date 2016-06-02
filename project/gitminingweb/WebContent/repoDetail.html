@@ -3,10 +3,11 @@
 <head>
 	<meta charset="UTF-8">
 	<title>GitMiningChart</title>
-	<script src="http://code.jquery.com/jquery.js"></script>
-  <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+	<script src="js/jquery-1.11.3.js"></script>
+  <!-- <script src="http://echarts.baidu.com/build/dist/echarts.js"></script> -->
+	<script src="http://echarts.baidu.com/dist/echarts.min.js"></script>
 	<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
-	<script src="js/RepoRadar.js"></script>
+
 	<link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/top.css" rel="stylesheet" media="screen">
 </head>
@@ -64,9 +65,9 @@
 
 	</div>
 
-	<div id="content" class=" col-md-8">
-				<div class=" col-md-offset-3">
-					<h3 class="col-md-offset-3">Repository Statistics</h3>
+	<div id="content" class="col-md-offset-2 col-md-8">
+
+					<h3 class="col-md-offset-2">Repository Statistics</h3>
 					<div class="number repo">
 							<div class="fork col-md-2">
 								<div>
@@ -99,20 +100,16 @@
 								<span  class="tips">collaborator</span>
 							</div>
 						</div>
-				</div>
+
 			</div>
 
 
-	<div id="qwe" class=" list-group col-md-offset-1 col-md-3">
-		<!--This is a Radar Chart-->
-		<!-- <h1>
-			show me the place
-		</h1> -->
+	<div id="qwe" class="col-md-3" style="width: 200px;height:200px;">
 
 	</div>
 
 	<div class=" col-md-offset-2 col-md-8">
-		<h3 class="col-md-offset-3">Infomation</h3>
+		<h3 class="col-md-offset-2">  Infomation</h3>
 		<div class="detail col-md-2">
 			<div>
 				<span class="type">更新日期</span>
@@ -139,7 +136,7 @@
 		</div>
 	</div>
 
-	<div class=" list-group col-md-offset-2 col-md-9">
+	<div class="  col-md-offset-2 col-md-8">
 		<!--This is a place for Recommendation -->
 		<h3 class="col-md-offset-2">
 			Recommend
@@ -195,5 +192,6 @@
 			<p class="text-muted">GitMining Made By Team Mole</p>
 		</div>
 	</footer>
+	<script src="js/repoRadar.js"></script>
 </body>
 </html>
