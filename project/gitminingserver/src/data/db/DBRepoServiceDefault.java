@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.bson.Document;
+import org.bson.conversions.Bson;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -16,6 +17,8 @@ import static com.mongodb.client.model.Filters.*;
 import com.mongodb.client.model.Sorts;
 import com.mongodb.client.model.TextSearchOptions;
 
+import common.enumeration.attribute.Category;
+import common.enumeration.attribute.Language;
 import common.enumeration.sort_standard.RepoSortStadard;
 import common.exception.TargetNotFoundException;
 import common.param_obj.RepositorySearchParam;
@@ -55,19 +58,7 @@ public class DBRepoServiceDefault implements DBRepoService {
 				base, GitCollections.REPOSITORY);
 		FindIterable<Document> repos = repository.find();
 		
-		switch (sortStandard) {
-		case FORKS_DESCENDING:
-			repos = repos.sort(Sorts.descending("forks_count"));
-			break;
-		case NO_SORT:
-			break;
-		case STARS_DESCENDING:
-			repos = repos.sort(Sorts.descending("stargazers_count"));
-			break;
-		default:
-			cp.releaseDatabase(base);
-			return result;
-		}
+		sort(sortStandard, repos);
 		
 		try {
 			repos.forEach(new Block<Document>(){
@@ -94,13 +85,75 @@ public class DBRepoServiceDefault implements DBRepoService {
 
 	@Override
 	public List<String> searchRepository(RepositorySearchParam params) {
+		/**
+		Language[]; Category[]; String[] keywords;RepoSortStadard;
+		 */
+		
 		List<String> result = new ArrayList<String>(200);
 		MongoDatabase base = cp.getDatabase();
-
-		//TODO
+		MongoCollection<Document> repoColl = CollectionHelper.getCollection(
+				base, GitCollections.REPOSITORY);
+		
+		FindIterable<Document> found = repoColl.find();
+		Bson partialFilter = null;
 		
 		
+		for (Language lang:params.getLangs()) {
+			if (partialFilter==null) {
+				partialFilter = eq("language",lang.getName());
+			} else {
+				if (lang==Language.ALL) {
+					partialFilter = new Document();	
+					break;
+				}
+				partialFilter = or(partialFilter,eq("language",lang.getName()));
+			}
+		}
+		if (partialFilter==null) partialFilter = new Document();
+		found = found.filter(partialFilter);
 		
+		partialFilter = null;
+		for (Category cat:params.getCates()) {
+			if (partialFilter==null) {
+				partialFilter = regex("description",cat.getName());
+			} else {
+				if (cat==Category.ALL) {
+					partialFilter = new Document();	
+					break;
+				}
+				partialFilter = and(partialFilter,regex("description",cat.getName()));
+			}
+		}
+		if (partialFilter==null) partialFilter = new Document();
+		found = found.filter(partialFilter);
+		
+		partialFilter = null;
+		for (String keyword:params.getKeywords()) {
+			if (partialFilter==null) {
+				partialFilter = or(regex("full_name",keyword),regex("description",keyword));
+			} else {
+				partialFilter = and (partialFilter,
+						or(regex("full_name",keyword),regex("description",keyword)));
+			}
+		}
+		if (partialFilter==null) partialFilter = new Document();
+		found.filter(partialFilter);
+		
+		sort(params.getSortStandard(),found);
+		found.forEach(new Block<Document>() {
+			int count = 0;
+			final int MAX_RETURN = 200;
+			@Override
+			public void apply(Document arg0) {
+				if(count>=MAX_RETURN) {
+					return;
+				}
+				else {
+					result.add(arg0.toJson());
+					count++;
+				}
+			}
+		});
 		
 		cp.releaseDatabase(base);
 		
@@ -136,5 +189,19 @@ public class DBRepoServiceDefault implements DBRepoService {
 //	System.out.println(result==null);
 //	System.out.println(result.first().toJson());	
 //}
+	
+	private static void sort(RepoSortStadard sortStandard, FindIterable<Document> repos) {
+		switch (sortStandard) {
+		case FORKS_DESCENDING:
+			repos = repos.sort(Sorts.descending("forks_count"));
+			break;
+		case NO_SORT:
+			break;
+		case STARS_DESCENDING:
+			repos = repos.sort(Sorts.descending("stargazers_count"));
+			break;
+
+		}
+	}
 
 }

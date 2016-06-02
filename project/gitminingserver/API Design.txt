@@ -16,7 +16,7 @@ Repository query:
 						param=full_name_of_the_repository
 						e.g. .../repo?type=data&method=spec&param=gitmining
 					search:get a list of repositories with a search parameter, now the maximum number of repos is 200
-																			//TODO
+																			//Complete
 						param=JSON object of RepositorySearchParam
 						e.g. .../repo?type=data&method=search&page=1&numPerPage=
 							param={"langs":["C"],"cates":[],"keywords":["all"],"sortStandard":"STARS_DESCENDING"}
