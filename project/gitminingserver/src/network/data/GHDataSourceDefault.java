@@ -30,7 +30,7 @@ public class GHDataSourceDefault implements GHDataSource {
 	private SearchApiMaker searchApi = null;
 	private HTTPConnectionService conn = null;
 	private static final int ITEM_PER_PAGE = 30;
-	private static final int PAGE_AMOUNT_LIMIT = 2;
+	private static final int PAGE_AMOUNT_LIMIT = 1;
 	
 	@Override
 	public List<Repository> searchRepository(RepositorySearchParam repositorySearchParam) throws NetworkException {
