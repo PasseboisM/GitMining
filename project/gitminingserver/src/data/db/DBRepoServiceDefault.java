@@ -102,7 +102,7 @@ public class DBRepoServiceDefault implements DBRepoService {
 			if (partialFilter==null) {
 				partialFilter = eq("language",lang.getName());
 			} else {
-				if (lang==Language.ALL) {
+				if (lang==Language.ALL||lang==Language.OTHERS) {
 					partialFilter = new Document();	
 					break;
 				}
@@ -117,7 +117,7 @@ public class DBRepoServiceDefault implements DBRepoService {
 			if (partialFilter==null) {
 				partialFilter = regex("description",cat.getName());
 			} else {
-				if (cat==Category.ALL) {
+				if (cat==Category.ALL||cat==Category.OTHERS) {
 					partialFilter = new Document();	
 					break;
 				}
