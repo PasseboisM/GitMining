@@ -38,6 +38,7 @@ app.controller('main_ctrl', ['$scope', 'BusinessService', function ($scope, Busi
 	    	itemsPerPage: 15
 	    };
 	function getReposInSpecialType(){
+		console.log(searchRepos);
 		$scope.paginationConf.totalItems = searchRepos.length;
 		var start = ($scope.paginationConf.currentPage-1)*$scope.paginationConf.itemsPerPage;
 		var end = $scope.paginationConf.currentPage*$scope.paginationConf.itemsPerPage;
@@ -67,11 +68,17 @@ app.controller('main_ctrl', ['$scope', 'BusinessService', function ($scope, Busi
 		}else{
 			console.log("now get new repos in s type");
 			var searchAttribute = {
-				cata:$scope.catagory,
-				lang:$scope.language,
-				keyword:$scope.search
+				type:"data",
+				method:"search",
+				cates:[$scope.catagory],
+				langs:[$scope.language],
+				keywords:$scope.search.split(" "),
+				sortStandard:$scope.sorttype
 			};
-			BusinessService.search(searchAttribute);
+			BusinessService.search(searchAttribute).success(
+				function(response) {
+					searchRepos=response;
+				});
 			getReposInSpecialType();
 		}
 	}
@@ -160,6 +167,11 @@ app.factory('BusinessService', ['$http', function ($http) {
     }
     var search = function (searchAttribute) {
     	console.log(searchAttribute);
+    	return $http({
+			 method:'GET',
+			 url:url,
+			 params:searchAttribute
+			 });
     }
 
     return {
