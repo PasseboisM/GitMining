@@ -12,7 +12,6 @@ var r = window.location.search.substr(1).match(reg);
 if (r!=null) return (r[2]); return null; 
 }
 
-var searchRepos;
 
 /*var repotype=GetQueryString("type"); 
 if(repotype!=null)	repotype = decodeURIComponent(repotype); 
@@ -31,12 +30,13 @@ var searchRepos=[];
 function transParams(searchAttribute){
 	var http_attributes = {
 		type:"data",
-		method:"search"
+		method:"search",
+		param:{}
 	};
-	http_attributes.params.cates = [http_catagories[catagories.indexOf(searchAttribute.cates)]];
-	http_attributes.params.langs = [http_languages[languages.indexOf(searchAttribute.langs)]];
-	http_attributes.params.sortStandard = http_sorttypes[sorttypes.indexOf(searchAttribute.sortStandard)];
-	http_attributes.params.keywords = searchAttribute.keywords;
+	http_attributes.param.cates = [http_catagories[catagories.indexOf(searchAttribute.cates)]];
+	http_attributes.param.langs = [http_languages[languages.indexOf(searchAttribute.langs)]];
+	http_attributes.param.sortStandard = http_sorttypes[sorttypes.indexOf(searchAttribute.sortStandard)];
+	http_attributes.param.keywords = searchAttribute.keywords;
 	return http_attributes;
 }
 
@@ -54,11 +54,14 @@ app.controller('main_ctrl', ['$scope', 'BusinessService', function ($scope, Busi
 	    	itemsPerPage: 15
 	    };
 	function getReposInSpecialType(){
-		console.log(searchRepos);
-		$scope.paginationConf.totalItems = searchRepos.length;
+		$scope.paginationConf.totalItems = searchRepos.length;		
+//		console.log(searchRepos.length);
 		var start = ($scope.paginationConf.currentPage-1)*$scope.paginationConf.itemsPerPage;
 		var end = $scope.paginationConf.currentPage*$scope.paginationConf.itemsPerPage;
+//		console.log(start);
+//		console.log(end);
 		$scope.repos = searchRepos.slice(start,end);
+//		console.log($scope.repos.length);
 	}
 	var GetAllEmployee = function () {
 		
@@ -94,8 +97,9 @@ app.controller('main_ctrl', ['$scope', 'BusinessService', function ($scope, Busi
 			BusinessService.search(transParams(searchAttribute)).success(
 				function(response) {
 					searchRepos=response;
+					getReposInSpecialType();
 				});
-			getReposInSpecialType();
+			
 		}
 	}
     
