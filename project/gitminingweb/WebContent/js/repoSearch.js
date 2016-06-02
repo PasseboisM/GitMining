@@ -142,7 +142,7 @@ app.controller('main_ctrl', ['$scope', 'BusinessService', function ($scope, Busi
 		console.log(text);
 	};
 
-	$scope.search = function() {
+	$scope.searchRepos = function() {
     	console.log($scope.search);
 		$scope.paginationConf.currentPage = 1;
 		if($scope.language=="All"&&$scope.catagory=="All"&&$scope.search=="")
