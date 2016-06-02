@@ -9,9 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.bson.Document;
 
+import com.google.gson.Gson;
+
 import common.enumeration.sort_standard.RepoSortStadard;
 import common.exception.TargetNotFoundException;
 import common.message.HintMessage;
+import common.param_obj.RepositorySearchParam;
 import data.service.DataServiceFactory;
 import data.service.MassiveDataGetter;
 import data.service.SpecificDataGetter;
@@ -23,6 +26,8 @@ class RepositoryRequestHandlerDefault extends RepositoryRequestHandler {
 			DataServiceFactory.getInstance().getMassiveDataGetter();
 	private SpecificDataGetter specific =
 			DataServiceFactory.getInstance().getSpecificDataGetter();
+	
+	private Gson gson = new Gson();
 	
 	@Override
 	public void handleRequest(HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
@@ -98,7 +103,18 @@ class RepositoryRequestHandlerDefault extends RepositoryRequestHandler {
 	}
 	
 	private void printTypeDataMethodSearch(HttpServletRequest httpRequest,PrintWriter out) {
-		//TODO
+		RepositorySearchParam searchParam = null;
+		List<String> result = null;
+		try {
+			searchParam = gson.fromJson(
+					httpRequest.getParameter("param"), RepositorySearchParam.class);
+		} catch (Exception e) {
+			out.println(new HintMessage(
+					"JSON Syntax fault. Please check your parameter.").toJSON());
+		}
+		
+		result = massive.searchRepository(searchParam);
+		printJSONList(out, result);
 	}
 
 	private void printTypeDataMethodPaged(HttpServletRequest httpRequest,PrintWriter out) {
@@ -114,10 +130,14 @@ class RepositoryRequestHandlerDefault extends RepositoryRequestHandler {
 			return;
 		}
 		List<String> result = massive.getRepositories(page, numPerPage, sort);
+		printJSONList(out, result);
+	}
+	
+	private static void printJSONList(PrintWriter out,List<String> information) {
 		out.print('[');
-		for (int i = 0; i < result.size(); i++) {
-			out.print(result.get(i));
-			if(i!=result.size()-1)	out.print(",");
+		for (int i = 0; i < information.size(); i++) {
+			out.print(information.get(i));
+			if(i!=information.size()-1)	out.print(",");
 		}
 		out.print(']');
 	}

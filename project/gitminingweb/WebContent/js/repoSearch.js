@@ -1,13 +1,17 @@
-var languages = ["All","Java","Ruby","Python","C","JavaScript","Perl","PHP","C++","html","shell","Objective-C","VIML","C#","EmacsList","Erlang","Lua","Clojure","css","Haskell","Scala","CommonLisp","R","Others"];
+var languages = ["All","Java","Ruby","Python","C","JavaScript","Perl","PHP","C++","html","shell","Objective-C","VIML","C#","EmacsLisp","Erlang","Lua","Clojure","css","Haskell","Scala","CommonLisp","R","Others"];
 var catagories = ["All","ActiveRecord","API","app","CMS","Django","Emacs","framework","interface","IRC","JSON","library","Linux","Mac","management","OS","plugin","Rails","Redis","server","source","template","TextMate","tool","Web","website","Others"];
+var sorttypes = ["no","stars","forks"];
 
+
+var http_languages = ["ALL","JAVA","RUBY","PYTHON","C","JAVA_SCRIPT","PERL","PHP","C_PLUS_PLUS","HTML","SHELL","OBJECTIVE_C","VIML","C_SHARP","EMACS_LISP","ERLANG","LUA","CLOJURE","CSS","HASKELL","SCALA","COMMON_LISP","R","OTHERS"];
+var http_catagories = ["ALL","ACTIVE_RECORD","API","APP","CMS","DJANGO","EMACS","FRAMEWORK","INTERFACE","IRC","JSON","LIBRARY","LINUX","MAC","MANAGEMENT","OS","PLUGIN","RAILS","REDIS","SERVER","SOURCE","TEMPLATE","TEXT_MATE","TOOL","WEB","WEBSITE","OTHERS"];
+var http_sorttypes = ["NO_SORT","STARS_DESCENDING","FORKS_DESCENDING"];
 function GetQueryString(name) { 
 var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)","i"); 
 var r = window.location.search.substr(1).match(reg); 
 if (r!=null) return (r[2]); return null; 
 }
 
-var searchRepos;
 
 /*var repotype=GetQueryString("type"); 
 if(repotype!=null)	repotype = decodeURIComponent(repotype); 
@@ -23,6 +27,18 @@ var app = angular.module('main_app', ['tm.pagination']);
 var isInitialStatus = true;
 var searchRepos=[];
 
+function transParams(searchAttribute){
+	var http_attributes = {
+		type:"data",
+		method:"search",
+		param:{}
+	};
+	http_attributes.param.cates = [http_catagories[catagories.indexOf(searchAttribute.cates)]];
+	http_attributes.param.langs = [http_languages[languages.indexOf(searchAttribute.langs)]];
+	http_attributes.param.sortStandard = http_sorttypes[sorttypes.indexOf(searchAttribute.sortStandard)];
+	http_attributes.param.keywords = searchAttribute.keywords;
+	return http_attributes;
+}
 
 app.controller('main_ctrl', ['$scope', 'BusinessService', function ($scope, BusinessService) {
 	$scope.sorttype = "no";
@@ -38,10 +54,14 @@ app.controller('main_ctrl', ['$scope', 'BusinessService', function ($scope, Busi
 	    	itemsPerPage: 15
 	    };
 	function getReposInSpecialType(){
-		$scope.paginationConf.totalItems = searchRepos.length;
+		$scope.paginationConf.totalItems = searchRepos.length;		
+//		console.log(searchRepos.length);
 		var start = ($scope.paginationConf.currentPage-1)*$scope.paginationConf.itemsPerPage;
 		var end = $scope.paginationConf.currentPage*$scope.paginationConf.itemsPerPage;
+//		console.log(start);
+//		console.log(end);
 		$scope.repos = searchRepos.slice(start,end);
+//		console.log($scope.repos.length);
 	}
 	var GetAllEmployee = function () {
 		
@@ -65,14 +85,22 @@ app.controller('main_ctrl', ['$scope', 'BusinessService', function ($scope, Busi
 					$scope.repos=response;
 				});
 		}else{
+			if($scope.search=="")	return;
 			console.log("now get new repos in s type");
 			var searchAttribute = {
-				cata:$scope.catagory,
-				lang:$scope.language,
-				keyword:$scope.search
+				type:"data",
+				method:"search",
+				cates:$scope.catagory,
+				langs:$scope.language,
+				keywords:$scope.search.split(" "),
+				sortStandard:$scope.sorttype
 			};
-			BusinessService.search(searchAttribute);
-			getReposInSpecialType();
+			BusinessService.search(transParams(searchAttribute)).success(
+				function(response) {
+					searchRepos=response;
+					getReposInSpecialType();
+				});
+			
 		}
 	}
     
@@ -112,6 +140,16 @@ app.controller('main_ctrl', ['$scope', 'BusinessService', function ($scope, Busi
 		else
 			isInitialStatus = false;
 		console.log(text);
+	};
+
+	$scope.searchRepos = function() {
+    	console.log($scope.search);
+		$scope.paginationConf.currentPage = 1;
+		if($scope.language=="All"&&$scope.catagory=="All"&&$scope.search=="")
+			isInitialStatus = true;
+		else
+			isInitialStatus = false;
+		GetAllEmployee();
 	};
 
 
@@ -160,6 +198,11 @@ app.factory('BusinessService', ['$http', function ($http) {
     }
     var search = function (searchAttribute) {
     	console.log(searchAttribute);
+    	return $http({
+			 method:'GET',
+			 url:url,
+			 params:searchAttribute
+			 });
     }
 
     return {
