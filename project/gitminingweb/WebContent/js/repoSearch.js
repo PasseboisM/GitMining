@@ -19,12 +19,12 @@ else				language = "All"*/
 // $(document).ready(function() {
 
 // });
-var app = angular.module('test', ['tm.pagination']);
+var app = angular.module('main_app', ['tm.pagination']);
 var isInitialStatus = true;
 
 
 
-app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, BusinessService) {
+app.controller('main_ctrl', ['$scope', 'BusinessService', function ($scope, BusinessService) {
 	$scope.sorttype = "no";
 	$scope.languages = languages;
 	$scope.catagories = catagories;
