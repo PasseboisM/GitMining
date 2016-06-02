@@ -85,6 +85,7 @@ app.controller('main_ctrl', ['$scope', 'BusinessService', function ($scope, Busi
 					$scope.repos=response;
 				});
 		}else{
+			if($scope.search=="")	return;
 			console.log("now get new repos in s type");
 			var searchAttribute = {
 				type:"data",
@@ -139,6 +140,16 @@ app.controller('main_ctrl', ['$scope', 'BusinessService', function ($scope, Busi
 		else
 			isInitialStatus = false;
 		console.log(text);
+	};
+
+	$scope.search = function() {
+    	console.log($scope.search);
+		$scope.paginationConf.currentPage = 1;
+		if($scope.language=="All"&&$scope.catagory=="All"&&$scope.search=="")
+			isInitialStatus = true;
+		else
+			isInitialStatus = false;
+		GetAllEmployee();
 	};
 
 
