@@ -1,30 +1,37 @@
 package data.db;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.bson.Document;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.google.gson.Gson;
 import com.mongodb.Block;
 import com.mongodb.client.FindIterable;
-import com.mongodb.client.model.Sorts;
 import com.mongodb.client.model.Filters;
-
+import static com.mongodb.client.model.Filters.*;
+import com.mongodb.client.model.Sorts;
+import com.mongodb.client.model.TextSearchOptions;
 
 import common.enumeration.sort_standard.RepoSortStadard;
+import common.exception.TargetNotFoundException;
 import common.param_obj.RepositorySearchParam;
 import data.db.core.CollectionHelper;
 import data.db.core.ConnectionPool;
 import data.db.core.GitCollections;
 import data.db.service.DBRepoService;
+import network.service.GHDataSource;
+import network.service.NetworkServiceFactory;
 
 
 
 public class DBRepoServiceDefault implements DBRepoService {
 
 	ConnectionPool cp = ConnectionPool.getInstance();
+	GHDataSource GHService = NetworkServiceFactory.getInstance().getGHDataSource();	
 	
 	@Override
 	public int getNumOfRepo() {
@@ -87,17 +94,47 @@ public class DBRepoServiceDefault implements DBRepoService {
 
 	@Override
 	public List<String> searchRepository(RepositorySearchParam params) {
-		// TODO Auto-generated method stub
-		return null;
+		List<String> result = new ArrayList<String>(200);
+		MongoDatabase base = cp.getDatabase();
+
+		//TODO
+		
+		
+		
+		
+		cp.releaseDatabase(base);
+		
+		return result;
 	}
 
-	public static void main(String[] args) {
-		DBRepoServiceDefault ti = new DBRepoServiceDefault();
-		List<String> sl = ti.getRepositories(3, 20, RepoSortStadard.NO_SORT);
 
-		for (String s:sl) {
-			System.out.println(s);
+	@Override
+	public String getRepository(String fullName) throws TargetNotFoundException {
+
+		MongoDatabase base = cp.getDatabase();
+		MongoCollection<Document> repoColl = CollectionHelper.getCollection(
+				base, GitCollections.REPOSITORY);
+		
+		FindIterable<Document> found = repoColl.find(eq("full_name",fullName));
+		try {
+			return found.first().toJson();
+		} catch (Exception e) { // No repository found.
+			throw new TargetNotFoundException();
+		} finally {
+					cp.releaseDatabase(base);	
 		}
-		System.out.println("Size:"+sl.size());
 	}
+	
+//	public static void main(String[] args) {
+//	DBRepoServiceDefault ti = new DBRepoServiceDefault();
+//	MongoDatabase base = ti.cp.getDatabase();
+//	MongoCollection<Document> repository = CollectionHelper.getCollection(
+//			base, GitCollections.REPOSITORY);
+//	FindIterable<Document> result = 
+//			repository.find().filter(
+//					and(regex("description","multiple"),regex("description","file")));
+//	System.out.println(result==null);
+//	System.out.println(result.first().toJson());	
+//}
+
 }

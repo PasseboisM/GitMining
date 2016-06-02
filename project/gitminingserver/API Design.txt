@@ -12,7 +12,7 @@ Repository query:
 				e.g. {"numOfRepo":57000}
 			data:obtain data of certain repositories
 				method=?
-					spec:get a specific repository by its full name			//TODO
+					spec:get a specific repository by its full name			//Complete
 						param=full_name_of_the_repository
 						e.g. .../repo?type=data&method=spec&param=gitmining
 					search:get a list of repositories with a search parameter, now the maximum number of repos is 200

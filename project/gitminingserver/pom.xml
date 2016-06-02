@@ -18,6 +18,12 @@
 			<version>2.6.2</version>
 			<scope>compile</scope>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.kohsuke</groupId>
+			<artifactId>github-api</artifactId>
+			<version>1.75</version>
+		</dependency>
 	</dependencies>
   
   <build>

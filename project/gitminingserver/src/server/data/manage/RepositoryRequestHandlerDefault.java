@@ -9,15 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.bson.Document;
 
-import com.google.gson.Gson;
-import com.mongodb.client.FindIterable;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-
 import common.enumeration.sort_standard.RepoSortStadard;
 import common.exception.TargetNotFoundException;
 import common.message.HintMessage;
-import data.db.core.ConnectionPool;
 import data.service.DataServiceFactory;
 import data.service.MassiveDataGetter;
 import data.service.SpecificDataGetter;
@@ -29,7 +23,6 @@ class RepositoryRequestHandlerDefault extends RepositoryRequestHandler {
 			DataServiceFactory.getInstance().getMassiveDataGetter();
 	private SpecificDataGetter specific =
 			DataServiceFactory.getInstance().getSpecificDataGetter();
-	private Gson gson = new Gson();
 	
 	@Override
 	public void handleRequest(HttpServletRequest httpRequest, HttpServletResponse httpResponse) {

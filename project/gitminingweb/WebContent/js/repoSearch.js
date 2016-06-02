@@ -7,6 +7,8 @@ var r = window.location.search.substr(1).match(reg);
 if (r!=null) return (r[2]); return null; 
 }
 
+var searchRepos;
+
 /*var repotype=GetQueryString("type"); 
 if(repotype!=null)	repotype = decodeURIComponent(repotype); 
 else				repotype = "All"
@@ -18,7 +20,7 @@ else				language = "All"*/
 
 // });
 var app = angular.module('test', ['tm.pagination']);
-
+var isInitialStatus = true;
 
 
 
@@ -35,36 +37,43 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
 	    	currentPage: 1,
 	    	itemsPerPage: 15
 	    };
+	function getReposInSpecialType(){
+		$scope.paginationConf.totalItems = searchRepos.length;
+		var start = ($scope.paginationConf.currentPage-1)*$scope.paginationConf.itemsPerPage;
+		var end = $scope.paginationConf.currentPage*$scope.paginationConf.itemsPerPage;
+		$scope.repos = searchRepos.slice(start,end);
+	}
 	var GetAllEmployee = function () {
 		
-		console.log("now get new repos");
-		var getAttribute = {
-			type:"data",
-			method:"paged",
-			page:$scope.paginationConf.currentPage,
-			numPerPage:$scope.paginationConf.itemsPerPage,
-			sort:$scope.sorttype
-		}
-		
-		if($scope.language=="All"&&$scope.catagory=="All"&&$scope.search==""){
+		if(isInitialStatus){
+			console.log("now get new repos");
+			var getAttribute = {
+				type:"data",
+				method:"paged",
+				page:$scope.paginationConf.currentPage,
+				numPerPage:$scope.paginationConf.itemsPerPage,
+				sort:$scope.sorttype
+			}
+					
+			// if($scope.language=="All"&&$scope.catagory=="All"&&$scope.search==""){
 			BusinessService.initial().success(
-			function(response) {
-				$scope.paginationConf.totalItems = response.numOfRepo;
-			});
-		BusinessService.list(getAttribute).success(
-			function(response) {
-				$scope.repos=response;
-			});	
+				function(response) {
+					$scope.paginationConf.totalItems = response.numOfRepo;
+				});
+			BusinessService.list(getAttribute).success(
+				function(response) {
+					$scope.repos=response;
+				});
 		}else{
+			console.log("now get new repos in s type");
 			var searchAttribute = {
 				cata:$scope.catagory,
 				lang:$scope.language,
 				keyword:$scope.search
 			};
 			BusinessService.search(searchAttribute);
+			getReposInSpecialType();
 		}
-		
-		
 	}
     
 	
@@ -84,15 +93,25 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
 	};
 
 	$scope.changecata = function(text) {
+		console.log(text);
 		$scope.catagory = text;
-		// console.log(language);
-		// window.location.href = "test.html?type="+repotype+"&lang="+language;
+		$scope.paginationConf.currentPage = 1;
+		if($scope.language=="All"&&$scope.catagory=="All"&&$scope.search=="")
+			isInitialStatus = true;
+		else
+			isInitialStatus = false;
+		console.log(text);
 	};
 	
     $scope.changelang = function(text) {
+    	console.log(text);
 		$scope.language = text;
-		// console.log(language);
-		// window.location.href = "test.html?type="+repotype+"&lang="+language;
+		$scope.paginationConf.currentPage = 1;
+		if($scope.language=="All"&&$scope.catagory=="All"&&$scope.search=="")
+			isInitialStatus = true;
+		else
+			isInitialStatus = false;
+		console.log(text);
 	};
 
 
@@ -118,7 +137,7 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
     当页码和页面记录数发生变化时监控后台查询
     如果把currentPage和itemsPerPage分开监控的话则会触发两次后台事件。 
     ***************************************************************/
-    $scope.$watch('paginationConf.currentPage + paginationConf.itemsPerPage + sorttype', GetAllEmployee);}]);
+    $scope.$watch('paginationConf.currentPage + paginationConf.itemsPerPage + sorttype + language + catagory', GetAllEmployee);}]);
 //业务类
 app.factory('BusinessService', ['$http', function ($http) {
 	var url = "/GitMiningServer/repo";
