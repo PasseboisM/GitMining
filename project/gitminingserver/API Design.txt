@@ -9,7 +9,7 @@ Repository query:
 		type=?
 			stat:obtain statistics about server's repository data
 				returns a JSON object containing attributes, "numOfRepo"	//Complete
-				e.g. {"numOfRepo":57000}
+				e.g. {"numOfRepo":3000}
 			data:obtain data of certain repositories
 				method=?
 					spec:get a specific repository by its full name			//Complete
@@ -29,10 +29,16 @@ Repository query:
 User query:
 	URL:http://106.75.5.61:8080/GitMiningServer/user?{param1=...}&{param2=...}&...
 	Parameters:
-		
+		type=?
+			stat:obtain statistics about server's user data
+				returns a JSON object containing attributes, "numOfUser"	//TODO
+				e.g. {"numOfUser":57000}
+			data:obtain data of certain users								//TODO
+				
+				
 	
 
-statistic query:
+Statistic query:
 	URL:http://106.75.5.61:8080/GitMiningServer/stat?{param1=...}&{param2=...}&...
 	Paratemers:
 		type=?
@@ -51,6 +57,7 @@ statistic query:
 			repo:obtain data from original RepositoryStatisticsService			//TODO
 				param=(fullname_of_the repository)
 					Returns RepoRank in JSON
+			
 
 	
 API hint:

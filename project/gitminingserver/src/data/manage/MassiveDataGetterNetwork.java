@@ -22,6 +22,7 @@ import common.param_obj.UserSearchParam;
 import common.service.Repository;
 import data.db.service.DBRepoService;
 import data.db.service.DBService;
+import data.db.service.DBUserService;
 import data.service.MassiveDataGetter;
 import network.service.GHDataSource;
 import network.service.NetworkServiceFactory;
@@ -29,9 +30,14 @@ import network.service.NetworkServiceFactory;
 public class MassiveDataGetterNetwork extends MassiveDataGetter {
 
 	private static MassiveDataGetterNetwork instance = new MassiveDataGetterNetwork();
+	
+	
 	private GHDataSource networkSource = NetworkServiceFactory.getInstance().getGHDataSource();
 	private DBRepoService repoDB = DBService.getInstance().getRepoService();
+	private DBUserService userDB = DBService.getInstance().getUserService();
+	
 	private Gson gson = new Gson();
+	
 	@Override
 	public List<String> getRepositories(int page, int numPerPage, RepoSortStadard sortStandard)
 			throws IndexOutOfBoundsException {
@@ -45,8 +51,7 @@ public class MassiveDataGetterNetwork extends MassiveDataGetter {
 
 	@Override
 	public int getNumOfUsers() {
-		// TODO Auto-generated method stub
-		return 0;
+		return userDB.getNumOfUser();
 	}
 
 	@Override
