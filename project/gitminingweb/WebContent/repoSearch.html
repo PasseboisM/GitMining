@@ -15,7 +15,7 @@
 
 <body>
 	<!-- <p id="x">sdfsdf</p> -->
-	<div ng-app="test" ng-controller="testCtrl">
+	<div ng-app="main_app" ng-controller="main_ctrl">
 	<nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -44,7 +44,7 @@
     <div class="input-group col-md-offset-2 col-md-8">
       <input type="text" class="form-control" placeholder="Search for..." ng-model="search">
       <span class="input-group-btn">
-        <button class="btn btn-default" ng-click="getRepo(search)" type="button">Go!</button>
+        <button class="btn btn-default" ng-click="searchRepos()" type="button">Go!</button>
       </span>
     </div>
 

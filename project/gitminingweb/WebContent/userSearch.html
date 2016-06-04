@@ -6,7 +6,7 @@
 	<script src="js/jquery-1.11.3.js"></script>
 	<!-- <script src="http://code.jquery.com/jquery.js"></script> -->
 	<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script> 
-	<script src="js/userSearch.js"></script> 
+	<script src="js/userSearch.js"></script>
 	<!-- <script src="js/reposervice.js"></script>  -->
 	<script src="js/tm.pagination.js"></script> 
 	<link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
@@ -52,43 +52,43 @@
     <div class="container" ng-app="test" ng-controller="testCtrl">
     	<div class="list-group col-md-8">
     
-    		<div ng-repeat="repo in repos" class="list-group-item">
+    		<div ng-repeat="user in users" class="list-group-item">
 
     			<div class="row">
     				<div class="col-md-12">
     					<!-- <h4>{{repo.fullName}}</h4> -->
-    					<a ng-href="#{{repo.fullName}}">{{repo.fullName}}</a>
+    					<a ng-href="#{{user.login}}">{{user.login}}</a>
     				</div>
     				<div class="col-md-7">
     					<div class="col-md-12">
-    						<p>{{repo.describe}}</p>
+    						<p>{{user.name}}</p>
     					</div>
     					<div class="col-md-12">
-    						<p>{{repo.lastUpdate}}</p>
+    						<p>{{user.location}}</p>
     					</div>
     				</div>
     				<div class="col-md-5">
     					<div class="col-md-4">
     						<div class="col-md-12">
-    							<p>{{repo.stars}}</p>
+    							<p>{{user.follower}}</p>
     						</div>
     						<div class="col-md-12">
-    							<p>stars</p>
+    							<p>followers</p>
     						</div>
     					</div>
     					<div class="col-md-4">
     						<div class="col-md-12">
-    							<p>{{repo.forks}}</p>
+    							<p>{{user.following}}</p>
     						</div>
     						<div class="col-md-12">
-    							<p>forks</p>
+    							<p>followings</p>
     						</div>
     					</div><div class="col-md-4">
     						<div class="col-md-12 center">
-    							<p class="center">{{repo.contributors}}</p>
+    							<p class="center">{{user.repos}}</p>
     						</div>
     						<div class="col-md-12 center">
-    							<p class="center">contributors</p>
+    							<p class="center">repos</p>
     						</div>
     					</div>
     				</div>
@@ -101,19 +101,19 @@
 
     	<div class="list-group col-md-offset-1 col-md-3">
 
-    		<div class="panel panel-default" ng-repeat="repo in repos" class="list-group-item">
+    		<div class="panel panel-default" ng-repeat="user in users" class="list-group-item">
 
     			<div class="panel-body row">
     				<div class="col-md-12">
     					<!-- <h4>{{repo.fullName}}</h4> -->
-    					<a ng-href="#{{repo.fullName}}">{{repo.fullName}}</a>
+    					<a ng-href="#{{user.login}}">{{user.login}}</a>
     				</div>
     				<div class="col-md-7">
     					<div class="col-md-12">
-    						<p>{{repo.describe}}</p>
+    						<p>{{user.name}}</p>
     					</div>
     					<div class="col-md-12">
-    						<p>{{repo.lastUpdate}}</p>
+    						<p>{{user.location}}</p>
     					</div>
     				</div>
     				
