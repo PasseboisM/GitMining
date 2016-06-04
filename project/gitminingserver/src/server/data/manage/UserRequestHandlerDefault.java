@@ -6,6 +6,8 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.bson.Document;
+
 import com.google.gson.Gson;
 
 import common.message.HintMessage;
@@ -57,12 +59,12 @@ class UserRequestHandlerDefault extends UserRequestHandler {
 
 	private void printTypeData(HttpServletRequest httpRequest, PrintWriter out) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	private void printTypeStat(HttpServletRequest httpRequest, PrintWriter out) {
-		// TODO Auto-generated method stub
 		
+		Document result = new Document("numOfUser",massive.getNumOfUsers());
+		out.println(result.toJson());
 	}
 
 }
