@@ -34,8 +34,13 @@ User query:
 				returns a JSON object containing attributes, "numOfUser"	//TODO
 				e.g. {"numOfUser":57000}
 			data:obtain data of certain users								//TODO
-				
-				
+				method=?
+					spec:													//TODO
+					
+					paged:obtain a page of user data with a certain sort	//Complete
+						page=?			stating from 1
+						numPerPage=?	no less than 1
+						sort=?			follower/no			
 	
 
 Statistic query:

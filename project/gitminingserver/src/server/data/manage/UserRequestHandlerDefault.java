@@ -2,6 +2,7 @@ package server.data.manage;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,6 +11,7 @@ import org.bson.Document;
 
 import com.google.gson.Gson;
 
+import common.enumeration.sort_standard.UserSortStandard;
 import common.message.HintMessage;
 import data.service.DataServiceFactory;
 import data.service.MassiveDataGetter;
@@ -58,7 +60,30 @@ class UserRequestHandlerDefault extends UserRequestHandler {
 	}
 
 	private void printTypeData(HttpServletRequest httpRequest, PrintWriter out) {
-		// TODO Auto-generated method stub
+		String method = null;
+		try {
+			method = httpRequest.getParameter("method");
+			if (method==null) throw new Exception();
+		} catch (Exception e) {
+			out.println(new HintMessage("Parameter (method) is necessary!").toJSON());
+			return;
+		}
+		
+		switch (method) {
+		case "spec":
+			printTypeDataMethodSpec(httpRequest, out);
+			break;
+		case "paged":
+			printTypeDataMethodPaged(httpRequest, out);
+			break;
+		case "search":
+			printTypeDataMethodSearch(httpRequest, out);
+			break;
+		default:
+			out.println(new HintMessage("Unspecified value for parameter (method).").toJSON());
+			return;
+		}
+
 	}
 
 	private void printTypeStat(HttpServletRequest httpRequest, PrintWriter out) {
@@ -67,4 +92,39 @@ class UserRequestHandlerDefault extends UserRequestHandler {
 		out.println(result.toJson());
 	}
 
+	private void printTypeDataMethodSpec(HttpServletRequest httpRequest, PrintWriter out) {
+		
+	}
+	
+	private void printTypeDataMethodPaged(HttpServletRequest httpRequest, PrintWriter out) {
+		String page = null,numPerPage = null,sort = null;
+		List<String> result = null;
+		
+		try {
+			page = httpRequest.getParameter("page");
+			numPerPage = httpRequest.getParameter("numPerPage");
+			sort = httpRequest.getParameter("sort");
+			if (page==null||numPerPage==null||sort==null) throw new Exception();
+			result = massive.getUsers(
+					Integer.parseInt(page),
+					Integer.parseInt(numPerPage),
+					UserSortStandard.getStandard(sort));
+		} catch (Exception e) {
+			out.println(new HintMessage("Please check if params are enough.").toJSON());
+			return;
+		}
+		
+		out.print('[');
+		for (int i=0;i<result.size();i++) {
+			out.print(result.get(i));
+			if (i!=result.size()-1) {
+				out.print(',');
+			}
+		}
+		out.print(']');		
+	}
+
+	private void printTypeDataMethodSearch(HttpServletRequest httpRequest, PrintWriter out) {
+	
+	}
 }

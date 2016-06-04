@@ -1,13 +1,18 @@
 package data.db;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.bson.Document;
 
+import com.mongodb.Block;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Sorts;
 
-import common.enumeration.sort_standard.UserSortSandard;
+import common.enumeration.sort_standard.RepoSortStadard;
+import common.enumeration.sort_standard.UserSortStandard;
 import common.param_obj.UserSearchParam;
 import data.db.core.CollectionHelper;
 import data.db.core.ConnectionPool;
@@ -21,10 +26,36 @@ public class DBUserServiceDefault implements DBUserService {
 	
 	
 	@Override
-	public List<String> getUsers(int page, int numPerPage, UserSortSandard sortStandard)
+	public List<String> getUsers(int page, int numPerPage, UserSortStandard sortStandard)
 			throws IndexOutOfBoundsException {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<String> result = new ArrayList<String>(numPerPage);
+		
+		MongoDatabase base = cp.getDatabase();
+		MongoCollection<Document> userColl =
+				CollectionHelper.getCollection(base, GitCollections.USER);
+
+		FindIterable<Document> found = userColl.find();
+
+		sort(sortStandard,found);
+		
+		found.forEach(new Block<Document>(){
+			int count = 0;
+			int MIN_INDEX = (page-1)*numPerPage+1;
+			int MAX_INDEX = page * numPerPage;
+			@Override
+			public void apply(Document arg0) {
+				count++;
+				if (count<=MAX_INDEX&&count>=MIN_INDEX) {
+					result.add(arg0.toJson());
+				}
+			}
+		});
+		
+		cp.releaseDatabase(base);
+		
+		if (result.size()==0) throw new IndexOutOfBoundsException();
+		
+		return result;
 	}
 
 	@Override
@@ -42,6 +73,19 @@ public class DBUserServiceDefault implements DBUserService {
 		
 		cp.releaseDatabase(base);
 		return result;
+	}
+	
+	private static void sort(UserSortStandard sortStandard, FindIterable<Document> repos) {
+		switch (sortStandard) {
+		case FOLLOWER_DESCENDING:
+			repos.sort(Sorts.descending("followers"));
+			break;
+		case NO_SORT:
+			break;
+		default:
+			break;
+
+		}
 	}
 
 }

@@ -14,7 +14,7 @@ import com.google.gson.Gson;
 import common.enumeration.attribute.Category;
 import common.enumeration.attribute.Language;
 import common.enumeration.sort_standard.RepoSortStadard;
-import common.enumeration.sort_standard.UserSortSandard;
+import common.enumeration.sort_standard.UserSortStandard;
 import common.exception.NetworkException;
 import common.model.beans.RepositoryBeans;
 import common.param_obj.RepositorySearchParam;
@@ -55,10 +55,9 @@ public class MassiveDataGetterNetwork extends MassiveDataGetter {
 	}
 
 	@Override
-	public List<String> getUsers(int page, int numPerPage, UserSortSandard sortStandard)
+	public List<String> getUsers(int page, int numPerPage, UserSortStandard sortStandard)
 			throws IndexOutOfBoundsException {
-		// TODO Auto-generated method stub
-		return null;
+		return userDB.getUsers(page, numPerPage, sortStandard);
 	}
 
 	@Override
