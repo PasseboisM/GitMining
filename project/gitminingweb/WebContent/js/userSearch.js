@@ -77,15 +77,13 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
 app.factory('BusinessService', ['$http', function ($http) {
 	var url = "/GitMiningServer/user";
 	var list = function (getAttribute) {
-		/*console.log("now change business");
+		console.log("now change business");
 		console.log(getAttribute);
 		return $http({
 			 method:'GET',
 			 url:url,
 			 params:getAttribute
-			 });*/
-		if(getAttribute.page%2==0)	return user2;
-		else								return user1;
+			 });
     }
 	var getTotal = function () {
 		console.log("getTotal");
@@ -97,6 +95,11 @@ app.factory('BusinessService', ['$http', function ($http) {
     }
     var search = function (searchAttribute) {
     	console.log(searchAttribute);
+    	return $http({
+			 method:'GET',
+			 url:url,
+			 params:searchAttribute
+			 });
     }
 
     return {
