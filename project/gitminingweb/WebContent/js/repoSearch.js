@@ -7,19 +7,10 @@ var http_languages = ["ALL","JAVA","RUBY","PYTHON","C","JAVA_SCRIPT","PERL","PHP
 var http_catagories = ["ALL","ACTIVE_RECORD","API","APP","CMS","DJANGO","EMACS","FRAMEWORK","INTERFACE","IRC","JSON","LIBRARY","LINUX","MAC","MANAGEMENT","OS","PLUGIN","RAILS","REDIS","SERVER","SOURCE","TEMPLATE","TEXT_MATE","TOOL","WEB","WEBSITE","OTHERS"];
 var http_sorttypes = ["NO_SORT","STARS_DESCENDING","FORKS_DESCENDING"];
 
-function GetQueryString(name) { 
-var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)","i"); 
-var r = window.location.search.substr(1).match(reg); 
-if (r!=null) return (r[2]); return null; 
-}
 
 
-/*var repotype=GetQueryString("type"); 
-if(repotype!=null)	repotype = decodeURIComponent(repotype); 
-else				repotype = "All"
-var language=GetQueryString("lang"); 
-if(language!=null)	language = decodeURIComponent(language); 
-else				language = "All"*/
+
+
 
 // $(document).ready(function() {
 
