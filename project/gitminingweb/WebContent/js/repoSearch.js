@@ -47,6 +47,7 @@ app.controller('main_ctrl', ['$scope', 'BusinessService', function ($scope, Busi
 	    	itemsPerPage: 15
 	    };
 	function getReposInSpecialType(){
+		console.log(111);
 		$scope.paginationConf.totalItems = searchRepos.length;		
 		var start = ($scope.paginationConf.currentPage-1)*$scope.paginationConf.itemsPerPage;
 		var end = $scope.paginationConf.currentPage*$scope.paginationConf.itemsPerPage;
@@ -89,6 +90,7 @@ app.controller('main_ctrl', ['$scope', 'BusinessService', function ($scope, Busi
 			};
 			BusinessService.search(transParams(searchAttribute)).success(
 				function(response) {
+					console.log(222);
 					searchRepos=response;
 					hasNewSearchQuest = false;
 					getReposInSpecialType();
@@ -114,6 +116,7 @@ app.controller('main_ctrl', ['$scope', 'BusinessService', function ($scope, Busi
 	};
 
 	$scope.changecata = function(text) {
+		hasNewSearchQuest = true;
 		console.log(text);
 		$scope.catagory = text;
 		$scope.paginationConf.currentPage = 1;
@@ -124,6 +127,7 @@ app.controller('main_ctrl', ['$scope', 'BusinessService', function ($scope, Busi
 	};
 	
     $scope.changelang = function(text) {
+    	hasNewSearchQuest = true;
     	console.log(text);
 		$scope.language = text;
 		$scope.paginationConf.currentPage = 1;

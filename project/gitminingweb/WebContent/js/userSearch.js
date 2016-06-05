@@ -7,7 +7,7 @@ function transParams(searchAttribute){
 		method:"search",
 		param:{}
 	};
-	http_attributes.param.sortStandard = http_sorttypes[sorttypes.indexOf(searchAttribute.sortStandard)];
+	http_attributes.param.sortStandard = http_sort_type[sort_type.indexOf(searchAttribute.sortStandard)];
 	http_attributes.param.keywords = searchAttribute.keywords;
 	return http_attributes;
 }
@@ -16,6 +16,7 @@ var hasNewSearchQuest = false;
 var app = angular.module('test', ['tm.pagination']);
 app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, BusinessService) {
 	$scope.search = "";
+	$scope.sort_type = "no";
 	$scope.paginationConf = {
 	    	currentPage: 1,
 	    	itemsPerPage: 15
@@ -45,7 +46,7 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
 				method:"paged",
 				page:$scope.paginationConf.currentPage,
 				numPerPage:$scope.paginationConf.itemsPerPage,
-				sort:"no"
+				sort:$scope.sort_type
 			}
 					
 			// if($scope.language=="All"&&$scope.catagory=="All"&&$scope.search==""){
@@ -64,7 +65,8 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
 			}
 			console.log("now get new users in search type");
 			var searchAttribute = {
-				keyword:$scope.search.split(" ")
+				keywords:$scope.search.split(" "),
+				sortStandard:$scope.sort_type
 			};
 			BusinessService.search(transParams(searchAttribute)).success(
 				function(response) {
