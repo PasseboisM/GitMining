@@ -23,6 +23,7 @@ app.controller('detail_controller', function($scope, $http) {
 		params:data
 	}).success(function(data) {
 		$scope.user = data;
+		console.log(data);
 	});
 
 });
