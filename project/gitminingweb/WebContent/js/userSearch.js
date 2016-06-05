@@ -55,11 +55,10 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
 				function(response) {
 					$scope.paginationConf.totalItems = response.numOfUser;
 				});
-			$scope.users = BusinessService.list(getAttribute)
-			/*.success(
+			BusinessService.list(getAttribute).success(
 				function(response) {
-					$scope.repos=response;
-				});*/
+					$scope.users=response;
+				});
 		}else{
 			console.log("now get new users in search type");
 			var searchAttribute = {
