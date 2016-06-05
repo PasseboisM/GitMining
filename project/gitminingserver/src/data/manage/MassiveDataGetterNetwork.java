@@ -58,6 +58,8 @@ public class MassiveDataGetterNetwork extends MassiveDataGetter {
 
 	@Override
 	public List<String> searchRepository(RepositorySearchParam params) {
+		final int MAX_RETURN_NUM = 200;
+		
 		List<Repository> repos = new ArrayList<Repository>(200);
 		List<String> result = new ArrayList<String>(200);
 		
@@ -76,14 +78,15 @@ public class MassiveDataGetterNetwork extends MassiveDataGetter {
 				}
 			}
 		}
+		
 		for (String s:fromDB) {
 			repos.add(gson.fromJson(s, RepositoryBeans.class));
 		}
 		
 		repos.sort(params.getSortStandard().getComparator());
 		
-		for (Repository r:repos) {
-			result.add(gson.toJson(r));
+		for (int i=0;i<MAX_RETURN_NUM&&i<repos.size();i++) {
+			result.add(gson.toJson(repos.get(i)));
 		}
 		
 		return result;
