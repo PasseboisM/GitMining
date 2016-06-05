@@ -40,16 +40,17 @@
     </nav>
 
 	
-    <div class="input-group col-md-offset-2 col-md-8">
-      <input type="text" class="form-control" placeholder="Search for..." ng-model="search">
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button" ng-click="searchUsers()">搜索</button>
-      </span>
-    </div>
-
-    <br/>
+    
 
     <div class="container" ng-app="test" ng-controller="testCtrl">
+        <div class="input-group col-md-offset-2 col-md-8">
+            <input type="text" class="form-control" placeholder="Search for..." ng-model="search">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" ng-click="searchUsers()">搜索</button>
+            </span>
+        </div>
+
+    <br/>
     	<div class="list-group col-md-8">
     
     		<div ng-repeat="user in users" class="list-group-item">
