@@ -10,9 +10,11 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Sorts;
+import static com.mongodb.client.model.Filters.*;
 
 import common.enumeration.sort_standard.RepoSortStadard;
 import common.enumeration.sort_standard.UserSortStandard;
+import common.exception.TargetNotFoundException;
 import common.param_obj.UserSearchParam;
 import data.db.core.CollectionHelper;
 import data.db.core.ConnectionPool;
@@ -85,6 +87,25 @@ public class DBUserServiceDefault implements DBUserService {
 		default:
 			break;
 
+		}
+	}
+
+	@Override
+	public String getUser(String login) throws TargetNotFoundException {
+		if (login==null) throw new TargetNotFoundException();
+		
+		MongoDatabase base = cp.getDatabase();
+		MongoCollection<Document> userColl =
+				CollectionHelper.getCollection(base, GitCollections.USER);
+		FindIterable<Document> found = userColl.find(eq("login",login));
+		
+		try {
+			String result = found.first().toJson();
+			return result;
+		} catch (Exception e) {
+			throw new TargetNotFoundException();
+		} finally {
+			cp.releaseDatabase(base);
 		}
 	}
 

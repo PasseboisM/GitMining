@@ -1,7 +1,6 @@
 package data.db;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.bson.Document;
@@ -9,14 +8,10 @@ import org.bson.conversions.Bson;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.google.gson.Gson;
 import com.mongodb.Block;
 import com.mongodb.client.FindIterable;
-import com.mongodb.client.model.Filters;
 import static com.mongodb.client.model.Filters.*;
 import com.mongodb.client.model.Sorts;
-import com.mongodb.client.model.TextSearchOptions;
-
 import common.enumeration.attribute.Category;
 import common.enumeration.attribute.Language;
 import common.enumeration.sort_standard.RepoSortStadard;

@@ -12,6 +12,7 @@ import org.bson.Document;
 import com.google.gson.Gson;
 
 import common.enumeration.sort_standard.UserSortStandard;
+import common.exception.TargetNotFoundException;
 import common.message.HintMessage;
 import data.service.DataServiceFactory;
 import data.service.MassiveDataGetter;
@@ -93,7 +94,25 @@ class UserRequestHandlerDefault extends UserRequestHandler {
 	}
 
 	private void printTypeDataMethodSpec(HttpServletRequest httpRequest, PrintWriter out) {
+		String login = null;
+		String result = null;
+		try {
+			login = httpRequest.getParameter("param");
+			if (login==null) throw new Exception();
+		} catch (Exception e) {
+			out.println(new HintMessage("Parameter (param) is necessary"
+					+ " to specify the login of user.").toJSON());
+			return;
+		}
 		
+		try {
+			result = specific.getSpecificGitUser(login);
+		} catch (TargetNotFoundException e) {
+			out.println(new HintMessage("User '"+login+"' not found!").toJSON());
+			return;
+		}
+		
+		out.print(result);
 	}
 	
 	private void printTypeDataMethodPaged(HttpServletRequest httpRequest, PrintWriter out) {
