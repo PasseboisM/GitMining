@@ -38,7 +38,6 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
 	    	currentPage: 1,
 	    	itemsPerPage: 15
 	    };
-	$scope.paginationConf.totalItems = 16;
 	var GetAllEmployee = function () {
 		
 		if(isInitialStatus){
@@ -54,7 +53,7 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
 			// if($scope.language=="All"&&$scope.catagory=="All"&&$scope.search==""){
 			BusinessService.initial().success(
 				function(response) {
-					$scope.paginationConf.totalItems = response.numOfRepo;
+					$scope.paginationConf.totalItems = response.numOfUser;
 				});
 			$scope.users = BusinessService.list(getAttribute)
 			/*.success(
