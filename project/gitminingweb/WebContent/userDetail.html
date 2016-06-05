@@ -5,6 +5,7 @@
     <title>GitMiningChart</title>
   <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
   <script src="js/userDetail.js"></script>
+  <script src="js/userRadar.js"></script>
   <link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
   <link href="css/top.css" rel="stylesheet" media="screen">
 </head>
@@ -38,7 +39,7 @@
     </div>
       <div class="col-md-12">
        <div class="col-md-4">
-          <img ng-src="{{user.avatar_url}}">
+          <img ng-src="{{user.avatar_url}}" class="col-md-12">
           <div>
             <p>用户类型：{{user.type}}</p> </div>
           <div>
@@ -53,9 +54,7 @@
           
         </div>
         <div class="col-md-8">
-           <a href="#" class="thumbnail">
-             <img src="avatar.png" alt="...">
-          </a>
+          <div id="radar" style="min-width:700px;height:400px"></div>
           <h2>用户统计数据</h2>
           <p>
           <span class="label label-default">被关注人数</span>
