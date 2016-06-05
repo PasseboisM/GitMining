@@ -68,7 +68,10 @@ Recommended info query:
 	URL:http://106.75.5.61:8080/GitMiningServer/recommend?{param1=...}&{param2=...}&...
 																				//TODO
 		
-			
+Login request:
+	URL:http://106.75.5.61:8080/GitMiningServer/login?{param1=...}&{param2=...}&...
+																				//TODO
+				
 	
 API hint:
 	URL:http://106.75.5.61:8080/GitMiningServer/api?{param1=...}&{param2=...}&...

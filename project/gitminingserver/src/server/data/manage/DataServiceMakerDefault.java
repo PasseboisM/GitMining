@@ -1,6 +1,7 @@
 package server.data.manage;
 
 import server.data.service.DataServiceMaker;
+import server.data.service.LogInRequestHandler;
 import server.data.service.RecommendRequestHandler;
 import server.data.service.RepositoryRequestHandler;
 import server.data.service.StatisticRequestHandler;
@@ -12,6 +13,7 @@ public class DataServiceMakerDefault extends DataServiceMaker {
 	private UserRequestHandler userHandler = new UserRequestHandlerDefault();
 	private StatisticRequestHandler statHandler = new StatisticRequestHandlerDefault();
 	private RecommendRequestHandler recommendHandler = new RecommendRequestHandlerDefault();
+	private LogInRequestHandler logInHandler = new LogInRequestHandlerDefault();
 	
 	@Override
 	public RepositoryRequestHandler getRepositoryService() {
@@ -31,6 +33,11 @@ public class DataServiceMakerDefault extends DataServiceMaker {
 	@Override
 	public RecommendRequestHandler getRecommendHandler() {
 		return recommendHandler;
+	}
+
+	@Override
+	public LogInRequestHandler getLogInRequestHandler() {
+		return logInHandler;
 	}
 
 }
