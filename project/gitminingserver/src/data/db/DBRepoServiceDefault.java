@@ -95,51 +95,53 @@ public class DBRepoServiceDefault implements DBRepoService {
 				base, GitCollections.REPOSITORY);
 		
 		FindIterable<Document> found = repoColl.find();
-		Bson partialFilter = null;
+		Bson[] partialFilter = new Bson[3];
 		
-		
+		partialFilter[0] = null;
 		for (Language lang:params.getLangs()) {
-			if (partialFilter==null) {
-				partialFilter = eq("language",lang.getName());
+			System.out.println(lang);
+			if (partialFilter[0]==null) {
+				partialFilter[0] = eq("language",lang.getName());
 			} else {
 				if (lang==Language.ALL||lang==Language.OTHERS) {
-					partialFilter = new Document();	
+					partialFilter[0] = new Document();	
 					break;
 				}
-				partialFilter = or(partialFilter,eq("language",lang.getName()));
+				partialFilter[0] = or(partialFilter[0],eq("language",lang.getName()));
 			}
 		}
-		if (partialFilter==null) partialFilter = new Document();
-		found = found.filter(partialFilter);
+		if (partialFilter[0]==null) partialFilter[0] = new Document();
 		
-		partialFilter = null;
+		partialFilter[1] = null;
 		for (Category cat:params.getCates()) {
+			
+			if (cat==Category.ALL||cat==Category.OTHERS) {
+				partialFilter[1] = new Document();	
+				break;
+			}
+			
 			if (partialFilter==null) {
-				partialFilter = regex("description",cat.getName());
+				partialFilter[1] = regex("description",cat.getName());
 			} else {
-				if (cat==Category.ALL||cat==Category.OTHERS) {
-					partialFilter = new Document();	
-					break;
-				}
-				partialFilter = and(partialFilter,regex("description",cat.getName()));
+				partialFilter[1] = and(partialFilter[1],regex("description",cat.getName()));
 			}
 		}
-		if (partialFilter==null) partialFilter = new Document();
-		found = found.filter(partialFilter);
+		if (partialFilter[1]==null) partialFilter[1] = new Document();
 		
-		partialFilter = null;
+		partialFilter[2] = null;
 		for (String keyword:params.getKeywords()) {
-			if (partialFilter==null) {
-				partialFilter = or(regex("full_name",keyword),regex("description",keyword));
+			if (partialFilter[2]==null) {
+				partialFilter[2] = or(regex("full_name",keyword),regex("description",keyword));
 			} else {
-				partialFilter = and (partialFilter,
+				partialFilter[2] = and (partialFilter[2],
 						or(regex("full_name",keyword),regex("description",keyword)));
 			}
 		}
-		if (partialFilter==null) partialFilter = new Document();
-		found.filter(partialFilter);
+		if (partialFilter[2]==null) partialFilter[2] = new Document();
+		found.filter(and(partialFilter[0],partialFilter[1],partialFilter[2]));
 		
 		sort(params.getSortStandard(),found);
+		
 		found.forEach(new Block<Document>() {
 			int count = 0;
 			final int MAX_RETURN = 200;
@@ -178,18 +180,21 @@ public class DBRepoServiceDefault implements DBRepoService {
 		}
 	}
 	
-//	public static void main(String[] args) {
-//	DBRepoServiceDefault ti = new DBRepoServiceDefault();
-//	MongoDatabase base = ti.cp.getDatabase();
-//	MongoCollection<Document> repository = CollectionHelper.getCollection(
-//			base, GitCollections.REPOSITORY);
-//	FindIterable<Document> result = 
-//			repository.find().filter(
-//					and(regex("description","multiple"),regex("description","file")));
-//	System.out.println(result==null);
-//	System.out.println(result.first().toJson());	
-//}
-	
+	public static void main(String[] args) {
+		DBRepoServiceDefault ti = new DBRepoServiceDefault();
+		MongoDatabase base = ti.cp.getDatabase();
+		MongoCollection<Document> repository = CollectionHelper.getCollection(
+				base, GitCollections.REPOSITORY);
+		Bson filt = null;
+		filt = eq("language","Java");
+		FindIterable<Document> result = 
+				repository.find();
+		result.filter(filt);
+		System.out.println(result==null);
+		System.out.println(result.first().toJson());	
+		ti.cp.releaseDatabase(base);
+	}
+
 	private static void sort(RepoSortStadard sortStandard, FindIterable<Document> repos) {
 		switch (sortStandard) {
 		case FORKS_DESCENDING:
