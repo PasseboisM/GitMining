@@ -16,9 +16,11 @@ import common.enumeration.attribute.Language;
 import common.enumeration.sort_standard.RepoSortStadard;
 import common.enumeration.sort_standard.UserSortStandard;
 import common.exception.NetworkException;
+import common.model.beans.GitUserBeans;
 import common.model.beans.RepositoryBeans;
 import common.param_obj.RepositorySearchParam;
 import common.param_obj.UserSearchParam;
+import common.service.GitUser;
 import common.service.Repository;
 import data.db.service.DBRepoService;
 import data.db.service.DBService;
@@ -98,8 +100,39 @@ public class MassiveDataGetterNetwork extends MassiveDataGetter {
 
 	@Override
 	public List<String> searchUser(UserSearchParam params) {
-		// TODO Auto-generated method stub
-		return null;
+		final int MAX_RETURN_NUM = 200;
+		
+		List<GitUser> users = new ArrayList<GitUser>(MAX_RETURN_NUM);
+		List<String> result = new ArrayList<String>(MAX_RETURN_NUM);
+		
+		try {
+			users.addAll(networkSource.searchUser(params));
+		} catch (NetworkException e) {
+			e.printStackTrace();
+		}
+		List<String> usersFromDB = userDB.searchUsers(params);
+		Iterator<String> iter = usersFromDB.iterator();
+		while (iter.hasNext()) {
+			GitUser temp = gson.fromJson(iter.next(), GitUserBeans.class);
+			for (GitUser user:users) {
+				if (user.getLogin().equals(temp.getLogin())) {
+					iter.remove();
+					break;
+				}
+			}
+		}
+		
+		for (String s:usersFromDB) {
+			users.add(gson.fromJson(s, GitUserBeans.class));
+		}
+		
+		users.sort(params.getSortStandard().getComparator());
+		
+		for (GitUser user:users) {
+			result.add(gson.toJson(user));
+		}
+		
+		return result;
 	}
 	
 	public static MassiveDataGetterNetwork getInstance() {

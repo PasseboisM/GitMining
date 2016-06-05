@@ -12,7 +12,7 @@ public class SearchApiMakerGitMining implements SearchApiMaker {
 	public String makeSearchUserApi(UserSearchParam param,int page) {
 		if(param==null) return null;
 		String api = SEARCH_SITE+USER;
-		String loginName = param.getLoginName();
+		String loginName = param.getKeywordInLine();
 		if(loginName==null) return null;
 		String searchItems[] = loginName.trim().split(" ");
 //		if(searchItems[0].equals("")) return null;
