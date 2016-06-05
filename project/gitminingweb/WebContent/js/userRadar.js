@@ -36,7 +36,8 @@ $(function() {
                 // 使用
                 require(
                     [
-                    'echarts'
+                    'echarts',
+                    'echarts/chart/radar'
                     ],
                 function (ec) {
                 // 基于准备好的dom，初始化echarts图表
