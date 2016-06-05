@@ -1,6 +1,6 @@
 package common.param_obj;
 
-import common.enumeration.sort_standard.UserSortSandard;
+import common.enumeration.sort_standard.UserSortStandard;
 
 /**
  * 
@@ -12,15 +12,15 @@ public class UserSearchParam {
 
 	private String loginName;
 
-	private UserSortSandard sortStandard;
+	private UserSortStandard sortStandard;
 	
-	public UserSearchParam(String loginName, UserSortSandard sortStandard) {
+	public UserSearchParam(String loginName, UserSortStandard sortStandard) {
 		super();
 		this.loginName = loginName;
 		this.sortStandard = sortStandard;
 	}
 
-	public UserSortSandard getSortStandard() {
+	public UserSortStandard getSortStandard() {
 		return sortStandard;
 	}
 	

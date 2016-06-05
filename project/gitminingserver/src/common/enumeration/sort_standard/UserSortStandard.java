@@ -9,7 +9,7 @@ import common.service.GitUserMin;
  * @author xjh14
  * GitUserMin排序方式，表示各种排序策略
  */
-public enum UserSortSandard {
+public enum UserSortStandard {
 	
 	NO_SORT(new Comparator<GitUserMin>() {
 		public int compare(GitUserMin arg0, GitUserMin arg1) {
@@ -26,12 +26,22 @@ public enum UserSortSandard {
 	
 	private Comparator<GitUserMin> cpr;
 	
-	UserSortSandard(Comparator<GitUserMin> cpr) {
+	UserSortStandard(Comparator<GitUserMin> cpr) {
 		this.cpr = cpr;
 	}
 	
 	public Comparator<GitUserMin> getComparator() {
 		return cpr;
+	}
+	
+	public static UserSortStandard getStandard(String name) {
+		assert name!=null;
+		
+		if (name.equalsIgnoreCase("no")||name.equalsIgnoreCase("no_sort")||name.equals("")) {
+			return UserSortStandard.NO_SORT;
+		} else {
+			return UserSortStandard.FOLLOWER_DESCENDING;
+		}
 	}
 	
 }
