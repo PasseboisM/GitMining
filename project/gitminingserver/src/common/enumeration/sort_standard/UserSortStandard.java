@@ -18,7 +18,7 @@ public enum UserSortStandard {
 	}),
 	FOLLOWER_DESCENDING(new Comparator<GitUserMin>() {
 		public int compare(GitUserMin arg0, GitUserMin arg1) {
-			 return arg0.getFollowers()-arg1.getFollowers();
+			 return arg1.getFollowers()-arg0.getFollowers();
 		}	
 	}),
 	;

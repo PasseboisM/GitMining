@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bson.Document;
+import org.bson.conversions.Bson;
 
 import com.mongodb.Block;
 import com.mongodb.client.FindIterable;
@@ -62,8 +63,40 @@ public class DBUserServiceDefault implements DBUserService {
 
 	@Override
 	public List<String> searchUsers(UserSearchParam param) {
-		// TODO Auto-generated method stub
-		return null;
+		final int MAX_RETURN = 200;
+		
+		ArrayList<String> result = new ArrayList<>(MAX_RETURN);
+		MongoDatabase base = cp.getDatabase();
+		MongoCollection<Document> userColl =
+				CollectionHelper.getCollection(base, GitCollections.USER);
+		
+		Bson filter = null;
+		for (String keyword:param.getKeywords()) {
+			if (filter==null) {
+				filter = getKeywordMatch(keyword);
+			} else {
+				filter = and(filter,getKeywordMatch(keyword));
+			}
+		}
+		if (filter==null) filter = new Document();
+		
+		FindIterable<Document> found = userColl.find(filter);
+		
+		sort(param.getSortStandard(), found);
+		
+		found.forEach(new Block<Document>(){
+			int count = 0;
+			@Override
+			public void apply(Document arg0) {
+				if ((count++)<MAX_RETURN) {
+					result.add(arg0.toJson());
+				}
+			}
+		});
+		
+		cp.releaseDatabase(base);
+		
+		return result;
 	}
 
 	@Override
@@ -77,10 +110,10 @@ public class DBUserServiceDefault implements DBUserService {
 		return result;
 	}
 	
-	private static void sort(UserSortStandard sortStandard, FindIterable<Document> repos) {
+	private static void sort(UserSortStandard sortStandard, FindIterable<Document> users) {
 		switch (sortStandard) {
 		case FOLLOWER_DESCENDING:
-			repos.sort(Sorts.descending("followers"));
+			users.sort(Sorts.descending("followers"));
 			break;
 		case NO_SORT:
 			break;
@@ -109,4 +142,13 @@ public class DBUserServiceDefault implements DBUserService {
 		}
 	}
 
+	private static Bson getKeywordMatch(String keyword) {
+		return or(
+				regex("login",keyword),
+				regex("name",keyword),
+				regex("location",keyword),
+				regex("email",keyword)
+				);
+	}
+	
 }

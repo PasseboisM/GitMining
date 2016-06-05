@@ -92,6 +92,7 @@ public class GHDataSourceDefault implements GHDataSource {
 		JSONArray jsonArray = jsonObject.getJSONArray("items");
 		jsonArray.forEach((Object object)->{
 			String user = ((JSONObject)object).toString();
+			System.out.println(user);
 			GitUser result = gson.fromJson(user, GitUserBeans.class);
 			users.add(result);
 		});

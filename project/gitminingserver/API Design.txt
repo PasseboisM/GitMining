@@ -33,7 +33,7 @@ User query:
 			stat:obtain statistics about server's user data
 				returns a JSON object containing attributes, "numOfUser"	//Complete
 				e.g. {"numOfUser":57000}
-			data:obtain data of certain users								//TODO
+			data:obtain data of certain users								
 				method=?
 					spec:obtain data of specific user						//Complete
 						param=login of the user
@@ -41,7 +41,7 @@ User query:
 						page=?			starting from 1
 						numPerPage=?	no less than 1
 						sort=follower/no			
-					search:obtain data with a search_param					//TODO
+					search:obtain data with a search_param					//Complete
 						param=JSON object of UserSearchParam
 						
 Statistic query:
@@ -67,7 +67,8 @@ Statistic query:
 Recommended info query:
 	URL:http://106.75.5.61:8080/GitMiningServer/recommend?{param1=...}&{param2=...}&...
 																				//TODO
-
+		
+			
 	
 API hint:
 	URL:http://106.75.5.61:8080/GitMiningServer/api?{param1=...}&{param2=...}&...

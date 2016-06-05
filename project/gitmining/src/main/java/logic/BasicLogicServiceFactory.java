@@ -74,7 +74,7 @@ public class BasicLogicServiceFactory extends LogicServiceFactory {
 	}
 	@Override
 	public LogInHelper getLogInHelper() {
-		// TODO 稍后再写出 LogInHelper实现
+		
 		return null;
 	}
 

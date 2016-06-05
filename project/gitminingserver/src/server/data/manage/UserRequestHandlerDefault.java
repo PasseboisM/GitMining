@@ -2,6 +2,7 @@ package server.data.manage;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import com.google.gson.Gson;
 import common.enumeration.sort_standard.UserSortStandard;
 import common.exception.TargetNotFoundException;
 import common.message.HintMessage;
+import common.param_obj.UserSearchParam;
 import data.service.DataServiceFactory;
 import data.service.MassiveDataGetter;
 import data.service.SpecificDataGetter;
@@ -30,6 +32,8 @@ class UserRequestHandlerDefault extends UserRequestHandler {
 	
 	@Override
 	public void handleRequest(HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
+		httpResponse.setCharacterEncoding("gb2312");
+		
 		PrintWriter out = null;
 		try {
 			out = httpResponse.getWriter();
@@ -144,6 +148,30 @@ class UserRequestHandlerDefault extends UserRequestHandler {
 	}
 
 	private void printTypeDataMethodSearch(HttpServletRequest httpRequest, PrintWriter out) {
-	
+		UserSearchParam param = null;
+		
+		try {
+			String s = httpRequest.getParameter("param");
+			if (s==null) throw new Exception();
+			param = gson.fromJson(s, UserSearchParam.class);
+			if (param.getKeywords()==null||param.getSortStandard()==null) {
+				throw new Exception();
+			}
+		} catch (Exception e) {
+			out.print(new HintMessage("Parameter (param) in bad format!").toJSON());
+			return;
+		}
+		
+		List<String> result = massive.searchUser(param);
+		
+		out.print('[');
+		for(int i=0;i<result.size();i++) {
+			out.print(result.get(i));
+			if(i!=result.size()-1) {
+				out.print(',');
+			}
+		}
+		out.print(']');
+		
 	}
 }
