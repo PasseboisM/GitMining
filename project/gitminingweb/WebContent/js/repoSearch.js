@@ -26,6 +26,7 @@ else				language = "All"*/
 // });
 var app = angular.module('main_app', ['tm.pagination']);
 var isInitialStatus = true;
+var hasNewSearchQuest = false;
 var searchRepos=[];
 
 function transParams(searchAttribute){
@@ -86,7 +87,11 @@ app.controller('main_ctrl', ['$scope', 'BusinessService', function ($scope, Busi
 					$scope.repos=response;
 				});
 		}else{
-			if($scope.search=="")	return;
+			// if($scope.search=="")	return;
+			if (!hasNewSearchQuest) {
+				getReposInSpecialType();
+				return;
+			}
 			console.log("now get new repos in s type");
 			var searchAttribute = {
 				type:"data",
@@ -99,6 +104,7 @@ app.controller('main_ctrl', ['$scope', 'BusinessService', function ($scope, Busi
 			BusinessService.search(transParams(searchAttribute)).success(
 				function(response) {
 					searchRepos=response;
+					hasNewSearchQuest = false;
 					getReposInSpecialType();
 				});
 			
@@ -129,7 +135,6 @@ app.controller('main_ctrl', ['$scope', 'BusinessService', function ($scope, Busi
 			isInitialStatus = true;
 		else
 			isInitialStatus = false;
-		console.log(text);
 	};
 	
     $scope.changelang = function(text) {
@@ -140,11 +145,11 @@ app.controller('main_ctrl', ['$scope', 'BusinessService', function ($scope, Busi
 			isInitialStatus = true;
 		else
 			isInitialStatus = false;
-		console.log(text);
 	};
 
 	$scope.searchRepos = function() {
     	console.log($scope.search);
+    	hasNewSearchQuest = true;
 		$scope.paginationConf.currentPage = 1;
 		if($scope.language=="All"&&$scope.catagory=="All"&&$scope.search=="")
 			isInitialStatus = true;
@@ -172,10 +177,14 @@ app.controller('main_ctrl', ['$scope', 'BusinessService', function ($scope, Busi
     	}
     	console.log("now type has changed to "+retype);
     };
+    /*var changeState = function () {
+    	hasNewSearchQuest = true;
+    }*/
     /***************************************************************
     当页码和页面记录数发生变化时监控后台查询
     如果把currentPage和itemsPerPage分开监控的话则会触发两次后台事件。 
     ***************************************************************/
+    // $scope.$watch('search',changeState);
     $scope.$watch('paginationConf.currentPage + paginationConf.itemsPerPage + sorttype + language + catagory', GetAllEmployee);}]);
 //业务类
 app.factory('BusinessService', ['$http', function ($http) {
