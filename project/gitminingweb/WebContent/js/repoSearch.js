@@ -6,6 +6,7 @@ var sorttypes = ["no","stars","forks"];
 var http_languages = ["ALL","JAVA","RUBY","PYTHON","C","JAVA_SCRIPT","PERL","PHP","C_PLUS_PLUS","HTML","SHELL","OBJECTIVE_C","VIML","C_SHARP","EMACS_LISP","ERLANG","LUA","CLOJURE","CSS","HASKELL","SCALA","COMMON_LISP","R","OTHERS"];
 var http_catagories = ["ALL","ACTIVE_RECORD","API","APP","CMS","DJANGO","EMACS","FRAMEWORK","INTERFACE","IRC","JSON","LIBRARY","LINUX","MAC","MANAGEMENT","OS","PLUGIN","RAILS","REDIS","SERVER","SOURCE","TEMPLATE","TEXT_MATE","TOOL","WEB","WEBSITE","OTHERS"];
 var http_sorttypes = ["NO_SORT","STARS_DESCENDING","FORKS_DESCENDING"];
+
 function GetQueryString(name) { 
 var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)","i"); 
 var r = window.location.search.substr(1).match(reg); 
