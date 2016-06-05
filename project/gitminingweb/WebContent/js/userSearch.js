@@ -64,7 +64,7 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
 			}
 			console.log("now get new users in search type");
 			var searchAttribute = {
-				keyword:$scope.search.split(" ");
+				keyword:$scope.search.split(" ")
 			};
 			BusinessService.search(transParams(searchAttribute)).success(
 				function(response) {
