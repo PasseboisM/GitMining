@@ -1,36 +1,18 @@
-user1=[{login:"haha",location:"LA",name:"HaHa",follower:25,following:1,repos:2},
-{login:"excuse miao",location:"YKHM",name:"Neko",follower:2,following:185,repos:27},
-{login:"haha",location:"LA",name:"HaHa",follower:25,following:1,repos:2},
-{login:"excuse miao",location:"YKHM",name:"Neko",follower:2,following:185,repos:27},
-{login:"haha",location:"LA",name:"HaHa",follower:25,following:1,repos:2},
-{login:"excuse miao",location:"YKHM",name:"Neko",follower:2,following:185,repos:27},
-{login:"haha",location:"LA",name:"HaHa",follower:25,following:1,repos:2},
-{login:"excuse miao",location:"YKHM",name:"Neko",follower:2,following:185,repos:27},
-{login:"haha",location:"LA",name:"HaHa",follower:25,following:1,repos:2},
-{login:"excuse miao",location:"YKHM",name:"Neko",follower:2,following:185,repos:27},
-{login:"haha",location:"LA",name:"HaHa",follower:25,following:1,repos:2},
-{login:"excuse miao",location:"YKHM",name:"Neko",follower:2,following:185,repos:27},
-{login:"haha",location:"LA",name:"HaHa",follower:25,following:1,repos:2},
-{login:"excuse miao",location:"YKHM",name:"Neko",follower:2,following:185,repos:27},
-{login:"haha",location:"LA",name:"HaHa",follower:25,following:1,repos:2},
-{login:"excuse miao",location:"YKHM",name:"Neko",follower:2,following:185,repos:27}];
-user2=[{login:"haha",location:"LA",name:"HaHa",follower:0,following:0,repos:0},
-{login:"excuse miao",location:"YKHM",name:"Neko",follower:0,following:0,repos:0},
-{login:"haha",location:"LA",name:"HaHa",follower:0,following:0,repos:0},
-{login:"excuse miao",location:"YKHM",name:"Neko",follower:0,following:0,repos:0},
-{login:"haha",location:"LA",name:"HaHa",follower:0,following:0,repos:0},
-{login:"excuse miao",location:"YKHM",name:"Neko",follower:0,following:0,repos:0},
-{login:"haha",location:"LA",name:"HaHa",follower:0,following:0,repos:0},
-{login:"excuse miao",location:"YKHM",name:"Neko",follower:0,following:0,repos:0},
-{login:"haha",location:"LA",name:"HaHa",follower:0,following:0,repos:0},
-{login:"excuse miao",location:"YKHM",name:"Neko",follower:0,following:0,repos:0},
-{login:"haha",location:"LA",name:"HaHa",follower:0,following:0,repos:0},
-{login:"excuse miao",location:"YKHM",name:"Neko",follower:0,following:0,repos:0},
-{login:"haha",location:"LA",name:"HaHa",follower:0,following:0,repos:0},
-{login:"excuse miao",location:"YKHM",name:"Neko",follower:0,following:0,repos:0},
-{login:"haha",location:"LA",name:"HaHa",follower:0,following:0,repos:0},
-{login:"excuse miao",location:"YKHM",name:"Neko",follower:0,following:0,repos:0}];
+var sort_type = ["no","follower"];
+var http_sort_type = ["NO_SORT","FOLLOWER_DESCENDING"];
+var searchUsers=[];
+function transParams(searchAttribute){
+	var http_attributes = {
+		type:"data",
+		method:"search",
+		param:{}
+	};
+	http_attributes.param.sortStandard = http_sorttypes[sorttypes.indexOf(searchAttribute.sortStandard)];
+	http_attributes.param.keywords = searchAttribute.keywords;
+	return http_attributes;
+}
 var isInitialStatus = true;
+var hasNewSearchQuest = false;
 var app = angular.module('test', ['tm.pagination']);
 app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, BusinessService) {
 	$scope.search = "";
@@ -38,6 +20,22 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
 	    	currentPage: 1,
 	    	itemsPerPage: 15
 	    };
+	function getReposInSpecialType(){
+		$scope.paginationConf.totalItems = searchUsers.length;		
+		var start = ($scope.paginationConf.currentPage-1)*$scope.paginationConf.itemsPerPage;
+		var end = $scope.paginationConf.currentPage*$scope.paginationConf.itemsPerPage;
+		$scope.users = searchUsers.slice(start,end);
+	}
+	$scope.searchUsers = function() {
+    	console.log($scope.search);
+    	hasNewSearchQuest = true;
+		$scope.paginationConf.currentPage = 1;
+		if($scope.search=="")
+			isInitialStatus = true;
+		else
+			isInitialStatus = false;
+		GetAllEmployee();
+	};
 	var GetAllEmployee = function () {
 		
 		if(isInitialStatus){
@@ -60,16 +58,24 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
 					$scope.users=response;
 				});
 		}else{
+			if (!hasNewSearchQuest) {
+				getReposInSpecialType();
+				return;
+			}
 			console.log("now get new users in search type");
 			var searchAttribute = {
-				cata:$scope.catagory,
-				lang:$scope.language,
-				keyword:$scope.search
+				keyword:$scope.search.split(" ");
 			};
-			BusinessService.search(searchAttribute);
+			BusinessService.search(transParams(searchAttribute)).success(
+				function(response) {
+					searchUsers=response;
+					hasNewSearchQuest = false;
+					getReposInSpecialType();
+				});
 			getReposInSpecialType();
 		}
 	}
+
 	$scope.$watch('paginationConf.currentPage + paginationConf.itemsPerPage', GetAllEmployee);
 
 }]);//业务类
