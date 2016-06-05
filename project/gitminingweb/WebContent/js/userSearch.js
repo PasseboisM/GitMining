@@ -52,10 +52,10 @@ app.controller('testCtrl', ['$scope', 'BusinessService', function ($scope, Busin
 			}
 					
 			// if($scope.language=="All"&&$scope.catagory=="All"&&$scope.search==""){
-			/*BusinessService.initial().success(
+			BusinessService.initial().success(
 				function(response) {
 					$scope.paginationConf.totalItems = response.numOfRepo;
-				});*/
+				});
 			$scope.users = BusinessService.list(getAttribute)
 			/*.success(
 				function(response) {

@@ -57,13 +57,9 @@ app.controller('main_ctrl', ['$scope', 'BusinessService', function ($scope, Busi
 	    };
 	function getReposInSpecialType(){
 		$scope.paginationConf.totalItems = searchRepos.length;		
-//		console.log(searchRepos.length);
 		var start = ($scope.paginationConf.currentPage-1)*$scope.paginationConf.itemsPerPage;
 		var end = $scope.paginationConf.currentPage*$scope.paginationConf.itemsPerPage;
-//		console.log(start);
-//		console.log(end);
 		$scope.repos = searchRepos.slice(start,end);
-//		console.log($scope.repos.length);
 	}
 	var GetAllEmployee = function () {
 		
@@ -77,7 +73,6 @@ app.controller('main_ctrl', ['$scope', 'BusinessService', function ($scope, Busi
 				sort:$scope.sorttype
 			}
 					
-			// if($scope.language=="All"&&$scope.catagory=="All"&&$scope.search==""){
 			BusinessService.initial().success(
 				function(response) {
 					$scope.paginationConf.totalItems = response.numOfRepo;
