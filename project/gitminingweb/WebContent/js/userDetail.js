@@ -6,6 +6,9 @@ if (r!=null) return (r[2]); return null;
 
 var login=GetQueryString("login"); 
 console.log(login);
+var formattime = function(text) {
+	return text.replace("T"," ").replace("Z"," ");
+};
 // if(repotype!=null)	repotype = decodeURIComponent(repotype); 
 // else				repotype = null;
 var app = angular.module('detail_app', []);
