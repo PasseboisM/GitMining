@@ -3,6 +3,7 @@ package data.db.service;
 import java.util.List;
 
 import common.enumeration.sort_standard.UserSortStandard;
+import common.exception.TargetNotFoundException;
 import common.param_obj.UserSearchParam;
 
 
@@ -14,4 +15,6 @@ public interface DBUserService {
 			UserSortStandard sortStandard) throws IndexOutOfBoundsException;
 	
 	public List<String> searchUsers (UserSearchParam param);
+	
+	public String getUser(String login) throws TargetNotFoundException;
 }
