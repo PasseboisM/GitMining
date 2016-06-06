@@ -1,6 +1,10 @@
+function GetQueryString(name) {
+var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)","i");
+var r = window.location.search.substr(1).match(reg);
+if (r!=null) return (r[2]); return null;
+}
 
-
-
+var repoName=GetQueryString("repoName");
 var app = angular.module('repo_app', []);
 
 
@@ -10,7 +14,7 @@ app.controller('repo_ctrl', function($scope, $http) {
 	data = {
 		type : "data",
 		method: "spec",
-		param: login
+		param: repoName
 	};
 
 
