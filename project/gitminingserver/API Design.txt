@@ -74,8 +74,13 @@ Recommended info query:
 					e.g. JavaScript  Ruby
 			user: original List<String> getRecommendUsers(Language language)	//TODO
 				param=(Language) 
-			related:
-				param=
+			related: methods from UserListDataGetter							//TODO
+				param=OwnedRepositories/
+					StarredRepositories/
+					SubscrippedRepositories/
+					Followers/
+					Followings
+				login=(the login the the user)
 		
 		
 Login request:
@@ -89,6 +94,15 @@ Login request:
 			key:a string used for making requests, only exsits when login was successful
 			e.g. {"state":"true","key":"123456"}
 				{"state":false,"key":""}
+				
+				
+                         ------!!ATTENTION!!---------
+	After logging in, each HTTP GET requests should be attached with a
+cookie,"key=******", with max age set to -1.
+	When no cookies are attached, a logging out or the shut down of browser
+is expected.
+                         ----------------------------
+				
 	
 API hint:
 	URL:http://106.75.5.61:8080/GitMiningServer/api?{param1=...}&{param2=...}&...
