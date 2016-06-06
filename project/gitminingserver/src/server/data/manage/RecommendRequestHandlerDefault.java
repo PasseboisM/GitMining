@@ -9,6 +9,7 @@ public class RecommendRequestHandlerDefault implements RecommendRequestHandler {
 
 	@Override
 	public void handleRequest(HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
+		httpResponse.setCharacterEncoding("gb2312");
 		// TODO Auto-generated method stub
 		
 	}

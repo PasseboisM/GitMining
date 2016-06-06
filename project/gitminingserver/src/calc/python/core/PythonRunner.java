@@ -33,6 +33,9 @@ public class PythonRunner {
 		fw.close();
 		
 		args[2] = f.getAbsolutePath();
+		
+		for(String s : args) System.out.println(s);
+		
 		Process process = Runtime.getRuntime().exec(args);
 		
 		InputStream inputStream = process.getInputStream();

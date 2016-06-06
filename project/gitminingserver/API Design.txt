@@ -57,10 +57,10 @@ Statistic query:
 					UserDistOverCreateTime
 					RepoDistOverStar
 					UserDistOverType		
-			user:obtain data from original UserStatisticsService				//TODO
+			user:obtain data from original UserStatisticsService				//Complete
 				param=(login_of_the_user)
 					Returns UserRank in JSON
-			repo:obtain data from original RepositoryStatisticsService			//TODO
+			repo:obtain data from original RepositoryStatisticsService			//Complete
 				param=(fullname_of_the repository)
 					Returns RepoRank in JSON
 			
