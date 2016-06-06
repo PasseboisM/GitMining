@@ -2,235 +2,234 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<title>GitMining</title>
-	<script src="js/jquery-1.11.3.js"></script>
-	<!-- <script src="http://echarts.baidu.com/build/dist/echarts.js"></script> -->
-	<script src="http://echarts.baidu.com/dist/echarts.min.js"></script>
-	<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
-	<script src="js/repoDetail.js"></script>
-	<link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-	<link href="css/top.css" rel="stylesheet" media="screen">
+  <meta charset="UTF-8">
+  <title>GitMining</title>
+  <script src="js/jquery-1.11.3.js"></script>
+  <!-- <script src="http://echarts.baidu.com/build/dist/echarts.js"></script> -->
+  <script src="http://echarts.baidu.com/dist/echarts.min.js"></script>
+  <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+  <script src="js/repoDetail.js"></script>
+  <link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/top.css" rel="stylesheet" media="screen">
 </head>
 
 <body>
 
-		<nav class="navbar navbar-inverse navbar-fixed-top">
-			<div class="container">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="#">GitMining</a>
-				</div>
-				<div id="navbar" class="collapse navbar-collapse">
-					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">项目搜索</a></li>
-						<li><a href="#about">用户搜索</a></li>
-						<li><a href="statisticChart.html">统计图表</a></li>
-					</ul>
-					<!-- <form class="navbar-form navbar-right">
-						<div class="form-group">
-							<input type="text" placeholder="Email" class="form-control">
-						</div>
-						<div class="form-group">
-							<input type="password" placeholder="Password" class="form-control">
-						</div>
-						<button type="submit" class="btn btn-success">Sign in</button>
-					</form> -->
-				</div>
-				<!--/.nav-collapse -->
-			</div>
-		</nav>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">GitMining</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">项目搜索</a></li>
+            <li><a href="#about">用户搜索</a></li>
+            <li><a href="statisticChart.html">统计图表</a></li>
+          </ul>
+          <!-- <form class="navbar-form navbar-right">
+            <div class="form-group">
+              <input type="text" placeholder="Email" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="password" placeholder="Password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Sign in</button>
+          </form> -->
+        </div>
+        <!--/.nav-collapse -->
+      </div>
+    </nav>
 <div ng-app="repo_app" ng-controller="repo_ctrl">
-		<div class="input-group col-md-offset-2 col-md-8">
-			<input type="text" class="form-control" placeholder="Search for...">
-			<span class="input-group-btn">
-				<button class="btn btn-default" type="button">Go!</button>
-			</span>
-		</div>
+    <div class="input-group col-md-offset-2 col-md-8">
+      <input type="text" class="form-control" placeholder="Search for...">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Go!</button>
+      </span>
+    </div>
 
-		<hr/>
+    <hr/>
 
-		<div class="info-group ">
-			<div>
-				<h2 class="ui header">
-			<div class="headcontent  col-md-offset-2 col-md-10">
-			    <a href="TODO">{{repo.getName}}</a> / <a >{{repo.getFull_name}}</a>
-				<div class="sub header">
-					{{repo.getDescription}}
-				<br />
-				</div>
-			</div>
-		</h2>
-			</div>
-			<div class="input-group col-md-offset-2 col-md-8">
-				<button class="btn btn-default" type="button">Clone!</button>
-				<input class="" type="text" ng-model="repo.getUrl" readonly>
-				<button type="submit " class="btn btn-success  ">See More</button>
-			</div>
+    <div class="info-group ">
+      <div>
+        <h2 class="ui header">
+      <div class="headcontent col-md-offset-2 col-md-10">
+          <a href="userDetail.html?login={{repo.owner.login}}">{{repo.owner.login}}</a> / {{repo.name}}
+        <div class="sub header">
+          {{repo.description}}
+        <br />
+        </div>
+      </div>
+    </h2>
+      </div>
+      <div class="input-group col-md-offset-2 col-md-8">
+        <button class="btn btn-default" type="button">Clone!</button>
+        <input class="" type="text" ng-model="repo.html_url" readonly>
+        <button type="submit " class="btn btn-success  ">See More</button>
+      </div>
 
-		</div>
+    </div>
 
-		<div class="col-md-12">
-			<div id="content" class="col-md-offset-2 col-md-6">
+    <div class="col-md-12">
+      <div id="content" class="col-md-offset-2 col-md-6">
 
-				<h3 class="col-md-offset-2">Repository Statistics</h3>
-				<div class="number repo">
-					<div class="fork col-md-2">
-						<div>
-							<p>
-								{{repo.getStargazers_count}}
-							</p>
-						</div>
-						<span class="tips">stars</span>
-					</div>
-					<div class="fork col-md-2">
-						<div>
-							<p>
-								{{repo.getForks_count}}
-							</p>
-						</div>
-						<span class="tips">forks</span>
-					</div>
-					<div class="fork col-md-2">
-						<div>
-							<p>
-								{{repo.getSubscribers_count}}
-							</p>
-						</div>
-						<span class="tips">subscribers</span>
-					</div>
-					<div class="fork col-md-2">
-						<div>
-							<p>
-								{{repo.getSubscribers_count}}
-							</p>
+        <h3 class="col-md-offset-2">Repository Statistics</h3>
+        <div class="number repo">
+          <div class="fork col-md-2">
+            <div>
+              <p>
+                {{repo.stargazers_count}}
+              </p>
+            </div>
+            <span class="tips">stars</span>
+          </div>
+          <div class="fork col-md-2">
+            <div>
+              <p>
+                {{repo.forks_count}}
+              </p>
+            </div>
+            <span class="tips">forks</span>
+          </div>
+          <div class="fork col-md-2">
+            <div>
+              <p>
+                {{repo.subscribers_count}}
+              </p>
+            </div>
+            <span class="tips">subscribers</span>
+          </div>
+          <div class="fork col-md-2">
+            <div>
+              <p>
+                {{repo.subscribers_count}}
+              </p>
 
-						</div>
-						<span class="tips">contributors</span>
-					</div>
+            </div>
+            <span class="tips">contributors</span>
+          </div>
 
-				</div>
-				<br>
-				<br>
-				<h3 class="col-md-offset-2">  Infomation</h3>
-				<div class="detail col-md-2">
-					<div>
-						<span class="type">更新日期</span>
-					</div>
-					<p>
-						{{formattime(repo.getUpdated_at)}}
-					</p>
-				</div>
-				<div class="detail col-md-2">
-					<div>
-						<span class="type">创建时间</span>
-					</div>
-					<p>
-						{{formattime(repo.getCreated_at)}}
-					</p>
-				</div>
-				<div class="detail col-md-2">
-					<div>
-						<span class="type">推送时间</span>
-					</div>
-					<p>
-						{{formattime(repo.getPushed_at)}}
+        </div>
+        <br>
+        <br>
+        <h3 class="col-md-offset-2">  Infomation</h3>
+        <div class="detail col-md-2">
+          <div>
+            <span class="type">更新日期</span>
+          </div>
+          <p>
+            {{formattime(repo.updated_at)}}
+          </p>
+        </div>
+        <div class="detail col-md-2">
+          <div>
+            <span class="type">创建时间</span>
+          </div>
+          <p>
+            {{formattime(repo.created_at)}}
+          </p>
+        </div>
+        <div class="detail col-md-2">
+          <div>
+            <span class="type">推送时间</span>
+          </div>
+          <p>
+            {{formattime(repo.pushed_at)}}
 
-					</p>
-				</div>
-				<div class="detail col-md-2">
-					<div>
-						<span class="type">项目大小</span>
-					</div>
-					<p>
+          </p>
+        </div>
+        <div class="detail col-md-2">
+          <div>
+            <span class="type">项目大小</span>
+          </div>
+          <p>
+            {{repo.size}}
+          </p>
+        </div>
+        <div class="detail col-md-2">
+          <div>
+            <span class="type">项目语言</span>
+          </div>
+          <p>
 
-						{{repo.getSize}}
-					</p>
-				</div>
-				<div class="detail col-md-2">
-					<div>
-						<span class="type">项目语言</span>
-					</div>
-					<p>
+            {{repo.language}}
+          </p>
+        </div>
+      </div>
 
-						{{repo.getMainLanguage}}
-					</p>
-				</div>
-			</div>
+      <div class="col-md-4">
+        <div id="radar" class="" style="width: 300px;height:300px;">
 
-			<div class="col-md-4">
-				<div id="qwe" class="" style="width: 300px;height:300px;">
+        </div>
+      </div>
 
-				</div>
-			</div>
-
-		</div>
-
+    </div>
 
 
 
 
 
 
-		<div class="  col-md-offset-2 col-md-6">
-			<!--This is a place for Recommendation -->
-			<h3 class="col-md-offset-2">
-			Recommend
-		</h3>
-			<hr/>
-		</div>
-		<div class=" col-md-offset-2 col-md-8">
-			<div class="panel panel-default col-md-3">
-				<div class="panel-heading">
-					<h3 class="panel-title">related by tag</h3>
-				</div>
-				<div class="panel-body">
-					<a href="TODO">technoweenie</a>
-				</div>
-				<div class="panel-body">
-					<a href="TODO">technoweenie</a>
-				</div>
-				<div class="panel-body">
-					<a href="TODO">technoweenie</a>
-				</div>
-			</div>
-			<div class="panel panel-default col-md-offset-1 col-md-3">
-				<div class="panel-heading">
-					<h3 class="panel-title">related by owner</h3>
-				</div>
-				<div class="panel-body">
-					<a href="TODO">technoweenie</a>
-				</div>
-				<div class="panel-body">
-					<a href="TODO">technoweenie</a>
-				</div>
-				<div class="panel-body">
-					<a href="TODO">technoweenie</a>
-				</div>
-			</div>
-			<div class="panel panel-default col-md-offset-1 col-md-3">
-				<div class="panel-heading">
-					<h3 class="panel-title">related by viewer</h3>
-				</div>
-				<div class="panel-body">
-					<a href="TODO">technoweenie</a>
-				</div>
-				<div class="panel-body">
-					<a href="TODO">technoweenie</a>
-				</div>
-				<div class="panel-body">
-					<a href="TODO">technoweenie</a>
-				</div>
-			</div>
-		</div>
-	</div>
 
-	<footer class="container footer col-md-12">
-		<div class="container">
-			<p class="text-muted">GitMining Made By Team Mole</p>
-		</div>
-	</footer>
+    <div class="  col-md-offset-2 col-md-6">
+      <!--This is a place for Recommendation -->
+      <h3 class="col-md-offset-2">
+      Recommend
+    </h3>
+      <hr/>
+    </div>
+    <div class=" col-md-offset-2 col-md-8">
+      <div class="panel panel-default col-md-3">
+        <div class="panel-heading">
+          <h3 class="panel-title">related by tag</h3>
+        </div>
+        <div class="panel-body">
+          <a href="TODO">technoweenie</a>
+        </div>
+        <div class="panel-body">
+          <a href="TODO">technoweenie</a>
+        </div>
+        <div class="panel-body">
+          <a href="TODO">technoweenie</a>
+        </div>
+      </div>
+      <div class="panel panel-default col-md-offset-1 col-md-3">
+        <div class="panel-heading">
+          <h3 class="panel-title">related by owner</h3>
+        </div>
+        <div class="panel-body">
+          <a href="TODO">technoweenie</a>
+        </div>
+        <div class="panel-body">
+          <a href="TODO">technoweenie</a>
+        </div>
+        <div class="panel-body">
+          <a href="TODO">technoweenie</a>
+        </div>
+      </div>
+      <div class="panel panel-default col-md-offset-1 col-md-3">
+        <div class="panel-heading">
+          <h3 class="panel-title">related by viewer</h3>
+        </div>
+        <div class="panel-body">
+          <a href="TODO">technoweenie</a>
+        </div>
+        <div class="panel-body">
+          <a href="TODO">technoweenie</a>
+        </div>
+        <div class="panel-body">
+          <a href="TODO">technoweenie</a>
+        </div>
+      </div>
+    </div>
+  </div>
 
-	<script src="js/repoRadar.js"></script>
+  <footer class="container footer col-md-12">
+    <div class="container">
+      <p class="text-muted">GitMining Made By Team Mole</p>
+    </div>
+  </footer>
+
+  <script src="js/repoRadar.js"></script>
 </body>
 
 </html>
