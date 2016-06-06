@@ -1,20 +1,31 @@
-var repoStatistic = ["stars", "forks", "subscribers", "contributors", "collaborator"];
-var repoInfo = ["更新日期", "创建时间", "项目语言", "项目大小"];
 
 
-var app = angular.module('main_app', []);
+
+var app = angular.module('repo_app', []);
 
 
-app.controller('main_ctrl', function($scope) {
-  console.log(repoInfo[0]);
-  $scope.repoSta=null;
-  $scope.repoInf=null;
-    for (var i = 0; i < repoStatistic.length; i++) {
-        $scope.repoSta[i]=repoStatistic[i];
-    }
-    for (var j = 0; j < repoInfo.length; j++) {
-        $scope.repoInf[j]=repoInfo[j];
-    }
+app.controller('repo_ctrl', function($scope, $http) {
+
+  var url = '/GitMiningServer/repository';
+	data = {
+		type : "data",
+		method: "spec",
+		param: login
+	};
+
+
+
+	$http({
+		method:'GET',
+		url:url,
+		params:data
+	}).success(function(data) {
+		$scope.repo = data;
+		console.log(data);
+		$scope.formattime = function(text) {
+			return text.replace("T"," ").replace("Z"," ");
+		};
+	});
 
 
 });
