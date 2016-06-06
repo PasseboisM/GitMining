@@ -1,8 +1,25 @@
 body {
     background-image: url("picture/background_1.jpg");
-    background-attachment : fixed;
+    background-attachment: local;
+    margin: 0;
+    padding: 0;
 }
-p{
-  font-style :  Lucida Grande;
+h1 {
+font-family:"Lucida Console",monospace;
+font-size:48px;
+}
+h2 {
+font-family: Verdana;
+font-size:32px;
 
+}
+button {
+    position:relative;
+
+    width: 74px;
+    height: 74px;
+
+    background-color: transparent;
+    border-style: hidden;
+    background-image: url(picture/02.png);
 }
