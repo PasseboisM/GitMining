@@ -12,6 +12,10 @@ public abstract class DataServiceMaker {
 	
 	public abstract StatisticRequestHandler getStatisticHandler();
 	
+	public abstract RecommendRequestHandler getRecommendHandler();
+	
+	public abstract LogInRequestHandler getLogInRequestHandler();
+	
 	public static DataServiceMaker getInstance() {
 		return instance;
 	}

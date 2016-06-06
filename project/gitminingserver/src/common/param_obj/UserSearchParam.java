@@ -1,31 +1,40 @@
 package common.param_obj;
 
-import common.enumeration.sort_standard.UserSortSandard;
+import common.enumeration.sort_standard.UserSortStandard;
 
 /**
  * 
  * @author xjh14
  * 搜索GitUser时使用的参数封装类，用于提高接口灵活性、简洁度。
- * 当前包含：User的登录名LoginName
+ * 当前包含：搜索关键字keywords, 排序方式sortStandard
  */
 public class UserSearchParam {
 
-	private String loginName;
+	private String[] keywords;
 
-	private UserSortSandard sortStandard;
+	private UserSortStandard sortStandard;
 	
-	public UserSearchParam(String loginName, UserSortSandard sortStandard) {
+	public UserSearchParam(String[] keys, UserSortStandard sortStandard) {
 		super();
-		this.loginName = loginName;
+		this.keywords = keys;
 		this.sortStandard = sortStandard;
 	}
 
-	public UserSortSandard getSortStandard() {
+	public UserSortStandard getSortStandard() {
 		return sortStandard;
 	}
 	
-	public String getLoginName() {
-		return loginName;
+	public String getKeywordInLine() {
+		StringBuilder sb = new StringBuilder();
+		for(int i=0;i<keywords.length;i++) {
+			sb.append(keywords[i]);
+			sb.append(' ');
+		}
+		return sb.toString();
+	}
+	
+	public String[] getKeywords() {
+		return keywords;
 	}
 	
 }

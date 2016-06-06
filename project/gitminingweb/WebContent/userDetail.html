@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>GitMiningChart</title>
-	<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
-	<script src="js/repoFake.js"></script>
-	<link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-	<link href="css/top.css" rel="stylesheet" media="screen">
+  <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+  <script src="js/userDetail.js"></script>
+  <link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/top.css" rel="stylesheet" media="screen">
+  <script src="http://code.jquery.com/jquery.js"></script>
+  <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -16,69 +18,67 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="repoSearch.html">项目搜索</a></li>
+            <li class="active"><a href="userSearch.html">用户搜索</a></li>
+            <li><a href="statisticChart.html">统计图表</a></li>
           </ul>
           <form class="navbar-form navbar-right">
-          	<div class="form-group">
-          		<input type="text" placeholder="Email" class="form-control">
-          	</div>
-          	<div class="form-group">
-          		<input type="password" placeholder="Password" class="form-control">
-          	</div>
-          	<button type="submit" class="btn btn-success">Sign in</button>
+            <div class="form-group">
+              <input type="text" placeholder="Email" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="password" placeholder="Password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Sign in</button>
           </form>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-   
+   <div ng-app="detail_app" ng-controller="detail_controller" >
     <div class="page-header col-md-offset-2 col-md-8">
-        <h1>UserName <small>UserID</small></h1>
+        <h1>{{user.login}}<small>{{user.id}}</small></h1>
     </div>
-    <div class="row col-md-12">
-      <div class="col-md-8">
-       <div class="img col-md-4">
-          <a href="#" class="thumbnail">
-             <img src="avatar.png" alt="img">
-          </a>
-          <div ng-app="" ng-init="userCatagries='user'">
-            <p>用户类型：<span ng-bind="userCatagries"></span></p>
-          <div ng-init="place='NewYork'">
-            <p>用户地点：<span ng-bind="place"></span></p>
-          <div ng-init="creatTime='2015.5.1'">
-            <p>创建时间：<span ng-bind="creatTime"></span></p>
-          <div ng-init="updateTime='2016.3.1'">
-            <p>更新时间：<span ng-bind="updateTime"></span></p>
+      <div class="col-md-12">
+       <div class="col-md-4">
+          <img ng-src="{{user.avatar_url}}" class="col-md-12">
+          <div>
+            <p>用户类型：{{user.type}}</p>
           </div>
+          <div>
+            <p>用户地点：{{user.location}}</p>
+            </div>
+          <div>
+            <p>创建时间：{{formattime(user.created_at)}}</p>
+            </div>
+          <div>
+            <p>更新时间：{{formattime(user.updated_at)}}</p>
           </div>
+       </div>
+       
+        <div class="col-md-8">
+          <div id="radar" style="min-width:700px;height:400px"></div>
+          <h2 class="col-md-offset-4 col-md-8">用户统计数据</h2>
+          <br>
+          <div class="col-md-4">
+            <div class="col-md-12">{{user.following}}</div>
+            <div class="col-md-12">被关注人数</div>
           </div>
+          <div class="col-md-4">
+            <div class="col-md-12">{{user.followers}}</div>
+            <div class="col-md-12">关注人数</div>
           </div>
-        </div>
-        <div class="col-md-4">
-           <a href="#" class="thumbnail">
-             <img src="avatar.png" alt="...">
-          </a>
-          <h2>用户统计数据</h2>
-          <p>
-          <span class="label label-default">被关注人数</span>
-          <span class="label label-primary">关注人数</span>
-          <span class="label label-success">公开项目</span>
-          </p>
+          <div class="col-md-4">
+            <div class="col-md-12">{{user.public_repos}}</div>
+            <div class="col-md-12">公开项目</div>
+          </div>
         </div>
        </div>
-       <div class="col-md-4">
-           <Strong>持有项目列表</Strong>
-           <ul class="list-group">
-             <li class="list-group-item">Cras justo odio</li>
-             <li class="list-group-item">Dapibus ac facilisis in</li>
-             <li class="list-group-item">Morbi leo risus</li>
-             <li class="list-group-item">Porta ac consectetur ac</li>
-             <li class="list-group-item">Vestibulum at eros</li>
-           </ul>
-        </div>
-       <div class="col-md-8">
-         <div class="col-md-4">
+       
+       <div class="col-md-12">
+        <!-- 空行 -->
+       </div>
+       <div class="col-md-12">
+         <div class="col-md-6">
           <Strong>关注者用户列表</Strong>
           <ul class="list-group">
              <li class="list-group-item">Cras justo odio</li>
@@ -88,7 +88,7 @@
              <li class="list-group-item">Vestibulum at eros</li>
           </ul>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-6">
            <Strong>关注用户列表</Strong>
            <ul class="list-group">
              <li class="list-group-item">Cras justo odio</li>
@@ -100,6 +100,16 @@
           </div>
         </div>
         <div class="col-md-4">
+           <Strong>持有项目列表</Strong>
+           <ul class="list-group">
+             <li class="list-group-item">Cras justo odio</li>
+             <li class="list-group-item">Dapibus ac facilisis in</li>
+             <li class="list-group-item">Morbi leo risus</li>
+             <li class="list-group-item">Porta ac consectetur ac</li>
+             <li class="list-group-item">Vestibulum at eros</li>
+           </ul>
+        </div>
+        <div class="col-md-4">
             <Strong>推荐项目列表</Strong>
            <ul class="list-group">
              <li class="list-group-item">Cras justo odio</li>
@@ -108,6 +118,8 @@
              <li class="list-group-item">Porta ac consectetur ac</li>
              <li class="list-group-item">Vestibulum at eros</li>
            </ul>
+        </div>
+        <div class="col-md-4">
            <Strong>订阅项目列表</Strong>
            <ul class="list-group">
              <li class="list-group-item">Cras justo odio</li>
@@ -118,7 +130,8 @@
            </ul>
         </div>
         
-       </div>
-     
+        <script src="js/userRadar.js"></script>
+     </div>
 </body>
 </html>
+

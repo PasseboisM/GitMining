@@ -1,6 +1,8 @@
 package data.manage;
 
 import data.manage.statistic.GeneralStatGetterNetwork;
+import data.manage.statistic.RepositoryStatGetterNetwork;
+import data.manage.statistic.UserStatGetterNetwork;
 import data.service.StatDataMakerFactory;
 import data.service.stat.GeneralStatGetter;
 import data.service.stat.RepoStatGetter;
@@ -11,6 +13,8 @@ public class StatDataMakerFactoryNetwork implements StatDataMakerFactory {
 	private static StatDataMakerFactoryNetwork instance = new StatDataMakerFactoryNetwork();
 	
 	private GeneralStatGetter general = new GeneralStatGetterNetwork();
+	private UserStatGetter userStat = new UserStatGetterNetwork();
+	private RepoStatGetter repoStat = new RepositoryStatGetterNetwork();
 	
 	@Override
 	public GeneralStatGetter getGeneralStatGetter() {
@@ -19,14 +23,12 @@ public class StatDataMakerFactoryNetwork implements StatDataMakerFactory {
 
 	@Override
 	public UserStatGetter getUserStatGetter() {
-		// TODO Auto-generated method stub
-		return null;
+		return userStat;
 	}
 
 	@Override
 	public RepoStatGetter getRepoStatGetter() {
-		// TODO Auto-generated method stub
-		return null;
+		return repoStat;
 	}
 
 	public static StatDataMakerFactoryNetwork getInstance() {

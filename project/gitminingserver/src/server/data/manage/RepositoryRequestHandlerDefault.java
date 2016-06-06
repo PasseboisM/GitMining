@@ -31,6 +31,8 @@ class RepositoryRequestHandlerDefault extends RepositoryRequestHandler {
 	
 	@Override
 	public void handleRequest(HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
+		httpResponse.setCharacterEncoding("gb2312");
+		
 		PrintWriter out = null;
 		try {
 			out = httpResponse.getWriter();
@@ -106,8 +108,11 @@ class RepositoryRequestHandlerDefault extends RepositoryRequestHandler {
 		RepositorySearchParam searchParam = null;
 		List<String> result = null;
 		try {
-			searchParam = gson.fromJson(
-					httpRequest.getParameter("param"), RepositorySearchParam.class);
+			String param = httpRequest.getParameter("param");
+			System.out.println(param);
+			searchParam = gson.fromJson(param
+					, RepositorySearchParam.class);
+			
 		} catch (Exception e) {
 			out.println(new HintMessage(
 					"JSON Syntax fault. Please check your parameter.").toJSON());
@@ -141,4 +146,5 @@ class RepositoryRequestHandlerDefault extends RepositoryRequestHandler {
 		}
 		out.print(']');
 	}
+
 }

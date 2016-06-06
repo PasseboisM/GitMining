@@ -10,28 +10,42 @@ import javax.swing.event.ListSelectionEvent;
 import org.junit.experimental.categories.Categories;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import common.enumeration.attribute.Category;
 import common.enumeration.attribute.Language;
 import common.enumeration.sort_standard.RepoSortStadard;
-import common.enumeration.sort_standard.UserSortSandard;
+import common.enumeration.sort_standard.UserSortStandard;
 import common.exception.NetworkException;
+import common.exception.TargetNotFoundException;
+import common.model.beans.GitUserBeans;
 import common.model.beans.RepositoryBeans;
 import common.param_obj.RepositorySearchParam;
 import common.param_obj.UserSearchParam;
+import common.service.GitUser;
 import common.service.Repository;
 import data.db.service.DBRepoService;
 import data.db.service.DBService;
+import data.db.service.DBUserService;
+import data.service.DataServiceFactory;
 import data.service.MassiveDataGetter;
+import data.service.SpecificDataGetter;
 import network.service.GHDataSource;
 import network.service.NetworkServiceFactory;
 
 public class MassiveDataGetterNetwork extends MassiveDataGetter {
 
 	private static MassiveDataGetterNetwork instance = new MassiveDataGetterNetwork();
+	
+	
 	private GHDataSource networkSource = NetworkServiceFactory.getInstance().getGHDataSource();
 	private DBRepoService repoDB = DBService.getInstance().getRepoService();
+	private DBUserService userDB = DBService.getInstance().getUserService();
+	
+	private SpecificDataGetter spec = DataServiceFactory.getInstance().getSpecificDataGetter();
+	
 	private Gson gson = new Gson();
+	
 	@Override
 	public List<String> getRepositories(int page, int numPerPage, RepoSortStadard sortStandard)
 			throws IndexOutOfBoundsException {
@@ -45,15 +59,13 @@ public class MassiveDataGetterNetwork extends MassiveDataGetter {
 
 	@Override
 	public int getNumOfUsers() {
-		// TODO Auto-generated method stub
-		return 0;
+		return userDB.getNumOfUser();
 	}
 
 	@Override
-	public List<String> getUsers(int page, int numPerPage, UserSortSandard sortStandard)
+	public List<String> getUsers(int page, int numPerPage, UserSortStandard sortStandard)
 			throws IndexOutOfBoundsException {
-		// TODO Auto-generated method stub
-		return null;
+		return userDB.getUsers(page, numPerPage, sortStandard);
 	}
 
 	@Override
@@ -94,8 +106,50 @@ public class MassiveDataGetterNetwork extends MassiveDataGetter {
 
 	@Override
 	public List<String> searchUser(UserSearchParam params) {
-		// TODO Auto-generated method stub
-		return null;
+		final int MAX_RETURN_NUM = 200;
+		
+//		List<GitUser> partialUser = new ArrayList<>(MAX_RETURN_NUM);
+//		List<GitUser> users = new ArrayList<GitUser>(MAX_RETURN_NUM);
+//		List<String> result = new ArrayList<String>(MAX_RETURN_NUM);
+//		
+//		try {
+//			partialUser.addAll(networkSource.searchUser(params));
+//		} catch (NetworkException e) {
+//			e.printStackTrace();
+//		}
+//		for (GitUser u:partialUser) {
+//			try {
+//				users.add(gson.fromJson(spec.getSpecificGitUser(u.getLogin()),GitUserBeans.class));
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		
+//		List<String> usersFromDB = userDB.searchUsers(params);
+//		Iterator<String> iter = usersFromDB.iterator();
+//		while (iter.hasNext()) {
+//			GitUser temp = gson.fromJson(iter.next(), GitUserBeans.class);
+//			for (GitUser user:users) {
+//				if (user.getLogin().equals(temp.getLogin())) {
+//					iter.remove();
+//					break;
+//				}
+//			}
+//		}
+//		
+//		for (String s:usersFromDB) {
+//			users.add(gson.fromJson(s, GitUserBeans.class));
+//		}
+//		
+//		users.sort(params.getSortStandard().getComparator());
+//		
+//		for (GitUser user:users) {
+//			result.add(gson.toJson(user));
+//		}
+		
+		List<String> result = userDB.searchUsers(params);
+		
+		return result;
 	}
 	
 	public static MassiveDataGetterNetwork getInstance() {

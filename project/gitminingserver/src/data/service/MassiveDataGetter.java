@@ -3,7 +3,7 @@ package data.service;
 import java.util.List;
 
 import common.enumeration.sort_standard.RepoSortStadard;
-import common.enumeration.sort_standard.UserSortSandard;
+import common.enumeration.sort_standard.UserSortStandard;
 import common.param_obj.RepositorySearchParam;
 import common.param_obj.UserSearchParam;
 import data.manage.MassiveDataGetterNetwork;
@@ -20,7 +20,7 @@ public abstract class MassiveDataGetter {
 	
 	public abstract int getNumOfUsers();
 	
-	public abstract List<String> getUsers(int page, int numPerPage,UserSortSandard sortStandard) throws IndexOutOfBoundsException;
+	public abstract List<String> getUsers(int page, int numPerPage,UserSortStandard sortStandard) throws IndexOutOfBoundsException;
 	
 	public abstract List<String> searchRepository(RepositorySearchParam params);
 	

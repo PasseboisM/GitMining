@@ -6,25 +6,18 @@ var sorttypes = ["no","stars","forks"];
 var http_languages = ["ALL","JAVA","RUBY","PYTHON","C","JAVA_SCRIPT","PERL","PHP","C_PLUS_PLUS","HTML","SHELL","OBJECTIVE_C","VIML","C_SHARP","EMACS_LISP","ERLANG","LUA","CLOJURE","CSS","HASKELL","SCALA","COMMON_LISP","R","OTHERS"];
 var http_catagories = ["ALL","ACTIVE_RECORD","API","APP","CMS","DJANGO","EMACS","FRAMEWORK","INTERFACE","IRC","JSON","LIBRARY","LINUX","MAC","MANAGEMENT","OS","PLUGIN","RAILS","REDIS","SERVER","SOURCE","TEMPLATE","TEXT_MATE","TOOL","WEB","WEBSITE","OTHERS"];
 var http_sorttypes = ["NO_SORT","STARS_DESCENDING","FORKS_DESCENDING"];
-function GetQueryString(name) { 
-var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)","i"); 
-var r = window.location.search.substr(1).match(reg); 
-if (r!=null) return (r[2]); return null; 
-}
 
 
-/*var repotype=GetQueryString("type"); 
-if(repotype!=null)	repotype = decodeURIComponent(repotype); 
-else				repotype = "All"
-var language=GetQueryString("lang"); 
-if(language!=null)	language = decodeURIComponent(language); 
-else				language = "All"*/
+
+
+
 
 // $(document).ready(function() {
 
 // });
 var app = angular.module('main_app', ['tm.pagination']);
 var isInitialStatus = true;
+var hasNewSearchQuest = false;
 var searchRepos=[];
 
 function transParams(searchAttribute){
@@ -55,13 +48,9 @@ app.controller('main_ctrl', ['$scope', 'BusinessService', function ($scope, Busi
 	    };
 	function getReposInSpecialType(){
 		$scope.paginationConf.totalItems = searchRepos.length;		
-//		console.log(searchRepos.length);
 		var start = ($scope.paginationConf.currentPage-1)*$scope.paginationConf.itemsPerPage;
 		var end = $scope.paginationConf.currentPage*$scope.paginationConf.itemsPerPage;
-//		console.log(start);
-//		console.log(end);
 		$scope.repos = searchRepos.slice(start,end);
-//		console.log($scope.repos.length);
 	}
 	var GetAllEmployee = function () {
 		
@@ -75,7 +64,6 @@ app.controller('main_ctrl', ['$scope', 'BusinessService', function ($scope, Busi
 				sort:$scope.sorttype
 			}
 					
-			// if($scope.language=="All"&&$scope.catagory=="All"&&$scope.search==""){
 			BusinessService.initial().success(
 				function(response) {
 					$scope.paginationConf.totalItems = response.numOfRepo;
@@ -85,7 +73,11 @@ app.controller('main_ctrl', ['$scope', 'BusinessService', function ($scope, Busi
 					$scope.repos=response;
 				});
 		}else{
-			if($scope.search=="")	return;
+			// if($scope.search=="")	return;
+			if (!hasNewSearchQuest) {
+				getReposInSpecialType();
+				return;
+			}
 			console.log("now get new repos in s type");
 			var searchAttribute = {
 				type:"data",
@@ -98,6 +90,7 @@ app.controller('main_ctrl', ['$scope', 'BusinessService', function ($scope, Busi
 			BusinessService.search(transParams(searchAttribute)).success(
 				function(response) {
 					searchRepos=response;
+					hasNewSearchQuest = false;
 					getReposInSpecialType();
 				});
 			
@@ -121,6 +114,7 @@ app.controller('main_ctrl', ['$scope', 'BusinessService', function ($scope, Busi
 	};
 
 	$scope.changecata = function(text) {
+		hasNewSearchQuest = true;
 		console.log(text);
 		$scope.catagory = text;
 		$scope.paginationConf.currentPage = 1;
@@ -128,10 +122,10 @@ app.controller('main_ctrl', ['$scope', 'BusinessService', function ($scope, Busi
 			isInitialStatus = true;
 		else
 			isInitialStatus = false;
-		console.log(text);
 	};
 	
     $scope.changelang = function(text) {
+    	hasNewSearchQuest = true;
     	console.log(text);
 		$scope.language = text;
 		$scope.paginationConf.currentPage = 1;
@@ -139,11 +133,11 @@ app.controller('main_ctrl', ['$scope', 'BusinessService', function ($scope, Busi
 			isInitialStatus = true;
 		else
 			isInitialStatus = false;
-		console.log(text);
 	};
 
 	$scope.searchRepos = function() {
     	console.log($scope.search);
+    	hasNewSearchQuest = true;
 		$scope.paginationConf.currentPage = 1;
 		if($scope.language=="All"&&$scope.catagory=="All"&&$scope.search=="")
 			isInitialStatus = true;
@@ -171,10 +165,14 @@ app.controller('main_ctrl', ['$scope', 'BusinessService', function ($scope, Busi
     	}
     	console.log("now type has changed to "+retype);
     };
+    /*var changeState = function () {
+    	hasNewSearchQuest = true;
+    }*/
     /***************************************************************
     当页码和页面记录数发生变化时监控后台查询
     如果把currentPage和itemsPerPage分开监控的话则会触发两次后台事件。 
     ***************************************************************/
+    // $scope.$watch('search',changeState);
     $scope.$watch('paginationConf.currentPage + paginationConf.itemsPerPage + sorttype + language + catagory', GetAllEmployee);}]);
 //业务类
 app.factory('BusinessService', ['$http', function ($http) {
