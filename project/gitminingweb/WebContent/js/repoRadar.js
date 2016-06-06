@@ -9,7 +9,7 @@
 
 
 
-var myChart = echarts.init(document.getElementById('qwe'));
+var myChart = echarts.init(document.getElementById('radar'));
 
 var option = {
     title: {
