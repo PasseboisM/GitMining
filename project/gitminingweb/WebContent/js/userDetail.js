@@ -5,7 +5,6 @@ if (r!=null) return (r[2]); return null;
 }
 
 var login=GetQueryString("login"); 
-console.log(login);
 
 // if(repotype!=null)	repotype = decodeURIComponent(repotype); 
 // else				repotype = null;

@@ -1,3 +1,10 @@
+function GetQueryString(name) { 
+var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)","i"); 
+var r = window.location.search.substr(1).match(reg); 
+if (r!=null) return (r[2]); return null; 
+}
+
+var login=GetQueryString("login"); 
 // 路径配置
 require.config({
     paths: {
@@ -10,29 +17,15 @@ $(function() {
     $(document).ready(function() {
         // get company
         var url = "/GitMiningServer/stat"
-        /*$.ajax(url, {
+        $.ajax(url, {
             type : 'GET',
             // async : false,
             // contentType : 'application/json',
             // dataType : 'json',
-            data : {type:'general',param:'UserDistOverFollower'},
+            data : {type:'user',param:login},
             success : function(data) {
                 // Set up the chart
-                
-
-               
-            }
-        });*/
-
-        /*var ranges = JSON.parse(data).ranges;
-                var catagories = []
-                var showdatas = []
-                for (var i = 0; i < ranges.length; i++) {
-                    var range = ranges[i];
-                    catagories[i] = range.lowerRange+"~"+range.higherRange;
-                    showdatas[i] = range.numOfUsers;
-                }*/
-
+                console.log(data);
                 // 使用
                 require(
                     [
@@ -98,6 +91,21 @@ $(function() {
                 myChart.setOption(option); 
             }
             );
+
+               
+            }
+        });
+
+        /*var ranges = JSON.parse(data).ranges;
+                var catagories = []
+                var showdatas = []
+                for (var i = 0; i < ranges.length; i++) {
+                    var range = ranges[i];
+                    catagories[i] = range.lowerRange+"~"+range.higherRange;
+                    showdatas[i] = range.numOfUsers;
+                }*/
+
+                
 
     });
 
