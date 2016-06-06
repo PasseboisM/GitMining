@@ -22,10 +22,12 @@ $(function() {
             // async : false,
             // contentType : 'application/json',
             // dataType : 'json',
+            // contentType:"application/x-www-form-urlencoded; charset=utf8", 
             data : {type:'user',param:login},
             success : function(data) {
                 // Set up the chart
                 var vertexes = JSON.parse(data).vertexes;
+                console.log(vertexes);
                 var catagories = [];
                 var showdatas = [];
                 var radar_indicator = [];
