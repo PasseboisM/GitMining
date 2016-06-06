@@ -13,7 +13,8 @@ import java.util.List;
 public class PythonRunner {
 	
 	public static List<String> runPython(String fileName,String...paras) throws IOException, InterruptedException {
-		String folderName = "python/";
+		//On server, the py programs shall be stored in this directory.
+		String folderName = "D:/python/";
 		String[] args = new String[3];
 		args[0] = "python";
 		args[1] = folderName+fileName;
