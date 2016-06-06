@@ -4,13 +4,13 @@ var r = window.location.search.substr(1).match(reg);
 if (r!=null) return (r[2]); return null;
 }
 
-var repoName=GetQueryString("repoName");
+var repoName=GetQueryString("fn");
 var app = angular.module('repo_app', []);
 
 
 app.controller('repo_ctrl', function($scope, $http) {
 
-  var url = '/GitMiningServer/repository';
+  var url = '/GitMiningServer/repo';
 	data = {
 		type : "data",
 		method: "spec",
