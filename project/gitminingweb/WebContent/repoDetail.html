@@ -8,7 +8,7 @@
 	<!-- <script src="http://echarts.baidu.com/build/dist/echarts.js"></script> -->
 	<script src="http://echarts.baidu.com/dist/echarts.min.js"></script>
 	<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
-	<script src="js/repoDetail.js"></script>
+	<script src="js/try.js"></script>
 	<link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/top.css" rel="stylesheet" media="screen">
 </head>
@@ -53,16 +53,17 @@
 			<div>
 				<h2 class="ui header">
 			<div class="headcontent  col-md-offset-2 col-md-10">
-			    <a href="TODO">technoweenie</a> / <a >attachment_fu</a>
+			    <a href="TODO">{{repo.getName}}</a> / <a >{{repo.getFull_name}}</a>
 				<div class="sub header">
-					Treat an ActiveRecord model as a file attachment, storing its patch, size, content type, etc.<br />
+					{{repo.getDescription}}
+				<br />
 				</div>
 			</div>
 		</h2>
 			</div>
 			<div class="input-group col-md-offset-2 col-md-8">
 				<button class="btn btn-default" type="button">Clone!</button>
-				<input class="" type="text" value="https://github.com/technoweenie/attachment_fu.git" readonly>
+				<input class="" type="text" ng-model="repo.getUrl" readonly>
 				<button type="submit " class="btn btn-success  ">See More</button>
 			</div>
 
@@ -142,7 +143,7 @@
 					</div>
 					<p>
 
-						{{formattime(repo.getSize)}}
+						{{repo.getSize}}
 					</p>
 				</div>
 				<div class="detail col-md-2">
@@ -151,7 +152,7 @@
 					</div>
 					<p>
 
-						{{formattime(repo.getMainLanguage)}}
+						{{repo.getMainLanguage}}
 					</p>
 				</div>
 			</div>
