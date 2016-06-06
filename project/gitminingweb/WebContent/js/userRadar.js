@@ -25,7 +25,16 @@ $(function() {
             data : {type:'user',param:login},
             success : function(data) {
                 // Set up the chart
-                console.log(data);
+                var vertexes = JSON.parse(data).vertexes;
+                var catagories = [];
+                var showdatas = [];
+                var radar_indicator = [];
+                for (var i = 0; i < vertexes.length; i++) {
+                    var range = vertexes[i];
+                    // catagories[i] = range.header;
+                    showdatas[i] = range.mark.toFixed(2);;
+                    radar_indicator[i] = {text:range.header,max:1}
+                }
                 // 使用
                 require(
                     [
@@ -61,14 +70,7 @@ $(function() {
                     },
                     polar : [
                     {
-                     indicator : [
-                     { text: '销售（sales）', max: 6000},
-                     { text: '管理（Administration）', max: 16000},
-                     { text: '信息技术（Information Techology）', max: 30000},
-                     { text: '客服（Customer Support）', max: 38000},
-                     { text: '研发（Development）', max: 52000},
-                     { text: '市场（Marketing）', max: 25000}
-                     ]
+                     indicator : radar_indicator
                  }
                  ],
                  calculable : true,
@@ -78,7 +80,7 @@ $(function() {
                     type: 'radar',
                     data : [
                     {
-                        value : [4300, 10000, 28000, 35000, 50000, 19000],
+                        value : showdatas,
                         name : '预算分配（Allocated Budget）'
                     }
                     ]
@@ -96,14 +98,7 @@ $(function() {
             }
         });
 
-        /*var ranges = JSON.parse(data).ranges;
-                var catagories = []
-                var showdatas = []
-                for (var i = 0; i < ranges.length; i++) {
-                    var range = ranges[i];
-                    catagories[i] = range.lowerRange+"~"+range.higherRange;
-                    showdatas[i] = range.numOfUsers;
-                }*/
+        
 
                 
 
