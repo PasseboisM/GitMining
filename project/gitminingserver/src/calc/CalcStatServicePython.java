@@ -1,5 +1,7 @@
 package calc;
 
+import calc.python.RepoStatCalcPython;
+import calc.python.UserStatCalcPython;
 import calc.service.CalcStatService;
 import calc.service.RepoStatService;
 import calc.service.UserStatService;
@@ -8,18 +10,19 @@ public class CalcStatServicePython extends CalcStatService {
 
 	private static CalcStatServicePython instance = new CalcStatServicePython();
 	
+	private RepoStatService repoService = new RepoStatCalcPython();
+	private UserStatService userService = new UserStatCalcPython();
+	
 	private CalcStatServicePython() {}
 	
 	@Override
 	public RepoStatService getRepoStatService() {
-		// TODO Auto-generated method stub
-		return null;
+		return repoService;
 	}
 
 	@Override
 	public UserStatService getUserStatService() {
-		// TODO Auto-generated method stub
-		return null;
+		return userService;
 	}
 	
 	public static CalcStatServicePython getInstance() {
