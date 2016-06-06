@@ -67,11 +67,28 @@ Statistic query:
 Recommended info query:
 	URL:http://106.75.5.61:8080/GitMiningServer/recommend?{param1=...}&{param2=...}&...
 																				//TODO
+		type=?
+			repo: original List<String> getRecommendRepos(Language language)	//TODO
+				param=(Language name) 
+					Not the name of enumeration, but the real name
+					e.g. JavaScript  Ruby
+			user: original List<String> getRecommendUsers(Language language)	//TODO
+				param=(Language) 
+			related:
+				param=
+		
 		
 Login request:
 	URL:http://106.75.5.61:8080/GitMiningServer/login?{param1=...}&{param2=...}&...
 																				//TODO
-				
+		login=(login of the user)
+		pass=(password of the account)
+		
+		Return type: a JSON object with attributes "state" and "key"
+			state:true/false		shows if the login and password is valid
+			key:a string used for making requests, only exsits when login was successful
+			e.g. {"state":"true","key":"123456"}
+				{"state":false,"key":""}
 	
 API hint:
 	URL:http://106.75.5.61:8080/GitMiningServer/api?{param1=...}&{param2=...}&...
