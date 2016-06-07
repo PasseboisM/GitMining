@@ -5,20 +5,17 @@ body {
     padding: 0;
 }
 h1 {
-font-family:"Lucida Console",monospace;
-font-size:48px;
+    font-family: "Lucida Console", monospace;
+    font-size: 48px;
 }
 h2 {
-font-family: Verdana;
-font-size:32px;
-
+    font-family: Verdana;
+    font-size: 32px;
 }
 button {
-    position:relative;
-
+    position: relative;
     width: 74px;
     height: 74px;
-
     background-color: transparent;
     border-style: hidden;
     background-image: url(picture/02.png);
