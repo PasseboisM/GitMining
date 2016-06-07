@@ -7,19 +7,10 @@ var http_languages = ["ALL","JAVA","RUBY","PYTHON","C","JAVA_SCRIPT","PERL","PHP
 var http_catagories = ["ALL","ACTIVE_RECORD","API","APP","CMS","DJANGO","EMACS","FRAMEWORK","INTERFACE","IRC","JSON","LIBRARY","LINUX","MAC","MANAGEMENT","OS","PLUGIN","RAILS","REDIS","SERVER","SOURCE","TEMPLATE","TEXT_MATE","TOOL","WEB","WEBSITE","OTHERS"];
 var http_sorttypes = ["NO_SORT","STARS_DESCENDING","FORKS_DESCENDING"];
 
-function GetQueryString(name) { 
-var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)","i"); 
-var r = window.location.search.substr(1).match(reg); 
-if (r!=null) return (r[2]); return null; 
-}
 
 
-/*var repotype=GetQueryString("type"); 
-if(repotype!=null)	repotype = decodeURIComponent(repotype); 
-else				repotype = "All"
-var language=GetQueryString("lang"); 
-if(language!=null)	language = decodeURIComponent(language); 
-else				language = "All"*/
+
+
 
 // $(document).ready(function() {
 
@@ -57,13 +48,9 @@ app.controller('main_ctrl', ['$scope', 'BusinessService', function ($scope, Busi
 	    };
 	function getReposInSpecialType(){
 		$scope.paginationConf.totalItems = searchRepos.length;		
-//		console.log(searchRepos.length);
 		var start = ($scope.paginationConf.currentPage-1)*$scope.paginationConf.itemsPerPage;
 		var end = $scope.paginationConf.currentPage*$scope.paginationConf.itemsPerPage;
-//		console.log(start);
-//		console.log(end);
 		$scope.repos = searchRepos.slice(start,end);
-//		console.log($scope.repos.length);
 	}
 	var GetAllEmployee = function () {
 		
@@ -77,7 +64,6 @@ app.controller('main_ctrl', ['$scope', 'BusinessService', function ($scope, Busi
 				sort:$scope.sorttype
 			}
 					
-			// if($scope.language=="All"&&$scope.catagory=="All"&&$scope.search==""){
 			BusinessService.initial().success(
 				function(response) {
 					$scope.paginationConf.totalItems = response.numOfRepo;
@@ -128,6 +114,7 @@ app.controller('main_ctrl', ['$scope', 'BusinessService', function ($scope, Busi
 	};
 
 	$scope.changecata = function(text) {
+		hasNewSearchQuest = true;
 		console.log(text);
 		$scope.catagory = text;
 		$scope.paginationConf.currentPage = 1;
@@ -138,6 +125,7 @@ app.controller('main_ctrl', ['$scope', 'BusinessService', function ($scope, Busi
 	};
 	
     $scope.changelang = function(text) {
+    	hasNewSearchQuest = true;
     	console.log(text);
 		$scope.language = text;
 		$scope.paginationConf.currentPage = 1;
