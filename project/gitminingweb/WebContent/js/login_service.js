@@ -28,46 +28,45 @@ return false
 
 console.log(getCookie('cookiename'));
 
-var app = angular.module('main_app', ['tm.pagination']);
-app.factory('LoginService', ['$http', function ($http) {
-//	var url = "/GitMiningServer/repo";
-//	var list = function (getAttribute) {
-//		console.log("now change business");
-//		console.log(getAttribute);
-//		return $http({
-//			 method:'GET',
-//			 url:url,
-//			 params:getAttribute
-//			 });
-//    }
-//	var getTotal = function () {
-//		console.log("getTotal");
-//		return $http({
-//			 method:'GET',
-//			 url:url,
-//			 params:{type:"stat"}
-//			 });
-//    }
-//    var search = function (searchAttribute) {
-//    	console.log(searchAttribute);
-//    	return $http({
-//			 method:'GET',
-//			 url:url,
-//			 params:searchAttribute
-//			 });
-//    }
-//
-//    return {
-//    	list: function (getAttribute) {
-//    		return list(getAttribute);
-//    	},
-//    	initial:function(){
-//    		return getTotal();
-//    	},
-//    	search:function(searchAttribute){
-//    		return search(searchAttribute);
-//    	}
-//    }
+angular.module('main_app').factory('LoginService', ['$http', function ($http) {
+	var url = "/GitMiningServer/repo";
+	var list = function (getAttribute) {
+		console.log("now change business");
+		console.log(getAttribute);
+		return $http({
+			 method:'GET',
+			 url:url,
+			 params:getAttribute
+			 });
+    }
+	var getTotal = function () {
+		console.log("getTotal");
+		return $http({
+			 method:'GET',
+			 url:url,
+			 params:{type:"stat"}
+			 });
+    }
+    var search = function (searchAttribute) {
+    	console.log(searchAttribute);
+    	return $http({
+			 method:'GET',
+			 url:url,
+			 params:searchAttribute
+			 });
+    }
+
+    return {
+    	list: function (getAttribute) {
+    		return list(getAttribute);
+    	},
+    	initial:function(){
+    		return getTotal();
+    	},
+    	search:function(searchAttribute){
+    		return search(searchAttribute);
+    	}
+    }
 }]);
 //app.controller('login_controller', ['$scope','$http',function($scope, $http) {
 //

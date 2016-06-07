@@ -33,7 +33,7 @@ function transParams(searchAttribute){
 	return http_attributes;
 }
 
-app.controller('main_ctrl', ['$scope', 'BusinessService', function ($scope, BusinessService) {
+app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', function ($scope, BusinessService,LoginService) {
 	$scope.sorttype = "no";
 	$scope.languages = languages;
 	$scope.catagories = catagories;
