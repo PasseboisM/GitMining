@@ -1,5 +1,9 @@
 package data.manage;
 
+import org.bson.Document;
+
+import com.google.gson.Gson;
+
 import data.service.LogInDataService;
 
 public class LogInDataServiceDefault implements LogInDataService {
@@ -16,6 +20,11 @@ public class LogInDataServiceDefault implements LogInDataService {
 
 	public static LogInDataServiceDefault getInstance() {
 		return instance;
+	}
+	
+	public static void main(String[] args) {
+		Document doc = new Document("state", true).append("key", "123456");
+		System.out.println(new Gson().toJson(doc));
 	}
 	
 }

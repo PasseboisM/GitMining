@@ -92,8 +92,8 @@ Login request:
 		Return type: a JSON object with attributes "state" and "key"
 			state:true/false		shows if the login and password is valid
 			key:a string used for making requests, only exsits when login was successful
-			e.g. {"state":"true","key":"123456"}
-				{"state":"false","key":""}
+			e.g. {"state":true,"key":"123456"}
+				{"state":false,"key":""}
 				
 				
                          ------!!ATTENTION!!---------

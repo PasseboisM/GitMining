@@ -31,13 +31,13 @@ public class RecommendRequestHandlerDefault implements RecommendRequestHandler {
 		
 		switch (type) {
 		case "repo":
-			//TODO
+			printTypeRepo(httpRequest, out);
 			break;
 		case "user":
-			//TODO
+			printTypeUser(httpRequest, out);
 			break;
 		case "related":
-			//TODO
+			printTypeRelated(httpRequest, out);
 			break;
 		default:
 			out.println(new HintMessage("Unknown value for parameter (type).").toJSON());
@@ -47,5 +47,17 @@ public class RecommendRequestHandlerDefault implements RecommendRequestHandler {
 		out.close();
 		
 	}
-
+	
+	private void printTypeRepo(HttpServletRequest httpRequest, PrintWriter out) {
+		
+	}
+	
+	private void printTypeUser(HttpServletRequest httpRequest, PrintWriter out) {
+		
+	}
+	
+	private void printTypeRelated(HttpServletRequest httpRequest, PrintWriter out) {
+		
+	}
+	
 }
