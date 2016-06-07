@@ -85,7 +85,7 @@ Recommended info query:
 		
 Login request:
 	URL:http://106.75.5.61:8080/GitMiningServer/login?{param1=...}&{param2=...}&...
-																				//TODO
+																				//Complete
 		login=(login of the user)
 		pass=(password of the account)
 		
