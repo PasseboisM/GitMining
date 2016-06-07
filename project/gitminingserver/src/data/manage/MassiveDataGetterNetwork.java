@@ -156,24 +156,24 @@ public class MassiveDataGetterNetwork extends MassiveDataGetter {
 		return instance;
 	}
 
-	public static void main(String[] args) throws NetworkException {
-		/**
-		 * TODO Sleep for 40 seconds? We need an overtime parameter!
-		 */
-		MassiveDataGetterNetwork mass = new MassiveDataGetterNetwork();
-		Language[] ll = new Language[1];
-		ll[0] = Language.JAVA_SCRIPT;
-		Category[] cl = new Category[1];
-		cl[0] = Category.ALL;
-		String[] sl = new String[1];
-		sl[0] = "jquery";
-		long stime = System.currentTimeMillis();
-		List<String> list = mass.searchRepository(
-				new RepositorySearchParam(ll,cl,sl,RepoSortStadard.STARS_DESCENDING));
-		System.out.println("Time:"+(System.currentTimeMillis()-stime));
-		System.out.println("Num of got:"+list.size());
-		Gson gson = new Gson();
-		System.out.println(list.get(0));
-		System.out.println(list.get(1));
-	}
+//	public static void main(String[] args) throws NetworkException {
+//		/**
+//		 * TODO Sleep for 40 seconds? We need an overtime parameter!
+//		 */
+//		MassiveDataGetterNetwork mass = new MassiveDataGetterNetwork();
+//		Language[] ll = new Language[1];
+//		ll[0] = Language.JAVA_SCRIPT;
+//		Category[] cl = new Category[1];
+//		cl[0] = Category.ALL;
+//		String[] sl = new String[1];
+//		sl[0] = "jquery";
+//		long stime = System.currentTimeMillis();
+//		List<String> list = mass.searchRepository(
+//				new RepositorySearchParam(ll,cl,sl,RepoSortStadard.STARS_DESCENDING));
+//		System.out.println("Time:"+(System.currentTimeMillis()-stime));
+//		System.out.println("Num of got:"+list.size());
+//		Gson gson = new Gson();
+//		System.out.println(list.get(0));
+//		System.out.println(list.get(1));
+//	}
 }

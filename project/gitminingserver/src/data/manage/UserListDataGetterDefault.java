@@ -3,21 +3,23 @@ package data.manage;
 import java.io.IOException;
 import java.util.List;
 
+import com.google.gson.Gson;
+
 import data.service.UserListDataGetter;
+import static common.util.JSONHelper.toJSONList;
 import network.service.UserRelatedDataSource;
 import network.service.NetworkServiceFactory;
 
 /**
- * 
  * @author River
- * TODO 实现Repository、User向String的转换
  */
 public class UserListDataGetterDefault extends UserListDataGetter {
 	
 	private static UserListDataGetter instance = new UserListDataGetterDefault();
 	
 	private UserRelatedDataSource fromNetwork = NetworkServiceFactory.getInstance().getUserRelatedDataSource();
-			
+	private Gson gson = new Gson();
+	
 	private UserListDataGetterDefault() {}
 	
 	public static UserListDataGetter getInstance() {
@@ -26,32 +28,27 @@ public class UserListDataGetterDefault extends UserListDataGetter {
 
 	@Override
 	public List<String> getOwnedRepositories(String login) throws IOException {
-		return null;
-//		return fromNetwork.listOwnedRepositories(login);
+		return toJSONList(fromNetwork.listOwnedRepositories(login));
 	}
 
 	@Override
 	public List<String> getStarredRepositories(String login) throws IOException {
-		return null;
-//		return fromNetwork.listStarredRepositories(login);
+		return toJSONList(fromNetwork.listStarredRepositories(login));
 	}
 
 	@Override
 	public List<String> getSubscrippedRepositories(String login) throws IOException {
-		return null;
-//		return fromNetwork.listSubscrippedRepositories(login);
+		return toJSONList(fromNetwork.listSubscrippedRepositories(login));
 	}
 
 	@Override
 	public List<String> getFollowers(String login) throws IOException {
-		return null;
-//		return fromNetwork.listFollowers(login);
+		return toJSONList(fromNetwork.listFollowers(login));
 	}
 
 	@Override
 	public List<String> getFollowings(String login) throws IOException {
-		return null;
-//		return fromNetwork.listFollowings(login);
+		return toJSONList(fromNetwork.listFollowings(login));
 	}
 
 }
