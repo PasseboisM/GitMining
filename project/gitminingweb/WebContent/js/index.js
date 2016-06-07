@@ -1,8 +1,5 @@
-var app = angular.module('index_app', []);
 
-
-app.controller('index_ctrl', function($scope) {
-
-
-
-});
+function jump()
+{
+   window.location.href="repoSearch.html";
+}

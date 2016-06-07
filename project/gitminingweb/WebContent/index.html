@@ -4,23 +4,33 @@
 <head>
 
 	<meta charset="UTF-8">
-  <title>GitMining</title>
+	<title>GitMining</title>
 	<link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+	<script src="js/index.js"></script>
 	<link href="css/index.css" rel="stylesheet" media="screen">
 </head>
 
 <body>
 
 	<div id="main" class="col-md-offset 4">
-		<h1  >GitMining</h1>
+		<h1 id="title_1">GitMining</h1>
 		<br/>
-		<h2 class="">Find what you need...</h2>
-		<br/>
-		<div ng-app="index_app" ng-controller="index_ctrl">
-				<button type="button" ng-click="jump()" ></button>
-		</div>
+		<div >
+			<br/>
 
+		</div>
+		<div id="sub_div">
+			<h2 id="info_1" class="col-md-offset-4 col-md-4">Find what you need...</h2>
+			<button id="button_1"class="col-md-2"type="button" onclick="jump()"></button>
+		</div>
 	</div>
+
+
+	<footer class="container footer col-md-12">
+			<div id="footer_div" class="container">
+					<p class="text-muted">GitMining Made By Team Mole</p>
+			</div>
+	</footer>
 </body>
 
 </html>
