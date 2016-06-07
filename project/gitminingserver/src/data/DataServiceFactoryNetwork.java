@@ -1,7 +1,9 @@
 package data;
 
+import data.manage.LogInDataServiceDefault;
 import data.manage.StatDataMakerFactoryNetwork;
 import data.service.DataServiceFactory;
+import data.service.LogInDataService;
 import data.service.MassiveDataGetter;
 import data.service.RecommendDataGetter;
 import data.service.SpecificDataGetter;
@@ -33,6 +35,11 @@ public class DataServiceFactoryNetwork extends DataServiceFactory {
 	@Override
 	public StatDataMakerFactory getStatDataMakerFactory() {
 		return StatDataMakerFactoryNetwork.getInstance();
+	}
+
+	@Override
+	public LogInDataService getLogInDataService() {
+		return LogInDataServiceDefault.getInstance();
 	}
 
 }
