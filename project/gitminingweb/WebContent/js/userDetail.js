@@ -6,8 +6,6 @@ if (r!=null) return (r[2]); return null;
 
 var login=GetQueryString("login"); 
 
-// if(repotype!=null)	repotype = decodeURIComponent(repotype); 
-// else				repotype = null;
 var app = angular.module('detail_app', []);
 app.controller('detail_controller', function($scope, $http) {
 	var url = '/GitMiningServer/user';
@@ -16,8 +14,6 @@ app.controller('detail_controller', function($scope, $http) {
 		method: "spec",
 		param: login
 	};
-	
-	
 
 	$http({
 		method:'GET',
