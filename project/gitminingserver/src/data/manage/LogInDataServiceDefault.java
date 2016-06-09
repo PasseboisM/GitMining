@@ -49,7 +49,9 @@ public class LogInDataServiceDefault implements LogInDataService {
 			try {
 				GitUser user =
 						gson.fromJson(specific.getSpecificGitUser(login), GitUserBeans.class);
-				login = user.getEmail();
+				if (user.getEmail()!=null) {
+					login = user.getEmail();
+				}
 			} catch (JsonSyntaxException | TargetNotFoundException e) {
 				e.printStackTrace();
 			}
