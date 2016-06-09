@@ -29,9 +29,8 @@ return false
 console.log(getCookie('cookiename'));
 
 angular.module('main_app').factory('LoginService', ['$http', function ($http) {
-	var url = "/GitMiningServer/repo";
+	var url = "/GitMiningServer/login";
 	var list = function (getAttribute) {
-		console.log("now change business");
 		console.log(getAttribute);
 		return $http({
 			 method:'GET',
@@ -39,32 +38,11 @@ angular.module('main_app').factory('LoginService', ['$http', function ($http) {
 			 params:getAttribute
 			 });
     }
-	var getTotal = function () {
-		console.log("getTotal");
-		return $http({
-			 method:'GET',
-			 url:url,
-			 params:{type:"stat"}
-			 });
-    }
-    var search = function (searchAttribute) {
-    	console.log(searchAttribute);
-    	return $http({
-			 method:'GET',
-			 url:url,
-			 params:searchAttribute
-			 });
-    }
+
 
     return {
-    	list: function (getAttribute) {
+    	login: function (getAttribute) {
     		return list(getAttribute);
-    	},
-    	initial:function(){
-    		return getTotal();
-    	},
-    	search:function(searchAttribute){
-    		return search(searchAttribute);
     	}
     }
 }]);
