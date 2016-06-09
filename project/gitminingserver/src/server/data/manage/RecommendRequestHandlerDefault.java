@@ -167,7 +167,7 @@ public class RecommendRequestHandlerDefault implements RecommendRequestHandler {
 			return;
 		}
 		
-		out.println(gson.toJson(result));
+		printJSONList(out, result);
 	}
 	
 }
