@@ -14,7 +14,7 @@
   <link href="css/top.css" rel="stylesheet" media="screen">
 </head>
 
-<body>
+<body ng-app="main_app" ng-controller="repo_ctrl">
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -44,7 +44,7 @@
         <!--/.nav-collapse -->
       </div>
     </nav>
-<div ng-app="main_app" ng-controller="repo_ctrl">
+<div>
     <div class="input-group col-md-offset-2 col-md-8">
       <input type="text" class="form-control" placeholder="Search for...">
       <span class="input-group-btn">

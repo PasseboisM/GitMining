@@ -8,7 +8,7 @@ var repoName=GetQueryString("fn");
 var app = angular.module('main_app', []);
 
 
-app.controller('repo_ctrl','LoginService', function($scope, $http,LoginService) {
+app.controller('repo_ctrl',['$scope','$http','LoginService', function($scope, $http,LoginService) {
 
 	$scope.password = "";
     $scope.email = LoginService.get_cookie("email");
@@ -75,4 +75,4 @@ app.controller('repo_ctrl','LoginService', function($scope, $http,LoginService) 
 	});
 
 
-});
+}]);
