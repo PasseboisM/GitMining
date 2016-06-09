@@ -49,7 +49,7 @@ app.controller('detail_controller',['$scope','$http','LoginService','TopService'
 
 	RecommendAttribute={
 		type:"related",
-		param:recommend_request_list[2],
+		param:recommend_request_list[2].slice(0,5);
 		login:login
 	}
 	TopService.getTop25(RecommendAttribute).success(
@@ -59,7 +59,7 @@ app.controller('detail_controller',['$scope','$http','LoginService','TopService'
 
 	RecommendAttribute={
 		type:"related",
-		param:recommend_request_list[3],
+		param:recommend_request_list[3].slice(0,5);
 		login:login
 	}
 	TopService.getTop25(RecommendAttribute).success(
@@ -69,7 +69,7 @@ app.controller('detail_controller',['$scope','$http','LoginService','TopService'
 	
 	RecommendAttribute={
 		type:"related",
-		param:recommend_request_list[4],
+		param:recommend_request_list[4].slice(0,5);
 		login:login
 	}
 	TopService.getTop25(RecommendAttribute).success(

@@ -74,8 +74,8 @@
          <div class="col-md-6">
           <div class="col-md-6">
             <Strong>关注者用户列表</Strong>
-            <div class="list-group" ng-repeat="follower in followers">
-             <div class="list-group-item"><a href="userDetail.html?login={{follower.login}}">{{follower.login}}</a></div>
+            <div class="panel panel-default clist-group" ng-repeat="follower in followers">
+             <div class="panel-body list-group-item"><a href="userDetail.html?login={{follower.login}}">{{follower.login}}</a></div>
            </div>
           </div>
           <div class="col-md-6">
@@ -104,33 +104,21 @@
         </div>
         <div class="col-md-4">
            <Strong>持有项目列表</Strong>
-           <ul class="list-group">
-             <li class="list-group-item">Cras justo odio</li>
-             <li class="list-group-item">Dapibus ac facilisis in</li>
-             <li class="list-group-item">Morbi leo risus</li>
-             <li class="list-group-item">Porta ac consectetur ac</li>
-             <li class="list-group-item">Vestibulum at eros</li>
-           </ul>
+           <div class="list-group" ng-repeat="repo in own_repos">
+             <div class="list-group-item"><a href="repoDetail.html?login={{repo.full_name}}">{{repo.full_name}}</a></div>
+           </div>
         </div>
         <div class="col-md-4">
             <Strong>推荐项目列表</Strong>
-           <ul class="list-group">
-             <li class="list-group-item">Cras justo odio</li>
-             <li class="list-group-item">Dapibus ac facilisis in</li>
-             <li class="list-group-item">Morbi leo risus</li>
-             <li class="list-group-item">Porta ac consectetur ac</li>
-             <li class="list-group-item">Vestibulum at eros</li>
-           </ul>
+           <div class="list-group" ng-repeat="repo in star_repos">
+             <div class="list-group-item"><a href="repoDetail.html?login={{repo.full_name}}">{{repo.full_name}}</a></div>
+           </div>
         </div>
         <div class="col-md-4">
            <Strong>订阅项目列表</Strong>
-           <ul class="list-group">
-             <li class="list-group-item">Cras justo odio</li>
-             <li class="list-group-item">Dapibus ac facilisis in</li>
-             <li class="list-group-item">Morbi leo risus</li>
-             <li class="list-group-item">Porta ac consectetur ac</li>
-             <li class="list-group-item">Vestibulum at eros</li>
-           </ul>
+           <div class="list-group" ng-repeat="repo in sub_repos">
+             <div class="list-group-item"><a href="repoDetail.html?login={{repo.full_name}}">{{repo.full_name}}</a></div>
+           </div>
         </div>
         
         <script src="js/userRadar.js"></script>
