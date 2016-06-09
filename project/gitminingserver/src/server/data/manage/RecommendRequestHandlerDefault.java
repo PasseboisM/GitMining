@@ -7,6 +7,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import common.enumeration.attribute.Language;
 import common.exception.NetworkException;
 import common.message.HintMessage;
@@ -22,6 +24,8 @@ public class RecommendRequestHandlerDefault implements RecommendRequestHandler {
 			DataServiceFactory.getInstance().getRecommendDataGetter();
 	private UserListDataGetter userList = 
 			DataServiceFactory.getInstance().getUserListDataGetter();
+	
+	private Gson gson = new Gson();
 	
 	@Override
 	public void handleRequest(HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
@@ -84,7 +88,7 @@ public class RecommendRequestHandlerDefault implements RecommendRequestHandler {
 			return;
 		}
 		
-		printJSONList(out, result);
+		out.println(gson.toJson(result));
 	}
 	
 	private void printTypeUser(HttpServletRequest httpRequest, PrintWriter out) {
@@ -109,7 +113,7 @@ public class RecommendRequestHandlerDefault implements RecommendRequestHandler {
 			return;
 		}
 		
-		printJSONList(out, result);
+		out.println(gson.toJson(result));
 	}
 	
 	private void printTypeRelated(HttpServletRequest httpRequest, PrintWriter out) {
@@ -163,7 +167,7 @@ public class RecommendRequestHandlerDefault implements RecommendRequestHandler {
 			return;
 		}
 		
-		printJSONList(out, result);
+		out.println(gson.toJson(result));
 	}
 	
 }
