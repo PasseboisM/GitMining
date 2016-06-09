@@ -62,6 +62,10 @@ app.controller('repo_ctrl',['$scope','$http','LoginService', function($scope, $h
 		$("#login_div").show();
 	}
 
+	$scope.see_more = function(url){
+		window.location.href=url;
+	}
+
 	$http({
 		method:'GET',
 		url:url,

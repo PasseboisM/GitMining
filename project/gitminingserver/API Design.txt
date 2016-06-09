@@ -66,15 +66,15 @@ Statistic query:
 			
 Recommended info query:
 	URL:http://106.75.5.61:8080/GitMiningServer/recommend?{param1=...}&{param2=...}&...
-																				//TODO
+																				//Complete
 		type=?
-			repo: original List<String> getRecommendRepos(Language language)	//TODO
+			repo: original List<String> getRecommendRepos(Language language)	//Complete
 				param=(Language name) 
 					Not the name of enumeration, but the real name
 					e.g. JavaScript  Ruby
-			user: original List<String> getRecommendUsers(Language language)	//TODO
+			user: original List<String> getRecommendUsers(Language language)	//Complete
 				param=(Language) 
-			related: methods from UserListDataGetter							//TODO
+			related: methods from UserListDataGetter							//Complete
 				param=OwnedRepositories/
 					StarredRepositories/
 					SubscrippedRepositories/
