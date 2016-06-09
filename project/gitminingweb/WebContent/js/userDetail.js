@@ -44,7 +44,7 @@ app.controller('detail_controller',['$scope','$http','LoginService','TopService'
 	}
 	TopService.getTop25(RecommendAttribute).success(
 		function(response) {
-			$scope.star_repos=response;
+			$scope.star_repos=response.slice(0,5);
 		});
 
 	RecommendAttribute={
