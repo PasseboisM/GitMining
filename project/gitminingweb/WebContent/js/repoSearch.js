@@ -41,7 +41,7 @@ function transParams(searchAttribute){
 	http_attributes.param.sortStandard = http_sorttypes[sorttypes.indexOf(searchAttribute.sortStandard)];
 	http_attributes.param.keywords = searchAttribute.keywords;
 	if(document.cookie.length>0)
-		http_attributes.key=LoginService.get_cookie("key");
+		http_attributes.key=searchAttribute.key;
 	return http_attributes;
 }
 
@@ -104,7 +104,8 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
 				cates:$scope.catagory,
 				langs:$scope.language,
 				keywords:$scope.search.split(" "),
-				sortStandard:$scope.sorttype
+				sortStandard:$scope.sorttype,
+				key:LoginService.get_cookie("key")
 			};
 
 			

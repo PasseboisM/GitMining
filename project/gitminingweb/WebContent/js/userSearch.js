@@ -8,9 +8,9 @@ function transParams(searchAttribute){
 		param:{}
 	};
 	http_attributes.param.sortStandard = http_sort_type[sort_type.indexOf(searchAttribute.sortStandard)];
-	http_attributes.param.keywords = searchAttribute.keywords;
+	http_attributes.param.keywords = searchAttribute.keywords;key
 	if(document.cookie.length>0)
-		http_attributes.key=LoginService.get_cookie("key");
+		http_attributes.key=searchAttribute.key;
 	return http_attributes;
 }
 var isInitialStatus = true;
@@ -73,7 +73,8 @@ app.controller('testCtrl', ['$scope', 'LoginService','BusinessService', function
 			console.log("now get new users in search type");
 			var searchAttribute = {
 				keywords:$scope.search.split(" "),
-				sortStandard:$scope.sort_type
+				sortStandard:$scope.sort_type,
+				key:LoginService.get_cookie("key")
 			};
 			BusinessService.search(transParams(searchAttribute)).success(
 				function(response) {
