@@ -33,6 +33,16 @@ public class RequestRecorderDefault implements RequestRecorder {
 		
 		System.out.println("User's index:"+user.toJson());
 		
+		switch (request.getRequestURI()) {
+		case "1":
+			break;
+		case "2":
+			break;
+		case "3":
+			break;
+		default:
+			break;
+		}
 	}
 
 	
@@ -45,4 +55,5 @@ public class RequestRecorderDefault implements RequestRecorder {
 		}
 		throw new TargetNotFoundException();
 	}
+	
 }
