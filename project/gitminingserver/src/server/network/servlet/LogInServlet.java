@@ -7,13 +7,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import server.data.manage.LogInRequestHandlerDefault;
+import server.data.service.LogInRequestHandler;
+
 /**
  * Servlet implementation class LogInServlet
  */
 @WebServlet("/login")
 public class LogInServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    
+	private LogInRequestHandler handler = new LogInRequestHandlerDefault();
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -25,9 +30,8 @@ public class LogInServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		handler.handleRequest(request, response);
 	}
 
 }
