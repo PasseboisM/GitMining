@@ -131,10 +131,7 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
 			login:$scope.email,
 			pass:$scope.password
 		}
-		LoginService.login(param).success(
-			function(response) {
-				console.log(response);
-			});
+		console.log(LoginService.login(param));
 	}
 	
     $scope.changelang = function(text) {

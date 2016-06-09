@@ -32,11 +32,15 @@ angular.module('main_app').factory('LoginService', ['$http', function ($http) {
 	var url = "/GitMiningServer/login";
 	var list = function (getAttribute) {
 		console.log(getAttribute);
-		return $http({
+		$http({
 			 method:'GET',
 			 url:url,
 			 params:getAttribute
-			 });
+			 }).success(
+			function(response) {
+				console.log(response);
+				return 111;
+			});
     }
 
 
@@ -46,31 +50,3 @@ angular.module('main_app').factory('LoginService', ['$http', function ($http) {
     	}
     }
 }]);
-//app.controller('login_controller', ['$scope','$http',function($scope, $http) {
-//
-//	$scope.email="";
-//	$scope.password="";
-//	$scope.login = function(){
-//		console.log(emial);
-//		console.log(password);
-//	}
-//	/*var url = '/GitMiningServer/user';
-//	data = {
-//		type : "data",
-//		method: "spec",
-//		param: login
-//	};
-//
-//	$http({
-//		method:'GET',
-//		url:url,
-//		params:data
-//	}).success(function(data) {
-//		$scope.user = data;
-//		console.log(data);
-//		$scope.formattime = function(text) {
-//			return text.replace("T"," ").replace("Z"," ");
-//		};
-//	});*/
-//
-//}]);
