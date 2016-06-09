@@ -13,7 +13,7 @@ public class JSONHelper {
 	public static void printJSONList(PrintWriter p,List<String> s) {
 		p.println('[');
 		for (int i=0;i<s.size();i++) {
-			p.print(s.get(i));
+			p.print('\"'+s.get(i)+'\"');
 			if (i!=s.size()-1) p.println(',');
 		}
 		p.println(']');
