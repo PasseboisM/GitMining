@@ -16,7 +16,7 @@ function transParams(searchAttribute){
 var isInitialStatus = true;
 var hasNewSearchQuest = false;
 var app = angular.module('main_app', ['tm.pagination']);
-app.controller('testCtrl', ['$scope', 'LoginService','BusinessService', function ($scope, BusinessService,LoginService) {
+app.controller('testCtrl', ['$scope', 'BusinessService','LoginService', function ($scope, BusinessService,LoginService) {
 	$scope.email = LoginService.get_cookie("email");
     $(document).ready(function(){
     	if($scope.email.length>0){
