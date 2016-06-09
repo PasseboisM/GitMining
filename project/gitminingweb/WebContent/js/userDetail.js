@@ -7,7 +7,7 @@ if (r!=null) return (r[2]); return null;
 var login=GetQueryString("login"); 
 
 var app = angular.module('main_app', []);
-app.controller('detail_controller','LoginService', function($scope, $http,LoginService) {
+app.controller('detail_controller',['$scope','$http','LoginService', function($scope, $http,LoginService) {
 	$scope.email = LoginService.get_cookie("email");
     $(document).ready(function(){
     	if($scope.email.length>0){
@@ -70,4 +70,4 @@ app.controller('detail_controller','LoginService', function($scope, $http,LoginS
 		};
 	});
 
-});
+}]);

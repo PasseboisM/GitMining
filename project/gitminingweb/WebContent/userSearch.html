@@ -13,7 +13,7 @@
     <link href="css/top.css" rel="stylesheet" media="screen">
 </head>
 
-<body>
+<body ng-app="main_app" ng-controller="testCtrl">
     <!-- <p id="x">sdfsdf</p> -->
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -46,7 +46,7 @@
     
     
 
-    <div class="container" ng-app="main_app" ng-controller="testCtrl">
+    <div class="container">
         <div class="input-group col-md-offset-2 col-md-8">
             <input type="text" class="form-control" placeholder="Search for..." ng-model="search">
             <span class="input-group-btn">
