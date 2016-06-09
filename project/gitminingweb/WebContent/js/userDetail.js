@@ -17,6 +17,9 @@ app.controller('detail_controller','LoginService', function($scope, $http,LoginS
 		param: login
 	};
 
+	if(document.cookie.length>0)
+		data.key=document.cookie;
+
 	$http({
 		method:'GET',
 		url:url,

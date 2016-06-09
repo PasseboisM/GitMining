@@ -18,12 +18,11 @@ $(document).ready(function(){
 // $(document).ready(function() {
 
 // });
-var app = angular.module('main_app', ['tm.pagination']);
 
 // angular.module('myApp')
-app.config(['$httpProvider', function($httpProvider) {
-  $httpProvider.defaults.withCredentials = true;
-}])
+// app.config(['$httpProvider', function($httpProvider) {
+// 	$httpProvider.defaults.headers.get ={'key':'123456'}
+// }])
 
 var isInitialStatus = true;
 var hasNewSearchQuest = false;
@@ -41,7 +40,7 @@ function transParams(searchAttribute){
 	http_attributes.param.sortStandard = http_sorttypes[sorttypes.indexOf(searchAttribute.sortStandard)];
 	http_attributes.param.keywords = searchAttribute.keywords;
 	if(document.cookie.length>0)
-		http_attributes.param.cookie=document.cookie;
+		http_attributes.key=document.cookie;
 	return http_attributes;
 }
 
@@ -81,7 +80,7 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
 			}
 
 			if(document.cookie.length>0)
-				getAttribute.cookie=document.cookie;
+				getAttribute.key=document.cookie;
 					
 			BusinessService.initial().success(
 				function(response) {
