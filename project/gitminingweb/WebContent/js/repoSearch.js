@@ -42,8 +42,8 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
 	$scope.catagories = catagories;
     $scope.language = "All";
     $scope.catagory = "All";
-    $scope.hasLogIn = LoginService.get_cookie("key").length>0;
-    // $scope.hasLogIn = false;
+    // $scope.hasLogIn = LoginService.get_cookie("key").length>0;
+    $scope.hasLogIn = false;
 
     $scope.search = "";
     $scope.email = "";
@@ -147,6 +147,7 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
 				console.log(response);
 				if(response.state){
 					LoginService.save_cookie(response.key);
+					hasLogIn=true;
 					//show user info
 				}else{
 					//show alert info
