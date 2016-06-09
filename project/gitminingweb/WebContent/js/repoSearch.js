@@ -40,7 +40,7 @@ function transParams(searchAttribute){
 	http_attributes.param.sortStandard = http_sorttypes[sorttypes.indexOf(searchAttribute.sortStandard)];
 	http_attributes.param.keywords = searchAttribute.keywords;
 	if(document.cookie.length>0)
-		http_attributes.key=document.cookie;
+		http_attributes.key=LoginService.get_cookie("key");
 	return http_attributes;
 }
 
@@ -80,7 +80,7 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
 			}
 
 			if(document.cookie.length>0)
-				getAttribute.key=document.cookie;
+				getAttribute.key=LoginService.get_cookie("key");
 					
 			BusinessService.initial().success(
 				function(response) {

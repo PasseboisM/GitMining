@@ -20,7 +20,7 @@ app.controller('repo_ctrl','LoginService', function($scope, $http,LoginService) 
 	};
 
 	if(document.cookie.length>0)
-		data.key=document.cookie;
+		data.key=LoginService.get_cookie("key");
 
 	$http({
 		method:'GET',

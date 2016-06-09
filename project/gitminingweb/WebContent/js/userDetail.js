@@ -18,7 +18,7 @@ app.controller('detail_controller','LoginService', function($scope, $http,LoginS
 	};
 
 	if(document.cookie.length>0)
-		data.key=document.cookie;
+		data.key=LoginService.get_cookie("key");
 
 	$http({
 		method:'GET',

@@ -10,7 +10,7 @@ function transParams(searchAttribute){
 	http_attributes.param.sortStandard = http_sort_type[sort_type.indexOf(searchAttribute.sortStandard)];
 	http_attributes.param.keywords = searchAttribute.keywords;
 	if(document.cookie.length>0)
-		http_attributes.key=document.cookie;
+		http_attributes.key=LoginService.get_cookie("key");
 	return http_attributes;
 }
 var isInitialStatus = true;
@@ -54,7 +54,7 @@ app.controller('testCtrl', ['$scope', 'LoginService','BusinessService', function
 			}
 
 			if(document.cookie.length>0)
-				getAttribute.key=document.cookie;
+				getAttribute.key=LoginService.get_cookie("key");
 					
 			// if($scope.language=="All"&&$scope.catagory=="All"&&$scope.search==""){
 			BusinessService.initial().success(
