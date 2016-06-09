@@ -8,10 +8,7 @@ var http_catagories = ["ALL","ACTIVE_RECORD","API","APP","CMS","DJANGO","EMACS",
 var http_sorttypes = ["NO_SORT","STARS_DESCENDING","FORKS_DESCENDING"];
 
 
-$(document).ready(function(){
-	$("#login_div").show();
-	$("#logout_div").hide();
-});
+
 
 
 
@@ -21,9 +18,9 @@ $(document).ready(function(){
 var app = angular.module('main_app', ['tm.pagination']);
 
 // angular.module('myApp')
-app.config(['$httpProvider', function($httpProvider) {
-  $httpProvider.defaults.withCredentials = true;
-}])
+//app.config(['$httpProvider', function($httpProvider) {
+//  $httpProvider.defaults.withCredentials = true;
+//}])
 
 var isInitialStatus = true;
 var hasNewSearchQuest = false;
@@ -41,7 +38,7 @@ function transParams(searchAttribute){
 	http_attributes.param.sortStandard = http_sorttypes[sorttypes.indexOf(searchAttribute.sortStandard)];
 	http_attributes.param.keywords = searchAttribute.keywords;
 	if(document.cookie.length>0)
-		http_attributes.param.cookie=document.cookie;
+		http_attributes.key=searchAttribute.key;
 	return http_attributes;
 }
 
@@ -55,7 +52,16 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
     $scope.hasLogIn = false;
 
     $scope.search = "";
-    $scope.email = "";
+    $scope.email = LoginService.get_cookie("email");
+    $(document).ready(function(){
+    	if($scope.email.length>0){
+    		$("#logout_div").show();
+    		$("#login_div").hide();
+    	}else{
+    		$("#login_div").show();
+    		$("#logout_div").hide();
+    	}
+    });
     $scope.password = "";
 
 	$scope.paginationConf = {
@@ -81,7 +87,7 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
 			}
 
 			if(document.cookie.length>0)
-				getAttribute.cookie=document.cookie;
+				getAttribute.key=LoginService.get_cookie("key");
 					
 			BusinessService.initial().success(
 				function(response) {
@@ -104,7 +110,8 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
 				cates:$scope.catagory,
 				langs:$scope.language,
 				keywords:$scope.search.split(" "),
-				sortStandard:$scope.sorttype
+				sortStandard:$scope.sorttype,
+				key:LoginService.get_cookie("key")
 			};
 
 			
@@ -155,7 +162,8 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
 			function(response) {
 				console.log(response);
 				if(response.state){
-					LoginService.save_cookie(response.key);
+					LoginService.save_cookie("key",response.key);
+					LoginService.save_cookie("email",$scope.email);
 					$("#login_div").hide();
 					$("#logout_div").show();
 					//show user info
@@ -166,6 +174,14 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
 					$scope.password="";
 				}
 			});
+	}
+	$scope.logout = function(){
+		LoginService.del_cookie("key");
+		LoginService.del_cookie("email");
+		$scope.email="";
+		$scope.password="";
+		$("#logout_div").hide();
+		$("#login_div").show();
 	}
 	
     $scope.changelang = function(text) {

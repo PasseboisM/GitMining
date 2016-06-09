@@ -9,12 +9,15 @@ import javax.servlet.http.HttpServletResponse;
 import common.message.HintMessage;
 import data.service.DataServiceFactory;
 import data.service.LogInDataService;
+import data.service.SpecificDataGetter;
 import server.data.service.LogInRequestHandler;
 
 public class LogInRequestHandlerDefault implements LogInRequestHandler {
 
 	private LogInDataService logInService = 
 			DataServiceFactory.getInstance().getLogInDataService();
+	
+
 	
 	@Override
 	public void handleRequest(HttpServletRequest httpRequest, HttpServletResponse httpResponse) {

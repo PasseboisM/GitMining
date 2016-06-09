@@ -7,13 +7,13 @@
     <!-- <script src="http://code.jquery.com/jquery.js"></script> -->
     <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script> 
     <script src="js/userSearch.js"></script>
-    <!-- <script src="js/reposervice.js"></script>  -->
+    <script src="js/login_service.js"></script>
     <script src="js/tm.pagination.js"></script> 
     <link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/top.css" rel="stylesheet" media="screen">
 </head>
 
-<body>
+<body ng-app="main_app" ng-controller="testCtrl">
     <!-- <p id="x">sdfsdf</p> -->
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -26,15 +26,19 @@
             <li class="active"><a href="userSearch.html">用户搜索</a></li>
             <li><a href="statisticChart.html">统计图表</a></li>
           </ul>
-          <form class="navbar-form navbar-right">
+          <div id="login_div" class="navbar-form navbar-right">
             <div class="form-group">
-                <input type="text" placeholder="Email" class="form-control">
+                <input type="text" placeholder="Email" class="form-control" ng-model="email">
             </div>
             <div class="form-group">
-                <input type="password" placeholder="Password" class="form-control">
+                <input type="password" ng-model="password" placeholder="Password" class="form-control">
             </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
-          </form>
+            <button ng-click="login()" class="btn btn-success">Sign in</button>
+          </div>
+
+          <div id="logout_div" class="navbar-form navbar-right white_font">
+            <div>User login:  {{email}}  <button ng-click="logout()" class="btn btn-success">Log out</button></div>
+          </div>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -42,7 +46,7 @@
     
     
 
-    <div class="container" ng-app="main_app" ng-controller="testCtrl">
+    <div class="container">
         <div class="input-group col-md-offset-2 col-md-8">
             <input type="text" class="form-control" placeholder="Search for..." ng-model="search">
             <span class="input-group-btn">
