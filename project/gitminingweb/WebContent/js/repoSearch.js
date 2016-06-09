@@ -18,6 +18,7 @@ var http_sorttypes = ["NO_SORT","STARS_DESCENDING","FORKS_DESCENDING"];
 var app = angular.module('main_app', ['tm.pagination']);
 var isInitialStatus = true;
 var hasNewSearchQuest = false;
+
 var searchRepos=[];
 
 function transParams(searchAttribute){
@@ -30,6 +31,8 @@ function transParams(searchAttribute){
 	http_attributes.param.langs = [http_languages[languages.indexOf(searchAttribute.langs)]];
 	http_attributes.param.sortStandard = http_sorttypes[sorttypes.indexOf(searchAttribute.sortStandard)];
 	http_attributes.param.keywords = searchAttribute.keywords;
+	if(document.cookie.length>0)
+		http_attributes.param.cookie=document.cookie;
 	return http_attributes;
 }
 
@@ -39,6 +42,8 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
 	$scope.catagories = catagories;
     $scope.language = "All";
     $scope.catagory = "All";
+    // $scope.hasLogIn = LoginService.get_cookie("key").length>0;
+    $scope.hasLogIn = false;
 
     $scope.search = "";
     $scope.email = "";
@@ -93,8 +98,8 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
 				sortStandard:$scope.sorttype
 			};
 
-			if(document.cookie.length>0)
-				searchAttribute.cookie=document.cookie;
+			
+
 			BusinessService.search(transParams(searchAttribute)).success(
 				function(response) {
 					searchRepos=response;
@@ -142,6 +147,7 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
 				console.log(response);
 				if(response.state){
 					LoginService.save_cookie(response.key);
+					hasLogIn=true;
 					//show user info
 				}else{
 					//show alert info

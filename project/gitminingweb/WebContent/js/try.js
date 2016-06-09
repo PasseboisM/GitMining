@@ -1,4 +1,4 @@
-var app = angular.module('repo_app', []);
+var app = angular.module('main_app', []);
 
 
 app.controller('repo_ctrl', function($scope) {

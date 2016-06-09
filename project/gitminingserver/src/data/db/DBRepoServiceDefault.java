@@ -112,7 +112,7 @@ public class DBRepoServiceDefault implements DBRepoService {
 				break;
 			}
 			
-			if (partialFilter==null) {
+			if (partialFilter[1]==null) {
 				partialFilter[1] = regex("description",cat.getName());
 			} else {
 				partialFilter[1] = and(partialFilter[1],regex("description",cat.getName()));
@@ -133,7 +133,7 @@ public class DBRepoServiceDefault implements DBRepoService {
 		found.filter(and(partialFilter[0],partialFilter[1],partialFilter[2]));
 		
 		sort(params.getSortStandard(),found);
-		
+
 		found.forEach(new Block<Document>() {
 			int count = 0;
 			final int MAX_RETURN = 200;

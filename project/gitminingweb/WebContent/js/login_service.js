@@ -2,9 +2,9 @@ function setCookie(name,value,expires){
 document.cookie = name + "=" + value + ((expires==null) ? "" : ";expires=" + expires.toGMTString())
 }
 
-var expirydate=new Date();
-expirydate.setTime(expirydate.getTime()+(100*60*60*24*100))
-setCookie('cookiename','cookiedata',expirydate)
+// var expirydate=new Date();
+// expirydate.setTime(expirydate.getTime()+(100*60*60*24*100))
+// setCookie('cookiename','cookiedata',expirydate)
 // expirydate being a variable with the expiry date in it
 // the one i have set for your convenience expires in 10 days
 
@@ -44,7 +44,12 @@ angular.module('main_app').factory('LoginService', ['$http', function ($http) {
     		return list(getAttribute);
     	},
     	save_cookie : function(text){
+    		// var expirydate=new Date();
+    		// expirydate.setTime(expirydate.getTime()+(1000*60*60*24*10))
     		setCookie("key",text);
+    	},
+    	get_cookie : function(text){
+    		return getCookie(text);
     	}
     }
 }]);
