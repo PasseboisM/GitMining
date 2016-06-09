@@ -8,7 +8,10 @@ var http_catagories = ["ALL","ACTIVE_RECORD","API","APP","CMS","DJANGO","EMACS",
 var http_sorttypes = ["NO_SORT","STARS_DESCENDING","FORKS_DESCENDING"];
 
 
-
+$(document).ready(function(){
+	$("#login_div").show();
+	$("#logout_div").hide();
+});
 
 
 
@@ -16,6 +19,12 @@ var http_sorttypes = ["NO_SORT","STARS_DESCENDING","FORKS_DESCENDING"];
 
 // });
 var app = angular.module('main_app', ['tm.pagination']);
+
+// angular.module('myApp')
+app.config(['$httpProvider', function($httpProvider) {
+  $httpProvider.defaults.withCredentials = true;
+}])
+
 var isInitialStatus = true;
 var hasNewSearchQuest = false;
 
@@ -147,7 +156,8 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
 				console.log(response);
 				if(response.state){
 					LoginService.save_cookie(response.key);
-					hasLogIn=true;
+					$("#login_div").hide();
+					$("#logout_div").show();
 					//show user info
 				}else{
 					//show alert info
@@ -214,11 +224,13 @@ app.factory('BusinessService', ['$http', function ($http) {
 	var list = function (getAttribute) {
 		console.log("now change business");
 		console.log(getAttribute);
+		console.log($http.defaults.headers);
 		return $http({
-			 method:'GET',
-			 url:url,
-			 params:getAttribute
-			 });
+			method:'GET',
+		 	url:url,
+			params:getAttribute
+
+			});
     }
 	var getTotal = function () {
 		console.log("getTotal");
