@@ -65,6 +65,9 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
 				numPerPage:$scope.paginationConf.itemsPerPage,
 				sort:$scope.sorttype
 			}
+
+			if(document.cookie.length>0)
+				getAttribute.cookie=document.cookie;
 					
 			BusinessService.initial().success(
 				function(response) {
@@ -89,6 +92,9 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
 				keywords:$scope.search.split(" "),
 				sortStandard:$scope.sorttype
 			};
+
+			if(document.cookie.length>0)
+				searchAttribute.cookie=document.cookie;
 			BusinessService.search(transParams(searchAttribute)).success(
 				function(response) {
 					searchRepos=response;
@@ -131,7 +137,18 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
 			login:$scope.email,
 			pass:$scope.password
 		}
-		console.log(LoginService.login(param));
+		LoginService.login(param).success(
+			function(response) {
+				if(response.state){
+					LoginService.save_cookie(response.value);
+					//show user info
+				}else{
+					//show alert info
+					console.log("hey sth. wrong!");
+					$scope.email="";
+					$scope.password="";
+				}
+			});
 	}
 	
     $scope.changelang = function(text) {

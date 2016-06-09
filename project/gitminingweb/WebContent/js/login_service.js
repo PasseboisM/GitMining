@@ -26,27 +26,25 @@ return unescape(docCookie.substring(cookieStart,end))
 return false
 }
 
-console.log(document.cookie.length);
 
 angular.module('main_app').factory('LoginService', ['$http', function ($http) {
 	var url = "/GitMiningServer/login";
 	var list = function (getAttribute) {
 		console.log(getAttribute);
-		$http({
+		return $http({
 			 method:'GET',
 			 url:url,
 			 params:getAttribute
-			 }).success(
-			function(response) {
-				console.log(response);
-				return 111;
-			});
+			 })
     }
 
 
     return {
     	login: function (getAttribute) {
     		return list(getAttribute);
+    	},
+    	save_cookie : function(text){
+    		setCookie("key",text);
     	}
     }
 }]);
