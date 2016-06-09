@@ -44,9 +44,9 @@ angular.module('main_app').factory('LoginService', ['$http', function ($http) {
     		return list(getAttribute);
     	},
     	save_cookie : function(text){
-    		var expirydate=new Date();
-    		expirydate.setTime(expirydate.getTime()+(1000*60*60*24*10))
-    		setCookie("key",text,expirydate);
+    		// var expirydate=new Date();
+    		// expirydate.setTime(expirydate.getTime()+(1000*60*60*24*10))
+    		setCookie("key",text,-1);
     	}
     }
 }]);
