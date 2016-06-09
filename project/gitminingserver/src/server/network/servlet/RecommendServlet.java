@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import common.message.HintMessage;
+import server.data.manage.RecommendRequestHandlerDefault;
+import server.data.service.RecommendRequestHandler;
 
 /**
  * Servlet implementation class RecommendServlet
@@ -17,7 +19,7 @@ import common.message.HintMessage;
 @WebServlet("/recommend")
 public class RecommendServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    private RecommendRequestHandler handler = new RecommendRequestHandlerDefault(); 
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -25,13 +27,9 @@ public class RecommendServlet extends HttpServlet {
         super();
     }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
-		out.print(new HintMessage("This is recommend servlet").toJSON());
-		out.close();
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		handler.handleRequest(request, response);
 	}
 
 }

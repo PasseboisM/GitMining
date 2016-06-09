@@ -63,8 +63,4 @@ public class SpecificDataGetterNetwork extends SpecificDataGetter {
 		return instance;
 	}
 	
-	
-	public static void main(String[] args) throws TargetNotFoundException {
-		System.out.println(new Gson().toJson(instance.getSpecificGitUser("nje")));
-	}
 }
