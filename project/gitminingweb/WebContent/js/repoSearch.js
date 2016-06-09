@@ -267,24 +267,6 @@ app.factory('BusinessService', ['$http', function ($http) {
     }
 }]);
 
-//业务类
-app.factory('TopService', ['$http', function ($http) {
-	var url = "/GitMiningServer/recommend";
-	var list = function (getAttribute) {
-		console.log(getAttribute);
-		return $http({
-			method:'GET',
-		 	url:url,
-			params:getAttribute
-			});
-    }
-
-    return {
-    	getTop25: function (getAttribute) {
-    		return list(getAttribute);
-    	}
-    }
-}]);
 
 
 

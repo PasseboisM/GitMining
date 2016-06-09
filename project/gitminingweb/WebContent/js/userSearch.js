@@ -16,7 +16,7 @@ function transParams(searchAttribute){
 var isInitialStatus = true;
 var hasNewSearchQuest = false;
 var app = angular.module('main_app', ['tm.pagination']);
-app.controller('testCtrl', ['$scope', 'BusinessService','LoginService', function ($scope, BusinessService,LoginService) {
+app.controller('testCtrl', ['$scope', 'BusinessService','LoginService', 'TopService',function ($scope, BusinessService,LoginService,TopService) {
 	$scope.email = LoginService.get_cookie("email");
     $(document).ready(function(){
     	if($scope.email.length>0){
@@ -123,6 +123,17 @@ app.controller('testCtrl', ['$scope', 'BusinessService','LoginService', function
 				});
 			getReposInSpecialType();
 		}
+
+		RecommendAttribute={
+			type:"user",
+			param:$scope.language
+		}
+		TopService.getTop25(RecommendAttribute).success(
+			function(response) {
+				$scope.recommend_repos=response;
+			});
+
+
 	}
 
 	$scope.$watch('paginationConf.currentPage + paginationConf.itemsPerPage', GetAllEmployee);
