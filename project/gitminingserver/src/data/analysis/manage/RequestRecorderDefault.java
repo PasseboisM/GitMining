@@ -1,5 +1,9 @@
 package data.analysis.manage;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,21 +13,17 @@ import org.bson.Document;
 
 import com.google.gson.Gson;
 
+import common.enumeration.attribute.Category;
 import common.enumeration.attribute.Language;
 import common.exception.TargetNotFoundException;
 import common.param_obj.RepositorySearchParam;
 import data.analysis.service.RequestRecorder;
 import data.db.service.DBAnalysisService;
 import data.db.service.DBService;
+import data.db.service.obj.AnalysisRecord;
+import data.db.service.obj.CatePair;
+import data.db.service.obj.LanguagePair;
 
-/**
- * 用户的浏览记录信息Document中包含其搜索时所指定的Language与Category
- * 
- * Document内容：
- * 		user_hash----String----本处不修改
- * 		lang_pref----List<Pair<Language,Integer>>------Integer累计搜索指定次数
- * 		cate_pref----List<Pair<Category,Integer>>------Category累计搜索指定次数
- */
 
 
 
@@ -96,11 +96,54 @@ public class RequestRecorderDefault implements RequestRecorder {
 				return userRaw;
 			}
 			
+			AnalysisRecord record = gson.fromJson(
+					userRaw.toJson(), AnalysisRecord.class);
 			
 			
-			
+			List<LanguagePair> langList = null;
+			if (record.getLang_pref()==null) {
+				langList = new ArrayList<>();
+			} else {
+				langList = new ArrayList<>(record.getLang_pref());
+			}
+			for (Language lang:param.getLangs()) {
+				boolean matched = false;
 				
-				
+				for (LanguagePair pair:langList) {
+					if (lang==pair.lang) {
+						pair.count++;
+						matched = true;
+						break;
+					}
+				}
+				if (!matched) {
+					langList.add(new LanguagePair(lang, 1));
+				}
+			}
+			record.setLang_pref(langList);
+			
+			List<CatePair> cateList = null;
+			if (record.getCate_pref()==null) {
+				cateList = new ArrayList<>();
+			} else {
+				cateList = new ArrayList<>(record.getCate_pref());
+			}
+			for (Category cate:param.getCates()) {
+				boolean matched = false;
+				for (CatePair pair:cateList) {
+					if (cate==pair.cate) {
+						pair.count++;
+						matched = true;
+						break;
+					}
+				}
+				if (!matched) {
+					cateList.add(new CatePair(cate, 1));
+				}
+			}
+			record.setCate_pref(cateList);
+			
+			return Document.parse(gson.toJson(record));
 		}
 		
 		return userRaw;
@@ -115,21 +158,4 @@ public class RequestRecorderDefault implements RequestRecorder {
 		
 		return userRaw;
 	}
-	
-	public static void main(String[] args) {
-		Document d = new Document("name","river");
-		Document lang_pref = new Document();
-		
-		int i=0;
-		for (Language lang:Language.values()) {
-			lang_pref.append((i++)+"", new Document().append("lang", lang.toString()).append("value", 0));
-		}
-		d.put("lang-pref", lang_pref);
-		
-		System.out.println(d.toJson());
-		System.out.println(new Gson().toJson(d));
-		
-		
-	}
-	
 }

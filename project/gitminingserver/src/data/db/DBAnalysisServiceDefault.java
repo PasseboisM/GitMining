@@ -16,9 +16,7 @@ import data.db.service.DBAnalysisService;
 public class DBAnalysisServiceDefault implements DBAnalysisService {
 
 	ConnectionPool cp = ConnectionPool.getInstance();
-	
-	private static final String USER_HASH = "user_hash";
-	
+		
 	@Override
 	public void ensureUser(String userHash) {
 		MongoDatabase base = cp.getDatabase();

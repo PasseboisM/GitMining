@@ -75,6 +75,7 @@ public class RecommendRequestHandlerDefault implements RecommendRequestHandler {
 		
 		List<String> result = null;
 		try {
+			//TODO 使用上key所对应的用户历史信息
 			result = recommend.getRecommendRepos(lang);
 		} catch (NetworkException e) {
 			e.printStackTrace();
