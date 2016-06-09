@@ -10,6 +10,8 @@ public abstract class DBService {
 	
 	public abstract DBStatService getStatService();
 	
+	public abstract DBAnalysisService getAnalysisService();
+	
 	public static DBService getInstance() {
 		return DBServiceDefault.getInstance();
 	}
