@@ -130,21 +130,21 @@
 
         <div class="list-group col-md-offset-1 col-md-3">
 
-            <div class="panel panel-default" ng-repeat="repo in recommend_repos" class="list-group-item">
+            <div class="panel panel-default" ng-repeat="full_name in recommend_repos" class="list-group-item">
 
                 <div class="panel-body row">
                     <div class="col-md-12">
                         <!-- <h4>{{repo.fullName}}</h4> -->
-                        <a ng-href="/GitMining/repoDetail.html?fn={{repo.full_name}}">{{repo.full_name}}</a>
+                        <a ng-href="/GitMining/repoDetail.html?fn={{full_name}}">{{full_name}}</a>
                     </div>
-                    <div class="col-md-12">
+                   <!--  <div class="col-md-12">
                         <div class="col-md-12">
                             <p>{{repo.description}}</p>
                         </div>
                         <div class="col-md-12">
                             <p>{{formattime(repo.updated_at)}}</p>
                         </div>
-                    </div>
+                    </div> -->
                     
                 </div>
             </div>
