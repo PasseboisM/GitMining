@@ -15,6 +15,8 @@ var isInitialStatus = true;
 var hasNewSearchQuest = false;
 var app = angular.module('main_app', ['tm.pagination']);
 app.controller('testCtrl', ['$scope', 'LoginService','BusinessService', function ($scope, BusinessService,LoginService) {
+	$scope.email = "";
+    $scope.password = "";
 	$scope.search = "";
 	$scope.sort_type = "no";
 	$scope.paginationConf = {

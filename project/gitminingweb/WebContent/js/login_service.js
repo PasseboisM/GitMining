@@ -26,73 +26,25 @@ return unescape(docCookie.substring(cookieStart,end))
 return false
 }
 
-console.log(getCookie('cookiename'));
 
 angular.module('main_app').factory('LoginService', ['$http', function ($http) {
-	var url = "/GitMiningServer/repo";
+	var url = "/GitMiningServer/login";
 	var list = function (getAttribute) {
-		console.log("now change business");
 		console.log(getAttribute);
 		return $http({
 			 method:'GET',
 			 url:url,
 			 params:getAttribute
-			 });
-    }
-	var getTotal = function () {
-		console.log("getTotal");
-		return $http({
-			 method:'GET',
-			 url:url,
-			 params:{type:"stat"}
-			 });
-    }
-    var search = function (searchAttribute) {
-    	console.log(searchAttribute);
-    	return $http({
-			 method:'GET',
-			 url:url,
-			 params:searchAttribute
-			 });
+			 })
     }
 
+
     return {
-    	list: function (getAttribute) {
+    	login: function (getAttribute) {
     		return list(getAttribute);
     	},
-    	initial:function(){
-    		return getTotal();
-    	},
-    	search:function(searchAttribute){
-    		return search(searchAttribute);
+    	save_cookie : function(text){
+    		setCookie("key",text);
     	}
     }
 }]);
-//app.controller('login_controller', ['$scope','$http',function($scope, $http) {
-//
-//	$scope.email="";
-//	$scope.password="";
-//	$scope.login = function(){
-//		console.log(emial);
-//		console.log(password);
-//	}
-//	/*var url = '/GitMiningServer/user';
-//	data = {
-//		type : "data",
-//		method: "spec",
-//		param: login
-//	};
-//
-//	$http({
-//		method:'GET',
-//		url:url,
-//		params:data
-//	}).success(function(data) {
-//		$scope.user = data;
-//		console.log(data);
-//		$scope.formattime = function(text) {
-//			return text.replace("T"," ").replace("Z"," ");
-//		};
-//	});*/
-//
-//}]);

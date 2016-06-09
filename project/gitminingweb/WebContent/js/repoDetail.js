@@ -10,14 +10,16 @@ var app = angular.module('main_app', []);
 
 app.controller('repo_ctrl','LoginService', function($scope, $http,LoginService) {
 
-  var url = '/GitMiningServer/repo';
+	$scope.email = "";
+    $scope.password = "";
+  	var url = '/GitMiningServer/repo';
 	data = {
 		type : "data",
 		method: "spec",
 		param: repoName
 	};
 
-
+	
 
 	$http({
 		method:'GET',

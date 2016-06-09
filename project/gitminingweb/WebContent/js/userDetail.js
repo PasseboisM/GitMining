@@ -8,6 +8,8 @@ var login=GetQueryString("login");
 
 var app = angular.module('main_app', []);
 app.controller('detail_controller','LoginService', function($scope, $http,LoginService) {
+	$scope.email = "";
+    $scope.password = "";
 	var url = '/GitMiningServer/user';
 	data = {
 		type : "data",
