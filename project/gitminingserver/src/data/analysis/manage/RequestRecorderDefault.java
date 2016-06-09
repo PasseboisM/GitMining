@@ -72,14 +72,13 @@ public class RequestRecorderDefault implements RequestRecorder {
 
 	
 	private String getUserKey(HttpServletRequest request) throws TargetNotFoundException {
-		String key = request.getHeader("key");
+		String key = request.getParameter("key");
 		
 		if (key==null) {
 			throw new TargetNotFoundException();
 		} else {
 			return key;
 		}
-		
 		
 	}
 	
