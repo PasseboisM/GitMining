@@ -1,11 +1,12 @@
 body {
-    background-color: #008b8b;
+    background-color: #000000;
     background-repeat: no-repeat;
     overflow: hidden;
     height: 100%;
     margin: 0;
     padding: 0;
 }
+.white_font{color: #F5F5F5;}
 div#main {
     /*width: 1920px;*/
     width: 100%;
