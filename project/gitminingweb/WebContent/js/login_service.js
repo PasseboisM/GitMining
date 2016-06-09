@@ -26,7 +26,7 @@ return unescape(docCookie.substring(cookieStart,end))
 return false
 }
 
-console.log(getCookie('cookiename'));
+console.log(document.cookie.length);
 
 angular.module('main_app').factory('LoginService', ['$http', function ($http) {
 	var url = "/GitMiningServer/login";

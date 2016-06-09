@@ -41,6 +41,8 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
     $scope.catagory = "All";
 
     $scope.search = "";
+    $scope.email = "";
+    $scope.password = "";
 
 	$scope.paginationConf = {
 	    	currentPage: 1,
@@ -123,6 +125,17 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
 		else
 			isInitialStatus = false;
 	};
+
+	$scope.login = function(){
+		param={
+			login:$scope.email,
+			pass:$scope.password
+		}
+		LoginService.login(param).success(
+			function(response) {
+				console.log(response);
+			});
+	}
 	
     $scope.changelang = function(text) {
     	hasNewSearchQuest = true;
