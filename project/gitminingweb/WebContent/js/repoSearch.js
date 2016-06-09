@@ -19,6 +19,12 @@ $(document).ready(function(){
 
 // });
 var app = angular.module('main_app', ['tm.pagination']);
+
+// angular.module('myApp')
+app.config(['$httpProvider', function($httpProvider) {
+  $httpProvider.defaults.withCredentials = true;
+}])
+
 var isInitialStatus = true;
 var hasNewSearchQuest = false;
 
@@ -222,10 +228,7 @@ app.factory('BusinessService', ['$http', function ($http) {
 		return $http({
 			method:'GET',
 		 	url:url,
-			params:getAttribute,
-			headers: {
-   				'Cookie': 123456
- 			}
+			params:getAttribute
 
 			});
     }
