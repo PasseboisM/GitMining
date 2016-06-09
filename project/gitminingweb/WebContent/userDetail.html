@@ -74,8 +74,8 @@
          <div class="col-md-6">
           <div class="col-md-6">
             <Strong>关注者用户列表</Strong>
-            <div class="panel panel-default" ng-repeat="follower in followers">
-             <div class="panel-body list-group-item"><a href="userDetail.html?login={{follower.login}}">{{follower.login}}</a></div>
+            <div ng-repeat="follower in followers">
+             <div class="list-group-item"><a href="userDetail.html?login={{follower.login}}">{{follower.login}}</a></div>
            </div>
           </div>
           <div class="col-md-6">
