@@ -18,11 +18,12 @@ $(document).ready(function(){
 // $(document).ready(function() {
 
 // });
+var app = angular.module('main_app', ['tm.pagination']);
 
 // angular.module('myApp')
-// app.config(['$httpProvider', function($httpProvider) {
-// 	$httpProvider.defaults.headers.get ={'key':'123456'}
-// }])
+//app.config(['$httpProvider', function($httpProvider) {
+//  $httpProvider.defaults.withCredentials = true;
+//}])
 
 var isInitialStatus = true;
 var hasNewSearchQuest = false;
