@@ -1,20 +1,11 @@
 var languages = ["All","Java","Ruby","Python","C","JavaScript","Perl","PHP","C++","html","shell","Objective-C","VIML","C#","EmacsLisp","Erlang","Lua","Clojure","css","Haskell","Scala","CommonLisp","R","Others"];
 var catagories = ["All","ActiveRecord","API","app","CMS","Django","Emacs","framework","interface","IRC","JSON","library","Linux","Mac","management","OS","plugin","Rails","Redis","server","source","template","TextMate","tool","Web","website","Others"];
 var sorttypes = ["no","stars","forks"];
-
-
 var http_languages = ["ALL","JAVA","RUBY","PYTHON","C","JAVA_SCRIPT","PERL","PHP","C_PLUS_PLUS","HTML","SHELL","OBJECTIVE_C","VIML","C_SHARP","EMACS_LISP","ERLANG","LUA","CLOJURE","CSS","HASKELL","SCALA","COMMON_LISP","R","OTHERS"];
 var http_catagories = ["ALL","ACTIVE_RECORD","API","APP","CMS","DJANGO","EMACS","FRAMEWORK","INTERFACE","IRC","JSON","LIBRARY","LINUX","MAC","MANAGEMENT","OS","PLUGIN","RAILS","REDIS","SERVER","SOURCE","TEMPLATE","TEXT_MATE","TOOL","WEB","WEBSITE","OTHERS"];
 var http_sorttypes = ["NO_SORT","STARS_DESCENDING","FORKS_DESCENDING"];
 
 
-
-
-
-
-// $(document).ready(function() {
-
-// });
 var app = angular.module('main_app', ['tm.pagination']);
 
 // angular.module('myApp')
@@ -42,7 +33,7 @@ function transParams(searchAttribute){
 	return http_attributes;
 }
 
-app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', function ($scope, BusinessService,LoginService) {
+app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService','TopService', function ($scope, BusinessService,LoginService,TopService) {
 	$scope.sorttype = "no";
 	$scope.languages = languages;
 	$scope.catagories = catagories;
@@ -50,7 +41,6 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
     $scope.catagory = "All";
     // $scope.hasLogIn = LoginService.get_cookie("key").length>0;
     $scope.hasLogIn = false;
-
     $scope.search = "";
     $scope.email = LoginService.get_cookie("email");
     $(document).ready(function(){
@@ -77,7 +67,6 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
 	var GetAllEmployee = function () {
 		
 		if(isInitialStatus){
-			console.log("now get new repos");
 			var getAttribute = {
 				type:"data",
 				method:"paged",
@@ -103,7 +92,6 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
 				getReposInSpecialType();
 				return;
 			}
-			console.log("now get new repos in s type");
 			var searchAttribute = {
 				type:"data",
 				method:"search",
@@ -124,13 +112,22 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
 				});
 			
 		}
+		RecommendAttribute={
+			type:"repo",
+			param:$scope.language
+		}
+		TopService.getTop25(RecommendAttribute).success(
+			function(response) {
+				$scope.recommend_repos=response;
+			});
+
 	}
     
 	
 
-    $scope.getRepo = function(text) {
+    /*$scope.getRepo = function(text) {
 		console.log(text);
-	};
+	};*/
 
     $scope.isActive={
     	isGen:true,
@@ -144,7 +141,6 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
 
 	$scope.changecata = function(text) {
 		hasNewSearchQuest = true;
-		console.log(text);
 		$scope.catagory = text;
 		$scope.paginationConf.currentPage = 1;
 		if($scope.language=="All"&&$scope.catagory=="All"&&$scope.search=="")
@@ -186,7 +182,6 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
 	
     $scope.changelang = function(text) {
     	hasNewSearchQuest = true;
-    	console.log(text);
 		$scope.language = text;
 		$scope.paginationConf.currentPage = 1;
 		if($scope.language=="All"&&$scope.catagory=="All"&&$scope.search=="")
@@ -196,7 +191,6 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
 	};
 
 	$scope.searchRepos = function() {
-    	console.log($scope.search);
     	hasNewSearchQuest = true;
 		$scope.paginationConf.currentPage = 1;
 		if($scope.language=="All"&&$scope.catagory=="All"&&$scope.search=="")
@@ -205,6 +199,8 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
 			isInitialStatus = false;
 		GetAllEmployee();
 	};
+
+
 
 
     $scope.changerepo = function(retype) {
@@ -223,7 +219,6 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
     		$scope.isActive.isStar=false;
     		$scope.isActive.isGen=false;
     	}
-    	console.log("now type has changed to "+retype);
     };
     /*var changeState = function () {
     	hasNewSearchQuest = true;
@@ -238,18 +233,13 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
 app.factory('BusinessService', ['$http', function ($http) {
 	var url = "/GitMiningServer/repo";
 	var list = function (getAttribute) {
-		console.log("now change business");
-		console.log(getAttribute);
-		console.log($http.defaults.headers);
 		return $http({
 			method:'GET',
 		 	url:url,
 			params:getAttribute
-
 			});
     }
 	var getTotal = function () {
-		console.log("getTotal");
 		return $http({
 			 method:'GET',
 			 url:url,
@@ -257,7 +247,6 @@ app.factory('BusinessService', ['$http', function ($http) {
 			 });
     }
     var search = function (searchAttribute) {
-    	console.log(searchAttribute);
     	return $http({
 			 method:'GET',
 			 url:url,
@@ -278,7 +267,24 @@ app.factory('BusinessService', ['$http', function ($http) {
     }
 }]);
 
+//业务类
+app.factory('TopService', ['$http', function ($http) {
+	var url = "/GitMiningServer/recommend";
+	var list = function (getAttribute) {
+		console.log(getAttribute);
+		return $http({
+			method:'GET',
+		 	url:url,
+			params:getAttribute
+			});
+    }
 
+    return {
+    	getTop25: function (getAttribute) {
+    		return list(getAttribute);
+    	}
+    }
+}]);
 
 
 
