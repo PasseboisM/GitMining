@@ -15,6 +15,7 @@ import common.enumeration.sort_standard.RepoSortStadard;
 import common.exception.TargetNotFoundException;
 import common.message.HintMessage;
 import common.param_obj.RepositorySearchParam;
+import static common.util.JSONHelper.printJSONList;
 import data.service.DataServiceFactory;
 import data.service.MassiveDataGetter;
 import data.service.SpecificDataGetter;
@@ -137,14 +138,6 @@ class RepositoryRequestHandlerDefault extends RepositoryRequestHandler {
 		List<String> result = massive.getRepositories(page, numPerPage, sort);
 		printJSONList(out, result);
 	}
-	
-	private static void printJSONList(PrintWriter out,List<String> information) {
-		out.print('[');
-		for (int i = 0; i < information.size(); i++) {
-			out.print(information.get(i));
-			if(i!=information.size()-1)	out.print(",");
-		}
-		out.print(']');
-	}
+
 
 }

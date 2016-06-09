@@ -2,7 +2,6 @@ package server.data.manage;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +15,7 @@ import common.enumeration.sort_standard.UserSortStandard;
 import common.exception.TargetNotFoundException;
 import common.message.HintMessage;
 import common.param_obj.UserSearchParam;
+import static common.util.JSONHelper.printJSONList;
 import data.service.DataServiceFactory;
 import data.service.MassiveDataGetter;
 import data.service.SpecificDataGetter;
@@ -137,14 +137,7 @@ class UserRequestHandlerDefault extends UserRequestHandler {
 			return;
 		}
 		
-		out.print('[');
-		for (int i=0;i<result.size();i++) {
-			out.print(result.get(i));
-			if (i!=result.size()-1) {
-				out.print(',');
-			}
-		}
-		out.print(']');		
+		printJSONList(out, result);
 	}
 
 	private void printTypeDataMethodSearch(HttpServletRequest httpRequest, PrintWriter out) {
@@ -164,14 +157,7 @@ class UserRequestHandlerDefault extends UserRequestHandler {
 		
 		List<String> result = massive.searchUser(param);
 		
-		out.print('[');
-		for(int i=0;i<result.size();i++) {
-			out.print(result.get(i));
-			if(i!=result.size()-1) {
-				out.print(',');
-			}
-		}
-		out.print(']');
+		printJSONList(out,result);
 		
 	}
 }
