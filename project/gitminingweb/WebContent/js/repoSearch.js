@@ -220,10 +220,14 @@ app.factory('BusinessService', ['$http', function ($http) {
 		console.log(getAttribute);
 		console.log($http.defaults.headers);
 		return $http({
-			 method:'GET',
-			 url:url,
-			 params:getAttribute
-			 });
+			method:'GET',
+		 	url:url,
+			params:getAttribute,
+			headers: {
+   				'Cookie': 123456
+ 			}
+
+			});
     }
 	var getTotal = function () {
 		console.log("getTotal");
