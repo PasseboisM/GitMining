@@ -29,7 +29,8 @@ app.controller('detail_controller',['$scope','$http','LoginService','TopService'
 
 	RecommendAttribute={
 		type:"related",
-		param:recommend_request_list[0]
+		param:recommend_request_list[0],
+		login:login
 	}
 	TopService.getTop25(RecommendAttribute).success(
 		function(response) {
@@ -38,7 +39,8 @@ app.controller('detail_controller',['$scope','$http','LoginService','TopService'
 
 	RecommendAttribute={
 		type:"related",
-		param:recommend_request_list[1]
+		param:recommend_request_list[1],
+		login:login
 	}
 	TopService.getTop25(RecommendAttribute).success(
 		function(response) {
@@ -47,7 +49,8 @@ app.controller('detail_controller',['$scope','$http','LoginService','TopService'
 
 	RecommendAttribute={
 		type:"related",
-		param:recommend_request_list[2]
+		param:recommend_request_list[2],
+		login:login
 	}
 	TopService.getTop25(RecommendAttribute).success(
 		function(response) {
@@ -56,7 +59,8 @@ app.controller('detail_controller',['$scope','$http','LoginService','TopService'
 
 	RecommendAttribute={
 		type:"related",
-		param:recommend_request_list[3]
+		param:recommend_request_list[3],
+		login:login
 	}
 	TopService.getTop25(RecommendAttribute).success(
 		function(response) {
@@ -65,7 +69,8 @@ app.controller('detail_controller',['$scope','$http','LoginService','TopService'
 	
 	RecommendAttribute={
 		type:"related",
-		param:recommend_request_list[4]
+		param:recommend_request_list[4],
+		login:login
 	}
 	TopService.getTop25(RecommendAttribute).success(
 		function(response) {
