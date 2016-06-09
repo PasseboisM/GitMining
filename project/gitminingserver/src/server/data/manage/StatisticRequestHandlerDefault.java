@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import common.exception.TargetNotFoundException;
 import common.message.HintMessage;
+import data.analysis.service.AnalysisServiceFactory;
+import data.analysis.service.RequestRecorder;
 import data.service.DataServiceFactory;
 import data.service.StatDataMakerFactory;
 import data.service.stat.GeneralStatGetter;
@@ -20,12 +22,16 @@ class StatisticRequestHandlerDefault extends StatisticRequestHandler {
 	private UserStatGetter userStat = null;
 	private RepoStatGetter repoStat = null;
 	
+	private RequestRecorder recorder = null;
+	
 	public StatisticRequestHandlerDefault() {
 		StatDataMakerFactory statData = DataServiceFactory.getInstance().getStatDataMakerFactory();
 		
 		generalStat = statData.getGeneralStatGetter();
 		userStat = statData.getUserStatGetter();
 		repoStat = statData.getRepoStatGetter();
+		
+		recorder = AnalysisServiceFactory.getRecorder();
 	}
 	
 	@Override
@@ -65,6 +71,8 @@ class StatisticRequestHandlerDefault extends StatisticRequestHandler {
 		}
 		
 		out.close();
+		
+		recorder.record(httpRequest);
 	}
 	
 	public void printGeneralStat (HttpServletRequest httpRequest,PrintWriter out) {

@@ -21,15 +21,12 @@ import data.db.core.CollectionHelper;
 import data.db.core.ConnectionPool;
 import data.db.core.GitCollections;
 import data.db.service.DBRepoService;
-import network.service.GHDataSource;
-import network.service.NetworkServiceFactory;
 
 
 
 public class DBRepoServiceDefault implements DBRepoService {
 
 	ConnectionPool cp = ConnectionPool.getInstance();
-	GHDataSource GHService = NetworkServiceFactory.getInstance().getGHDataSource();	
 	
 	@Override
 	public int getNumOfRepo() {

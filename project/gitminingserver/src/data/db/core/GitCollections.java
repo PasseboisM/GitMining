@@ -1,7 +1,7 @@
 package data.db.core;
 
 public enum GitCollections {
-	REPOSITORY("repository"),USER("user");
+	REPOSITORY("repository"),USER("user"),ANALYSIS("system_user_info");
 	
 	private String name;
 	private GitCollections(String name) {

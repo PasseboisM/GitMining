@@ -1,5 +1,6 @@
 package data.db;
 
+import data.db.service.DBAnalysisService;
 import data.db.service.DBRepoService;
 import data.db.service.DBService;
 import data.db.service.DBStatService;
@@ -13,7 +14,7 @@ public class DBServiceDefault extends DBService {
 	
 	private DBUserService userService = new DBUserServiceDefault();
 	private DBRepoService repoService = new DBRepoServiceDefault();
-	
+	private DBAnalysisService analysisService = new DBAnalysisServiceDefault();
 	
 	@Override
 	public DBUserService getUserService() {
@@ -27,12 +28,17 @@ public class DBServiceDefault extends DBService {
 
 	@Override
 	public DBStatService getStatService() {
-		// TODO Auto-generated method stub
+		// TODO 暂时不需要此功能
 		return null;
 	}
 
+	@Override
+	public DBAnalysisService getAnalysisService() {
+		return analysisService;
+	}
+	
 	public static DBServiceDefault getInstance() {
 		return instance;
 	}
-	
+
 }

@@ -16,6 +16,9 @@ import common.exception.TargetNotFoundException;
 import common.message.HintMessage;
 import common.param_obj.RepositorySearchParam;
 import static common.util.JSONHelper.printJSONList;
+
+import data.analysis.service.AnalysisServiceFactory;
+import data.analysis.service.RequestRecorder;
 import data.service.DataServiceFactory;
 import data.service.MassiveDataGetter;
 import data.service.SpecificDataGetter;
@@ -27,6 +30,8 @@ class RepositoryRequestHandlerDefault extends RepositoryRequestHandler {
 			DataServiceFactory.getInstance().getMassiveDataGetter();
 	private SpecificDataGetter specific =
 			DataServiceFactory.getInstance().getSpecificDataGetter();
+	
+	private RequestRecorder recorder = AnalysisServiceFactory.getRecorder();	
 	
 	private Gson gson = new Gson();
 	
@@ -61,6 +66,8 @@ class RepositoryRequestHandlerDefault extends RepositoryRequestHandler {
 		}
 		
 		out.close();
+		
+		recorder.record(httpRequest);
 	}
 
 	private void printTypeStat(HttpServletRequest httpRequest,PrintWriter out) {
