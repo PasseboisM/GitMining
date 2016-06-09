@@ -30,6 +30,8 @@ function transParams(searchAttribute){
 	http_attributes.param.langs = [http_languages[languages.indexOf(searchAttribute.langs)]];
 	http_attributes.param.sortStandard = http_sorttypes[sorttypes.indexOf(searchAttribute.sortStandard)];
 	http_attributes.param.keywords = searchAttribute.keywords;
+	if(document.cookie.length>0)
+		http_attributes.param.cookie=document.cookie;
 	return http_attributes;
 }
 
@@ -93,8 +95,8 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
 				sortStandard:$scope.sorttype
 			};
 
-			if(document.cookie.length>0)
-				searchAttribute.cookie=document.cookie;
+			
+
 			BusinessService.search(transParams(searchAttribute)).success(
 				function(response) {
 					searchRepos=response;
