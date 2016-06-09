@@ -113,7 +113,7 @@ class RepositoryRequestHandlerDefault extends RepositoryRequestHandler {
 			System.out.println(param);
 			searchParam = gson.fromJson(param
 					, RepositorySearchParam.class);
-			
+			System.out.println(gson.toJson(searchParam));
 		} catch (Exception e) {
 			out.println(new HintMessage(
 					"JSON Syntax fault. Please check your parameter.").toJSON());
