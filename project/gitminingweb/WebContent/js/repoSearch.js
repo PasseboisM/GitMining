@@ -41,6 +41,8 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
     $scope.catagory = "All";
 
     $scope.search = "";
+    $scope.email = "";
+    $scope.password = "";
 
 	$scope.paginationConf = {
 	    	currentPage: 1,
@@ -63,6 +65,9 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
 				numPerPage:$scope.paginationConf.itemsPerPage,
 				sort:$scope.sorttype
 			}
+
+			if(document.cookie.length>0)
+				getAttribute.cookie=document.cookie;
 					
 			BusinessService.initial().success(
 				function(response) {
@@ -87,6 +92,9 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
 				keywords:$scope.search.split(" "),
 				sortStandard:$scope.sorttype
 			};
+
+			if(document.cookie.length>0)
+				searchAttribute.cookie=document.cookie;
 			BusinessService.search(transParams(searchAttribute)).success(
 				function(response) {
 					searchRepos=response;
@@ -123,6 +131,26 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
 		else
 			isInitialStatus = false;
 	};
+
+	$scope.login = function(){
+		param={
+			login:$scope.email,
+			pass:$scope.password
+		}
+		LoginService.login(param).success(
+			function(response) {
+				console.log(response);
+				if(response.state){
+					LoginService.save_cookie(response.key);
+					//show user info
+				}else{
+					//show alert info
+					console.log("hey sth. wrong!");
+					$scope.email="";
+					$scope.password="";
+				}
+			});
+	}
 	
     $scope.changelang = function(text) {
     	hasNewSearchQuest = true;

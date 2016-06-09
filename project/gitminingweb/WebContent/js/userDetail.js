@@ -6,8 +6,10 @@ if (r!=null) return (r[2]); return null;
 
 var login=GetQueryString("login"); 
 
-var app = angular.module('detail_app', []);
-app.controller('detail_controller', function($scope, $http) {
+var app = angular.module('main_app', []);
+app.controller('detail_controller','LoginService', function($scope, $http,LoginService) {
+	$scope.email = "";
+    $scope.password = "";
 	var url = '/GitMiningServer/user';
 	data = {
 		type : "data",

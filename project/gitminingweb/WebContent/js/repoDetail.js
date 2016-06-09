@@ -5,19 +5,21 @@ if (r!=null) return (r[2]); return null;
 }
 
 var repoName=GetQueryString("fn");
-var app = angular.module('repo_app', []);
+var app = angular.module('main_app', []);
 
 
-app.controller('repo_ctrl', function($scope, $http) {
+app.controller('repo_ctrl','LoginService', function($scope, $http,LoginService) {
 
-  var url = '/GitMiningServer/repo';
+	$scope.email = "";
+    $scope.password = "";
+  	var url = '/GitMiningServer/repo';
 	data = {
 		type : "data",
 		method: "spec",
 		param: repoName
 	};
 
-
+	
 
 	$http({
 		method:'GET',
