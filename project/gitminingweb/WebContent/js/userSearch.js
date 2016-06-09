@@ -126,11 +126,11 @@ app.controller('testCtrl', ['$scope', 'BusinessService','LoginService', 'TopServ
 
 		RecommendAttribute={
 			type:"user",
-			param:$scope.language
+			param:"All"
 		}
 		TopService.getTop25(RecommendAttribute).success(
 			function(response) {
-				$scope.recommend_repos=response;
+				$scope.recommend_users=response;
 			});
 
 

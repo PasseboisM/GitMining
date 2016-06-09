@@ -5,9 +5,10 @@ if (r!=null) return (r[2]); return null;
 }
 
 var login=GetQueryString("login"); 
+var recommend_request_list=["OwnedRepositories","StarredRepositories","SubscrippedRepositories","Followers","Followings"]
 
 var app = angular.module('main_app', []);
-app.controller('detail_controller',['$scope','$http','LoginService', function($scope, $http,LoginService) {
+app.controller('detail_controller',['$scope','$http','LoginService','TopService',function($scope, $http,LoginService,TopService) {
 	$scope.email = LoginService.get_cookie("email");
     $(document).ready(function(){
     	if($scope.email.length>0){
@@ -25,6 +26,53 @@ app.controller('detail_controller',['$scope','$http','LoginService', function($s
 		method: "spec",
 		param: login
 	};
+
+	RecommendAttribute={
+		type:"related",
+		param:recommend_request_list[0]
+	}
+	TopService.getTop25(RecommendAttribute).success(
+		function(response) {
+			$scope.own_repos=response.slice(0,5);
+		});
+
+	RecommendAttribute={
+		type:"related",
+		param:recommend_request_list[1]
+	}
+	TopService.getTop25(RecommendAttribute).success(
+		function(response) {
+			$scope.star_repos=response;
+		});
+
+	RecommendAttribute={
+		type:"related",
+		param:recommend_request_list[2]
+	}
+	TopService.getTop25(RecommendAttribute).success(
+		function(response) {
+			$scope.sub_repos=response;
+		});
+
+	RecommendAttribute={
+		type:"related",
+		param:recommend_request_list[3]
+	}
+	TopService.getTop25(RecommendAttribute).success(
+		function(response) {
+			$scope.followers=response;
+		});
+	
+	RecommendAttribute={
+		type:"related",
+		param:recommend_request_list[4]
+	}
+	TopService.getTop25(RecommendAttribute).success(
+		function(response) {
+			$scope.followings=response;
+		});
+	
+	
 	$scope.login = function(){
 		param={
 			login:$scope.email,

@@ -5,6 +5,7 @@
     <title>GitMiningChart</title>
   <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
   <script src="js/userDetail.js"></script>
+  <script src="js/recommend.js"></script>
   <script src="js/login_service.js"></script>
   <link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
   <link href="css/top.css" rel="stylesheet" media="screen">
@@ -73,12 +74,8 @@
          <div class="col-md-6">
           <div class="col-md-6">
             <Strong>关注者用户列表</Strong>
-            <ul class="list-group">
-             <li class="list-group-item">Cras justo odio</li>
-             <li class="list-group-item">Dapibus ac facilisis in</li>
-             <li class="list-group-item">Morbi leo risus</li>
-             <li class="list-group-item">Porta ac consectetur ac</li>
-             <li class="list-group-item">Vestibulum at eros</li>
+            <ul class="list-group" ng-repeat="follower in followers">
+             <li class="list-group-item">{{follower}}</li>
            </ul>
           </div>
           <div class="col-md-6">
