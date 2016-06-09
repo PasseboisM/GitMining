@@ -37,7 +37,7 @@ class RepositoryRequestHandlerDefault extends RepositoryRequestHandler {
 	
 	@Override
 	public void handleRequest(HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
-		httpResponse.setCharacterEncoding("gb2312");
+		httpResponse.setCharacterEncoding("unicode");
 		
 		PrintWriter out = null;
 		try {
