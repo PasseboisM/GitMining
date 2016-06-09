@@ -8,7 +8,10 @@ var http_catagories = ["ALL","ACTIVE_RECORD","API","APP","CMS","DJANGO","EMACS",
 var http_sorttypes = ["NO_SORT","STARS_DESCENDING","FORKS_DESCENDING"];
 
 
-
+$(document).ready(function(){
+	$("#login_div").show();
+	$("#logout_div").hide();
+});
 
 
 
@@ -147,8 +150,8 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
 				console.log(response);
 				if(response.state){
 					LoginService.save_cookie(response.key);
-					document.getElementById("login_div").style.display="none";
-					document.getElementById("logout_div").style.display="inline"; 
+					$("#login_div").hide();
+					$("#logout_div").show();
 					//show user info
 				}else{
 					//show alert info
