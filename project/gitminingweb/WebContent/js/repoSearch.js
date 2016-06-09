@@ -8,10 +8,7 @@ var http_catagories = ["ALL","ACTIVE_RECORD","API","APP","CMS","DJANGO","EMACS",
 var http_sorttypes = ["NO_SORT","STARS_DESCENDING","FORKS_DESCENDING"];
 
 
-$(document).ready(function(){
-	$("#login_div").show();
-	$("#logout_div").hide();
-});
+
 
 
 
@@ -55,7 +52,16 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
     $scope.hasLogIn = false;
 
     $scope.search = "";
-    $scope.email = "";
+    $scope.email = LoginService.get_cookie("email");
+    $(document).ready(function(){
+    	if($scope.email.length>0){
+    		$("#logout_div").show();
+    		$("#login_div").hide();
+    	}else{
+    		$("#login_div").show();
+    		$("#logout_div").hide();
+    	}
+    });
     $scope.password = "";
 
 	$scope.paginationConf = {
@@ -156,7 +162,8 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
 			function(response) {
 				console.log(response);
 				if(response.state){
-					LoginService.save_cookie(response.key);
+					LoginService.save_cookie("key",response.key);
+					LoginService.save_cookie("email",$scope.email);
 					$("#login_div").hide();
 					$("#logout_div").show();
 					//show user info
@@ -167,6 +174,14 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
 					$scope.password="";
 				}
 			});
+	}
+	$scope.logout = function(){
+		LoginService.del_cookie("key");
+		LoginService.del_cookie("email");
+		$scope.email="";
+		$scope.password="";
+		$("#logout_div").hide();
+		$("#login_div").show();
 	}
 	
     $scope.changelang = function(text) {

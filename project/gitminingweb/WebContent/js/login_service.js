@@ -1,5 +1,5 @@
 function setCookie(name,value,expires){
-document.cookie = name + "=" + value + ((expires==null) ? "" : ";expires=" + expires.toGMTString())
+    document.cookie = name + "=" + value + ((expires==null) ? "" : ";expires=" + expires.toGMTString())
 }
 
 // var expirydate=new Date();
@@ -9,22 +9,28 @@ document.cookie = name + "=" + value + ((expires==null) ? "" : ";expires=" + exp
 // the one i have set for your convenience expires in 10 days
 
 function getCookie(name) {
-var cookieName = name + "="
-var docCookie = document.cookie
-var cookieStart
-var end
-if (docCookie.length>0) {
-cookieStart = docCookie.indexOf(cookieName)
-if (cookieStart != -1) {
-cookieStart = cookieStart + cookieName.length
-end = docCookie.indexOf(";",cookieStart)
-if (end == -1) {
-end = docCookie.length}
-return unescape(docCookie.substring(cookieStart,end))
-}
-}
-return false
-}
+    var cookieName = name + "="
+    var docCookie = document.cookie
+    var cookieStart
+    var end
+    if (docCookie.length>0) {
+        cookieStart = docCookie.indexOf(cookieName)
+        if (cookieStart != -1) {
+            cookieStart = cookieStart + cookieName.length
+            end = docCookie.indexOf(";",cookieStart)
+            if (end == -1) {
+                end = docCookie.length}
+                return unescape(docCookie.substring(cookieStart,end))
+            }
+        }
+        return ""
+    }
+
+function deleteCookie(name){ 
+    var date=new Date(); 
+    date.setTime(date.getTime()-10000); 
+    document.cookie=name+"=v; expires="+date.toGMTString(); 
+} 
 
 
 angular.module('main_app').factory('LoginService', ['$http', function ($http) {
@@ -43,13 +49,14 @@ angular.module('main_app').factory('LoginService', ['$http', function ($http) {
     	login: function (getAttribute) {
     		return list(getAttribute);
     	},
-    	save_cookie : function(text){
-    		// var expirydate=new Date();
-    		// expirydate.setTime(expirydate.getTime()+(1000*60*60*24*10))
-    		setCookie("key",text);
+    	save_cookie : function(name,value){
+    		setCookie(name,value);
     	},
     	get_cookie : function(text){
     		return getCookie(text);
-    	}
+    	},
+        del_cookie : function(text){
+            return deleteCookie(text);
+        }
     }
 }]);
