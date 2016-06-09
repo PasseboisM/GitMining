@@ -139,8 +139,9 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
 		}
 		LoginService.login(param).success(
 			function(response) {
+				console.log(response);
 				if(response.state){
-					LoginService.save_cookie(response.value);
+					LoginService.save_cookie(response.key);
 					//show user info
 				}else{
 					//show alert info
