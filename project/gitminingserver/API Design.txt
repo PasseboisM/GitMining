@@ -98,8 +98,8 @@ Login request:
 				
                          ------!!ATTENTION!!---------
 	After logging in, each HTTP GET requests should be attached with a
-cookie,"key=******", with max age set to -1.
-	When no cookies are attached, a logging out or the shut down of browser
+parameter,"key=******", with max age set to -1.
+	When no parameter "key" is attached, a logging out or the shut down of browser
 is expected.
                          ----------------------------
 				
