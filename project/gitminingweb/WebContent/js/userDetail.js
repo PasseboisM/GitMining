@@ -49,32 +49,32 @@ app.controller('detail_controller',['$scope','$http','LoginService','TopService'
 
 	RecommendAttribute={
 		type:"related",
-		param:recommend_request_list[2].slice(0,5);
+		param:recommend_request_list[2],
 		login:login
 	}
 	TopService.getTop25(RecommendAttribute).success(
 		function(response) {
-			$scope.sub_repos=response;
+			$scope.sub_repos=response.slice(0,5);
 		});
 
 	RecommendAttribute={
 		type:"related",
-		param:recommend_request_list[3].slice(0,5);
+		param:recommend_request_list[3],
 		login:login
 	}
 	TopService.getTop25(RecommendAttribute).success(
 		function(response) {
-			$scope.followers=response;
+			$scope.followers=response.slice(0,5);
 		});
 	
 	RecommendAttribute={
 		type:"related",
-		param:recommend_request_list[4].slice(0,5);
+		param:recommend_request_list[4],
 		login:login
 	}
 	TopService.getTop25(RecommendAttribute).success(
 		function(response) {
-			$scope.followings=response;
+			$scope.followings=response.slice(0,5);
 		});
 	
 	

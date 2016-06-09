@@ -74,13 +74,13 @@
          <div class="col-md-6">
           <div class="col-md-6">
             <Strong>关注者用户列表</Strong>
-            <div class="panel panel-default clist-group" ng-repeat="follower in followers">
+            <div class="panel panel-default" ng-repeat="follower in followers">
              <div class="panel-body list-group-item"><a href="userDetail.html?login={{follower.login}}">{{follower.login}}</a></div>
            </div>
           </div>
           <div class="col-md-6">
             <Strong>关注用户列表</Strong>
-           <div class="list-group" ng-repeat="follower in followings">
+           <div ng-repeat="follower in followings">
              <div class="list-group-item"><a href="userDetail.html?login={{follower.login}}">{{follower.login}}</a></div>
            </div>
           </div>
@@ -104,25 +104,31 @@
         </div>
         <div class="col-md-4">
            <Strong>持有项目列表</Strong>
-           <div class="list-group" ng-repeat="repo in own_repos">
+           <div ng-repeat="repo in own_repos">
              <div class="list-group-item"><a href="repoDetail.html?login={{repo.full_name}}">{{repo.full_name}}</a></div>
            </div>
         </div>
         <div class="col-md-4">
             <Strong>推荐项目列表</Strong>
-           <div class="list-group" ng-repeat="repo in star_repos">
+           <div ng-repeat="repo in star_repos">
              <div class="list-group-item"><a href="repoDetail.html?login={{repo.full_name}}">{{repo.full_name}}</a></div>
            </div>
         </div>
         <div class="col-md-4">
            <Strong>订阅项目列表</Strong>
-           <div class="list-group" ng-repeat="repo in sub_repos">
+           <div ng-repeat="repo in sub_repos">
              <div class="list-group-item"><a href="repoDetail.html?login={{repo.full_name}}">{{repo.full_name}}</a></div>
            </div>
         </div>
         
         <script src="js/userRadar.js"></script>
      </div>
+     
+     <footer class="container footer col-md-12">
+        <div class="container">
+            <p class="text-muted">GitMining Made By Team Mole</p>
+        </div>
+    </footer>
 </body>
 </html>
 
