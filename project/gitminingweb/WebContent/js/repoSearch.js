@@ -18,6 +18,7 @@ var http_sorttypes = ["NO_SORT","STARS_DESCENDING","FORKS_DESCENDING"];
 var app = angular.module('main_app', ['tm.pagination']);
 var isInitialStatus = true;
 var hasNewSearchQuest = false;
+
 var searchRepos=[];
 
 function transParams(searchAttribute){
@@ -41,6 +42,8 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
 	$scope.catagories = catagories;
     $scope.language = "All";
     $scope.catagory = "All";
+    $scope.hasLogIn = LoginService.get_cookie("key").length>0;
+    // $scope.hasLogIn = false;
 
     $scope.search = "";
     $scope.email = "";
