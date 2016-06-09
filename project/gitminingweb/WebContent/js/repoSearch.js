@@ -147,7 +147,8 @@ app.controller('main_ctrl', ['$scope', 'BusinessService','LoginService', functio
 				console.log(response);
 				if(response.state){
 					LoginService.save_cookie(response.key);
-					hasLogIn=true;
+					document.getElementById("login_div").style.display="none";
+					document.getElementById("logout_div").style.display="inline"; 
 					//show user info
 				}else{
 					//show alert info
