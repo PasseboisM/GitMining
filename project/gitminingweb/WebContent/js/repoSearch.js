@@ -218,6 +218,7 @@ app.factory('BusinessService', ['$http', function ($http) {
 	var list = function (getAttribute) {
 		console.log("now change business");
 		console.log(getAttribute);
+		console.log($http.defaults.headers);
 		return $http({
 			 method:'GET',
 			 url:url,
