@@ -49,7 +49,7 @@ public class RequestRecorderDefault implements RequestRecorder {
 		db.ensureUser(key);
 		
 		Document user = db.getUserIndex(key);
-		
+		System.out.println(user==null);
 		System.out.println("User's index:"+user.toJson());
 		
 		switch (request.getRequestURI()) {

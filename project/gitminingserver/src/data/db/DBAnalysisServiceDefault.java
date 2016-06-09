@@ -28,6 +28,7 @@ public class DBAnalysisServiceDefault implements DBAnalysisService {
 		FindIterable<Document> found = analysisColl.find(eq(USER_HASH,userHash));
 		try {
 			Document temp = found.first();
+			if (temp==null) throw new Exception();
 		} catch (Exception e) {//Not found
 			analysisColl.insertOne(new Document(USER_HASH,userHash));
 		}

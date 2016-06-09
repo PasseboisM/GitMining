@@ -3,9 +3,15 @@ package data.manage;
 import org.bson.Document;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import common.exception.NetworkException;
+import common.exception.TargetNotFoundException;
+import common.model.beans.GitUserBeans;
+import common.service.GitUser;
+import data.service.DataServiceFactory;
 import data.service.LogInDataService;
+import data.service.SpecificDataGetter;
 import network.service.GHDataSource;
 import network.service.NetworkServiceFactory;
 
@@ -14,8 +20,12 @@ public class LogInDataServiceDefault implements LogInDataService {
 	private static LogInDataServiceDefault instance = new LogInDataServiceDefault();
 	
 	private GHDataSource checker = NetworkServiceFactory.getInstance().getGHDataSource();
+	private SpecificDataGetter specific = 
+			DataServiceFactory.getInstance().getSpecificDataGetter();
 	
 	private final String FAILURE_LOG_IN;
+	
+	private Gson gson = new Gson();
 	
 	private LogInDataServiceDefault() {
 		FAILURE_LOG_IN = new Document("state",false)
@@ -35,8 +45,19 @@ public class LogInDataServiceDefault implements LogInDataService {
 			return FAILURE_LOG_IN;
 		}
 		
-		Document doc = new Document("state",state);
+		if (state && !login.contains("@")) {
+			try {
+				GitUser user =
+						gson.fromJson(specific.getSpecificGitUser(login), GitUserBeans.class);
+				login = user.getEmail();
+			} catch (JsonSyntaxException | TargetNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
 		
+		
+		Document doc = new Document("state",state);
+				
 		doc.append("key", state?""+login.hashCode():"");
 		
 		return doc.toJson();
