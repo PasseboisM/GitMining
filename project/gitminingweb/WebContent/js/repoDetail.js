@@ -10,8 +10,8 @@ var app = angular.module('main_app', []);
 
 app.controller('repo_ctrl','LoginService', function($scope, $http,LoginService) {
 
-	$scope.email = "";
-    $scope.password = LoginService.get_cookie("email");
+	$scope.password = "";
+    $scope.email = LoginService.get_cookie("email");
     $(document).ready(function(){
     	if($scope.email.length>0){
     		$("#logout_div").show();

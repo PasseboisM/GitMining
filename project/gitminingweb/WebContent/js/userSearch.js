@@ -17,7 +17,16 @@ var isInitialStatus = true;
 var hasNewSearchQuest = false;
 var app = angular.module('main_app', ['tm.pagination']);
 app.controller('testCtrl', ['$scope', 'LoginService','BusinessService', function ($scope, BusinessService,LoginService) {
-	$scope.email = "";
+	$scope.email = LoginService.get_cookie("email");
+    $(document).ready(function(){
+    	if($scope.email.length>0){
+    		$("#logout_div").show();
+    		$("#login_div").hide();
+    	}else{
+    		$("#login_div").show();
+    		$("#logout_div").hide();
+    	}
+    });
     $scope.password = "";
 	$scope.search = "";
 	$scope.sort_type = "no";
@@ -41,6 +50,36 @@ app.controller('testCtrl', ['$scope', 'LoginService','BusinessService', function
 			isInitialStatus = false;
 		GetAllEmployee();
 	};
+	$scope.login = function(){
+		param={
+			login:$scope.email,
+			pass:$scope.password
+		}
+		LoginService.login(param).success(
+			function(response) {
+				console.log(response);
+				if(response.state){
+					LoginService.save_cookie("key",response.key);
+					LoginService.save_cookie("email",$scope.email);
+					$("#login_div").hide();
+					$("#logout_div").show();
+					//show user info
+				}else{
+					//show alert info
+					console.log("hey sth. wrong!");
+					$scope.email="";
+					$scope.password="";
+				}
+			});
+	}
+	$scope.logout = function(){
+		LoginService.del_cookie("key");
+		LoginService.del_cookie("email");
+		$scope.email="";
+		$scope.password="";
+		$("#logout_div").hide();
+		$("#login_div").show();
+	}
 	var GetAllEmployee = function () {
 		
 		if(isInitialStatus){
