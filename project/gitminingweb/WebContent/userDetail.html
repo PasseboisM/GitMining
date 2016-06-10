@@ -75,16 +75,13 @@
           <div class="col-md-12">
             <Strong>关注者用户列表</Strong>
             <div ng-repeat="follower in followers">
-            <a ng-href="userDetail.html?login={{follower.login}}" class="col-md-2"><img height="50" width="50" ng-src="{{follower.avatar_url}}"></img></a>
-             
+            <a ng-href="userDetail.html?login={{follower.login}}" class="col-md-2"><img height="62" width="62" ng-src="{{follower.avatar_url}}"></img><p>{{follower.login}}</p></a>
            </div>
           </div>
           <div class="col-md-12">
             <Strong>关注用户列表</Strong>
            <div ng-repeat="follower in followings">
-             <a ng-href="userDetail.html?login={{follower.login}}" class="col-md-2"><img height="50" width="50" ng-src="{{follower.avatar_url}}"></img></a>
-           
-             <!-- <div class="list-group-item"><a href="userDetail.html?login={{follower.login}}">{{follower.login}}</a></div> -->
+             <a ng-href="userDetail.html?login={{follower.login}}" class="col-md-2"><img height="62" width="62" ng-src="{{follower.avatar_url}}"></img><p>{{follower.login}}</p></a>
            </div>
           </div>
           </div>
