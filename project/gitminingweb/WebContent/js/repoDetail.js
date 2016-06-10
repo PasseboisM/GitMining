@@ -27,8 +27,8 @@ app.controller('repo_ctrl',['$scope','$http','LoginService', function($scope, $h
 		method: "spec",
 		param: repoName
 	};
-
-	if(document.cookie.length>0)
+	var key = LoginService.get_cookie("key");
+	if(key.length>0)
 		data.key=LoginService.get_cookie("key");
 
 	$scope.login = function(){

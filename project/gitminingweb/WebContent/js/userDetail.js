@@ -108,7 +108,8 @@ app.controller('detail_controller',['$scope','$http','LoginService','TopService'
 		$("#logout_div").hide();
 		$("#login_div").show();
 	}
-	if(document.cookie.length>0)
+	var key = LoginService.get_cookie("key");
+	if(key.length>0)
 		data.key=LoginService.get_cookie("key");
 
 	$http({
