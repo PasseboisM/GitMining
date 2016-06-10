@@ -1,75 +1,34 @@
 .default-color0.chart-pie{
-	-fx-pie-color:#f0ffff;
+	-fx-pie-color: #5f9ea0;
 }
 .default-color1.chart-pie{
-	-fx-pie-color:#add8e6;
+	-fx-pie-color:#008b8b;
 }
 .default-color2.chart-pie{
-	-fx-pie-color:#afeeee;
+	-fx-pie-color: #6495ed;
 }
 .default-color3.chart-pie{
-	-fx-pie-color:#87ceeb;
+	-fx-pie-color:#1e90ff;
 }
 .default-color4.chart-pie{
-	-fx-pie-color:#008080;
-}
-.default-color5.chart-pie{
-	-fx-pie-color:#4169e1;
-}
-.default-color6.chart-pie{
-	-fx-pie-color:#6a5acd;
-}
-.default-color7.chart-pie{
-	-fx-pie-color:#7b68ee;
-}
-.default-color8.chart-pie{
-	-fx-pie-color:#9932cc;
-}
-.default-color9.chart-pie{
-	-fx-pie-color:#9400d3;
-}
-.default-color10.chart-pie{
-	-fx-pie-color:#191970;
-}
-.default-color11.chart-pie{
-	-fx-pie-color:#0000cd;
-}
-.default-color12.chart-pie{
-	-fx-pie-color:#000080;
-}
-.default-color13.chart-pie{
 	-fx-pie-color:#0000ff;
 }
-.default-color14.chart-pie{
-	-fx-pie-color:#4b0082;
+.default-color5.chart-pie{
+	-fx-pie-color:#0000cd;
 }
-.default-color15.chart-pie{
-	-fx-pie-color:#66cdaa;
+.default-color6.chart-pie{
+	-fx-pie-color:#00008b;
 }
-.default-color16.chart-pie{
-	-fx-pie-color:#b0c4de;
+.default-color7.chart-pie{
+	-fx-pie-color:#000080;
 }
-.default-color17.chart-pie{
-	-fx-pie-color:#87cefa;
-}
-.default-color18.chart-pie{
-	-fx-pie-color:#29b2aa;
-}
-.default-color19.chart-pie{
-	-fx-pie-color:#90ee90;
-}
-.default-color20.chart-pie{
-	-fx-pie-color:#3cb371;
-}
-.default-color21.chart-pie{
-	-fx-pie-color:#32cd32;
-}
+
 .chart-pie-label-line{
-	-fx-stroke:#00008b;
-	-fx-fill:#00008b;
+	-fx-stroke: #0000ff;
+	-fx-fill: #0000ff;
 }
 .chart-pie-label{
-	-fx-fill:#00008b;
+	-fx-fill: #0000ff;
 	-fx-font-size:1em;
 }
 .chart-legend{
