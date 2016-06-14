@@ -8,8 +8,8 @@ function transParams(searchAttribute){
 		param:{}
 	};
 	http_attributes.param.sortStandard = http_sort_type[sort_type.indexOf(searchAttribute.sortStandard)];
-	http_attributes.param.keywords = searchAttribute.keywords;key
-	if(document.cookie.length>0)
+	http_attributes.param.keywords = searchAttribute.keywords;
+	if(searchAttribute.key.length>0)
 		http_attributes.key=searchAttribute.key;
 	return http_attributes;
 }
@@ -91,8 +91,8 @@ app.controller('testCtrl', ['$scope', 'BusinessService','LoginService', 'TopServ
 				numPerPage:$scope.paginationConf.itemsPerPage,
 				sort:$scope.sort_type
 			}
-
-			if(document.cookie.length>0)
+			var key = LoginService.get_cookie("key");
+			if(key.length>0)
 				getAttribute.key=LoginService.get_cookie("key");
 					
 			// if($scope.language=="All"&&$scope.catagory=="All"&&$scope.search==""){

@@ -105,19 +105,19 @@
         <div class="col-md-4">
            <Strong>持有项目列表</Strong>
            <div ng-repeat="repo in own_repos">
-             <div class="list-group-item"><a href="repoDetail.html?login={{repo.full_name}}">{{repo.full_name}}</a></div>
+             <div class="list-group-item"><a href="repoDetail.html?fn={{repo.full_name}}">{{repo.full_name}}</a></div>
            </div>
         </div>
         <div class="col-md-4">
             <Strong>推荐项目列表</Strong>
            <div ng-repeat="repo in star_repos">
-             <div class="list-group-item"><a href="repoDetail.html?login={{repo.full_name}}">{{repo.full_name}}</a></div>
+             <div class="list-group-item"><a href="repoDetail.html?fn={{repo.full_name}}">{{repo.full_name}}</a></div>
            </div>
         </div>
         <div class="col-md-4">
            <Strong>订阅项目列表</Strong>
            <div ng-repeat="repo in sub_repos">
-             <div class="list-group-item"><a href="repoDetail.html?login={{repo.full_name}}">{{repo.full_name}}</a></div>
+             <div class="list-group-item"><a href="repoDetail.html?fn={{repo.full_name}}">{{repo.full_name}}</a></div>
            </div>
         </div>
         
