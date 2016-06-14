@@ -15,9 +15,11 @@ app.controller('repo_ctrl',['$scope','$http','LoginService', function($scope, $h
     $(document).ready(function(){
     	if($scope.email.length>0){
     		$("#logout_div").show();
+    		$("#wrong_msg").hide();
     		$("#login_div").hide();
     	}else{
     		$("#login_div").show();
+    		$("#wrong_msg").hide();
     		$("#logout_div").hide();
     	}
     });
@@ -43,11 +45,13 @@ app.controller('repo_ctrl',['$scope','$http','LoginService', function($scope, $h
 					LoginService.save_cookie("key",response.key);
 					LoginService.save_cookie("email",$scope.email);
 					$("#login_div").hide();
+					$("#wrong_msg").hide();
 					$("#logout_div").show();
 					//show user info
 				}else{
 					//show alert info
 					console.log("hey sth. wrong!");
+					$("#wrong_msg").show();
 					$scope.email="";
 					$scope.password="";
 				}
@@ -60,6 +64,7 @@ app.controller('repo_ctrl',['$scope','$http','LoginService', function($scope, $h
 		$scope.password="";
 		$("#logout_div").hide();
 		$("#login_div").show();
+		$("#wrong_msg").hide();
 	}
 
 	$scope.see_more = function(url){
