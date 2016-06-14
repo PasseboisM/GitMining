@@ -1,40 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<title>GitMining Chart</title>
 	<link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/top.css" rel="stylesheet" media="screen">
-  <script src="http://code.jquery.com/jquery.js"></script>
-  <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
-  
+	<script src="http://code.jquery.com/jquery.js"></script>
+	<script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+
 </head>
+
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="index.html">GitMining</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="repoSearch.html">项目搜索</a></li>
-            <li><a href="userSearch.html">用户搜索</a></li>
-            <li class="active"><a href="statisticChart.html">统计图表</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
-
-	<div id="follower" style="min-width:700px;height:400px"></div>
-  <div id="fork" style="min-width:700px;height:400px"></div>
-  <div id="language" style="min-width:700px;height:400px"></div>
-  <div id="repo_time" style="min-width:700px;height:400px"></div>
-  <div id="user_time" style="min-width:700px;height:400px"></div>
-  <div id="star" style="min-width:700px;height:400px"></div>
-  <div id="type" style="min-width:700px;height:400px"></div>
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="index.html">GitMining</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="repoSearch.html">项目搜索</a></li>
+					<li><a href="userSearch.html">用户搜索</a></li>
+					<li class="active"><a href="statisticChart.html">统计图表</a></li>
+				</ul>
+			</div>
+			<!--/.nav-collapse -->
+		</div>
+	</nav>
 	
+	<div id="main">
+		<div id="follower" style="min-width:700px;height:400px"></div>
+		<div id="fork" style="min-width:700px;height:400px"></div>
+		<div id="language" style="min-width:700px;height:400px"></div>
+		<div id="repo_time" style="min-width:700px;height:400px"></div>
+		<div id="user_time" style="min-width:700px;height:400px"></div>
+		<div id="star" style="min-width:700px;height:400px"></div>
+		<div id="type" style="min-width:700px;height:400px"></div>
+	</div>
 
-  <script type="text/javascript" src="js/statisticEchart.js"></script>
-	
+
+
+	<script type="text/javascript" src="js/statisticEchart.js"></script>
+
 </body>
+
 </html>
