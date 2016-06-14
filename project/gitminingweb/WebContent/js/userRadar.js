@@ -49,8 +49,7 @@ $(function() {
                
                 var option = {
                     title : {
-                        text: '预算 vs 开销（Budget vs spending）',
-                        subtext: '纯属虚构'
+                        text: '用户数据评分雷达图'
                     },
                     tooltip : {
                         trigger: 'axis'
@@ -59,7 +58,7 @@ $(function() {
                         orient : 'vertical',
                         x : 'right',
                         y : 'bottom',
-                        data:['预算分配（Allocated Budget）']
+                        data:['用户评分']
                     },
                     toolbox: {
                         show : true,
@@ -78,12 +77,12 @@ $(function() {
                  calculable : true,
                  series : [
                  {
-                    name: '预算 vs 开销（Budget vs spending）',
+                    name: '用户评分',
                     type: 'radar',
                     data : [
                     {
                         value : showdatas,
-                        name : '预算分配（Allocated Budget）'
+                        name : '用户评分'
                     }
                     ]
                 }
