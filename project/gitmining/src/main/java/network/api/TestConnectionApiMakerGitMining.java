@@ -11,7 +11,6 @@ public class TestConnectionApiMakerGitMining implements TestConnectionApiMaker{
 	 */
 	public NetworkTester[] getTestConnectionApis() {
 		NetworkTester[] result = {
-				new NetworkTester("http://gitmining.net/api/user/rubinius/item/login", "rubinius"),
 				new NetworkTester("http://106.75.5.61:8080/GitMiningServer/api?action=test", "{\"message\":\"Connected.\"}")
 		};
 		return result;

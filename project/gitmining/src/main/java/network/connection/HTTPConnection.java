@@ -56,58 +56,5 @@ public class HTTPConnection extends HTTPConnectionService {
         }
         return body;
     }
-    
-//    public String do_get_performanceTest(String url) throws ClientProtocolException, IOException {
-//        String body = "{}";
-//        long[] timeP = new long[10];int i = 0;
-//        
-//        timeP[i++] = System.currentTimeMillis();
-//        
-//        DefaultHttpClient httpclient = new DefaultHttpClient();
-//        timeP[i++] = System.currentTimeMillis();
-//        System.out.println("Create client:"+(timeP[i-1]-timeP[i-2])+"ms");
-//        
-//        try {
-//            HttpGet httpget = new HttpGet(url);
-//            timeP[i++] = System.currentTimeMillis();
-//            System.out.println("Create httpget:"+(timeP[i-1]-timeP[i-2])+"ms");
-//            
-//            HttpResponse response = httpclient.execute(httpget);
-//            timeP[i++] = System.currentTimeMillis();
-//            System.out.println("execute httpget:"+(timeP[i-1]-timeP[i-2])+"ms");
-//            
-//            HttpEntity entity = response.getEntity();
-//            timeP[i++] = System.currentTimeMillis();
-//            System.out.println("make entity:"+(timeP[i-1]-timeP[i-2])+"ms");
-//            
-//            body = EntityUtils.toString(entity);
-//            timeP[i++] = System.currentTimeMillis();
-//            System.out.println("toString:"+(timeP[i-1]-timeP[i-2])+"ms");
-//            
-//        } finally {
-//            httpclient.getConnectionManager().shutdown();
-//            timeP[i++] = System.currentTimeMillis();
-//            System.out.println("shut down:"+(timeP[i-1]-timeP[i-2])+"ms");
-//            
-//            System.out.println("Total:"+(timeP[i-1]-timeP[0])+"ms\n\n");
-//        }
-//        return body;
-//    }
-//    
-//    public static void main(String[] args) throws ClientProtocolException, IOException, NetworkException {
-//		HTTPConnection con = new HTTPConnection();
-//		con.do_get_performanceTest(new UserApiMaker_stub().makeUserAPI("XRiver"));
-//		con.do_get_performanceTest(new UserApiMaker_stub().makeUserAPI("kylin1"));
-//		con.do_get_performanceTest(new UserApiMaker_stub().makeUserAPI("Summer222"));
-//		con.do_get_performanceTest(new UserApiMaker_stub().makeUserAPI("iDimple"));
-		
-//		System.out.println(con.do_get(new UserApiMaker_stub().makeUserAPI("XRiver")));System.out.println();
-//		System.out.println(con.do_get(new UserApiMaker_stub().makeUserAPI("kylin1")));System.out.println();
-//		System.out.println(con.do_get(new UserApiMaker_stub().makeUserAPI("Summer222")));System.out.println();
-//		System.out.println(con.do_get(new UserApiMaker_stub().makeUserAPI("iDimple")));System.out.println();
-		
-		
-
-//	}
-    
+	    
 }
