@@ -14,9 +14,11 @@ app.controller('detail_controller',['$scope','$http','LoginService','TopService'
     	if($scope.email.length>0){
     		$("#logout_div").show();
     		$("#login_div").hide();
+    		$("#wrong_msg").hide();
     	}else{
     		$("#login_div").show();
     		$("#logout_div").hide();
+    		$("#wrong_msg").hide();
     	}
     });
     $scope.password = "";
@@ -91,10 +93,12 @@ app.controller('detail_controller',['$scope','$http','LoginService','TopService'
 					LoginService.save_cookie("email",$scope.email);
 					$("#login_div").hide();
 					$("#logout_div").show();
+					$("#wrong_msg").hide();
 					//show user info
 				}else{
 					//show alert info
 					console.log("hey sth. wrong!");
+					$("#wrong_msg").show();
 					$scope.email="";
 					$scope.password="";
 				}
@@ -106,6 +110,7 @@ app.controller('detail_controller',['$scope','$http','LoginService','TopService'
 		$scope.email="";
 		$scope.password="";
 		$("#logout_div").hide();
+		$("#wrong_msg").hide();
 		$("#login_div").show();
 	}
 	var key = LoginService.get_cookie("key");

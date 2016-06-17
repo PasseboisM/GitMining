@@ -21,10 +21,12 @@ app.controller('testCtrl', ['$scope', 'BusinessService','LoginService', 'TopServ
     $(document).ready(function(){
     	if($scope.email.length>0){
     		$("#logout_div").show();
+    		$("#wrong_msg").hide();
     		$("#login_div").hide();
     	}else{
     		$("#login_div").show();
     		$("#logout_div").hide();
+    		$("#wrong_msg").hide();
     	}
     });
     $scope.password = "";
@@ -62,11 +64,13 @@ app.controller('testCtrl', ['$scope', 'BusinessService','LoginService', 'TopServ
 					LoginService.save_cookie("key",response.key);
 					LoginService.save_cookie("email",$scope.email);
 					$("#login_div").hide();
+					$("#wrong_msg").hide();
 					$("#logout_div").show();
 					//show user info
 				}else{
 					//show alert info
 					console.log("hey sth. wrong!");
+					$("#wrong_msg").show();
 					$scope.email="";
 					$scope.password="";
 				}
@@ -78,6 +82,7 @@ app.controller('testCtrl', ['$scope', 'BusinessService','LoginService', 'TopServ
 		$scope.email="";
 		$scope.password="";
 		$("#logout_div").hide();
+		$("#wrong_msg").hide();
 		$("#login_div").show();
 	}
 	var GetAllEmployee = function () {

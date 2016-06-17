@@ -347,7 +347,7 @@ $(function() {
                         data : catagories,
                         axisLabel :{  
                             interval:0 ,
-                            rotate: -40
+                            rotate: -20
                         }
                     }
                     ],
@@ -428,7 +428,10 @@ $(function() {
                 // 基于准备好的dom，初始化echarts图表
                 var myChart = ec.init(document.getElementById('user_time')); 
                 var option = {
-                    tooltip : {
+                	title : {
+                        text: '用户创建时间统计图表',
+                        // subtext: '纯属虚构'
+                    },tooltip : {
                         trigger: 'axis'
                     },
                     toolbox: {
@@ -442,9 +445,6 @@ $(function() {
                         }
                     },
                     calculable : true,
-                    legend: {
-                        data:['用户数','百分比']
-                    },
                     xAxis : [
                     {
                         type : 'category',
