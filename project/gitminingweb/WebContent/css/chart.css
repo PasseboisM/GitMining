@@ -1,0 +1,13 @@
+div#main {
+    /*width: 1920px;*/
+    width: 100%;
+    /*margin-left: auto;
+    margin-right: auto;*/
+}
+
+.margin10{
+	margin-top : 5%;
+	margin-bottom : 5%;
+	margin-left: 10%;
+    margin-right: 10%;
+}

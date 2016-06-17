@@ -25,6 +25,7 @@
             <li><a href="statisticChart.html">统计图表</a></li>
           </ul>
           <div id="login_div" class="navbar-form navbar-right">
+          	<div id="wrong_msg" style="color:#ff0000">登录名或密码错误！</div>
             <div class="form-group">
                 <input type="text" placeholder="Email" class="form-control" ng-model="email">
             </div>
@@ -40,13 +41,13 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-   <div>
-    <div class="page-header col-md-offset-2 col-md-8">
-        <h1 class="col-md-4">{{user.login}}</h1><small class="col-md-4 col-md-offset-4">{{user.id}}</small>
+   <div class="col-xs-offset-1 col-xs-10 col-md-offset-1 col-md-10">
+    <div class="page-header col-xs-offset-2 col-xs-8 col-md-offset-2 col-md-8">
+        <h1 class="col-xs-4 col-md-4">{{user.login}}</h1><h1 class="col-xs-offset-4 col-xs-4 col-md-offset-4 col-md-4"><small>{{user.id}}</small></h1>
     </div>
-      <div class="col-md-12">
-       <div class="col-md-4">
-          <img ng-src="{{user.avatar_url}}" class="col-md-12">
+      <div class="col-xs-12 col-md-12">
+       <div class="col-xs-4 col-md-4">
+          <img ng-src="{{user.avatar_url}}" class="col-xs-12 col-md-12">
           <div>
             <p>用户类型：{{user.type}}</p>
           </div>
@@ -61,60 +62,60 @@
           </div>
        </div>
        
-        <div class="col-md-8">
+        <div class="col-xs-8 col-md-8 padding10">
           <div id="radar" style="min-width:700px;height:400px"></div>
           
         </div>
        </div>
        
-       <div class="col-md-12">
+       <div class="col-xs-12 col-md-12">
         <!-- 空行 -->
        </div>
-       <div class="col-md-12">
-         <div class="col-md-6">
-          <div class="col-md-12">
+       <div class="col-xs-12 col-md-12">
+         <div class="col-xs-6 col-md-6">
+          <div class="col-xs-12 col-md-12">
             <Strong>关注者用户列表</Strong>
             <div ng-repeat="follower in followers">
-            <a ng-href="userDetail.html?login={{follower.login}}" class="col-md-2"><img height="62" width="62" ng-src="{{follower.avatar_url}}"></img><p>{{follower.login}}</p></a>
+            <a ng-href="userDetail.html?login={{follower.login}}" class="col-xs-2 col-md-2"><img height="40" width="40" ng-src="{{follower.avatar_url}}"></img><p>{{follower.login}}</p></a>
            </div>
           </div>
-          <div class="col-md-12">
+          <div class="col-xs-12 col-md-12">
             <Strong>关注用户列表</Strong>
            <div ng-repeat="follower in followings">
-             <a ng-href="userDetail.html?login={{follower.login}}" class="col-md-2"><img height="62" width="62" ng-src="{{follower.avatar_url}}"></img><p>{{follower.login}}</p></a>
+             <a ng-href="userDetail.html?login={{follower.login}}" class="col-xs-2 col-md-2"><img height="40" width="40" ng-src="{{follower.avatar_url}}"></img><p>{{follower.login}}</p></a>
            </div>
           </div>
           </div>
-          <div class="col-md-6">
-           <h2 class="col-md-offset-4 col-md-8">用户统计数据</h2>
+          <div class="col-xs-6 col-md-6">
+           <h2 class="col-xs-offset-2 col-xs-10 col-md-offset-2 col-md-10">用户统计数据</h2>
           <br>
-          <div class="col-md-4">
-            <div class="col-md-12">{{user.following}}</div>
-            <div class="col-md-12">被关注人数</div>
+          <div class="col-xs-4 col-md-4">
+            <div class="col-xs-12 col-md-12">{{user.following}}</div>
+            <div class="col-xs-12 col-md-12">被关注人数</div>
           </div>
-          <div class="col-md-4">
-            <div class="col-md-12">{{user.followers}}</div>
-            <div class="col-md-12">关注人数</div>
+          <div class="col-xs-4 col-md-4">
+            <div class="col-xs-12 col-md-12">{{user.followers}}</div>
+            <div class="col-xs-12 col-md-12">关注人数</div>
           </div>
-          <div class="col-md-4">
-            <div class="col-md-12">{{user.public_repos}}</div>
-            <div class="col-md-12">公开项目</div>
+          <div class="col-xs-4 col-md-4">
+            <div class="col-xs-12 col-md-12">{{user.public_repos}}</div>
+            <div class="col-xs-12 col-md-12">公开项目</div>
           </div>
           </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-xs-4 col-md-4">
            <Strong>持有项目列表</Strong>
            <div ng-repeat="repo in own_repos">
              <div class="list-group-item"><a href="repoDetail.html?fn={{repo.full_name}}">{{repo.full_name}}</a></div>
            </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-xs-4 col-md-4">
             <Strong>推荐项目列表</Strong>
            <div ng-repeat="repo in star_repos">
              <div class="list-group-item"><a href="repoDetail.html?fn={{repo.full_name}}">{{repo.full_name}}</a></div>
            </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-xs-4 col-md-4">
            <Strong>订阅项目列表</Strong>
            <div ng-repeat="repo in sub_repos">
              <div class="list-group-item"><a href="repoDetail.html?fn={{repo.full_name}}">{{repo.full_name}}</a></div>
@@ -124,7 +125,7 @@
         <script src="js/userRadar.js"></script>
      </div>
      
-     <footer class="container footer col-md-12">
+     <footer class="container footer col-xs-12 col-md-12">
         <div class="container">
             <p class="text-muted">GitMining Made By Team Mole</p>
         </div>
