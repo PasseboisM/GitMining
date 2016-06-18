@@ -78,8 +78,8 @@ public class MainController extends Application implements Observer{
 		MainController controller = loader.getController();
 		controller.initial();
 		Scene scene = new Scene(mainAnchorPane,1190,660);
-		primaryStage.setMinHeight(640);
-		primaryStage.setMinWidth(960);
+		primaryStage.setMinHeight(600);
+		primaryStage.setMinWidth(800);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
