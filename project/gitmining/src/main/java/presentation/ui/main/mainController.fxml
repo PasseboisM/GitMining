@@ -17,7 +17,7 @@
          <center>
             <HBox BorderPane.alignment="CENTER">
                <children>
-                  <VBox fx:id="menu" maxHeight="1100.0" maxWidth="150.0" minHeight="600.0" minWidth="150.0" stylesheets="@menu.css">
+                  <VBox fx:id="menu" maxHeight="1100.0" maxWidth="150.0" minHeight="500.0" minWidth="150.0" stylesheets="@menu.css">
                      <children>
                         <VBox VBox.vgrow="ALWAYS">
                            <children>
